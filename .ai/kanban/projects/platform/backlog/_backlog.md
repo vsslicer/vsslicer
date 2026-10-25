@@ -151,3 +151,4 @@
 149. [PLT-174: Test that a signed macOS or Windows build updates from a GitHub release](174-test-that-a-signed-macos-or-windows-build-updates-from-a-git.md)
 150. [PLT-175: Release signed macOS and Windows installers](175-release-signed-macos-and-windows-installers.md)
 151. [PLT-181: Reconcile the DCO requirement with the project commit convention](181-reconcile-the-dco-requirement-with-the-project-commit-conven.md)
+152. [PLT-187: Deliver a reloaded webview's reused stream ids](187-deliver-a-reloaded-webview-s-reused-stream-ids.md)

@@ -59,3 +59,5 @@
 57. [GCP-82: Re-segment arcs at Klipper's gcode_arcs resolution](082-re-segment-arcs-at-klipper-s-gcode-arcs-resolution.md)
 58. [GCP-83: Carry ESTIMATOR_ADD_TIME and G4 dwell through gcode-api and the parser to the planners](083-carry-estimator-add-time-and-g4-dwell-through-gcode-api-and-.md)
 59. [GCP-84: Open .bgcode in the parser: same ParsedFile as the .gcode twin, metadata in the golden JSON](084-open-bgcode-in-the-parser-same-parsedfile-as-the-gcode-twin-.md)
+60. [GCP-85: Guard the Klipper planner against zero accel or velocity](085-guard-the-klipper-planner-against-zero-accel-or-velocity.md)
+61. [GCP-86: Speed up latin1 conversion in the bgcode-to-gcode twin](086-speed-up-latin1-conversion-in-the-bgcode-to-gcode-twin.md)
