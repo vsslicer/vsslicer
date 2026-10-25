@@ -249,5 +249,10 @@
     "PRN": "projects/printers/.ai/kanban",
     "SLC": "projects/slicer/.ai/kanban",
     "FIL": "projects/filament/.ai/kanban"
+  },
+  "sprint_close": {
+    "requires": [
+      ".ai/audits/{sprint}-audit.md"
+    ]
   }
 }
