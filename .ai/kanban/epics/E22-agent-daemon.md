@@ -32,7 +32,7 @@ In:
 - Lifecycle: idle shutdown when no window and no active job for N minutes; restart on crash with
   sessions re-opened; `deactivate()` only detaches (well under the 5 s budget).
 - Setting `vsslicer.printers.useAgent` (default on after the epic, off while it is in progress):
-  off keeps E20/E2's in-process sessions.
+  off keeps E20/E21's in-process sessions.
 - Logs to a rotating file and to the window's output channel on request.
 
 Out: camera proxy (E38 adds it to this process), upload queue (E25), fleet queue (E47), running on a
@@ -54,7 +54,7 @@ serves two windows on one session, and shuts down within the 5 s `deactivate` bu
 - [ ] Security tests: a client without the token is refused; the socket and token file are not
       readable by another user (POSIX permissions test; Windows pipe ACL checked manually)
 - [ ] Version skew test: an older extension and a newer agent negotiate or the agent is restarted
-- [ ] With `useAgent` off, the E20/E2 test suites still pass (rollback path)
+- [ ] With `useAgent` off, the E20/E21 test suites still pass (rollback path)
 - [ ] On the H2C: one MQTT session across two windows over a full print (manual checklist, firmware
       recorded)
 - Fixtures and the fake adapter cover everything else (D5).
@@ -69,7 +69,7 @@ serves two windows on one session, and shuts down within the 5 s `deactivate` bu
 
 ## Risks and spikes
 
-- Running Electron as Node from an extension: spike (1-2 days) on macOS, Windows and Linux with the
+- Running Electron as Node from an extension: spike (1-2 days, shared with SLC's engine child-process spike) on macOS, Windows and Linux with the
   current VS Code; fallback is a `node` on PATH or a bundled Node, decided by the spike
   (`slicing-engine-embedding.md` lists the same unknown for the engine child process).
 - Adapters loaded in the agent from other extensions' folders: version pinning and the trust model

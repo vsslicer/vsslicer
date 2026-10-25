@@ -9,14 +9,14 @@ depends_on: [E11, E12]
 rows: ["§7 Placeholder macro language (`{if}`, expressions)"]
 ---
 
-`ProfileStore` in `@vsslicer/profiles`: the files on disk, the index over them and `resolve(printerInstance, material[], process) → {unified, native(format)}`, plus writers that export entities back to PrusaSlicer INI, Orca/Bambu JSON and Cura instance containers. This is the API the slicer adapters call to produce engine input (E27, E28) and the one the profile UI edits through (E14-E8). For users it means a profile imported from Orca and edited in VSSlicer slices exactly like the original, and can be exported back to Orca.
+`ProfileStore` in `@vsslicer/profiles`: the files on disk, the index over them and `resolve(printerInstance, material[], process) → {unified, native(format)}`, plus writers that export entities back to PrusaSlicer INI, Orca/Bambu JSON and Cura instance containers. This is the API the slicer adapters call to produce engine input (E27, E28) and the one the profile UI edits through (E14-E18). For users it means a profile imported from Orca and edited in VSSlicer slices exactly like the original, and can be exported back to Orca.
 
 ## Scope
 - In: the store layout. User entities as one JSON file each under the workspace `.vsslicer/profiles/` (tracked by git, which replaces cloud sync), vendor entities under `globalStorageUri`; identity from `id`, never from file names. User entities store only their diff, the parent `id` and the parent `version` (`profiles.md` §6).
 - In: the index (by id, kind, vendor, compatibility), file watching, `resolve` (inheritance chain, `overrides` by `when`, per-extruder keys) with a provenance trail per resolved key (which entity set it), and compatibility queries (`compatibleMaterials(printerInstance)`, `compatibleProcesses(...)`).
 - In: native export written new: Prusa INI sections (flattened or with one `inherits`, as PrusaSlicer stores user presets), Orca/Bambu JSON (`inherits`, `from`, arrays with `nil`, extruder-variant arrays rebuilt from keyed values), Cura `quality_changes`/`definition_changes` `.inst.cfg` with the current `setting_version` (27). Unmodified entities export their stored native form byte for byte.
 - In: placeholder macro text (start, end, layer, toolchange G-code) stored verbatim with a `dialect` tag (`prusa-macro`, `cura-subst`); exported unchanged to the same dialect; a warning when exported to the other dialect, because the languages are not portable (`profiles.md` §6).
-- Out: evaluating macros (the engine does, §7 row reason); the placeholder catalogue and template editor (E16); three-way vendor upgrade UI (E57); bundle formats (E18); secrets (E16).
+- Out: evaluating macros (the engine does, §7 row reason); the placeholder catalogue and template editor (E6); three-way vendor upgrade UI (E57); bundle formats (E18); secrets (E16).
 
 ## Feature-matrix rows
 - §7 Placeholder macro language (P1): done when start/end/layer/toolchange G-code from every importer survives store, resolve and export byte-exact, and a cross-dialect export warns.
@@ -32,7 +32,7 @@ rows: ["§7 Placeholder macro language (`{if}`, expressions)"]
 
 ## Dependencies
 - Needs E11, E12. Coordinated with E27, which consumes this API and defines what the Orca CLI needs as input; that is an interface agreement, not a dependency of this epic.
-- Exposes `ProfileStore` (`get`, `list`, `query`, `resolve`, `save`, `export(format)`, `onDidChange`) to E14-E9, E26/E2/E3, E40 (material lookup), E20 (printer instances through E16), E16 (template text and dialect).
+- Exposes `ProfileStore` (`get`, `list`, `query`, `resolve`, `save`, `export(format)`, `onDidChange`) to E14-E18, E57, E26/E27/E28, E40 (material lookup), E20 (printer instances through E16), E6 (template text and dialect).
 
 ## Risks and spikes
 - Byte equivalence for vendor presets that are flattened on import (Prusa system presets are stored flattened, `PresetBundle.cpp:1367`): export target is the flattened form, which is what PrusaSlicer itself writes; spike confirms on 10 presets.

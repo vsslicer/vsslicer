@@ -5,7 +5,7 @@ status: reviewed
 initiative: I1
 project: GCP
 order: 3
-depends_on: [E5, E6, E4]
+depends_on: [E3, E4, E2]
 rows: ["§10 Layer and feature preview", "§10 Standalone viewer for any G-code file", "§10 Time-interpolated toolhead simulation", "§10 50–500 MB files"]
 ---
 
@@ -20,11 +20,11 @@ budget, because the text never becomes a `TextDocument`.
 
 In:
 - `CustomReadonlyEditorProvider` for the three file types (`supportsMultipleEditorsPerDocument`
-  false), parse and plan in the E3/E2 worker, move buffers transferred to the webview as
-  `ArrayBuffer`s through E4's transport. `retainContextWhenHidden` on, GPU resources freed on
+  false), parse and plan in the E3/E4 worker, move buffers transferred to the webview as
+  `ArrayBuffer`s through E2's transport. `retainContextWhenHidden` on, GPU resources freed on
   dispose; webview state (camera, layer, mode) saved with `setState`.
 - Renderer: libvgcode's model **ported** from PrusaSlicer@30ef591 `src/libvgcode/` (AGPL-3.0) to
-  WebGL2 GLSL and TypeScript on E4's core: one instanced segment template, per-move
+  WebGL2 GLSL and TypeScript on E2's core: one instanced segment template, per-move
   attributes in data textures, visibility as a contiguous range plus role/travel/tool filters,
   colouring in the shader from per-move scalars and a palette texture (mode switch = uniform
   change). Provenance lines on every ported file.
@@ -75,16 +75,16 @@ shadows (Orca desktop-only extras), toolpaths export (E51), the `web` build (I10
 
 ## Dependencies
 
-- Needs E5 (`ParsedFile`, diagnostics), E6 (`Timing`, `trapezoidsFor`), E4 (WebGL2
-  core, data-texture chunking, ArrayBuffer transport, CSP helper), E3 (Playwright, test
+- Needs E3 (`ParsedFile`, diagnostics), E4 (`Timing`, `trapezoidsFor`), E2 (WebGL2
+  core, data-texture chunking, ArrayBuffer transport, CSP helper), E1 (Playwright, test
   electron, packaging).
-- Uses the E4 spike decisions on postMessage throughput and the WebGPU probe.
-- Exposes the editor that E51's `open` and `follow` drive (internal API: `PreviewSession` with
+- Uses the E2 spike decisions on postMessage throughput and the WebGPU probe.
+- Exposes the editor that E7's `open` and `follow` drive (internal API: `PreviewSession` with
   `reveal(position)`, `setPlate`).
 
 ## Risks and spikes
 
-- ArrayBuffer transfer cost host to webview for 400 MB of buffers is unmeasured: if the E4
+- ArrayBuffer transfer cost host to webview for 400 MB of buffers is unmeasured: if the E2
   spike shows it is slow, fall back to `fetch(asWebviewUri)` of a cache file written by the worker.
 - Data-texture size limits (`MAX_TEXTURE_SIZE`) per GPU: chunk textures; test on a 16k limit.
 - Above about 20M moves the budget fails: spike far-zoom level of detail (merge collinear
@@ -98,7 +98,7 @@ shadows (Orca desktop-only extras), toolpaths export (E51), the `web` build (I10
   was considered; rejected because the timeline, the move slider and the toolhead marker are one
   control and share the visibility range. If it runs past 6 sprints, the side panel's G-code text
   pane and object hover are the first to move to a follow-up story set.
-- Boring technology: raw WebGL2 on E4, no three.js; worker_threads; no WebGPU or WASM, so no
+- Boring technology: raw WebGL2 on E2, no three.js; worker_threads; no WebGPU or WASM, so no
   innovation tokens spent.
 - Blast radius: the webview and worker are separate from the host; the only host work is
   forwarding buffers. A broken renderer breaks the preview only.

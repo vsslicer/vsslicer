@@ -5,7 +5,7 @@ status: reviewed
 initiative: I1
 project: GCP
 order: 2
-depends_on: [E5]
+depends_on: [E3]
 rows: ["§10 Firmware-aware time estimate"]
 ---
 
@@ -73,9 +73,9 @@ M73 lines into files (a possible later post-processor), porting klipper_estimato
 
 ## Dependencies
 
-- Needs E5 (move buffers, config block, flavour detection).
+- Needs E3 (move buffers, config block, flavour detection).
 - Exposes `plan(parsed, limits) -> Timing` (start times, layer and role tables, checkpoints,
-  `estimate` flag, limit sources) and `trapezoidsFor(range)` to E7 and E51.
+  `estimate` flag, limit sources) and `trapezoidsFor(range)` to E5 and E7.
 - Later inputs: E13 `ProfileStore.resolve` for limits, E23 Moonraker `configfile` for
   live Klipper limits. Neither is needed in I1.
 

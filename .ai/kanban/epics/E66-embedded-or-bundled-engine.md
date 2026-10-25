@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: SLC
 order: 10
-depends_on: [E26, E28, E30, E26]
+depends_on: [E26, E28, E30, E1]
 rows: []
 ---
 
@@ -38,8 +38,8 @@ None. The engine's support for §2 rows is recorded as a new capability table (E
 
 ## Dependencies
 
-- Needs E26 (interface), E28 (Cura settings resolution, reused by both Cura candidates), E30 (capability table and effect tests), E26 (CI able to build Emscripten or native targets within free runner limits, D5).
-- Exposes another `SlicerEngine`; with Arcus, a live layer stream E63 could consume (new API to agree with GCP).
+- Needs E26 (interface), E28 (Cura settings resolution, reused by both Cura candidates), E30 (capability table and effect tests), E1 (CI able to build Emscripten or native targets within free runner limits, D5).
+- Exposes another `SlicerEngine`; with Arcus, a live layer stream E7 could consume (new API to agree with GCP).
 
 ## Risks and spikes
 

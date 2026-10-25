@@ -9,7 +9,7 @@ depends_on: []
 rows: ["§16 In-app extension marketplace"]
 ---
 
-Delivers the repository every VSSlicer project builds in: a pnpm + Turborepo monorepo, CI on GitHub Actions (free public-repository minutes only, D5), the three test harnesses (vitest, `@vscode/test-electron`, Playwright), AGPL-3.0 licence files and SPDX expressions (D2), and a tag-driven release that publishes every extension and the `vsslicer` extension pack to open-vsx.org and the Microsoft VS Marketplace with trusted publishing where the registry supports it. Its users are the other six project boards (they inherit the layout, CI and release) and every VS Code or VSCodium user, who finds VSSlicer through the Extensions view (roadmap "Marketplace plan"; `docs/research/vscode-platform.md` §5, Implications 1 and 7).
+Delivers the repository every VSSlicer project builds in: a pnpm + Turborepo monorepo, CI on GitHub Actions in one public GitHub repository (free public-repository minutes only, D5, D10), the three test harnesses (vitest, `@vscode/test-electron`, Playwright), AGPL-3.0 licence files and SPDX expressions (D2), and a tag-driven release that publishes every extension and the `vsslicer` extension pack to open-vsx.org and the Microsoft VS Marketplace with trusted publishing where the registry supports it. Its users are the other six project boards (they inherit the layout, CI and release) and every VS Code or VSCodium user, who finds VSSlicer through the Extensions view (roadmap "Marketplace plan"; `docs/research/vscode-platform.md` §5, Implications 1 and 7).
 
 ## Scope
 
@@ -21,9 +21,10 @@ Decisions this epic makes and records in `CONTRIBUTING.md` and `.ai/instructions
 - **Release process.** A pull request carries a Changesets entry; merging to `main` updates a "Version packages" pull request; merging that bumps versions, writes each extension's `CHANGELOG.md` and pushes tags `<package>@<version>`. A tag starts the release workflow: build, full test suite, `vsce package --no-dependencies` from the esbuild bundle (vsce does not follow pnpm's symlinked `node_modules`), VSIX content check, GitHub release with the VSIX and source tarball, then `ovsx publish` and `vsce publish --packagePath`. Odd minor versions publish with `--pre-release`, even minors as releases, because the marketplaces take only `major.minor.patch`. Each marketplace step first asks whether that version already exists and skips it, so re-running a half-failed release publishes only what is missing. An extension that lists `targets` in its `package.json` is packaged once per `vsce --target`; nothing in I1 needs that, later SLC and PRN extensions do (`vscode-platform.md` §1 "Platform-specific VSIX").
 - **Publishing identity.** `vsslicer` namespace on open-vsx.org (Eclipse account, Publisher Agreement, verified-namespace issue on `EclipseFdn/open-vsx.org`) and `vsslicer` publisher on the Microsoft marketplace. Trusted publishing: OIDC to Open VSX (server 1.2.0 and later, `vscode-platform.md` §5) and `vsce publish --azure-credential` with an Entra ID federated credential, each only if the spike below confirms it works on the public registry at no cost; otherwise scoped tokens in GitHub encrypted secrets with a recorded expiry.
 - **Test tooling.** vitest for libraries; `@vscode/test-electron` for extension tests, run against the `engines.vscode` minimum and current stable on Linux (xvfb), macOS and Windows, and against the latest VSCodium release on Linux (D1: stock VS Code and VSCodium); Playwright with Chromium for webview snapshots, pinned version, snapshots generated only on the Linux runner with SwiftShader WebGL (`--use-angle=swiftshader --enable-unsafe-swiftshader`), since CI runners have no GPU (`3d-viewer.md` §2).
-- **Extension pack** `vsslicer` with `extensionPack` listing the extensions that have shipped; `vsslicer.gcode` is its first member (E68).
+- **Contributor policy (D10).** DCO: every commit in a pull request carries `Signed-off-by`, checked in CI; copyright stays with each contributor; `CONTRIBUTING.md` explains the sign-off.
+- **Extension pack** `vsslicer` with `extensionPack` listing the extensions that have shipped; `vsslicer.gcode` is its first member (E5).
 - Written new; nothing is ported.
-- **Out:** npm publishing of libraries; a remote build cache; signing VSIX files ourselves (the marketplaces sign); the self-hosted registry (E68); the VSCodium build (E69); a contributor-licence or DCO check (open question).
+- **Out:** npm publishing of libraries; a remote build cache; signing VSIX files ourselves (the marketplaces sign); the self-hosted registry (E68); the VSCodium build (E69); a CLA (D10 chose DCO).
 
 ## Feature-matrix rows
 
@@ -44,26 +45,27 @@ Decisions this epic makes and records in `CONTRIBUTING.md` and `.ai/instructions
 - [ ] The release workflow, on a tag, publishes `vsslicer.gcode` (pre-release) and the `vsslicer` pack to both marketplaces and creates a GitHub release with VSIX and source tarball; re-running it reports both versions as already published and succeeds; with one marketplace's credential revoked, the job fails red naming that marketplace and the other publish still lands.
 - [ ] Installing the pack in a clean stock VS Code and a clean VSCodium installs `vsslicer.gcode` (manual check recorded with versions, then an integration test against a local VSIX).
 - [ ] The `vsslicer` namespace on open-vsx.org shows as verified; the issue link and the Microsoft publisher id are recorded in `CONTRIBUTING.md`.
+- [ ] A pull request with a commit lacking `Signed-off-by` fails the DCO check; adding the sign-off makes it pass (regression caught: unsigned contributions merged, D10).
 - [ ] No secret appears in workflow logs (GitHub masking plus a grep step over the log artefact for the token prefixes).
 
 Oracles: the marketplaces themselves (search, install, update), the Open VSX upload validation, and the tests above. No hardware is involved (D5).
 
 ## Dependencies
 
-- Needs: nothing. Needs from E68 a first `vsslicer.gcode` build to publish as pre-release (until then the release path is proven with the pack alone).
+- Needs: nothing. Needs from E5 a first `vsslicer.gcode` build to publish as pre-release (until then the release path is proven with the pack alone).
 - Exposes to every project: the layout, `turbo.json` tasks (`lint`, `build`, `test`, `test:integration`, `test:snapshot`, `package`), the three harnesses, the licence and fixture checks, and the release workflow. E2 adds the webview test stub to the Playwright harness; E48 adds the browser build and `@vscode/test-web`; E68 adds a third publish target.
 
 ## Risks and spikes
 
 - **Trusted publishing availability** (unverified whether open-vsx.org enables OIDC publishing, and whether Microsoft's federated credential needs a paid Azure subscription). Spike (2 days): publish a throwaway pre-release of the pack from a test tag with each method; record the result as a PLT decision; fallback is scoped tokens with a calendar reminder before expiry.
 - **vsce with pnpm.** Unverified how current vsce treats a pnpm workspace; the esbuild bundle plus `--no-dependencies` sidesteps it, and the VSIX file-list test catches a regression.
-- **Repository hosting.** Free minutes and the AGPL source link assume a public GitHub repository; there is no remote yet (open question to the owner).
+- **Repository hosting.** D10 settles a public GitHub repository; creating it and the `vsslicer` organisation or account is the first task, since free minutes and the AGPL source link depend on it.
 - **Snapshot flakiness** across SwiftShader versions: pin Playwright and its Chromium, regenerate snapshots only in a dedicated job.
 - **Marketplace review delays or rejections** of a new publisher: start the namespace and publisher claims in the first sprint.
 
 ## Eng review
 
-- Scope challenge: considered splitting "publishing" into its own epic; kept it here because it is one workflow on top of the CI this epic builds, and I1's exit criterion is that CI publishes on tag. Deliberately out: npm publishing, remote cache, a DCO bot, the own registry.
+- Scope challenge: considered splitting "publishing" into its own epic; kept it here because it is one workflow on top of the CI this epic builds, and I1's exit criterion is that CI publishes on tag. Deliberately out: npm publishing, remote cache, a CLA, the own registry; the DCO check is in (D10).
 - Tests: each check above names the regression it catches; meta-tests prove the harnesses can fail, which is the usual silent failure of new CI.
 - Boring technology: pnpm, Turborepo, Changesets, esbuild, GitHub Actions; no innovation token spent.
 - Blast radius: a bad release reaches every user on auto-update, and the marketplaces cannot roll back a version. Mitigation: odd-minor pre-releases first; rollback is a new patch built from the previous tag, which the workflow supports by tagging a revert.

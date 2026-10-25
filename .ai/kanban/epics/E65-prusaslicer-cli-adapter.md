@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: SLC
 order: 9
-depends_on: [E26, E27, E29, E30, E12, E13, E28]
+depends_on: [E26, E27, E29, E30, E12, E13, E3]
 rows: ["§7 Binary G-code (`.bgcode`) output"]
 ---
 
@@ -18,7 +18,7 @@ In:
 - The exit-code bug: PrusaSlicer 3.0 returns 0 when slicing fails; success requires the output file to exist, parse, and stderr to carry no error line (ENG §5). No progress output; indeterminate progress.
 - Forced preset update prompt: run with a private `--datadir` so the 30 s preset-update gate cannot block slicing.
 - Emission of Prusa INI or JSON from `ProfileStore.resolve(...).native("prusa")` (E13).
-- `.bgcode` output through `binary_gcode`; our output assembler (E27) injects thumbnails before conversion or uses the engine's own thumbnail blocks; E28 reads the result.
+- `.bgcode` output through `binary_gcode`; our output assembler (E27) injects thumbnails before conversion or uses the engine's own thumbnail blocks; E3 reads the result.
 - Capability table and effect tests for the Prusa column of E30's rows; E64's regex step switches off when Prusa applies `gcode_substitutions` itself.
 
 Out: Prusa Connect or PrusaLink upload (PRN), SLA (E67), SuperSlicer as a separate adapter (it would reuse this adapter with a different binary; not planned).
@@ -31,13 +31,13 @@ Out: Prusa Connect or PrusaLink upload (PRN), SLA (E67), SuperSlicer as a separa
 
 - [ ] Every failure path detected despite exit 0: missing output, empty output, stderr error line; one test per case with recorded stderr (regression: a failed slice reported as success)
 - [ ] Fixture slices on pinned 2.9.x in CI on three platforms; parser layer count and roles as in I5
-- [ ] `.bgcode` versus text G-code move equality on fixtures (oracle: E28 parsing both)
+- [ ] `.bgcode` versus text G-code move equality on fixtures (oracle: E3 parsing both)
 - [ ] Capability table generated from `--export-config-schema` (3.0) matches the hand-maintained table (2.9.x) for shared keys
 - [ ] Fixtures only (D5: no Prusa hardware)
 
 ## Dependencies
 
-- Needs E26, E27, E29, E30, E12 and E13 (Prusa importer and native export), E28 (`.bgcode` reader).
+- Needs E26, E27, E29, E30, E12 and E13 (Prusa importer and native export), E3 (`.bgcode` reader).
 - Exposes a third `SlicerEngine`, and the Prusa oracle runs E64 needs for regex substitution.
 
 ## Risks and spikes

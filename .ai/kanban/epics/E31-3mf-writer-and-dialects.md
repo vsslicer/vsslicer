@@ -5,7 +5,7 @@ status: reviewed
 initiative: I6
 project: VWR
 order: 4
-depends_on: [E8, E26, E54]
+depends_on: [E8, E26, E13]
 rows: ["§9 Generic 3MF export (no vendor extensions)"]
 ---
 
@@ -15,7 +15,7 @@ The model writer turns an edited `Project` back into a 3MF that Orca, Bambu Stud
 
 In (`@vsslicer/3mf`):
 - Model writer: core plus Production split model (`3D/Objects/object_N.model`), build items, transforms, components, UUIDs stable across saves.
-- Bambu/Orca dialect writer: `model_settings.config` (objects, parts, per-volume config, plates, instances, assemble items), `project_settings.config` and embedded preset JSONs (content supplied by E54 `resolve(...).native('orca')`), `custom_gcode_per_layer.xml`, `layer_config_ranges.xml`, `layer_heights_profile.txt`, `cut_information.xml` written when the model holds that data.
+- Bambu/Orca dialect writer: `model_settings.config` (objects, parts, per-volume config, plates, instances, assemble items), `project_settings.config` and embedded preset JSONs (content supplied by E13 `resolve(...).native('orca')`), `custom_gcode_per_layer.xml`, `layer_config_ranges.xml`, `layer_heights_profile.txt`, `cut_information.xml` written when the model holds that data.
 - Our own namespace: `Metadata/vsslicer/*` parts with a MustPreserve relationship; `Application` is `VSSlicer-<version>`, never another vendor's (`3mf.md` Implications). Whether Orca and Bambu Studio still read the file as theirs with a non-Bambu `Application` is the first spike.
 - Change tracking: parts whose source data did not change are copied as original bytes; changed parts are regenerated; stale plate artefacts (G-code, md5, plate thumbnails, `slice_info` entries) of plates whose content changed are removed and listed in a save notice.
 - Dialect conversion on save: Prusa 2.x and Cura projects are saved in the Bambu/Orca shape after an explicit confirmation that names what is converted and what is kept only as preserved parts; the default for a foreign dialect is Save As.
@@ -42,7 +42,7 @@ Out: Prusa 2.x and Cura writers (a project stays readable in them only as core g
 
 ## Dependencies
 
-- Needs E8 (container, `Project` types), E26 (pinned Orca CLI as the oracle), E54 (native preset JSON for embedded presets; until it lands, the original embedded presets are preserved unchanged).
+- Needs E8 (container, `Project` types), E26 (pinned Orca CLI as the oracle), E13 (native preset JSON for embedded presets; until it lands, the original embedded presets are preserved unchanged).
 - Exposes `writeProject(project, pkg, {dialect})` and `exportGeneric(project)` to E32 (save), E27 (writes the 3MF it passes to the engine) and E52 to E54 (painting, cut, layer-height parts).
 
 ## Risks and spikes

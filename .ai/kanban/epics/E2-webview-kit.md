@@ -9,7 +9,7 @@ depends_on: [E1]
 rows: []
 ---
 
-Delivers `@vsslicer/webview-kit`, the library every VSSlicer webview is built on: safe WebGL2 context creation with a clear failure message, an instanced-segment renderer core that draws millions of moves at about 28 bytes each (D6), a typed message transport between the extension host and the webview that moves ArrayBuffers without JSON, a CSP helper, and helpers for the webview lifecycle (hidden, restored, disposed). Its users are E68 (the G-code preview), E10 (the model viewer, which draws the same segments inside its three.js scene), and later the camera, profile-form and filament webviews. It also answers two I1 spikes the roadmap assigns to the webview layer: `postMessage` throughput and the WebGPU probe.
+Delivers `@vsslicer/webview-kit`, the library every VSSlicer webview is built on: safe WebGL2 context creation with a clear failure message, an instanced-segment renderer core that draws millions of moves at about 28 bytes each (D6), a typed message transport between the extension host and the webview that moves ArrayBuffers without JSON, a CSP helper, and helpers for the webview lifecycle (hidden, restored, disposed). Its users are E5 (the G-code preview), E10 (the model viewer, which draws the same segments inside its three.js scene), and later the camera, profile-form and filament webviews. It also answers two I1 spikes the roadmap assigns to the webview layer: `postMessage` throughput and the WebGPU probe.
 
 ## Scope
 
@@ -20,7 +20,7 @@ Delivers `@vsslicer/webview-kit`, the library every VSSlicer webview is built on
 - **Transport:** typed request, response and notification messages with a schema version and a handshake on every webview (re)load; ArrayBuffers sent as transferables (`SerializableObjectWithBuffers`, `vscode-platform.md` §2) in chunks of a configurable size with acknowledgement-based backpressure; messages to a disposed webview are dropped with one logged warning, not an exception.
 - **Test support:** a webview stub for the E1 Playwright harness (fake `acquireVsCodeApi`, fake host end of the transport) so every project can snapshot its webview in plain Chromium.
 - **Code origin:** written new in TypeScript. The renderer follows libvgcode's technique (PrusaSlicer, AGPL-3.0); under D2 its shader and layout code may be ported, with the upstream copyright line and a `Ported from PrusaSlicer@<commit>:<path>` line per file.
-- **Out:** the G-code move layout and parser (E19 owns it; the kit takes its typed arrays as input); triangle meshes, picking and three.js (VWR); a WebGPU backend (only if the probe passes on all three platforms, D6, as a later epic); `SharedArrayBuffer` (assumed unavailable, `3d-viewer.md` §2).
+- **Out:** the G-code move layout and parser (E3 owns it; the kit takes its typed arrays as input); triangle meshes, picking and three.js (VWR); a WebGPU backend (only if the probe passes on all three platforms, D6, as a later epic); `SharedArrayBuffer` (assumed unavailable, `3d-viewer.md` §2).
 
 ## Feature-matrix rows
 
@@ -45,8 +45,8 @@ Verified on the owner's machines and the CI runners only; no printer is involved
 ## Dependencies
 
 - Needs: E1 (monorepo, Playwright and `@vscode/test-electron` harnesses).
-- Coordinates with: E19 on the per-move typed-array layout (position f32×3, width and height f16, role/tool/flags u8, file offset u32, start time f32; `gcode-viewer-simulation.md` §6). The kit consumes it; GCP owns it.
-- Exposes: the `host`, `webview` and `gl` entry points above to E68, E10 and every later webview; the Playwright webview stub to all projects; the spike decisions to GCP and VWR.
+- Coordinates with: E3 on the per-move typed-array layout (position f32×3, width and height f16, role/tool/flags u8, file offset u32, start time f32; `gcode-viewer-simulation.md` §6). The kit consumes it; GCP owns it.
+- Exposes: the `host`, `webview` and `gl` entry points above to E5, E10 and every later webview; the Playwright webview stub to all projects; the spike decisions to GCP and VWR.
 
 ## Risks and spikes
 

@@ -5,7 +5,7 @@ status: reviewed
 initiative: I8
 project: FIL
 order: 3
-depends_on: [E40, E20, E21, E23, E42, E8]
+depends_on: [E40, E20, E21, E23, E3, E8]
 rows: ["§14 Consumption from printer feedback"]
 ---
 
@@ -30,7 +30,7 @@ only, `filament-management.md` Licence notes):
      E8) mapped through the AMS mapping recorded at send (PRN, §5 AMS slot mapping at send).
      `remain`/`remain_g`, `tag_uid`, `tray_uuid` per tray are stored as observations on the spool
      and compared, not booked.
-  3. Any other adapter: slicer G-code totals from the file header/footer (E42 summary
+  3. Any other adapter: slicer G-code totals from the file header/footer (E3 summary
      statistics: `; filament used [g]`, per tool).
   4. Cancelled or failed jobs: proportional share by progress (layer or file offset reached),
      booked with `estimate: true`.
@@ -55,7 +55,7 @@ flags (E43), multi-material purge accounting beyond what the slicer totals inclu
 
 - [ ] Reconciliation tests on recorded job ends (fixtures from E21 and E23 recordings):
       Moonraker `filament_used` and Bambu `used_g`/`remain` produce the expected events and flags.
-- [ ] Slicer-total fallback tested on E42 fixtures from Orca, PrusaSlicer, Bambu Studio and
+- [ ] Slicer-total fallback tested on E3 fixtures from Orca, PrusaSlicer, Bambu Studio and
       Cura output; multi-tool jobs book per tool (catches "everything booked to spool 0", §4).
 - [ ] Cancel at 40 % of layers books 40 % (+-1 layer) flagged as estimate.
 - [ ] Redelivered job-end events (daemon reconnect, two windows) book once (E40 idempotency).
@@ -71,7 +71,7 @@ flags (E43), multi-material purge accounting beyond what the slicer totals inclu
 
 - Needs E40 (store, `book`), E20 (job events, normalised status, capability flags), E21
   (Bambu AMS tray fields and the AMS mapping per job), E23 (Moonraker `print_stats` and job
-  history), E42 (summary statistics per tool), E8 (`slice_info.config` reader).
+  history), E3 (summary statistics per tool), E8 (`slice_info.config` reader).
 - Exposes slot assignments, booked events and disagreement flags through `Inventory` to E43, E44
   and E45, and to PRN (fleet history can show spool ids per job).
 

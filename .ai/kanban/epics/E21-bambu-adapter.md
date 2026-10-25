@@ -5,7 +5,7 @@ status: reviewed
 initiative: I4
 project: PRN
 order: 2
-depends_on: [E20, E39]
+depends_on: [E20, E8]
 rows: ["§11 Bambu LAN or cloud control", "§11 Printer health and error notifications (HMS)", "§5 AMS slot mapping at send, sync AMS to project"]
 ---
 
@@ -13,12 +13,12 @@ Delivers `vsslicer.bambu`, the first real adapter (D3): status, job control, `.g
 AMS slot mapping, and HMS notifications for Bambu printers in LAN mode with Developer Mode, starting
 with the owner's H2C (D5). Printers not in Developer Mode get read-only status with an honest
 prompt. It is built on the open-source Bambu networking implementation the owner named
-("bamboo-networking plugin"), which the epic's first task identifies.
+("bamboo-networking plugin"), which the spike card PRN-1 (story US1) identifies.
 
 ## Scope
 
 In:
-- Spike first (see Risks): identify the implementation, record licence and revision, decide depend,
+- Spike first, carried by card PRN-1 (story US1; see Risks): identify the implementation, record licence and revision, decide depend,
   port or re-implement.
 - `@vsslicer/printer-bambu` library (Node, runs in the extension host now and in the daemon after
   E22) and the `vsslicer.bambu` extension (`extensionKind: ["ui"]`) that registers it with
@@ -58,7 +58,7 @@ AGPL or GPL code ported under D2 carries the original notices and a per-file pro
 
 ## Acceptance criteria
 
-- [ ] Spike note (`.reference/notes/PRN-<n>-bamboo-networking-spike.md`) names the project, URL,
+- [ ] Spike note (`.reference/notes/PRN-1-bamboo-networking-spike.md`) names the project, URL,
       licence (read from its LICENSE file), commit hash analysed, languages, ABI or protocol scope,
       whether it supports LAN, Developer Mode, cloud and the H2C, and the decision (depend, port,
       re-implement) with reasons; an owner decision records it if it changes D3's reading
@@ -68,7 +68,7 @@ AGPL or GPL code ported under D2 carries the original notices and a per-file pro
       as an X1-style full push (fixture pairs)
 - [ ] FTPS upload tests against a local implicit-TLS FTP server: progress, abort, resume refusal,
       wrong access code gives `PrinterError.auth`
-- [ ] `ams_mapping` built from fixture `.gcode.3mf` plates (E39 fixtures) matches the shape
+- [ ] `ams_mapping` built from fixture `.gcode.3mf` plates (E8 fixtures) matches the shape
       Orca sends (`bambu-connectivity.md` §1; checked field by field against the H2C's accepted
       command)
 - [ ] Mode F: `fun` flag fixtures for enabled and disabled select the right capability set
@@ -81,7 +81,7 @@ AGPL or GPL code ported under D2 carries the original notices and a per-file pro
 
 ## Dependencies
 
-- Needs E20 (API, registry), E39 (`@vsslicer/3mf` reading the Bambu `.gcode.3mf` layout:
+- Needs E20 (API, registry), E8 (`@vsslicer/3mf` reading the Bambu `.gcode.3mf` layout:
   plates, `slice_info`, filament list). Sending a file sliced in VSSlicer also needs E27; I4 tests
   with files sliced in Bambu Studio or Orca.
 - Exposes the Bambu adapter to E22 (hosted in the daemon), E25 (queued uploads, live feed
@@ -90,7 +90,7 @@ AGPL or GPL code ported under D2 carries the original notices and a per-file pro
 
 ## Risks and spikes
 
-- **Which "bamboo-networking plugin" (spike, first PRN task, 2-3 days).** Candidates found by web
+- **Which "bamboo-networking plugin" (spike card PRN-1, story US1, 2-3 days).** Candidates found by web
   search on 2026-10-25, none verified: `open-bamboo-networking` (ClusterM,
   https://github.com/ClusterM/open-bamboo-networking; the name matches the owner's spelling), the SFC
   "baltobu" reverse-networking rewrite of `libbambu_networking`

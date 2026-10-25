@@ -26,7 +26,7 @@ In:
   `readDirectory`, `stat`, `readFile` (download, size limit with a prompt), `writeFile` (upload),
   `delete`, `rename` where the adapter supports move; read-only when the adapter lacks write
   capabilities; thumbnails surfaced through `fileMetadata` in a hover or a custom view.
-- Opening a `printer://` G-code file opens the `vsslicer.gcode` preview (E24) via its URI.
+- Opening a `printer://` G-code file opens the `vsslicer.gcode` preview (E5) via its URI.
 - Bambu storage through FTPS (E21's client), Moonraker `gcodes` root, OctoPrint `local`/`sdcard`,
   PrusaLink storages, Duet `0:/gcodes`.
 
@@ -54,14 +54,14 @@ timelapse folders (E39).
       `Unavailable`, file-change events after upload and delete
 - [ ] On the H2C (firmware recorded): list the SD card over FTPS, download and open a `.gcode.3mf`,
       upload and delete a file
-- [ ] Opening a `printer://` G-code file opens the preview (integration test with E24's editor)
+- [ ] Opening a `printer://` G-code file opens the preview (integration test with E5's editor)
 - [ ] Remote-SSH: `printer://` works from a remote workspace because the provider is in the UI-kind
       extension (manual check)
 - Volume listing per OS is a manual checklist on macOS, Windows and Linux.
 
 ## Dependencies
 
-- Needs E20 (API), E21 (Bambu FTPS), E23 (open adapters' file APIs); E24 to open files in
+- Needs E20 (API), E21 (Bambu FTPS), E23 (open adapters' file APIs); E5 to open files in
   the preview (optional at runtime: without it, files open as text).
 - Exposes the "folder or drive" adapter and `printer://` URIs to E25 (queued exports), SLC (export
   after slicing), E47 (dispatch to SD-only printers), E39 (timelapse download reuses the

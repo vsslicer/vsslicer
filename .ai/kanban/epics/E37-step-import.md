@@ -5,7 +5,7 @@ status: reviewed
 initiative: I6
 project: VWR
 order: 10
-depends_on: [E9, E32, E36, E9]
+depends_on: [E9, E32, E36, E2]
 rows: ["§3 Import STEP"]
 ---
 
@@ -37,7 +37,7 @@ Out: keeping the B-rep for re-tessellation after save (the 3MF stores the mesh; 
 
 ## Dependencies
 
-- Needs E9 (meshes), E32 (add-object command), E36 (repair on load), E9 (worker under CSP, WASM asset loading).
+- Needs E9 (meshes), E32 (add-object command), E36 (repair on load), E2 (worker under CSP, WASM asset loading).
 - Exposes `importStep(bytes, quality)` to `vsslicer.project` only.
 
 ## Risks and spikes

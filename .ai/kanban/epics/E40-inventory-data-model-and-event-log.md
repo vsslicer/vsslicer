@@ -5,7 +5,7 @@ status: reviewed
 initiative: I8
 project: FIL
 order: 1
-depends_on: [E40]
+depends_on: [E1]
 rows: []
 ---
 
@@ -71,8 +71,8 @@ None owned. Enables §14 Spool inventory (E43) and §14 Consumption from printer
 
 ## Dependencies
 
-- Needs E40 (monorepo, CI, test tooling, publishing).
-- Exposes `Inventory` (extension `exports`) to E41-E6 and to other projects that want spools
+- Needs E1 (monorepo, CI, test tooling, publishing).
+- Exposes `Inventory` (extension `exports`) to E41-E45 and to other projects that want spools
   (SLC filament cost, PRN AMS slot display); the event schema is the contract E42 and E45 write to.
 
 ## Risks and spikes
@@ -85,7 +85,7 @@ None owned. Enables §14 Spool inventory (E43) and §14 Consumption from printer
 
 ## Eng review
 
-- Scope challenge: the smallest epic that makes E41-E6 possible. Deliberately out: UI, any
+- Scope challenge: the smallest epic that makes E41-E45 possible. Deliberately out: UI, any
   network. Considered folding a minimal tree view in so the epic is user-visible; rejected, the
   UI is its own deliverable (E43) and E40 is testable without it.
 - Tests name their regressions (drift, double booking, torn writes, concurrent appends,

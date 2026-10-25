@@ -5,7 +5,7 @@ status: reviewed
 initiative: I8
 project: FIL
 order: 4
-depends_on: [E40, E41, E42, E13, E41, E20]
+depends_on: [E40, E41, E42, E13, E2, E20]
 rows: ["§14 Spool inventory"]
 ---
 
@@ -24,7 +24,7 @@ In (written new):
 - Add spool: QuickPick over the E41 catalogue (search by brand, name, EAN), or a blank spool.
 - Spool editor: one webview form (initial weight, empty spool weight, location, lot, price,
   extras, archive) using the CSP helper and message transport of `@vsslicer/webview-kit`
-  (E41); labels and keyboard navigation for accessibility; writes go through `Inventory`.
+  (E2); labels and keyboard navigation for accessibility; writes go through `Inventory`.
 - History panel per spool: booked events with source, job, printer, estimate and disagreement
   flags; actions "Measure on scale", "Correct", "Reassign to spool".
 - Slot assignment: commands and tree actions to set the spool in a printer tool or AMS tray
@@ -47,7 +47,7 @@ reports, a custom editor for the store file.
 
 ## Acceptance criteria
 
-- [ ] Extension integration tests (`@vscode/test-electron`, E40 tooling): tree contents for
+- [ ] Extension integration tests (`@vscode/test-electron`, E1 tooling): tree contents for
       each grouping on a fixture inventory; add from catalogue, edit, archive, restore.
 - [ ] Profile link tests against E13 fixtures imported from Orca, Bambu, PrusaSlicer and Cura
       profiles: OFD Bambu PLA Basic links to the `GFA00` material, generic `GFL99` asks the user;
@@ -65,7 +65,7 @@ reports, a custom editor for the store file.
 
 - Needs E40 (store), E41 (catalogue), E42 (events, flags, slot assignments), E13
   (`ProfileStore` lookup by `external_ids`; PRF must confirm it holds Bambu, Orca, Prusa and Cura
-  ids, FIL notes), E41 (CSP helper and transport), E20 (`PrinterRegistry` listing).
+  ids, FIL notes), E2 (CSP helper and transport), E20 (`PrinterRegistry` listing).
 - Exposes `Inventory.materialFor(spoolId)` and the slot map to SLC (pick material for a sliced
   job) and PRN (show spools in AMS slot mapping at send).
 

@@ -2,9 +2,9 @@
 id: M3
 title: Print
 status: draft
-start: 2027-03-01
-due: 2027-05-31
-initiatives: I4, I5
+start: "2026-10-27T03:15+00:00"
+due: "2026-10-28T08:15+00:00"
+initiatives: "I4, I5"
 ---
 
 First end-to-end loop: slice with Orca or CuraEngine, preview, send to the Bambu H2C or an open-ecosystem printer, follow live.

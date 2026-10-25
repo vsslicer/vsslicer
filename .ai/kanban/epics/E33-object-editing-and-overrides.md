@@ -5,7 +5,7 @@ status: reviewed
 initiative: I6
 project: VWR
 order: 6
-depends_on: [E32, E9, E52, E54]
+depends_on: [E32, E9, E11, E13]
 rows: ["§3 Move, rotate, scale, lay on face", "§3 Mirror, split, instances, unit conversion, merge", "§3 Modifier and negative volumes, support enforcers and blockers", "§4 Per-object, part and range setting overrides"]
 ---
 
@@ -17,7 +17,7 @@ In (`vsslicer.project` webview and host commands; `@vsslicer/mesh` for split and
 - Gizmos on three.js `TransformControls` and a numeric panel; snapping; lay on face through BVH picking of the clicked face. Each tool emits E32 commands.
 - Mirror X/Y/Z, split to objects and to parts (connected components in a worker), instances (add, remove, set count), unit conversion (inch, metre), merge objects into one with parts.
 - Volume types matching the dialects: part, negative, modifier, support enforcer, support blocker; added from primitives (box, cylinder, sphere) or from a file.
-- Settings overrides: object, part and modifier config, and layer-range (height-range) config entries edited from the object tree through a form that shows only the keys the schema allows at that level (E52 per-key scope, as PrusaSlicer 3.0 `overrides_in`). Height ranges here are numeric entries; the interactive height-range tool is E54.
+- Settings overrides: object, part and modifier config, and layer-range (height-range) config entries edited from the object tree through a form that shows only the keys the schema allows at that level (E11 per-key scope, as PrusaSlicer 3.0 `overrides_in`). Height ranges here are numeric entries; the interactive height-range tool is E54.
 - Written new; the volume-type and config-level semantics follow the dialect layout read in E8.
 
 Out: per-plate settings (E34), arrange (E35), cut and boolean (E53), painting (E52), the height-range gizmo and variable layer height (E54).
@@ -33,19 +33,19 @@ Out: per-plate settings (E34), arrange (E35), cut and boolean (E53), painting (E
 
 - [ ] Every command registers with E32's inverse property test.
 - [ ] Geometry fixtures: split of a two-shell mesh yields two objects with the original triangle sets; merge then split is identity on triangle sets.
-- [ ] Orca CLI oracle in CI: fixtures with a negative volume, a modifier with changed infill, a support blocker, an object override and a layer-range override slice, and the G-code parser (E10) confirms the expected effect per object or layer range.
-- [ ] Override form rejects keys not allowed at a level, with the reason; invalid values show the E52 validation message.
+- [ ] Orca CLI oracle in CI: fixtures with a negative volume, a modifier with changed infill, a support blocker, an object override and a layer-range override slice, and the G-code parser (E3) confirms the expected effect per object or layer range.
+- [ ] Override form rejects keys not allowed at a level, with the reason; invalid values show the E11 validation message.
 - [ ] Gizmo interactions covered in the webview harness (drag, snap, numeric entry, escape cancels without a command).
 - [ ] Verified only on fixtures and the Orca CLI (D5).
 
 ## Dependencies
 
-- Needs E32 (commands, undo), E9 (BVH, connected components), E52 (schema with per-key override scope), E54 (resolved values to show inherited settings), E10 (parser for the G-code checks).
+- Needs E32 (commands, undo), E9 (BVH, connected components), E11 (schema with per-key override scope), E13 (resolved values to show inherited settings), E3 (parser for the G-code checks).
 - Exposes the object, part and volume commands and the override editing model to E34, E35, E52 to E55.
 
 ## Risks and spikes
 
-- Whether E52's schema carries the override scope (object, part, range) for every key; the Orca key list does not mark it. Spike with PRF: derive scope from Orca `TabPrintPart`/`TabPrintModel` pages and Prusa `overrides_in`.
+- Whether E11's schema carries the override scope (object, part, range) for every key; the Orca key list does not mark it. Spike with PRF: derive scope from Orca `TabPrintPart`/`TabPrintModel` pages and Prusa `overrides_in`.
 - `TransformControls` with very large meshes: drag must move a proxy and commit on release; measured on the 5 M fixture.
 
 ## Eng review

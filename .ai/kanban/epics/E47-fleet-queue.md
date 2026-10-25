@@ -59,7 +59,7 @@ re-slicing is SLC's), bed-clear confirmation hardware, scheduling by time.
 
 - Needs E25 (transfer), E46 (history records, `vsslicer.fleet` extension), E22 (agent), E40
   (inventory model for material checks; I9 needs I8), E26 (the sliced artefact reference shape),
-  E47 (`ProjectModel` plate references), E61 (`printer_instance` nozzle and model).
+  E10 (`ProjectModel` plate references), E13 (`printer_instance` nozzle and model).
 - Exposes `Queue` (add, list, events) to SLC ("slice and queue") and future dashboards.
 
 ## Risks and spikes
