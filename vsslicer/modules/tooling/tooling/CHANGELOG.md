@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+- Add the `check-licence` bin: fails on a missing `"license": "AGPL-3.0-or-later"` in `package.json`, a source file (.ts .tsx .js .mjs .cjs .sh .glsl .wgsl) without the SPDX header in its first 5 lines, and a `Ported from <project>@<commit>:<path>` line without a `Copyright` line within 5 lines. Ignores node_modules, dist, coverage, .git and test/fixtures.
+
 ## 0.4.0
 
 - Add the shared flat ESLint config (`@vsslicer/tooling/eslint`): typescript-eslint recommended (unused imports are errors), `import-x/no-extraneous-dependencies`, an SPDX header rule, the layer-boundary rule (`eslint-plugin-boundaries`: domain imports nothing outer, application only domain, adapters domain and application, by folder `src/<layer>/`) and `vscode` importable only from `src/presentation`.

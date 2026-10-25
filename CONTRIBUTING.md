@@ -17,7 +17,7 @@ node scripts/run.mjs ci            # per module, in dependency order: install, l
 scripts/registry.sh stop
 ```
 
-- `node scripts/run.mjs checks`: repository checks that aren't a module's own tests (the phantom-dependency fixture must fail its build; every module's pnpm settings stay strict).
+- `node scripts/run.mjs checks`: repository checks that aren't a module's own tests (the phantom-dependency fixture must fail its build; every module's pnpm settings stay strict; `check-licence` over every module and the fixtures dir).
 - Other runner commands: `node scripts/run.mjs <install|build|test|publish>`, and `--changed <git-ref>` to limit any of them to modules changed since that ref and their dependents.
 - One module on its own (its dependencies must already be published, which `ci` does):
   `cd vsslicer/modules/<name> && pnpm install && pnpm test && pnpm build`.
@@ -60,9 +60,19 @@ All code lives in `vsslicer/`; every capability is its own module; layers (domai
 
 The deliberate violations that prove each rule fail live in `modules/tooling/test/fixtures/lint/` (excluded from the normal lint) and are asserted by `modules/tooling/test/lint.test.mjs`.
 
+### Licence check
+
+`check-licence [dir...]` (a bin of `@vsslicer/tooling`; default the current directory) fails with `<file>: <rule>: <message>` for:
+
+- `package-license`: `package.json` lacks `"license": "AGPL-3.0-or-later"`.
+- `spdx-header`: a `.ts`, `.tsx`, `.js`, `.mjs`, `.cjs`, `.sh`, `.glsl` or `.wgsl` file lacks `SPDX-License-Identifier: AGPL-3.0-or-later` in its first 5 lines (after a shebang).
+- `ported-copyright`: a line `Ported from <project>@<commit>:<path>` (D2) has no line containing `Copyright` within 5 lines before or after it. Put the upstream notice right under the provenance line.
+
+Ignored: `node_modules`, `dist`, `coverage`, `.git` and `test/fixtures` at any depth. Tooling's own `lint` runs it on itself; `node scripts/run.mjs checks` (and so `ci`) runs it over every module and `fixtures/phantom-dep`, which is where the repository-wide "lint" gate lives. Fixtures: `modules/tooling/test/fixtures/licence/`, asserted by `test/licence.test.mjs`.
+
 Adopting it in a module:
 
-1. `devDependencies`: `@vsslicer/tooling` (`^0.4.0` or later), plus `eslint` and `prettier` pinned to the tooling versions (pnpm does not expose transitive bins).
+1. `devDependencies`: `@vsslicer/tooling` (`^0.5.0` or later), plus `eslint` and `prettier` pinned to the tooling versions (pnpm does not expose transitive bins).
 2. `eslint.config.mjs`: `// SPDX-License-Identifier: AGPL-3.0-or-later` then `export { default } from '@vsslicer/tooling/eslint';`.
 3. `package.json`: `"prettier": "@vsslicer/tooling/prettier"`, `"lint": "eslint . && prettier --check . && tsc --noEmit"` (extensions: `tsc`), `"format": "prettier --write ."`.
 4. `.prettierignore` with `dist`, `coverage`, `pnpm-lock.yaml`.
