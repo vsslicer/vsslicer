@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Build `THIRD-PARTY-NOTICES.md` with `third-party-notices` (`@vsslicer/tooling` 0.6.0) from the extension and webview bundles' metafiles and ship it in `files`; the build fails on a bundled dependency outside the licence allow-list. The extension currently bundles only `@vsslicer/example` (ours), so the file lists no third-party packages.
+
 ## 0.3.0
 
 - Add the `vsslicer.example.webview` command: opens a WebviewPanel whose HTML (CSP with nonce and `cspSource`, `asWebviewUri`) loads `dist/webview.js`, an esbuild browser iife built from `src/presentation/webview/main.ts` that posts a `ready` message. This is the stable sample webview bundle for the test harnesses.

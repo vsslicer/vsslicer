@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0
+
+- Add the `third-party-notices` bin: reads the esbuild metafile(s), finds the packages that were inlined (skipping the module's own sources and `@vsslicer/*`), checks each package's SPDX licence expression (`OR`, `AND`, `WITH`, parentheses, `+`) against an AGPL-3.0-compatible allow-list, and writes a deterministic `THIRD-PARTY-NOTICES.md` with the licence text of every package. `UNLICENSED`, a missing or non-allow-listed licence, a non-SPDX `SEE LICENSE IN`, or a missing licence file fail with `name@version` and exit 1.
+- `vsslicer-bundle` now also writes the esbuild metafile next to the bundle (`dist/extension.meta.json`).
+
 ## 0.5.0
 
 - Add the `check-licence` bin: fails on a missing `"license": "AGPL-3.0-or-later"` in `package.json`, a source file (.ts .tsx .js .mjs .cjs .sh .glsl .wgsl) without the SPDX header in its first 5 lines, and a `Ported from <project>@<commit>:<path>` line without a `Copyright` line within 5 lines. Ignores node_modules, dist, coverage, .git and test/fixtures.
