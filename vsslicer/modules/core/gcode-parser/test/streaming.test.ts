@@ -24,7 +24,7 @@ describe('chunking', () => {
   it('bounds chunks by move count, numbers them in order and carries state across them', async () => {
     const whole = await run(sample);
     const r = await run(sample, { chunkMoves: 100 }, 333);
-    expect(r.chunks.length).toBe(Math.ceil(whole.moves.length / 100) + (whole.moves.length % 100 === 0 ? 1 : 0));
+    expect(r.chunks.length).toBe(Math.ceil(whole.moves.length / 100));
     let next = 0;
     for (const c of r.chunks) {
       expect(c.firstMove).toBe(next);
@@ -46,11 +46,9 @@ describe('chunking', () => {
     expect(r.chunks.map((c) => c.bytesRead)).toEqual([...r.chunks.map((c) => c.bytesRead)].sort((a, b) => a - b));
   });
 
-  it('a line without a final line break is parsed; an empty file gives one empty chunk', async () => {
+  it('a line without a final line break is parsed; an empty file gives no chunk', async () => {
     expect((await run('G1 X1\nG1 X2')).moves.map((m) => m.x)).toEqual([1, 2]);
-    const e = await run('');
-    expect(e.chunks).toHaveLength(1);
-    expect(e.chunks[0]?.moveCount).toBe(0);
+    expect((await run('')).chunks).toHaveLength(0);
   });
 
   it('skips a line longer than 1 MiB with a warning and carries on', async () => {

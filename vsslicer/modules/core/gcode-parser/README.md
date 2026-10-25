@@ -11,6 +11,10 @@ for await (const chunk of parse(fileSource('benchy.gcode'), { flavour: 'marlin' 
 }
 ```
 
+`collect(parse(...))` gives a `ParsedFile`. `transferList(chunk)` lists a chunk's buffers for
+`postMessage(chunk, transferList(chunk))`; they are exact length and detach on transfer. The last
+chunk is never empty: it exists only if it holds moves, state changes, markers or diagnostics.
+
 Layers: `src/domain` (tokeniser, modal state machine and command handlers, chunk writer, line
 splitter; pure), `src/application` (`parse`), `src/adapters` (`fileSource`, a Node file stream).
 

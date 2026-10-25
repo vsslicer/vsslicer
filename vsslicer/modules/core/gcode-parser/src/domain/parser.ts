@@ -118,7 +118,8 @@ export class GCodeParser {
     this.carry = null;
     this.offset += this.skipped;
     this.tags.finish(this.offset);
-    yield this.take();
+    // no empty trailing chunk: the final one exists only if it holds something
+    if (!this.writer.empty) yield this.take();
   }
 
   private take(): Chunk {

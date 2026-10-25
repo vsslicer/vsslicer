@@ -4,3 +4,5 @@
 2. [GCP-57: Add the modal state-change table to gcode-api](057-add-the-modal-state-change-table-to-gcode-api.md)
 3. [GCP-3: Implement the streaming text parser core](003-implement-the-streaming-text-parser-core.md)
 4. [GCP-4: Detect slicer and flavour and assign roles and layers from tag sets](004-detect-slicer-and-flavour-and-assign-roles-and-layers-from-t.md)
+5. [GCP-5: Write the move buffers, layer table and diagnostics with transferable output](005-write-the-move-buffers-layer-table-and-diagnostics-with-tran.md)
+6. [GCP-11: Read the .bgcode container: header, blocks, CRC32 and diagnostics](011-read-the-bgcode-container-header-blocks-crc32-and-diagnostic.md)

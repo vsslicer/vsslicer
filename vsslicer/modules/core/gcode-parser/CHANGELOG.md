@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+- `collect(chunks) -> Promise<ParsedFile>`: joins a chunk stream into a `ParsedFile` (buffers stay one per chunk; layer table, markers and diagnostics in file order).
+- `transferList(chunk)`: the chunk's three buffers for `postMessage` / `structuredClone` transfer. Buffers are exact length and detach on transfer; tests cover both.
+- Change: the final chunk is no longer emitted empty. It exists only if it holds moves, state changes, markers or diagnostics (for example the end-of-file `no-slicer-tags`); an empty file yields no chunk. `bytesRead` of the last chunk may therefore be below the file size when trailing lines produce nothing.
+- Dev: `@vsslicer/tooling` ^0.7.0.
+
 ## 0.3.0
 
 - Slicer detection (`Chunk.slicer`: PrusaSlicer, SuperSlicer, OrcaSlicer, Bambu Studio, Cura) and flavour detection (`; gcode_flavor =`, Cura `;FLAVOR:`) from header and config comments. The `flavour` option is now an override: option, else detected, else `marlin`.
