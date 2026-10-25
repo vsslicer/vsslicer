@@ -6,6 +6,7 @@ priority: P0
 effort: M
 area: [printers, legal]
 milestone: R1
+owner: worker-sonnet
 created: 2026-10-25
 ---
 

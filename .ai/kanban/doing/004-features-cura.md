@@ -6,6 +6,7 @@ priority: P0
 effort: L
 area: [slicer]
 milestone: R1
+owner: worker-opus
 created: 2026-10-25
 ---
 

@@ -6,6 +6,7 @@ priority: P1
 effort: M
 area: [viewer, platform]
 milestone: R1
+owner: worker-sonnet
 created: 2026-10-25
 ---
 
