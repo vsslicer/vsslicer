@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@vsslicer/gcode-api':
+        specifier: ^0.2.0
+        version: 0.2.0
     devDependencies:
       '@types/node':
         specifier: 24.19.2
@@ -765,6 +769,10 @@ packages:
 
   '@vitest/spy@5.0.5':
     resolution: {integrity: sha512-lwJRExuH417257Q5wv9QYugN9IMJkoxcrKrYxGPQkBzl7wlNpTUxD/5yNX4ESKVUIShKPgkGchYPFMWOOk0wzw==}
+
+  '@vsslicer/gcode-api@0.2.0':
+    resolution: {integrity: sha512-r0RJJjcXoCjdJlH/fd5xN0gm2BRZc20VWwRIccVyAa0PXrhSBAvoxYY5G7b/X0e+a9+qfJUejmaZhOF+qFuaOw==}
+    engines: {node: '>=24'}
 
   '@vsslicer/tooling@0.4.0':
     resolution: {integrity: sha512-fNzHdKpXVnktbbxXPzTVwx/4RlvMhCMqY3gR9Pfajhr8lGr36cCm9jpz8fFPoLVTeZY+wary+vvYtRQmms5Mbw==}
@@ -2035,6 +2043,8 @@ snapshots:
       vite: 8.3.5(@types/node@24.19.2)(esbuild@0.28.2)
 
   '@vitest/spy@5.0.5': {}
+
+  '@vsslicer/gcode-api@0.2.0': {}
 
   '@vsslicer/tooling@0.4.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:

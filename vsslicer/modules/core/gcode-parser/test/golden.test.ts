@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { fixturesDir, loadManifest, readGolden, summarise, type Summary } from './support/golden.ts';
-import { interimSummary } from './support/interim-summary.ts';
+import { parserSummary } from './support/parser-summary.ts';
 
 const manifest = loadManifest();
 
 describe('golden corpus', () => {
-  it.each(manifest.files)('$path matches its golden JSON', (file) => {
+  it.each(manifest.files)('$path matches its golden JSON', async (file) => {
     expect(existsSync(join(fixturesDir, file.path)), 'fixture file is missing').toBe(true);
     // a difference fails; regenerate deliberately with `pnpm golden:update`
-    expect(summarise(interimSummary, file)).toEqual(readGolden(file));
+    expect(await summarise(parserSummary, file)).toEqual(readGolden(file));
   });
 
   it('manifest and fixture folders list the same files', () => {
@@ -35,14 +35,30 @@ describe('golden corpus', () => {
 });
 
 describe('harness', () => {
-  it('detects a changed summary', () => {
-    const file = manifest.files[0];
-    if (!file) throw new Error('empty corpus');
+  it('detects a changed summary', async () => {
+    const file = manifest.files.find((f) => f.format === 'gcode');
+    if (!file) throw new Error('no text file in the corpus');
     const golden: Summary = readGolden(file);
-    const changed = summarise((bytes, f) => {
-      const s = interimSummary(bytes, f);
-      return { ...s, interim: { ...(s['interim'] as object), g1: -1 } };
+    const changed = await summarise(async (bytes, f) => {
+      const s = await parserSummary(bytes, f);
+      return { ...s, moveCount: -1 };
     }, file);
     expect(changed).not.toEqual(golden);
+  });
+});
+
+// A second opinion on the move count that does not use the parser: count the lines that command
+// a move. G0-G3 with an X, Y, Z or E word (a lone `G1 F3000` is a feedrate change, not a move) and
+// G10/G11 without P or L (firmware retract; with them it is an RRF tool-offset command).
+const MOVE_LINE = /^G0?[0-3](?=[\s;]|$)(?=[^;]*\b[XYZE]\s*-?[\d.])/i;
+const FIRMWARE_RETRACT = /^G1[01](?=[\s;]|$)(?![^;]*\b[PL]\s*-?[\d.])/i;
+
+describe('move counts', () => {
+  const text = manifest.files.filter((f) => f.format === 'gcode');
+  it.each(text)('$path: parser move count equals an independent line count', async (file) => {
+    const lines = readFileSync(join(fixturesDir, file.path), 'utf8').split('\n');
+    const expected = lines.filter((l) => MOVE_LINE.test(l.trim()) || FIRMWARE_RETRACT.test(l.trim())).length;
+    expect(expected).toBeGreaterThan(1000);
+    expect(readGolden(file)['moveCount']).toBe(expected);
   });
 });

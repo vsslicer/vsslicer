@@ -3,13 +3,8 @@
     "bytes": 213819,
     "sha256": "23f5a04c2cd5d679f703eb502a2500bda95e553ef47cb34ee1b3d57aa94dfaa6"
   },
-  "interim": {
-    "lines": 9325,
-    "g0": 0,
-    "g1": 6785,
-    "g2": 0,
-    "g3": 100,
-    "layerMarkers": 100,
-    "thumbnailBlocks": 0
-  }
+  "moveCount": 6218,
+  "stateChanges": 1881,
+  "markers": 121,
+  "diagnostics": []
 }

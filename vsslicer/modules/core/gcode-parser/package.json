@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/gcode-parser",
-  "version": "0.1.0",
-  "description": "G-code parser module. 0.1.0 carries the golden corpus (test/fixtures) and the golden-JSON harness; the parser itself lands in later releases.",
+  "version": "0.2.1",
+  "description": "Streaming G-code text parser: implements the gcode-api Parse contract (moves, extrusion, state-change table, markers) and carries the golden corpus.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "main": "dist/index.js",
@@ -30,6 +30,9 @@
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write .",
     "golden:update": "node scripts/update-golden.ts"
+  },
+  "dependencies": {
+    "@vsslicer/gcode-api": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

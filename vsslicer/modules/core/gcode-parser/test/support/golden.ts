@@ -25,19 +25,19 @@ export interface Manifest {
 }
 
 export type Summary = Record<string, unknown>;
-/** The parser's seam: GCP-3/4/7/8 replace the interim summariser with one built on the real parser. */
-export type Summariser = (bytes: Uint8Array, file: ManifestFile) => Summary;
+/** The parser's seam: builds the golden fields from a corpus file; tests inject their own. */
+export type Summariser = (bytes: Uint8Array, file: ManifestFile) => Promise<Summary>;
 
 export const loadManifest = (): Manifest =>
   JSON.parse(readFileSync(join(fixturesDir, 'manifest.json'), 'utf8')) as Manifest;
 
 export const goldenPath = (file: ManifestFile): string => join(goldenDir, `${file.path}.json`);
 
-export function summarise(summariser: Summariser, file: ManifestFile): Summary {
+export async function summarise(summariser: Summariser, file: ManifestFile): Promise<Summary> {
   const bytes = readFileSync(join(fixturesDir, file.path));
   return {
     file: { bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') },
-    ...summariser(bytes, file),
+    ...(await summariser(bytes, file)),
   };
 }
 
