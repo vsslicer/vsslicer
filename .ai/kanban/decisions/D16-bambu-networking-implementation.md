@@ -30,12 +30,21 @@ open drop-in replacement for Bambu's closed `libbambu_networking` and `libBambuS
    paths (RTSPS :322 H.264 for the H2C, MJPEG-over-TLS :6000 for A1/P1) for E38.
 2. **Not depended on.** Loading the native library from Node would need FFI per OS and CPU, a
    host-slicer callback ABI built for Studio, and its cloud and signing code. That fails E21's
-   decision rule.
-3. **Never copied:** anything that holds or obtains Bambu secrets or signs commands
-   (`research/10.*`, signing, cert-endpoint and cloud-auth code), and the `client_name =
-   BambuStudio` setting. D2 item 5 already forbids Bambu private keys.
+   decision rule. The pure-Node libraries pass that rule but cover too little (see Alternatives).
+3. **Never copied:** anything that holds or obtains Bambu secrets or signs commands, namely
+   `research/10.02-secrets.md` (embedded client secrets, cert endpoint), `10.03-mqtt-field-encryption.md`,
+   `10.04-mqtt-signing.md`, `10.05-http-pop.md` and `10.07-bearssl-crypto-island.md`, the matching
+   signing, cert-endpoint and cloud-auth code in `src/`, and the `client_name = BambuStudio`
+   setting. D2 item 5 already forbids Bambu private keys. `research/10.06-lan-tls-and-access-codes.md`
+   is allowed: it is the LAN TLS trust model ported in item 1. Its CA bundle `printer.cer` (5 public
+   CA certificates, no keys) is shipped in `BambuStudio@79df7ae:resources/cert/printer.cer` (AGPL-3.0);
+   we take it from there with that provenance, not from upstream.
 4. **Cross-checks and fixtures** come from MIT sources: ha-bambulab/pybambu (H2C model,
-   `MOCK-H2C.json`, HMS text tables) and OpenBambuAPI (docs, GFDL: paraphrase, don't copy text).
+   `MOCK-H2C.json`) and OpenBambuAPI (docs, GFDL: paraphrase, don't copy text). HMS text tables
+   are not MIT material: they are Bambu's own data, which ha-bambulab scrapes from
+   `e.bambulab.com/query.php` and the Bambu wiki (`ha-bambulab@0e027ff:scripts/update_error_text.py:67,267`).
+   `printer-bambu` fetches them at runtime from Bambu, or writes its own short descriptions; it
+   never bundles the scraped tables.
 5. **Pinning.** `922c3e9` is the analysed revision. Moving to a newer upstream revision is a
    card of its own that re-reads the diff of the ported paths.
 
@@ -54,14 +63,38 @@ Recommendation: no cloud in E21. If the owner wants it later, it becomes a separ
 limited to the first list (sign-in and read-only cloud telemetry under an honest client name).
 The second list is identity spoofing with extracted keys, which is what Bambu acted on in the
 2026 Jarczak episode (`bambu-connectivity.md` §5). The owner chooses one of:
-(a) LAN only (recommended), (b) LAN plus read-only cloud, (c) full cloud with user-supplied keys,
-which overrides D2 item 5.
+
+- (a) **LAN only** (recommended). Keeps every point of `bambu-connectivity.md` §5.
+- (b) **LAN plus read-only cloud** under an honest client name. This overrides §5 point 2 ("Do
+  not touch Bambu's cloud servers from our own client", `bambu-connectivity.md:135`), keeping its
+  second half (never present ourselves as Bambu Studio). Unverified that it works: the API sits
+  behind Cloudflare, which bans some generic user agents (`Python-urllib` gets 403, error 1010)
+  while `curl`'s default and `BambuStudio/…` pass
+  (`open-bamboo-networking@922c3e9:research/06.06-cloud-rest.md:74`); whether an honest
+  `VSSlicer/…` user agent passes sign-in and telemetry is not tested.
+- (c) **Full cloud with user-supplied keys.** This breaks §5 points 2 and 3
+  (`bambu-connectivity.md:135-136`): the client impersonates Bambu Studio (`X-BBL-Client-Name:
+  BambuStudio`), and we would ship a signing implementation that uses Bambu's extracted slicer
+  key. That is the DMCA s.1201 and ToS 3.5(5) circumvention exposure of the Jarczak episode. It
+  also overrides D2 item 5 if any key handling ships with us. Not recommended.
 
 ## Alternatives
 
 - **Depend on the native library** (load the `.so`/`.dll` through FFI, or require the user to
   install it): no protocol code of our own, but native builds for every platform, a Studio-shaped
   ABI, and its cloud code comes along.
+- **Depend on an existing Node library** (re-tested after review; table in the PRN-1 note,
+  features from READMEs and npm metadata, code not read, unverified):
+  `bambu-js` (MIT, MQTT + FTP + camera frames, P1S and H2D, last publish 2025-08-17),
+  `@taucad/bambu` (Apache-2.0, Developer-LAN MQTT + FTP, X1C and A1 mini only, 0.1.0-beta.5),
+  `bambu-link` (MIT, MQTT only, tested on P1S, TLS verification off by default),
+  `bambu-node` (MIT, MQTT only, repository archived) and `homebridge-bambu-labs` (ISC, MQTT
+  status and light only). These do pass E21's "usable from Node" rule, so depend is not ruled
+  out by the ABI argument above. They are rejected because none covers the :6000 file transfer,
+  the RTSPS :322 camera, the H2C, or the CA-plus-leaf-pin TLS check (D15 row 5), and their
+  MQTT/FTPS layer is a thin wrapper over the same `mqtt` and `basic-ftp` packages
+  `printer-bambu` uses directly. `bambu-js` and `@taucad/bambu` are kept as permissive
+  cross-references. Revisit `@taucad/bambu` if it leaves beta and adds the H2C.
 - **Re-implement from MIT and GFDL references only** (ha-bambulab, bambulan, bambulabs_api,
   OpenBambuAPI): keeps `printer-bambu` licensable under permissive terms, but those projects
   cover less of the :6000 file transfer and camera framing and have less H2C data. It is only
@@ -79,8 +112,9 @@ which overrides D2 item 5.
   permissively without a rewrite.
 - Upstream's `research/` text is in the same AGPL repository; quote it with attribution, or
   paraphrase it.
-- ToS posture is unchanged from `bambu-connectivity.md` §5: LAN with the owner's access code in
-  Developer Mode, no spoofing, on the owner's responsibility (D2 item 5, D3).
+- ToS posture: with cloud option (a), unchanged from `bambu-connectivity.md` §5: LAN with the
+  owner's access code in Developer Mode, no spoofing, on the owner's responsibility (D2 item 5,
+  D3). Option (b) overrides §5 point 2 and option (c) breaks §5 points 2 and 3 (see Cloud mode).
 
 ## Consequences for the plan
 

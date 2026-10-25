@@ -135,7 +135,7 @@ Defensible posture for us:
 2. Do not touch Bambu's cloud servers from our own client, and never present ourselves as Bambu Studio (User-Agent, signatures, publisher identity). The 2026 dispute turned on cloud access and impersonation, not on LAN protocol use.
 3. Do not ship, embed or fetch the extracted Bambu Connect certificate/key, per-printer certs obtained by memory-scanning the plugin, or any signing implementation of the closed plugin (potential DMCA s.1201 / ToS 3.5(5) circumvention claim, and clearly not "ours").
 4. Do not redistribute `libbambu_networking`. Bambu distributes it to users via Studio/Orca; our extension can at most let the user bring their own installation (see below). Redistribution is covered by 3.3/3.5(2) risks.
-5. Write our own protocol client from public documentation (OpenBambuAPI is GFDL: facts are not copyrightable but copy no prose; ha-bambulab is MIT).
+5. Write our own protocol client from public documentation (OpenBambuAPI is GFDL: facts are not copyrightable but copy no prose; ha-bambulab is MIT).[^p5]
 6. Not legal advice; the Bambu ToS binds users, enforceability of reverse-engineering clauses against interoperability varies by jurisdiction (unverified).
 
 ### 6. Open Bamboo Networking (PRN-1, researched 2026-10-25)
@@ -145,9 +145,13 @@ The "bamboo-networking plugin" named by the owner (D3) is https://github.com/Clu
 - Licence: AGPL-3.0-or-later (open-bamboo-networking@922c3e9:LICENSE:1-13). GitHub reports NOASSERTION because a project header sits above the licence text.
 - What it is: a C++ drop-in for `libbambu_networking` with the same `dlsym` ABI, file name and install location, for Studio ABI 02.03.00 to 02.08.04 and Orca 2.3.2 and later (README.md:93-99, 128-175). It credits OpenBambuAPI, bambulabs_api, ha-bambulab and MITM captures (README.md:101-105). `research/` holds 79 protocol notes (research/INDEX.md).
 - LAN, Developer Mode, no keys: SSDP on UDP 2021, MQTT/TLS 8883, FTPS 990 with `project_file`, the TLS :6000 file transfer, RTSPS :322 H.264 (X1, P2S, H-series, X2D) and MJPEG over TLS :6000 (A1, P1) (README.md:185-212, 324-357). TLS is verified against Studio's CA bundle plus a per-device leaf pinned on first contact, with CN = SNI = serial; N7/P2S firmware sends only the leaf (STATUS.md:245-258).
-- Cloud: sign-in, cloud MQTT and preset/filament sync work without secrets. Signed commands, cloud print, MakerWorld records and TUTK remote camera need the user's own extracted Bambu slicer key plus `client_name = BambuStudio`, because the API returns HTTP 403 to an honest name (README.md:214-241, 327-340, 357). `research/10.02-secrets.md` documents Bambu's embedded client secrets. Point 3 above applies: copy none of it.
+- Cloud: sign-in, cloud MQTT and preset/filament sync work without secrets. Signed commands, cloud print, MakerWorld records and TUTK remote camera need the user's own extracted Bambu slicer key plus `client_name = BambuStudio`, because the API returns HTTP 403 to an honest name (README.md:214-241, 327-340, 357). `research/10.02-secrets.md` documents Bambu's embedded client secrets. Point 3 above applies: copy none of 10.02, 10.03 (field encryption), 10.04 (signing), 10.05 (HTTP PoP) or 10.07 (crypto). 10.06 (LAN TLS and access codes) is the LAN trust model and may be ported; its `printer.cer` CA bundle is public and comes from BambuStudio@79df7ae:resources/cert/printer.cer (AGPL-3.0). D16's cloud option (b) would override point 2, and option (c) breaks points 2 and 3.
+- HMS text: ha-bambulab's tables are scraped from Bambu (ha-bambulab@0e027ff:scripts/update_error_text.py:67,267), so they are Bambu's data, not MIT: fetch at runtime or paraphrase.
+- Node libraries (bambu-js MIT, @taucad/bambu Apache-2.0, bambu-link MIT, bambu-node MIT archived, homebridge-bambu-labs ISC) are usable from Node but cover only MQTT, FTP and at most camera frames, with no :6000 transfer, H2C or leaf-pin TLS (READMEs and npm metadata, 2026-10-25; unverified). bambuddy (AGPL-3.0, Python) and OctoPrint-BambuConnector (AGPL-3.0, Python) are applications, not libraries. Table in the PRN-1 note.
 - H2C: the author has no H2C. There are two community reports on firmware 01.02.00.00 in LAN-only mode, about :6000 `LIST_INFO`/`SUB_FILE` without a USB stick (research/09.06-commands.md:58, 149). H2C camera support rests on the "H-series" row and is untested (unverified).
 - D2 now allows porting AGPL code, so point 5 above ("write our own client") becomes "port the LAN parts of this project with provenance lines" if D16 is accepted.
+
+[^p5]: Superseded if D16 is accepted: the LAN client is ported from Open Bamboo Networking under D2 with provenance lines (§6, `.ai/kanban/decisions/D16-bambu-networking-implementation.md`).
 
 ## Comparison
 

@@ -36,3 +36,11 @@ table (12 candidates) in `.reference/notes/PRN-1-bambu-networking.md`; proposed 
 `.ai/kanban/decisions/D16-bambu-networking-implementation.md` (port the LAN protocol under D2, no
 dependency, no secrets/signing code; cloud mode stated separately for the owner); summary in
 `docs/research/bambu-connectivity.md` §6. Left for the owner: accept D16 and pick the cloud option.
+
+2026-10-25 (w-prn1-fix, review fixes): D16 now says cloud option (b) overrides §5 point 2 and
+(c) breaks §5 points 2 and 3 (impersonation, signing, DMCA s.1201); the never-copy list names
+research/10.02, 10.03, 10.04, 10.05, 10.07 and allows 10.06, with `printer.cer` taken from
+BambuStudio@79df7ae; HMS tables marked as Bambu data (fetch at runtime or paraphrase). Seven
+candidates added (bambu-js, bambu-node, @taucad/bambu, bambu-link, homebridge-bambu-labs,
+bambuddy, OctoPrint-BambuConnector); "depend on a Node library" re-tested and rejected on
+coverage. Choice unchanged.
