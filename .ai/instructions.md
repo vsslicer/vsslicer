@@ -41,10 +41,26 @@ docs/research/         tracked: distilled research reports, one per topic
 
 ## Architecture rules
 
-- **All code lives in `vsslicer/`**: the pnpm + Turborepo monorepo root (`package.json`,
-  `pnpm-workspace.yaml`, `turbo.json`, packages and extensions). Only files a tool requires at the
-  repository root stay there, kept thin and pointing into `vsslicer/`: `.github/workflows/*.yml`
-  (`working-directory: vsslicer`) and the root `LICENSE`. Research, plans and boards stay outside it.
+- **All code lives in `vsslicer/`.** Only files a tool requires at the repository root stay there,
+  kept thin and pointing into `vsslicer/`: `.github/workflows/*.yml` and the root `LICENSE`.
+  Research, plans and boards stay outside it.
+- **Every capability is its own independent module** in `vsslicer/modules/<name>/`: the G-code
+  core, the toolhead simulator, each slicer engine adapter, each printer connector, the viewer,
+  profiles, filament, and so on. A module is a self-contained project:
+  - its own `package.json`, lockfile, version, changelog, tests and build.
+    `cd vsslicer/modules/<name> && pnpm install && pnpm test && pnpm build` works with nothing else built.
+  - its own CI job and its own release (`<name>@x.y.z`), so it can be published alone, to npm,
+    Open VSX or the VSSlicer marketplace, or moved to its own repository unchanged.
+  - other modules only through declared semver ranges on their published packages, never relative
+    imports, path aliases or reaching into another module's files.
+- **Contracts are modules too.** A boundary several modules share (the slicer port, the printer
+  port, the G-code model) lives in its own small `*-api` module. Adapters depend on that, never
+  on each other: `slicer-orca` and `slicer-prusa` depend on `slicer-api`; `printer-moonraker` and
+  `printer-bambu` on `printer-api`.
+- **Shared tooling is a versioned module** (`tooling`: TypeScript base config, ESLint config with
+  the layer-boundary rule, test setup), consumed as a dev dependency. There is no root workspace
+  and no root lockfile. A thin script in `vsslicer/scripts/` runs a command in every module in
+  dependency order.
 - **Modular, SOLID and KISS, Clean architecture.** Every package is split into layers whose
   dependencies point inward only:
   - `domain`: entities and value objects. Pure, with no I/O and no framework.
