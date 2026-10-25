@@ -35,7 +35,7 @@ describe('parseInWorker', () => {
       const there = await collect(parseInWorker(path));
       expect(there, f.path).toEqual(here);
     }
-  });
+  }, 60_000); // parses the whole corpus twice; the default 5 s fails on a loaded machine
 
   it('parses a byte stream, with progress ending at 100%', async () => {
     const bytes = encode(block.repeat(2000));

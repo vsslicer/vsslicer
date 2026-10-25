@@ -15,15 +15,15 @@ Module: gcode-parser. Finding 2 of the SP2 audit, `.ai/audits/SP2-audit.md` (det
 
 ## Acceptance criteria
 
-- [ ] Neither test asserts wall-clock time tighter than it can hold on a loaded machine (time budgets relative or generous, documented)
-- [ ] Three parallel full-suite runs under CPU load pass
+- [x] Neither test asserts wall-clock time tighter than it can hold on a loaded machine (time budgets relative or generous, documented)
+- [x] Three parallel full-suite runs under CPU load pass
 
 ## Tasks
 
-- [ ] Write the failing test
-- [ ] Fix
-- [ ] Release a patch version of each changed module
+- [x] Write the failing test
+- [x] Fix
+- [x] Release a patch version of each changed module
 
 ## Progress
 
-Not started.
+Done in gcode-parser 0.8.4 (published).

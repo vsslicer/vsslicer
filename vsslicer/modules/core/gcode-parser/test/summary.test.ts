@@ -77,7 +77,7 @@ describe('missing statistics are absent, never zero', () => {
   it('an unparseable value is absent, not NaN or 0', async () => {
     const s = await sum('; filament used [mm] = abc, 5\n; estimated printing time (normal mode) = soon\n');
     expect(s.extruders[1]).toEqual({ lengthMm: 5 });
-    expect(s.extruders[0]).toBeUndefined();
+    expect(s.extruders[0]).toEqual({});
     expect(s.estimateSeconds).toBeUndefined();
   });
 });
@@ -110,6 +110,25 @@ describe('other formats', () => {
   });
 });
 
+describe('unknown extruder slots are empty objects, never holes', () => {
+  it.each([
+    ['; filament used [mm] = nan, 120.5\n', [{}, { lengthMm: 120.5 }]],
+    ['; filament used [mm] = 1,,3\n', [{ lengthMm: 1 }, {}, { lengthMm: 3 }]],
+  ])('%j', async (text, expected) => {
+    const s = await sum(text);
+    expect(s.extruders).toEqual(expected);
+    expect(0 in s.extruders && 1 in s.extruders).toBe(true);
+    for (const e of s.extruders) expect(e.lengthMm ?? 0).toBeGreaterThanOrEqual(0);
+  });
+  it('for...of works over every corpus summary', async () => {
+    for (const file of loadManifest().files.filter(lineScannable)) {
+      const got = await readSummary(fileSource(join(fixturesDir, file.path), 4096));
+      for (const e of got.extruders) expect(typeof e).toBe('object');
+      expect(Object.keys(got.extruders)).toHaveLength(got.extruders.length);
+    }
+  }, 60_000);
+});
+
 describe('no move buffers, fast', () => {
   it('scans 100 MB of moves allocating almost no array buffers', async () => {
     const block = encode('G1 X10.123 Y20.456 E0.01234 F1800\n; layer comment\nG1 X11.5 E.01\n'.repeat(1000));
@@ -127,8 +146,10 @@ describe('no move buffers, fast', () => {
     expect(s.extruders).toEqual([{ lengthMm: 7, weightG: 3 }]);
     // a parse would hold chunk buffers of tens of MB; here only line fragments
     expect(process.memoryUsage().arrayBuffers - base).toBeLessThan(2 << 20);
-    expect(ms).toBeLessThan(5000);
-  });
+    // Time is a regression guard only (memory is the point): a real slowdown is minutes, while a
+    // loaded CI box can be several times slower. Test timeout stays above the bound.
+    expect(ms).toBeLessThan(30_000);
+  }, 60_000);
 
   it('readSummaryFile reads the head and tail regions of a big file and agrees with the full scan', async () => {
     const dir = mkdtempSync(join(tmpdir(), 'summary-'));
