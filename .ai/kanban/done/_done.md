@@ -10,3 +10,4 @@
 8. [VSS-7: 3D viewer in VS Code webviews](007-3d-viewer-webview.md)
 9. [VSS-8: G-code viewer and toolhead simulation](008-gcode-viewer-simulation.md)
 10. [VSS-9: Printer connectivity: open ecosystems](009-printer-connectivity-open.md)
+11. [VSS-10: Bambu Lab connectivity](010-bambu-connectivity.md)
