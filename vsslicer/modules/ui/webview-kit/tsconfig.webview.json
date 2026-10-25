@@ -1,5 +1,5 @@
 {
   "extends": "@vsslicer/tooling/tsconfig.base.json",
   "compilerOptions": { "rootDir": "src", "outDir": "dist", "lib": ["ES2023", "DOM"], "types": [] },
-  "include": ["src/domain", "src/webview"]
+  "include": ["src/domain", "src/application", "src/webview"]
 }
