@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2
+
+- Dev: `@vsslicer/tooling` ^0.8.1; lockfile pins current versions only. (PLT-179)
+
 ## 0.3.1
 
 - Fix: a compressed block declaring more than 64 MiB, or (Heatshrink) more than 16 times its compressed size, yields `block-too-large` and is not decoded (a 4-byte block claiming 4 GB no longer allocates 4 GB).

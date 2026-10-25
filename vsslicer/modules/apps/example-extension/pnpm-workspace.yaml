@@ -6,6 +6,6 @@ minimumReleaseAgeExclude:
 # vsce-sign and keytar (via @vsslicer/tooling's @vscode/vsce) are only for publishing and signing
 allowBuilds:
   '@vscode/vsce-sign': false
-  keytar: false
   esbuild: false
+  keytar: false
   unrs-resolver: false

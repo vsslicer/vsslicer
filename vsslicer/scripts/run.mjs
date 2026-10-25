@@ -7,7 +7,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { changed, localDeps, order, withDeps } from './lib.mjs';
-import { changelogSection, integrityProblems, lockfileIntegrities, registryProblems, releaseTag, versionProblems } from './versioning.mjs';
+import { changelogSection, integrityProblems, stalePinProblems, lockfileIntegrities, registryProblems, releaseTag, versionProblems } from './versioning.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const registry = 'http://localhost:4873/';
@@ -166,6 +166,8 @@ if (cmd === 'ci' || cmd === 'checks') {
   const reg = modules.flatMap((m) =>
     registryProblems({ dir: m.dir, pkg: m.pkg, texts: Object.fromEntries(['.npmrc', 'pnpm-workspace.yaml', 'pnpm-lock.yaml'].map((f) => [f, modFile(m, f) ?? ''])) }),
   );
+  const current = new Map(modules.map((m) => [m.name, m.version]));
+  reg.push(...modules.flatMap((m) => stalePinProblems(m.name, lockfileIntegrities(modFile(m, 'pnpm-lock.yaml') ?? ''), current)));
   if (reg.length) (reg.forEach((p) => console.error(`registry: ${p}`)), process.exit(1));
   const r = spawnSync(process.execPath, ['--test', 'test/phantom-dep.test.mjs', 'test/npmrc.test.mjs'], { cwd: join(root, 'scripts'), stdio: 'inherit', env });
   if (r.status !== 0) (console.error('checks failed'), process.exit(r.status ?? 1));

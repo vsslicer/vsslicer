@@ -67,6 +67,19 @@ export function integrityProblems(dependent, entries, lookup) {
   return out;
 }
 
+/** current: Map(module name -> package.json version). A clean registry serves current versions only (D12), so any other pin cannot install there. */
+export function stalePinProblems(dependent, entries, current) {
+  const out = [];
+  for (const spec of entries.keys()) {
+    const at = spec.lastIndexOf('@');
+    const name = spec.slice(0, at);
+    const now = current.get(name);
+    if (now !== undefined && now !== spec.slice(at + 1))
+      out.push(`${dependent} and ${name}: ${dependent}'s lockfile pins ${spec}, but ${name}'s current is ${now}; raise the range, re-lock and bump ${dependent}`);
+  }
+  return out;
+}
+
 /** m: { dir, pkg, texts: { fileName: content } for .npmrc, pnpm-workspace.yaml, pnpm-lock.yaml } -> problems */
 export function registryProblems(m) {
   const out = [];

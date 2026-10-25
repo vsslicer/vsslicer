@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Dev: `@vsslicer/tooling` ^0.8.1; lockfile pins current versions only. (PLT-179)
+
 ## 0.2.1
 
 - The download cache defaults to one folder shared by every module: `VSCODE_TEST_CACHE`, else `~/.cache/vsslicer/vscode-test` (Windows: `%LOCALAPPDATA%\vsslicer\vscode-test`), instead of `.vscode-test` per module. `--cache-dir` and `cacheDir` still override. New pure helper `defaultCacheDir`. Delete old per-module `.vscode-test` folders.

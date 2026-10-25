@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Dev: `@vsslicer/tooling` ^0.8.1, `@vsslicer/example-extension` ^0.7.2 (the old `^0.3.0` could not match 0.7.x); lockfile pins current versions only. (PLT-179)
+
 ## 0.1.0
 
 - Playwright harness: Chromium with SwiftShader WebGL, `test:snapshot`, Linux-only snapshot writing (`UPDATE_SNAPSHOTS=1`).

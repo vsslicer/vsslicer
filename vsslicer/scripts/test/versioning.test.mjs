@@ -5,7 +5,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { changelogSection, integrityProblems, isPublishedChange, lockfileIntegrities, registryProblems, releaseTag, versionProblems } from '../versioning.mjs';
+import { changelogSection, integrityProblems, stalePinProblems, isPublishedChange, lockfileIntegrities, registryProblems, releaseTag, versionProblems } from '../versioning.mjs';
 
 const scripts = join(import.meta.dirname, '..');
 const files = ['dist', '!dist/*.meta.json', 'LICENSE', 'bin'];
@@ -36,15 +36,24 @@ test('changelogSection and releaseTag', () => {
 test('lockfile integrity: a doctored lockfile names both modules', () => {
   const lock = readFileSync(join(scripts, '..', 'modules', 'example-extension', 'pnpm-lock.yaml'), 'utf8');
   const entries = lockfileIntegrities(lock);
-  assert.ok(entries.has('@vsslicer/example@0.3.0'));
+  assert.ok(entries.has('@vsslicer/example@0.3.1'));
   const served = new Map(entries);
   const lookup = (n, v) => served.get(`${n}@${v}`);
   assert.deepStrictEqual(integrityProblems('@vsslicer/example-extension', entries, lookup), []);
-  const doctored = lockfileIntegrities(lock.replace(/(@vsslicer\/example@0\.3\.0':\n\s+resolution: \{integrity: sha512-)\w{4}/, '$1AAAA'));
+  const doctored = lockfileIntegrities(lock.replace(/(@vsslicer\/example@0\.3\.1':\n\s+resolution: \{integrity: sha512-)\w{4}/, '$1AAAA'));
   const [p, ...rest] = integrityProblems('@vsslicer/example-extension', doctored, lookup);
   assert.deepStrictEqual(rest, []);
   assert.match(p, /@vsslicer\/example-extension and @vsslicer\/example:/);
   assert.match(integrityProblems('d', entries, () => undefined)[0], /does not serve/);
+});
+
+test('stalePinProblems: a lockfile pinning a non-current @vsslicer version names both modules', () => {
+  const current = new Map([['@vsslicer/tooling', '0.8.1']]);
+  const pins = (v) => new Map([[`@vsslicer/tooling@${v}`, 'sha512-x']]);
+  assert.deepStrictEqual(stalePinProblems('@vsslicer/example', pins('0.8.1'), current), []);
+  const [p, ...rest] = stalePinProblems('@vsslicer/example', pins('0.5.0'), current);
+  assert.deepStrictEqual(rest, []);
+  assert.match(p, /@vsslicer\/example and @vsslicer\/tooling:.*0\.5\.0.*current is 0\.8\.1/);
 });
 
 test('registryProblems', () => {
