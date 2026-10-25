@@ -6,10 +6,11 @@
           {
             "type": "command",
             "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
-            "timeout": 5
+            "timeout": 10,
+            "async": true
           }
         ],
-        "matcher": "Agent"
+        "matcher": "*"
       }
     ],
     "SubagentStart": [
@@ -18,7 +19,8 @@
           {
             "type": "command",
             "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
-            "timeout": 5
+            "timeout": 10,
+            "async": true
           }
         ]
       }
@@ -29,7 +31,58 @@
           {
             "type": "command",
             "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
-            "timeout": 5
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
+            "timeout": 10,
+            "async": true
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
+            "timeout": 10,
+            "async": true
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/skills/taskboard/scripts/hook.py\" 2>/dev/null || true",
+            "timeout": 10,
+            "async": true
           }
         ]
       }
