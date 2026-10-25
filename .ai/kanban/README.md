@@ -9,9 +9,9 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Ready to start](todo/_todo.md) | 0 |
 | [In progress](doing/_doing.md) | 0 |
 | [In review](review/_review.md) | 0 |
-| [Done](done/_done.md) | 13 |
+| [Done](done/_done.md) | 11 |
 
-31 finished card(s) are archived in [archive/](archive/), by sprint or month.
+33 finished card(s) are archived in [archive/](archive/), by sprint or month.
 
 ## Milestones
 
@@ -44,7 +44,6 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 - [SP27: Daily use 5](sprints/SP27.md): planned, 0/38 cards done
 - [SP28: Daily use 6](sprints/SP28.md): planned, 0/39 cards done
 - [SP29: Daily use 7](sprints/SP29.md): planned, 0/41 cards done
-- [SP3: Preview 2](sprints/SP3.md): active, 24/39 cards done
 - [SP30: Daily use 8](sprints/SP30.md): planned, 0/40 cards done
 - [SP31: Daily use 9](sprints/SP31.md): planned, 0/41 cards done
 - [SP32: Daily use 10](sprints/SP32.md): planned, 0/44 cards done
@@ -55,7 +54,7 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 - [SP37: Parity 2](sprints/SP37.md): planned, 0/38 cards done
 - [SP38: Parity 3](sprints/SP38.md): planned, 0/39 cards done
 - [SP39: Parity 4](sprints/SP39.md): planned, 0/41 cards done
-- [SP4: Preview 1](sprints/SP4.md): planned, 0/32 cards done
+- [SP4: Preview 1](sprints/SP4.md): active, 0/47 cards done
 - [SP40: Parity 5](sprints/SP40.md): planned, 0/38 cards done
 - [SP41: Parity 6](sprints/SP41.md): planned, 0/38 cards done
 - [SP42: Parity 7](sprints/SP42.md): planned, 0/41 cards done

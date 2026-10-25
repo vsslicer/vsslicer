@@ -8,4 +8,6 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Ready](todo/_todo.md) | 0 |
 | [In progress](doing/_doing.md) | 0 |
 | [In review](review/_review.md) | 0 |
-| [Done](done/_done.md) | 1 |
+| [Done](done/_done.md) | 0 |
+
+1 finished card(s) are archived in [archive/](archive/), by sprint or month.

@@ -8,7 +8,7 @@ model: sonnet
 area: [publishing]
 story: US6
 milestone: "VSS:M1"
-sprint: "VSS:SP3"
+sprint: "VSS:SP4"
 created: 2026-10-25
 ---
 

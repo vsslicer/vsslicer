@@ -1,15 +1,3 @@
 # Done
 
-1. [PLT-179: Make a clean registry rebuild the repo: pin every lockfile to current @vsslicer versions](179-make-a-clean-registry-rebuild-the-repo-pin-every-lockfile-to.md)
-2. [PLT-180: Add a prepack build to every module that ships dist](180-add-a-prepack-build-to-every-module-that-ships-dist.md)
-3. [PLT-182: Run test:integration in CI and drop the dead caches](182-run-test-integration-in-ci-and-drop-the-dead-caches.md)
-4. [PLT-183: Print one-line errors from third-party-notices and vsslicer-bundle](183-print-one-line-errors-from-third-party-notices-and-vsslicer-.md)
-5. [PLT-184: Write the bundle metafile relative to the bundle cwd](184-write-the-bundle-metafile-relative-to-the-bundle-cwd.md)
-6. [PLT-185: Retry the lockfile-integrity registry fetch](185-retry-the-lockfile-integrity-registry-fetch.md)
-7. [PLT-186: Build the test-vscode runner path with fileURLToPath](186-build-the-test-vscode-runner-path-with-fileurltopath.md)
-8. [PLT-30: Create the webview-kit package with host, webview and gl entry points](030-create-the-webview-kit-package-with-host-webview-and-gl-entr.md)
-9. [PLT-32: Implement createWebviewHtml and the CSP helper](032-implement-createwebviewhtml-and-the-csp-helper.md)
-10. [PLT-34: Define the transport protocol: envelope, handshake, schema version](034-define-the-transport-protocol-envelope-handshake-schema-vers.md)
-11. [PLT-35: Implement chunking, ordering, backpressure and timeouts over a channel interface](035-implement-chunking-ordering-backpressure-and-timeouts-over-a.md)
-12. [PLT-36: Implement the host half of the transport with dropped-message handling](036-implement-the-host-half-of-the-transport-with-dropped-messag.md)
-13. [PLT-37: Implement the webview half: acquireVsCodeApi wrapper, state and theme tokens](037-implement-the-webview-half-acquirevscodeapi-wrapper-state-an.md)
+No cards.
