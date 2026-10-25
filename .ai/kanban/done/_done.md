@@ -13,3 +13,4 @@
 11. [VSS-10: Bambu Lab connectivity](010-bambu-connectivity.md)
 12. [VSS-11: Remote camera streams](011-remote-camera.md)
 13. [VSS-12: Printer, process and material profiles](012-profiles.md)
+14. [VSS-14: Project management and fleet tools](014-projects-and-fleet.md)
