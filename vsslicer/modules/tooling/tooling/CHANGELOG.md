@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.8.2
 
-- PLT-183: `third-party-notices` and `vsslicer-bundle` print one `<bin>: <message>` line and exit 1 on user errors (missing metafile, bad entry), no stack trace. `vsslicer-bundle` no longer prints esbuild's own log.
+- PLT-183: `third-party-notices` and `vsslicer-bundle` print one `<bin>: <message>` line and exit 1 on user errors (missing metafile, bad entry), no stack trace. `vsslicer-bundle` prints esbuild warnings and every error through `formatMessages`.
 - PLT-184: `bundle(entry, outfile, cwd)` writes the metafile under `cwd`.
 
 ## 0.8.1
