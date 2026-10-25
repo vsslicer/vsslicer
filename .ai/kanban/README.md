@@ -6,8 +6,8 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | --- | --- |
 | [Backlog](backlog/_backlog.md) | 0 |
 | [Next](next/_next.md) | 0 |
-| [Ready to start](todo/_todo.md) | 1 |
-| [In progress](doing/_doing.md) | 0 |
+| [Ready to start](todo/_todo.md) | 0 |
+| [In progress](doing/_doing.md) | 1 |
 | [In review](review/_review.md) | 0 |
 | [Done](done/_done.md) | 16 |
 
@@ -15,6 +15,6 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 
 - [R1: Research](milestones/R1-research.md): active, 16/17 cards done
 
-## Ready to start
+## In progress
 
-- [VSS-17](todo/017-feature-matrix-and-roadmap.md): Feature matrix and roadmap
+- [VSS-17](doing/017-feature-matrix-and-roadmap.md): Feature matrix and roadmap
