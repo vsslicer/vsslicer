@@ -58,7 +58,7 @@ export async function* bgcodeToGcode(events: AsyncIterable<GcodeEvent>): AsyncGe
     } else if (e.kind === 'block' && e.block.data) {
       const { block } = e;
       const data = block.data!;
-      if (block.params.type === 5)
+      if (block.params.type === BlockType.Thumbnail)
         thumbnails.push({ format: block.params.format, width: block.params.width, height: block.params.height, data });
       else if (block.type === BlockType.FileMetadata) file = parseIni(data);
       else if (block.type === BlockType.PrinterMetadata) printer = parseIni(data);

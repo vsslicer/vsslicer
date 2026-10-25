@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- Fix: `bgcodeToGcode` no longer drops the last line of a G-code block that does not end in a newline (libbgcode keeps it). Thumbnail checks use `BlockType.Thumbnail`. (GCP-14)
+
 ## 0.4.0
 
 - Fix: a JSON (encoding 1) slicer metadata block no longer raises `unknown-encoding`.

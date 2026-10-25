@@ -63,7 +63,9 @@ export function thumbnailText(t: Thumbnail): string {
 /** Drops lines that are blank or only `;` (libbgcode's remove_empty_lines); input is latin1 text. */
 export function dropBlankLines(text: string): string {
   let out = '';
-  for (const line of text.split('\n').slice(0, -1))
+  const lines = text.split('\n');
+  if (text.endsWith('\n')) lines.pop();
+  for (const line of lines)
     if (
       line
         .replace(/^[ \t]+/, '')

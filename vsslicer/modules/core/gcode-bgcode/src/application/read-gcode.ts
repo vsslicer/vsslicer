@@ -14,7 +14,13 @@ export type GcodeEvent = BgcodeEvent | { kind: 'gcode'; block: Block; text: Uint
 export async function* decodeGcodeBlocks(events: AsyncIterable<BgcodeEvent>): AsyncGenerator<GcodeEvent> {
   for await (const e of events) {
     yield e;
-    if (e.kind !== 'block' || e.block.type !== BlockType.GCode || !e.block.data || e.block.params.type === 5) continue;
+    if (
+      e.kind !== 'block' ||
+      e.block.type !== BlockType.GCode ||
+      !e.block.data ||
+      e.block.params.type === BlockType.Thumbnail
+    )
+      continue;
     const { encoding } = e.block.params;
     if (encoding === GCodeEncoding.None) yield { kind: 'gcode', block: e.block, text: e.block.data };
     else if (encoding === GCodeEncoding.MeatPack || encoding === GCodeEncoding.MeatPackComments)
