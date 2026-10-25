@@ -7,3 +7,4 @@
 5. [GCP-5: Write the move buffers, layer table and diagnostics with transferable output](005-write-the-move-buffers-layer-table-and-diagnostics-with-tran.md)
 6. [GCP-11: Read the .bgcode container: header, blocks, CRC32 and diagnostics](011-read-the-bgcode-container-header-blocks-crc32-and-diagnostic.md)
 7. [GCP-12: Port the Heatshrink 11-4 and 12-4 decoder](012-port-the-heatshrink-11-4-and-12-4-decoder.md)
+8. [GCP-13: Port the MeatPack decoder with and without comments](013-port-the-meatpack-decoder-with-and-without-comments.md)

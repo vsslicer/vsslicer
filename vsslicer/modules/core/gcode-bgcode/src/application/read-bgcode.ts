@@ -57,7 +57,7 @@ function reader(source: AsyncIterable<Uint8Array>) {
  * CRC mismatches, unsupported compression and failed decodes keep the stream going (the block is
  * still yielded); an unknown block type or compression value, a bad header or truncation end it,
  * because the following block boundary cannot be known.
- * G-code encodings (MeatPack) are not decoded here: `block.params.encoding` tells the consumer.
+ * G-code encodings (MeatPack) are not decoded here (see `decodeGcodeBlocks`).
  */
 export async function* readBgcode(
   source: AsyncIterable<Uint8Array>,

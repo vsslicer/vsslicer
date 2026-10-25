@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+- MeatPack decoder (encoding 1 and 2), pure TypeScript, with libbgcode's re-spacing of G lines: `meatpackDecode(bytes)`. Throws on a stream that ends inside a command or full-width character.
+- `decodeGcodeBlocks(events)` wraps `readBgcode`: each decodable G-code block is followed by `{ kind: 'gcode', block, text }` (Heatshrink then MeatPack); a corrupt MeatPack block yields `decode-failed`.
+- Fix: the Heatshrink file header now carries the complete ISC permission and disclaimer text.
+
 ## 0.2.0
 
 - Heatshrink decoder (window 11 or 12, lookahead 4), pure TypeScript: `heatshrinkDecode(data, size, windowBits, lookaheadBits)` and the `heatshrink11Codec` / `heatshrink12Codec` codecs for compression values 2 and 3. Whole-block; output is bounded by the declared uncompressed size and corrupt streams throw (reported as `decode-failed`).
