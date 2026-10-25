@@ -1,0 +1,7 @@
+# settings only, not a workspace
+# our own just-published modules are younger than minimumReleaseAge
+minimumReleaseAgeExclude:
+  - '@vsslicer/*'
+# esbuild (via @vsslicer/tooling) ships its binary as an optional dependency; its postinstall is only an optimisation
+allowBuilds:
+  esbuild: false
