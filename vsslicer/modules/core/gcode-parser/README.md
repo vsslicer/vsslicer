@@ -32,7 +32,7 @@ A leading UTF-8 BOM is skipped (offsets still count it).
 
 Memory is bounded by one chunk plus one partial line, whatever the file size: the working buffers
 are reused and each chunk gets fresh copies of the used part. A line longer than 1 MiB is skipped
-with the warning `line-too-long`.
+with the warning `line-too-long`, however the input is cut.
 
 ## What is interpreted
 
@@ -89,6 +89,27 @@ Decisions:
   same chunk.
 - **No tags**: roles stay `Unknown`, `layers` is empty, and at the end of the file one `info`
   diagnostic `no-slicer-tags` says which tags were missing (only if the file had moves).
+
+## Parsing off the calling thread
+
+```ts
+import { parseInWorker } from '@vsslicer/gcode-parser';
+const ctl = new AbortController();
+for await (const chunk of parseInWorker('/path/model.gcode', {
+  signal: ctl.signal,
+  onProgress: ({ bytesRead, total }) => {},
+  memoryCapBytes: 256 << 20,
+})) {
+  // chunk.moves etc. are the worker's buffers, moved to this thread
+}
+```
+
+`source` is a path (read in the worker) or an `AsyncIterable<Uint8Array>` (pass `total` for progress). Node `worker_threads` only; a web-worker variant is later. Options of `parse` apply too.
+
+- **Cancel**: abort terminates the worker; the iterator rejects with the reason, no chunk after it.
+- **Progress**: per chunk, monotonic; the last call has `bytesRead === total` (end of stream is 100%, even if the last chunk's `bytesRead` is lower).
+- **Memory**: heap limit `memoryCapBytes` (default 256 MiB) gives `ParseWorkerError` with `code: 'memory-cap'`. The worker stays at most `maxPendingChunks` (default 2) chunks ahead of the consumer, so a slow consumer bounds buffers. Typed errors: `memory-cap`, `parse-failed` (`cause` is the worker's error), `worker-crashed`.
+- A byte-stream source stuck inside its own `next()` delays an abort until it yields.
 
 ## Decisions
 

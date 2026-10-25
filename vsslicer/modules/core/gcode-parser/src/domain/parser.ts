@@ -86,18 +86,23 @@ export class GCodeParser {
         return;
       }
       const consumed = nl + 1 - pos;
+      const length = (this.carry?.length ?? 0) + nl - pos;
       if (this.skipping) {
         this.skipping = false;
         this.offset += this.skipped + consumed;
         this.skipped = 0;
+      } else if (length > MAX_LINE) {
+        // checked here as well as in `stash`, so detection does not depend on how the input is cut
+        this.tooLong();
+        this.offset += length + 1;
+        this.carry = null;
       } else if (this.carry) {
         const line = new Uint8Array(this.carry.length + nl - pos);
         line.set(this.carry);
         line.set(input.subarray(pos, nl), this.carry.length);
-        const length = this.carry.length;
         this.carry = null;
         this.line(line, line.length);
-        this.offset += length + consumed;
+        this.offset += length + 1;
       } else {
         this.line(input.subarray(pos, nl), nl - pos);
         this.offset += consumed;
@@ -134,7 +139,7 @@ export class GCodeParser {
     }
     const length = (this.carry?.length ?? 0) + rest.length;
     if (length > MAX_LINE) {
-      this.writer.diagnostic('line-too-long', 'warning', this.offset, `line longer than ${MAX_LINE} bytes skipped`);
+      this.tooLong();
       this.skipping = true;
       this.skipped = length;
       this.carry = null;
@@ -144,6 +149,10 @@ export class GCodeParser {
     if (this.carry) next.set(this.carry);
     next.set(rest, this.carry?.length ?? 0);
     this.carry = next;
+  }
+
+  private tooLong(): void {
+    this.writer.diagnostic('line-too-long', 'warning', this.offset, `line longer than ${MAX_LINE} bytes skipped`);
   }
 
   private line(buf: Uint8Array, length: number): void {

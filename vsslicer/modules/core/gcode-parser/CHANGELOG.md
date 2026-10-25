@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.1
+
+- Fix: `parseInWorker` with a path that cannot be stat'ed (missing, no permission) now rejects with `ParseWorkerError` code `parse-failed` and the fs error as `cause` (`cause.code === 'ENOENT'`), like every other failure; before it leaked the raw fs error. Tests for ENOENT, EACCES (unreadable file) and EISDIR.
+
+## 0.5.0
+
+- `parseInWorker(source, { signal, onProgress, memoryCapBytes, maxPendingChunks, total, ...parserOptions })`: runs the parser in a `worker_threads` worker (`dist/adapters/worker-entry.js`) and yields the same chunks as `parse`, buffers moved by transfer. `source` is a file path (read in the worker) or a byte stream (forwarded piece by piece on request). The host thread never parses.
+- Cancel: aborting terminates the worker at once and rejects with the signal's reason; no chunk follows. Tested on a 200 MB file (well under 500 ms).
+- Progress: `onProgress({ bytesRead, total })` per chunk, never decreasing; the last call is `total` (file size, or the `total` option for streams).
+- Memory: the worker's heap is limited to `memoryCapBytes` (default 256 MiB); exceeding it rejects with `ParseWorkerError` code `memory-cap`. Credit-based flow control keeps the worker at most `maxPendingChunks` (default 2) chunks ahead of a slow consumer. Other failures: `parse-failed` (the worker's error as `cause`), `worker-crashed`.
+- Fix: `line-too-long` (over 1 MiB) is now detected whatever the input piece size (before, only when the over-length part arrived in a piece without a line break, so 64 KiB pieces or one 2 MB piece missed it).
+- Dev: `@vsslicer/tooling` ^0.8.0.
+
 ## 0.4.0
 
 - `collect(chunks) -> Promise<ParsedFile>`: joins a chunk stream into a `ParsedFile` (buffers stay one per chunk; layer table, markers and diagnostics in file order).
