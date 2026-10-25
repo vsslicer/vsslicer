@@ -5,14 +5,14 @@ status: reviewed
 initiative: I3
 project: PRF
 order: 5
-depends_on: [E14, E12]
+depends_on: [E14, E2]
 rows: ["§13 Data-driven settings layout", "§13 Settings search and comparison"]
 ---
 
 A webview settings form in `vsslicer.profiles`, generated entirely from E11's catalogue: pages per schema group, widgets per type, inherited and overridden values shown apart, search over every key, and a side-by-side comparison of two profiles. Users edit any of the 800-odd settings of a process, material or printer without opening JSON, and find a setting by its label, tooltip or its PrusaSlicer, Orca or Cura name. The layout comes from data, so a new catalogue key appears in the form without UI code.
 
 ## Scope
-- In (written new on `@vsslicer/webview-kit`, E12): a custom editor or panel for one entity at a time; navigation by the schema groups of E11 (`layers` ... `plate`), subgroups and order from the catalogue; widgets for bool, int, float with unit, enum, percent-or-absolute values (Prusa `%` relatives kept relative), keyed per-extruder tables, and multiline G-code with its dialect badge (text only; the template editor is E16).
+- In (written new on `@vsslicer/webview-kit`, E2): a custom editor or panel for one entity at a time; navigation by the schema groups of E11 (`layers` ... `plate`), subgroups and order from the catalogue; widgets for bool, int, float with unit, enum, percent-or-absolute values (Prusa `%` relatives kept relative), keyed per-extruder tables, and multiline G-code with its dialect badge (text only; the template editor is E6).
 - In: each field shows its effective value, where it comes from (own, parent name, override block) and a "reset to parent" action; Cura `{"expr"}` values shown as formulas, read-only; hidden keys behind a toggle.
 - In: search across unified key, label, tooltip and every native name; filters "modified only" and "differs from parent"; comparison of two entities or of an entity and its parent, as a two-column view of differing keys; "open as text diff" hands the two files to VS Code's diff editor.
 - In: edits go to `ProfileStore.save` in the host through the transport; the webview holds no state of record; theme colours from VS Code tokens; full keyboard navigation and labelled controls.
@@ -33,7 +33,7 @@ A webview settings form in `vsslicer.profiles`, generated entirely from E11's ca
 - [ ] Fixtures only (D5).
 
 ## Dependencies
-- Needs E14 (store access, commands), E12 (webview transport, CSP helper), E11 (catalogue as the layout source).
+- Needs E14 (store access, commands), E2 (webview transport, CSP helper), E11 (catalogue as the layout source).
 - Exposes the form components to E17 and E57, and `vsslicer.profiles.openForm(entityId)` to SLC (process picker) and FIL (material view).
 
 ## Risks and spikes

@@ -5,7 +5,7 @@ status: reviewed
 initiative: I5
 project: SLC
 order: 3
-depends_on: [E26, E27, E67, E12, E13, E65, E28]
+depends_on: [E26, E27, E11, E12, E13, E9, E3]
 rows: []
 ---
 
@@ -38,8 +38,8 @@ None directly; Cura's support for the §2 rows is recorded in E30's capability m
 
 ## Dependencies
 
-- Needs E26 (interface, registry, download), E27 (output assembly for thumbnails and labels on plain G-code), E12 (Cura definitions and `fdm_materials` imported), E67 (unified schema keys for mapping), E13 (`resolve` returning the Cura stack), E28 (oracle), E65 (`@vsslicer/mesh` STL export).
-- Exposes `resolveCuraStack(stack): ResolvedCuraSettings` so PRF's settings form can show Cura computed values; PRF must not build a second Cura evaluator (open question to the coordinator).
+- Needs E26 (interface, registry, download), E27 (output assembly for thumbnails and labels on plain G-code), E12 (Cura definitions and `fdm_materials` imported), E11 (unified schema keys for mapping), E13 (`resolve` returning the Cura stack), E3 (oracle), E9 (`@vsslicer/mesh` STL export).
+- Exposes `resolveCuraStack(stack): ResolvedCuraSettings` so PRF's settings form can show Cura computed values; PRF does not build a second Cura evaluator (coordinator ruling).
 
 ## Risks and spikes
 

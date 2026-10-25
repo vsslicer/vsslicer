@@ -5,11 +5,11 @@ status: reviewed
 initiative: I2
 project: VWR
 order: 1
-depends_on: [E8]
+depends_on: [E1]
 rows: ["§9 3MF project with own config dialect", "§9 Open other slicers' 3MF", "§9 Lossless round trip of unknown parts"]
 ---
 
-`@vsslicer/3mf` is the library every later project feature stands on: it opens a 3MF package, resolves its model and Production sub-models, detects which slicer wrote it, reads that slicer's plates, objects and config into typed structures, and saves an untouched package back byte-for-byte. Users get it through the viewer (E10); other projects get it as an API: E27 adds sliced parts to a `.gcode.3mf`, GCP reads embedded plate G-code, E53 imports embedded presets.
+`@vsslicer/3mf` is the library every later project feature stands on: it opens a 3MF package, resolves its model and Production sub-models, detects which slicer wrote it, reads that slicer's plates, objects and config into typed structures, and saves an untouched package back byte-for-byte. Users get it through the viewer (E10); other projects get it as an API: E27 adds sliced parts to a `.gcode.3mf`, GCP reads embedded plate G-code, E12 imports embedded presets.
 
 ## Scope
 
@@ -22,7 +22,7 @@ In:
 - Ported code (D2): the Bambu/Orca key tables and plate-metadata parsing follow `OrcaSlicer@09aa0114:src/libslic3r/Format/bbs_3mf.cpp` and `BambuStudio@79df7ae:src/libslic3r/Format/bbs_3mf.cpp` (AGPL-3.0); Prusa 2.x follows `PrusaSlicer@30ef591:src/slic3r-shared/src/Slic3r/Biz/Config/Legacy/3mf_legacy.cpp` (AGPL-3.0). Each ported file keeps the upstream copyright notice and a `Ported from <repo>@<commit>:<path>` line.
 - Heavy work (unzip, XML of large sub-models) runs in a `worker_threads` worker in the extension host and in a Web Worker in the webview; the library is isomorphic.
 
-Out: the model writer and dialect writers (E31); turning dialect config into unified profiles (E53 owns that; this epic hands it the raw config blobs); Prusa 3.0 JSON reader (detected and opened as core plus preserved parts until PrusaSlicer 3.0 reaches beta); Slice, Beam Lattice, Volumetric, Boolean, Displacement and Secure Content extensions (detected; file opens read-only with a notice, lib3mf WASM is not shipped).
+Out: the model writer and dialect writers (E31); turning dialect config into unified profiles (E12 owns that; this epic hands it the raw config blobs); Prusa 3.0 JSON reader (detected and opened as core plus preserved parts until PrusaSlicer 3.0 reaches beta); Slice, Beam Lattice, Volumetric, Boolean, Displacement and Secure Content extensions (detected; file opens read-only with a notice, lib3mf WASM is not shipped).
 
 ## Feature-matrix rows
 
@@ -43,19 +43,19 @@ Out: the model writer and dialect writers (E31); turning dialect config into uni
 
 ## Dependencies
 
-- Needs E8 (monorepo, CI, fixture storage, lib3mf WASM in CI).
-- Exposes `openPackage(bytes|uri)`, `Package.parts`, `Package.replacePart/addPart/removePart`, `Package.save()`, `readProject(pkg) -> Project` with `dialect`, and the `Project` types (plates, objects, parts, instances, raw config) to E36, E37, E31, E27 (`.gcode.3mf` assembly), E10 (embedded `plate_N.gcode` lookup) and E53 (embedded preset JSON, Prusa INI, Cura containers).
+- Needs E1 (monorepo, CI, fixture storage, lib3mf WASM in CI).
+- Exposes `openPackage(bytes|uri)`, `Package.parts`, `Package.replacePart/addPart/removePart`, `Package.save()`, `readProject(pkg) -> Project` with `dialect`, and the `Project` types (plates, objects, parts, instances, raw config) to E9, E10, E31, E27 (`.gcode.3mf` assembly), E3 (embedded `plate_N.gcode` lookup) and E12 (embedded preset JSON, Prusa INI, Cura containers).
 
 ## Risks and spikes
 
-- E10 reads `.gcode.3mf` in I1, before this epic. Spike (first story): publish the container layer as the first increment so E10 uses it; otherwise GCP reads the zip with fflate and migrates.
+- E3 reads `.gcode.3mf` in I1, before this epic. Spike (first story): publish the container layer as the first increment so E3 uses it; otherwise GCP reads the zip with fflate and migrates.
 - Byte-identical save depends on reusing the original compressed entries, not recompressing. Spike: confirm fflate exposes raw entry copy, or write the small local-header copier ourselves.
 - Prusa 3.0 JSON layout is alpha. Re-check at beta; a story is added then.
 - Fixture provenance: fixtures must be our own exports from upstream releases, not downloaded user models, so their licence is clear.
 
 ## Eng review
 
-- Scope challenge: reader and container only; the model writer moved to E31 because I2 needs only untouched save and part replacement. Dialect-to-profile conversion stays with E53 to avoid two owners of the settings mapping.
+- Scope challenge: reader and container only; the model writer moved to E31 because I2 needs only untouched save and part replacement. Dialect-to-profile conversion stays with E12 to avoid two owners of the settings mapping.
 - Tests: conformance suite catches spec regressions; byte-identity catches recompression and part reordering; goldens catch dialect key drift. Oracle named per criterion.
 - Blast radius: a parser crash in a worker is caught and shown per file; it cannot take down the extension host. Zip-bomb cap prevents memory exhaustion.
 - Reversibility: read-only, so no user data at risk; a bad dialect reader can be disabled per dialect (falls back to core plus preserved parts).

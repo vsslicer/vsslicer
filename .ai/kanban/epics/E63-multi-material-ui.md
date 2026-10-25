@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: SLC
 order: 7
-depends_on: [E27, E30, E67, E13, E66]
+depends_on: [E27, E30, E11, E13, E10, E34]
 rows: ["§5 Wipe tower, ramming, purge matrix", "§5 Flush volumes derived from colours", "§5 Purge into infill, objects or support", "§5 Per-feature filament assignment", "§5 Dual-nozzle filament grouping"]
 ---
 
@@ -41,13 +41,13 @@ Out: the engine's tower generation (engine side), AMS slot mapping at send (PRN)
 
 ## Dependencies
 
-- Needs E27 (emission), E30 (capability table for per-feature keys), E67 and E13 (keys and writes), E66 and the I6 editor epics for the plate overlay (VWR's tower placement overlay API; a new VWR export the coordinator must confirm).
+- Needs E27 (emission), E30 (capability table for per-feature keys), E11 and E13 (keys and writes), E10 (`ProjectModel`), and E34 (VWR's plate epic), which provides the tower placement overlay API.
 - Exposes the flush matrix calculator to PRN (send-time remapping may need recalculated flush volumes when AMS mapping changes colours).
 
 ## Risks and spikes
 
 - Spike: what the H2C's nozzle arrangement means for `filament_map` (unverified; the H2C class and its nozzle count must be confirmed on the printer and in Orca's machine profile).
-- Risk: the tower overlay needs a VWR editor API that does not exist in the anchors; without it, placement is numeric only.
+- Risk: if E34's overlay API lands late, placement is numeric only until it does.
 - Risk: Bambu and Orca flush behaviour drift (900 versus 20000 mm³ cap); the cap follows the selected engine.
 
 ## Eng review

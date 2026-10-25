@@ -5,7 +5,7 @@ status: reviewed
 initiative: I6
 project: VWR
 order: 7
-depends_on: [E32, E33, E54, E26, E32]
+depends_on: [E32, E33, E13, E26, E5]
 rows: ["§4 Multi-plate projects (plate as a first-class object)", "§4 Per-plate settings and per-plate custom G-code", "§4 Per-layer pause, colour change, custom G-code", "§4 Mixed printers in one project"]
 ---
 
@@ -16,8 +16,8 @@ The plate becomes an object the user edits: create, duplicate, rename, lock, del
 In (`vsslicer.project`, `@vsslicer/3mf` model; written new, shaped like Orca's `PartPlate` metadata without copying it, `projects-and-fleet.md` Implications):
 - Plate model: index, name, locked, bed type, print sequence, spiral mode, filament order and maps, instances; plate commands (create, duplicate, delete, lock, rename, reorder, move instance) through E32. Limit of 36 plates for Bambu/Orca compatibility (`MAX_PLATE_COUNT`).
 - Plate layout in the viewer: plates side by side as Orca draws them, with the active plate highlighted; tree view grouping by plate.
-- Config layering global < plate < object < part, shown in the override form with the source of each value (E54 resolve with a plate layer).
-- Per-plate custom G-code and per-layer entries (pause, colour change, tool change, custom) stored in `custom_gcode_per_layer.xml` per plate. Entries are edited from a plate's layer list in the project editor, and from GCP's layer slider through a `ProjectModel` command that E32 calls.
+- Config layering global < plate < object < part, shown in the override form with the source of each value (E13 resolve with a plate layer).
+- Per-plate custom G-code and per-layer entries (pause, colour change, tool change, custom) stored in `custom_gcode_per_layer.xml` per plate. Entries are edited from a plate's layer list in the project editor, and from GCP's layer slider through a `ProjectModel` command that E5 calls.
 - Mixed printers: a plate may reference a printer instance different from the project's; the plate's config layer then resolves against that printer. Written into our namespace and into the plate config where the dialect has a key; otherwise preserved in `Metadata/vsslicer/`.
 - Plate state from slicing: valid, stale (contents changed since slicing), sliced artefacts in `.vsslicer/sliced/`, consumed from SLC.
 
@@ -33,7 +33,7 @@ Out: arrange across plates (E35); filament-to-extruder mapping UI for multi-mate
 ## Acceptance criteria
 
 - [ ] Plate invariants under property tests (I6 exit criterion): every instance on exactly one plate; locked plates unchanged by any command except unlock; delete then undo restores membership and order.
-- [ ] Orca CLI oracle: a three-plate fixture with per-plate bed type and a pause at a layer slices, and E10 finds the pause on the right layer of the right plate only.
+- [ ] Orca CLI oracle: a three-plate fixture with per-plate bed type and a pause at a layer slices, and E3 finds the pause on the right layer of the right plate only.
 - [ ] Editing a sliced plate marks it stale in the tree and E31 removes its stale artefacts on save.
 - [ ] Bambu Studio and Orca GUI manual matrix: plates, names, lock flags and per-layer entries survive.
 - [ ] Mixed printers: a two-printer fixture resolves different bed sizes; an object outside the bed of its plate's printer is flagged.
@@ -41,7 +41,7 @@ Out: arrange across plates (E35); filament-to-extruder mapping UI for multi-mate
 
 ## Dependencies
 
-- Needs E32, E33, E54 (resolve with a plate layer and per-plate printer), E26 (Orca CLI), E32 (layer slider calls our command), E10 (G-code checks).
+- Needs E32, E33, E13 (resolve with a plate layer and per-plate printer), E26 (Orca CLI), E5 (layer slider calls our command), E3 (G-code checks).
 - Exposes `Plate` and plate commands, `ProjectModel.addLayerGcode(plate, z, entry)`, plate state events to SLC (slice plate, slice all), PRN (send plate, queue items reference `project + plate`) and GCP.
 
 ## Risks and spikes

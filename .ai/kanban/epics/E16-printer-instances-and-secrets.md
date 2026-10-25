@@ -12,7 +12,7 @@ rows: ["§13 Physical printer (instance with a host connection)"]
 The user's own printers as `printer_instance` entities in `vsslicer.profiles`: which model, which nozzle on which toolhead, which surface and feeder, and how to reach it (host type, address, and a `secret_ref` into VS Code SecretStorage). The printer extensions (PRN) connect through these instances, and the slicer resolves profiles for them. Credentials never land in profile files, unlike PrusaSlicer 2.9's plain-text physical printer INI files.
 
 ## Scope
-- In (written new): create, edit and delete instances (tree items and form fields from E14/E5); `connection {host_type, url, secret_ref}` with `host_type` values taken from the adapters E20 registers (Bambu LAN with serial and access code first, D3; then Moonraker, OctoPrint, PrusaLink, Duet); credentials stored with `context.secrets` under the `secret_ref`.
+- In (written new): create, edit and delete instances (tree items and form fields from E14/E15); `connection {host_type, url, secret_ref}` with `host_type` values taken from the adapters E20 registers (Bambu LAN with serial and access code first, D3; then Moonraker, OctoPrint, PrusaLink, Duet); credentials stored with `context.secrets` under the `secret_ref`.
 - In: import of existing physical printers from PrusaSlicer 2.9 `physical_printer/*.ini` and 3.0 JSON, Orca user machine presets and Cura machine instances: entity into the store, credential (`printhost_apikey`, `printhost_password`, access code) into SecretStorage; the source files are not touched.
 - In: `getConnection(instanceId)` in the extension API, returning the credential to the calling extension; export of an instance to native formats without secrets.
 - Out: talking to printers (PRN), discovery (E23, used by E17), the wizard (E17).
@@ -29,7 +29,7 @@ The user's own printers as `printer_instance` entities in `vsslicer.profiles`: w
 
 ## Dependencies
 - Needs E13, E14; E20 for the `host_type` registry and connection shape (agreed both ways: E20 reads instances from here).
-- Exposes `printer_instance` entities and `getConnection` to E20/E2/E3/E4, and instances to E26/E2 as the slicing target.
+- Exposes `printer_instance` entities and `getConnection` to E20/E21/E22/E23, and instances to E26/E27 as the slicing target.
 
 ## Risks and spikes
 - Extension API exposure: any installed extension can call `getConnection`. This is VS Code's normal trust model (one extension host); documented, and the API returns secrets only for instances whose `host_type` the calling adapter registered.

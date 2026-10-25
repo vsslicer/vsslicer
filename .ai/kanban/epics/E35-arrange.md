@@ -38,7 +38,7 @@ Out: sequential-print arrange with gantry clearance checks beyond the simple cle
 
 ## Dependencies
 
-- Needs E34 (plates, locks, commands), E9 (meshes, hulls), E54 (bed shape and exclusion areas of the plate's printer).
+- Needs E34 (plates, locks, commands), E9 (meshes, hulls), E13 (bed shape and exclusion areas of the plate's printer).
 - Exposes `arrange(plateIds, options)`, `fillBed(instance)`, `multiply(instance, n)` commands to E55 (auto-orient then arrange) and to SLC (arrange before slicing a plate).
 
 ## Risks and spikes

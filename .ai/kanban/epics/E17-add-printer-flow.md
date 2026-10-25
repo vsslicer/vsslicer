@@ -15,7 +15,7 @@ The P0 minimum of PrusaSlicer's configuration wizard in `vsslicer.profiles`: the
 - In (written new): a wizard webview built from E15's components, plus a quick-pick fallback for the same steps; steps vendor › model › nozzle per toolhead › surface › feeder › materials (only those compatible by E11's evaluator) › connection (E16, optional, prefilled from PRN discovery when a printer extension is installed) › summary.
 - In: when the chosen vendor's data is not present, offer the Orca/Bambu data package or the Prusa upstream download (D4) inline; selected materials and default process become visible in the tree (the counterpart of Prusa's installed vendor/model/variant triples).
 - In: finishing creates the instance and opens the resolved default process in the form.
-- Out: calibration (SLC), printer discovery itself (E21/E4), editing existing instances (E16).
+- Out: calibration (SLC), printer discovery itself (E21/E23), editing existing instances (E16).
 
 ## Feature-matrix rows
 - §13 Add-printer flow (P0): done when a user goes from nothing to a printer instance with compatible materials and a resolved process, for a Prusa, an Orca-vendor, a Bambu and a Cura printer.

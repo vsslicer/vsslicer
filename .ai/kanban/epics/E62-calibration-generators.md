@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: SLC
 order: 6
-depends_on: [E26, E27, E29, E30, E13, E66, E28, E30]
+depends_on: [E26, E27, E29, E30, E13, E10, E3, E5]
 rows: ["§6 Temperature tower", "§6 Flow, pressure advance, retraction, max volumetric speed", "§6 Motion tests (VFA, input shaping, cornering)", "§6 Static test models (cube, tolerance, bed levelling, ironing patterns)", "§2 Input shaping and junction deviation emission, adaptive PA"]
 ---
 
@@ -40,13 +40,13 @@ Out: printer-side automatic calibration over MQTT (PRN, P3), Bambu's per-AMS-slo
 
 ## Dependencies
 
-- Needs E26, E27, E29 (post-processing step runner), E30 (capability table to extend), E13 (profile write API), E66 (plate from generated model), E28 (sweep detection), E30 (preview where the user picks the block).
+- Needs E26, E27, E29 (post-processing step runner), E30 (capability table to extend), E13 (profile write API), E10 (plate from generated model), E3 (sweep detection), E5 (preview where the user picks the block).
 - Exposes `Calibration.run(test, params)` and the sweep definitions for reuse by PRN if printer-side calibration is reopened.
 
 ## Risks and spikes
 
 - Spike: sweep by post-processing versus engine-native modifiers (layer-range modifiers in the 3MF). Post-processing is engine-independent but fights engine temperature commands; the spike slices a tower both ways on Orca and CuraEngine.
-- Risk: E13 may expose `resolve` without a write API; needs a `ProfileStore.update` (coordinator to confirm with PRF).
+- E13 exposes `ProfileStore.update` for the write-back (coordinator ruling); a delay there blocks only the write-back step.
 - Risk: epic size near the six-sprint limit; split point if needed: "sweep towers" (temperature, retraction, MVS, VFA) and "path generators" (PA line and pattern, flow).
 
 ## Eng review

@@ -5,7 +5,7 @@ status: reviewed
 initiative: I3
 project: PRF
 order: 1
-depends_on: [E11]
+depends_on: [E1]
 rows: ["§1 Layers, slicing precision, resolution", "§1 Walls, perimeters, seams, bridging, overhangs", "§1 Top/bottom shells, infill, ironing", "§1 Supports and raft", "§1 Skirt, brim, adhesion", "§1 Speed, acceleration, jerk", "§1 Extrusion width, flow, retraction, travel", "§1 Cooling", "§1 Filament material, temperatures, overrides, pressure advance", "§1 Multi-material, wipe or prime tower, tool change", "§1 Printer definition and machine limits", "§1 Custom G-code, output options, post-processing", "§1 Special modes, fuzzy skin, mesh fixes, experimental", "§1 Plate-level settings", "§13 Inheritance and compatibility conditions", "§13 Nozzle or tool as its own entity", "§14 Filament presets (temperatures, flow, density, cost)", "§5 Multi-tool presets and toolchangers"]
 ---
 
@@ -57,8 +57,8 @@ Totals to reconcile: PrusaSlicer 471 + 178 legacy-only, SuperSlicer 893, Bambu 6
 - [ ] Verified on fixtures only; no hardware involved (D5).
 
 ## Dependencies
-- Needs E11 (monorepo, test tooling, publishing).
-- Exposes types, JSON Schema files and `evaluate(expr, context)`, `merge(chain)` and the catalogue to E12-E10, E27/E3 (native key names for emission), E40 (`material` shape, `external_ids`), E20 (`printer_instance.connection` shape), E58 (`plate` group).
+- Needs E1 (monorepo, test tooling, publishing).
+- Exposes types, JSON Schema files and `evaluate(expr, context)`, `merge(chain)` and the catalogue to E12-E18, E57, E58, E27/E28 (native key names for emission), E40 (`material` shape, `external_ids`), E20 (`printer_instance.connection` shape), E10 (`plate` group).
 
 ## Risks and spikes
 - Canonical key names (`profiles.md` open question). Proposal: Orca names are canonical, since the first engine is the Orca CLI (I5) and Orca covers Bambu except about 100 keys; other dialects map through the catalogue. Spike (1 day) writes it up as a VSS decision before the catalogue script runs.

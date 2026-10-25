@@ -5,11 +5,11 @@ status: reviewed
 initiative: I3
 project: PRF
 order: 4
-depends_on: [E13, E11]
+depends_on: [E13, E1]
 rows: []
 ---
 
-The first user-visible release of `vsslicer.profiles`: a profile tree in the explorer, commands to import from installed slicers and to download Prusa vendor bundles, a read-only "resolved profile" view, export to native formats, and validation of profile JSON files through VS Code's built-in JSON language service. It owns no feature-matrix row of its own; it is the extension shell that puts E11-E3's rows (vendor library, inheritance and conditions, nozzle entities, macro pass-through) in front of users, and the host for E15-E8.
+The first user-visible release of `vsslicer.profiles`: a profile tree in the explorer, commands to import from installed slicers and to download Prusa vendor bundles, a read-only "resolved profile" view, export to native formats, and validation of profile JSON files through VS Code's built-in JSON language service. It owns no feature-matrix row of its own; it is the extension shell that puts E11-E13's rows (vendor library, inheritance and conditions, nozzle entities, macro pass-through) in front of users, and the host for E15-E18.
 
 ## Scope
 - In (written new, extension kind `workspace`): activation on `.vsslicer/profiles/**` or the view; `ProfileStore` (E13) hosted with its index in a worker; a `TreeView` grouped vendor › printer model › nozzle, plus materials, processes and printer instances, with abstract entities greyed, inheritance chain shown on expand, and a filter "compatible with printer instance X" from the evaluator.
@@ -21,7 +21,7 @@ The first user-visible release of `vsslicer.profiles`: a profile tree in the exp
 None owned. Surfaces E11 (§13 Inheritance and compatibility conditions, §13 Nozzle or tool as its own entity), E12 (§13 Bundled vendor profile library) and E13 (§7 Placeholder macro language) to users.
 
 ## Acceptance criteria
-- [ ] Integration tests (`@vscode/test-electron`, from E11) on a fixture workspace: tree shows the expected counts for an imported Orca vendor and for a fixture Prusa bundle; the compatibility filter hides incompatible materials.
+- [ ] Integration tests (`@vscode/test-electron`, from E1) on a fixture workspace: tree shows the expected counts for an imported Orca vendor and for a fixture Prusa bundle; the compatibility filter hides incompatible materials.
 - [ ] Editing a profile JSON file gives schema completion for `settings` keys and a diagnostic for an unknown parent within one second.
 - [ ] `Download Prusa vendor bundle` shows URL and commit, writes only to `globalStorageUri`, and offline gives an error message with a retry action (no partial bundle left behind).
 - [ ] `Show resolved profile` lists provenance per key; output matches `ProfileStore.resolve` for the E13 tuple fixtures.
@@ -29,8 +29,8 @@ None owned. Surfaces E11 (§13 Inheritance and compatibility conditions, §13 No
 - [ ] Fixtures only (D5).
 
 ## Dependencies
-- Needs E13 (and through it E11, E12), E11 (extension packaging, integration test harness).
-- Exposes the extension API `vsslicer.profiles` (`getStore()`) and the tree for E15-E8; the commands are what SLC's printer/material pickers call (E26).
+- Needs E13 (and through it E11, E12), E1 (extension packaging, integration test harness).
+- Exposes the extension API `vsslicer.profiles` (`getStore()`) and the tree for E15-E18; the commands are what SLC's printer/material pickers call (E26).
 
 ## Risks and spikes
 - Multi-root workspaces: which folder holds user profiles. Proposal: the first folder with `.vsslicer/`, else the first folder; spike checks how VS Code orders folders in `workspaceFolders`.

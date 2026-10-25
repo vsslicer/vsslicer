@@ -5,7 +5,7 @@ status: reviewed
 initiative: I3
 project: PRF
 order: 8
-depends_on: [E12, E13, E14, E18]
+depends_on: [E12, E13, E14, E8]
 rows: ["§13 Profile bundle import and export (`.ini` bundle, `.orca_*`, `.bbscfg`, `.curaprofile`)"]
 ---
 
@@ -13,8 +13,8 @@ Reading and writing the files users share profiles with: Orca's `.orca_printer`,
 
 ## Scope
 - In (written new in `@vsslicer/profiles`, commands in `vsslicer.profiles`): zip bundles with `bundle_structure.json` (`version`, `bundle_id`, `bundle_type`, preset lists, `printer_vendor`, `printer_asset`) per `profiles.md` §2; PrusaSlicer config bundle sections including `[presets]`; `.curaprofile` after the format spike.
-- In: 3MF-embedded profiles (`Metadata/project_settings.config`, PrusaSlicer `Slic3r_PE.config`) read through E18's container API and converted into user entities.
-- In: export of selected entities to each format, without secrets (E16), using the zip library E11 picks for the monorepo (E18 needs the same).
+- In: 3MF-embedded profiles (`Metadata/project_settings.config`, PrusaSlicer `Slic3r_PE.config`) read through E8's container API and converted into user entities.
+- In: export of selected entities to each format, without secrets (E16), using the zip library E1 picks for the monorepo (E8 needs the same).
 - In: archive safety: entries must stay inside the import folder (Orca checks the same, `PresetBundle.cpp:2428`), limits on entry count and uncompressed size, no symlinks.
 - Out: Cura `.curapackage` marketplace packages; writing profiles into 3MF projects (E27 and VWR own project output).
 
@@ -25,13 +25,13 @@ Reading and writing the files users share profiles with: Orca's `.orca_printer`,
 - [ ] Fixture bundles made by Orca@09aa0114, Bambu Studio@79df7ae and PrusaSlicer 2.9.6 (built from their writers' documented layout, plus at least one bundle saved by each real app) import with the expected entity counts.
 - [ ] Round trip: import(export(x)) equals x for each format; export(import(b)) is byte-equivalent to b for unmodified bundles where the format allows (zip entry order and timestamps documented where not).
 - [ ] Malicious archives (path traversal, absolute paths, zip bomb, symlink, 10 000 entries) are rejected with a message and write nothing.
-- [ ] A 3MF from E18's fixture set with Orca `project_settings.config` imports its process and filaments.
+- [ ] A 3MF from E8's fixture set with Orca `project_settings.config` imports its process and filaments.
 - [ ] Exported bundles contain no credentials (E16 scan reused).
 - [ ] Manual: one exported `.orca_printer` and one `.bbscfg` load in the desktop apps (versions recorded). Fixtures otherwise (D5).
 
 ## Dependencies
-- Needs E12 (dialect readers), E13 (store, native export), E14 (commands), E18 (3MF container reading).
-- Exposes `importBundle(uri)` and `exportBundle(ids, format)`; E58 can call import when a project's embedded profiles are not in the store.
+- Needs E12 (dialect readers), E13 (store, native export), E14 (commands), E8 (3MF container reading).
+- Exposes `importBundle(uri)` and `exportBundle(ids, format)`; E10 can call import when a project's embedded profiles are not in the store.
 
 ## Risks and spikes
 - `.curaprofile` layout is unverified (`profiles.md` Comparison); spike (1 day) against a file saved by Cura 5.x, else the format moves to E57.

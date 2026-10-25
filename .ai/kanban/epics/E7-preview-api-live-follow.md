@@ -5,7 +5,7 @@ status: reviewed
 initiative: I1
 project: GCP
 order: 5
-depends_on: [E7]
+depends_on: [E5]
 rows: ["§10 Live print follow (file position from the printer)"]
 ---
 
@@ -59,7 +59,7 @@ on E4's timing).
 
 ## Dependencies
 
-- Needs E7 (`PreviewSession.reveal`, plate picker), E5 (file offsets, layer table).
+- Needs E5 (`PreviewSession.reveal`, plate picker), E3 (file offsets, layer table).
 - Exposes the API above to E10 (preview hand-off), E27 (open sliced output), E20 and
   E21/E23 (progress feed). None of them is needed to build or test this epic.
 
@@ -75,7 +75,7 @@ on E4's timing).
 
 - Scope: small (1 to 2 sprints). Merging into E5 was considered; kept separate because this is
   the cross-project contract, which needs its own freeze, semver check and tests, and three other
-  projects name `E51` in their dependencies.
+  projects name `E7` in their dependencies.
 - Changed after review: commands added next to `exports` (cross-host calls), and the position
   widened from a bare offset to offset or layer/percent (Bambu is the only hardware, D5).
 - Dependencies are one-way: `vsslicer.gcode` never imports the printer API; printers push.

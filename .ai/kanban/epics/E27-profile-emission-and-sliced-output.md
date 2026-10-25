@@ -5,7 +5,7 @@ status: reviewed
 initiative: I5
 project: SLC
 order: 2
-depends_on: [E26, E13, E64, E66, E28]
+depends_on: [E26, E13, E8, E10, E3]
 rows: ["§7 `.gcode.3mf` sliced output", "§7 Thumbnails in G-code (PNG, JPG, QOI, BTT TFT, ColPic)", "§7 Object labels, exclude object"]
 ---
 
@@ -15,8 +15,8 @@ Turns a resolved VSSlicer profile and a project plate into the files the Orca CL
 
 In:
 - Preset emission in `vsslicer.slicer`: take `ProfileStore.resolve(printerInstance, material[], process).native("orca")` (E13) and write `machine.json`, `process.json` and one filament JSON per slot; apply plate and per-run overrides as `--key=value` where Orca accepts them, else in the JSON (Orca refuses 43 keys on the command line, ENG §1). Strip `post_process` (E29 runs scripts). Custom G-code templates and placeholders pass through byte for byte; the engine evaluates them (the macro language row is PRF's).
-- Plate input: the plate's 3MF from `ProjectModel` (E66), sliced with `--slice <plate>`.
-- `.gcode.3mf` assembly with `@vsslicer/3mf` (E64): `Metadata/plate_N.gcode` and `.md5`, `plate_N.png` and `plate_no_light_N.png`, `slice_info.config`, `model_settings.config`, `project_settings.config` (layout from `features-bambustudio-orcaslicer.md` §6). Thumbnails rendered by `vsslicer.project` `renderThumbnail(plate)`, not by the engine (Orca needs GL for them, ENG Implications).
+- Plate input: the plate's 3MF from `ProjectModel` (E10), sliced with `--slice <plate>`.
+- `.gcode.3mf` assembly with `@vsslicer/3mf` (E8): `Metadata/plate_N.gcode` and `.md5`, `plate_N.png` and `plate_no_light_N.png`, `slice_info.config`, `model_settings.config`, `project_settings.config` (layout from `features-bambustudio-orcaslicer.md` §6). Thumbnails rendered by `vsslicer.project` `renderThumbnail(plate)`, not by the engine (Orca needs GL for them, ENG Implications).
 - Plain G-code: thumbnail blocks in the formats the printer profile's `thumbnails_format` names (PNG, JPG, QOI, BTT TFT, ColPic); object labels by enabling `gcode_label_objects` and `exclude_object` in the emitted preset when the firmware flavour supports them.
 - Encoders for QOI, BTT TFT and ColPic are written new; ColPic and BTT TFT may be ported from OrcaSlicer (AGPL-3.0, D2) with provenance lines if the spec text is insufficient.
 
@@ -26,7 +26,7 @@ Out: Cura emission (E28 flattens the Cura stack itself), Prusa INI or JSON emiss
 
 - §7 `.gcode.3mf` sliced output (P1): done when our assembled archive is accepted by the H2C and is structurally equal (same part list, same `slice_info` keys) to Orca's own `--export-3mf` output for the fixture plates.
 - §7 Thumbnails in G-code (P1): done when each of the five formats is written, decodes back to the rendered image (lossless formats) and is read by `@vsslicer/gcode`'s thumbnail extraction.
-- §7 Object labels, exclude object (P1): done when labelled output carries one label per object instance and `EXCLUDE_OBJECT_DEFINE` for Klipper flavour, checked by E28's label reader.
+- §7 Object labels, exclude object (P1): done when labelled output carries one label per object instance and `EXCLUDE_OBJECT_DEFINE` for Klipper flavour, checked by E3's label reader.
 
 ## Acceptance criteria
 
@@ -42,7 +42,7 @@ Out: Cura emission (E28 flattens the Cura stack itself), Prusa INI or JSON emiss
 
 ## Dependencies
 
-- Needs E26 (adapter), E13 (`resolve` with the Orca native form), E64 (3MF writer), E66 (`ProjectModel`, `renderThumbnail`), E28 (thumbnail and label readers as oracle).
+- Needs E26 (adapter), E13 (`resolve` with the Orca native form), E8 (3MF writer), E10 (`ProjectModel`, `renderThumbnail`), E3 (thumbnail and label readers as oracle).
 - E21 for the H2C acceptance check.
 - Exposes the emitter (`emitOrcaPresets(resolved, overrides)`) and the output assembler (`writeSlicedOutput(plate, gcode, format)`) to E29, E62, E63, E64 and E65.
 

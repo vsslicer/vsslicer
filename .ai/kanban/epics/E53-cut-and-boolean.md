@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: VWR
 order: 12
-depends_on: [E33, E36, E52, E31, E9]
+depends_on: [E33, E36, E52, E31, E2]
 rows: ["§3 Planar cut, connectors, dovetail", "§3 Mesh boolean (union, difference, intersection)"]
 ---
 
@@ -37,7 +37,7 @@ Out: cut along a non-planar surface (`CutSurface.cpp`); text and SVG emboss (P3,
 
 ## Dependencies
 
-- Needs E33 (objects, parts), E36 (repair check), E52 (paint split), E31 (writer), E9 (WASM in a worker).
+- Needs E33 (objects, parts), E36 (repair check), E52 (paint split), E31 (writer), E2 (WASM in a worker).
 - Exposes `cut(mesh, plane, options)` and `boolean(op, a, b)` to the emboss rows of E56 if they are reopened.
 
 ## Risks and spikes

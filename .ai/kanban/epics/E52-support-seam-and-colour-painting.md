@@ -30,14 +30,14 @@ Out: fuzzy-skin and texture painting (P3, E56); texture-to-colour (P3 in the sam
 ## Acceptance criteria
 
 - [ ] Serialised paint strings from upstream fixtures decode and re-encode byte-identically (Orca, Bambu Studio and PrusaSlicer 2.9 fixtures).
-- [ ] A fixture painted in VSSlicer opens in Orca with the same painted regions (manual matrix) and slices with the Orca CLI with supports, seams and tool changes in the painted regions (checked with E10 per layer).
+- [ ] A fixture painted in VSSlicer opens in Orca with the same painted regions (manual matrix) and slices with the Orca CLI with supports, seams and tool changes in the painted regions (checked with E3 per layer).
 - [ ] Each stroke is undoable; E32's inverse property test covers paint commands.
 - [ ] Painting a 1 M triangle mesh keeps interaction within the frame budget set in E10.
 - [ ] Verified only on fixtures (D5); a painted multi-colour print on the H2C is an optional manual check.
 
 ## Dependencies
 
-- Needs E9 (BVH), E31 (writer), E33 (objects and parts), E10 (G-code checks), E26 (Orca CLI).
+- Needs E9 (BVH), E31 (writer), E33 (objects and parts), E3 (G-code checks), E26 (Orca CLI).
 - Exposes the `PaintLayer` model and serialiser to E53 (cut must split paint) and SLC (§5 multi-material UI shows painted filaments).
 
 ## Risks and spikes

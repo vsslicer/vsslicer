@@ -5,7 +5,7 @@ status: reviewed
 initiative: I5
 project: SLC
 order: 4
-depends_on: [E26, E27, E28, E20, E21, E63]
+depends_on: [E26, E27, E28, E20, E21, E7]
 rows: ["§7 External post-processing scripts"]
 ---
 
@@ -18,7 +18,7 @@ In:
 - Problem matchers contributed in `package.json` for Orca, CuraEngine (and later Prusa) warning lines; warnings without a file location are attached to the plate's 3MF or the profile file.
 - Post-processing: after a successful slice, run each script from the profile's `post_process` list (moved out of the engine preset by E27) or a workspace setting, in order, on a temp copy of the G-code, with the Prusa/Orca contract: G-code path as last argument, `SLIC3R_PP_OUTPUT_NAME`, `SLIC3R_PP_HOST`, and every config key as `SLIC3R_<KEY>` (`features-bambustudio-orcaslicer.md` §6). Runs before `.gcode.3mf` assembly so the archive carries the processed G-code and correct MD5.
 - Scripts run only in a trusted workspace (Workspace Trust); untrusted workspaces show why the step was skipped.
-- Commands "Slice plate", "Slice and preview" (opens the result with `GcodePreview.open`, E63) and "Slice and print"; status bar progress through `withProgress`.
+- Commands "Slice plate", "Slice and preview" (opens the result with `GcodePreview.open`, E7) and "Slice and print"; status bar progress through `withProgress`.
 
 Out: Cura's in-process Python `Script` classes (different API, needs Uranium; noted for E64 as possible built-ins), regex substitution (E64), fleet multi-printer send (PRN, I9), queue.
 
@@ -38,7 +38,7 @@ Out: Cura's in-process Python `Script` classes (different API, needs Uranium; no
 
 ## Dependencies
 
-- Needs E26, E27 (emission and output assembly; E27 strips `post_process`), E28 (Cura warnings), E20 (`PrinterRegistry.upload`, job start), E21 (H2C send), E63 (`GcodePreview.open`).
+- Needs E26, E27 (emission and output assembly; E27 strips `post_process`), E28 (Cura warnings), E20 (`PrinterRegistry.upload`, job start), E21 (H2C send), E7 (`GcodePreview.open`).
 - Exposes the `vsslicer` task type and its definition schema, the problem matcher names (`$vsslicer-orca`, `$vsslicer-cura`), and a post-processing step runner reused by E64 (regex substitution as a built-in step).
 
 ## Risks and spikes

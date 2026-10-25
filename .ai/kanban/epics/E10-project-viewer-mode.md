@@ -5,7 +5,7 @@ status: reviewed
 initiative: I2
 project: VWR
 order: 3
-depends_on: [E8, E9, E9, E34]
+depends_on: [E8, E9, E2, E7]
 rows: ["§9 Embedded per-plate G-code and thumbnails"]
 ---
 
@@ -15,10 +15,10 @@ rows: ["§9 Embedded per-plate G-code and thumbnails"]
 
 In:
 - `CustomReadonlyEditorProvider` for `*.3mf`, `*.stl`, `*.obj` (written new). The extension host holds the `Project` from E8; the webview fetches file bytes through `asWebviewUri` and parses meshes in its workers (`3d-viewer.md` §5).
-- Webview: three.js `WebGLRenderer` (MIT) with three-mesh-bvh picking, orbit and view-cube navigation, bed rendering from the project's printer bed shape when known, object selection and hover, wireframe toggle, mesh warnings from E9 statistics. Built on E9 for transport and CSP.
+- Webview: three.js `WebGLRenderer` (MIT) with three-mesh-bvh picking, orbit and view-cube navigation, bed rendering from the project's printer bed shape when known, object selection and hover, wireframe toggle, mesh warnings from E9 statistics. Built on E2 for transport and CSP.
 - Plates and objects tree view (`TreeView` under the file), synchronised with the 3D selection; plate thumbnails from `plate_N.png` and the cover thumbnail.
 - `ProjectModel` export (read-only in this epic): plates, objects, per-plate sliced artefacts, change events; `renderThumbnail(plate)` rendering a plate image offscreen in the webview.
-- "Preview sliced plate" calls `GcodePreview.open(uri, {plate})` from E34.
+- "Preview sliced plate" calls `GcodePreview.open(uri, {plate})` from E7.
 - WebGL context failure detection with a message telling the user to enable hardware acceleration (`3d-viewer.md` §2).
 - Size budgets from the E9 benchmark: above the budget the object shows as a bounding box with "Draw anyway".
 - Plain WebGL2 only (D6); no WebGPU path.
@@ -32,7 +32,7 @@ Out: editing, saving and undo (E32 switches to `CustomEditorProvider`); measure 
 ## Acceptance criteria
 
 - [ ] Fixture projects from each dialect open with the right plate and object tree (golden JSON from E8) and render; snapshot tests in headless Chromium with a software WebGL flag (CI only) match reference images within a pixel tolerance.
-- [ ] Selecting in the tree highlights in 3D and vice versa; tested in the webview test harness from E8.
+- [ ] Selecting in the tree highlights in 3D and vice versa; tested in the webview test harness from E1.
 - [ ] Frame time and first-render time at 1, 5 and 20 M triangles are recorded on the reference machines and meet the budgets set from E9's benchmark (budgets written into this epic when measured).
 - [ ] "Preview sliced plate" on a `.gcode.3mf` fixture opens the matching `plate_N.gcode` in `vsslicer.gcode`; if `vsslicer.gcode` is not installed the command explains how to get it.
 - [ ] Error paths each tested and shown in the editor, never a blank panel: WebGL context failure, E8 open errors, E9 parse errors, size above budget, missing thumbnail part.
@@ -41,13 +41,13 @@ Out: editing, saving and undo (E32 switches to `CustomEditorProvider`); measure 
 
 ## Dependencies
 
-- Needs E8 (`Project`), E9 (meshes, BVH), E9 (webview kit, transport, CSP), E34 (`GcodePreview.open`).
+- Needs E8 (`Project`), E9 (meshes, BVH), E2 (webview kit, transport, CSP), E7 (`GcodePreview.open`).
 - Exposes `ProjectModel` (read-only now, editable from E32) and `renderThumbnail(plate)` to E27 (thumbnails for output) and PRN (plate references in sends and queue items).
 
 ## Risks and spikes
 
-- Whether E9's renderer core is three.js or raw WebGL2. The research recommends three.js for the model viewer; spike with PLT before the first story so both projects share one renderer choice.
-- Software WebGL in CI: Chromium needs an explicit flag since SwiftShader fallback was deprecated; confirm the snapshot harness runs on GitHub Actions (E8).
+- Resolved by the coordinator: E2's renderer core is raw WebGL2 with no three.js; this viewer uses three.js and draws the kit's G-code layer into its own context.
+- Software WebGL in CI: Chromium needs an explicit flag since SwiftShader fallback was deprecated; confirm the snapshot harness runs on GitHub Actions (E1).
 - `retainContextWhenHidden` memory overhead versus reload cost: measure on the 5 M fixture and pick per size.
 
 ## Eng review

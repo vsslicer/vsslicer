@@ -5,7 +5,7 @@ status: reviewed
 initiative: I9
 project: PRN
 order: 9
-depends_on: [E22, E25, E39]
+depends_on: [E22, E25, E8]
 rows: ["§15 Job history"]
 ---
 
@@ -26,7 +26,7 @@ In:
   from the session status stream; per project when the file came from a workspace project, else a
   global history in `globalStorageUri`.
 - VSSlicer job id written into the sent file: a G-code header comment for plain G-code, a metadata
-  entry in `.gcode.3mf` through `@vsslicer/3mf` (E39), so printer-side records can be matched.
+  entry in `.gcode.3mf` through `@vsslicer/3mf` (E8), so printer-side records can be matched.
 - Moonraker back-fill from `server/history/list` (optional command), de-duplicated by printer plus
   `start_time`.
 - History view (tree): by month, project, printer; open the plate, the G-code, re-send.
@@ -58,7 +58,7 @@ login), OctoPrint history (core has none; the PrintJobHistory plugin is abandone
 ## Dependencies
 
 - Needs E22 (agent writer), E25 (upload and job events), E21 and E23 (status streams),
-  E39 (`.gcode.3mf` metadata write), E47 (`ProjectModel` plate references, optional link).
+  E8 (`.gcode.3mf` metadata write), E10 (`ProjectModel` plate references, optional link).
 - Exposes `History` (query, append events) to E47 (queue items become history records), E42
   (consumption per job may reference `vsslicer_job_id`).
 

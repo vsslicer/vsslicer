@@ -5,7 +5,7 @@ status: reviewed
 initiative: I2
 project: VWR
 order: 2
-depends_on: [E8, E9]
+depends_on: [E1, E2]
 rows: ["§3 Import STL, OBJ, 3MF"]
 ---
 
@@ -18,7 +18,7 @@ In:
 - Vertex deduplication to indexed geometry (about 24 bytes per triangle instead of 72; `3d-viewer.md` §3).
 - BVH build through three-mesh-bvh (MIT) in a worker, with serialise and deserialise so a BVH built once can be transferred.
 - Mesh statistics: triangle count, bounding box, volume, open-edge and non-manifold-edge counts, degenerate triangles. Repair is E36; this epic only reports.
-- Runs in a Web Worker pool in the webview and in `worker_threads` in the extension host; results cross as transferred `ArrayBuffer`s through the E9 transport.
+- Runs in a Web Worker pool in the webview and in `worker_threads` in the extension host; results cross as transferred `ArrayBuffer`s through the E2 transport.
 - Guard rails from `meshview`/`nightmesh`: declared STL triangle count checked against file length; a configurable triangle cap (default chosen by the E10 benchmark) above which the caller must confirm.
 
 Out: mesh repair (E36), STEP (E37), painting model (E52), boolean and cut (E53), decimation proxies (E10 decides whether it needs them), AMF and other formats (P3, E56).
@@ -39,15 +39,15 @@ Out: mesh repair (E36), STEP (E37), painting model (E52), boolean and cut (E53),
 
 ## Dependencies
 
-- Needs E8 (tooling) and E9 (worker pool and `ArrayBuffer` transfer in the message transport).
+- Needs E1 (tooling) and E2 (worker pool and `ArrayBuffer` transfer in the message transport).
 - Consumes E8's typed mesh arrays for 3MF objects.
-- Exposes `parseStl`, `parseObj`, `fromArrays`, `IndexedMesh`, `buildBvh`, `MeshStats` to E37 and every editor epic (E33 to E55).
+- Exposes `parseStl`, `parseObj`, `fromArrays`, `IndexedMesh`, `buildBvh`, `MeshStats` to E10 and every editor epic (E33 to E55).
 
 ## Risks and spikes
 
 - BVH build time and memory at 5 to 20 M triangles are unknown (`3d-viewer.md` open question 3). Spike: the benchmark in the acceptance criteria is the first story; if 20 M triangles cannot be indexed within budget, E10 falls back to a bounding-box placeholder with "draw anyway".
 - `SharedArrayBuffer` is assumed unavailable in webviews, so the parallel BVH builder cannot be used; single-worker build is the baseline.
-- Worker creation under the webview CSP (`3d-viewer.md` open question 2) is resolved by E9; this epic consumes its answer.
+- Worker creation under the webview CSP (`3d-viewer.md` open question 2) is resolved by E2; this epic consumes its answer.
 
 ## Eng review
 

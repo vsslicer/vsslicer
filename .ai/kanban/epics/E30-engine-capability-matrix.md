@@ -5,7 +5,7 @@ status: reviewed
 initiative: I5
 project: SLC
 order: 5
-depends_on: [E26, E27, E28, E67, E28]
+depends_on: [E26, E27, E28, E11, E3]
 rows: ["§2 Arachne variable-width walls", "§2 Tree and organic supports", "§2 Lightning, gyroid and 3D infill patterns", "§2 Arc fitting (G2/G3 output)", "§2 Ironing", "§2 Fuzzy skin", "§2 Scarf or sloped seams", "§2 Adaptive layer height (automatic)", "§2 Bridge detection over sparse infill", "§2 Pressure equalizer, monotonic infill, ramping travels"]
 ---
 
@@ -14,12 +14,12 @@ VSSlicer implements no slicing algorithm; the engine features of feature-matrix 
 ## Scope
 
 In:
-- `SlicerEngine.capabilities(): CapabilityTable` in `vsslicer.slicer`: per unified key (E67 schema), `supported | renamed(nativeKey, valueMap) | unsupported`, plus engine version range. One table per adapter (Orca from E26, CuraEngine from E28), as JSON data with a JSON Schema.
+- `SlicerEngine.capabilities(): CapabilityTable` in `vsslicer.slicer`: per unified key (E11 schema), `supported | renamed(nativeKey, valueMap) | unsupported`, plus engine version range. One table per adapter (Orca from E26, CuraEngine from E28), as JSON data with a JSON Schema.
 - A generated Markdown capability report per pinned engine version, committed with the tests.
-- Pass-through tests: for each row below and each engine that supports it, slice a small fixture with the feature off and on, and assert a measurable effect in the G-code through `@vsslicer/gcode` (E28): roles, widths, arcs, layer heights, feedrates.
+- Pass-through tests: for each row below and each engine that supports it, slice a small fixture with the feature off and on, and assert a measurable effect in the G-code through `@vsslicer/gcode` (E3): roles, widths, arcs, layer heights, feedrates.
 - Warnings at slice time when the resolved profile sets a key the chosen engine does not support (surfaced through E29's problem matcher channel).
 
-Out: the settings UI itself (PRF), the preview of the features (GCP; arcs are read by E28), the P2 and P3 §2 rows (E62, E64, E67), the PrusaSlicer column (added by E65 for its own adapter).
+Out: the settings UI itself (PRF), the preview of the features (GCP; arcs are read by E3), the P2 and P3 §2 rows (E62, E64, E67), the PrusaSlicer column (added by E65 for its own adapter).
 
 ## Feature-matrix rows
 
@@ -38,7 +38,7 @@ Each row is P0 or P1. "Done" for each: the capability table has an entry for bot
 
 ## Acceptance criteria
 
-- [ ] Capability tables for Orca and CuraEngine validate against their schema and cover every unified key in E67's schema (test fails on an unmapped key: regression when PRF adds keys)
+- [ ] Capability tables for Orca and CuraEngine validate against their schema and cover every unified key in E11's schema (test fails on an unmapped key: regression when PRF adds keys)
 - [ ] One effect test per row per supporting engine, run in CI against the pinned engines; each test names the regression it catches (feature silently dropped by emission or by an engine upgrade)
 - [ ] Bumping a pinned engine version regenerates the report; a diff in the report fails CI until reviewed
 - [ ] Slicing with an unsupported key set produces one warning per key in Problems; never an error and never silent
@@ -46,7 +46,7 @@ Each row is P0 or P1. "Done" for each: the capability table has an entry for bot
 
 ## Dependencies
 
-- Needs E26 and E28 (both adapters), E27 (emission, where `renamed` mappings are applied), E67 (unified keys), E28 (oracle; arc parsing).
+- Needs E26 and E28 (both adapters), E27 (emission, where `renamed` mappings are applied), E11 (unified keys), E3 (oracle; arc parsing).
 - Exposes `CapabilityTable` per engine to PRF (settings form greys out unsupported keys) and to E65 and E66 (new adapters add a table and reuse the effect tests).
 
 ## Risks and spikes

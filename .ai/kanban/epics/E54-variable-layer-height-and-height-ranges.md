@@ -23,7 +23,7 @@ Out: Cura's automatic adaptive layers (an engine setting, SLC).
 
 ## Feature-matrix rows
 
-- §3 Variable layer height editor (P2): done when an adaptive profile computed here matches Orca's on the fixtures within a tolerance, edits round-trip, and the Orca CLI's G-code follows the profile (layer Z values checked with E10).
+- §3 Variable layer height editor (P2): done when an adaptive profile computed here matches Orca's on the fixtures within a tolerance, edits round-trip, and the Orca CLI's G-code follows the profile (layer Z values checked with E3).
 - §3 Height-range modifiers (P2): done when ranges created by dragging round-trip and the sliced G-code shows the override only in that range.
 
 ## Acceptance criteria
@@ -36,7 +36,7 @@ Out: Cura's automatic adaptive layers (an engine setting, SLC).
 
 ## Dependencies
 
-- Needs E33 (layer-range overrides), E34 (plate config for layer height limits), E31 (writer), E54 (min and max layer height of the printer), E10.
+- Needs E33 (layer-range overrides), E34 (plate config for layer height limits), E31 (writer), E13 (min and max layer height of the printer), E3.
 - Exposes the layer-height profile to SLC (passed to the engine through the 3MF).
 
 ## Risks and spikes

@@ -5,7 +5,7 @@ status: reviewed
 initiative: I5
 project: SLC
 order: 1
-depends_on: [E26, E19]
+depends_on: [E1, E19]
 rows: []
 ---
 
@@ -31,7 +31,7 @@ None directly. This epic is the substrate the rows of E27 to E30 ride on; the I5
 - [ ] Every row of the Orca exit-code table maps to a typed error with a user-visible message; one test per code, using a stub binary that exits with that code (regression: a new code or modulo-256 wrap shows as "unknown error")
 - [ ] Cancel during slicing kills the process tree within 2 s and leaves no file in `.vsslicer/sliced/` (test with a stub that sleeps; then with the pinned Orca on a large fixture in CI)
 - [ ] A crash (signal) or timeout of the engine produces an error notification and never blocks the extension host (integration test with `@vscode/test-electron`)
-- [ ] On Linux CI, the pinned Orca release slices the fixture plate set; `--pipe` progress reaches 100 and `result.json` is read; `@vsslicer/gcode` (E28) parses the output with the expected layer count
+- [ ] On Linux CI, the pinned Orca release slices the fixture plate set; `--pipe` progress reaches 100 and `result.json` is read; `@vsslicer/gcode` (E3) parses the output with the expected layer count
 - [ ] On macOS and Windows, a slice completes with indeterminate progress (CI on free GitHub Actions runners, D5)
 - [ ] Download: checksum mismatch, offline and HTTP errors each produce a distinct message and leave no partial binary (tests with a local HTTP fixture server)
 - [ ] Detection finds an installed Orca and reports its version; an unsupported version shows a warning naming the pinned version
@@ -39,8 +39,8 @@ None directly. This epic is the substrate the rows of E27 to E30 ride on; the I5
 
 ## Dependencies
 
-- Needs E26 (monorepo, CI with pinned engine download and cache, vitest, `@vscode/test-electron`).
-- Uses E28 as the test oracle for output parsing.
+- Needs E1 (monorepo, CI with pinned engine download and cache, vitest, `@vscode/test-electron`).
+- Uses E3 as the test oracle for output parsing.
 - E19 only if the daemon later hosts long slices; not required for this epic.
 - Exposes `SlicerEngine`, the engine registry and `Slicer.slice(job)` to E27 to E30, E65, E66, and to PRN (I9 fleet send of sliced output).
 

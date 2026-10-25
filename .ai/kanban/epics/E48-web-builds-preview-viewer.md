@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: PLT
 order: 4
-depends_on: [E1, E2, E19, E68, E9, E10]
+depends_on: [E1, E2, E3, E5, E9, E10]
 rows: ["§16 Web or browser target"]
 ---
 
@@ -31,7 +31,7 @@ Delivers `browser` builds of `vsslicer.gcode` (preview, simulation, G-code langu
 
 - [ ] `@vscode/test-web` runs the G-code preview and model viewer integration tests on every pull request that touches their browser path.
 - [ ] The lint rule fails on a fixture module that imports `fs` from a browser entry (regression caught: a desktop-only import that breaks activation on vscode.dev).
-- [ ] The golden-file corpus from E19 parses to the same summary statistics in the web worker as on desktop (same test data, both runtimes).
+- [ ] The golden-file corpus from E3 parses to the same summary statistics in the web worker as on desktop (same test data, both runtimes).
 - [ ] Opening a file over the web size limit shows the stated message and opens nothing; a file under it opens within a stated time on the CI runner.
 - [ ] On vscode.dev, a manual checklist (recorded with browser and date): open a G-code file from a public GitHub repository, scrub layers, read thumbnails; open a 3MF; on Chrome, open a local folder with File System Access.
 - [ ] Printer, slice and live-follow commands are absent from the command palette on the web (test asserts the contributed `when` clauses).
@@ -40,7 +40,7 @@ Verified on fixtures and in Chromium only; no printer is involved.
 
 ## Dependencies
 
-- Needs: E1 (build, CI, release), E2 (transport and renderer, already browser code), E19 and E68 (the parser and preview), E9 and E10 (mesh library and viewer).
+- Needs: E1 (build, CI, release), E2 (transport and renderer, already browser code), E3 and E5 (the parser and preview), E9 and E10 (mesh library and viewer).
 - Exposes: the browser build target, the Node-import lint rule, the worker shim and the `@vscode/test-web` harness to any project that wants a web build later.
 
 ## Risks and spikes

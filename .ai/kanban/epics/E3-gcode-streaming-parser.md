@@ -5,7 +5,7 @@ status: reviewed
 initiative: I1
 project: GCP
 order: 1
-depends_on: [E3]
+depends_on: [E1]
 rows: ["§10 Read `.bgcode`", "§10 Read `.gcode.3mf`", "§10 Arc rendering", "§10 Per-job filament use, weight and cost"]
 ---
 
@@ -85,9 +85,9 @@ only), level-of-detail merging (E5 spike if needed).
 
 ## Dependencies
 
-- Needs E3 (monorepo, vitest, CI, fixture storage).
+- Needs E1 (monorepo, vitest, CI, fixture storage).
 - Exposes `parse(source, opts) -> AsyncIterable<Chunk>` and a `ParsedFile` (move buffers, layer
-  table, labels, thumbnails, config, summary, diagnostics) to E6, E7, E50, E51.
+  table, labels, thumbnails, config, summary, diagnostics) to E4, E5, E6, E7.
 - Exposes `readSummary(uri)` (statistics without moves) for E42 consumption booking and
   E27 output checks; E10 reads plate thumbnails through it.
 

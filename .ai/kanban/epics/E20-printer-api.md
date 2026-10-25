@@ -5,7 +5,7 @@ status: reviewed
 initiative: I4
 project: PRN
 order: 1
-depends_on: [E20]
+depends_on: [E1]
 rows: ["§11 Status, telemetry and job control"]
 ---
 
@@ -73,11 +73,11 @@ extension host here), file browsing UI (E24), queue (E25), camera UI (E38).
 
 ## Dependencies
 
-- Needs E20 (monorepo, CI, test tooling, publishing).
+- Needs E1 (monorepo, CI, test tooling, publishing).
 - Exposes `@vsslicer/printer-api` to E21, E23, E59, E60; `CameraSource` to E38;
-  `PrinterRegistry` to SLC (send after slicing), E38 (live follow feed, via E25), E42
+  `PrinterRegistry` to SLC (send after slicing), E7 (live follow feed, via E25), E42
   (`materials[]` feedback), E46 and E47.
-- Printer connections reference PRF's `printer_instance` id (E59 schema) but do not depend on
+- Printer connections reference PRF's `printer_instance` id (E11 schema) but do not depend on
   PRF code; the link is an optional string field so I4 can start before I3 finishes.
 
 ## Risks and spikes

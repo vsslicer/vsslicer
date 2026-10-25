@@ -9,7 +9,7 @@ depends_on: [E1]
 rows: []
 ---
 
-Delivers VSSlicer's own extension registry: an unmodified Eclipse Open VSX server configured as an upstream-registry instance, holding the VSSlicer extensions and falling through to open-vsx.org for everything else, so users of the VSSlicer build (E69) keep the public catalogue while getting our extensions from our gallery (`vscode-platform.md` §5; roadmap "Marketplace plan", phase 11). It extends the §16 In-app extension marketplace row that E1 owns. Hosting costs money, so it is gated on a budget (D5: no hosted registry yet).
+Delivers VSSlicer's own extension registry: an unmodified Eclipse Open VSX server configured as an upstream-registry instance, holding the VSSlicer extensions and falling through to open-vsx.org for everything else, so users of the VSSlicer build (E69) keep the public catalogue while getting our extensions from our gallery (`vscode-platform.md` §5; roadmap "Marketplace plan", phase 11). It extends the §16 In-app extension marketplace row that E1 owns. Hosting costs money, so it is gated on a budget decision (D5, D10); until then open-vsx.org and the Microsoft marketplace are the only registries.
 
 ## Scope
 
@@ -33,7 +33,7 @@ None owned. Extends §16 In-app extension marketplace (owned by E1) with the own
 - [ ] A platform-specific VSIX at the configured size limit uploads; one over it is refused with the registry's error shown in the release job.
 - [ ] Backup then restore into an empty instance serves the same extensions and versions (rehearsal recorded).
 - [ ] The takedown procedure and contact are published on the registry's about page.
-- [ ] An owner decision exists for hosting budget and for third-party uploads before anything is deployed publicly.
+- [ ] An owner budget decision (D10 gate) and a decision on third-party uploads exist before anything is deployed publicly.
 
 Verified on a local instance in CI and on the hosted instance once budget exists; no hardware involved.
 

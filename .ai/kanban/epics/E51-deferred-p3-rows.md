@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: GCP
 order: 7
-depends_on: [E5]
+depends_on: [E3]
 rows: ["§7 Toolpaths export to OBJ"]
 ---
 
@@ -21,7 +21,7 @@ scheduled.
 ## Feature-matrix rows
 
 - **§7 Toolpaths export to OBJ (P3).** Waits because the matrix rates it rare (PS §4; BO §6) and
-  nothing in I1 to I9 needs it; the data it needs exists after E5.
+  nothing in I1 to I9 needs it; the data it needs exists after E3.
 
 ## Acceptance criteria
 
@@ -29,7 +29,7 @@ scheduled.
 
 ## Dependencies
 
-- Would need E5 only. Related: VWR's §7 Export meshes to STL or Draco, which could share an
+- Would need E3 only. Related: VWR's §7 Export meshes to STL or Draco, which could share an
   OBJ/STL writer.
 
 ## Risks and spikes

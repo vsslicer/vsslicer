@@ -5,7 +5,7 @@ status: reviewed
 initiative: I3
 project: PRF
 order: 2
-depends_on: [E11, E11]
+depends_on: [E11, E1]
 rows: ["§13 Bundled vendor profile library"]
 ---
 
@@ -39,7 +39,7 @@ Importers in `@vsslicer/profiles` that turn the user's existing profiles and the
 - [ ] Fixtures only; no hardware (D5).
 
 ## Dependencies
-- Needs E11 (types, catalogue, evaluator, merge), E11.
+- Needs E11 (types, catalogue, evaluator, merge), E1.
 - Exposes `import*(source) → ImportResult` and `locateInstalledSlicers()` to E13, E14, E16, E18; the `@vsslicer/profiles-data-orca` package to E13; fdm_materials-derived materials to E41 as a seed.
 
 ## Risks and spikes

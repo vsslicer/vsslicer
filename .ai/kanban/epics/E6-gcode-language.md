@@ -5,7 +5,7 @@ status: reviewed
 initiative: I1
 project: GCP
 order: 4
-depends_on: [E3, E5]
+depends_on: [E1, E3]
 rows: ["§10 G-code text editing (grammar, hovers on commands)"]
 ---
 
@@ -55,8 +55,8 @@ server, language features over 50 MB (not possible with `TextDocument`).
 
 ## Dependencies
 
-- Needs E3 (packaging, test electron) and E5 (flavour detection, tag tables).
-- Exposes the command catalogue as a data module in `@vsslicer/gcode` for E7's text pane
+- Needs E1 (packaging, test electron) and E3 (flavour detection, tag tables).
+- Exposes the command catalogue as a data module in `@vsslicer/gcode` for E5's text pane
   hovers and E50's template language.
 
 ## Risks and spikes
@@ -72,7 +72,7 @@ server, language features over 50 MB (not possible with `TextDocument`).
   parallel with them.
 - The placeholder catalogue was moved out to E50 (I10, P2): the template editor needs PRF's
   profile store and macro language, which arrive in I3. This departs from the I1 text, which put
-  "the language side" of that row here; the coordinator decides (see notes).
+  "the language side" of that row here; the coordinator accepted the move to I10.
 - A language server was rejected as more machinery than hovers and completion need; plain
   providers in the extension host are cheap and synchronous over small documents.
 - Zero silent failures: unknown commands get a warning-level diagnostic only when the flavour is

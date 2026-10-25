@@ -5,7 +5,7 @@ status: reviewed
 initiative: I7
 project: PRN
 order: 7
-depends_on: [E20, E21, E22, E23, E21]
+depends_on: [E20, E21, E22, E23, E2]
 rows: ["§12 Live camera view in the app"]
 ---
 
@@ -30,7 +30,7 @@ In:
   release with a pinned version and SHA-256, started by the agent bound to 127.0.0.1 with
   `api.local_auth`, re-served as MJPEG or MSE. Without go2rtc, RTSP cameras show snapshots only if the
   printer offers them, with an explanation.
-- Webview player (`@vsslicer/webview-kit` CSP helper, E21): `<img>` for MJPEG, `<canvas>` for
+- Webview player (`@vsslicer/webview-kit` CSP helper, E2): `<img>` for MJPEG, `<canvas>` for
   pushed frames, `<video>` with MSE; CSP limited to the proxy origin, no `unsafe-inline`.
 - "Open camera" from the Printers tree; snapshot to file.
 
@@ -65,7 +65,7 @@ GFDL prose); Mainsail/Fluidd (GPL) read only.
 ## Dependencies
 
 - Needs E20 (`CameraSource`), E21 (Bambu `ipcam` state, access code), E22 (agent hosts the
-  proxy and sidecar), E23 (open adapters' `webcams()`), E21 (CSP helper, message transport).
+  proxy and sidecar), E23 (open adapters' `webcams()`), E2 (CSP helper, message transport).
 - Exposes `CameraView.open(source)` and the proxy to E39 (WebRTC and timelapse), E47 (fleet
   view thumbnails), and any extension that wants a camera tile.
 

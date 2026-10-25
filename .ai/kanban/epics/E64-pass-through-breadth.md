@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: SLC
 order: 8
-depends_on: [E29, E30, E67, E28]
+depends_on: [E29, E30, E11, E3]
 rows: ["§2 Sequential (object-by-object) printing", "§2 Mold, conical support or make-overhang-printable, gradual infill", "§2 Klipper adaptive bed mesh (`bed_mesh_*`)", "§7 Regex find and replace (`gcode_substitutions`)", "§7 Feature and role-change G-code hooks", "§12 Timelapse G-code generation"]
 ---
 
@@ -39,7 +39,7 @@ Out: collision display in the editor (VWR), timelapse retrieval from printers (P
 
 ## Dependencies
 
-- Needs E29 (step runner), E30 (table and effect tests), E67 (keys present in the schema), E28 (oracle), E65 for the Prusa oracle runs of regex substitution (or a recorded fixture until E65 lands).
+- Needs E29 (step runner), E30 (table and effect tests), E11 (keys present in the schema), E3 (oracle), E65 for the Prusa oracle runs of regex substitution (or a recorded fixture until E65 lands).
 - Exposes the regex step for E65 to switch off when the Prusa engine applies substitutions itself.
 
 ## Risks and spikes

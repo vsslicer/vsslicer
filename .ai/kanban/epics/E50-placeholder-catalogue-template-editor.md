@@ -5,7 +5,7 @@ status: draft
 initiative: I10
 project: GCP
 order: 6
-depends_on: [E50, E11, E13]
+depends_on: [E6, E11, E13]
 rows: ["§7 Placeholder catalogue and G-code template editor"]
 ---
 
@@ -45,15 +45,15 @@ substitution beyond completion of setting names, a preview of the rendered templ
 
 ## Dependencies
 
-- Needs E50 (grammar, command catalogue), E11 (schema for config-option variables), E13
+- Needs E6 (grammar, command catalogue), E11 (schema for config-option variables), E13
   (opening template fields from the profile store), and PRF's placeholder macro language epic
   for the expression grammar it defines.
 - Exposes the catalogue to PRF (validation of imported templates) and SLC (pass-through checks).
 
 ## Risks and spikes
 
-- Ownership: I1 and the E50 anchor put "the language side" of this row in I1; this epic puts
-  the whole row in I10 because it needs PRF. Coordinator decision pending.
+- Ownership: I1 and the E6 anchor put "the language side" of this row in I1; this epic puts
+  the whole row in I10 because it needs PRF. The coordinator accepted this.
 - Orca's catalogue moves between releases; regenerate from source per Orca release.
 
 ## Eng review
