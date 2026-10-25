@@ -1,7 +1,7 @@
 ---
 id: D2
-title: VSSlicer is AGPL-3.0; engines may be bundled, upstream code may be ported
-status: proposed
+title: "VSSlicer is AGPL-3.0; engines may be bundled, upstream code may be ported"
+status: accepted
 date: 2026-10-25
 cards: [16, 5, 17]
 question: Q2

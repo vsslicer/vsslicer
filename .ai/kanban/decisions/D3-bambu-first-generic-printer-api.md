@@ -1,7 +1,7 @@
 ---
 id: D3
-title: Printers: Bambu Lab first, over an open-source networking implementation, behind a generic printer API
-status: proposed
+title: "Printers: Bambu Lab first, over an open-source networking implementation, behind a generic printer API"
+status: accepted
 date: 2026-10-25
 cards: [10, 9, 17]
 question: Q3

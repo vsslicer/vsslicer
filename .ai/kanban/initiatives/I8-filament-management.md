@@ -14,7 +14,7 @@ No mainline slicer tracks spools; users run Spoolman or spreadsheets. The owner'
 
 ## Outcome
 
-`vsslicer.filament`: a Spoolman-compatible superset model (Brand, Material, Filament, Spool, ConsumptionEvent, Tag) stored locally with an append-only event log; OFD import with SpoolmanDB filling gaps; optional Spoolman sync and Moonraker's Spoolman proxy; booking in trust order Moonraker, Bambu AMS `remain`/`tag_uid`, slicer total, manual scale; OpenPrintTag reading through the printer; spools linked to material profiles through `slicer_ids`.
+`vsslicer.filament`: a Spoolman-compatible superset model (Brand, Material, Filament, Spool, ConsumptionEvent, Tag) stored locally with an append-only event log; OFD import with SpoolmanDB filling gaps; optional Spoolman sync and Moonraker's Spoolman proxy; booking in trust order Moonraker `filament_used`, Bambu `used_g` (AMS `remain` as a cross-check), then the slicer total, with a manual scale reading as an absolute correction; OpenPrintTag reading through the printer; spools linked to material profiles through `slicer_ids`.
 
 ## Roadmap phases and feature-matrix rows
 

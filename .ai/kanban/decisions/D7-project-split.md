@@ -1,7 +1,7 @@
 ---
 id: D7
-title: Seven project boards: platform, gcode, viewer, profiles, printers, slicer, filament
-status: proposed
+title: "Seven project boards: platform, gcode, viewer, profiles, printers, slicer, filament"
+status: accepted
 date: 2026-10-25
 cards: [20]
 ---
