@@ -4,3 +4,7 @@
 2. [VSS-31: Stories and tasks for I3](031-stories-and-tasks-for-i3.md)
 3. [VSS-32: Stories and tasks for I4](032-stories-and-tasks-for-i4.md)
 4. [VSS-33: Stories and tasks for I5](033-stories-and-tasks-for-i5.md)
+5. [VSS-34: Stories and tasks for I6](034-stories-and-tasks-for-i6.md)
+6. [VSS-35: Stories and tasks for I7](035-stories-and-tasks-for-i7.md)
+7. [VSS-36: Stories and tasks for I8](036-stories-and-tasks-for-i8.md)
+8. [VSS-37: Stories and tasks for I9](037-stories-and-tasks-for-i9.md)
