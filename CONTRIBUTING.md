@@ -89,6 +89,16 @@ Adopting it in a module:
 - Fails (exit 1, nothing written, message names `name@version`): `UNLICENSED`, no licence, a licence off the list, an expression that does not parse (including `SEE LICENSE IN ...`), or a package without a licence file.
 - Wire it into the extension build after the bundles, and ship the file: `"build": "tsc && vsslicer-bundle && third-party-notices"`, `"files": ["dist", "!dist/*.meta.json", "THIRD-PARTY-NOTICES.md", ...]`, and `THIRD-PARTY-NOTICES.md` in `.prettierignore` (see `modules/example-extension`). Tests build fake pnpm-layout trees at run time: `modules/tooling/test/notices.test.mjs`.
 
+### VSIX package
+
+`vsslicer-package` (a bin of `@vsslicer/tooling` 0.7.0 or later, wrapping `@vscode/vsce` 3.9.2) is every extension module's `"package": "vsslicer-package"`; run `pnpm build && pnpm package`. It writes `<name>-<version>.vsix` (git-ignored) into the module, prints the size and exits 1 with one line per problem:
+
+- Content, exactly: `extension/dist/*.js|css` (no `.map`, no `.meta.json`), `package.json`, `LICENSE`, `THIRD-PARTY-NOTICES.md`, `README.md`, `CHANGELOG.md`, declared assets (`icon` and any existing file named in `contributes`) and the VSIX's own manifest files; `main` must exist. Nothing else (no `node_modules`, `src`, tests); `content: unexpected <entry>` / `content: missing <entry>`.
+- Size: `"vsslicer": { "sizeBudgetKB": 200 }` in `package.json` is required; a larger VSIX fails.
+- Manifest: `license` `AGPL-3.0-or-later`, `publisher` (`vsslicer`; no marketplace account yet, Q8) and `repository` whose URL contains the release tag `<name>@<version>` (the module directory name, not the scoped name). Until the remote exists (Q7) use the placeholder `https://github.com/<owner>/VSSlicer/tree/<name>@<version>/vsslicer/modules/<name>`, and change the version in it with every bump.
+
+How it works: vsce runs with `--no-dependencies` in a temporary copy of the module (no `node_modules`; vsce rejects scoped names, so the copy gets the unscoped one). vsce ignores negations in `package.json` `files`, so the module's `.vscodeignore` decides the content; copy the whitelist from `modules/example-extension/.vscodeignore` (`**`, then `!dist/*.js`, `!LICENSE`, ...). Add `!media/**` etc. for assets. The module's `pnpm-workspace.yaml` needs `allowBuilds` `false` for `@vscode/vsce-sign` and `keytar`. Tests build a fake extension at run time: `modules/tooling/test/package.test.mjs`.
+
 ## Adding a module
 
 1. Copy `modules/example` (library) or `modules/example-extension` (extension) to `modules/<name>`; rename it in `package.json`, start at version `0.1.0`, reset `CHANGELOG.md`, keep `LICENSE`, `.npmrc` and `pnpm-workspace.yaml`.
@@ -108,6 +118,12 @@ git commit -s
 ## Versions and releases
 
 A module's published content changes only with a version bump and a `CHANGELOG.md` entry. A release is the tag `<name>@x.y.z`. The publish step never overwrites a version, so dependents' lockfile hashes stay valid.
+
+- `cd vsslicer && node scripts/run.mjs version-check --base <ref>` (CI runs it in the `select` job against the PR base, or the previous commit on push): for each module whose published files changed since `<ref>` (`src/`, anything in `files`, `package.json`; tests, fixtures, docs and other Markdown are exempt), `package.json` must carry a different version and `CHANGELOG.md` a `## x.y.z` entry. New modules need the entry for their first version. The failure names the module.
+- `node scripts/run.mjs release --dry-run <module-folder>` prints the `CHANGELOG.md` section of the module's current version and the tag `<folder>@x.y.z` (e.g. `example-extension@0.4.0`) without creating it. The tag itself is created at release time.
+- `node scripts/run.mjs ci` ends with a lockfile-integrity guard: every `@vsslicer/*` entry in each module's `pnpm-lock.yaml` must match the `dist.integrity` the registry serves for that version, otherwise it fails naming both modules (the dependency changed after publishing without a bump; the local pnpm store hides this, a clean one does not).
+- `node scripts/run.mjs checks` also requires every module's `publishConfig.registry` and `.npmrc` (`@vsslicer:registry=`) to be `http://localhost:4873/` until D10's registries exist, and rejects any `registry.npmjs.org` reference for `@vsslicer` packages.
+- A `modules/<dir>` without a `package.json` yet (being created) is skipped with a warning.
 
 ## Why independent modules
 
