@@ -1,11 +1,12 @@
 ---
 id: 4
-title: Feature inventory: Cura and CuraEngine
+title: "Feature inventory: Cura and CuraEngine"
 type: spike
 priority: P0
 effort: L
 area: [slicer]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

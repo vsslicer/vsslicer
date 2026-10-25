@@ -6,6 +6,7 @@ priority: P0
 effort: M
 area: [3mf]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

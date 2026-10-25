@@ -6,6 +6,7 @@ priority: P0
 effort: L
 area: [slicer, platform]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

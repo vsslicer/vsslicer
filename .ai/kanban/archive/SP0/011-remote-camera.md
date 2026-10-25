@@ -6,6 +6,7 @@ priority: P1
 effort: M
 area: [camera]
 milestone: R1
+sprint: SP0
 owner: worker-sonnet
 created: 2026-10-25
 ---

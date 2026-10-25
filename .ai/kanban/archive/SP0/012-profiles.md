@@ -1,11 +1,12 @@
 ---
 id: 12
-title: Printer, process and material profiles
+title: "Printer, process and material profiles"
 type: spike
 priority: P0
 effort: L
 area: [profiles]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

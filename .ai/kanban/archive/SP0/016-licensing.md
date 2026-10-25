@@ -6,8 +6,9 @@ priority: P0
 effort: M
 area: [legal]
 milestone: R1
-depends_on: [1, 5, 10, 12]
+sprint: SP0
 owner: worker-sonnet
+depends_on: [1, 5, 10, 12]
 created: 2026-10-25
 ---
 

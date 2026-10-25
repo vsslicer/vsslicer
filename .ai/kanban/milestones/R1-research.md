@@ -1,7 +1,7 @@
 ---
 id: R1
 title: Research
-status: active
+status: done
 start: 2026-10-25
 due: 2026-11-08
 ---

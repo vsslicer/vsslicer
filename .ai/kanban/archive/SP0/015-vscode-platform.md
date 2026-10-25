@@ -1,11 +1,12 @@
 ---
 id: 15
-title: VS Code platform: fork vs extension
+title: "VS Code platform: fork vs extension"
 type: spike
 priority: P0
 effort: L
 area: [platform]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

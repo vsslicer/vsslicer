@@ -1,11 +1,12 @@
 ---
 id: 3
-title: Feature inventory: Bambu Studio and OrcaSlicer
+title: "Feature inventory: Bambu Studio and OrcaSlicer"
 type: spike
 priority: P0
 effort: L
 area: [slicer]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

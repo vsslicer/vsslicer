@@ -1,11 +1,12 @@
 ---
 id: 2
-title: Feature inventory: PrusaSlicer and SuperSlicer
+title: "Feature inventory: PrusaSlicer and SuperSlicer"
 type: spike
 priority: P0
 effort: L
 area: [slicer]
 milestone: R1
+sprint: SP0
 owner: worker-opus
 created: 2026-10-25
 ---

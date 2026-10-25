@@ -1,11 +1,12 @@
 ---
 id: 9
-title: Printer connectivity: open ecosystems
+title: "Printer connectivity: open ecosystems"
 type: spike
 priority: P0
 effort: L
 area: [printers]
 milestone: R1
+sprint: SP0
 owner: worker-sonnet
 created: 2026-10-25
 ---
