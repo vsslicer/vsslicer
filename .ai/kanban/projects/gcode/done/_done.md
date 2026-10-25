@@ -1,19 +1,3 @@
 # Done
 
-1. [GCP-1: Define the @vsslicer/gcode package API and move-buffer layout](001-define-the-vsslicer-gcode-package-api-and-move-buffer-layout.md)
-2. [GCP-57: Add the modal state-change table to gcode-api](057-add-the-modal-state-change-table-to-gcode-api.md)
-3. [GCP-3: Implement the streaming text parser core](003-implement-the-streaming-text-parser-core.md)
-4. [GCP-4: Detect slicer and flavour and assign roles and layers from tag sets](004-detect-slicer-and-flavour-and-assign-roles-and-layers-from-t.md)
-5. [GCP-5: Write the move buffers, layer table and diagnostics with transferable output](005-write-the-move-buffers-layer-table-and-diagnostics-with-tran.md)
-6. [GCP-11: Read the .bgcode container: header, blocks, CRC32 and diagnostics](011-read-the-bgcode-container-header-blocks-crc32-and-diagnostic.md)
-7. [GCP-12: Port the Heatshrink 11-4 and 12-4 decoder](012-port-the-heatshrink-11-4-and-12-4-decoder.md)
-8. [GCP-13: Port the MeatPack decoder with and without comments](013-port-the-meatpack-decoder-with-and-without-comments.md)
-9. [GCP-6: Run the parser in a worker with cancel, progress and a memory cap](006-run-the-parser-in-a-worker-with-cancel-progress-and-a-memory.md)
-10. [GCP-7: Extract thumbnails, object labels and the config block](007-extract-thumbnails-object-labels-and-the-config-block.md)
-11. [GCP-8: Compute per-job filament, weight, cost and the slicer estimate; add readSummary](008-compute-per-job-filament-weight-cost-and-the-slicer-estimate.md)
-12. [GCP-9: Tessellate G2/G3 arcs in I/J and R form](009-tessellate-g2-g3-arcs-in-i-j-and-r-form.md)
-13. [GCP-76: Bound block sizes in the .bgcode reader](076-bound-block-sizes-in-the-bgcode-reader.md)
-14. [GCP-77: Join chunks without spreading arrays in collect](077-join-chunks-without-spreading-arrays-in-collect.md)
-15. [GCP-78: Reset the toolhead position on G28](078-reset-the-toolhead-position-on-g28.md)
-16. [GCP-2: Check in the golden corpus and the golden-JSON harness](002-check-in-the-golden-corpus-and-the-golden-json-harness.md)
-17. [GCP-10: Check arc-fitted fixtures against slicer output](010-check-arc-fitted-fixtures-against-slicer-output.md)
+No cards.

@@ -1,9 +1,9 @@
 ---
 id: SP3
 title: Preview 2
-status: planned
+status: active
 milestone: M1
-start: "2026-10-25T21:15+00:00"
+start: "2026-10-25T22:19+00:00"
 end: "2026-10-25T23:15+00:00"
 capacity: 122
 ---
