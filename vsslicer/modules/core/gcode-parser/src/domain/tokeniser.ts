@@ -32,6 +32,8 @@ export class Tokens {
   name = '';
   args = '';
   has = 0;
+  /** Bit set of the letters seen without a number (`G28 X`), same indexing as `has`. */
+  bare = 0;
   readonly value = new Float64Array(26);
   /** Where the last `readNumber` stopped. */
   private end = 0;
@@ -39,6 +41,10 @@ export class Tokens {
   /** Is parameter `letter` ('X') present with a number? */
   hasParam(letter: string): boolean {
     return (this.has & (1 << letterIndex(letter.charCodeAt(0)))) !== 0;
+  }
+  /** Is `letter` present, with or without a number (a flag like the X of `G28 X`)? */
+  hasWord(letter: string): boolean {
+    return ((this.has | this.bare) & (1 << letterIndex(letter.charCodeAt(0)))) !== 0;
   }
   param(letter: string): number {
     return this.value[letterIndex(letter.charCodeAt(0))] ?? NaN;
@@ -60,6 +66,7 @@ export class Tokens {
     this.name = '';
     this.args = '';
     this.has = 0;
+    this.bare = 0;
     let i = start;
     while (i < end && (buf[i] === SPACE || buf[i] === TAB)) i++;
     // N<digits> line number
@@ -91,6 +98,7 @@ export class Tokens {
       } else if (isLetter(c)) {
         const v = this.readNumber(buf, i + 1, end);
         if (Number.isNaN(v)) {
+          this.bare |= 1 << letterIndex(c);
           i++;
         } else {
           const k = letterIndex(c);

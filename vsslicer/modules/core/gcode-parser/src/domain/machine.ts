@@ -96,6 +96,9 @@ export class Machine implements ModalState {
             return;
           case 21: // millimetres: the only unit; nothing to record
             return;
+          case 28: // home: machine 0 and no G92 offset on the named axes (all three if none; Prusa's W too)
+            this.home(t);
+            return this.out.marker(t.commandName(), fileOffset);
           case 90:
           case 91:
             this.relative = n === 91;
@@ -192,6 +195,15 @@ export class Machine implements ModalState {
   private firmwareRetract(retract: boolean, fileOffset: number): void {
     const flag = retract ? MoveFlag.Retract : MoveFlag.Unretract;
     this.out.writeMove(this.position[0], this.position[1], this.position[2], this.tool, flag, fileOffset, 0);
+  }
+
+  private home(t: Tokens): void {
+    const any = t.hasWord('X') || t.hasWord('Y') || t.hasWord('Z');
+    for (let a = 0; a < 3; a++) {
+      if (any && !t.hasWord(AXES[a] ?? 'X')) continue;
+      this.position[a] = 0;
+      this.origin[a] = 0;
+    }
   }
 
   private setPosition(t: Tokens): void {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.3
+
+- Fix: `G28` now homes the toolhead position. The named axes (X, Y, Z; all three when none is named, also for Prusa's `G28 W`) go to machine 0 and lose their `G92` offset, so `G1 X50`, `G28`, `G91`, `G1 X10` ends at X10 (was X60). `E` is unchanged and `G28` still leaves its `Marker`. Positions after a `G28` in files that home mid-file change.
+
 ## 0.8.2
 
 - Fix: 0.8.1 shipped a stale build (its `dist` predated the `collect` fix); use 0.8.2. New `prepack` script runs `pnpm build`, so `pnpm pack` and `pnpm publish` always pack a fresh `dist`.

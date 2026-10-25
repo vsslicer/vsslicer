@@ -193,7 +193,8 @@ NAME=` (label without ranges), `_START NAME=`, `_END`, Cura `;MESH:name` (`NONME
   0xFFFFFFFF the parser emits the error `offset-overflow` at 0xFFFFFFFF, ends the final chunk and
   stops reading the source. It never wraps.
 - **Positions** are machine coordinates (file coordinates plus the G92 origin), in f32.
-- Not handled yet: `G28` homing position (position is left as is), `G20` inches, `M220`/`M221`
+- `G28` still leaves a `Marker`, and also homes: the named axes (X, Y, Z; all three if none, as with Prusa's `G28 W`) go to machine 0 and lose their `G92` offset (Marlin, Klipper). `E` is untouched.
+- Not handled yet: `G20` inches, `M220`/`M221`
   overrides (markers).
 
 ## Golden corpus

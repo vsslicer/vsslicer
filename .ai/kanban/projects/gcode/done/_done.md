@@ -14,3 +14,4 @@
 12. [GCP-9: Tessellate G2/G3 arcs in I/J and R form](009-tessellate-g2-g3-arcs-in-i-j-and-r-form.md)
 13. [GCP-76: Bound block sizes in the .bgcode reader](076-bound-block-sizes-in-the-bgcode-reader.md)
 14. [GCP-77: Join chunks without spreading arrays in collect](077-join-chunks-without-spreading-arrays-in-collect.md)
+15. [GCP-78: Reset the toolhead position on G28](078-reset-the-toolhead-position-on-g28.md)
