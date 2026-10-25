@@ -5,3 +5,8 @@
 3. [PLT-183: Print one-line errors from third-party-notices and vsslicer-bundle](183-print-one-line-errors-from-third-party-notices-and-vsslicer-.md)
 4. [PLT-184: Write the bundle metafile relative to the bundle cwd](184-write-the-bundle-metafile-relative-to-the-bundle-cwd.md)
 5. [PLT-30: Create the webview-kit package with host, webview and gl entry points](030-create-the-webview-kit-package-with-host-webview-and-gl-entr.md)
+6. [PLT-180: Add a prepack build to every module that ships dist](180-add-a-prepack-build-to-every-module-that-ships-dist.md)
+7. [PLT-185: Retry the lockfile-integrity registry fetch](185-retry-the-lockfile-integrity-registry-fetch.md)
+8. [PLT-186: Build the test-vscode runner path with fileURLToPath](186-build-the-test-vscode-runner-path-with-fileurltopath.md)
+9. [PLT-32: Implement createWebviewHtml and the CSP helper](032-implement-createwebviewhtml-and-the-csp-helper.md)
+10. [PLT-34: Define the transport protocol: envelope, handshake, schema version](034-define-the-transport-protocol-envelope-handshake-schema-vers.md)
