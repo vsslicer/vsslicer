@@ -7,6 +7,7 @@ effort: M
 model: opus
 area: [legal, platform]
 milestone: R2
+sprint: SP1
 created: 2026-10-25
 ---
 

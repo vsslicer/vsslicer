@@ -8,6 +8,7 @@ model: opus
 area: [bambu]
 story: US1
 milestone: "VSS:M1"
+sprint: "VSS:SP3"
 created: 2026-10-25
 ---
 

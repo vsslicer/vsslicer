@@ -8,6 +8,7 @@ model: sonnet
 area: [webview-kit]
 story: US10
 milestone: "VSS:M1"
+sprint: "VSS:SP3"
 depends_on: [44]
 created: 2026-10-25
 ---

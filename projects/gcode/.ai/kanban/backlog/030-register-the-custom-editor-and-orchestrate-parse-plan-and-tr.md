@@ -8,7 +8,8 @@ model: opus
 area: [editor]
 story: US10
 milestone: "VSS:M1"
-depends_on: [6, 19]
+sprint: "VSS:SP4"
+depends_on: [6, 19, PLT-15, PLT-17, PLT-30]
 created: 2026-10-25
 ---
 

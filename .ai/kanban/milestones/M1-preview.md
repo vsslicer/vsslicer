@@ -2,8 +2,8 @@
 id: M1
 title: Preview
 status: draft
-start: 2026-11-02
-due: 2026-12-20
+start: "2026-10-25T19:15+00:00"
+due: "2026-10-26T01:15+00:00"
 initiatives: I1
 ---
 

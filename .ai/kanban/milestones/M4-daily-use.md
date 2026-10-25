@@ -2,9 +2,9 @@
 id: M4
 title: Daily use
 status: draft
-start: 2027-06-01
-due: 2027-10-31
-initiatives: I6, I7, I8, I9
+start: "2026-10-28T08:15+00:00"
+due: "2026-10-30T00:15+00:00"
+initiatives: "I6, I7, I8, I9"
 ---
 
 Project editor, cameras, filament inventory, fleet queue and history: parity for daily use.

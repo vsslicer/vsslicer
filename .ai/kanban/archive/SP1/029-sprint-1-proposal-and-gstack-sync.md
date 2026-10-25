@@ -7,6 +7,8 @@ effort: M
 model: opus
 area: [platform]
 milestone: R2
+sprint: SP1
+owner: coordinator
 created: 2026-10-25
 ---
 
@@ -26,4 +28,7 @@ Propose Sprint 1 on the board holding most of its work, move its cards to Ready,
 
 ## Progress
 
-Not started.
+Done with `board.py plan-sprints M1 --length 2h --apply`: SP2 to SP4, 2-hour sprints sized at the
+measured 61 points an hour, 332 points over 105 cards on PLT, GCP and PRN, in dependency order. Cross-board
+needs written only in prose became `depends_on` (GCP roots on PLT-2 and PLT-8, GCP-30 on PLT-15, PLT-17 and
+PLT-30). M2 to M6 re-timed at the same pace (D11, proposed). Verified: `check` passes on all eight boards.

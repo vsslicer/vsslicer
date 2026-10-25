@@ -8,6 +8,8 @@ model: opus
 area: [live]
 story: US17
 milestone: "VSS:M1"
+sprint: "VSS:SP4"
+depends_on: [PLT-2, PLT-8]
 created: 2026-10-25
 ---
 

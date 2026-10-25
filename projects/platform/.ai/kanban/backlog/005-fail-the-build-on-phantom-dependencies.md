@@ -8,6 +8,7 @@ model: sonnet
 area: [monorepo]
 story: US1
 milestone: "VSS:M1"
+sprint: "VSS:SP2"
 depends_on: [3, 4]
 created: 2026-10-25
 ---

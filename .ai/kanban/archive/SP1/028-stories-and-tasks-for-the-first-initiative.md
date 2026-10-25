@@ -7,6 +7,7 @@ effort: L
 model: opus
 area: [gcode, platform]
 milestone: R2
+sprint: SP1
 created: 2026-10-25
 ---
 

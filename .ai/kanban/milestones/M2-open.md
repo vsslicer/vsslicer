@@ -2,9 +2,9 @@
 id: M2
 title: Open
 status: draft
-start: 2026-12-21
-due: 2027-02-28
-initiatives: I2, I3
+start: "2026-10-26T01:15+00:00"
+due: "2026-10-27T03:15+00:00"
+initiatives: "I2, I3"
 ---
 
 `vsslicer.project` viewer and `vsslicer.profiles`: open any 3MF, STL or OBJ; import every slicer's profiles.
