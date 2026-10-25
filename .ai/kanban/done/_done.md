@@ -9,3 +9,4 @@
 7. [VSS-36: Stories and tasks for I8](036-stories-and-tasks-for-i8.md)
 8. [VSS-37: Stories and tasks for I9](037-stories-and-tasks-for-i9.md)
 9. [VSS-38: Stories and tasks for I10](038-stories-and-tasks-for-i10.md)
+10. [VSS-39: Stories and tasks for I11](039-stories-and-tasks-for-i11.md)
