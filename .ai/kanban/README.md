@@ -8,16 +8,15 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 1 |
 | [In progress](doing/_doing.md) | 1 |
-| [In review](review/_review.md) | 12 |
-| [Done](done/_done.md) | 3 |
+| [In review](review/_review.md) | 11 |
+| [Done](done/_done.md) | 4 |
 
 ## Milestones
 
-- [R1: Research](milestones/R1-research.md): active, 3/17 cards done
+- [R1: Research](milestones/R1-research.md): active, 4/17 cards done
 
 ## In review
 
-- [VSS-2](review/002-features-prusaslicer-superslicer.md): Feature inventory: PrusaSlicer and SuperSlicer
 - [VSS-3](review/003-features-bambustudio-orcaslicer.md): Feature inventory: Bambu Studio and OrcaSlicer
 - [VSS-4](review/004-features-cura.md): Feature inventory: Cura and CuraEngine
 - [VSS-5](review/005-slicing-engine-embedding.md): Slicing engine architecture and embedding options
