@@ -79,7 +79,14 @@ docs/research/         tracked: distilled research reports, one per topic
 
 ## Build and test
 
-Nothing to build yet. Implementation work will add its commands here.
+Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
+
+- `scripts/registry.sh start|stop|status`: Verdaccio on `http://localhost:4873`.
+- `node scripts/run.mjs ci`: every module in dependency order: install, lint, build, test, publish.
+- `node scripts/run.mjs test` (or `build`, `install`, `publish`): that step in every module.
+- `--changed <git-ref>` on any of them: only changed modules and their dependents.
+- One module standalone: `cd modules/<name> && pnpm install && pnpm test && pnpm build`.
+- Runner tests: `cd vsslicer/scripts && node --test test/`.
 
 ## Conventions
 
