@@ -1,7 +1,7 @@
 ---
 id: D10
-title: Public GitHub monorepo, DCO, unsigned Linux builds allowed, hosted registry gated on budget
-status: proposed
+title: "Public GitHub monorepo, DCO, unsigned Linux builds allowed, hosted registry gated on budget"
+status: accepted
 date: 2026-10-25
 cards: [27]
 ---

@@ -1,7 +1,7 @@
 ---
 id: D9
-title: The unified profile schema uses OrcaSlicer's setting key names as canonical
-status: proposed
+title: "The unified profile schema uses OrcaSlicer's setting key names as canonical"
+status: accepted
 date: 2026-10-25
 cards: [23]
 ---
