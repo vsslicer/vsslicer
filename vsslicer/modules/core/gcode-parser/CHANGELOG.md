@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.2
+
+- Fix: 0.8.1 shipped a stale build (its `dist` predated the `collect` fix); use 0.8.2. New `prepack` script runs `pnpm build`, so `pnpm pack` and `pnpm publish` always pack a fresh `dist`.
+
+## 0.8.1
+
+- Fix: `collect` threw "Maximum call stack size exceeded" on a chunk with a few hundred thousand markers (a 4 MB file of 840,000 `M400` lines): it joined layers, markers, diagnostics, thumbnails and object ranges with `push(...array)`, which passes every item as an argument. They are now appended in a loop. Regression tests: 300,000 marker lines through `parse` + `collect`, and a chunk with 1,000,000 markers and object ranges.
+
 ## 0.8.0
 
 - G2/G3 arcs are tessellated (domain `tessellateArc`, wired into the machine): I/J/K and R forms, planes G17/G18/G19 with helical interpolation, negative R, full circles, `E` split evenly. Chords stay within the new option `arcTolerance` (mm, default 0.05) of the arc and sweep at most `arcMaxAngle` (degrees, default 15). Every chord keeps `MoveFlag.Arc` and the arc command's `fileOffset`.
