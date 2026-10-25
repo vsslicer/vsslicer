@@ -1,0 +1,8 @@
+# settings only, not a workspace
+# our own just-published modules are younger than minimumReleaseAge
+minimumReleaseAgeExclude:
+  - '@vsslicer/*'
+# esbuild and unrs-resolver (via @vsslicer/tooling) ship their binaries as optional dependencies; their postinstalls are only optimisations
+allowBuilds:
+  esbuild: false
+  unrs-resolver: false

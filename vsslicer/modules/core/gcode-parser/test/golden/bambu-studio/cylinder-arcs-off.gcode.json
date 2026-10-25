@@ -1,0 +1,15 @@
+{
+  "file": {
+    "bytes": 398949,
+    "sha256": "f9f5d739b40b857f7af3e1cf26a6fad8ca29d3afa58a1bf5793ed3bf0d89399a"
+  },
+  "interim": {
+    "lines": 15096,
+    "g0": 0,
+    "g1": 13473,
+    "g2": 0,
+    "g3": 50,
+    "layerMarkers": 50,
+    "thumbnailBlocks": 0
+  }
+}
