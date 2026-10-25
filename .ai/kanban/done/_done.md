@@ -10,3 +10,4 @@
 8. [VSS-25: Epics: slicer (SLC)](025-epics-slicer-slc.md)
 9. [VSS-26: Epics: filament (FIL)](026-epics-filament-fil.md)
 10. [VSS-27: Epics: platform (PLT)](027-epics-platform-plt.md)
+11. [VSS-28: Stories and tasks for the first initiative](028-stories-and-tasks-for-the-first-initiative.md)
