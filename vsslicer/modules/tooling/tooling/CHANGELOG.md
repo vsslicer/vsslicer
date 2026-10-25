@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- `vsslicer-package` builds one VSIX per target when `"vsslicer": { "targets": ["linux-x64", "win32-x64"] }` is declared: `vsce package --target <t>`, named `<name>-<t>-<version>.vsix`, with the content assertion and size budget run on each file. No `targets`: one universal VSIX as before. New export `packAll`; `pack(cwd, target)` takes the optional target.
+
 ## 0.7.0
 
 - Add the `vsslicer-package` bin (pins `@vscode/vsce` 3.9.2): builds `<name>-<version>.vsix` with `vsce package --no-dependencies` in a temporary copy of the module (vsce rejects scoped names; the module's `.vscodeignore` decides the content), prints the size and fails on: a manifest without `license` `AGPL-3.0-or-later`, `publisher`, a `repository` containing the release tag `<name>@<version>` or `"vsslicer": { "sizeBudgetKB": n }`; any entry besides `dist` bundles (.js/.css, no `.map`/`.meta.json`), `package.json`, `LICENSE`, `THIRD-PARTY-NOTICES.md`, `README.md`, `CHANGELOG.md`, declared assets and the VSIX manifest files, or any of those missing; a VSIX over the budget.

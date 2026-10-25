@@ -9,6 +9,8 @@
 //             THIRD-PARTY-NOTICES.md, README.md, CHANGELOG.md, declared assets (icon, files named in contributes)
 //             and the VSIX's own manifest files; nothing else (no node_modules, src, tests, maps)
 //   size      the VSIX is within the budget
+// "vsslicer": { "targets": ["linux-x64", "win32-x64"] } builds one <name>-<target>-<version>.vsix per target
+// (vsce --target), each checked on its own with the same rules; without targets: one universal VSIX.
 // What goes in is decided by the module's `.vscodeignore` (vsce ignores negations in package.json `files`).
 // Packaging runs in a temporary copy: vsce rejects scoped names like @vsslicer/x, so the copy gets the unscoped
 // name and no `files` (vsce refuses `files` together with .vscodeignore).
@@ -98,11 +100,11 @@ export const checkContent = (names, pkg, cwd) => {
   ];
 };
 
-/** Builds the VSIX in `cwd`, checks it and returns { file, kb, problems }. */
-export const pack = async (cwd = process.cwd()) => {
+/** Builds the VSIX (for `target`, if given) in `cwd`, checks it and returns { file, kb, budget, problems }. */
+export const pack = async (cwd = process.cwd(), target) => {
   const pkg = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8'));
   const problems = checkManifest(pkg);
-  const file = join(cwd, `${shortName(pkg)}-${pkg.version}.vsix`);
+  const file = join(cwd, `${[shortName(pkg), target, pkg.version].filter(Boolean).join('-')}.vsix`);
   const stage = mkdtempSync(join(tmpdir(), 'vsslicer-package-'));
   try {
     cpSync(cwd, stage, { recursive: true, filter: (s) => !/(^|[\\/])(node_modules|\.git|coverage)$|\.vsix$/.test(s) });
@@ -112,6 +114,7 @@ export const pack = async (cwd = process.cwd()) => {
       dependencies: false,
       packagePath: join(stage, 'out.vsix'),
       allowMissingRepository: true,
+      target,
     });
     renameSync(join(stage, 'out.vsix'), file);
   } finally {
@@ -124,12 +127,23 @@ export const pack = async (cwd = process.cwd()) => {
   return { file, kb, budget, problems };
 };
 
+/** pack() once per declared target, or once for the universal VSIX. */
+export const packAll = async (cwd = process.cwd()) => {
+  const { targets } = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8')).vsslicer ?? {};
+  const results = [];
+  for (const t of targets?.length ? targets : [undefined]) results.push(await pack(cwd, t));
+  return results;
+};
+
 // argv[1] is the node_modules/.bin symlink when run as a bin
 if (import.meta.filename === realpathSync(process.argv[1])) {
-  const { file, kb, budget, problems } = await pack();
-  console.log(`${file}: ${kb.toFixed(1)} KB (budget ${budget ?? '?'} KB)`);
-  if (problems.length) {
-    console.error(problems.join('\n'));
-    process.exit(1);
+  let failed = false;
+  for (const { file, kb, budget, problems } of await packAll()) {
+    console.log(`${file}: ${kb.toFixed(1)} KB (budget ${budget ?? '?'} KB)`);
+    if (problems.length) {
+      console.error(`${file}:\n${problems.join('\n')}`);
+      failed = true;
+    }
   }
+  if (failed) process.exit(1);
 }

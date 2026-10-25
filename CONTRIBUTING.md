@@ -91,13 +91,23 @@ Adopting it in a module:
 
 ### VSIX package
 
-`vsslicer-package` (a bin of `@vsslicer/tooling` 0.7.0 or later, wrapping `@vscode/vsce` 3.9.2) is every extension module's `"package": "vsslicer-package"`; run `pnpm build && pnpm package`. It writes `<name>-<version>.vsix` (git-ignored) into the module, prints the size and exits 1 with one line per problem:
+`vsslicer-package` (a bin of `@vsslicer/tooling` 0.7.0 or later; per-target VSIX from 0.8.0, wrapping `@vscode/vsce` 3.9.2) is every extension module's `"package": "vsslicer-package"`; run `pnpm build && pnpm package`. It writes `<name>-<version>.vsix` (git-ignored) into the module, prints the size and exits 1 with one line per problem:
 
 - Content, exactly: `extension/dist/*.js|css` (no `.map`, no `.meta.json`), `package.json`, `LICENSE`, `THIRD-PARTY-NOTICES.md`, `README.md`, `CHANGELOG.md`, declared assets (`icon` and any existing file named in `contributes`) and the VSIX's own manifest files; `main` must exist. Nothing else (no `node_modules`, `src`, tests); `content: unexpected <entry>` / `content: missing <entry>`.
+- Targets: `"vsslicer": { "targets": ["linux-x64", "win32-x64"] }` makes one platform-specific VSIX per target (`vsce package --target <t>`), named `<name>-<t>-<version>.vsix`; the content and size checks run on each file and report under that file name. No `targets`: one universal `<name>-<version>.vsix`.
 - Size: `"vsslicer": { "sizeBudgetKB": 200 }` in `package.json` is required; a larger VSIX fails.
 - Manifest: `license` `AGPL-3.0-or-later`, `publisher` (`vsslicer`; no marketplace account yet, Q8) and `repository` whose URL contains the release tag `<name>@<version>` (the module directory name, not the scoped name). Until the remote exists (Q7) use the placeholder `https://github.com/<owner>/VSSlicer/tree/<name>@<version>/vsslicer/modules/<name>`, and change the version in it with every bump.
 
 How it works: vsce runs with `--no-dependencies` in a temporary copy of the module (no `node_modules`; vsce rejects scoped names, so the copy gets the unscoped one). vsce ignores negations in `package.json` `files`, so the module's `.vscodeignore` decides the content; copy the whitelist from `modules/example-extension/.vscodeignore` (`**`, then `!dist/*.js`, `!LICENSE`, ...). Add `!media/**` etc. for assets. The module's `pnpm-workspace.yaml` needs `allowBuilds` `false` for `@vscode/vsce-sign` and `keytar`. Tests build a fake extension at run time: `modules/tooling/test/package.test.mjs`.
+
+### Integration tests in VS Code
+
+`@vsslicer/test-vscode` (an extension's dev dependency; `@vscode/test-electron` and mocha are pinned there, not in tooling) runs mocha suites inside a real VS Code. `pnpm test:integration` in `modules/example-extension` is the model: `test/integration/*.test.ts` (mocha globals, `import * as vscode from 'vscode'`; the extension's `eslint.config.mjs` turns `no-restricted-imports` off for that folder and adds the globals) is bundled by esbuild to `dist-test/` and handed to `vsslicer-test-vscode`. Keep the unit script off that folder (`node --test test/*.test.ts`) and add `@types/mocha` and `"mocha"` in `tsconfig.json` `types`.
+
+- Versions: `--versions min,stable` (default). `min` is the lowest `engines.vscode` (it must be a released version); an exact version or `insiders` also works.
+- Each VS Code starts with `--disable-extensions` and a temporary user-data and extensions dir. Exit code 1 if any version fails. `ELECTRON_RUN_AS_NODE` is cleared (VS Code terminals set it). macOS needs no display; Linux without `DISPLAY` re-runs under `xvfb-run` (install `xvfb`).
+- Artefacts per version in `test-results/integration/<version>/`: `junit.xml`, `console.log` (everything VS Code printed) and `logs/`. Upload `test-results/` with `if: always()`.
+- Cache: downloads go to `.vscode-test/<version>/` (~130 MB per version and OS). Cache `.vscode-test` keyed on `runner.os`, the module's `package.json` hash (it holds `engines.vscode`) and a week stamp (`stable` moves). Both folders are git-ignored in the module.
 
 ## Adding a module
 

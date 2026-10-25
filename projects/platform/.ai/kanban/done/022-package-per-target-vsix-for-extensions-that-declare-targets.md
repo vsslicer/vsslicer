@@ -9,6 +9,7 @@ area: [publishing]
 story: US5
 milestone: "VSS:M1"
 sprint: "VSS:SP2"
+owner: PLT-22-worker
 depends_on: [21]
 created: 2026-10-25
 ---

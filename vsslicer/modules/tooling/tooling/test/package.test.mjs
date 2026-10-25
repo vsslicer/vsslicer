@@ -3,9 +3,11 @@ import assert from 'node:assert';
 import { randomBytes } from 'node:crypto';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join } from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
 import test from 'node:test';
-import { checkManifest, pack } from '../bin/vsslicer-package.mjs';
+import { checkManifest, pack, packAll } from '../bin/vsslicer-package.mjs';
 
 const write = (file, text) => (mkdirSync(dirname(file), { recursive: true }), writeFileSync(file, text));
 const strict = '**\n!dist/*.js\n!media/**\n!LICENSE\n!THIRD-PARTY-NOTICES.md\n!README.md\n!CHANGELOG.md\n';
@@ -91,4 +93,47 @@ test('manifest: repository tag, licence, publisher and budget', () => {
   );
   assert.deepStrictEqual(checkManifest({ ...ok }), ['manifest: repository is missing']);
   assert.strictEqual(checkManifest({ ...ok, repository: repo, license: 'MIT', publisher: '', vsslicer: {} }).length, 3);
+});
+
+test('declared targets give one VSIX per target, each with its TargetPlatform, each asserted', async () => {
+  const d = extension({ vsslicer: { sizeBudgetKB: 50, targets: ['linux-x64', 'win32-x64'] } });
+  try {
+    const results = await packAll(d);
+    assert.deepStrictEqual(
+      results.map((r) => basename(r.file)),
+      ['fake-linux-x64-1.2.3.vsix', 'fake-win32-x64-1.2.3.vsix'],
+    );
+    for (const [i, t] of ['linux-x64', 'win32-x64'].entries()) {
+      assert.deepStrictEqual(results[i].problems, []);
+      const dir = mkdtempSync(join(tmpdir(), 'unzip-'));
+      execFileSync('unzip', ['-q', results[i].file, 'extension.vsixmanifest', '-d', dir]);
+      assert.match(readFileSync(join(dir, 'extension.vsixmanifest'), 'utf8'), new RegExp(`TargetPlatform="${t}"`));
+      rmSync(dir, { recursive: true, force: true });
+    }
+  } finally {
+    rmSync(d, { recursive: true, force: true });
+  }
+});
+
+test('the content assertion runs for every target file', async () => {
+  const d = extension({ vsslicer: { sizeBudgetKB: 50, targets: ['linux-x64', 'win32-x64'] } }, { '.vscodeignore': '' });
+  try {
+    const results = await packAll(d);
+    assert.strictEqual(results.length, 2);
+    for (const r of results) assert.ok(r.problems.includes('content: unexpected extension/src/x.ts'), r.file);
+  } finally {
+    rmSync(d, { recursive: true, force: true });
+  }
+});
+
+test('without targets there is one universal VSIX', async () => {
+  const d = extension();
+  try {
+    assert.deepStrictEqual(
+      (await packAll(d)).map((r) => basename(r.file)),
+      ['fake-1.2.3.vsix'],
+    );
+  } finally {
+    rmSync(d, { recursive: true, force: true });
+  }
 });
