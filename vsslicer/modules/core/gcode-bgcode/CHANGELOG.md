@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- Fix: a JSON (encoding 1) slicer metadata block no longer raises `unknown-encoding`.
+- `bgcodeToGcode(decodeGcodeBlocks(readBgcode(...)))` rebuilds the `.gcode` twin text (generator line, printer metadata, thumbnails, G-code, print metadata, Slicer3 JSON and slicer config) and ends with a `metadata` event exposing every metadata block, the raw Slicer3 JSON and the thumbnails. Tested line for line against both twin fixtures. (GCP-14)
+
 ## 0.3.3
 
 - Build in `prepack`, so a plain `pnpm publish` never ships a stale or missing `dist`. (PLT-180)

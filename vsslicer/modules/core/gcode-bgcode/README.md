@@ -36,3 +36,14 @@ for await (const e of decodeGcodeBlocks(readBgcode(stream, [deflateCodec, heatsh
 
 - `meatpackDecode(bytes)` does one block (encoding 1 and 2 decode alike; comments are plain bytes in 2), including libbgcode's re-spacing (`G1 X1 Y2`), so the text equals what PrusaSlicer's parser expects.
 - The text of the G-code blocks is not the whole `.gcode`: header, thumbnail and config comments live in the other blocks. Tests check the decoded blocks appear byte for byte in the reference `.gcode` (see `test/meatpack.test.ts`).
+
+## .gcode twin and metadata
+
+```ts
+for await (const e of bgcodeToGcode(decodeGcodeBlocks(readBgcode(stream, codecs)))) {
+  if (e.kind === 'text') out.push(e.text); // concatenated: the text .gcode, line for line
+  if (e.kind === 'metadata') use(e.metadata); // file, printer, print, slicer (INI), slicerJson (raw), thumbnails
+}
+```
+
+Layout follows libbgcode's converter (blank lines dropped from G-code blocks). Slicer3 JSON is exposed raw; no fixture has one, so it is tested with a synthetic file.

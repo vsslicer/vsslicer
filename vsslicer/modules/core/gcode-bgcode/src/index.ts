@@ -10,3 +10,6 @@ export * from './domain/bgcode.ts';
 export { crc32 } from './domain/crc32.ts';
 export { heatshrinkDecode } from './domain/heatshrink.ts';
 export { meatpackDecode } from './domain/meatpack.ts';
+export { bgcodeToGcode } from './application/to-gcode.ts';
+export type { ToGcodeEvent } from './application/to-gcode.ts';
+export type { BgcodeMetadata, MetadataEntries, Thumbnail } from './domain/ascii.ts';
