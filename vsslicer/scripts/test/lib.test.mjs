@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import test from 'node:test';
 import assert from 'node:assert';
-import { changed, localDeps, order } from '../lib.mjs';
+import { changed, localDeps, order, withDeps } from '../lib.mjs';
 
 const m = (name, deps = []) => ({ name, dir: name.split('/')[1], deps });
 const mods = [m('@vsslicer/ext', ['@vsslicer/lib']), m('@vsslicer/lib', ['@vsslicer/api']), m('@vsslicer/api'), m('@vsslicer/tooling')];
@@ -25,3 +25,11 @@ test('localDeps reads all three dependency kinds', () =>
   assert.deepStrictEqual(
     localDeps({ dependencies: { '@vsslicer/a': '^1', x: '1' }, devDependencies: { '@vsslicer/b': '^1' }, peerDependencies: { '@vsslicer/c': '^1' } }).sort(),
     ['@vsslicer/a', '@vsslicer/b', '@vsslicer/c']));
+
+test('a change under scripts/ selects every module', () =>
+  assert.strictEqual(changed(mods, ['scripts/run.mjs']).size, mods.length));
+
+test('withDeps adds transitive dependencies', () => {
+  assert.deepStrictEqual([...withDeps(mods, ['@vsslicer/ext'])].sort(), ['@vsslicer/api', '@vsslicer/ext', '@vsslicer/lib']);
+  assert.deepStrictEqual([...withDeps(mods, ['@vsslicer/tooling'])], ['@vsslicer/tooling']);
+});

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // SPDX-License-Identifier: AGPL-3.0-or-later
-// Usage: node scripts/run.mjs <command> [--changed <git-ref>]
+// Usage: node scripts/run.mjs <command> [--changed <git-ref>] [--list]   (--list prints the selected module names as JSON and exits)
 // Commands: install | publish | checks | ci | any pnpm script name (run where the module defines it).
 import { spawnSync } from 'node:child_process';
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { changed, localDeps, order } from './lib.mjs';
+import { changed, localDeps, order, withDeps } from './lib.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const registry = 'http://localhost:4873/';
@@ -48,10 +48,15 @@ if (ref) {
   const hit = changed(modules, files);
   names = names.filter((n) => hit.has(n));
 }
+// `--list`: print the selection as JSON and stop (the CI select job reads it)
+if (args.includes('--list')) (console.log(JSON.stringify(names)), process.exit(0));
+// ci on a subset: unselected dependencies are still installed, built and published (a clean registry has none), but not linted or tested
+const selected = new Set(names);
+if (cmd === 'ci') names = order(modules).filter((n) => withDeps(modules, selected).has(n));
 
 const sh = (m, argv, e = env) => {
   console.log(`\n[${m.name}] pnpm ${argv.join(' ')}`);
-  const r = spawnSync('pnpm', argv, { cwd: join(root, 'modules', m.dir), stdio: 'inherit', env: e });
+  const r = spawnSync('pnpm', argv, { cwd: join(root, 'modules', m.dir), stdio: 'inherit', env: e, shell: process.platform === 'win32' });
   if (r.status !== 0) (console.error(`${m.name}: pnpm ${argv.join(' ')} failed`), process.exit(r.status ?? 1));
 };
 
@@ -80,7 +85,7 @@ for (const name of names) {
   const m = modules.find((x) => x.name === name);
   if (cmd === 'ci') {
     sh(m, steps.install);
-    for (const s of ['lint', 'build', 'test']) if (s in m.scripts) sh(m, ['run', s]);
+    for (const s of selected.has(name) ? ['lint', 'build', 'test'] : ['build']) if (s in m.scripts) sh(m, ['run', s]);
     await publish(m);
   } else if (cmd === 'publish') await publish(m);
   else if (cmd === 'install') sh(m, steps.install);
@@ -92,4 +97,9 @@ if (cmd === 'ci' || cmd === 'checks') {
   console.log('\n[checks] node --test phantom-dep + npmrc');
   const r = spawnSync(process.execPath, ['--test', 'test/phantom-dep.test.mjs', 'test/npmrc.test.mjs'], { cwd: join(root, 'scripts'), stdio: 'inherit', env });
   if (r.status !== 0) (console.error('checks failed'), process.exit(r.status ?? 1));
+  // licence fields, SPDX headers, ported-file provenance: tooling's bin from source, so it needs no install
+  console.log('\n[checks] check-licence');
+  const dirs = [...modules.map((m) => join(root, 'modules', m.dir)), join(root, 'fixtures', 'phantom-dep')];
+  const l = spawnSync(process.execPath, [join(root, 'modules', 'tooling', 'bin', 'check-licence.mjs'), ...dirs], { stdio: 'inherit', env });
+  if (l.status !== 0) (console.error('checks failed'), process.exit(l.status ?? 1));
 }

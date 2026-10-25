@@ -23,6 +23,8 @@ export function order(modules) {
 
 /** Modules whose directory holds a changed file, plus everything that transitively depends on them. */
 export function changed(modules, files) {
+  // the runner, registry and node pin affect every module
+  if (files.some((f) => f.startsWith('scripts/') || f === '.nvmrc')) return new Set(modules.map((m) => m.name));
   const hit = new Set(
     modules.filter((m) => files.some((f) => f.startsWith(`modules/${m.dir}/`))).map((m) => m.name),
   );
@@ -38,4 +40,17 @@ export function changed(modules, files) {
 export function localDeps(pkg) {
   const all = { ...pkg.dependencies, ...pkg.devDependencies, ...pkg.peerDependencies };
   return Object.keys(all).filter((n) => n.startsWith('@vsslicer/'));
+}
+
+/** names plus everything they transitively depend on (those get built and published, not tested). */
+export function withDeps(modules, names) {
+  const byName = new Map(modules.map((m) => [m.name, m]));
+  const out = new Set();
+  const add = (n) => {
+    if (out.has(n) || !byName.has(n)) return;
+    out.add(n);
+    byName.get(n).deps.forEach(add);
+  };
+  names.forEach(add);
+  return out;
 }
