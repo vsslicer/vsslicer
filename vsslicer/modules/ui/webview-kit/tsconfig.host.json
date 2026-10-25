@@ -1,5 +1,5 @@
 {
   "extends": "@vsslicer/tooling/tsconfig.base.json",
   "compilerOptions": { "rootDir": "src", "outDir": "dist", "lib": ["ES2023"], "types": ["node"] },
-  "include": ["src/domain", "src/application", "src/host"]
+  "include": ["src/domain", "src/application", "src/adapters/host-panel.ts", "src/host"]
 }

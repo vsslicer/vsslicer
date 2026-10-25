@@ -94,3 +94,7 @@ const stop = receiveBuffers(channel, { onBuffer(stream, data) {}, onError(stream
 
 A `Channel` is `{ post(message), onMessage(listener): unsubscribe }`; the host and webview halves (PLT-36, PLT-37)
 adapt `webview.postMessage` and `acquireVsCodeApi()` to it.
+
+## Adapters
+
+Host: `createPanelChannel(panel)` (`@vsslicer/webview-kit/host`) turns a webview panel (structurally typed, no `vscode` import) into a `Channel`; after disposal or a failed `postMessage` it drops messages with one warning. Webview: `createWebviewApi(acquireVsCodeApi)` for typed state (acquires once), `createWindowChannel(post, window)` (only messages from `window.parent`, the VS Code host), `watchTheme(domThemeHost())` and `watchVisibility(document, cb)`.

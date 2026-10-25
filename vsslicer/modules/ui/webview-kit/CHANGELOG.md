@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- PLT-37: webview adapters: `createWebviewApi` (typed state, `acquireVsCodeApi` called once), `createWindowChannel` (accepts only messages whose source is the VS Code host frame), `watchTheme`/`domThemeHost` (`--vscode-*` tokens with change events) and `watchVisibility`.
+- PLT-36: host adapter `createPanelChannel`: structural panel, envelope-only pass-through, messages after disposal or a failed `postMessage` dropped with one warning, listeners released on disposal; a reload re-handshakes via `serveHandshake`.
+
 ## 0.3.0
 
 - PLT-35: chunked `ArrayBuffer` transfer (`sendBuffer`, `receiveBuffers`) with configurable chunk size, ordering by `seq`, cumulative acks with a send window for backpressure, and `TimeoutError` on silence; `handshake` takes `{ timeoutMs }`. Protocol in the README.

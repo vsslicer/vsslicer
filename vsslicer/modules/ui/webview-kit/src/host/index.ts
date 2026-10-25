@@ -11,3 +11,4 @@ export {
   type TransferOptions,
   type ReceiveHandlers,
 } from '../application/transfer.ts';
+export { createPanelChannel, type HostPanel } from '../adapters/host-panel.ts';
