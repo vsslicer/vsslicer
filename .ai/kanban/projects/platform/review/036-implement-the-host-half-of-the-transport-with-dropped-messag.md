@@ -17,16 +17,16 @@ Binds the channel to a VS Code `Webview` using `SerializableObjectWithBuffers`; 
 
 ## Acceptance criteria
 
-- [ ] Disposing the webview mid-transfer logs exactly one warning and leaks no listener (unit test with a fake webview)
-- [ ] Host never parses payloads beyond the envelope
-- [ ] Reload of the webview triggers a new handshake
+- [x] Disposing the webview mid-transfer logs exactly one warning and leaks no listener (unit test with a fake webview)
+- [x] Host never parses payloads beyond the envelope
+- [x] Reload of the webview triggers a new handshake
 
 ## Tasks
 
-- [ ] Write the host binding
-- [ ] Track disposal
-- [ ] Write unit tests with a fake Webview
+- [x] Write the host binding
+- [x] Track disposal
+- [x] Write unit tests with a fake Webview
 
 ## Progress
 
-Not started.
+Done in webview-kit 0.4.0 (src/adapters, unit tests with fakes). Not verified in a real VS Code webview or Playwright.

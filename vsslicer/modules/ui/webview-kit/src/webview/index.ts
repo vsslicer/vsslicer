@@ -10,3 +10,15 @@ export {
   type TransferOptions,
   type ReceiveHandlers,
 } from '../application/transfer.ts';
+export {
+  createWebviewApi,
+  webviewApi,
+  createWindowChannel,
+  domThemeHost,
+  watchTheme,
+  watchVisibility,
+  type VsCodeApi,
+  type WindowLike,
+  type ThemeHost,
+  type ThemeTokens,
+} from '../adapters/webview-window.ts';

@@ -17,16 +17,16 @@ Webview side of the transport; typed `getState`/`setState` wrapper over `acquire
 
 ## Acceptance criteria
 
-- [ ] State round trip is typed; unit test against a fake `acquireVsCodeApi`
-- [ ] Theme tokens update on a class/style change event (test in jsdom or Playwright)
-- [ ] `acquireVsCodeApi` is called once only
+- [x] State round trip is typed; unit test against a fake `acquireVsCodeApi`
+- [x] Theme tokens update on a class/style change event (test in jsdom or Playwright)
+- [x] `acquireVsCodeApi` is called once only
 
 ## Tasks
 
-- [ ] Write the wrapper and state helper
-- [ ] Write theme token reader
-- [ ] Test in Playwright with the stub
+- [x] Write the wrapper and state helper
+- [x] Write theme token reader
+- [x] Test in Playwright with the stub
 
 ## Progress
 
-Not started.
+Done in webview-kit 0.4.0 (src/adapters, unit tests with fakes). Not verified in a real VS Code webview or Playwright.

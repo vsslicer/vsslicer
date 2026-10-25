@@ -11,3 +11,5 @@
 9. [PLT-34: Define the transport protocol: envelope, handshake, schema version](034-define-the-transport-protocol-envelope-handshake-schema-vers.md)
 10. [PLT-183: Print one-line errors from third-party-notices and vsslicer-bundle](183-print-one-line-errors-from-third-party-notices-and-vsslicer-.md)
 11. [PLT-35: Implement chunking, ordering, backpressure and timeouts over a channel interface](035-implement-chunking-ordering-backpressure-and-timeouts-over-a.md)
+12. [PLT-36: Implement the host half of the transport with dropped-message handling](036-implement-the-host-half-of-the-transport-with-dropped-messag.md)
+13. [PLT-37: Implement the webview half: acquireVsCodeApi wrapper, state and theme tokens](037-implement-the-webview-half-acquirevscodeapi-wrapper-state-an.md)
