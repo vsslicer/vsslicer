@@ -8,16 +8,12 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 1 |
 | [In progress](doing/_doing.md) | 1 |
-| [In review](review/_review.md) | 1 |
-| [Done](done/_done.md) | 14 |
+| [In review](review/_review.md) | 0 |
+| [Done](done/_done.md) | 15 |
 
 ## Milestones
 
-- [R1: Research](milestones/R1-research.md): active, 14/17 cards done
-
-## In review
-
-- [VSS-15](review/015-vscode-platform.md): VS Code platform: fork vs extension
+- [R1: Research](milestones/R1-research.md): active, 15/17 cards done
 
 ## In progress
 
