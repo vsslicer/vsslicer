@@ -19,3 +19,4 @@
 17. [VSS-17: Feature matrix and roadmap](017-feature-matrix-and-roadmap.md)
 18. [VSS-18: Decisions from the owner's answers (D1-D6)](018-decisions-from-the-owner-s-answers-d1-d6.md)
 19. [VSS-19: Initiatives, order and release milestones](019-initiatives-order-and-release-milestones.md)
+20. [VSS-20: Projects and boards](020-projects-and-boards.md)
