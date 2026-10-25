@@ -39,6 +39,28 @@ docs/research/         tracked: distilled research reports, one per topic
 - Note the licence of every project you study. PrusaSlicer, OrcaSlicer and Bambu Studio are
   AGPL-3.0; reusing their code decides our own licence, so flag it wherever it matters.
 
+## Architecture rules
+
+- **All code lives in `vsslicer/`**: the pnpm + Turborepo monorepo root (`package.json`,
+  `pnpm-workspace.yaml`, `turbo.json`, packages and extensions). Only files a tool requires at the
+  repository root stay there, kept thin and pointing into `vsslicer/`: `.github/workflows/*.yml`
+  (`working-directory: vsslicer`) and the root `LICENSE`. Research, plans and boards stay outside it.
+- **Modular, SOLID and KISS, Clean architecture.** Every package is split into layers whose
+  dependencies point inward only:
+  - `domain`: entities and value objects. Pure, with no I/O and no framework.
+  - `application`: use cases, and the ports (interfaces) they need from the outside.
+  - `adapters`: the file system, processes, network, workers and engines, implementing those ports.
+  - `presentation`: VS Code activation, commands, views and webviews.
+- **The VS Code API appears only in `presentation`.** Domain and application code runs and is
+  tested in plain Node, without VS Code, so it can serve other hosts (a CLI, the daemon) unchanged.
+- **One reason to change per module.** Code depends on interfaces at real boundaries, and new
+  behaviour comes through new adapters, not edits to the core.
+- **KISS beats speculative abstraction.** A port exists because there's a real boundary with two
+  sides today, not "for later". Prefer the plain function to the framework.
+- **An import-boundary lint enforces the layers.** It fails CI when an inner layer imports an
+  outer one. A rule broken on purpose must fail the lint.
+- Every task card names the package and layer its code belongs to. Split a card that mixes layers.
+
 ## Build and test
 
 Nothing to build yet. Implementation work will add its commands here.
