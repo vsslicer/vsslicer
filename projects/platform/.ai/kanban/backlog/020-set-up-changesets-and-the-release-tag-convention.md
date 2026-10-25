@@ -1,6 +1,6 @@
 ---
 id: 20
-title: Set up Changesets and the release-tag convention
+title: Set up per-module versioning and the release-tag convention
 type: feature
 priority: P0
 effort: S
@@ -13,20 +13,20 @@ depends_on: [9]
 created: 2026-10-25
 ---
 
-A pull request carries a Changesets entry; merging to `main` updates a "Version packages" pull request; merging that bumps versions, writes each extension's `CHANGELOG.md` and pushes tags `<package>@<version>`.
+Each module carries its own version and `CHANGELOG.md` and releases as `<name>@x.y.z`. Changesets assumes one workspace, so the rule is enforced by a small check in `tooling` instead. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 
-- [ ] A pull request without an entry is flagged by a CI step (docs-only changes exempt)
-- [ ] Version bump in the sample extension produces `CHANGELOG.md` and a `sample-extension@x.y.z` tag in a dry run
-- [ ] Libraries are marked private (no npm publishing)
+- [ ] A change to a module's published files without a version bump and a `CHANGELOG.md` entry is flagged by a CI step (docs-only changes exempt)
+- [ ] A version bump of `example-extension` produces its `CHANGELOG.md` entry and an `example-extension@x.y.z` tag in a dry run
+- [ ] `scripts/run.mjs ci` fails, naming both modules, when a dependent's lockfile integrity for an `@vsslicer/*` dependency differs from the tarball the registry serves (published content changed without a bump; the pnpm store masks this locally, a clean CI store does not)
+- [ ] Modules publish only to the registry their `.npmrc` names (the local registry until D10's registries exist); nothing publishes to npmjs
 
 ## Tasks
 
-- [ ] Install and configure Changesets
-- [ ] Add the CI check
-- [ ] Add the version workflow
-- [ ] Document the rule
+- [ ] Write the bump check and the tag dry run
+- [ ] Wire the check into CI
+- [ ] Document the rule in `CONTRIBUTING.md`
 
 ## Progress
 

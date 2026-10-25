@@ -13,6 +13,8 @@ depends_on: [14, 9]
 created: 2026-10-25
 ---
 
+Module: `tooling` (snapshot harness). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Pinned Playwright and Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader`, a page loader that stubs `acquireVsCodeApi`, and a WebGL2 triangle rendered and compared to a snapshot.
 
 ## Acceptance criteria

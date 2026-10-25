@@ -13,6 +13,8 @@ depends_on: [3]
 created: 2026-10-25
 ---
 
+Module: `gcode-parser`, layer `domain`. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Renderer and later epics draw only straight segments. Ports the R-form centre and discretisation rule from PrusaSlicer@30ef591 libpgcode `ProcessorImpl.cpp:929-975, 1120-1206` (AGPL-3.0, provenance lines per D2).
 
 ## Acceptance criteria

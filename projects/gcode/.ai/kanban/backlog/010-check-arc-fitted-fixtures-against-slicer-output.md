@@ -13,6 +13,8 @@ depends_on: [9, 2]
 created: 2026-10-25
 ---
 
+Module: `gcode-parser` (tests). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Proves the arc row against the real slicers.
 
 ## Acceptance criteria

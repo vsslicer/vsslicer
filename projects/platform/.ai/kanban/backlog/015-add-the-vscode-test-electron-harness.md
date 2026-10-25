@@ -13,6 +13,8 @@ depends_on: [14, 9]
 created: 2026-10-25
 ---
 
+Module: `tooling` (integration harness), used by `example-extension`. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 A shared runner (`tools/test-vscode`) that downloads a VS Code version, installs xvfb on Linux, runs mocha tests inside the extension host, and exposes `test:integration` per extension.
 
 ## Acceptance criteria

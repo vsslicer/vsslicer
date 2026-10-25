@@ -13,6 +13,8 @@ depends_on: [11, 3]
 created: 2026-10-25
 ---
 
+Module: `tooling` (licence check and notices generator). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Walks each extension's bundled production dependencies (from the esbuild metafile), fails on a licence outside the allow-list (AGPL-3.0, GPL-3.0, LGPL-2.1/3.0, MIT, BSD-2/3, ISC, Apache-2.0, MPL-2.0, CC0, Zlib), and writes `THIRD-PARTY-NOTICES.md` per extension.
 
 ## Acceptance criteria

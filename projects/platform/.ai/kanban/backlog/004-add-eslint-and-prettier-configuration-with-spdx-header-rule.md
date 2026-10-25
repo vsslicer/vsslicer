@@ -13,13 +13,14 @@ depends_on: [2]
 created: 2026-10-25
 ---
 
-Shared lint and format rules run by the `lint` task in every package, including a rule that fails on a missing import declaration and on a missing SPDX header placeholder.
+Module: `tooling`. One shared ESLint and Prettier configuration in `@vsslicer/tooling`, consumed by every module, including the SPDX header rule and the layer-boundary rule that enforces the Clean architecture layers. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 
-- [ ] `pnpm turbo run lint` fails on a deliberately mis-formatted fixture and on an unused import
+- [ ] `pnpm lint` in a module fails on a deliberately mis-formatted fixture, on an unused import, and on a source file without the SPDX header
 - [ ] `import/no-extraneous-dependencies` is an error
-- [ ] Config is one shared package consumed by all workspaces
+- [ ] A layer-boundary rule (`eslint-plugin-boundaries` or `dependency-cruiser`) fails `lint` when `domain` imports `application`, `adapters` or `presentation`, when `application` imports `adapters` or `presentation`, or when any file outside `presentation` imports `vscode`; proven on deliberate-violation fixtures
+- [ ] Config is one shared export of `@vsslicer/tooling`, consumed by every module
 
 ## Tasks
 

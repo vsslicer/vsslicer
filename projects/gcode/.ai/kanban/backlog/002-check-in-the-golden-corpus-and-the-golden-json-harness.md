@@ -13,6 +13,8 @@ depends_on: [1]
 created: 2026-10-25
 ---
 
+Module: `gcode-parser` (test fixtures and golden harness); the corpus lives in `modules/gcode-parser/test/fixtures`. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 The fixtures and oracle every parser, planner and renderer test uses.
 
 Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards belong to the platform worker.

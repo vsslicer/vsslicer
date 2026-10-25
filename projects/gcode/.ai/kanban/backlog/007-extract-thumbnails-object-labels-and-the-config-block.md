@@ -13,6 +13,8 @@ depends_on: [5]
 created: 2026-10-25
 ---
 
+Module: `gcode-parser`, layer `domain`. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Thumbnails, labels and config share the same pass as the moves.
 
 ## Acceptance criteria

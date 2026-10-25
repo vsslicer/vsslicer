@@ -13,6 +13,8 @@ depends_on: [7]
 created: 2026-10-25
 ---
 
+Module: `gcode-parser`, layers `domain` and `application` (`readSummary`). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Gives FIL consumption booking, SLC output checks and the viewer the statistics without moves.
 
 ## Acceptance criteria

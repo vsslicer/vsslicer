@@ -13,6 +13,8 @@ depends_on: [11]
 created: 2026-10-25
 ---
 
+Module: `gcode-bgcode`, layer `domain`. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Compression used by `.bgcode` blocks, ported from libbgcode `binarize/`.
 
 ## Acceptance criteria

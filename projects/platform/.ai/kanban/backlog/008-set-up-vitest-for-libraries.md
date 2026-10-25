@@ -13,13 +13,13 @@ depends_on: [3]
 created: 2026-10-25
 ---
 
-Unit test runner for every `packages/*` library, run by the `test` task.
+Module: `tooling`. A shared vitest config in `@vsslicer/tooling` that every library module uses. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 
-- [ ] `packages/example` has a passing test run through `pnpm turbo run test`
-- [ ] Coverage reporter configured; a shared vitest config exports defaults
-- [ ] A failing test makes `test` exit non-zero
+- [ ] `modules/example` has a passing vitest suite run by its own `pnpm test` and by `scripts/run.mjs test`
+- [ ] Coverage reporter configured; the shared vitest config is exported from `@vsslicer/tooling`
+- [ ] A failing test makes `pnpm test` exit non-zero
 
 ## Tasks
 

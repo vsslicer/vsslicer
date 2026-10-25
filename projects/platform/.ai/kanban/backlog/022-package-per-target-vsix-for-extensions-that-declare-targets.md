@@ -13,6 +13,8 @@ depends_on: [21]
 created: 2026-10-25
 ---
 
+Module: `tooling` (package helper). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Later SLC and PRN extensions ship platform-specific VSIX; prove the mechanism now with a fixture.
 
 ## Acceptance criteria

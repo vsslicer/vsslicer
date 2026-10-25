@@ -13,13 +13,13 @@ depends_on: [3, 4]
 created: 2026-10-25
 ---
 
-Regression test for hoisting: a library that imports a package missing from its own `package.json` must fail `build`.
+Module: `tooling` (checks). Each module is its own pnpm project, so an undeclared import must fail that module's build. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 
-- [ ] A fixture library `fixtures/phantom-dep` importing an undeclared package makes `pnpm turbo run build` fail with the package named
-- [ ] The test runs in CI as a negative test (expected failure) and passes when the build fails
-- [ ] pnpm `strict` settings (no `shamefully-hoist`) are asserted in `.npmrc`
+- [ ] A fixture module `vsslicer/fixtures/phantom-dep` importing an undeclared package makes its `pnpm build` fail with the package named
+- [ ] The negative test runs from `scripts/run.mjs` (and so in CI) and passes when the fixture's build fails
+- [ ] Every module's `.npmrc` keeps pnpm's strict settings (no `shamefully-hoist`), asserted by a test over all modules
 
 ## Tasks
 

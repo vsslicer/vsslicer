@@ -13,7 +13,7 @@ depends_on: [20, 23, 16, 24]
 created: 2026-10-25
 ---
 
-A tag `<package>@<version>` starts: build, full tests, package, content check, GitHub release with VSIX and source tarball (the corresponding source, D2 item 4). Odd minors publish with `--pre-release`, even minors as releases. Rollback is a new patch tagged from the previous tag.
+A tag `<name>@x.y.z` releases that one module: build, package and publish it alone. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 

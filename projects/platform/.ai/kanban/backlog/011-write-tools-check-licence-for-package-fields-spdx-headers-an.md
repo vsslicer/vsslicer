@@ -13,6 +13,8 @@ depends_on: [9, 6]
 created: 2026-10-25
 ---
 
+Module: `tooling` (bin `check-licence`). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Catches what Open VSX would reject and ports without provenance (D2): `package.json` licence field, SPDX header in every source file, upstream copyright line next to every `Ported from <project>@<commit>:<path>` line.
 
 ## Acceptance criteria

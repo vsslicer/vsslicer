@@ -13,7 +13,7 @@ depends_on: [3, 12]
 created: 2026-10-25
 ---
 
-`package` task per extension: esbuild bundle, then `vsce package --no-dependencies` (vsce does not follow pnpm symlinks), then assert the file list and size.
+Module: `tooling` (package helper), used by every extension module's `pnpm package`. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 

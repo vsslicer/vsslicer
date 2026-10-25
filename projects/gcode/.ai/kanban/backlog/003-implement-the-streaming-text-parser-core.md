@@ -13,6 +13,8 @@ depends_on: [1, 2]
 created: 2026-10-25
 ---
 
+Module: `gcode-parser`, layers `domain` (tokeniser, state machine) and `application` (`parse`). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Turns text G-code into moves with modal state.
 
 ## Acceptance criteria

@@ -13,13 +13,13 @@ depends_on: [2]
 created: 2026-10-25
 ---
 
-Puts the AGPL-3.0 text at the root and `"license": "AGPL-3.0-or-later"` in every package, and starts `CONTRIBUTING.md` and the `.ai/instructions.md` "Build and test" section with the decisions this epic makes (pnpm + Turborepo and the rejected alternatives, layout, Node pin, DCO per D10).
+Puts the AGPL-3.0 text at the repository root (for GitHub's detection) and in every module, `"license": "AGPL-3.0-or-later"` in every module's `package.json`, and starts `CONTRIBUTING.md` and the `.ai/instructions.md` "Build and test" section with the decisions this epic makes (independent modules and the local registry, D12; layout; Node pin; DCO per D10). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 
-- [ ] `LICENSE` is the unmodified AGPL-3.0 text
-- [ ] Every `package.json` carries the licence expression
-- [ ] `CONTRIBUTING.md` explains setup, layout, DCO sign-off, the Changesets rule and the monorepo decision with rejected alternatives
+- [ ] `LICENSE` at the repository root and in every module is the unmodified AGPL-3.0 text
+- [ ] Every module's `package.json` carries the licence expression
+- [ ] `CONTRIBUTING.md` explains setup, layout, DCO sign-off, the version-bump rule and the independent-module decision with rejected alternatives (workspace, Turborepo, `link:` dependencies)
 - [ ] `.ai/instructions.md` "Build and test" lists the real commands
 
 ## Tasks

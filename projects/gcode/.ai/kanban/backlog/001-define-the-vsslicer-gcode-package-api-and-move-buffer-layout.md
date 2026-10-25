@@ -13,6 +13,8 @@ depends_on: [PLT-2, PLT-8]
 created: 2026-10-25
 ---
 
+Module: `gcode-api` (`@vsslicer/gcode-api`, domain types only): the shared G-code model that `gcode-parser`, `toolhead-sim` and the `gcode-preview` extension depend on. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 The data contract every other epic reads: ParsedFile, Chunk, move buffer (about 28 bytes per move), layer table, diagnostics.
 
 Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards belong to the platform worker.

@@ -13,11 +13,11 @@ depends_on: [21]
 created: 2026-10-25
 ---
 
-`extensions/pack` with `extensionPack` listing shipped extensions (empty until `vsslicer.gcode`, E68) and the README that markets the suite.
+Module: `pack` (`vsslicer/modules/pack`), the extension pack, packaged by the tooling package helper. Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
 
 ## Acceptance criteria
 
-- [ ] `extensions/pack` packages to a VSIX through the common `package` task
+- [ ] `modules/pack` packages to a VSIX through its own `pnpm package` (the tooling helper)
 - [ ] `extensionPack` is generated from a list of shipped extension ids; adding `vsslicer.gcode` is a one-line change
 - [ ] Pack passes the licence and content checks
 

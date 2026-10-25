@@ -13,6 +13,8 @@ depends_on: [9]
 created: 2026-10-25
 ---
 
+Module: `tooling` (fixtures check). Module model: `.ai/instructions.md` "Architecture rules" and D12 (independent modules in `vsslicer/modules/<name>/`, local Verdaccio registry, `scripts/run.mjs`).
+
 Keeps the repository small: no fixture over 5 MB, every `fixtures/` folder has `PROVENANCE.md` (generator, version, settings, licence). Large inputs (the 50, 200 and 500 MB G-code budget files) are generated in CI.
 
 ## Acceptance criteria
