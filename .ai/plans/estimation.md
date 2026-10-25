@@ -50,3 +50,41 @@ Each rule: the rule, its evidence (sprint and figures), since when.
    in `activity.jsonl`. The coordinator moves a card to doing when it dispatches, and board migrations
    must keep done times. Evidence: SP2's `board.py retro` Minutes column was unusable; workers moved
    cards to doing at the end of their run, and `ee9667a` re-stamped all done times to 22:07. Since SP2.
+10. **Plan capacity from concurrency: points = sprint minutes x mean running agents / 1.5**, and the
+    sprint's workable points (not owner- or dependency-blocked) must not exceed it. At SP3's mean of
+    2 agents that is 80 points an hour; this replaces rule 1's 33. Check before the sprint starts: the
+    sum of workable assigned points is at most the stated capacity. Evidence: SP3 ran 95 agent-minutes
+    for 62 points (1.5 per point, SP2 2.4), 81 points an hour at a mean of 2.0 running agents; the
+    sprint doc said capacity 122 but assigned 129 workable points (182 in all), and 67 were never
+    started. Since SP3.
+11. **Dispatch per lane, not per wave.** When a lane's agent stops, its next card (or its review) is
+    dispatched within 2 minutes; the coordinator commits and verifies while other lanes run.
+    Testable from `activity.jsonl`: time with no agent running stays under 15% of the sprint.
+    Evidence: SP3 had no agent running for 17.5 of 47 minutes (37%); wave 1 dispatched 22:25, its
+    Sonnet workers were done by 22:28, but wave 2 started at 22:35 after GCP-19 (22:33). Peak was 8
+    agents, mean 2.0. Since SP3.
+12. **Budget fix rounds by kind:** one per 9 bugfix cards, one per 2 cards of new code (ports of
+    upstream algorithms, protocols, contracts, research decisions). Each fix round costs a review
+    wave, about 5 minutes wall, even when the fix takes under a minute. Evidence: SP3 8 of 22 failed
+    first review; bugs 1 of 9 (PLT-183), the rest 7 of 13 (GCP-19, GCP-24, PRN-1, PLT-35, GCP-14,
+    PLT-36, PLT-37); fixes took 0.4 to 4.4 agent-minutes. Since SP3.
+13. **Release shared modules once per sprint.** Changes to `tooling` and `*-api` modules ship in one
+    release at the start or end of the sprint, followed by one lockfile-only re-lock of every
+    dependent (`pnpm update --no-save`) and one clean-registry `node scripts/run.mjs ci`: plan about
+    5 minutes of coordinator time for it. A card that changes a shared module and its consumers is at
+    least L, or split per module. Evidence: SP3 every tooling or gcode-api release made dependents
+    stale under PLT-179's check (PLT-180's pins after gcode-api 0.4.1); holding tooling 0.8.2 to the
+    end and re-locking 10 modules once passed a clean-registry ci in 70 s (`35dc269`). Since SP3.
+14. **A module lane may take two cards at once** when they change disjoint files and neither
+    publishes; the coordinator releases the module once after both pass. Evidence: SP3 GCP-20
+    (Klipper) and GCP-24 (Marlin) ran in parallel in `gcode-planner` (22:35 to 22:44), both
+    unreleased, with no conflict; the coordinator released 0.2.x. Since SP3.
+15. **A port card lists the parser and API inputs it needs, and missing ones become their own card
+    when planning.** Evidence: SP3 GCP-20 needed arc resolution and ESTIMATOR_ADD_TIME the parser
+    does not carry (split to GCP-82, GCP-83), GCP-14's parser side became GCP-84, and GCP-19 left
+    worker wiring to GCP-30; three cards were created at review time. Since SP3.
+16. **Move each card to done when its review passes**, not in one batch at the end, and to doing
+    when its worker is dispatched. Testable: done times in `board.py retro` differ per card.
+    Evidence: SP3 all 22 done cards moved at 23:04:15 to 23:04:17 and starts were stamped at wave
+    commits, so the facts table's Minutes column (13 to 41) again measures nothing; rule 9 was not
+    followed. Since SP3.

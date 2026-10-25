@@ -3,7 +3,7 @@ id: 83
 title: Carry ESTIMATOR_ADD_TIME and G4 dwell through gcode-api and the parser to the planners
 type: feature
 priority: P1
-effort: M
+effort: L
 model: opus
 story: US7
 milestone: "VSS:M1"
