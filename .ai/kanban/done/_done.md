@@ -9,3 +9,4 @@
 7. [VSS-5: Slicing engine architecture and embedding options](005-slicing-engine-embedding.md)
 8. [VSS-7: 3D viewer in VS Code webviews](007-3d-viewer-webview.md)
 9. [VSS-8: G-code viewer and toolhead simulation](008-gcode-viewer-simulation.md)
+10. [VSS-9: Printer connectivity: open ecosystems](009-printer-connectivity-open.md)
