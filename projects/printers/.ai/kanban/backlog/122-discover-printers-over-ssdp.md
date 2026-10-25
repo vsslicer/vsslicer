@@ -8,6 +8,7 @@ model: sonnet
 area: [discovery]
 story: US23
 milestone: "VSS:M3"
+sprint: "VSS:SP14"
 depends_on: [120, 14]
 created: 2026-10-25
 ---

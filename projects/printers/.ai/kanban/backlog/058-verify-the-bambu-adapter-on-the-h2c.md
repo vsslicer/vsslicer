@@ -8,6 +8,7 @@ model: opus
 area: [bambu]
 story: US14
 milestone: "VSS:M3"
+sprint: "VSS:SP11"
 depends_on: [52, 53, 54, 56, 48]
 created: 2026-10-25
 ---

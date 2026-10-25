@@ -8,6 +8,7 @@ model: opus
 area: [engine]
 story: US6
 milestone: "VSS:M3"
+sprint: "VSS:SP11"
 depends_on: [2, PRF-135]
 created: 2026-10-25
 ---

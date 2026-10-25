@@ -8,6 +8,7 @@ model: sonnet
 area: [tasks]
 story: US23
 milestone: "VSS:M3"
+sprint: "VSS:SP14"
 depends_on: [100, PRN-14, PRN-28]
 created: 2026-10-25
 ---

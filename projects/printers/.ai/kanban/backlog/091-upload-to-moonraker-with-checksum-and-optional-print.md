@@ -8,6 +8,7 @@ model: sonnet
 area: [moonraker]
 story: US19
 milestone: "VSS:M3"
+sprint: "VSS:SP13"
 depends_on: [89, 90]
 created: 2026-10-25
 ---

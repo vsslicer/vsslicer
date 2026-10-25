@@ -8,7 +8,7 @@ end: "2026-10-26T11:15+00:00"
 capacity: 135
 ---
 
-Planned by `board.py plan-sprints M2`: 50 points, 20 cards.
+Planned by `board.py plan-sprints M2`: 45 points, 18 cards (PRF-94 and PRF-146 moved to M3).
 
 ## Epics
 

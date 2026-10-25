@@ -8,6 +8,7 @@ model: sonnet
 area: [cura]
 story: US16
 milestone: "VSS:M3"
+sprint: "VSS:SP14"
 depends_on: [102, 82]
 created: 2026-10-25
 ---

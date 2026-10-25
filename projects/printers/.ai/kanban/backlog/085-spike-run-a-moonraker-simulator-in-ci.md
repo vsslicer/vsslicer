@@ -8,6 +8,7 @@ model: opus
 area: [moonraker]
 story: US24
 milestone: "VSS:M3"
+sprint: "VSS:SP13"
 depends_on: [PLT-9]
 created: 2026-10-25
 ---

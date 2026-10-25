@@ -8,6 +8,7 @@ model: sonnet
 area: [postprocess]
 story: US22
 milestone: "VSS:M3"
+sprint: "VSS:SP14"
 depends_on: [110, 111]
 created: 2026-10-25
 ---

@@ -8,6 +8,7 @@ model: sonnet
 area: [engine]
 story: US10
 milestone: "VSS:M3"
+sprint: "VSS:SP12"
 depends_on: [52, 27, GCP-16]
 created: 2026-10-25
 ---

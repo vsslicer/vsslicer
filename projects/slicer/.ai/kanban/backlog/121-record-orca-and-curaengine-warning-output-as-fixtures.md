@@ -8,6 +8,7 @@ model: sonnet
 area: [tasks]
 story: US19
 milestone: "VSS:M3"
+sprint: "VSS:SP14"
 depends_on: [30, 82, 1]
 created: 2026-10-25
 ---

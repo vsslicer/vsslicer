@@ -8,6 +8,7 @@ model: sonnet
 area: [duet]
 story: US22
 milestone: "VSS:M3"
+sprint: "VSS:SP13"
 depends_on: [112, PLT-13, 84]
 created: 2026-10-25
 ---

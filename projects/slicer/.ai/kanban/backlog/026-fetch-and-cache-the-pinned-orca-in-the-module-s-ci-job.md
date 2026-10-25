@@ -8,6 +8,7 @@ model: sonnet
 area: [orca, engine]
 story: US7
 milestone: "VSS:M3"
+sprint: "VSS:SP11"
 depends_on: [19, 12, PLT-9]
 created: 2026-10-25
 ---

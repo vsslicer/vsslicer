@@ -8,6 +8,7 @@ model: opus
 area: [orca, engine]
 story: US3
 milestone: "VSS:M3"
+sprint: "VSS:SP12"
 depends_on: [23, 20, 21, 14, 7]
 created: 2026-10-25
 ---

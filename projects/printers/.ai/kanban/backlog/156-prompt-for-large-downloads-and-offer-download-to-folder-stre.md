@@ -8,6 +8,7 @@ model: sonnet
 area: [storage]
 story: US29
 milestone: "VSS:M3"
+sprint: "VSS:SP15"
 depends_on: [154]
 created: 2026-10-25
 ---
