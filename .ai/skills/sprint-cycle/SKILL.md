@@ -1,6 +1,6 @@
 ---
 name: sprint-cycle
-description: How a VSSlicer sprint runs from start to close, ending with an automatic audit whose findings become the next sprint's bugfix cards. Use when coordinating, finishing or closing a sprint, or starting the next one.
+description: How a VSSlicer sprint runs from start to close, ending with an automatic audit whose findings become the next sprint's bugfix cards and a retro that calibrates future estimates. Use when coordinating, finishing or closing a sprint, or starting the next one.
 ---
 
 # Sprint cycle
@@ -25,8 +25,24 @@ One coordinator (Opus) runs one sprint. The board is the taskboard skill
    - nice to have: `priority=P2`
    Record the card tickets in the report under a closing "Cards" section, and in the
    "SP<n>: audit review and bugfix" card's Progress, then move that card to Done.
-4. **Close and begin.** `board.py close-sprint SP<n> --next SP<n+1>`. It refuses until
-   `.ai/audits/SP<n>-audit.md` exists (board.json `sprint_close.requires`), carries unfinished cards
+4. **Hold the retro.** A fresh Opus agent (it may be the auditor) runs `board.py retro SP<n>` and
+   writes `.ai/retros/SP<n>-retro.md`:
+   - the facts table from the command, unedited
+   - **on time or not:** planned vs actual pace and overrun, and which cards ran long or short
+     against their effort, by effort, model and type
+   - **why:** for each card that ran well over or under its size, the cause (scope bigger than the
+     card said, waiting on a dependency, verification failing and looping, owner question, model
+     too weak or more than needed, tooling problems, parallelism limits), from its notes file, its
+     Progress, the verifier's report and git history; and for the sprint as a whole, where the time
+     went (sequential chains, too little parallelism, coordination overhead, carried cards)
+   - **change:** concrete, testable adjustments to estimation (re-size a kind of card, split
+     rules, model choice, parallelism the coordinator should use), each written into
+     `.ai/plans/estimation.md` under "Rules learned" with its evidence
+   - **re-sizing:** cards in the next sprints whose effort no longer fits the rules, re-sized with
+     `board.py set` (owner-facing scope is unchanged)
+   The retro changes no code. Move the "SP<n>: retro" card to Done with a two-line summary.
+5. **Close and begin.** `board.py close-sprint SP<n> --next SP<n+1>`. It refuses until
+   `.ai/audits/SP<n>-audit.md` and `.ai/retros/SP<n>-retro.md` exist (board.json `sprint_close.requires`), carries unfinished cards
    over, archives the finished ones and starts SP<n+1>. Commit it as `Board: close SP<n>`. Reply
    with the result; whoever started you then starts the coordinator for SP<n+1>.
 

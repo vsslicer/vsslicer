@@ -81,9 +81,10 @@ docs/research/         tracked: distilled research reports, one per topic
 
 Every sprint runs `.ai/skills/sprint-cycle`: finish the sprint's tasks (including the bugfix cards
 from the previous sprint's audit), run the audit (`.ai/audits/SP<n>-audit.md`, by a fresh Opus agent
-that wrote none of the sprint's code), turn its findings into bugfix cards in the next sprint, then
-`close-sprint SP<n> --next SP<n+1>`, which refuses to close without the audit and starts the next
-sprint. Each sprint's "SP<n>: audit review and bugfix" card on the VSS board tracks steps 2 and 3.
+that wrote none of the sprint's code), turn its findings into bugfix cards in the next sprint, hold the retro (`.ai/retros/SP<n>-retro.md`:
+on time or not, why, and what changes in `.ai/plans/estimation.md`), then
+`close-sprint SP<n> --next SP<n+1>`, which refuses to close without the audit and the retro and
+starts the next sprint. Planners size cards with `.ai/plans/estimation.md`. Each sprint's "SP<n>: audit review and bugfix" card on the VSS board tracks steps 2 and 3.
 
 ## Build and test
 
@@ -125,6 +126,7 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 - `.ai/agents/vsslicer-reviewer.agent.md`: reviews research reports and plans for unsourced
   claims, missing coverage and licence risks.
 - `.ai/plans/roadmap.md`: the implementation roadmap, written from the research.
+- `.ai/plans/estimation.md`: how to size cards, calibrated by every sprint retro.
 - gstack (global install, `~/.claude/skills/gstack`): `/office-hours`, `/plan-ceo-review`,
   `/plan-eng-review` and `/autoplan` for product and plan review; `/review`, `/investigate`,
   `/qa` and `/ship` once code exists. Use `/browse` from gstack for web browsing that needs a
