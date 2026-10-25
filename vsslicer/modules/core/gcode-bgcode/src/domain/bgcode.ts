@@ -67,6 +67,7 @@ export type BgcodeDiagnosticCode =
   | 'unknown-encoding'
   | 'decode-failed'
   | 'size-mismatch'
+  | 'block-too-large'
   | 'crc-mismatch'
   | 'truncated';
 

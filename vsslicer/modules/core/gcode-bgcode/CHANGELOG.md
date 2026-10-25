@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Fix: a compressed block declaring more than 64 MiB, or (Heatshrink) more than 16 times its compressed size, yields `block-too-large` and is not decoded (a 4-byte block claiming 4 GB no longer allocates 4 GB).
+- Fix: the deflate codec stops at the declared size (`maxOutputLength`) instead of inflating a bomb first.
+
 ## 0.3.0
 
 - MeatPack decoder (encoding 1 and 2), pure TypeScript, with libbgcode's re-spacing of G lines: `meatpackDecode(bytes)`. Throws on a stream that ends inside a command or full-width character.

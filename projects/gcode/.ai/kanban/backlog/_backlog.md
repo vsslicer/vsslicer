@@ -62,5 +62,4 @@
 60. [GCP-73: Show template diagnostics as problems](073-show-template-diagnostics-as-problems.md)
 61. [GCP-74: Add the editTemplate command with a save callback](074-add-the-edittemplate-command-with-a-save-callback.md)
 62. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
-63. [GCP-77: Join chunks without spreading arrays in collect](077-join-chunks-without-spreading-arrays-in-collect.md)
-64. [GCP-78: Reset the toolhead position on G28](078-reset-the-toolhead-position-on-g28.md)
+63. [GCP-78: Reset the toolhead position on G28](078-reset-the-toolhead-position-on-g28.md)

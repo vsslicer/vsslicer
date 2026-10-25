@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { readFileSync } from 'node:fs';
+import { deflateSync } from 'node:zlib';
 import { describe, expect, it } from 'vitest';
 import {
   BlockType,
   Compression,
   crc32,
   deflateCodec,
+  heatshrink11Codec,
   readBgcode,
   type BgcodeEvent,
   type Block,
@@ -140,5 +142,57 @@ describe('truncation at every offset', () => {
     expect(codes(ev)).toEqual([]);
     expect(blocks(ev)[0]?.data?.length).toBe(size);
     expect(Date.now() - t).toBeLessThan(3000);
+  });
+});
+
+describe('block size bounds (GCP-76)', () => {
+  const le = (n: number, size: number) => Array.from({ length: size }, (_, i) => Math.floor(n / 2 ** (8 * i)) & 0xff);
+  /** One compressed G-code block with no checksum (header checksum type 0). */
+  const file = (compression: number, uncompressed: number, payload: Uint8Array) =>
+    Uint8Array.from([
+      ...Buffer.from('GCDE'),
+      ...le(1, 4),
+      ...le(0, 2),
+      ...le(1, 2),
+      ...le(compression, 2),
+      ...le(uncompressed, 4),
+      ...le(payload.length, 4),
+      ...le(0, 2),
+      ...payload,
+    ]);
+  const spy = (decode: Codec['decode']) => {
+    const calls: number[] = [];
+    return { calls, decode: (d: Uint8Array, s: number) => (calls.push(s), decode(d, s)) };
+  };
+  const mb = () => process.memoryUsage().arrayBuffers / 2 ** 20;
+
+  it('does not allocate for a 4-byte Heatshrink block claiming 4 GB', async () => {
+    const before = mb();
+    const ev = await collect(file(2, 0xffffffff, Uint8Array.of(1, 2, 3, 4)), [heatshrink11Codec]);
+    expect(codes(ev)).toEqual(['block-too-large']);
+    expect(blocks(ev)[0]!.data).toBeUndefined();
+    expect(mb() - before).toBeLessThan(5);
+  });
+
+  it('rejects a Heatshrink block claiming more than 16x its compressed size, before the codec runs', async () => {
+    const s = spy(() => new Uint8Array(0));
+    const ev = await collect(file(2, 65, new Uint8Array(4)), [
+      { compression: Compression.Heatshrink11, decode: s.decode },
+    ]);
+    expect(codes(ev)).toEqual(['block-too-large']);
+    expect(s.calls).toEqual([]);
+  });
+
+  it('rejects any compressed block declaring more than 64 MiB', async () => {
+    const ev = await collect(file(1, 64 * 2 ** 20 + 1, new Uint8Array(8)), [deflateCodec]);
+    expect(codes(ev)).toEqual(['block-too-large']);
+  });
+
+  it('stops inflating at the declared size instead of expanding a deflate bomb', async () => {
+    const bomb = deflateSync(Buffer.alloc(210 * 2 ** 20), { level: 9 });
+    const before = mb();
+    const ev = await collect(file(1, 100, bomb), [deflateCodec]);
+    expect(codes(ev)).toEqual(['decode-failed']);
+    expect(mb() - before).toBeLessThan(5);
   });
 });

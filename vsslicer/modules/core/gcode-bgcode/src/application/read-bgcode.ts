@@ -16,6 +16,11 @@ import {
 import { crc32 } from '../domain/crc32.ts';
 import type { Codec } from './codec.ts';
 
+/** Largest uncompressed block the reader will decode. */
+const MAX_BLOCK_SIZE = 64 * 2 ** 20;
+/** Heatshrink emits at most 16 bytes (a full back-reference) per 16 bits, so 16x is its ceiling. */
+const HEATSHRINK_MAX_RATIO = 16;
+
 export type BgcodeEvent =
   | { kind: 'header'; header: FileHeader }
   | { kind: 'block'; block: Block }
@@ -123,7 +128,17 @@ export async function* readBgcode(
     if (compression !== Compression.None) {
       const codec = codecs.find((c) => c.compression === compression);
       data = undefined;
-      if (!codec) yield diag('unsupported-compression', at + 2, `no codec for compression ${compression}`, 'warning');
+      const tooLarge =
+        uncompressedSize > MAX_BLOCK_SIZE ||
+        (compression !== Compression.Deflate && uncompressedSize > compressedSize * HEATSHRINK_MAX_RATIO);
+      if (tooLarge)
+        yield diag(
+          'block-too-large',
+          at,
+          `block type ${type} declares ${uncompressedSize} bytes from ${compressedSize}`,
+        );
+      else if (!codec)
+        yield diag('unsupported-compression', at + 2, `no codec for compression ${compression}`, 'warning');
       else
         try {
           data = codec.decode(payload, uncompressedSize);

@@ -12,3 +12,4 @@
 10. [GCP-7: Extract thumbnails, object labels and the config block](007-extract-thumbnails-object-labels-and-the-config-block.md)
 11. [GCP-8: Compute per-job filament, weight, cost and the slicer estimate; add readSummary](008-compute-per-job-filament-weight-cost-and-the-slicer-estimate.md)
 12. [GCP-9: Tessellate G2/G3 arcs in I/J and R form](009-tessellate-g2-g3-arcs-in-i-j-and-r-form.md)
+13. [GCP-76: Bound block sizes in the .bgcode reader](076-bound-block-sizes-in-the-bgcode-reader.md)
