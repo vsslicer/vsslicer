@@ -15,7 +15,7 @@ Module: tooling. Finding 7 of the SP2 audit, `.ai/audits/SP2-audit.md` (details,
 
 ## Acceptance criteria
 
-- [ ] User errors (missing argument, bad path) print one line and exit 1, no stack trace (tests)
+- [x] User errors (missing argument, bad path) print one line and exit 1, no stack trace (tests)
 
 ## Tasks
 
@@ -25,4 +25,4 @@ Module: tooling. Finding 7 of the SP2 audit, `.ai/audits/SP2-audit.md` (details,
 
 ## Progress
 
-Not started.
+Done in tooling (unreleased, coordinator releases). Tests in test/bundle.test.mjs and test/notices.test.mjs.

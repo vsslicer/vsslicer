@@ -76,7 +76,7 @@ export const notices = (metafiles, cwd = process.cwd()) => {
   return { markdown, problems };
 };
 
-if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) {
+const main = () => {
   const args = process.argv.slice(2);
   const o = args.indexOf('--out');
   const out = o >= 0 ? args.splice(o, 2)[1] : 'THIRD-PARTY-NOTICES.md';
@@ -86,4 +86,13 @@ if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) {
     process.exit(1);
   }
   writeFileSync(out, markdown);
+};
+
+if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) {
+  try {
+    main();
+  } catch (e) {
+    console.error(`third-party-notices: ${e.message}`);
+    process.exit(1);
+  }
 }
