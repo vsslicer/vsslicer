@@ -8,16 +8,15 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 1 |
 | [In progress](doing/_doing.md) | 1 |
-| [In review](review/_review.md) | 7 |
-| [Done](done/_done.md) | 8 |
+| [In review](review/_review.md) | 6 |
+| [Done](done/_done.md) | 9 |
 
 ## Milestones
 
-- [R1: Research](milestones/R1-research.md): active, 8/17 cards done
+- [R1: Research](milestones/R1-research.md): active, 9/17 cards done
 
 ## In review
 
-- [VSS-8](review/008-gcode-viewer-simulation.md): G-code viewer and toolhead simulation
 - [VSS-9](review/009-printer-connectivity-open.md): Printer connectivity: open ecosystems
 - [VSS-10](review/010-bambu-connectivity.md): Bambu Lab connectivity
 - [VSS-11](review/011-remote-camera.md): Remote camera streams

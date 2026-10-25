@@ -8,3 +8,4 @@
 6. [VSS-4: Feature inventory: Cura and CuraEngine](004-features-cura.md)
 7. [VSS-5: Slicing engine architecture and embedding options](005-slicing-engine-embedding.md)
 8. [VSS-7: 3D viewer in VS Code webviews](007-3d-viewer-webview.md)
+9. [VSS-8: G-code viewer and toolhead simulation](008-gcode-viewer-simulation.md)
