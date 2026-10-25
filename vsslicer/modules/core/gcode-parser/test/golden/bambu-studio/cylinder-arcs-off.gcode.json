@@ -1,0 +1,52 @@
+{
+  "file": {
+    "bytes": 398949,
+    "sha256": "f9f5d739b40b857f7af3e1cf26a6fad8ca29d3afa58a1bf5793ed3bf0d89399a"
+  },
+  "slicer": "bambustudio",
+  "flavour": "marlin",
+  "moveCount": 14386,
+  "stateChanges": 860,
+  "markers": 116,
+  "layerCount": 50,
+  "arcs": {
+    "commands": 50,
+    "segments": 1200
+  },
+  "roleHistogram": {
+    "Perimeter": 4785,
+    "ExternalPerimeter": 4787,
+    "InternalInfill": 1932,
+    "SolidInfill": 456,
+    "TopSolidInfill": 117,
+    "BridgeInfill": 101,
+    "Skirt": 64,
+    "BottomSurface": 114
+  },
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [],
+  "config": {
+    "keys": 561,
+    "sha256": "dc43fa617d5cf3c659ccea01bcd1f0d7ee4aaa916ffa3a281f40ffc95f7376ea",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Bambu Lab X1 Carbon",
+      "gcode_flavor": "marlin"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 550,
+        "volumeCm3": 1.32291
+      }
+    ],
+    "estimateSeconds": {
+      "model": 307,
+      "total": 308
+    }
+  }
+}

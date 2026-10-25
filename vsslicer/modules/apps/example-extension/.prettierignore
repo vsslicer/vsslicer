@@ -1,0 +1,7 @@
+dist
+coverage
+pnpm-lock.yaml
+THIRD-PARTY-NOTICES.md
+test-results
+.vscode-test
+dist-test

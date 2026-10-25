@@ -2,8 +2,8 @@
 id: M3
 title: Print
 status: draft
-start: "2026-10-27T03:15+00:00"
-due: "2026-10-28T08:15+00:00"
+start: "2026-10-26T11:15+00:00"
+due: "2026-10-27T01:15+00:00"
 initiatives: "I4, I5"
 ---
 

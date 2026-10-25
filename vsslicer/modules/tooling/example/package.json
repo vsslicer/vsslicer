@@ -1,0 +1,42 @@
+{
+  "name": "@vsslicer/example",
+  "version": "0.3.0",
+  "description": "Sample VSSlicer library module (domain layer).",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check . && tsc --noEmit",
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "5.0.5",
+    "@vsslicer/tooling": "^0.5.0",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}

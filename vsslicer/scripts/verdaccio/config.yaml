@@ -1,0 +1,17 @@
+# Local registry for @vsslicer/* modules (D12). Storage is gitignored; relative to this file.
+storage: ../../.registry/storage
+auth:
+  htpasswd:
+    file: ../../.registry/htpasswd
+    max_users: -1
+uplinks: {}
+packages:
+  '@vsslicer/*':
+    access: $all
+    publish: $all
+    unpublish: $authenticated
+    # no proxy: @vsslicer/* never leaves this machine
+  '**':
+    access: $all
+    publish: $authenticated
+log: { type: stdout, format: pretty, level: warn }

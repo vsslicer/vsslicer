@@ -1,0 +1,91 @@
+{
+  "file": {
+    "bytes": 109623,
+    "sha256": "918379706e63abab93fda7cc8855b7ef52160aed27a7fc336466c11d1ca71933"
+  },
+  "slicer": "prusaslicer",
+  "flavour": "marlin",
+  "moveCount": 1782,
+  "stateChanges": 821,
+  "markers": 251,
+  "layerCount": 126,
+  "arcs": {
+    "commands": 0,
+    "segments": 0
+  },
+  "roleHistogram": {
+    "ExternalPerimeter": 637,
+    "SolidInfill": 528,
+    "TopSolidInfill": 93,
+    "Skirt": 101,
+    "Custom": 6
+  },
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "png",
+      "width": 160,
+      "height": 120,
+      "bytes": 7723,
+      "sha256": "587a80d23275768348475ccebe5ef23f2c70673b6e10387b37e94647dd28442f"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Shape-Box",
+      "id": "0",
+      "copy": 0,
+      "ranges": 3,
+      "moves": 1621
+    }
+  ],
+  "config": {
+    "keys": 353,
+    "sha256": "af65852fe3daf5caf0fd8ad8ff24bfcc60ce16f09bd72aeed1b1ecf8968bec59",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4,0.4,0.4,0.4,0.4",
+      "filament_type": "ABS;ABS;ABS;ABS;ABS",
+      "printer_model": "MK3MMU2",
+      "gcode_flavor": "marlin"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 676.57,
+        "volumeCm3": 1.63,
+        "weightG": 1.76,
+        "cost": 0.05
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 1047,
+      "silent": 1048
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "file": {
+    "bytes": 275430,
+    "sha256": "c7c4dcdb14c7965863a0fb217ff72450f4b1e8a43434468369076c1323f30e44"
+  },
+  "slicer": "orcaslicer",
+  "flavour": "marlin",
+  "moveCount": 7951,
+  "stateChanges": 1603,
+  "markers": 120,
+  "layerCount": 100,
+  "arcs": {
+    "commands": 0,
+    "segments": 0
+  },
+  "roleHistogram": {
+    "Perimeter": 792,
+    "ExternalPerimeter": 400,
+    "InternalInfill": 4606,
+    "SolidInfill": 560,
+    "TopSolidInfill": 74,
+    "Custom": 4,
+    "BottomSurface": 101,
+    "InternalBridgeInfill": 92
+  },
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [
+    {
+      "name": "cube20.stl",
+      "id": "7021244195858113377",
+      "copy": 0,
+      "ranges": 100,
+      "moves": 7840
+    }
+  ],
+  "config": {
+    "keys": 699,
+    "sha256": "7a2d958e18ce650d45c31a45abbd4cfd9f66ce742238e9dc27623d1180df3fbe",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Generic Marlin Printer",
+      "gcode_flavor": "marlin"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 1436.85,
+        "volumeCm3": 3.46,
+        "weightG": 4.29,
+        "cost": 0.09
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 1002
+    }
+  }
+}

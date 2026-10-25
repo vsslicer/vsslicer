@@ -1,0 +1,93 @@
+{
+  "file": {
+    "bytes": 223076,
+    "sha256": "912be0fd02af475a55db90dc752f1545ecc6a3aca4cbf31e412dd089285b7077"
+  },
+  "slicer": "superslicer",
+  "flavour": "klipper",
+  "moveCount": 5875,
+  "stateChanges": 1395,
+  "markers": 27,
+  "layerCount": 25,
+  "arcs": {
+    "commands": 248,
+    "segments": 2136
+  },
+  "roleHistogram": {
+    "Perimeter": 734,
+    "ExternalPerimeter": 390,
+    "OverhangPerimeter": 18,
+    "InternalInfill": 398,
+    "SolidInfill": 836,
+    "TopSolidInfill": 137,
+    "BridgeInfill": 11,
+    "GapFill": 111,
+    "Skirt": 138,
+    "InternalBridgeInfill": 90
+  },
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "png",
+      "width": 64,
+      "height": 64,
+      "bytes": 2510,
+      "sha256": "21b6ca91df86c9cca67a6da217372887645e2a909bc188a5f13364c1f6b94c23"
+    },
+    {
+      "format": "png",
+      "width": 400,
+      "height": 300,
+      "bytes": 31663,
+      "sha256": "cce432852584e6dfb68fe8fb1f23c7511e06bfbc97574a2cd762b6bb667842a0"
+    }
+  ],
+  "objects": [
+    {
+      "name": "cube_1",
+      "id": "0",
+      "copy": 0,
+      "ranges": 25,
+      "moves": 781
+    },
+    {
+      "name": "cube_1",
+      "id": "0",
+      "copy": 1,
+      "ranges": 25,
+      "moves": 788
+    },
+    {
+      "name": "union_3",
+      "id": "2",
+      "copy": 0,
+      "ranges": 25,
+      "moves": 1637
+    },
+    {
+      "name": "cylinder_2",
+      "id": "1",
+      "copy": 0,
+      "ranges": 25,
+      "moves": 2418
+    }
+  ],
+  "config": {
+    "keys": 0,
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "sample": {}
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 264.59,
+        "volumeCm3": 0.64,
+        "weightG": 0.67,
+        "cost": 0.01
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 439
+    }
+  }
+}

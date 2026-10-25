@@ -1,0 +1,212 @@
+{
+  "name": "Profiles",
+  "key": "PRF",
+  "columns": [
+    {
+      "id": "backlog",
+      "title": "Backlog"
+    },
+    {
+      "id": "todo",
+      "title": "Ready"
+    },
+    {
+      "id": "doing",
+      "title": "In progress"
+    },
+    {
+      "id": "review",
+      "title": "In review"
+    },
+    {
+      "id": "done",
+      "title": "Done"
+    }
+  ],
+  "active": [
+    "doing",
+    "review"
+  ],
+  "done": "done",
+  "items": [
+    {
+      "kind": "initiative",
+      "folder": "initiatives",
+      "prefix": "I",
+      "title": "Initiatives"
+    },
+    {
+      "kind": "epic",
+      "folder": "epics",
+      "prefix": "E",
+      "title": "Epics",
+      "parent": "initiative"
+    },
+    {
+      "kind": "story",
+      "folder": "stories",
+      "prefix": "US",
+      "title": "Stories",
+      "parent": "epic"
+    },
+    {
+      "kind": "milestone",
+      "folder": "milestones",
+      "prefix": "M",
+      "title": "Milestones"
+    },
+    {
+      "kind": "sprint",
+      "folder": "sprints",
+      "prefix": "SP",
+      "title": "Sprints",
+      "parent": "milestone"
+    },
+    {
+      "kind": "decision",
+      "folder": "decisions",
+      "prefix": "D",
+      "title": "Decisions"
+    }
+  ],
+  "fields": [
+    {
+      "name": "type",
+      "label": "Type",
+      "kind": "select",
+      "options": [
+        "feature",
+        "bug",
+        "refactor",
+        "chore",
+        "docs",
+        "spike"
+      ]
+    },
+    {
+      "name": "priority",
+      "label": "Priority",
+      "kind": "select",
+      "options": [
+        {
+          "value": "P0",
+          "color": "red"
+        },
+        {
+          "value": "P1",
+          "color": "amber"
+        },
+        {
+          "value": "P2",
+          "color": "blue"
+        },
+        {
+          "value": "P3",
+          "color": "gray"
+        }
+      ]
+    },
+    {
+      "name": "effort",
+      "label": "Effort",
+      "kind": "select",
+      "options": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    },
+    {
+      "name": "model",
+      "label": "Model",
+      "kind": "select",
+      "tile": true,
+      "options": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ]
+    },
+    {
+      "name": "area",
+      "label": "Area",
+      "kind": "multiselect",
+      "options": [
+        "schema",
+        "importers",
+        "evaluator",
+        "store",
+        "form",
+        "wizard",
+        "export"
+      ]
+    },
+    {
+      "name": "story",
+      "label": "Story",
+      "kind": "item",
+      "item": "story"
+    },
+    {
+      "name": "milestone",
+      "label": "Milestone",
+      "kind": "item",
+      "item": "milestone"
+    },
+    {
+      "name": "sprint",
+      "label": "Sprint",
+      "kind": "item",
+      "item": "sprint"
+    },
+    {
+      "name": "owner",
+      "label": "Owner",
+      "kind": "text"
+    },
+    {
+      "name": "depends_on",
+      "label": "Depends on",
+      "kind": "cards"
+    },
+    {
+      "name": "docs",
+      "label": "Docs",
+      "kind": "docs"
+    },
+    {
+      "name": "source",
+      "label": "Source",
+      "kind": "text"
+    }
+  ],
+  "points": {
+    "XS": 1,
+    "S": 2,
+    "M": 3,
+    "L": 5,
+    "XL": 8
+  },
+  "docs": [
+    "docs",
+    ".ai/plans"
+  ],
+  "notes": ".reference/notes/{ticket}-*.md",
+  "stall_minutes": 20,
+  "gstack": {
+    "todos": "TODOS.md",
+    "group_by": "area"
+  },
+  "template": "What the task is for, in a sentence or two.\n\n## Acceptance criteria\n\n- [ ] What has to be true for the task to be done\n\n## Tasks\n\n- [ ] The work, broken down, in order\n\n## Progress\n\nNot started.\n",
+  "projects": {
+    "VSS": ".ai/kanban",
+    "PLT": ".ai/kanban/projects/platform",
+    "GCP": ".ai/kanban/projects/gcode",
+    "VWR": ".ai/kanban/projects/viewer",
+    "PRN": ".ai/kanban/projects/printers",
+    "SLC": ".ai/kanban/projects/slicer",
+    "FIL": ".ai/kanban/projects/filament"
+  }
+}

@@ -3,7 +3,7 @@ id: M2
 title: Open
 status: draft
 start: "2026-10-26T01:15+00:00"
-due: "2026-10-27T03:15+00:00"
+due: "2026-10-26T11:15+00:00"
 initiatives: "I2, I3"
 ---
 

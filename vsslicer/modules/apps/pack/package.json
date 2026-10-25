@@ -1,0 +1,41 @@
+{
+  "name": "@vsslicer/pack",
+  "displayName": "VSSlicer",
+  "version": "0.1.1",
+  "description": "VSSlicer extension pack: installs the VSSlicer extensions (no code of its own).",
+  "publisher": "vsslicer",
+  "license": "AGPL-3.0-or-later",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/pack@0.1.1/vsslicer/modules/pack",
+  "vsslicer": {
+    "sizeBudgetKB": 50
+  },
+  "files": [
+    "shipped-extensions.txt",
+    "THIRD-PARTY-NOTICES.md",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24",
+    "vscode": "^1.100.0"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "extensionPack": [],
+  "scripts": {
+    "lint": "eslint . && prettier --check .",
+    "build": "node scripts/sync-pack.mjs",
+    "package": "vsslicer-package",
+    "test": "node --test test/",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@vsslicer/tooling": "^0.8.1",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}

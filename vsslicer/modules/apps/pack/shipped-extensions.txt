@@ -1,0 +1,4 @@
+# Extensions this pack installs, one id per line (publisher.name). `#` starts a comment.
+# `pnpm build` copies them into package.json `extensionPack`; never edit that field by hand.
+# Only list ids that are published: VS Code cannot install an id that does not exist.
+# Next: vsslicer.gcode

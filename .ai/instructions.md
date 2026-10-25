@@ -39,9 +39,63 @@ docs/research/         tracked: distilled research reports, one per topic
 - Note the licence of every project you study. PrusaSlicer, OrcaSlicer and Bambu Studio are
   AGPL-3.0; reusing their code decides our own licence, so flag it wherever it matters.
 
+## Architecture rules
+
+- **All code lives in `vsslicer/`.** Only files a tool requires at the repository root stay there,
+  kept thin and pointing into `vsslicer/`: `.github/workflows/*.yml` and the root `LICENSE`.
+  Research, plans and boards stay outside it.
+- **Every capability is its own independent module** in `vsslicer/modules/<name>/`: the G-code
+  core, the toolhead simulator, each slicer engine adapter, each printer connector, the viewer,
+  profiles, filament, and so on. A module is a self-contained project:
+  - its own `package.json`, lockfile, version, changelog, tests and build.
+    `cd vsslicer/modules/<name> && pnpm install && pnpm test && pnpm build` works with nothing else built.
+  - its own CI job and its own release (`<name>@x.y.z`), so it can be published alone, to npm,
+    Open VSX or the VSSlicer marketplace, or moved to its own repository unchanged.
+  - other modules only through declared semver ranges on their published packages, never relative
+    imports, path aliases or reaching into another module's files.
+- **Contracts are modules too.** A boundary several modules share (the slicer port, the printer
+  port, the G-code model) lives in its own small `*-api` module. Adapters depend on that, never
+  on each other: `slicer-orca` and `slicer-prusa` depend on `slicer-api`; `printer-moonraker` and
+  `printer-bambu` on `printer-api`.
+- **Shared tooling is a versioned module** (`tooling`: TypeScript base config, ESLint config with
+  the layer-boundary rule, test setup), consumed as a dev dependency. There is no root workspace
+  and no root lockfile. A thin script in `vsslicer/scripts/` runs a command in every module in
+  dependency order.
+- **Modular, SOLID and KISS, Clean architecture.** Every package is split into layers whose
+  dependencies point inward only:
+  - `domain`: entities and value objects. Pure, with no I/O and no framework.
+  - `application`: use cases, and the ports (interfaces) they need from the outside.
+  - `adapters`: the file system, processes, network, workers and engines, implementing those ports.
+  - `presentation`: VS Code activation, commands, views and webviews.
+- **The VS Code API appears only in `presentation`.** Domain and application code runs and is
+  tested in plain Node, without VS Code, so it can serve other hosts (a CLI, the daemon) unchanged.
+- **One reason to change per module.** Code depends on interfaces at real boundaries, and new
+  behaviour comes through new adapters, not edits to the core.
+- **KISS beats speculative abstraction.** A port exists because there's a real boundary with two
+  sides today, not "for later". Prefer the plain function to the framework.
+- **An import-boundary lint enforces the layers.** It fails CI when an inner layer imports an
+  outer one. A rule broken on purpose must fail the lint.
+- Every task card names the package and layer its code belongs to. Split a card that mixes layers.
+
+## Sprint cycle
+
+Every sprint runs `.ai/skills/sprint-cycle`: finish the sprint's tasks (including the bugfix cards
+from the previous sprint's audit), run the audit (`.ai/audits/SP<n>-audit.md`, by a fresh Opus agent
+that wrote none of the sprint's code), turn its findings into bugfix cards in the next sprint, hold the retro (`.ai/retros/SP<n>-retro.md`:
+on time or not, why, and what changes in `.ai/plans/estimation.md`), then
+`close-sprint SP<n> --next SP<n+1>`, which refuses to close without the audit and the retro and
+starts the next sprint. Planners size cards with `.ai/plans/estimation.md`. Each sprint's "SP<n>: audit review and bugfix" card on the VSS board tracks steps 2 and 3.
+
 ## Build and test
 
-Nothing to build yet. Implementation work will add its commands here.
+Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
+
+- `scripts/registry.sh start|stop|status`: Verdaccio on `http://localhost:4873`.
+- `node scripts/run.mjs ci`: every module in dependency order: install, lint, build, test, publish.
+- `node scripts/run.mjs test` (or `build`, `install`, `publish`): that step in every module.
+- `--changed <git-ref>` on any of them: only changed modules and their dependents.
+- One module standalone: `cd modules/<name> && pnpm install && pnpm test && pnpm build`.
+- Runner tests: `cd vsslicer/scripts && node --test test/`.
 
 ## Conventions
 
@@ -66,10 +120,13 @@ Nothing to build yet. Implementation work will add its commands here.
 
 ## Skills, agents, plans
 
+- `.ai/skills/sprint-cycle`: how a sprint runs, from its tasks to the audit, the next sprint's
+  bugfix cards, and close.
 - `.ai/skills/slicer-research`: how a research task runs: clone, analyse, take notes, report.
 - `.ai/agents/vsslicer-reviewer.agent.md`: reviews research reports and plans for unsourced
   claims, missing coverage and licence risks.
 - `.ai/plans/roadmap.md`: the implementation roadmap, written from the research.
+- `.ai/plans/estimation.md`: how to size cards, calibrated by every sprint retro.
 - gstack (global install, `~/.claude/skills/gstack`): `/office-hours`, `/plan-ceo-review`,
   `/plan-eng-review` and `/autoplan` for product and plan review; `/review`, `/investigate`,
   `/qa` and `/ship` once code exists. Use `/browse` from gstack for web browsing that needs a

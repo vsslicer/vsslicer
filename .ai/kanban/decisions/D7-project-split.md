@@ -18,13 +18,13 @@ natural seam: each project owns whole extensions and the libraries only they pub
 
 | Key | Board | Owns (extensions and libraries) | Initiatives |
 |---|---|---|---|
-| PLT | `projects/platform/.ai/kanban` | monorepo, CI, test tooling, publishing to Open VSX and the Microsoft marketplace, the `vsslicer` extension pack, `@vsslicer/webview-kit`, `@vsslicer/agent-protocol`, `web` builds, the VSCodium build, self-hosted Open VSX, `vsslicer.themes` | I1, I10, I11 |
-| GCP | `projects/gcode/.ai/kanban` | `@vsslicer/gcode`, `vsslicer.gcode` (preview, simulation, G-code language, live follow) | I1, I10 |
-| VWR | `projects/viewer/.ai/kanban` | `@vsslicer/3mf`, `@vsslicer/mesh`, `vsslicer.project` (viewer, then editor: plates, arrange, repair, STEP, painting, cut, boolean) | I2, I6, I10 |
-| PRF | `projects/profiles/.ai/kanban` | `@vsslicer/profiles`, `vsslicer.profiles` (schema, importers, evaluator, store, form, add-printer flow) | I3, I10 |
-| PRN | `projects/printers/.ai/kanban` | `@vsslicer/printer-api`, `vsslicer.bambu`, `vsslicer.printers`, `vsslicer-agent`, `vsslicer.camera`, `vsslicer.fleet`, `vsslicer.printers-serial`, `vsslicer.printers-unofficial` | I4, I7, I9, I10 |
-| SLC | `projects/slicer/.ai/kanban` | `vsslicer.slicer` (engine adapters, tasks, post-processing, calibration, multi-material UI, embedded engine) | I5, I10 |
-| FIL | `projects/filament/.ai/kanban` | `vsslicer.filament` | I8, I10 |
+| PLT | `.ai/kanban/projects/platform` | monorepo, CI, test tooling, publishing to Open VSX and the Microsoft marketplace, the `vsslicer` extension pack, `@vsslicer/webview-kit`, `@vsslicer/agent-protocol`, `web` builds, the VSCodium build, self-hosted Open VSX, `vsslicer.themes` | I1, I10, I11 |
+| GCP | `.ai/kanban/projects/gcode` | `@vsslicer/gcode`, `vsslicer.gcode` (preview, simulation, G-code language, live follow) | I1, I10 |
+| VWR | `.ai/kanban/projects/viewer` | `@vsslicer/3mf`, `@vsslicer/mesh`, `vsslicer.project` (viewer, then editor: plates, arrange, repair, STEP, painting, cut, boolean) | I2, I6, I10 |
+| PRF | `.ai/kanban/projects/profiles` | `@vsslicer/profiles`, `vsslicer.profiles` (schema, importers, evaluator, store, form, add-printer flow) | I3, I10 |
+| PRN | `.ai/kanban/projects/printers` | `@vsslicer/printer-api`, `vsslicer.bambu`, `vsslicer.printers`, `vsslicer-agent`, `vsslicer.camera`, `vsslicer.fleet`, `vsslicer.printers-serial`, `vsslicer.printers-unofficial` | I4, I7, I9, I10 |
+| SLC | `.ai/kanban/projects/slicer` | `vsslicer.slicer` (engine adapters, tasks, post-processing, calibration, multi-material UI, embedded engine) | I5, I10 |
+| FIL | `.ai/kanban/projects/filament` | `vsslicer.filament` | I8, I10 |
 
 Every project board links VSS and the six other projects in its `board.json` `projects`, so
 `KEY:E<n>` dependencies and `KEY-<n>` cards validate across the workspace; VSS links all seven.

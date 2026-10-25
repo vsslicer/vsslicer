@@ -1,0 +1,75 @@
+{
+  "file": {
+    "bytes": 85818,
+    "sha256": "e8cb9527cc827613b6f6aeb021366815fcaf93f26bd3b81fed0872a9268c381a"
+  },
+  "slicer": "prusaslicer",
+  "flavour": "marlin",
+  "moveCount": 1663,
+  "stateChanges": 693,
+  "markers": 264,
+  "layerCount": 31,
+  "arcs": {
+    "commands": 5,
+    "segments": 100
+  },
+  "roleHistogram": {
+    "Perimeter": 125,
+    "ExternalPerimeter": 133,
+    "InternalInfill": 299,
+    "SolidInfill": 431,
+    "TopSolidInfill": 39,
+    "BridgeInfill": 64,
+    "Custom": 4
+  },
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "qoi",
+      "width": 16,
+      "height": 16,
+      "bytes": 274,
+      "sha256": "1dd07e8b89ce8d94822d8e2aebecfad2f2dc5ca977707c5c6cfd84aaf3f90670"
+    },
+    {
+      "format": "qoi",
+      "width": 313,
+      "height": 173,
+      "bytes": 10809,
+      "sha256": "4cbb606aa97a9ae415e3ad6d9ce01977b8bc7844b291d2ee7564e9300a953f87"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Shape-Box",
+      "id": "0",
+      "ranges": 1,
+      "moves": 1646
+    }
+  ],
+  "config": {
+    "keys": 353,
+    "sha256": "916ffde113da1021bc67d77d3fe8a1074ca8372d08fd68ff9b8ee4ba76e6e9f5",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "MK4S",
+      "gcode_flavor": "marlin2"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 252.22,
+        "volumeCm3": 0.61,
+        "weightG": 0.75,
+        "cost": 0.03
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 221,
+      "silent": 227
+    }
+  }
+}

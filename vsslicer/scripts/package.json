@@ -1,0 +1,10 @@
+{
+  "name": "@vsslicer/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "packageManager": "pnpm@11.22.0",
+  "engines": { "node": ">=24" },
+  "scripts": { "test": "node --test test/" },
+  "devDependencies": { "verdaccio": "6.11.1" }
+}

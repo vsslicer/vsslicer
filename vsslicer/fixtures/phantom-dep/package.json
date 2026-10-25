@@ -1,0 +1,11 @@
+{
+  "name": "@vsslicer/fixture-phantom-dep",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Negative fixture: src imports 'eslint' without declaring it, so the build must fail.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "packageManager": "pnpm@11.22.0",
+  "scripts": { "build": "tsc" },
+  "devDependencies": { "typescript": "7.0.2" }
+}

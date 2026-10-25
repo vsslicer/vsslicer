@@ -1,0 +1,62 @@
+{
+  "file": {
+    "bytes": 263053,
+    "sha256": "6bf9eaab9420d43b3b77a25e410694ef7f460b040a7dee2ebbb980242ccd395d"
+  },
+  "slicer": "orcaslicer",
+  "flavour": "marlin",
+  "moveCount": 7625,
+  "stateChanges": 1930,
+  "markers": 1044,
+  "layerCount": 100,
+  "arcs": {
+    "commands": 98,
+    "segments": 2352
+  },
+  "roleHistogram": {
+    "Perimeter": 396,
+    "ExternalPerimeter": 400,
+    "InternalInfill": 2023,
+    "SolidInfill": 677,
+    "TopSolidInfill": 70,
+    "Custom": 2,
+    "BottomSurface": 105,
+    "InternalBridgeInfill": 112
+  },
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [
+    {
+      "name": "cube20.stl",
+      "id": "7236833210312978021",
+      "copy": 0,
+      "ranges": 100,
+      "moves": 7302
+    }
+  ],
+  "config": {
+    "keys": 699,
+    "sha256": "de62749d45ee44e24105953f686b1f067229c60832520367fa2b11de85647e2a",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Bambu Lab X1 Carbon",
+      "gcode_flavor": "marlin"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 1223.89,
+        "volumeCm3": 2.94,
+        "weightG": 3.71,
+        "cost": 0.06
+      }
+    ],
+    "estimateSeconds": {
+      "model": 535,
+      "total": 555
+    }
+  }
+}

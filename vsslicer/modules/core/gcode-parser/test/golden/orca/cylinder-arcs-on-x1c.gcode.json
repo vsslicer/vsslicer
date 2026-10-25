@@ -1,0 +1,62 @@
+{
+  "file": {
+    "bytes": 409917,
+    "sha256": "ad3007168e40aafc21a44eb64abd70f6f7d56412441eef76a884217d44c6ca8a"
+  },
+  "slicer": "orcaslicer",
+  "flavour": "marlin",
+  "moveCount": 13155,
+  "stateChanges": 966,
+  "markers": 585,
+  "layerCount": 50,
+  "arcs": {
+    "commands": 568,
+    "segments": 2137
+  },
+  "roleHistogram": {
+    "Perimeter": 4612,
+    "ExternalPerimeter": 4729,
+    "InternalInfill": 546,
+    "SolidInfill": 492,
+    "TopSolidInfill": 51,
+    "Custom": 2,
+    "BottomSurface": 80,
+    "InternalBridgeInfill": 85
+  },
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [
+    {
+      "name": "cylinder.stl",
+      "id": "7236833210312978021",
+      "copy": 0,
+      "ranges": 50,
+      "moves": 12947
+    }
+  ],
+  "config": {
+    "keys": 699,
+    "sha256": "109a3fdcc02aa3600edef604ff394b636e14711fbe6911eea0d95c79a3e626a1",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Bambu Lab X1 Carbon",
+      "gcode_flavor": "marlin"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 566.08,
+        "volumeCm3": 1.36,
+        "weightG": 1.72,
+        "cost": 0.03
+      }
+    ],
+    "estimateSeconds": {
+      "model": 277,
+      "total": 297
+    }
+  }
+}

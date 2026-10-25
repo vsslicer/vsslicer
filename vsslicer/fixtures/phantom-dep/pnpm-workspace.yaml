@@ -1,0 +1,3 @@
+# settings only, not a workspace
+minimumReleaseAgeExclude:
+  - '@vsslicer/*'
