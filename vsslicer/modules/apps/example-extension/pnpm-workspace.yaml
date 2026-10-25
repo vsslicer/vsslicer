@@ -1,0 +1,3 @@
+# settings only, not a workspace: our own just-published modules are younger than minimumReleaseAge
+minimumReleaseAgeExclude:
+  - '@vsslicer/*'

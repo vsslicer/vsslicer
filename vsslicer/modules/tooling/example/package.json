@@ -1,0 +1,16 @@
+{
+  "name": "@vsslicer/example",
+  "version": "0.1.0",
+  "description": "Sample VSSlicer library module (domain layer).",
+  "license": "AGPL-3.0-or-later",
+  "main": "dist/index.js",
+  "files": ["dist", "LICENSE"],
+  "engines": { "node": ">=24" },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": { "registry": "http://localhost:4873/" },
+  "scripts": {
+    "lint": "node --check src/index.js && node --check src/domain/greeting.js",
+    "build": "node -e \"const fs=require('node:fs');fs.rmSync('dist',{recursive:true,force:true});fs.cpSync('src','dist',{recursive:true})\"",
+    "test": "node --test test/"
+  }
+}

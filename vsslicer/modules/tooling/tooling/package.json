@@ -1,0 +1,16 @@
+{
+  "name": "@vsslicer/tooling",
+  "version": "0.1.0",
+  "description": "Shared VSSlicer tooling (TypeScript, ESLint and test configs land here).",
+  "license": "AGPL-3.0-or-later",
+  "main": "src/index.js",
+  "files": ["src", "LICENSE"],
+  "engines": { "node": ">=24" },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": { "registry": "http://localhost:4873/" },
+  "scripts": {
+    "lint": "node --check src/index.js",
+    "build": "node --check src/index.js",
+    "test": "node --test test/"
+  }
+}

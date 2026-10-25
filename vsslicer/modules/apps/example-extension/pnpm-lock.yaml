@@ -1,0 +1,23 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@vsslicer/example':
+        specifier: ^0.1.0
+        version: 0.1.0
+
+packages:
+
+  '@vsslicer/example@0.1.0':
+    resolution: {integrity: sha512-mf2/IJycaHvd7oUL3tmz4DFH4QlByZPXyf8HosoJ8nS2KVBXrjuyFULzSxo1bszWFvMH7aNGmwReLPoc6ZsTvA==}
+    engines: {node: '>=24'}
+
+snapshots:
+
+  '@vsslicer/example@0.1.0': {}
