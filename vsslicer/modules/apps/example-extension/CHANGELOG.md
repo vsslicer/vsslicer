@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1
+
+- Depend on `@vsslicer/test-vscode` 0.2.1: the VS Code download is shared (`~/.cache/vsslicer/vscode-test`, or `VSCODE_TEST_CACHE`) instead of kept in this module's `.vscode-test`.
+
 ## 0.7.0
 
 - Compile the integration suites to `dist-test/` and depend on `@vsslicer/test-vscode` 0.2.0. 0.6.0 was published mid-change by a concurrent run (it ships `dist/test/` and an old range) and is superseded.

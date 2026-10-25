@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { cachePath, resolveVersion, resultsPath } from '../src/versions.ts';
+import { join } from 'node:path';
+import { cachePath, defaultCacheDir, resolveVersion, resultsPath } from '../src/versions.ts';
 
 describe('resolveVersion', () => {
   it.each([
@@ -25,5 +26,20 @@ describe('paths', () => {
   it('keys cache and results by version', () => {
     expect(cachePath('.vscode-test', '1.100.0')).toBe('.vscode-test/1.100.0');
     expect(resultsPath('test-results/integration', 'stable')).toBe('test-results/integration/stable');
+  });
+});
+
+describe('defaultCacheDir', () => {
+  const home = join('/home', 'u');
+  it('prefers VSCODE_TEST_CACHE', () =>
+    expect(defaultCacheDir({ VSCODE_TEST_CACHE: '/x/cache', LOCALAPPDATA: 'C:\\L' }, 'win32', home)).toBe('/x/cache'));
+  it('is one folder under the home cache on Linux and macOS', () => {
+    const want = join(home, '.cache', 'vsslicer', 'vscode-test');
+    expect(defaultCacheDir({}, 'linux', home)).toBe(want);
+    expect(defaultCacheDir({ VSCODE_TEST_CACHE: '' }, 'darwin', home)).toBe(want);
+  });
+  it('uses LOCALAPPDATA on Windows, the home cache without it', () => {
+    expect(defaultCacheDir({ LOCALAPPDATA: 'C:\\L' }, 'win32', home)).toBe(join('C:\\L', 'vsslicer', 'vscode-test'));
+    expect(defaultCacheDir({}, 'win32', home)).toBe(join(home, '.cache', 'vsslicer', 'vscode-test'));
   });
 });

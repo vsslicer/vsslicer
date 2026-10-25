@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, createWriteStream } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { homedir, tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { downloadAndUnzipVSCode, runTests } from '@vscode/test-electron';
-import { cachePath, resolveVersion, resultsPath } from './versions.ts';
+import { cachePath, defaultCacheDir, resolveVersion, resultsPath } from './versions.ts';
 
 export interface IntegrationOptions {
   /** The extension folder (its package.json supplies `engines.vscode`). */
@@ -14,7 +14,7 @@ export interface IntegrationOptions {
   extensionTestsPath?: string;
   /** `min`, `stable`, `insiders` or an exact version. Default `['min', 'stable']`. */
   versions?: string[];
-  /** Default `.vscode-test`; one `<version>` folder inside per VS Code. */
+  /** Default `VSCODE_TEST_CACHE` or `~/.cache/vsslicer/vscode-test` (Windows: `%LOCALAPPDATA%\\vsslicer\\vscode-test`), shared by every module; one `<version>` folder inside per VS Code. */
   cacheDir?: string;
   /** Default `test-results/integration`; `<version>/junit.xml`, `console.log` and `logs/` inside. */
   resultsDir?: string;
@@ -36,7 +36,7 @@ export const runIntegration = async (o: IntegrationOptions): Promise<string[]> =
     rmSync(results, { recursive: true, force: true });
     mkdirSync(results, { recursive: true });
     const tmp = mkdtempSync(join(tmpdir(), 'vsslicer-vscode-'));
-    const cache = resolve(cachePath(o.cacheDir ?? '.vscode-test', version));
+    const cache = resolve(cachePath(o.cacheDir ?? defaultCacheDir(process.env, process.platform, homedir()), version));
     mkdirSync(cache, { recursive: true }); // test-electron only creates the last path segment
     const vscodeExecutablePath = await downloadAndUnzipVSCode({ version, cachePath: cache });
     // VS Code's stdout/stderr (including the renderer console) are forwarded to ours: keep a copy as an artefact.

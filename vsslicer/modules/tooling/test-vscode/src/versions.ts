@@ -14,3 +14,10 @@ export const cachePath = (cacheRoot: string, version: string): string => join(ca
 
 /** Results and logs of one run: `<resultsRoot>/<version>/`. */
 export const resultsPath = (resultsRoot: string, version: string): string => join(resultsRoot, version);
+
+/** Shared by every module on the machine: `VSCODE_TEST_CACHE`, else `%LOCALAPPDATA%\vsslicer\vscode-test` (Windows) or `~/.cache/vsslicer/vscode-test`. */
+export const defaultCacheDir = (env: NodeJS.ProcessEnv, platform: NodeJS.Platform, home: string): string => {
+  if (env['VSCODE_TEST_CACHE']) return env['VSCODE_TEST_CACHE'];
+  const base = platform === 'win32' && env['LOCALAPPDATA'] ? env['LOCALAPPDATA'] : join(home, '.cache');
+  return join(base, 'vsslicer', 'vscode-test');
+};

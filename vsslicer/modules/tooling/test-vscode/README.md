@@ -16,7 +16,7 @@ Keep the unit script off that folder (`node --test test/*.test.ts`).
 
 ## CLI
 
-`vsslicer-test-vscode [--extension .] [--tests dist-test] [--versions min,stable] [--cache-dir .vscode-test] [--results-dir test-results/integration]`
+`vsslicer-test-vscode [--extension .] [--tests dist-test] [--versions min,stable] [--cache-dir <dir>] [--results-dir test-results/integration]`
 
 - `min` is read from `engines.vscode` of `--extension` (`^1.100.0` gives `1.100.0`; it must be a released version). Other values are passed on: `stable`, `insiders` or an exact `1.101.2`.
 - Each VS Code starts with `--disable-extensions`, a temporary `--user-data-dir` and `--extensions-dir` (removed afterwards) and `--logsPath` inside the results folder.
@@ -26,9 +26,9 @@ Keep the unit script off that folder (`node --test test/*.test.ts`).
 
 ## Artefacts and cache (for CI)
 
-Per version, `test-results/integration/<version>/`: `junit.xml` (mocha xunit), `console.log` (all stdout and stderr VS Code produced, the renderer console included) and `logs/` (VS Code's log folder: `main.log`, `window1/renderer.log`, `exthost`, ...). Upload `test-results/` as the artefact (`if: always()`). `.vscode-test/` and `test-results/` are git-ignored.
+Per version, `test-results/integration/<version>/`: `junit.xml` (mocha xunit), `console.log` (all stdout and stderr VS Code produced, the renderer console included) and `logs/` (VS Code's log folder: `main.log`, `window1/renderer.log`, `exthost`, ...). Upload `test-results/` as the artefact (`if: always()`). `test-results/` is git-ignored.
 
-Downloads go to `.vscode-test/<version>/` (about 130 MB per version and platform), so cache `.vscode-test` keyed on OS and the `engines.vscode` value, plus a date or week stamp for `stable`, which resolves to whatever is current: `key: vscode-${{ runner.os }}-${{ hashFiles('modules/<ext>/package.json') }}-<week>`. test-electron reuses an existing folder without a network call when the version is exact.
+Downloads go to one cache shared by every module on the machine: `$VSCODE_TEST_CACHE`, else `~/.cache/vsslicer/vscode-test` (Windows: `%LOCALAPPDATA%\vsslicer\vscode-test`), `--cache-dir` overrides; `<version>/` inside, about 130 MB per version and platform. A second extension finds the first one's download and starts without a network call (exact versions; `stable` asks the update service which version is current, then reuses that folder). In CI cache that folder keyed on OS, the `engines.vscode` value and a week stamp for `stable`, which moves.
 
 ## API
 

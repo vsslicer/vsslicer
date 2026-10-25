@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/example-extension",
   "displayName": "VSSlicer Example",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Sample VSSlicer VS Code extension (presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
@@ -54,7 +54,7 @@
     "@types/mocha": "10.0.10",
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
-    "@vsslicer/test-vscode": "^0.2.0",
+    "@vsslicer/test-vscode": "^0.2.1",
     "@vsslicer/tooling": "^0.7.0",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",

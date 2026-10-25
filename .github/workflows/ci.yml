@@ -78,9 +78,18 @@ jobs:
         with:
           path: vsslicer/.cache/large-fixtures
           key: large-fixtures-${{ runner.os }}-${{ hashFiles('vsslicer/scripts/generate-large-fixture.mjs') }}
+      # one VS Code download for every extension module (@vsslicer/test-vscode); `stable` moves, so the key carries the ISO week
+      - id: week
+        run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/vscode-test
+          key: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-${{ hashFiles('vsslicer/modules/*/package.json') }}
+          restore-keys: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-
       - run: scripts/registry.sh start
       - run: node scripts/run.mjs ci --changed "$BASE"
         env:
+          VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
           BASE: ${{ needs.select.outputs.base }}
       - if: always()
         run: scripts/registry.sh stop

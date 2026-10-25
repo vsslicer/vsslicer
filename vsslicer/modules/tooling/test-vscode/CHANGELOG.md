@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- The download cache defaults to one folder shared by every module: `VSCODE_TEST_CACHE`, else `~/.cache/vsslicer/vscode-test` (Windows: `%LOCALAPPDATA%\vsslicer\vscode-test`), instead of `.vscode-test` per module. `--cache-dir` and `cacheDir` still override. New pure helper `defaultCacheDir`. Delete old per-module `.vscode-test` folders.
+
 ## 0.2.0
 
 - The CLI looks for compiled suites in `dist-test/` by default (was `dist/test/`, which `files: ["dist"]` would have published with the extension).
