@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0
+
+- Add the `vsslicer-package` bin (pins `@vscode/vsce` 3.9.2): builds `<name>-<version>.vsix` with `vsce package --no-dependencies` in a temporary copy of the module (vsce rejects scoped names; the module's `.vscodeignore` decides the content), prints the size and fails on: a manifest without `license` `AGPL-3.0-or-later`, `publisher`, a `repository` containing the release tag `<name>@<version>` or `"vsslicer": { "sizeBudgetKB": n }`; any entry besides `dist` bundles (.js/.css, no `.map`/`.meta.json`), `package.json`, `LICENSE`, `THIRD-PARTY-NOTICES.md`, `README.md`, `CHANGELOG.md`, declared assets and the VSIX manifest files, or any of those missing; a VSIX over the budget.
+- Consumers' `pnpm-workspace.yaml` needs `allowBuilds` `false` for `@vscode/vsce-sign` and `keytar` (vsce's signing and keychain postinstalls).
+
 ## 0.6.0
 
 - Add the `third-party-notices` bin: reads the esbuild metafile(s), finds the packages that were inlined (skipping the module's own sources and `@vsslicer/*`), checks each package's SPDX licence expression (`OR`, `AND`, `WITH`, parentheses, `+`) against an AGPL-3.0-compatible allow-list, and writes a deterministic `THIRD-PARTY-NOTICES.md` with the licence text of every package. `UNLICENSED`, a missing or non-allow-listed licence, a non-SPDX `SEE LICENSE IN`, or a missing licence file fail with `name@version` and exit 1.

@@ -11,3 +11,5 @@
 9. [PLT-13: Write the fixtures check for size cap and PROVENANCE.md](013-write-the-fixtures-check-for-size-cap-and-provenance-md.md)
 10. [PLT-12: Write the bundled-dependency licence check and THIRD-PARTY-NOTICES generator](012-write-the-bundled-dependency-licence-check-and-third-party-n.md)
 11. [PLT-17: Add the Playwright harness with SwiftShader WebGL and a webview stub loader](017-add-the-playwright-harness-with-swiftshader-webgl-and-a-webv.md)
+12. [PLT-20: Set up per-module versioning and the release-tag convention](020-set-up-changesets-and-the-release-tag-convention.md)
+13. [PLT-21: Add the VSIX packaging task with content assertion and size budget](021-add-the-vsix-packaging-task-with-content-assertion-and-size-.md)

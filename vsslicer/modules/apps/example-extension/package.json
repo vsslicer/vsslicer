@@ -1,17 +1,22 @@
 {
   "name": "@vsslicer/example-extension",
   "displayName": "VSSlicer Example",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Sample VSSlicer VS Code extension (presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/example-extension@0.5.0/vsslicer/modules/example-extension",
+  "vsslicer": {
+    "sizeBudgetKB": 200
+  },
   "main": "dist/extension.js",
   "files": [
     "dist",
     "!dist/*.meta.json",
     "THIRD-PARTY-NOTICES.md",
     "LICENSE",
-    "PROVENANCE.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=24",
@@ -40,13 +45,14 @@
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc",
     "build": "tsc && vsslicer-bundle && esbuild src/presentation/webview/main.ts --bundle --platform=browser --format=iife --target=es2023 --sourcemap --outfile=dist/webview.js --metafile=dist/webview.meta.json && third-party-notices dist/extension.meta.json dist/webview.meta.json",
+    "package": "vsslicer-package",
     "test": "node --test test/",
     "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
-    "@vsslicer/tooling": "^0.6.0",
+    "@vsslicer/tooling": "^0.7.0",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",
     "prettier": "3.9.10",

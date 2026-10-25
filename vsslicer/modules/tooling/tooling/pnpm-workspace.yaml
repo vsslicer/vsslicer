@@ -1,4 +1,7 @@
 # esbuild and unrs-resolver (eslint-plugin-import-x) ship their binaries as optional dependencies; their postinstalls are only optimisations
+# vsce-sign and keytar (via @vscode/vsce) are only for publishing and signing, which we never do from here
 allowBuilds:
+  '@vscode/vsce-sign': false
   esbuild: false
+  keytar: false
   unrs-resolver: false

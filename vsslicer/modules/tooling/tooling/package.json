@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/tooling",
-  "version": "0.6.0",
-  "description": "Shared VSSlicer tooling: TypeScript base config, extension bundler, vitest config, ESLint config with the layer-boundary rule, Prettier config the check-licence bin and the third-party-notices bin.",
+  "version": "0.7.0",
+  "description": "Shared VSSlicer tooling: TypeScript base config, extension bundler, vitest config, ESLint config with the layer-boundary rule, Prettier config the check-licence bin, the third-party-notices bin and the vsslicer-package bin.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "exports": {
@@ -14,7 +14,8 @@
   "bin": {
     "vsslicer-bundle": "bin/vsslicer-bundle.mjs",
     "check-licence": "bin/check-licence.mjs",
-    "third-party-notices": "bin/third-party-notices.mjs"
+    "third-party-notices": "bin/third-party-notices.mjs",
+    "vsslicer-package": "bin/vsslicer-package.mjs"
   },
   "files": [
     "tsconfig.base.json",
@@ -33,12 +34,13 @@
   },
   "scripts": {
     "lint": "eslint . && prettier --check . && node bin/check-licence.mjs",
-    "build": "node --check bin/vsslicer-bundle.mjs && node --check bin/check-licence.mjs && node --check bin/third-party-notices.mjs",
+    "build": "node --check bin/vsslicer-bundle.mjs && node --check bin/check-licence.mjs && node --check bin/third-party-notices.mjs && node --check bin/vsslicer-package.mjs",
     "test": "node --test test/",
     "format": "prettier --write ."
   },
   "dependencies": {
     "@eslint/js": "10.0.1",
+    "@vscode/vsce": "3.9.2",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",
     "eslint-plugin-boundaries": "7.3.0",
