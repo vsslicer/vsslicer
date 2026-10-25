@@ -1,7 +1,7 @@
 ---
 id: D14
-title: Owner time for GUI-only fixtures and H2C sessions, grouped per milestone
-status: proposed
+title: "Owner time for GUI-only fixtures and H2C sessions, grouped per milestone"
+status: accepted
 date: 2026-10-25
 cards: [30, 31, 32, 33, 34, 36, 38]
 ---

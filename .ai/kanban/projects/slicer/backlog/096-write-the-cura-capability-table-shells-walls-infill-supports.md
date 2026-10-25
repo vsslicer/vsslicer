@@ -8,7 +8,7 @@ model: opus
 area: [cura, engine]
 story: US26
 milestone: "VSS:M3"
-sprint: "VSS:SP15"
+sprint: "VSS:SP20"
 depends_on: [92, 82]
 created: 2026-10-25
 ---

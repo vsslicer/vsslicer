@@ -8,7 +8,7 @@ model: sonnet
 area: [orca]
 story: US49
 milestone: "VSS:M5"
-sprint: "VSS:SP27"
+sprint: "VSS:SP38"
 depends_on: [171, 92]
 created: 2026-10-25
 ---

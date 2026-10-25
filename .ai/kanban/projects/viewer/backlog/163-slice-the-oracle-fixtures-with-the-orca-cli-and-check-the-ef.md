@@ -8,7 +8,7 @@ model: opus
 area: [editor]
 story: US46
 milestone: "VSS:M4"
-sprint: "VSS:SP19"
+sprint: "VSS:SP26"
 depends_on: [162, 144, 149, 150, SLC-30, GCP-4, GCP-5]
 created: 2026-10-25
 ---

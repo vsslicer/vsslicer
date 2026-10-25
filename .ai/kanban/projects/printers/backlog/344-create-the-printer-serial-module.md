@@ -8,7 +8,7 @@ model: sonnet
 area: [serial]
 story: US60
 milestone: "VSS:M5"
-sprint: "VSS:SP30"
+sprint: "VSS:SP42"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8, 320]
 created: 2026-10-25
 ---

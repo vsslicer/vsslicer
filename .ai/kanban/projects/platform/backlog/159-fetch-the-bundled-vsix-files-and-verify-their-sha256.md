@@ -8,7 +8,7 @@ model: sonnet
 area: [fork]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP35"
+sprint: "VSS:SP50"
 depends_on: [158, 144, 102, GCP-75, VWR-388, PRF-176, PRN-378, PRN-60, PRN-315, SLC-276, FIL-96]
 created: 2026-10-25
 ---

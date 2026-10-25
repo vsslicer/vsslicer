@@ -8,7 +8,7 @@ model: sonnet
 area: [bambu]
 story: US10
 milestone: "VSS:M3"
-sprint: "VSS:SP10"
+sprint: "VSS:SP14"
 depends_on: [51, 50, 48]
 created: 2026-10-25
 ---

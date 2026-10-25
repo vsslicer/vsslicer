@@ -8,7 +8,7 @@ model: opus
 area: [mesh, painting]
 story: US85
 milestone: "VSS:M5"
-sprint: "VSS:SP30"
+sprint: "VSS:SP41"
 depends_on: [283, 284, 288, 36]
 created: 2026-10-25
 ---

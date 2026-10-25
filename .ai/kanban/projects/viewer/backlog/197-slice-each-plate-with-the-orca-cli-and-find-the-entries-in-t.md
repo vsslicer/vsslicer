@@ -8,7 +8,7 @@ model: opus
 area: [plates]
 story: US57
 milestone: "VSS:M4"
-sprint: "VSS:SP20"
+sprint: "VSS:SP28"
 depends_on: [196, 178, 176, SLC-30, SLC-42, GCP-4, GCP-5]
 created: 2026-10-25
 ---

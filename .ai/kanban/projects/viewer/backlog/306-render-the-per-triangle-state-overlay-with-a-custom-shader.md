@@ -8,7 +8,7 @@ model: opus
 area: [viewer, painting]
 story: US81
 milestone: "VSS:M5"
-sprint: "VSS:SP30"
+sprint: "VSS:SP42"
 depends_on: [55, 291, 300]
 created: 2026-10-25
 ---

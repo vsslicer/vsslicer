@@ -8,7 +8,7 @@ model: opus
 area: [unofficial]
 story: US72
 milestone: "VSS:M5"
-sprint: "VSS:SP32"
+sprint: "VSS:SP46"
 depends_on: [434]
 created: 2026-10-25
 ---

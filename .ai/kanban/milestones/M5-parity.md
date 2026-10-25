@@ -2,8 +2,8 @@
 id: M5
 title: Parity
 status: draft
-start: "2026-10-27T19:15+00:00"
-due: "2026-10-28T13:15+00:00"
+start: "2026-10-28T15:30+00:00"
+due: "2026-10-29T17:30+00:00"
 initiatives: I10
 ---
 

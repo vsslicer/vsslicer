@@ -1,7 +1,7 @@
 ---
 id: D13
 title: Deferred P3 epics get no cards until the owner reopens a row
-status: proposed
+status: accepted
 date: 2026-10-25
 cards: [38]
 ---
@@ -16,7 +16,7 @@ E61 (firmware flashing, Prusa Wi-Fi and Connect, printer-side calibration, cloud
 
 ## Decision (proposed)
 
-**Recommended default:** these six epics get no stories or task cards, and M5 (SP26 to SP34) is
+**Recommended default:** these six epics get no stories or task cards, and M5 (SP36 to SP48 since the SP3 re-plan) is
 planned without them. Reopening a row means adding it to this decision's list. Its epic then gets
 stories and cards through the usual cycle, in whichever milestone the owner names.
 

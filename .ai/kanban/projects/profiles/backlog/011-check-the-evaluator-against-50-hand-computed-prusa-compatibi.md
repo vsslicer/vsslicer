@@ -8,7 +8,7 @@ model: opus
 area: [evaluator]
 story: US3
 milestone: "VSS:M2"
-sprint: "VSS:SP6"
+sprint: "VSS:SP8"
 depends_on: [135, 10, PLT-13, 119]
 created: 2026-10-25
 ---

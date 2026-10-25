@@ -8,7 +8,7 @@ model: sonnet
 area: [agent-protocol]
 story: US41
 milestone: "VSS:M3"
-sprint: "VSS:SP11"
+sprint: "VSS:SP15"
 depends_on: [63, 56, 66]
 created: 2026-10-25
 ---

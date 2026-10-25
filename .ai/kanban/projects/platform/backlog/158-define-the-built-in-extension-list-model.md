@@ -8,7 +8,7 @@ model: sonnet
 area: [fork]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP35"
+sprint: "VSS:SP49"
 depends_on: [148]
 created: 2026-10-25
 ---

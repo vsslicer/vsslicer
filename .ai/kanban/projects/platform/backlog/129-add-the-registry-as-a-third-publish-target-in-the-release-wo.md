@@ -8,7 +8,7 @@ model: sonnet
 area: [registry]
 story: US64
 milestone: "VSS:M6"
-sprint: "VSS:SP35"
+sprint: "VSS:SP49"
 depends_on: [25, 26, 123, 119, 128]
 created: 2026-10-25
 ---

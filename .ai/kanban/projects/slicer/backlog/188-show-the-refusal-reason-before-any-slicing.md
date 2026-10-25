@@ -8,7 +8,7 @@ model: sonnet
 area: [tasks, calibration]
 story: US48
 milestone: "VSS:M5"
-sprint: "VSS:SP27"
+sprint: "VSS:SP37"
 depends_on: [187, 147]
 created: 2026-10-25
 ---

@@ -8,7 +8,7 @@ model: sonnet
 area: [ui]
 story: US24
 milestone: "VSS:M4"
-sprint: "VSS:SP17"
+sprint: "VSS:SP24"
 depends_on: [16]
 created: 2026-10-25
 ---

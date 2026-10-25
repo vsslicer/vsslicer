@@ -8,7 +8,7 @@ model: opus
 area: [fork]
 story: US68
 milestone: "VSS:M6"
-sprint: "VSS:SP35"
+sprint: "VSS:SP49"
 depends_on: [127]
 created: 2026-10-25
 ---

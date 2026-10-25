@@ -8,7 +8,7 @@ model: sonnet
 area: [engine]
 story: US7
 milestone: "VSS:M3"
-sprint: "VSS:SP11"
+sprint: "VSS:SP15"
 depends_on: [PLT-13]
 created: 2026-10-25
 ---

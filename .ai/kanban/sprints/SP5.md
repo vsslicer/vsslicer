@@ -1,16 +1,17 @@
 ---
 id: SP5
-title: Open 1
+title: Preview 2
 status: planned
-milestone: M2
-start: "2026-10-26T01:15+00:00"
-end: "2026-10-26T03:15+00:00"
-capacity: 135
+milestone: M1
+start: "2026-10-26T01:30+00:00"
+end: "2026-10-26T03:30+00:00"
+capacity: 92
 ---
 
-Planned by `board.py plan-sprints M2`: 135 points, 52 cards.
+Planned by `board.py plan-sprints M1`: 91 points, 28 cards.
 
 ## Epics
 
-- VSS:E8 Build the @vsslicer/3mf container and dialect readers
-- VSS:E11 Define the unified profile schema, settings catalogue and condition evaluator
+- VSS:E5 Ship the vsslicer.gcode preview and simulation editor
+- VSS:E6 Add the G-code language: grammar, hovers and completion
+- VSS:E7 Expose the preview API and live print follow

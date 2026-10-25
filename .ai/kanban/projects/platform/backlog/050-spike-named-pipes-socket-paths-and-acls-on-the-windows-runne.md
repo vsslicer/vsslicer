@@ -8,7 +8,7 @@ model: opus
 area: [agent-protocol]
 story: US41
 milestone: "VSS:M3"
-sprint: "VSS:SP11"
+sprint: "VSS:SP14"
 depends_on: [49, 9]
 created: 2026-10-25
 ---
