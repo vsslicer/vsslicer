@@ -1,7 +1,7 @@
 ---
 id: I11
 title: Distribution: the VSSlicer build, own marketplace, themes
-status: reviewed
+status: approved
 milestone: M6
 order: 11
 projects: PLT

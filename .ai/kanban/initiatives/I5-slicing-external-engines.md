@@ -1,7 +1,7 @@
 ---
 id: I5
 title: Slicing through external engines: the first end-to-end loop
-status: reviewed
+status: approved
 milestone: M3
 order: 5
 projects: SLC (with PRF emit, VWR thumbnails, PRN send)

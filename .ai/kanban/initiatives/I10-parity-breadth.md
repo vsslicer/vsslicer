@@ -1,7 +1,7 @@
 ---
 id: I10
 title: Parity breadth: calibration, painting, cut and boolean, multi-material, more engines and printers
-status: reviewed
+status: approved
 milestone: M5
 order: 10
 projects: SLC, VWR, PRN, PLT, GCP

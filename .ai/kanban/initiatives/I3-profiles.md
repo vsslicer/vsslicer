@@ -1,7 +1,7 @@
 ---
 id: I3
 title: Profiles: unified schema, importers, editor and add-printer flow
-status: reviewed
+status: approved
 milestone: M2
 order: 3
 projects: PRF

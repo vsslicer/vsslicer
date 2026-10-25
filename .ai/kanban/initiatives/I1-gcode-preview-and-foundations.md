@@ -1,7 +1,7 @@
 ---
 id: I1
 title: G-code preview, toolhead simulation and foundations
-status: reviewed
+status: approved
 milestone: M1
 order: 1
 projects: PLT, GCP

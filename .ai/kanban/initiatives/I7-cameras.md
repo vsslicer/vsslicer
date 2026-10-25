@@ -1,7 +1,7 @@
 ---
 id: I7
 title: Cameras: watch printers live
-status: reviewed
+status: approved
 milestone: M4
 order: 7
 projects: PRN

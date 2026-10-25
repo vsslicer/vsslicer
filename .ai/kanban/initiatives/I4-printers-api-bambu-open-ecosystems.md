@@ -1,7 +1,7 @@
 ---
 id: I4
 title: Printers: generic API, Bambu first, open ecosystems, daemon and export to storage
-status: reviewed
+status: approved
 milestone: M3
 order: 4
 projects: PRN

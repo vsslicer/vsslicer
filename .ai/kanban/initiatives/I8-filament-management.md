@@ -1,7 +1,7 @@
 ---
 id: I8
 title: Filament management: database, spool inventory, consumption from printer feedback
-status: reviewed
+status: approved
 milestone: M4
 order: 8
 projects: FIL

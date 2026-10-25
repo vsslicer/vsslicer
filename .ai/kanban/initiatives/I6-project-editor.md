@@ -1,7 +1,7 @@
 ---
 id: I6
 title: Project editor: prepare prints inside VS Code
-status: reviewed
+status: approved
 milestone: M4
 order: 6
 projects: VWR

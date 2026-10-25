@@ -1,7 +1,7 @@
 ---
 id: D8
 title: Initiative order I1-I11 and release milestones M1-M6
-status: proposed
+status: accepted
 date: 2026-10-25
 cards: [19]
 ---

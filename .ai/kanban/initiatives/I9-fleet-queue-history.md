@@ -1,7 +1,7 @@
 ---
 id: I9
 title: Fleet: queue across printers, compatibility checks, job history
-status: reviewed
+status: approved
 milestone: M4
 order: 9
 projects: PRN

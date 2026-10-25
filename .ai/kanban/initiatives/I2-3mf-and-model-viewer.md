@@ -1,7 +1,7 @@
 ---
 id: I2
 title: 3MF library and model viewer (read-only)
-status: reviewed
+status: approved
 milestone: M2
 order: 2
 projects: VWR
