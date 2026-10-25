@@ -45,8 +45,16 @@ Nothing to build yet. Implementation work will add its commands here.
 
 ## Conventions
 
-- Tasks live on the board in `.ai/kanban` (the kanban skill). Ticket IDs are `VSS-<n>`, and
-  commit subjects start with theirs. One commit per finished, verified task.
+- Tasks live on the board in `.ai/kanban` (the taskboard skill, `~/.claude/skills/taskboard`).
+  Ticket IDs are `VSS-<n>`, and commit subjects start with theirs. One commit per finished,
+  verified task. Agents move cards with `board.py` (pass `--agent <name>`), never by editing
+  column lists; run `board.py check` before committing board changes. People reorder and
+  prioritise on the dashboard (`serve.py`, port 8125).
+- The suite will split into projects (filament manager, 3D viewer, slicer, G-code preview, ...),
+  each with its own board and key, linked from this umbrella board's `board.json` `projects`.
+  Umbrella initiatives, milestones and decisions stay here; epics, stories and tasks go on the
+  project that delivers them. Ideas become initiatives, epics, stories and tasks through the
+  gstack planning cycle in the taskboard skill.
 - Only the coordinator commits. Parallel workers write files and never run `git add` or
   `git commit`, so commits never race on the index.
 - No Co-Authored-By or other AI attribution trailers in commits.
