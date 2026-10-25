@@ -77,6 +77,21 @@ docs/research/         tracked: distilled research reports, one per topic
   outer one. A rule broken on purpose must fail the lint.
 - Every task card names the package and layer its code belongs to. Split a card that mixes layers.
 
+## Sprint audit and bugfix
+
+Every sprint ends with an audit and a bugfix session before it closes. Its card is
+"SP<n>: audit review and bugfix" on the VSS board.
+1. **Audit:** a fresh Opus agent that wrote none of the sprint's code runs `/ponytail:ponytail-audit`
+   over the modules the sprint changed (`git diff --stat` from the sprint's first commit). It saves
+   the report as `.ai/audits/SP<n>-audit.md`. The audit changes no code.
+2. **Cards:** each finding becomes a `type: bug` card on the board of the module it's in, linking
+   the report. Must-fix findings are P0 in this sprint; should-fix and nice-to-have findings are
+   P1 and P2 in the next sprint.
+3. **Bugfix:** the must-fix cards go through the usual lifecycle (fix, test that fails before the
+   fix, independent verification, one commit each).
+4. **Close:** the sprint closes only when its audit is written and its must-fix cards are done.
+   The audit card's Progress lists what was found, fixed and carried over.
+
 ## Build and test
 
 Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
