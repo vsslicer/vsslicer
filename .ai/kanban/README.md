@@ -1,6 +1,6 @@
 # VSSlicer: the board
 
-The project's tasks, one Markdown card each, kept with [kanban](https://github.com/fonix232/skills/tree/main/kanban): a folder per column, cards named `<number>-<title>.md`, and each column's order in its `_<column>.md`. Tickets are `VSS-<number>`, and commit subjects start with theirs.
+The project's tasks, one Markdown card each, kept with [taskboard](https://github.com/fonix232/skills/tree/main/taskboard). Tickets are `VSS-<number>`, and commit subjects start with theirs. Open the dashboard with `python3 ~/.claude/skills/taskboard/scripts/serve.py`.
 
 | Column | Cards |
 | --- | --- |
@@ -8,16 +8,15 @@ The project's tasks, one Markdown card each, kept with [kanban](https://github.c
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 1 |
 | [In progress](doing/_doing.md) | 1 |
-| [In review](review/_review.md) | 13 |
-| [Done](done/_done.md) | 2 |
+| [In review](review/_review.md) | 12 |
+| [Done](done/_done.md) | 3 |
 
-## In progress
+## Milestones
 
-- [VSS-16](doing/016-licensing.md): Licensing synthesis
+- [R1: Research](milestones/R1-research.md): active, 3/17 cards done
 
 ## In review
 
-- [VSS-1](review/001-slicer-landscape.md): Slicer landscape and reference clones
 - [VSS-2](review/002-features-prusaslicer-superslicer.md): Feature inventory: PrusaSlicer and SuperSlicer
 - [VSS-3](review/003-features-bambustudio-orcaslicer.md): Feature inventory: Bambu Studio and OrcaSlicer
 - [VSS-4](review/004-features-cura.md): Feature inventory: Cura and CuraEngine
@@ -30,6 +29,10 @@ The project's tasks, one Markdown card each, kept with [kanban](https://github.c
 - [VSS-12](review/012-profiles.md): Printer, process and material profiles
 - [VSS-14](review/014-projects-and-fleet.md): Project management and fleet tools
 - [VSS-15](review/015-vscode-platform.md): VS Code platform: fork vs extension
+
+## In progress
+
+- [VSS-16](doing/016-licensing.md): Licensing synthesis
 
 ## Ready to start
 
