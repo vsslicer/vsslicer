@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0
+
+- Compile the integration suites to `dist-test/` and depend on `@vsslicer/test-vscode` 0.2.0. 0.6.0 was published mid-change by a concurrent run (it ships `dist/test/` and an old range) and is superseded.
+
+## 0.6.0
+
+- Add `pnpm test:integration` (`@vsslicer/test-vscode` 0.1.2): mocha suite in `test/integration/` that runs in a real VS Code on the `engines.vscode` minimum and on stable; it activates the extension, checks both commands are registered, runs `hello` and opens the webview. Results and VS Code logs go to `test-results/integration/<version>/`. The unit script is now `node --test test/*.test.ts`.
+
 ## 0.5.0
 
 - Add `pnpm package` (`vsslicer-package` from `@vsslicer/tooling` 0.7.0): builds `example-extension-0.5.0.vsix` and asserts its content, size budget (200 KB, `"vsslicer": { "sizeBudgetKB" }`), `repository` tag and licence. `.vscodeignore` whitelists the bundles (no maps, no meta files), `LICENSE`, `THIRD-PARTY-NOTICES.md`, `README.md` and `CHANGELOG.md`; `PROVENANCE.md` is no longer shipped.

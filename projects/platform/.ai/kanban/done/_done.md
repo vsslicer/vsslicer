@@ -13,3 +13,5 @@
 11. [PLT-17: Add the Playwright harness with SwiftShader WebGL and a webview stub loader](017-add-the-playwright-harness-with-swiftshader-webgl-and-a-webv.md)
 12. [PLT-20: Set up per-module versioning and the release-tag convention](020-set-up-changesets-and-the-release-tag-convention.md)
 13. [PLT-21: Add the VSIX packaging task with content assertion and size budget](021-add-the-vsix-packaging-task-with-content-assertion-and-size-.md)
+14. [PLT-22: Package per-target VSIX for extensions that declare targets](022-package-per-target-vsix-for-extensions-that-declare-targets.md)
+15. [PLT-15: Add the @vscode/test-electron harness](015-add-the-vscode-test-electron-harness.md)

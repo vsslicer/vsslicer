@@ -1,0 +1,54 @@
+{
+  "name": "@vsslicer/test-vscode",
+  "version": "0.2.0",
+  "description": "Integration harness for VSSlicer extensions: runs mocha suites inside a real VS Code (@vscode/test-electron), on the engines minimum and stable.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./runner": "./runner.cjs"
+  },
+  "bin": {
+    "vsslicer-test-vscode": "dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "runner.cjs",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check . && tsc --noEmit -p tsconfig.test.json",
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "mocha": "12.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@vitest/coverage-v8": "5.0.5",
+    "@vsslicer/tooling": "^0.7.0",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}

@@ -5,7 +5,7 @@
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "lib": ["ES2023", "DOM"]
   },
   "include": ["src", "test"]
