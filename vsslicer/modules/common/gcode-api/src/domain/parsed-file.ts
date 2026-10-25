@@ -40,6 +40,45 @@ export interface Marker {
   moveIndex: number;
 }
 
+/** Image formats of an embedded thumbnail; `data` holds the file's bytes (checked against the format's magic). */
+export type ThumbnailFormat = 'png' | 'jpg' | 'qoi';
+
+/**
+ * A preview image embedded in the G-code as a comment block (`; thumbnail begin WxH len`,
+ * `; thumbnail_JPG begin ...`, `; thumbnail_QOI begin ...`), base64-decoded.
+ */
+export interface Thumbnail {
+  format: ThumbnailFormat;
+  /** Size the slicer states in the block header. */
+  width: number;
+  height: number;
+  /** The decoded image file (a PNG, JPEG or QOI file). */
+  data: Uint8Array;
+  /** Offset in the decoded text of the block's `begin` line. */
+  fileOffset: number;
+}
+
+/** Moves `[firstMove, endMove)` (global indices); never empty. */
+export interface MoveRange {
+  firstMove: number;
+  endMove: number;
+}
+
+/**
+ * An object the slicer labelled, for cancel-object / exclude-object: `; printing object NAME id:ID
+ * copy N` (PrusaSlicer, Orca, Bambu), Marlin `M486`, Klipper `EXCLUDE_OBJECT_*`, Cura `;MESH:`.
+ * `ranges` are the stretches of moves that print it, in file order (an object is usually printed
+ * in many stretches, one per layer); empty for an object that was only defined.
+ */
+export interface ObjectLabel {
+  name: string;
+  /** The slicer's id for the object (`id:` value, M486 index), when it states one. */
+  id?: string;
+  /** Instance number (`copy N`), when the slicer states one. */
+  copy?: number;
+  ranges: MoveRange[];
+}
+
 /** Slicer that produced the file, detected from header lines. */
 export type Slicer = 'prusaslicer' | 'superslicer' | 'orcaslicer' | 'bambustudio' | 'cura' | 'unknown';
 
@@ -78,6 +117,17 @@ export interface Chunk {
   bytesRead: number;
   /** Detected slicer; `unknown` until the header has been read. */
   slicer: Slicer;
+  /** Thumbnails whose block ends in this chunk, decoded. Their `data` buffers can be transferred. */
+  thumbnails: Thumbnail[];
+  /**
+   * Labels with the ranges that were closed in this chunk (a range closes at the next label, the
+   * stop line or the end of the file, so it is listed by the chunk that holds that point; its
+   * moves can be in earlier chunks) and objects defined here. The same object can appear in
+   * several chunks; `ParsedFile.objects` merges them.
+   */
+  objects: ObjectLabel[];
+  /** Config entries read in this chunk (the block's end is here): key to verbatim value. Usually empty or one block. */
+  config: Record<string, string>;
 }
 
 /** The whole parsed file: every chunk's results, in file order. */
@@ -96,6 +146,15 @@ export interface ParsedFile {
   layers: Layer[];
   markers: Marker[];
   diagnostics: Diagnostic[];
+  /** Every chunk's thumbnails in file order. */
+  thumbnails: Thumbnail[];
+  /** The chunks' labels merged by name, id and copy: ranges joined in file order. */
+  objects: ObjectLabel[];
+  /**
+   * The slicer's config block (`; prusaslicer_config = begin`, `; CONFIG_BLOCK_START`, Cura
+   * `;SETTING_3`) as written: keys to verbatim string values, later duplicates win. Empty if the file has none.
+   */
+  config: Record<string, string>;
 }
 
 export interface ParseOptions {

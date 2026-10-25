@@ -19,5 +19,26 @@
     "BottomSurface": 80,
     "InternalBridgeInfill": 85
   },
-  "diagnostics": []
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [
+    {
+      "name": "cylinder.stl",
+      "id": "7236833210312978021",
+      "copy": 0,
+      "ranges": 50,
+      "moves": 11378
+    }
+  ],
+  "config": {
+    "keys": 699,
+    "sha256": "109a3fdcc02aa3600edef604ff394b636e14711fbe6911eea0d95c79a3e626a1",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Bambu Lab X1 Carbon",
+      "gcode_flavor": "marlin"
+    }
+  }
 }

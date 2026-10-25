@@ -10,10 +10,11 @@ type Parse = (source: AsyncIterable<Uint8Array>, opts?: { signal?: AbortSignal }
 - `Chunk`: one increment of a streaming parse: a move buffer, an extrusion column and a
   state-change table (`ArrayBuffer`s, meant to be transferred, not copied), its `firstMove` and
   `moveCount`, the layers that start in it, markers, diagnostics, `bytesRead` for progress, and
-  the detected `slicer`.
+  the detected `slicer`, and the metadata that ends in it (`thumbnails`, `objects`, `config`,
+  below).
 - `ParsedFile`: all chunks in file order: `slicer`, `moveCount`, `moves`, `extrusion` and
   `stateChanges` (the chunk buffers, not concatenated, so a large file never needs twice its
-  memory), `layers`, `markers`, `diagnostics`.
+  memory), `layers`, `markers`, `diagnostics`, `thumbnails`, `objects`, `config`.
 - `Layer`: `{ z, firstMove }`; layer `i` runs to the next layer's `firstMove` (or `moveCount`).
 - `Marker`: a command kept by name and **not** interpreted (unknown or out-of-scope commands,
   pauses such as M600): `{ name, fileOffset, moveIndex }`. Interpreted modal commands (F, fan,
@@ -103,3 +104,20 @@ the changes it read, so `moveIndex` can be `firstMove + moveCount` when the next
 next chunk. Only changes are stored: the state at any move is the table folded from the start,
 carried across chunks like the position. `readStateChange` and `writeStateChange` decode and
 encode one record.
+
+## Thumbnails, object labels, config
+
+Metadata is not per move, so it travels as small structured fields on the chunk where it is
+**complete**, and `ParsedFile` gathers it:
+
+- `Thumbnail`: `{ format: 'png' | 'jpg' | 'qoi', width, height, data, fileOffset }`; `data` is the
+  base64-decoded image file (magic checked), `width`/`height` are the block header's. A chunk
+  lists the thumbnails whose block ends in it. A block of any other format is not a thumbnail: the
+  parser leaves a marker and a diagnostic. Transfer the `data` buffers with the chunk.
+- `ObjectLabel`: `{ name, id?, copy?, ranges }` for cancel/exclude-object. `ranges` are
+  `{ firstMove, endMove }` (global, end exclusive) stretches that print the object, one per
+  layer typically; an object only defined (Klipper `EXCLUDE_OBJECT_DEFINE`) has none. A range is
+  listed by the chunk where it closes, so a label may repeat across chunks; `ParsedFile.objects`
+  merges them by name, id and copy.
+- `config`: the slicer's config block as `Record<string, string>`, values verbatim, in the chunk
+  where the block ends (Cura's `;SETTING_3` lines: the file's last chunk).

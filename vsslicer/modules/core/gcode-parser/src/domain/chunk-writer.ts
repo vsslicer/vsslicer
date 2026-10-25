@@ -7,7 +7,7 @@ import {
   StateChangeOffset,
   StateKind,
 } from '@vsslicer/gcode-api';
-import type { Chunk, Diagnostic, Layer, Marker, Slicer } from '@vsslicer/gcode-api';
+import type { Chunk, Diagnostic, Layer, Marker, ObjectLabel, Slicer, Thumbnail } from '@vsslicer/gcode-api';
 
 const INITIAL_MOVES = 1024;
 const KINDS = 32;
@@ -35,6 +35,9 @@ export class ChunkWriter {
   private markers: Marker[] = [];
   private diagnostics: Diagnostic[] = [];
   private layers: Layer[] = [];
+  private thumbnails: Thumbnail[] = [];
+  private labels = new Map<string, ObjectLabel>();
+  private entries = new Map<string, string>();
   /** A layer change was read; the layer joins `layers` with its first move (so the chunk that holds the move lists it). */
   private pending: Layer | null = null;
   /** The layer of this chunk whose z is still the first move's: the first extrusion corrects it. */
@@ -58,7 +61,15 @@ export class ChunkWriter {
     return this.count >= this.maxMoves;
   }
   get empty(): boolean {
-    return this.count === 0 && this.changeCount === 0 && this.markers.length === 0 && this.diagnostics.length === 0;
+    return (
+      this.count === 0 &&
+      this.changeCount === 0 &&
+      this.markers.length === 0 &&
+      this.diagnostics.length === 0 &&
+      this.thumbnails.length === 0 &&
+      this.labels.size === 0 &&
+      this.entries.size === 0
+    );
   }
 
   writeMove(x: number, y: number, z: number, tool: number, flags: number, fileOffset: number, e: number): void {
@@ -129,6 +140,30 @@ export class ChunkWriter {
     this.markers.push({ name, fileOffset, moveIndex: this.nextMove });
   }
 
+  thumbnail(t: Thumbnail): void {
+    this.thumbnails.push(t);
+  }
+
+  /** The label of this chunk with that identity; created without ranges if new (an object that is only defined). */
+  label(l: { name: string; id?: string; copy?: number }): ObjectLabel {
+    const key = `${l.name}\0${l.id ?? ''}\0${l.copy ?? ''}`;
+    let label = this.labels.get(key);
+    if (!label) {
+      label = { ...l, ranges: [] };
+      this.labels.set(key, label);
+    }
+    return label;
+  }
+
+  /** Moves `[firstMove, endMove)` print the object. */
+  range(l: { name: string; id?: string; copy?: number }, firstMove: number, endMove: number): void {
+    this.label(l).ranges.push({ firstMove, endMove });
+  }
+
+  config(pairs: Iterable<[string, string]>): void {
+    for (const [k, v] of pairs) this.entries.set(k, v);
+  }
+
   diagnostic(code: string, severity: Diagnostic['severity'], fileOffset: number, message: string): void {
     this.diagnostics.push({ code, severity, fileOffset, message });
   }
@@ -146,6 +181,9 @@ export class ChunkWriter {
       diagnostics: this.diagnostics,
       bytesRead,
       slicer,
+      thumbnails: this.thumbnails,
+      objects: [...this.labels.values()],
+      config: Object.fromEntries(this.entries),
     };
     this.firstMove += this.count;
     this.count = 0;
@@ -153,6 +191,9 @@ export class ChunkWriter {
     this.markers = [];
     this.diagnostics = [];
     this.layers = [];
+    this.thumbnails = [];
+    this.labels = new Map();
+    this.entries = new Map();
     this.unsettled = null; // the chunk is gone: its layer objects must not change any more
     return chunk;
   }

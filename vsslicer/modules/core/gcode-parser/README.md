@@ -1,7 +1,7 @@
 # @vsslicer/gcode-parser
 
 Streaming G-code text parser. Implements `Parse` from `@vsslicer/gcode-api`: bytes in, `Chunk`s
-out (moves, extrusion column, state-change table, markers, diagnostics). Pure Node/ES, no VS Code.
+out (moves, extrusion column, state-change table, markers, diagnostics, thumbnails, object labels, config). Pure Node/ES, no VS Code.
 
 ```ts
 import { fileSource, parse } from '@vsslicer/gcode-parser';
@@ -111,7 +111,37 @@ for await (const chunk of parseInWorker('/path/model.gcode', {
 - **Memory**: heap limit `memoryCapBytes` (default 256 MiB) gives `ParseWorkerError` with `code: 'memory-cap'`. The worker stays at most `maxPendingChunks` (default 2) chunks ahead of the consumer, so a slow consumer bounds buffers. Typed errors: `memory-cap`, `parse-failed` (`cause` is the worker's error), `worker-crashed`.
 - A byte-stream source stuck inside its own `next()` delays an abort until it yields.
 
+## Thumbnails, object labels, config
+
+Read in the same pass (`src/domain/metadata.ts`). Each result is a field of the chunk where it is
+complete (`thumbnails`, `objects`, `config`); `collect` gathers them into `ParsedFile`. Text only:
+the thumbnails, labels and config of `.bgcode` / `.gcode.3mf` come with the container cards.
+
+- **Thumbnails**: `; thumbnail begin WxH len` (PNG), `; thumbnail_JPG begin ...`,
+  `; thumbnail_QOI begin ...` up to the matching `end`, base64 decoded; magic bytes are checked
+  (`89 50 4E 47`, `FF D8 FF`, `qoif`) and `len` must equal the base64 length or the byte count.
+  Any other `thumbnail_XXX` leaves the marker `THUMBNAIL_XXX` and the warning `thumbnail-format`;
+  bad data gives `thumbnail-invalid`, `thumbnail-length`, `thumbnail-unterminated` (a command or
+  the next `begin` before `end`, or the end of the file) and `thumbnail-too-long` (16 MiB).
+- **Labels**: `; printing object NAME id:ID copy N` / `; stop printing object` (PrusaSlicer, Orca,
+  Bambu), Marlin `M486 S<i>` (starts object i, `S-1` ends) with `M486 A<name>` naming the current
+  index (id is the index; an unnamed object is named by it), Klipper `EXCLUDE_OBJECT_DEFINE
+NAME=` (label without ranges), `_START NAME=`, `_END`, Cura `;MESH:name` (`NONMESH` ends). A
+  range runs from the label to the next label, the stop line or the end of the file, and empty
+  ranges are dropped. `M486` and `EXCLUDE_OBJECT_*` also stay markers: the printer runs them.
+- **Config**: `; <slicer>_config = begin` ... `end` (PrusaSlicer, SuperSlicer), `; CONFIG_BLOCK_START`
+  ... `_END` (Orca, Bambu): `; key = value` lines, key and value split at the first `=`, the value
+  verbatim (no trimming, no unquoting; `; key =` is the empty string); a command line ends a block
+  left open. Cura's `;SETTING_<n> ` lines are joined, unescaped and read as JSON; the `[values]` of
+  the global and extruder profiles become the map (the first value of a key wins) in the last
+  chunk, or `config-invalid` if the text does not parse.
+
 ## Decisions
+
+- **Metadata in chunks, not a separate stream.** A chunk carries the thumbnails, label ranges and
+  config entries that complete in it, so a consumer needs one stream and a progress UI can show a
+  thumbnail as soon as its block has been read. Ranges are global move indices, so a range closing
+  in a later chunk than its moves is fine. Image buffers are in `transferList`.
 
 - **Only changes are stored.** A state change equal to the last recorded value of the same kind
   and index is dropped, for every kind (a repeated `F`, `M106 S255`, `M104 S200`). The last values
@@ -136,8 +166,8 @@ for await (const chunk of parseInWorker('/path/model.gcode', {
 `test/fixtures` holds the corpus (see its `PROVENANCE.md` files) and `test/golden/*.json` its
 expected summary: `slicer`, `flavour`, `moveCount`, `stateChanges`, `markers`, `layerCount`,
 `roleHistogram` (extruding moves per role name), `diagnostics` for text G-code, byte size and
-hash for all (binary files get more with GCP-7). `pnpm golden:update` rewrites them; review
-the diff. Tests count the move lines, the layer-change comments and the extruding moves per role tag of every text file independently and compare. Cura has no fixture yet (Q9): its tags are unit-tested with inline samples.
+hash for all (binary files get more when their text is decoded), plus `thumbnails` (format, size, byte count, sha256), `objects` (name, id, copy, range and move counts) and `config` (key count, sha256 of the sorted map, a few keys). `pnpm golden:update` rewrites them; review
+the diff. Tests count the move lines, the layer-change comments and the extruding moves per role tag of every text file independently and compare. The same for the thumbnails (decoded with `Buffer`), the object names and the config key count. Cura has no fixture yet (Q9): its tags, `;MESH:` and `;SETTING_3` are unit-tested with inline samples.
 
 ## Develop
 

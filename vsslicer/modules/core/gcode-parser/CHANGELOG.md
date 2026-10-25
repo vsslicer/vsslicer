@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0
+
+- Thumbnails (PNG, JPG, QOI; unknown formats leave a marker and `thumbnail-format`), object labels (`; printing object`, `M486`, `EXCLUDE_OBJECT_*`, Cura `;MESH:`) as move ranges, and the config block (PrusaSlicer, Orca/Bambu, Cura `;SETTING_3`) as a key-value map: `Chunk.thumbnails` / `objects` / `config`, gathered by `collect` into `ParsedFile`. `transferList` includes the thumbnail buffers.
+- Golden JSON gains `thumbnails`, `objects` and `config` per text file; tests cross-check them against an independent read of the fixtures.
+- Depends on `@vsslicer/gcode-api` ^0.3.0.
+
 ## 0.5.1
 
 - Fix: `parseInWorker` with a path that cannot be stat'ed (missing, no permission) now rejects with `ParseWorkerError` code `parse-failed` and the fs error as `cause` (`cause.code === 'ENOENT'`), like every other failure; before it leaked the raw fs error. Tests for ENOENT, EACCES (unreadable file) and EISDIR.

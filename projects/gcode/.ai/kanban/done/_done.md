@@ -9,3 +9,4 @@
 7. [GCP-12: Port the Heatshrink 11-4 and 12-4 decoder](012-port-the-heatshrink-11-4-and-12-4-decoder.md)
 8. [GCP-13: Port the MeatPack decoder with and without comments](013-port-the-meatpack-decoder-with-and-without-comments.md)
 9. [GCP-6: Run the parser in a worker with cancel, progress and a memory cap](006-run-the-parser-in-a-worker-with-cancel-progress-and-a-memory.md)
+10. [GCP-7: Extract thumbnails, object labels and the config block](007-extract-thumbnails-object-labels-and-the-config-block.md)

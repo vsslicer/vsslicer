@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/gcode-api",
-  "version": "0.2.0",
-  "description": "Shared G-code model (domain types only): parse contract, ParsedFile, Chunk, move-buffer layout, extrusion column, state-change table, layer table, diagnostics.",
+  "version": "0.3.0",
+  "description": "Shared G-code model (domain types only): parse contract, ParsedFile, Chunk, move-buffer layout, extrusion column, state-change table, layer table, thumbnails, object labels, config, diagnostics.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "main": "dist/index.js",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/node": "24.19.2",
     "@vitest/coverage-v8": "5.0.5",
-    "@vsslicer/tooling": "^0.4.0",
+    "@vsslicer/tooling": "^0.8.0",
     "eslint": "10.13.0",
     "prettier": "3.9.10",
     "typescript": "7.0.2",

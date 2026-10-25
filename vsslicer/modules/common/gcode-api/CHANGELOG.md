@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0
+
+- US2 metadata: `Thumbnail` / `ThumbnailFormat`, `ObjectLabel` / `MoveRange` and a config map, on `Chunk` (`thumbnails`, `objects`, `config`: each item arrives in the chunk where its block or range ends) and on `ParsedFile` (`thumbnails`, `objects` merged by name, id and copy, `config`). Additive except that code building a `Chunk` or `ParsedFile` by hand must add the three fields.
+- Dev: `@vsslicer/tooling` ^0.8.0.
+
 ## 0.2.0
 
 - `Chunk.extrusion` / `ParsedFile.extrusion`: one f32 E delta per move, beside the unchanged 28-byte move record.

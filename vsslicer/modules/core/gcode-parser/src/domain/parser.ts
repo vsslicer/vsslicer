@@ -2,6 +2,7 @@
 import type { Chunk, Slicer } from '@vsslicer/gcode-api';
 import { ChunkWriter } from './chunk-writer.ts';
 import { Machine } from './machine.ts';
+import { Metadata } from './metadata.ts';
 import type { Flavour } from './machine.ts';
 import { SlicerTags } from './slicer-tags.ts';
 import { Tokens } from './tokeniser.ts';
@@ -33,6 +34,7 @@ const BOM = [0xef, 0xbb, 0xbf];
 export class GCodeParser {
   readonly machine: Machine;
   private readonly tags: SlicerTags;
+  private readonly meta: Metadata;
   private readonly writer: ChunkWriter;
   private readonly tokens = new Tokens();
   private readonly chunkBytes: number;
@@ -51,6 +53,7 @@ export class GCodeParser {
     this.writer = new ChunkWriter(opts.chunkMoves ?? 65536);
     this.machine = new Machine(this.writer, opts.flavour ?? 'marlin');
     this.tags = new SlicerTags(this.writer, this.machine, opts.flavour !== undefined);
+    this.meta = new Metadata(this.writer);
     this.chunkBytes = opts.chunkBytes ?? 4 << 20;
     this.base = opts.baseOffset ?? 0;
     this.offset = this.base;
@@ -123,6 +126,7 @@ export class GCodeParser {
     this.carry = null;
     this.offset += this.skipped;
     this.tags.finish(this.offset);
+    this.meta.finish(this.offset);
     // no empty trailing chunk: the final one exists only if it holds something
     if (!this.writer.empty) yield this.take();
   }
@@ -168,6 +172,7 @@ export class GCodeParser {
     }
     let end = length;
     if (end > 0 && buf[end - 1] === 0x0d) end--;
+    this.meta.handle(buf, end, this.offset);
     if (this.tokens.tokenise(buf, 0, end)) this.machine.handle(this.tokens, this.offset);
     else this.tags.handle(buf, end, this.offset);
   }

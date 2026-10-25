@@ -18,5 +18,40 @@
     "BridgeInfill": 64,
     "Custom": 4
   },
-  "diagnostics": []
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "qoi",
+      "width": 16,
+      "height": 16,
+      "bytes": 274,
+      "sha256": "1dd07e8b89ce8d94822d8e2aebecfad2f2dc5ca977707c5c6cfd84aaf3f90670"
+    },
+    {
+      "format": "qoi",
+      "width": 313,
+      "height": 173,
+      "bytes": 10809,
+      "sha256": "4cbb606aa97a9ae415e3ad6d9ce01977b8bc7844b291d2ee7564e9300a953f87"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Shape-Box",
+      "id": "0",
+      "ranges": 1,
+      "moves": 1551
+    }
+  ],
+  "config": {
+    "keys": 353,
+    "sha256": "916ffde113da1021bc67d77d3fe8a1074ca8372d08fd68ff9b8ee4ba76e6e9f5",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "MK4S",
+      "gcode_flavor": "marlin2"
+    }
+  }
 }

@@ -6,10 +6,14 @@ export type {
   Diagnostic,
   Layer,
   Marker,
+  MoveRange,
+  ObjectLabel,
   Parse,
   ParsedFile,
   ParseOptions,
   Slicer,
+  Thumbnail,
+  ThumbnailFormat,
 } from './domain/parsed-file.ts';
 export {
   STATE_CHANGE_STRIDE,

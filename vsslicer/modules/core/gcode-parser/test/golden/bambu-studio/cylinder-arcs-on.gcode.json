@@ -19,5 +19,18 @@
     "Skirt": 64,
     "BottomSurface": 103
   },
-  "diagnostics": []
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [],
+  "config": {
+    "keys": 561,
+    "sha256": "544b754b28f07e79e618ee7ae0bc184665f52788f9107e406d3af379566c195c",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Bambu Lab X1 Carbon",
+      "gcode_flavor": "marlin"
+    }
+  }
 }

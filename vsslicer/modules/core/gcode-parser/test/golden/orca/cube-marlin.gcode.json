@@ -19,5 +19,26 @@
     "BottomSurface": 101,
     "InternalBridgeInfill": 92
   },
-  "diagnostics": []
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [
+    {
+      "name": "cube20.stl",
+      "id": "7021244195858113377",
+      "copy": 0,
+      "ranges": 100,
+      "moves": 7840
+    }
+  ],
+  "config": {
+    "keys": 699,
+    "sha256": "7a2d958e18ce650d45c31a45abbd4cfd9f66ce742238e9dc27623d1180df3fbe",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PLA",
+      "printer_model": "Generic Marlin Printer",
+      "gcode_flavor": "marlin"
+    }
+  }
 }

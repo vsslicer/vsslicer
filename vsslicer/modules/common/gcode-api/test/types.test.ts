@@ -8,6 +8,8 @@ import type {
   Layer,
   Marker,
   Move,
+  MoveRange,
+  ObjectLabel,
   MoveRole,
   Parse,
   ParsedFile,
@@ -15,6 +17,8 @@ import type {
   Slicer,
   StateChange,
   StateKind,
+  Thumbnail,
+  ThumbnailFormat,
 } from '../src/index.ts';
 
 test('ParsedFile shape', () => {
@@ -27,6 +31,9 @@ test('ParsedFile shape', () => {
     layers: Layer[];
     markers: Marker[];
     diagnostics: Diagnostic[];
+    thumbnails: Thumbnail[];
+    objects: ObjectLabel[];
+    config: Record<string, string>;
   }>();
 });
 
@@ -42,6 +49,9 @@ test('Chunk shape', () => {
     diagnostics: Diagnostic[];
     bytesRead: number;
     slicer: Slicer;
+    thumbnails: Thumbnail[];
+    objects: ObjectLabel[];
+    config: Record<string, string>;
   }>();
 });
 
@@ -61,6 +71,19 @@ test('table row shapes', () => {
   expectTypeOf<Slicer>().toEqualTypeOf<
     'prusaslicer' | 'superslicer' | 'orcaslicer' | 'bambustudio' | 'cura' | 'unknown'
   >();
+});
+
+test('metadata shapes', () => {
+  expectTypeOf<ThumbnailFormat>().toEqualTypeOf<'png' | 'jpg' | 'qoi'>();
+  expectTypeOf<Thumbnail>().toEqualTypeOf<{
+    format: ThumbnailFormat;
+    width: number;
+    height: number;
+    data: Uint8Array;
+    fileOffset: number;
+  }>();
+  expectTypeOf<MoveRange>().toEqualTypeOf<{ firstMove: number; endMove: number }>();
+  expectTypeOf<ObjectLabel>().toEqualTypeOf<{ name: string; id?: string; copy?: number; ranges: MoveRange[] }>();
 });
 
 test('Move shape', () => {
