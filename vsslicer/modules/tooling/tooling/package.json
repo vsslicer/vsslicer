@@ -1,12 +1,14 @@
 {
   "name": "@vsslicer/tooling",
-  "version": "0.3.0",
-  "description": "Shared VSSlicer tooling: TypeScript base config and the extension bundler shared vitest config (ESLint config lands here).",
+  "version": "0.4.0",
+  "description": "Shared VSSlicer tooling: TypeScript base config, extension bundler, vitest config, ESLint config with the layer-boundary rule, and Prettier config.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "exports": {
     "./tsconfig.base.json": "./tsconfig.base.json",
     "./vitest": "./vitest.config.mjs",
+    "./eslint": "./eslint.mjs",
+    "./prettier": "./prettier.config.mjs",
     "./package.json": "./package.json"
   },
   "bin": {
@@ -15,6 +17,8 @@
   "files": [
     "tsconfig.base.json",
     "vitest.config.mjs",
+    "eslint.mjs",
+    "prettier.config.mjs",
     "bin",
     "LICENSE"
   ],
@@ -26,11 +30,21 @@
     "registry": "http://localhost:4873/"
   },
   "scripts": {
-    "lint": "node --check bin/vsslicer-bundle.mjs",
+    "lint": "eslint . && prettier --check .",
     "build": "node --check bin/vsslicer-bundle.mjs",
-    "test": "node --test test/"
+    "test": "node --test test/",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "esbuild": "0.28.2"
-  }
+    "@eslint/js": "10.0.1",
+    "esbuild": "0.28.2",
+    "eslint": "10.13.0",
+    "eslint-plugin-boundaries": "7.3.0",
+    "eslint-plugin-import-x": "4.17.1",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0"
+  },
+  "prettier": "./prettier.config.mjs"
 }

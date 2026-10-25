@@ -1,3 +1,4 @@
-# esbuild ships its binary as an optional dependency; its postinstall is only an optimisation
+# esbuild and unrs-resolver (eslint-plugin-import-x) ship their binaries as optional dependencies; their postinstalls are only optimisations
 allowBuilds:
   esbuild: false
+  unrs-resolver: false

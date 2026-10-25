@@ -15,7 +15,10 @@ test('bundle inlines local code, keeps vscode external, emits cjs', async () => 
   const d = mkdtempSync(join(tmpdir(), 'bundle-'));
   mkdirSync(join(d, 'src'));
   writeFileSync(join(d, 'src', 'dep.ts'), 'export const x: number = 42;\n');
-  writeFileSync(join(d, 'src', 'e.ts'), "import * as vscode from 'vscode';\nimport { x } from './dep.ts';\nexport const activate = () => vscode.window.showInformationMessage(String(x));\n");
+  writeFileSync(
+    join(d, 'src', 'e.ts'),
+    "import * as vscode from 'vscode';\nimport { x } from './dep.ts';\nexport const activate = () => vscode.window.showInformationMessage(String(x));\n",
+  );
   await bundle(join(d, 'src', 'e.ts'), join(d, 'dist', 'extension.js'));
   const out = readFileSync(join(d, 'dist', 'extension.js'), 'utf8');
   assert.match(out, /require\("vscode"\)/);

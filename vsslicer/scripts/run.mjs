@@ -11,7 +11,9 @@ import { changed, localDeps, order } from './lib.mjs';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const registry = 'http://localhost:4873/';
 // Verdaccio accepts any token for @vsslicer/* publishes; pnpm just needs one to be set. Never written to disk.
-const publishEnv = { ...process.env, 'npm_config_//localhost:4873/:_authToken': 'local-dev' };
+// pnpm aborts without a TTY (ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY) unless CI is set
+const env = { ...process.env, CI: 'true' };
+const publishEnv = { ...env, 'npm_config_//localhost:4873/:_authToken': 'local-dev' };
 
 const args = process.argv.slice(2);
 const cmd = args[0];
@@ -47,9 +49,9 @@ if (ref) {
   names = names.filter((n) => hit.has(n));
 }
 
-const sh = (m, argv, env = process.env) => {
+const sh = (m, argv, e = env) => {
   console.log(`\n[${m.name}] pnpm ${argv.join(' ')}`);
-  const r = spawnSync('pnpm', argv, { cwd: join(root, 'modules', m.dir), stdio: 'inherit', env });
+  const r = spawnSync('pnpm', argv, { cwd: join(root, 'modules', m.dir), stdio: 'inherit', env: e });
   if (r.status !== 0) (console.error(`${m.name}: pnpm ${argv.join(' ')} failed`), process.exit(r.status ?? 1));
 };
 

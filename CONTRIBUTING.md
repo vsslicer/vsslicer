@@ -47,6 +47,26 @@ All code lives in `vsslicer/`; every capability is its own module; layers (domai
 - Tests are `.ts` files under `test/`. Libraries run them with vitest: pin `vitest` and `@vitest/coverage-v8` (same exact version) as devDependencies (pnpm does not expose transitive bins), add `vitest.config.ts` = `mergeConfig(base, defineConfig({}))` with `import base from '@vsslicer/tooling/vitest'` (v8 coverage, `text` + `lcov` into `coverage/`), and scripts `"test": "vitest run"` and `"test:coverage": "vitest run --coverage"`. A failing test exits non-zero. Modules with nothing to gain (the extension) may stay on `node --test test/` (type stripping, no build step). Keep the VS Code API out of anything a test imports: `import type` it, and pass it in (see `modules/example-extension/src/presentation/`).
 - esbuild reaches modules through tooling, so each module needs `allowBuilds: { esbuild: false }` in its `pnpm-workspace.yaml` (its binary is an optional dependency), and `minimumReleaseAgeExclude: ['@vsslicer/*']` for our own fresh packages.
 
+## Lint and format
+
+`@vsslicer/tooling` also ships the shared ESLint flat config (`@vsslicer/tooling/eslint`) and Prettier config (`@vsslicer/tooling/prettier`). `pnpm lint` in a module runs `eslint .`, `prettier --check .` and the type check; `pnpm format` runs `prettier --write .`. The ESLint config enforces:
+
+- typescript-eslint recommended, so unused imports and variables are errors (prefix an intentionally unused argument with `_`).
+- `import-x/no-extraneous-dependencies` as an error: import only what the module's `package.json` declares (dev dependencies only from `test/` and `*.config.*` files).
+- The SPDX header: the first comment of every `.ts`, `.mjs` and `.js` file (after a shebang) is `// SPDX-License-Identifier: AGPL-3.0-or-later`.
+- The layer rule, by folder `src/<layer>/`: `domain` imports nothing from the other layers, `application` only `domain`, `adapters` only `domain` and `application`, `presentation` anything. A violation fails with `boundaries/dependencies`.
+- `vscode` may be imported (even as a type) only under `src/presentation/`.
+
+The deliberate violations that prove each rule fail live in `modules/tooling/test/fixtures/lint/` (excluded from the normal lint) and are asserted by `modules/tooling/test/lint.test.mjs`.
+
+Adopting it in a module:
+
+1. `devDependencies`: `@vsslicer/tooling` (`^0.4.0` or later), plus `eslint` and `prettier` pinned to the tooling versions (pnpm does not expose transitive bins).
+2. `eslint.config.mjs`: `// SPDX-License-Identifier: AGPL-3.0-or-later` then `export { default } from '@vsslicer/tooling/eslint';`.
+3. `package.json`: `"prettier": "@vsslicer/tooling/prettier"`, `"lint": "eslint . && prettier --check . && tsc --noEmit"` (extensions: `tsc`), `"format": "prettier --write ."`.
+4. `.prettierignore` with `dist`, `coverage`, `pnpm-lock.yaml`.
+5. `pnpm-workspace.yaml`: `allowBuilds: { unrs-resolver: false }` (next to esbuild).
+
 ## Adding a module
 
 1. Copy `modules/example` (library) or `modules/example-extension` (extension) to `modules/<name>`; rename it in `package.json`, start at version `0.1.0`, reset `CHANGELOG.md`, keep `LICENSE`, `.npmrc` and `pnpm-workspace.yaml`.

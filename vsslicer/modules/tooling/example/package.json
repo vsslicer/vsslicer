@@ -24,15 +24,19 @@
     "registry": "http://localhost:4873/"
   },
   "scripts": {
-    "lint": "tsc --noEmit",
+    "lint": "eslint . && prettier --check . && tsc --noEmit",
     "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@vitest/coverage-v8": "5.0.5",
-    "@vsslicer/tooling": "^0.3.0",
+    "@vsslicer/tooling": "^0.4.0",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
     "typescript": "7.0.2",
     "vitest": "5.0.5"
-  }
+  },
+  "prettier": "@vsslicer/tooling/prettier"
 }
