@@ -91,3 +91,22 @@ test('version-check and release --dry-run in a scratch git repo; a module withou
   assert.match(rel.stdout, /tag: alpha@0\.2\.0/);
   assert.ok(!execFileSync('git', ['tag'], { cwd: v, encoding: 'utf8' }).includes('alpha@'));
 });
+
+test('ci stops before any install when published files changed without a bump (uncommitted or untracked); --allow-unbumped skips the guard', () => {
+  const { run, pkg, alpha } = scratch();
+  const reachedInstall = (r) => /pnpm install/.test(r.stdout);
+  writeFileSync(join(alpha, 'src', 'a.ts'), 'changed'); // uncommitted edit, no bump
+  let r = run('ci');
+  assert.notStrictEqual(r.status, 0);
+  assert.match(r.stderr, /alpha: .*version is still 0\.1\.0/);
+  assert.match(r.stderr, /bump .*CHANGELOG\.md.*--allow-unbumped/s);
+  assert.ok(!reachedInstall(r), r.stdout);
+  writeFileSync(join(alpha, 'src', 'new.ts'), 'x'); // untracked counts too
+  assert.match(run('ci').stderr, /alpha: /);
+  assert.ok(reachedInstall(run('ci', '--allow-unbumped')));
+  writeFileSync(join(alpha, 'package.json'), pkg('0.2.0'));
+  writeFileSync(join(alpha, 'CHANGELOG.md'), '# Changelog\n\n## 0.2.0\n\n- second\n\n## 0.1.0\n\n- first\n');
+  r = run('ci');
+  assert.doesNotMatch(r.stderr, /version-check/);
+  assert.ok(reachedInstall(r), r.stdout);
+});

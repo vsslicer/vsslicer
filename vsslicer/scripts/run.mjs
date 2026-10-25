@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Usage: node scripts/run.mjs <command> [--changed <git-ref>] [--list]   (--list prints the selected module names as JSON and exits)
-// Commands: install | publish | checks | ci | version-check --base <ref> | release --dry-run <dir> | any pnpm script name (run where the module defines it).
+// Commands: install | publish | checks | ci [--allow-unbumped] | version-check --base <ref> | release --dry-run <dir> | any pnpm script name (run where the module defines it).
 import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -71,6 +71,16 @@ if (cmd === 'release') {
   if (section === null) (console.error(`release: ${m.dir} CHANGELOG.md has no "## ${m.version}" entry`), process.exit(1));
   console.log(`${section}\n\ntag: ${releaseTag(m.dir, m.version)}`);
   process.exit(0);
+}
+
+// ci publishes only versions the registry lacks, so an unbumped edit would be tested against the old published code: stop first.
+// --allow-unbumped is for deliberate local iteration; CI never passes it.
+if (cmd === 'ci' && !args.includes('--allow-unbumped')) {
+  const v = spawnSync(process.execPath, [fileURLToPath(import.meta.url), 'version-check', '--base', 'HEAD'], { cwd: root, stdio: ['ignore', 'ignore', 'inherit'] });
+  if (v.status !== 0) {
+    console.error('ci: stopped before install/publish. Bump the module version in package.json and add a "## <version>" entry to its CHANGELOG.md (or pass --allow-unbumped to iterate locally on purpose).');
+    process.exit(1);
+  }
 }
 
 let names;

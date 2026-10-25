@@ -16,3 +16,6 @@
 14. [PLT-22: Package per-target VSIX for extensions that declare targets](022-package-per-target-vsix-for-extensions-that-declare-targets.md)
 15. [PLT-15: Add the @vscode/test-electron harness](015-add-the-vscode-test-electron-harness.md)
 16. [PLT-23: Create the vsslicer extension pack skeleton](023-create-the-vsslicer-extension-pack-skeleton.md)
+17. [PLT-178: Stop a local ci run that would use a stale dependency](178-stop-a-local-ci-run-that-would-use-a-stale-dependency.md)
+18. [PLT-177: Remove the stray package.json and .vscodeignore at the repository root](177-remove-the-stray-package-json-and-vscodeignore-at-the-reposi.md)
+19. [PLT-176: Share the VS Code test download across modules](176-share-the-vs-code-test-download-across-modules.md)
