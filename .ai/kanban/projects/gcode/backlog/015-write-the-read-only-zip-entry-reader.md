@@ -9,7 +9,7 @@ area: [parser]
 story: US5
 milestone: "VSS:M1"
 sprint: "VSS:SP3"
-depends_on: [5]
+depends_on: [5, VWR-73]
 created: 2026-10-25
 ---
 
