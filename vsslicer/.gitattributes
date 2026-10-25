@@ -1,1 +1,4 @@
 * text=auto eol=lf
+# Fixtures are byte-exact test data (goldens hash them): never convert line endings.
+modules/*/test/fixtures/** -text
+fixtures/** -text
