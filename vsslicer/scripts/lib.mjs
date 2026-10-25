@@ -54,3 +54,13 @@ export function withDeps(modules, names) {
   names.forEach(add);
   return out;
 }
+
+/** fetch that retries thrown errors: node's fetch sometimes hits a keep-alive socket the registry just closed. */
+export async function fetchRetry(url, fetchFn = fetch, tries = 3) {
+  for (let i = 1; ; i++)
+    try {
+      return await fetchFn(url);
+    } catch (e) {
+      if (i >= tries) throw e;
+    }
+}
