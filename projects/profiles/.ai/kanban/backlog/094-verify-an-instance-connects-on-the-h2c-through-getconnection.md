@@ -8,6 +8,7 @@ model: opus
 area: [store]
 story: US38
 milestone: "VSS:M3"
+sprint: "VSS:SP9"
 depends_on: [86, PRN-60]
 created: 2026-10-25
 ---

@@ -1,6 +1,6 @@
 ---
 id: 51
-title: "Create the `project-extension` module"
+title: Create the `project-extension` module
 type: chore
 priority: P0
 effort: S
@@ -8,6 +8,7 @@ model: sonnet
 area: [viewer]
 story: US16
 milestone: "VSS:M2"
+sprint: "VSS:SP6"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8, PLT-14, PLT-21]
 created: 2026-10-25
 ---

@@ -1,6 +1,6 @@
 ---
 id: 34
-title: "Create the `mesh` module"
+title: Create the `mesh` module
 type: chore
 priority: P0
 effort: S
@@ -8,6 +8,7 @@ model: sonnet
 area: [mesh]
 story: US11
 milestone: "VSS:M2"
+sprint: "VSS:SP6"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---

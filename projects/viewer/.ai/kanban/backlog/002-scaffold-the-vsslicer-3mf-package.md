@@ -1,6 +1,6 @@
 ---
 id: 2
-title: "Create the `3mf` module"
+title: Create the `3mf` module
 type: chore
 priority: P0
 effort: S
@@ -8,6 +8,7 @@ model: sonnet
 area: [3mf]
 story: US1
 milestone: "VSS:M2"
+sprint: "VSS:SP5"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8, 1]
 created: 2026-10-25
 ---

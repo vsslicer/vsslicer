@@ -8,6 +8,7 @@ model: sonnet
 area: [mesh]
 story: US13
 milestone: "VSS:M2"
+sprint: "VSS:SP6"
 depends_on: [43]
 created: 2026-10-25
 ---

@@ -8,6 +8,7 @@ model: opus
 area: [export]
 story: US23
 milestone: "VSS:M2"
+sprint: "VSS:SP8"
 depends_on: [44, 47, 136]
 created: 2026-10-25
 ---

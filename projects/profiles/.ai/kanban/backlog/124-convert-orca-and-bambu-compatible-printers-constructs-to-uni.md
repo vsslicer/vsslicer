@@ -8,6 +8,7 @@ model: sonnet
 area: [evaluator]
 story: US3
 milestone: "VSS:M2"
+sprint: "VSS:SP6"
 depends_on: [120, 135]
 created: 2026-10-25
 ---
