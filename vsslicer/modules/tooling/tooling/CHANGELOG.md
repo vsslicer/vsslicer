@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.1
+
+- `vsslicer-package`: `main` is optional (an extension pack has none), so `extension/<main>` is only required when `main` is set. A user error (invalid target, no `package.json`) prints one `vsslicer-package: <message>` line and exits 1, with no stack trace.
+- All bins no longer crash when `process.argv[1]` is missing (e.g. `node -e`, a REPL).
+- `check-licence` also ignores `.vscode-test`, `test-results`, `dist-test` and `.cache` (generated or downloaded).
+- `vsslicer-bundle` takes an optional third argument, the working directory the esbuild metafile paths are relative to. `third-party-notices` tests use it, which fixes `ENOENT lstat` failures when the module copy lives under a symlinked `$TMPDIR`.
+
 ## 0.8.0
 
 - `vsslicer-package` builds one VSIX per target when `"vsslicer": { "targets": ["linux-x64", "win32-x64"] }` is declared: `vsce package --target <t>`, named `<name>-<t>-<version>.vsix`, with the content assertion and size budget run on each file. No `targets`: one universal VSIX as before. New export `packAll`; `pack(cwd, target)` takes the optional target.

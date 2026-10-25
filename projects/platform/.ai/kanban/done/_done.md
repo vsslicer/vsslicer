@@ -15,3 +15,4 @@
 13. [PLT-21: Add the VSIX packaging task with content assertion and size budget](021-add-the-vsix-packaging-task-with-content-assertion-and-size-.md)
 14. [PLT-22: Package per-target VSIX for extensions that declare targets](022-package-per-target-vsix-for-extensions-that-declare-targets.md)
 15. [PLT-15: Add the @vscode/test-electron harness](015-add-the-vscode-test-electron-harness.md)
+16. [PLT-23: Create the vsslicer extension pack skeleton](023-create-the-vsslicer-extension-pack-skeleton.md)

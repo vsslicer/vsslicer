@@ -76,7 +76,7 @@ export const notices = (metafiles, cwd = process.cwd()) => {
   return { markdown, problems };
 };
 
-if (import.meta.filename === realpathSync(process.argv[1])) {
+if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) {
   const args = process.argv.slice(2);
   const o = args.indexOf('--out');
   const out = o >= 0 ? args.splice(o, 2)[1] : 'THIRD-PARTY-NOTICES.md';

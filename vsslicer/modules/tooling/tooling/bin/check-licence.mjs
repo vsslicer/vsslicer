@@ -6,14 +6,23 @@
 //   spdx-header      every source file has the SPDX line within its first 5 lines (after a shebang)
 //   ported-copyright every line "Ported from <project>@<commit>:<path>" has a line containing "Copyright"
 //                    within 5 lines before or after it (D2: provenance plus the upstream notice)
-// Source files: .ts .tsx .js .mjs .cjs .sh .glsl .wgsl. Ignored: node_modules, dist, coverage, .git and
-// test/fixtures (deliberate violations, checked by tooling's own tests), at any depth below a module root.
+// Source files: .ts .tsx .js .mjs .cjs .sh .glsl .wgsl. Ignored: node_modules, dist, coverage, .git, the generated or
+// downloaded .vscode-test, test-results, dist-test, .cache and test/fixtures (deliberate violations, checked by tooling's own tests), at any depth below a module root.
 import { readdirSync, readFileSync, realpathSync } from 'node:fs';
 import { extname, join, relative, sep } from 'node:path';
 
 const spdx = 'SPDX-License-Identifier: AGPL-3.0-or-later';
 const sources = new Set(['.ts', '.tsx', '.js', '.mjs', '.cjs', '.sh', '.glsl', '.wgsl']);
-const ignoredDirs = new Set(['node_modules', 'dist', 'coverage', '.git']);
+const ignoredDirs = new Set([
+  'node_modules',
+  'dist',
+  'coverage',
+  '.git',
+  '.vscode-test',
+  'test-results',
+  'dist-test',
+  '.cache',
+]);
 const ported = /Ported from \S+@[0-9a-f]+:\S+/;
 const window = 5;
 
@@ -53,7 +62,7 @@ export const check = (root) => {
   return problems;
 };
 
-if (import.meta.filename === realpathSync(process.argv[1])) {
+if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) {
   const problems = process.argv.slice(2).length ? process.argv.slice(2).flatMap(check) : check('.');
   problems.forEach((p) => console.error(p));
   if (problems.length) {

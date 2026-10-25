@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/tooling",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Shared VSSlicer tooling: TypeScript base config, extension bundler, vitest config, ESLint config with the layer-boundary rule, Prettier config the check-licence bin, the third-party-notices bin and the vsslicer-package bin.",
   "license": "AGPL-3.0-or-later",
   "type": "module",

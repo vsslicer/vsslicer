@@ -13,8 +13,8 @@ const write = (file, text) => (mkdirSync(dirname(file), { recursive: true }), wr
 
 /** Project in pnpm layout: node_modules/<name> -> node_modules/.pnpm/<flat>@<ver>/node_modules/<name>.
  *  deps: [{name, version, license?, licenses?, files?}]. Returns the project dir with dist/extension.meta.json built. */
-const project = async (deps, own = []) => {
-  const d = mkdtempSync(join(tmpdir(), 'notices-'));
+const project = async (deps, own = [], base = tmpdir()) => {
+  const d = mkdtempSync(join(base, 'notices-'));
   const imports = [];
   for (const [i, dep] of deps.entries()) {
     const flat = dep.name.replace('/', '+');
@@ -30,7 +30,7 @@ const project = async (deps, own = []) => {
   }
   for (const o of own) imports.push(`require('${o}')`);
   write(join(d, 'src/e.js'), `${imports.join(';\n')};\n`);
-  await bundle(join(d, 'src/e.js'), join(d, 'dist/extension.js'));
+  await bundle('./src/e.js', join(d, 'dist/extension.js'), d);
   return d;
 };
 const run = (d) => notices([join(d, 'dist/extension.meta.json')], d);
@@ -132,4 +132,14 @@ test('the bin writes byte-identical output on two runs and fails without writing
   assert.strictEqual(r.status, 1);
   assert.match(r.stderr, /x@1\.0\.0/);
   assert.throws(() => readFileSync(join(bad, 'THIRD-PARTY-NOTICES.md')));
+});
+
+test('works when the module lives under a symlinked directory', async () => {
+  const link = join(mkdtempSync(join(tmpdir(), 'link-')), 'via');
+  const target = mkdtempSync(join(tmpdir(), 'target-'));
+  symlinkSync(target, link);
+  const d = await project([dep('a', 'MIT')], [], link);
+  const { markdown, problems } = run(d);
+  assert.deepStrictEqual(problems, []);
+  assert.match(markdown, /## a@1\.0\.0/);
 });

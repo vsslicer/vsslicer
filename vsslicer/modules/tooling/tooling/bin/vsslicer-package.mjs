@@ -91,11 +91,11 @@ export const checkContent = (names, pkg, cwd) => {
     'extension/changelog.md',
     ...assets(pkg, cwd).map((a) => `extension/${a}`),
   ];
-  const main = `extension/${norm(pkg.main ?? '')}`;
+  const main = pkg.main ? [`extension/${norm(pkg.main)}`] : []; // extension packs have no main
   const bundle = (n) => /^extension\/dist\/[^/]+\.(js|css)$/.test(n) && !n.endsWith('.meta.json');
   const got = new Set(names);
   return [
-    ...[...fixed, main].filter((n) => !got.has(n)).map((n) => `content: missing ${n}`),
+    ...[...fixed, ...main].filter((n) => !got.has(n)).map((n) => `content: missing ${n}`),
     ...names.filter((n) => !fixed.includes(n) && !bundle(n)).map((n) => `content: unexpected ${n}`),
   ];
 };
@@ -136,9 +136,13 @@ export const packAll = async (cwd = process.cwd()) => {
 };
 
 // argv[1] is the node_modules/.bin symlink when run as a bin
-if (import.meta.filename === realpathSync(process.argv[1])) {
+if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) {
   let failed = false;
-  for (const { file, kb, budget, problems } of await packAll()) {
+  const results = await packAll().catch((e) => {
+    console.error(`vsslicer-package: ${e.message}`); // user errors (bad target, no package.json): no stack trace
+    process.exit(1);
+  });
+  for (const { file, kb, budget, problems } of results) {
     console.log(`${file}: ${kb.toFixed(1)} KB (budget ${budget ?? '?'} KB)`);
     if (problems.length) {
       console.error(`${file}:\n${problems.join('\n')}`);

@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { randomBytes } from 'node:crypto';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import test from 'node:test';
@@ -133,6 +133,26 @@ test('without targets there is one universal VSIX', async () => {
       (await packAll(d)).map((r) => basename(r.file)),
       ['fake-1.2.3.vsix'],
     );
+  } finally {
+    rmSync(d, { recursive: true, force: true });
+  }
+});
+
+test('an extension pack without main packages cleanly', async () => {
+  const d = extension(
+    { main: undefined, icon: undefined, activationEvents: undefined, extensionPack: [] },
+    { 'dist/extension.js': null, 'media/icon.png': null },
+  );
+  assert.deepStrictEqual((await run(d)).problems, []);
+});
+
+test('the bin reports a user error as one line, without a stack trace', () => {
+  const d = extension({ vsslicer: { sizeBudgetKB: 50, targets: ['nope-x64'] } });
+  try {
+    const bin = new URL('../bin/vsslicer-package.mjs', import.meta.url).pathname;
+    const r = spawnSync(process.execPath, [bin], { cwd: d, encoding: 'utf8' });
+    assert.strictEqual(r.status, 1);
+    assert.match(r.stderr, /^vsslicer-package: .+\n$/);
   } finally {
     rmSync(d, { recursive: true, force: true });
   }

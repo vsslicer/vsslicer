@@ -6,8 +6,13 @@ import { realpathSync, writeFileSync } from 'node:fs';
 import { build } from 'esbuild';
 
 // Also writes the esbuild metafile next to the bundle (dist/extension.meta.json) for third-party-notices.
-export const bundle = async (entry = 'src/presentation/extension.ts', outfile = 'dist/extension.js') => {
+export const bundle = async (
+  entry = 'src/presentation/extension.ts',
+  outfile = 'dist/extension.js',
+  cwd = process.cwd(),
+) => {
   const { metafile } = await build({
+    absWorkingDir: cwd,
     entryPoints: [entry],
     outfile,
     bundle: true,
@@ -23,4 +28,4 @@ export const bundle = async (entry = 'src/presentation/extension.ts', outfile = 
 };
 
 // argv[1] is the node_modules/.bin symlink when run as a bin
-if (import.meta.filename === realpathSync(process.argv[1])) await bundle(...process.argv.slice(2));
+if (process.argv[1] && import.meta.filename === realpathSync(process.argv[1])) await bundle(...process.argv.slice(2));
