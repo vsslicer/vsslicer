@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
 import { join } from 'node:path';
-import { cachePath, defaultCacheDir, resolveVersion, resultsPath } from '../src/versions.ts';
+import { cachePath, defaultCacheDir, resolveVersion, resultsPath, runnerPath } from '../src/versions.ts';
 
 describe('resolveVersion', () => {
   it.each([
@@ -42,4 +42,11 @@ describe('defaultCacheDir', () => {
     expect(defaultCacheDir({ LOCALAPPDATA: 'C:\\L' }, 'win32', home)).toBe(join('C:\\L', 'vsslicer', 'vscode-test'));
     expect(defaultCacheDir({}, 'win32', home)).toBe(join(home, '.cache', 'vsslicer', 'vscode-test'));
   });
+});
+
+describe('runnerPath', () => {
+  it('decodes spaces', () =>
+    expect(runnerPath('file:///Users/a%20b/dist/run.js', false)).toBe('/Users/a b/runner.cjs'));
+  it('drops the slash before a Windows drive letter', () =>
+    expect(runnerPath('file:///C:/x%20y/dist/run.js', true)).toBe('C:\\x y\\runner.cjs'));
 });
