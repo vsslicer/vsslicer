@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- PLT-35: chunked `ArrayBuffer` transfer (`sendBuffer`, `receiveBuffers`) with configurable chunk size, ordering by `seq`, cumulative acks with a send window for backpressure, and `TimeoutError` on silence; `handshake` takes `{ timeoutMs }`. Protocol in the README.
+
 ## 0.2.0
 
 - PLT-34: transport envelope (`hello`, `welcome`, `reload`, `request`, `response`, `notification`) with `parseEnvelope`, `VersionMismatchError`, and the per-load handshake (`serveHandshake` on the host, `handshake` in the webview) over a `Channel` port. Protocol in the README.

@@ -50,7 +50,7 @@ export interface Notification extends Base {
 export type Envelope = Hello | Welcome | Reload | Request | Response | Notification;
 export type Kind = Envelope['kind'];
 
-export type ProtocolErrorCode = 'not-an-envelope' | 'invalid-envelope' | 'version-mismatch';
+export type ProtocolErrorCode = 'not-an-envelope' | 'invalid-envelope' | 'version-mismatch' | 'timeout';
 
 export class ProtocolError extends Error {
   override readonly name: string = 'ProtocolError';
@@ -69,6 +69,16 @@ export class VersionMismatchError extends ProtocolError {
     super('version-mismatch', `webview-kit transport version ${received}, expected ${expected}: reload the webview`);
     this.expected = expected;
     this.received = received;
+  }
+}
+
+/** The peer stayed silent for `ms`: no `welcome`, no acknowledgement, or no next chunk. */
+export class TimeoutError extends ProtocolError {
+  override readonly name = 'TimeoutError';
+  readonly ms: number;
+  constructor(what: string, ms: number) {
+    super('timeout', `webview-kit: ${what} timed out after ${ms} ms`);
+    this.ms = ms;
   }
 }
 

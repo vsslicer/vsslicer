@@ -2,3 +2,11 @@
 export * from '../domain/protocol.ts';
 export type { Channel } from '../application/channel.ts';
 export { handshake } from '../application/handshake.ts';
+export * from '../domain/chunk.ts';
+export {
+  sendBuffer,
+  receiveBuffers,
+  TRANSFER_DEFAULTS,
+  type TransferOptions,
+  type ReceiveHandlers,
+} from '../application/transfer.ts';

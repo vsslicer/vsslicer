@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import {
   TRANSPORT_SCHEMA_VERSION,
+  TimeoutError,
   VersionMismatchError,
   hello,
   parseEnvelope,
@@ -35,21 +36,31 @@ export function serveHandshake(channel: Channel, handlers: HandshakeHandlers): (
 
 /**
  * Webview side: run once per document load. Resolves on the host's `welcome` for this session;
- * rejects with VersionMismatchError when either side is on another schema version.
- * shortcut: no timeout or hello retry; PLT-35 adds timeouts, until then the host must subscribe before setting `html`.
+ * rejects with VersionMismatchError when either side is on another schema version, and with TimeoutError
+ * when no answer comes within `timeoutMs` (default 30 s).
+ * shortcut: no hello retry, so the host must subscribe before setting `html`.
  */
-export function handshake(channel: Channel, session: string = crypto.randomUUID()): Promise<Welcome> {
+export function handshake(
+  channel: Channel,
+  session: string = crypto.randomUUID(),
+  { timeoutMs = 30_000 }: { readonly timeoutMs?: number } = {},
+): Promise<Welcome> {
   return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      stop();
+      reject(new TimeoutError('handshake', timeoutMs));
+    }, timeoutMs);
+    const settle = () => (stop(), clearTimeout(timer));
     const stop = channel.onMessage((message) => {
       const r = parseEnvelope(message);
       if (r.ok && r.envelope.kind === 'welcome' && r.envelope.session === session) {
-        stop();
+        settle();
         resolve(r.envelope);
       } else if (r.ok && r.envelope.kind === 'reload') {
-        stop();
+        settle();
         reject(new VersionMismatchError(r.envelope.expected, TRANSPORT_SCHEMA_VERSION));
       } else if (!r.ok && r.error instanceof VersionMismatchError) {
-        stop();
+        settle();
         channel.post(reload());
         reject(r.error);
       }

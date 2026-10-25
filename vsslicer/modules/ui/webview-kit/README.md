@@ -68,8 +68,29 @@ ours and are ignored, so the kit can share a channel with other traffic. `parseE
   the error; the host's `onMismatch` should set `webview.html` again from the current build, and the webview's
   `handshake` rejects. `hello` and `reload` keep their shape in every version, so a mismatch is always detectable.
 - **Versioning.** Adding an optional field needs no bump (unknown fields are accepted). A new `kind`, or a changed
-  or removed field, bumps `TRANSPORT_SCHEMA_VERSION`. Chunking, ordering, acknowledgements and timeouts (PLT-35)
-  build on this envelope.
+  or removed field, bumps `TRANSPORT_SCHEMA_VERSION`.
+- **Handshake timeout.** `handshake(channel, session?, { timeoutMs })` rejects with `TimeoutError`
+  (`code: 'timeout'`, `ms`) when no `welcome` arrives in time (default 30 s). There is no `hello` retry.
+
+## Buffer transfer (`/host`, `/webview`)
+
+```ts
+await sendBuffer(channel, streamId, bytes, { chunkSize: 1 << 20, window: 4, timeoutMs: 30_000 });
+const stop = receiveBuffers(channel, { onBuffer(stream, data) {}, onError(stream, error) {} }, { timeoutMs });
+```
+
+- **Chunks.** `bytes` (an `ArrayBuffer` or `Uint8Array` view) goes as `notification`s with method
+  `webview-kit/chunk` and extra fields `stream`, `seq` (0-based), `count`; the `payload` is an `ArrayBuffer` of at
+  most `chunkSize` bytes, owned by that chunk. An empty buffer is one empty chunk. An additive change: no version bump.
+- **Ordering.** The receiver files chunks by `seq`, so arrival order does not matter and duplicates are dropped.
+  Streams are independent; `stream` must be unique per sender.
+- **Backpressure.** After each chunk the receiver posts `webview-kit/ack` with `seq` = chunks held contiguously
+  from 0 (cumulative). The sender keeps at most `window` chunks unacknowledged and resolves on the last ack.
+- **Timeouts.** The sender rejects with `TimeoutError` after `timeoutMs` without an ack; the receiver reports
+  `TimeoutError` through `onError` after `timeoutMs` without the next chunk and drops the stream.
+- **Version mismatch.** A `reload` frame, or an ack from another version, rejects the send with
+  `VersionMismatchError`. The receiver ignores other-version chunks; the handshake handles the reload.
+- Defaults (`TRANSFER_DEFAULTS`) are unmeasured guesses until the postMessage throughput spike.
 
 A `Channel` is `{ post(message), onMessage(listener): unsubscribe }`; the host and webview halves (PLT-36, PLT-37)
 adapt `webview.postMessage` and `acquireVsCodeApi()` to it.
