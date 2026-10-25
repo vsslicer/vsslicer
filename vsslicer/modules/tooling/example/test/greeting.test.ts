@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import test from 'node:test';
-import assert from 'node:assert';
+import { expect, test } from 'vitest';
 import { greet } from '../src/index.ts';
 
-test('greet', () => assert.strictEqual(greet('VSSlicer'), 'Hello, VSSlicer!'));
+test('greet', () => expect(greet('VSSlicer')).toBe('Hello, VSSlicer!'));

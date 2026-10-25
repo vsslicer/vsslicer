@@ -1,11 +1,12 @@
 {
   "name": "@vsslicer/tooling",
-  "version": "0.2.0",
-  "description": "Shared VSSlicer tooling: TypeScript base config and the extension bundler (ESLint and test configs land here).",
+  "version": "0.3.0",
+  "description": "Shared VSSlicer tooling: TypeScript base config and the extension bundler shared vitest config (ESLint config lands here).",
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "exports": {
     "./tsconfig.base.json": "./tsconfig.base.json",
+    "./vitest": "./vitest.config.mjs",
     "./package.json": "./package.json"
   },
   "bin": {
@@ -13,6 +14,7 @@
   },
   "files": [
     "tsconfig.base.json",
+    "vitest.config.mjs",
     "bin",
     "LICENSE"
   ],

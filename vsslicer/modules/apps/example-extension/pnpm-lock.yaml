@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vsslicer/example':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
     devDependencies:
       '@types/node':
         specifier: 24.19.2
@@ -19,8 +19,8 @@ importers:
         specifier: 1.100.0
         version: 1.100.0
       '@vsslicer/tooling':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -309,12 +309,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@vsslicer/example@0.2.0':
-    resolution: {integrity: sha512-Tuo7qHmEjnIahUtj6EtsOXb4SzjBXMGbo7xDV4ufJbaD4c2S7B4fCV5Bp4Os6y3ICOMgtkwDLcVRV4LY0Y7zMQ==}
+  '@vsslicer/example@0.3.0':
+    resolution: {integrity: sha512-Jrpfmy7oGNYjT6wNXG7yQykt++D8sbtjFZE1y4D0mhaTWfOQEMbq7Ne/xpLNklWPRjC7QolvyA0b1WkjqxELcA==}
     engines: {node: '>=24'}
 
-  '@vsslicer/tooling@0.2.0':
-    resolution: {integrity: sha512-hbOvtsFQGy7yheR4gMAQz2WnOFgweiCuGRT1c3IbW/IzeRldefgmVC2Bg2EudKvQDE8/++oEgcLznthqHcUG0g==}
+  '@vsslicer/tooling@0.3.0':
+    resolution: {integrity: sha512-cFeBdoUMAexMR6x7/7XE9Rffpp/NrrF/elzwiOA3IHEUZRBqIrPLf4ebBNipiSUNTUsyUMKns75hi+k4j41mLQ==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -477,9 +477,9 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  '@vsslicer/example@0.2.0': {}
+  '@vsslicer/example@0.3.0': {}
 
-  '@vsslicer/tooling@0.2.0':
+  '@vsslicer/tooling@0.3.0':
     dependencies:
       esbuild: 0.28.2
 
