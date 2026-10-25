@@ -12,6 +12,10 @@ import type { Flavour } from './machine.ts';
  * (string_to_gcode_extrusion_role; tag names `TYPE:` etc.: src/libpgcode/include/Slic3r/Biz/libpgcode/Types.hpp:308-319)
  * Copyright (c) Prusa Research and the Slic3r/PrusaSlicer contributors (AGPL-3.0; the files carry no per-file notice).
  *
+ * SuperSlicer names: Ported from SuperSlicer@1f3d287:src/libslic3r/ExtrusionRole.cpp:40-120 (gcode_extrusion_role_to_string,
+ * string_to_gcode_extrusion_role) and the 2.3.56 fixture's `;TYPE:Internal perimeter`.
+ * Copyright (c) Prusa Research and the Slic3r/PrusaSlicer/SuperSlicer contributors (AGPL-3.0; the file carries no per-file grant beyond the repo licence).
+ *
  * Orca/Bambu names: Ported from OrcaSlicer@09aa0114:src/libslic3r/ExtrusionEntity.cpp:701-742
  * (string_to_role; tag names ` FEATURE: `: src/libslic3r/GCode/GCodeProcessor.cpp:100-150)
  * Copyright (c) the OrcaSlicer contributors (AGPL-3.0; the files carry no per-file notice).
@@ -28,6 +32,10 @@ export const ROLE_BY_NAME: ReadonlyMap<string, MoveRole> = new Map<string, MoveR
   ['Perimeter', MoveRole.Perimeter],
   ['External perimeter', MoveRole.ExternalPerimeter],
   ['Overhang perimeter', MoveRole.OverhangPerimeter],
+  ['Internal perimeter', MoveRole.Perimeter], // SuperSlicer 2.3 (before the rename to "Perimeter")
+  ['Internal bridge infill', MoveRole.InternalBridgeInfill], // SuperSlicer
+  ['Thin wall', MoveRole.GapFill], // SuperSlicer: variable-width thin walls, which Prusa files as gap fill
+  ['Milling', MoveRole.Custom], // SuperSlicer CNC milling pass; not an extrusion
   ['Internal infill', MoveRole.InternalInfill],
   ['Solid infill', MoveRole.SolidInfill],
   ['Top solid infill', MoveRole.TopSolidInfill],

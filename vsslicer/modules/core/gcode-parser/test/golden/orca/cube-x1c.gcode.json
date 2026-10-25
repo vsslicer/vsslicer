@@ -5,10 +5,14 @@
   },
   "slicer": "orcaslicer",
   "flavour": "marlin",
-  "moveCount": 5371,
+  "moveCount": 7625,
   "stateChanges": 1930,
   "markers": 1044,
   "layerCount": 100,
+  "arcs": {
+    "commands": 98,
+    "segments": 2352
+  },
   "roleHistogram": {
     "Perimeter": 396,
     "ExternalPerimeter": 400,
@@ -27,7 +31,7 @@
       "id": "7236833210312978021",
       "copy": 0,
       "ranges": 100,
-      "moves": 5048
+      "moves": 7302
     }
   ],
   "config": {

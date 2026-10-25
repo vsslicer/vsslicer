@@ -5,10 +5,14 @@
   },
   "slicer": "prusaslicer",
   "flavour": "marlin",
-  "moveCount": 1568,
+  "moveCount": 1663,
   "stateChanges": 693,
   "markers": 264,
   "layerCount": 31,
+  "arcs": {
+    "commands": 5,
+    "segments": 100
+  },
   "roleHistogram": {
     "Perimeter": 125,
     "ExternalPerimeter": 133,
@@ -40,7 +44,7 @@
       "name": "Shape-Box",
       "id": "0",
       "ranges": 1,
-      "moves": 1551
+      "moves": 1646
     }
   ],
   "config": {

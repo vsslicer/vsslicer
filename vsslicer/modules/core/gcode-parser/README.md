@@ -27,13 +27,15 @@ splitter; pure), `src/application` (`parse`), `src/adapters` (`fileSource`, a No
 
 ## Options (`parse(source, options)`)
 
-| Option       | Default  | Meaning                                                                                                                                                      |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `signal`     | none     | Abort; the iterator rejects with the reason.                                                                                                                 |
-| `flavour`    | detected | `marlin`, `klipper` or `reprapfirmware`; only decides units (below). **Overrides** the flavour the file names; absent, see "Slicer, flavour, roles, layers". |
-| `chunkMoves` | 65536    | A chunk ends after this many moves (about 2.2 MB of buffers).                                                                                                |
-| `chunkBytes` | 4 MiB    | A chunk also ends after this many decoded bytes, so progress flows through comment-heavy files.                                                              |
-| `baseOffset` | 0        | Offset of the first byte in the decoded text; for resuming and for testing the 4 GiB rule.                                                                   |
+| Option         | Default  | Meaning                                                                                                                                                      |
+| -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `signal`       | none     | Abort; the iterator rejects with the reason.                                                                                                                 |
+| `flavour`      | detected | `marlin`, `klipper` or `reprapfirmware`; only decides units (below). **Overrides** the flavour the file names; absent, see "Slicer, flavour, roles, layers". |
+| `chunkMoves`   | 65536    | A chunk ends after this many moves (about 2.2 MB of buffers).                                                                                                |
+| `chunkBytes`   | 4 MiB    | A chunk also ends after this many decoded bytes, so progress flows through comment-heavy files.                                                              |
+| `arcTolerance` | 0.05     | Largest distance in mm between a G2/G3 arc and its chords (see "Arcs").                                                                                      |
+| `arcMaxAngle`  | 15       | Largest angle in degrees one arc chord may sweep (at most 180).                                                                                              |
+| `baseOffset`   | 0        | Offset of the first byte in the decoded text; for resuming and for testing the 4 GiB rule.                                                                   |
 
 A leading UTF-8 BOM is skipped (offsets still count it).
 
@@ -46,7 +48,7 @@ with the warning `line-too-long`, however the input is cut.
 | Command                                      | Result                                                                                                                                                                                                              |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `G0` `G1`                                    | Move (a record only if an X, Y, Z or E word is present; `G1 F3000` alone is only a feedrate change).                                                                                                                |
-| `G2` `G3`                                    | **One** move to the end point with the `Arc` flag; tessellation is GCP-9. I/J/R ignored.                                                                                                                            |
+| `G2` `G3`                                    | Tessellated into straight `Arc`-flagged moves ("Arcs" below).                                                                                                                                                       |
 | `G10` `G11`                                  | In-place move with `Retract` / `Unretract`, E = 0. With `P` or `L` (RRF tool offsets) a marker.                                                                                                                     |
 | `G17` `G18` `G19`                            | Plane state (for arcs); no record.                                                                                                                                                                                  |
 | `G90` `G91` `M82` `M83`                      | Positioning modes. E is relative after M83 or while G91 is on (as PrusaSlicer: G91 wins over M82; Marlin also lets M83+G90 revert E to absolute, we keep it relative). M82 makes E absolute again unless G91 is on. |
@@ -89,13 +91,39 @@ Decisions:
   `unknown-role` warning per distinct name, at most 8). Travel and retract moves carry the role of
   the last tag as well; filter by the move flags. Bambu's `Floating vertical shell` is
   `Perimeter`, `Support ironing` `Ironing`, `Flush` `WipeTower` (no exact role exists). Cura's
-  `SKIN` is `SolidInfill`; `;MESH:` is ignored (there is nowhere to store the object name yet).
+  `SKIN` is `SolidInfill`. SuperSlicer's `Internal perimeter` is `Perimeter`, `Thin wall` `GapFill`, `Internal bridge infill` `InternalBridgeInfill`, `Milling` `Custom`; `;MESH:` is ignored (there is nowhere to store the object name yet).
 - **Layers** are listed in the chunk that holds the layer's first move, `firstMove` global. A
   layer change with no move before the next one is dropped. A layer whose z the slicer does not
   state starts with the first move's z, corrected to the first extrusion's if that is in the
   same chunk.
 - **No tags**: roles stay `Unknown`, `layers` is empty, and at the end of the file one `info`
   diagnostic `no-slicer-tags` says which tags were missing (only if the file had moves).
+
+## Arcs
+
+`G2` (clockwise) and `G3` (counter-clockwise) become several straight moves, so consumers draw only
+segments. Semantics follow Marlin's `plan_arc`/`G2_G3` (provenance in `src/domain/arc.ts`).
+
+- **Plane**: `G17` XY with `I J`, `G18` ZX with `K I` (Z is the first axis, so G2 is clockwise seen
+  from +Y, as Marlin; Klipper differs), `G19` YZ with `J K`. The remaining axis is interpolated
+  evenly (helix). `I J K` are always relative to the start; `G90.1`/`G91.1` are not interpreted.
+- **R form**: the centre is on the perpendicular bisector of the chord; a negative R takes the arc
+  over 180 degrees. R wins over `I J K` when both are given. Start == end in the plane (within
+  0.0001 mm) with `I J K` is a full circle (in the direction of G2/G3); with R it is invalid.
+- **Chords**: equal angle, so equal length; the angle is the smaller of `2*acos(1 - arcTolerance/r)`
+  and `arcMaxAngle`, so no chord is further than `arcTolerance` from the arc (at most 16384 chords
+  per arc). The last vertex is the end point exactly; the others lie on the circle of the start
+  radius. `E` is divided evenly among the chords (proportional to arc length). `F` is a state
+  change as for any move; the chords add none.
+- **Flags**: every chord has `MoveFlag.Arc`, the arc command's `fileOffset` and the same
+  travel/retract flags; consecutive moves with `Arc` and one `fileOffset` are one source arc, so
+  a consumer can group them (a chunk boundary may fall inside an arc).
+- **Invalid arcs** give the warning `arc-invalid` at the command (at most 100 per parse) and one
+  straight `Arc` move to the end point: no centre in the plane, zero radius, start and end radius
+  differing by more than `arcTolerance`, R too small for the chord (by more than `arcTolerance`),
+  R full circle.
+- A move count therefore grows with arcs: ArcWelder, Orca and Bambu "arc fitting" files, and
+  the circles Bambu draws for purge lines and wipes, are cut into 15-degree-or-finer chords.
 
 ## Parsing off the calling thread
 
@@ -172,9 +200,9 @@ NAME=` (label without ranges), `_START NAME=`, `_END`, Cura `;MESH:name` (`NONME
 
 `test/fixtures` holds the corpus (see its `PROVENANCE.md` files) and `test/golden/*.json` its
 expected summary: `slicer`, `flavour`, `moveCount`, `stateChanges`, `markers`, `layerCount`,
-`roleHistogram` (extruding moves per role name), `diagnostics` for text G-code, byte size and
+`arcs` (G2/G3 commands and the moves they became), `roleHistogram` (extruding moves per role name, an arc counted once), `diagnostics` for text G-code, byte size and
 hash for all (binary files get more when their text is decoded), plus `thumbnails` (format, size, byte count, sha256), `objects` (name, id, copy, range and move counts) and `config` (key count, sha256 of the sorted map, a few keys) and `summary` (the `readSummary` result). `pnpm golden:update` rewrites them; review
-the diff. Tests count the move lines, the layer-change comments and the extruding moves per role tag of every text file independently and compare. The same for the thumbnails (decoded with `Buffer`), the object names and the config key count. Cura has no fixture yet (Q9): its tags, `;MESH:` and `;SETTING_3` are unit-tested with inline samples.
+the diff. Tests count the straight move lines (arcs via the golden `arcs`), the layer-change comments and the extruding moves per role tag of every text file independently and compare. The same for the thumbnails (decoded with `Buffer`), the object names and the config key count. Cura has no fixture yet (Q9): its tags, `;MESH:` and `;SETTING_3` are unit-tested with inline samples.
 
 ## Develop
 

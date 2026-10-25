@@ -5,10 +5,14 @@
   },
   "slicer": "orcaslicer",
   "flavour": "marlin",
-  "moveCount": 10865,
+  "moveCount": 18600,
   "stateChanges": 5005,
   "markers": 1631,
   "layerCount": 50,
+  "arcs": {
+    "commands": 1358,
+    "segments": 9093
+  },
   "roleHistogram": {
     "Perimeter": 392,
     "ExternalPerimeter": 400,
@@ -28,14 +32,14 @@
       "id": "6710984816411157096",
       "copy": 0,
       "ranges": 50,
-      "moves": 1928
+      "moves": 2560
     },
     {
       "name": "cube10.stl",
       "id": "0",
       "copy": 0,
       "ranges": 50,
-      "moves": 1924
+      "moves": 2556
     }
   ],
   "config": {

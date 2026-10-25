@@ -56,9 +56,15 @@ const FIRMWARE_RETRACT = /^G1[01](?=[\s;]|$)(?![^;]*\b[PL]\s*-?[\d.])/i;
 describe('move counts', () => {
   const text = manifest.files.filter((f) => f.format === 'gcode');
   it.each(text)('$path: parser move count equals an independent line count', async (file) => {
-    const lines = readFileSync(join(fixturesDir, file.path), 'utf8').split('\n');
-    const expected = lines.filter((l) => MOVE_LINE.test(l.trim()) || FIRMWARE_RETRACT.test(l.trim())).length;
-    expect(expected).toBeGreaterThan(1000);
-    expect(readGolden(file)['moveCount']).toBe(expected);
+    const lines = readFileSync(join(fixturesDir, file.path), 'utf8')
+      .split('\n')
+      .map((l) => l.trim());
+    // a G2/G3 line is several moves (tessellated); the golden says how many
+    const isArc = (l: string): boolean => /^G0?[23](?=[\s;]|$)/i.test(l);
+    const arcs = readGolden(file)['arcs'] as { commands: number; segments: number };
+    const straight = lines.filter((l) => !isArc(l) && (MOVE_LINE.test(l) || FIRMWARE_RETRACT.test(l))).length;
+    expect(straight + arcs.segments).toBeGreaterThan(1000);
+    expect(lines.filter((l) => isArc(l) && MOVE_LINE.test(l)).length).toBe(arcs.commands);
+    expect(readGolden(file)['moveCount']).toBe(straight + arcs.segments);
   });
 });

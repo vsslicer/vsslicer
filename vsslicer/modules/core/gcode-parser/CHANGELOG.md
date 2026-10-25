@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.0
+
+- G2/G3 arcs are tessellated (domain `tessellateArc`, wired into the machine): I/J/K and R forms, planes G17/G18/G19 with helical interpolation, negative R, full circles, `E` split evenly. Chords stay within the new option `arcTolerance` (mm, default 0.05) of the arc and sweep at most `arcMaxAngle` (degrees, default 15). Every chord keeps `MoveFlag.Arc` and the arc command's `fileOffset`.
+- New warning `arc-invalid` (and a straight move to the end point) for a missing centre, zero radius, start/end radius mismatch, R too small for the chord and an R full circle.
+- Breaking for move counts: files with arcs have more moves; goldens regenerated (golden JSON gains `arcs`; `roleHistogram` still counts an arc once).
+- SuperSlicer role names: `Internal perimeter`, `Internal bridge infill`, `Thin wall`, `Milling` (the 2.3.56 fixture no longer gets `unknown-role`); its role/layer line scans now run in the tests.
+
 ## 0.7.0
 
 - `readSummary(source)` (application) and `readSummaryFile(path)` (adapter): the slicer's own job statistics as a `JobSummary` (`@vsslicer/gcode-api` 0.4.0): per extruder filament length, volume, weight and cost, and the time estimates (`normal`, `silent`, `model`, `total`), read from the summary comments of PrusaSlicer, Orca, Bambu Studio and Cura. No moves are parsed and no move buffers allocated; `readSummaryFile` reads only the first and last 512 KiB. Statistics the slicer did not state are absent; a weight, volume or cost of 0 for a filament that was fed (Bambu Studio without density) is dropped.

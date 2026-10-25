@@ -50,9 +50,8 @@ export function writeGolden(file: ManifestFile, summary: Summary): void {
 }
 
 /**
- * Cura (`;LAYER:`, no config block) and SuperSlicer 2.3 (old role names, ArcWelder) files are in the corpus
+ * Cura (`;LAYER:`, no config block) files are in the corpus
  * but the independent line scans of the Prusa/Orca/Bambu-style tests do not model them; those tests skip them.
  * The golden harness itself still covers them. Tracked in the manifest notes (GCP-2).
  */
-export const lineScannable = (f: ManifestFile): boolean =>
-  f.format === 'gcode' && f.slicer !== 'Cura' && f.slicer !== 'SuperSlicer';
+export const lineScannable = (f: ManifestFile): boolean => f.format === 'gcode' && f.slicer !== 'Cura';

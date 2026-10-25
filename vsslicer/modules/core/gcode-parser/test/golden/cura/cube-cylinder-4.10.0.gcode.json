@@ -9,6 +9,10 @@
   "stateChanges": 2285,
   "markers": 4,
   "layerCount": 25,
+  "arcs": {
+    "commands": 0,
+    "segments": 0
+  },
   "roleHistogram": {
     "Perimeter": 11192,
     "ExternalPerimeter": 3395,

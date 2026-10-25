@@ -18,6 +18,13 @@ export interface ParserOptions {
   chunkMoves?: number;
   /** A chunk also ends after this many decoded bytes, so a comment-heavy file still reports progress. Default 4 MiB. */
   chunkBytes?: number;
+  /**
+   * Largest distance in mm between a G2/G3 arc and the chords it is cut into. Default 0.05 (the
+   * tolerance of the golden fixtures); smaller means more, shorter moves.
+   */
+  arcTolerance?: number;
+  /** Largest angle in degrees one arc chord may sweep, whatever the tolerance. Default 15, at most 180. */
+  arcMaxAngle?: number;
   /** Decoded-text offset of the first byte, for resuming and for testing the 4 GiB rule. Default 0. */
   baseOffset?: number;
 }
@@ -51,7 +58,7 @@ export class GCodeParser {
 
   constructor(opts: ParserOptions = {}) {
     this.writer = new ChunkWriter(opts.chunkMoves ?? 65536);
-    this.machine = new Machine(this.writer, opts.flavour ?? 'marlin');
+    this.machine = new Machine(this.writer, opts.flavour ?? 'marlin', opts.arcTolerance, opts.arcMaxAngle);
     this.tags = new SlicerTags(this.writer, this.machine, opts.flavour !== undefined);
     this.meta = new Metadata(this.writer);
     this.chunkBytes = opts.chunkBytes ?? 4 << 20;

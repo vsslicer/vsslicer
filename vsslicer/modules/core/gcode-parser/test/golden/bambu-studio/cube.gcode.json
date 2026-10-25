@@ -5,10 +5,14 @@
   },
   "slicer": "bambustudio",
   "flavour": "marlin",
-  "moveCount": 6218,
+  "moveCount": 8518,
   "stateChanges": 1881,
   "markers": 121,
   "layerCount": 100,
+  "arcs": {
+    "commands": 100,
+    "segments": 2400
+  },
   "roleHistogram": {
     "Perimeter": 507,
     "ExternalPerimeter": 500,

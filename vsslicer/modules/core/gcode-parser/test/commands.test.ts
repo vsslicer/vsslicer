@@ -120,14 +120,6 @@ describe('G10/G11 firmware retract and G17-19', () => {
     for (const _ of p.feed(encode('G19\nG17\nG19\n'))) void _;
     expect(p.machine.plane).toBe(19);
   });
-  it('G2/G3 record the end point as one Arc move for now (tessellation is GCP-9)', async () => {
-    const r = await run('G1 X0 Y0\nG2 X10 Y0 I5 J0 E1\nG3 X0 Y0 I-5 J0 E2\n');
-    expect(r.moves.slice(1).map((m) => [m.x, m.y, m.flags])).toEqual([
-      [10, 0, MoveFlag.Arc],
-      [0, 0, MoveFlag.Arc],
-    ]);
-    expect(r.e).toEqual([0, 1, 1]);
-  });
 });
 
 describe('tool changes', () => {

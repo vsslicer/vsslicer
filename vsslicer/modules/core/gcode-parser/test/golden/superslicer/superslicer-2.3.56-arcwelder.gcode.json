@@ -5,11 +5,16 @@
   },
   "slicer": "superslicer",
   "flavour": "klipper",
-  "moveCount": 3987,
+  "moveCount": 5875,
   "stateChanges": 1395,
   "markers": 27,
   "layerCount": 25,
+  "arcs": {
+    "commands": 248,
+    "segments": 2136
+  },
   "roleHistogram": {
+    "Perimeter": 734,
     "ExternalPerimeter": 390,
     "OverhangPerimeter": 18,
     "InternalInfill": 398,
@@ -18,12 +23,9 @@
     "BridgeInfill": 11,
     "GapFill": 111,
     "Skirt": 138,
-    "Unknown": 824
+    "InternalBridgeInfill": 90
   },
-  "diagnostics": [
-    "unknown-role",
-    "unknown-role"
-  ],
+  "diagnostics": [],
   "thumbnails": [
     {
       "format": "png",
@@ -67,7 +69,7 @@
       "id": "1",
       "copy": 0,
       "ranges": 25,
-      "moves": 559
+      "moves": 2418
     }
   ],
   "config": {

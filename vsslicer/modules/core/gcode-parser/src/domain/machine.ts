@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { MoveFlag, StateKind } from '@vsslicer/gcode-api';
+import { tessellateArc } from './arc.ts';
 import type { ChunkWriter } from './chunk-writer.ts';
 import type { Tokens } from './tokeniser.ts';
 
@@ -27,6 +28,10 @@ export interface ModalState {
 
 const AXES = ['X', 'Y', 'Z', 'E'] as const;
 const MAX_TOOL = 254;
+/** Chord tolerance (mm) and largest segment angle (degrees) of tessellated arcs. */
+export const DEFAULT_ARC_TOLERANCE = 0.05;
+export const DEFAULT_ARC_MAX_ANGLE = 15;
+const MAX_ARC_DIAGNOSTICS = 100;
 
 /**
  * The modal state machine and the command handlers. Feed it one tokenised line at a time; it
@@ -46,12 +51,23 @@ export class Machine implements ModalState {
   private ePosition = 0;
 
   private readonly out: ChunkWriter;
+  private readonly arcTolerance: number;
+  private readonly arcMaxAngle: number;
+  private arcDiagnostics = 0;
   /** Firmware dialect; the parser sets it when the file names its flavour and no option fixed it. */
   flavour: Flavour;
 
-  constructor(out: ChunkWriter, flavour: Flavour) {
+  constructor(
+    out: ChunkWriter,
+    flavour: Flavour,
+    arcTolerance = DEFAULT_ARC_TOLERANCE,
+    arcMaxAngle = DEFAULT_ARC_MAX_ANGLE,
+  ) {
     this.out = out;
     this.flavour = flavour;
+    this.arcTolerance = arcTolerance > 0 ? arcTolerance : DEFAULT_ARC_TOLERANCE;
+    const degrees = arcMaxAngle > 0 ? Math.min(arcMaxAngle, 180) : DEFAULT_ARC_MAX_ANGLE;
+    this.arcMaxAngle = (degrees * Math.PI) / 180;
   }
 
   get extruderRelative(): boolean {
@@ -65,10 +81,10 @@ export class Machine implements ModalState {
         switch (n) {
           case 0:
           case 1:
-            return this.move(t, fileOffset, false);
+            return this.move(t, fileOffset, null);
           case 2:
           case 3:
-            return this.move(t, fileOffset, true);
+            return this.move(t, fileOffset, n === 2 ? 'cw' : 'ccw');
           case 10:
           case 11:
             if (t.hasParam('P') || t.hasParam('L')) return this.out.marker(t.commandName(), fileOffset); // RRF tool offsets
@@ -104,10 +120,14 @@ export class Machine implements ModalState {
     this.out.marker(t.commandName(), fileOffset);
   }
 
-  private move(t: Tokens, fileOffset: number, arc: boolean): void {
+  private move(t: Tokens, fileOffset: number, arcDirection: 'cw' | 'ccw' | null): void {
     if (t.hasParam('F')) this.feedrate(t.param('F'));
+    const arc = arcDirection !== null;
     const axes = t.hasParam('X') || t.hasParam('Y') || t.hasParam('Z');
-    if (!axes && !t.hasParam('E')) return;
+    // a full circle may have only a centre (G2 I5)
+    const centre = arc && (t.hasParam('I') || t.hasParam('J') || t.hasParam('K') || t.hasParam('R'));
+    if (!axes && !t.hasParam('E') && !centre) return;
+    const start = arc ? [...this.position] : this.position;
     let moved = false;
     for (let a = 0; a < 3; a++) {
       const letter = AXES[a] ?? 'X';
@@ -133,7 +153,40 @@ export class Machine implements ModalState {
     else if (e === 0) flags = MoveFlag.Travel;
     else if (!moved && !arc) flags = MoveFlag.Unretract;
     if (arc) flags |= MoveFlag.Arc;
-    this.out.writeMove(this.position[0], this.position[1], this.position[2], this.tool, flags, fileOffset, e);
+    if (arcDirection === null) {
+      this.out.writeMove(this.position[0], this.position[1], this.position[2], this.tool, flags, fileOffset, e);
+      return;
+    }
+    const opt = (letter: string): number => (t.hasParam(letter) ? t.param(letter) : NaN);
+    const result = tessellateArc({
+      start,
+      end: this.position,
+      plane: this.plane,
+      ijk: [opt('I'), opt('J'), opt('K')],
+      radius: opt('R'),
+      clockwise: arcDirection === 'cw',
+      tolerance: this.arcTolerance,
+      maxAngle: this.arcMaxAngle,
+    });
+    if (!result.ok) {
+      if (this.arcDiagnostics++ < MAX_ARC_DIAGNOSTICS)
+        this.out.diagnostic('arc-invalid', 'warning', fileOffset, `${result.error}; moved straight to the end point`);
+      this.out.writeMove(this.position[0], this.position[1], this.position[2], this.tool, flags, fileOffset, e);
+      return;
+    }
+    // every chord keeps the arc's flag and file offset; E is split evenly (the chords are equally long)
+    const pts = result.points;
+    const n = pts.length / 3;
+    for (let i = 0; i < n; i++)
+      this.out.writeMove(
+        pts[i * 3] ?? 0,
+        pts[i * 3 + 1] ?? 0,
+        pts[i * 3 + 2] ?? 0,
+        this.tool,
+        flags,
+        fileOffset,
+        e / n,
+      );
   }
 
   private firmwareRetract(retract: boolean, fileOffset: number): void {

@@ -10,18 +10,43 @@ import { pieces } from './run.ts';
 const roleName = new Map<number, string>(Object.entries(MoveRole).map(([name, v]) => [v, name]));
 const NOT_EXTRUSION = MoveFlag.Travel | MoveFlag.Retract | MoveFlag.Unretract;
 
-/** Extruding moves per role name (an arc counts as one), in role order. */
+/** Extruding moves per role name, in role order. The chords of one arc count as one move. */
 export function roleHistogram(chunks: readonly Chunk[]): Record<string, number> {
   const counts = new Map<number, number>();
+  let arcAt = -1; // file offset of the arc whose chords were just counted
   for (const c of chunks) {
     const v = new DataView(c.moves);
     for (let i = 0; i < c.moveCount; i++) {
-      if ((v.getUint8(i * MOVE_STRIDE + MoveOffset.flags) & NOT_EXTRUSION) !== 0) continue;
+      const flags = v.getUint8(i * MOVE_STRIDE + MoveOffset.flags);
+      if ((flags & NOT_EXTRUSION) !== 0) continue;
+      if ((flags & MoveFlag.Arc) !== 0) {
+        const at = v.getUint32(i * MOVE_STRIDE + MoveOffset.fileOffset, true);
+        if (at === arcAt) continue;
+        arcAt = at;
+      }
       const role = v.getUint8(i * MOVE_STRIDE + MoveOffset.role);
       counts.set(role, (counts.get(role) ?? 0) + 1);
     }
   }
   return Object.fromEntries([...counts].sort((a, b) => a[0] - b[0]).map(([role, n]) => [roleName.get(role), n]));
+}
+
+/** G2/G3 commands (runs of Arc moves with one file offset) and the moves they became. */
+export function arcSummary(chunks: readonly Chunk[]): { commands: number; segments: number } {
+  let commands = 0;
+  let segments = 0;
+  let arcAt = -1;
+  for (const c of chunks) {
+    const v = new DataView(c.moves);
+    for (let i = 0; i < c.moveCount; i++) {
+      if ((v.getUint8(i * MOVE_STRIDE + MoveOffset.flags) & MoveFlag.Arc) === 0) continue;
+      segments++;
+      const at = v.getUint32(i * MOVE_STRIDE + MoveOffset.fileOffset, true);
+      if (at !== arcAt) commands++;
+      arcAt = at;
+    }
+  }
+  return { commands, segments };
 }
 
 const sha256 = (data: string | Uint8Array): string => createHash('sha256').update(data).digest('hex');
@@ -94,6 +119,7 @@ export const parserSummary: Summariser = async (bytes, file) => {
     stateChanges: chunks.reduce((n, c) => n + c.stateChanges.byteLength / STATE_CHANGE_STRIDE, 0),
     markers: chunks.reduce((n, c) => n + c.markers.length, 0),
     layerCount: chunks.reduce((n, c) => n + c.layers.length, 0),
+    arcs: arcSummary(chunks),
     roleHistogram: roleHistogram(chunks),
     diagnostics: chunks.flatMap((c) => c.diagnostics.map((d) => d.code)),
     ...metadataSummary(chunks),
