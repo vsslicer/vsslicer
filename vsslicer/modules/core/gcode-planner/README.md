@@ -17,7 +17,12 @@ const timing = await runPlanner(constantSpeedPlanner, parsed, limits, { signal, 
   else `config.gcode_flavor`; a missing or unknown name falls back to Marlin with
   `flavourAssumed: true`.
 - `Planner`: `{ name, estimate, plan(parsed, limits): Generator<movesDone, Timing> }`. It writes
-  each move's start time (f32, seconds) into the move record's `startTime` field in place.
+  each move's start time (f32, seconds) into the move record's `startTime` field in place, and
+  yields at least once per move buffer.
+- Limit precedence, per field: override > the file's own limit command (M201/M203/M204/M205 for
+  Marlin, SET_VELOCITY_LIMIT and M204 for Klipper) > config block > flavour default. Planners read
+  limits through `MoveCursor.limit`, and `test/harness.ts` `checkLimitPrecedence` checks it.
+  `sources` and `assumed` describe the starting values only; they do not see in-file commands.
 - `Timing`: `totalTime`, `layerTimes` (per `parsed.layers` row), `roleTimes` (per `MoveRole`,
   non-travel moves) and `travelTime`, all f64; `checkpoints` (`{ move, time, speed }` every
   `checkpointInterval` moves) so a window can be recomputed later without per-move speeds.

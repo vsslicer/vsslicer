@@ -4,7 +4,7 @@
 // Prusa Research, and checked against Marlin@2ef3ee6 (GPL-3.0-or-later, combinable with AGPL-3.0
 // under GPLv3 section 13) Marlin/src/module/planner.cpp and src/gcode/motion/G2_G3.cpp.
 import { MOVE_STRIDE, MoveFlag, MoveOffset, StateKind } from '@vsslicer/gcode-api';
-import type { MachineLimits } from './limits.ts';
+import type { LimitKey, ResolvedLimits } from './limits.ts';
 import { MoveCursor } from './move-cursor.ts';
 import type { Planner } from './planner.ts';
 import { TimingBuilder } from './timing.ts';
@@ -45,7 +45,7 @@ export interface MarlinVariant {
   clampAccel: boolean;
 }
 
-/** Motion settings in force for one move: the file's M201/M203/M204/M205/M900, else the limits. */
+/** Motion settings in force for one move: an override, else the file's M201/M203/M204/M205/M900, else the limits. */
 interface Settings {
   feed: number;
   maxFeed: number[];
@@ -380,24 +380,28 @@ class Machine {
 }
 
 /** The settings in force for the cursor's current move. */
-function settings(cur: MoveCursor, l: MachineLimits, v: MarlinVariant): Settings {
-  const st = (kind: StateKind, i: number, fallback: number) => cur.state(kind, i, fallback);
-  const per = (kind: StateKind, f: [number, number, number, number]) => f.map((x, i) => st(kind, i, x));
+function settings(cur: MoveCursor, r: ResolvedLimits, v: MarlinVariant): Settings {
+  const l = r.limits;
+  const lim = (key: LimitKey, kind: StateKind, i = 0, fallback?: number) => cur.limit(r, key, kind, i, fallback);
+  const per = (kind: StateKind, keys: [LimitKey, LimitKey, LimitKey, LimitKey]) => keys.map((k, i) => lim(k, kind, i));
   // shortcut: state() hides the order of M204 S and P/T, so P/T win when both are set; fine for slicer output.
-  const s = st(StateKind.Accel, 0, NaN);
+  const s = cur.state(StateKind.Accel, 0, NaN);
   const clamp = (x: number, max: number) => (v.clampAccel && max > 0 ? Math.min(x, max) : x);
   return {
-    feed: st(StateKind.Feedrate, 0, BOOT_FEEDRATE),
-    maxFeed: per(StateKind.MaxFeedrate, [l.maxFeedrateX, l.maxFeedrateY, l.maxFeedrateZ, l.maxFeedrateE]),
-    maxAccel: per(StateKind.MaxAccel, [l.maxAccelX, l.maxAccelY, l.maxAccelZ, l.maxAccelE]),
-    jerk: per(StateKind.Jerk, [l.jerkX, l.jerkY, l.jerkZ, l.jerkE]),
-    jd: st(StateKind.JunctionDeviation, 0, l.junctionDeviation),
-    accelPrint: clamp(st(StateKind.AccelPrint, 0, Number.isNaN(s) ? l.accelPrint : s), l.accelPrint),
-    accelRetract: clamp(st(StateKind.AccelRetract, 0, l.accelRetract), l.accelRetract),
-    accelTravel: clamp(st(StateKind.AccelTravel, 0, Number.isNaN(s) ? l.accelTravel : s), l.accelTravel),
-    minFeed: st(StateKind.MinFeedrate, 0, l.minFeedrate),
-    minTravel: st(StateKind.MinTravelFeedrate, 0, l.minTravelFeedrate),
-    advanceK: st(StateKind.PressureAdvance, cur.tool, 0),
+    feed: cur.state(StateKind.Feedrate, 0, BOOT_FEEDRATE),
+    maxFeed: per(StateKind.MaxFeedrate, ['maxFeedrateX', 'maxFeedrateY', 'maxFeedrateZ', 'maxFeedrateE']),
+    maxAccel: per(StateKind.MaxAccel, ['maxAccelX', 'maxAccelY', 'maxAccelZ', 'maxAccelE']),
+    jerk: per(StateKind.Jerk, ['jerkX', 'jerkY', 'jerkZ', 'jerkE']),
+    jd: lim('junctionDeviation', StateKind.JunctionDeviation),
+    accelPrint: clamp(lim('accelPrint', StateKind.AccelPrint, 0, Number.isNaN(s) ? l.accelPrint : s), l.accelPrint),
+    accelRetract: clamp(lim('accelRetract', StateKind.AccelRetract), l.accelRetract),
+    accelTravel: clamp(
+      lim('accelTravel', StateKind.AccelTravel, 0, Number.isNaN(s) ? l.accelTravel : s),
+      l.accelTravel,
+    ),
+    minFeed: lim('minFeedrate', StateKind.MinFeedrate),
+    minTravel: lim('minTravelFeedrate', StateKind.MinTravelFeedrate),
+    advanceK: cur.state(StateKind.PressureAdvance, cur.tool, 0),
   };
 }
 
@@ -501,17 +505,12 @@ export function marlinFamilyPlanner(variant: MarlinVariant): Planner {
             arc = {
               offset,
               points: [[cur.x - cur.dx, cur.y - cur.dy, cur.z - cur.dz, 0]],
-              s: settings(cur, limits.limits, variant),
+              s: settings(cur, limits, variant),
             };
           end[3] = arc.points.at(-1)![3] + cur.e;
           arc.points.push(end);
         } else
-          m.segment(
-            m.group([cur.length]),
-            [cur.dx, cur.dy, cur.dz, cur.e],
-            settings(cur, limits.limits, variant),
-            NO_HINT,
-          );
+          m.segment(m.group([cur.length]), [cur.dx, cur.dy, cur.dz, cur.e], settings(cur, limits, variant), NO_HINT);
         if (cur.bufferEnd) yield out.count;
       }
       flush();

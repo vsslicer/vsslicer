@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { MOVE_STRIDE, MoveOffset, STATE_CHANGE_STRIDE, StateChangeOffset } from '@vsslicer/gcode-api';
 import type { MoveRole, ParsedFile, StateKind } from '@vsslicer/gcode-api';
+import type { LimitKey, ResolvedLimits } from './limits.ts';
 
 /**
  * Walks a parsed file's moves in order across its chunk buffers, carrying the start position over
@@ -48,6 +49,15 @@ export class MoveCursor {
   /** The value of `kind` (for `index`) in force for the current move, or `fallback` if none was set yet. */
   state(kind: StateKind, index = 0, fallback = NaN): number {
     return this.values.get(kind * 256 + index) ?? fallback;
+  }
+
+  /**
+   * The limit `key` in force for the current move, by the rule in planner.ts: a user override beats
+   * the file's own command (`kind`, `index`), which beats the config block and the flavour default.
+   * `fallback` is used before the file sets `kind`; it defaults to the resolved value.
+   */
+  limit(r: ResolvedLimits, key: LimitKey, kind: StateKind, index = 0, fallback = r.limits[key]): number {
+    return r.sources[key] === 'override' ? r.limits[key] : this.state(kind, index, fallback);
   }
 
   /** Steps to the next move; false at the end. */

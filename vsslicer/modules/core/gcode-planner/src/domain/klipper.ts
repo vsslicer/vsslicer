@@ -249,12 +249,13 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
           else if (extra) lead += extra;
         }
         // SET_VELOCITY_LIMIT and M204 (toolhead.py:534-616): new moves only, no flush.
-        const v = cur.state(StateKind.MaxVelocity, 0, th.maxVelocity);
-        const s = cur.state(StateKind.Accel, 0, NaN);
-        const p = cur.state(StateKind.AccelPrint, 0, NaN);
-        const t = cur.state(StateKind.AccelTravel, 0, NaN);
-        const nScv = cur.state(StateKind.SquareCornerVelocity, 0, scv);
-        const nMcr = cur.state(StateKind.MinCruiseRatio, 0, mcr);
+        // An `accel` override pins S, P and T to it, so M204 never changes the accel.
+        const v = cur.limit(resolved, 'maxVelocity', StateKind.MaxVelocity, 0, th.maxVelocity);
+        const s = cur.limit(resolved, 'accel', StateKind.Accel, 0, NaN);
+        const p = cur.limit(resolved, 'accel', StateKind.AccelPrint, 0, NaN);
+        const t = cur.limit(resolved, 'accel', StateKind.AccelTravel, 0, NaN);
+        const nScv = cur.limit(resolved, 'squareCornerVelocity', StateKind.SquareCornerVelocity, 0, scv);
+        const nMcr = cur.limit(resolved, 'minCruiseRatio', StateKind.MinCruiseRatio, 0, mcr);
         let accel = th.maxAccel;
         if (s !== lastAccel && s > 0) accel = s;
         else if ((p !== lastP || t !== lastT) && p > 0 && t > 0) accel = Math.min(p, t); // M204 P T: the lower one

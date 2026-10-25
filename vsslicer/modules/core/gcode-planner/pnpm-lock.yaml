@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vsslicer/gcode-api':
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.4.1
+        version: 0.4.1
     devDependencies:
       '@types/node':
         specifier: 24.19.2
@@ -972,8 +972,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/gcode-api@0.4.0':
-    resolution: {integrity: sha512-BPSEOe5F6jrBB65nIWM/S9+UTZAWIruS7dg5p1Y745h9ABuExG0GJyl+3UKuedLvdPtrzqSyapJopRyZVDTaIw==}
+  '@vsslicer/gcode-api@0.4.1':
+    resolution: {integrity: sha512-7bNnCZvXQAxnD6EqLt19U8ESnwAUGCLhFLbFm7pTLZLREYyzmGFoKWVZREeRck0zzHdr0P6iwn4t5fIuYIzNQg==}
     engines: {node: '>=24'}
 
   '@vsslicer/tooling@0.8.1':
@@ -3325,7 +3325,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/gcode-api@0.4.0': {}
+  '@vsslicer/gcode-api@0.4.1': {}
 
   '@vsslicer/tooling@0.8.1(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:

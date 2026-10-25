@@ -18,7 +18,7 @@ import {
   resolveLimits,
 } from '../src/index.ts';
 import type { MachineLimits, Planner } from '../src/index.ts';
-import { checkPlanner, fixture, sampleFile } from './harness.ts';
+import { checkLimitPrecedence, checkPlanner, fixture, sampleFile } from './harness.ts';
 import type { FixtureMove } from './harness.ts';
 
 /** One-buffer file with the state-change table `changes`; moves with the same `arc` id share a fileOffset. */
@@ -62,6 +62,25 @@ describe('marlin planner', () => {
   it('passes the planner harness, both variants', () => {
     expect(checkPlanner(marlinPlanner).estimate).toBe(false);
     expect(checkPlanner(buddyPlanner).planner).toBe('prusa-buddy');
+  });
+
+  it('ranks override > M201/M203/M204 > config, both variants', () => {
+    for (const p of [marlinPlanner, buddyPlanner]) {
+      checkLimitPrecedence(p, {
+        flavour: 'marlin',
+        key: 'maxFeedrateX',
+        kind: StateKind.MaxFeedrate,
+        values: [50, 100],
+      });
+      checkLimitPrecedence(p, { flavour: 'marlin', key: 'maxAccelX', kind: StateKind.MaxAccel, values: [200, 800] });
+    }
+    // Not for Buddy: it clamps M204 to the configured maxima, so the config value is a ceiling there.
+    checkLimitPrecedence(marlinPlanner, {
+      flavour: 'marlin',
+      key: 'accelTravel',
+      kind: StateKind.AccelTravel,
+      values: [200, 800],
+    });
   });
 
   it('gives the same result whatever the chunking', () => {

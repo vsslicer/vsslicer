@@ -11,9 +11,9 @@ import {
   writeMove,
   writeStateChange,
 } from '@vsslicer/gcode-api';
-import type { Layer, ParsedFile } from '@vsslicer/gcode-api';
+import type { Layer, ParsedFile, StateChange } from '@vsslicer/gcode-api';
 import { planSync, resolveLimits } from '../src/index.ts';
-import type { Planner, Timing } from '../src/index.ts';
+import type { Flavour, LimitKey, LimitSource, Planner, ResolvedLimits, Timing } from '../src/index.ts';
 
 export interface FixtureMove {
   x: number;
@@ -24,8 +24,21 @@ export interface FixtureMove {
   role?: number;
 }
 
-/** Builds a ParsedFile from moves, cut into buffers of `chunk` moves, with F changes `[moveIndex, mm/s]`. */
-export function fixture(moves: FixtureMove[], feeds: [number, number][], layers: Layer[], chunk = 3): ParsedFile {
+/**
+ * Builds a ParsedFile from moves, cut into buffers of `chunk` moves, with F changes `[moveIndex, mm/s]`
+ * and any other state changes in `states`.
+ */
+export function fixture(
+  moves: FixtureMove[],
+  feeds: [number, number][],
+  layers: Layer[],
+  chunk = 3,
+  states: StateChange[] = [],
+): ParsedFile {
+  const changes = [
+    ...feeds.map(([moveIndex, value]) => ({ moveIndex, kind: StateKind.Feedrate, index: 0, value })),
+    ...states,
+  ].sort((a, b) => a.moveIndex - b.moveIndex);
   const parsed: ParsedFile = {
     slicer: 'unknown',
     moveCount: moves.length,
@@ -61,11 +74,9 @@ export function fixture(moves: FixtureMove[], feeds: [number, number][], layers:
     });
     parsed.moves.push(buf);
     parsed.extrusion.push(ext);
-    const own = feeds.filter(([at]) => at >= first && at < first + chunk);
+    const own = changes.filter((c) => c.moveIndex >= first && c.moveIndex < first + chunk);
     const sc = new ArrayBuffer(own.length * STATE_CHANGE_STRIDE);
-    own.forEach(([at, f], i) =>
-      writeStateChange(new DataView(sc), i, { moveIndex: at, kind: StateKind.Feedrate, index: 0, value: f }),
-    );
+    own.forEach((c, i) => writeStateChange(new DataView(sc), i, c));
     parsed.stateChanges.push(sc);
   }
   return parsed;
@@ -109,7 +120,13 @@ function startTimes(parsed: ParsedFile): number[] {
 /** Runs `planner` on the sample and checks every invariant of the contract; returns the Timing. */
 export function checkPlanner(planner: Planner, parsed = sampleFile()): Timing {
   const limits = resolveLimits({ flavour: 'marlin' });
-  const timing = planSync(planner, parsed, limits);
+  const it = planner.plan(parsed, limits);
+  let yields = 0;
+  let r = it.next();
+  for (; !r.done; r = it.next()) yields++;
+  const timing = r.value;
+  // The contract: at least one yield per non-empty move buffer, so runPlanner can slice and abort.
+  expect(yields).toBeGreaterThanOrEqual(parsed.moves.filter((b) => b.byteLength > 0).length);
   expect(timing.planner).toBe(planner.name);
   expect(timing.limits).toBe(limits);
 
@@ -133,4 +150,38 @@ export function checkPlanner(planner: Planner, parsed = sampleFile()): Timing {
     expect(c.speed).toBeGreaterThanOrEqual(0);
   });
   return timing;
+}
+
+export interface PrecedenceCase {
+  flavour: Flavour;
+  /** A limit the planner reads, and the in-file command that sets it. */
+  key: LimitKey;
+  kind: StateKind;
+  index?: number;
+  /** Two values far enough apart, and low enough, to change a 100 mm travel's time. */
+  values: [number, number];
+}
+
+/**
+ * The precedence rule every planner obeys (planner.ts): an override beats the file's own limit
+ * command, and the file's command beats a config-block (or default) value.
+ */
+export function checkLimitPrecedence(
+  planner: Planner,
+  { flavour, key, kind, index = 0, values: [a, b] }: PrecedenceCase,
+): void {
+  const time = (source: LimitSource, value: number, inFile?: number): number => {
+    const base = resolveLimits({ flavour });
+    const limits: ResolvedLimits = {
+      ...base,
+      limits: { ...base.limits, [key]: value },
+      sources: { ...base.sources, [key]: source },
+    };
+    const states = inFile === undefined ? [] : [{ moveIndex: 0, kind, index, value: inFile }];
+    const parsed = fixture([{ x: 100, y: 0, flags: MoveFlag.Travel, role: MoveRole.None }], [[0, 1000]], [], 3, states);
+    return planSync(planner, parsed, limits).totalTime;
+  };
+  expect(time('config', a)).not.toBeCloseTo(time('config', b), 6);
+  expect(time('config', a, b)).toBeCloseTo(time('config', b), 9);
+  expect(time('override', a, b)).toBeCloseTo(time('override', a), 9);
 }

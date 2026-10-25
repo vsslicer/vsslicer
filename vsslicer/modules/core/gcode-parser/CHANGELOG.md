@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.5
+
+- Re-lock to gcode-api 0.4.1 (PLT-180 follow-up).
+
 ## 0.8.4
 
 - Fix (GCP-81): the summary `extruders` array is dense. A slot whose values are all unparseable (`; filament used [mm] = nan, 120.5`, `= 1,,3`) is `{}` instead of a hole (`undefined`, `null` in JSON), so `for (const e of extruders)` no longer throws.

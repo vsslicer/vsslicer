@@ -11,7 +11,7 @@ import {
 import type { ParsedFile, StateChange } from '@vsslicer/gcode-api';
 import { createKlipperPlanner, klipperPlanner, planSync, resolveLimits } from '../src/index.ts';
 import type { MachineLimits, Planner } from '../src/index.ts';
-import { checkPlanner, fixture, sampleFile } from './harness.ts';
+import { checkLimitPrecedence, checkPlanner, fixture, sampleFile } from './harness.ts';
 import type { FixtureMove } from './harness.ts';
 
 /** One-buffer file whose state-change table is `changes` (sorted by move). */
@@ -33,6 +33,8 @@ const feed = (moveIndex: number, value: number): StateChange => ({
 
 function run(parsed: ParsedFile, override: Partial<MachineLimits> = {}, planner: Planner = klipperPlanner) {
   const limits = resolveLimits({ flavour: 'klipper', override: { accel: 1000, maxVelocity: 300, ...override } });
+  // accel and max_velocity stand in for printer.cfg, so the file's SET_VELOCITY_LIMIT / M204 still win.
+  for (const k of ['accel', 'maxVelocity'] as const) if (!(k in override)) limits.sources[k] = 'config';
   return planSync(planner, parsed, limits);
 }
 
@@ -53,6 +55,12 @@ const corner = (): ParsedFile =>
 describe('klipper planner', () => {
   it('passes the planner harness', () => {
     expect(checkPlanner(klipperPlanner).estimate).toBe(false);
+  });
+
+  it('ranks override > SET_VELOCITY_LIMIT / M204 > config', () => {
+    const p = klipperPlanner;
+    checkLimitPrecedence(p, { flavour: 'klipper', key: 'maxVelocity', kind: StateKind.MaxVelocity, values: [50, 100] });
+    checkLimitPrecedence(p, { flavour: 'klipper', key: 'accel', kind: StateKind.Accel, values: [200, 800] });
   });
 
   it('times a single move as a constant-accel trapezoid', () => {

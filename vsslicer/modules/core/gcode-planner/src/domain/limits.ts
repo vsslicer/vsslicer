@@ -57,8 +57,16 @@ export interface ResolvedLimits {
   /** The name the flavour was resolved from, when there was one. */
   flavourName?: string;
   limits: MachineLimits;
+  /**
+   * Where each starting value came from. A non-`override` value can still be replaced mid-file by
+   * the file's own limit commands (see `Planner`); an `override` never is.
+   */
   sources: Record<LimitKey, LimitSource>;
-  /** A field this flavour reads came from the flavour defaults, not the user or the file. */
+  /**
+   * A field this flavour reads came from the flavour defaults, not the user or the config block.
+   * It does not look at in-file limit commands, so a file that sets its limits (SET_VELOCITY_LIMIT,
+   * M201...) is still reported as assumed.
+   */
   assumed: boolean;
 }
 
@@ -82,9 +90,8 @@ export const FLAVOUR_FIELDS: Record<Flavour, readonly LimitKey[]> = {
   reprapfirmware: [...axes('maxFeedrate'), ...axes('maxAccel'), ...axes('jerk'), 'accelPrint', 'accelTravel'],
 };
 
-// Marlin JD 0.013 and classic jerk X/Y 10, Z 0.3, E 5: Marlin@2ef3ee6:Marlin/Configuration.h:1413-1445
-// (docs/research/gcode-viewer-simulation.md). shortcut: the feedrate and accel values are unverified
-// Marlin Configuration.h defaults; GCP-24 checks them.
+// Marlin@2ef3ee6:Marlin/Configuration.h: max feedrate :1373, max accel :1386, accel P/R/T :1401-1403,
+// JD 0.013 and classic jerk X/Y 10, Z 0.3, E 5 :1413-1445 (checked by GCP-24).
 const MARLIN: MachineLimits = {
   maxFeedrateX: 300,
   maxFeedrateY: 300,
@@ -181,7 +188,7 @@ export interface LimitInputs {
   override?: Partial<MachineLimits>;
 }
 
-/** Resolves each limit from the override, then the file's config block, then the flavour defaults. */
+/** Resolves each limit from the override, then the file's config block, then the flavour defaults; planners apply in-file commands on top. */
 export function resolveLimits({ flavour, config = {}, override = {} }: LimitInputs): ResolvedLimits {
   const flavourName = flavour ?? config['gcode_flavor'];
   const known = flavourName === undefined ? undefined : flavourFromName(flavourName);

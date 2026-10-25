@@ -11,6 +11,12 @@ import type { Timing } from './timing.ts';
  * number of moves done (at least once per move buffer) and returns the {@link Timing}. It writes
  * start times into `parsed.moves` in place. Run it with `runPlanner` (cancellable, progress) or
  * `planSync`.
+ *
+ * Limit precedence, per field: user override > the file's own limit command (M201/M203/M204/M205,
+ * SET_VELOCITY_LIMIT, whichever the firmware honours) > config block > flavour default. The last
+ * two are already folded into `ResolvedLimits`; a planner reads every limit through
+ * `MoveCursor.limit` so the rule lives in one place. A firmware may further cap a file value by
+ * the configured one (Buddy clamps M204); that is the firmware's behaviour, not a precedence change.
  */
 export interface Planner {
   /** Stable id, copied to `Timing.planner`. */
