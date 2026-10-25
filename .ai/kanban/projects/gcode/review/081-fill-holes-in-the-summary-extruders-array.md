@@ -15,15 +15,15 @@ Module: gcode-parser. Finding 5 of the SP2 audit, `.ai/audits/SP2-audit.md` (det
 
 ## Acceptance criteria
 
-- [ ] `filament used [mm] = nan, 120.5` and `= 1,,3` yield a dense `extruders` array with `{}` for unknown slots (test first)
-- [ ] `for...of` over every corpus summary works
+- [x] `filament used [mm] = nan, 120.5` and `= 1,,3` yield a dense `extruders` array with `{}` for unknown slots (test first)
+- [x] `for...of` over every corpus summary works
 
 ## Tasks
 
-- [ ] Write the failing test
-- [ ] Fix
-- [ ] Release a patch version of each changed module
+- [x] Write the failing test
+- [x] Fix
+- [x] Release a patch version of each changed module
 
 ## Progress
 
-Not started.
+Done in gcode-parser 0.8.4 (published).
