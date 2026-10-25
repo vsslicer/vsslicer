@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Fix (GCP-24 review): the Marlin and Buddy lookahead window is the busy block plus 14, as Marlin's ring holds BLOCK_BUFFER_SIZE - 1 blocks including the busy one (Marlin@2ef3ee6 `planner.h:917`); it was one block deeper. The steady-state lookahead test now pins the exact time. Header says the port follows PrusaSlicer, not Marlin's kennovo correction or `minimum_planner_speed_sqr`.
+
 ## 0.2.0
 
 - GCP-20: Klipper planner, ported from klipper@ee2c6fb `klippy/toolhead.py`: `klipperPlanner` and `createKlipperPlanner(KlipperOptions)`. Constant-accel trapezoids, junction deviation from `square_corner_velocity`, centripetal cap, `minimum_cruise_ratio`, lazy time-based lookahead flush and a full flush at G4/M400, SET_VELOCITY_LIMIT, M204 S / min(P, T), Z and extrude-only limits, E junction, firmware retraction (G10/G11), macro time via `addTime`. M201/M203/M205 are ignored. Not yet: `[gcode_arcs] resolution` segmentation and `; ESTIMATOR_ADD_TIME` from the file.

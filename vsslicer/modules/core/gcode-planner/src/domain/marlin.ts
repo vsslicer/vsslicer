@@ -3,6 +3,9 @@
 // src/libpgcode/src/Slic3r/Biz/libpgcode/{TimeBlock,TimeMachine,ProcessorImpl}.cpp, Copyright (c)
 // Prusa Research, and checked against Marlin@2ef3ee6 (GPL-3.0-or-later, combinable with AGPL-3.0
 // under GPLv3 section 13) Marlin/src/module/planner.cpp and src/gcode/motion/G2_G3.cpp.
+// Where they differ it follows PrusaSlicer: no kennovo junction correction (Marlin@2ef3ee6:
+// planner.cpp:2618-2633) and no minimum_planner_speed_sqr floor. The lookahead depth follows Marlin
+// (see segment), not PrusaSlicer@30ef591 batching 256 blocks and keeping 64 (…/libpgcode/TimeProcessor.hpp:14-17).
 import { MOVE_STRIDE, MoveFlag, MoveOffset, StateKind } from '@vsslicer/gcode-api';
 import type { LimitKey, ResolvedLimits } from './limits.ts';
 import { MoveCursor } from './move-cursor.ts';
@@ -281,7 +284,10 @@ class Machine {
     this.prevSafe = safe;
 
     g.pending++;
-    if (this.blocks.length === BLOCK_BUFFER_SIZE) this.retire();
+    // The ring holds BLOCK_BUFFER_SIZE - 1 blocks including the busy one (moves_free(),
+    // Marlin@2ef3ee6:Marlin/src/module/planner.h:901,917), so blocks[0] stands in for the busy block
+    // and 14 follow it. Buddy uses the same depth (its own BLOCK_BUFFER_SIZE is unverified).
+    if (this.blocks.length === BLOCK_BUFFER_SIZE - 1) this.retire();
     this.blocks.push(b);
     this.recalculate();
   }
@@ -368,6 +374,8 @@ class Machine {
         return [tBefore + t, v];
       };
       let [t0, v0] = timeAt(0);
+      // The parser's chords and the firmware's blocks split the arc differently: each chord ends at its
+      // arc-length fraction of the blocks' total distance, and takes the block time up to that point.
       chords.forEach((c, k) => {
         cum += c;
         const end = k === chords.length - 1 ? total : len > 0 ? (cum / len) * total : ((k + 1) / chords.length) * total;

@@ -152,9 +152,10 @@ describe('marlin planner', () => {
     });
 
     it('caps speed to what the 16-block window can stop from', () => {
-      // 100 x 1 mm at 100 mm/s^2: the window is 16 mm, so v <= sqrt(2 * 100 * 16) = 56.6 mm/s.
+      // 100 x 1 mm at 100 mm/s^2: the ring holds 15 blocks with the busy one (planner.h:917), so 14 mm
+      // follow it and v <= sqrt(2 * 100 * 14) = 52.9 mm/s. A 15 mm window (the old depth) gives 2.363 s.
       const t = run(line(100, 1), { accelTravel: 100 }).totalTime;
-      expect(t).toBeGreaterThan(100 / Math.sqrt(2 * 100 * 16));
+      expect(t).toBeCloseTo(2.407036, 5);
       expect(t).toBeGreaterThan(run(line(1, 100), { accelTravel: 100 }).totalTime + 0.1);
     });
   });

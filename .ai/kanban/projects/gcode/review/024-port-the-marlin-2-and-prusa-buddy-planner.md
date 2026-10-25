@@ -36,3 +36,9 @@ Marlin@2ef3ee6 previous_nominal_speed in the junction cap, LA cap, G2/G3 segment
 The parser's arc chords are refitted to the circle and re-segmented as the firmware does. Notes:
 `.reference/notes/GCP-24-marlin-planner.md`. Open: oracle comparison against PrusaSlicer M73 times on
 the golden corpus (GCP-23); M204 S vs P/T order (shortcut, needs ordered state).
+
+w-marlin-fix (review fix, 0.2.1): lookahead window is now the busy block plus 14, as Marlin's ring holds
+BLOCK_BUFFER_SIZE - 1 including the busy one (Marlin@2ef3ee6 `planner.h:917`); both variants use it
+(PrusaSlicer batches 256/keeps 64 and does not model the ring; Buddy's own buffer size unverified). The
+lookahead test pins 2.407036 s (old depth: 2.362988 s, fails). Header and chord-mapping comments added.
+Published `@vsslicer/gcode-planner@0.2.1`.
