@@ -8,6 +8,7 @@ model: opus
 area: [history, bambu]
 story: US51
 milestone: "VSS:M4"
+sprint: "VSS:SP22"
 depends_on: [180, VWR-74, 48]
 created: 2026-10-25
 ---

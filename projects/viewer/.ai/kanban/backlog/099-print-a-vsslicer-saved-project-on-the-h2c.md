@@ -8,6 +8,7 @@ model: opus
 area: [3mf]
 story: US30
 milestone: "VSS:M4"
+sprint: "VSS:SP18"
 depends_on: [91, SLC-42, PRN-48]
 created: 2026-10-25
 ---

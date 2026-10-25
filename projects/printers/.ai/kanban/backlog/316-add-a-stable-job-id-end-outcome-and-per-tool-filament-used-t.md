@@ -8,6 +8,7 @@ model: sonnet
 area: [api]
 story: "FIL:US13"
 milestone: "VSS:M4"
+sprint: "VSS:SP17"
 created: 2026-10-25
 ---
 

@@ -8,6 +8,7 @@ model: opus
 area: [camera, daemon]
 story: US44
 milestone: "VSS:M4"
+sprint: "VSS:SP20"
 depends_on: [253, SLC-14, 261]
 created: 2026-10-25
 ---

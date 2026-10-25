@@ -8,6 +8,7 @@ model: opus
 area: [camera]
 story: US45
 milestone: "VSS:M4"
+sprint: "VSS:SP21"
 depends_on: [294, 277, 253, 273]
 created: 2026-10-25
 ---

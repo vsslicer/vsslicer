@@ -8,6 +8,7 @@ model: sonnet
 area: [plates]
 story: US55
 milestone: "VSS:M4"
+sprint: "VSS:SP20"
 depends_on: [183, 108, PRF-142, PRF-144]
 created: 2026-10-25
 ---

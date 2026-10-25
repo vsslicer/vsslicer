@@ -8,6 +8,7 @@ model: opus
 area: [daemon, fleet]
 story: US55
 milestone: "VSS:M4"
+sprint: "VSS:SP24"
 depends_on: [217, 218, 208, 168]
 created: 2026-10-25
 ---

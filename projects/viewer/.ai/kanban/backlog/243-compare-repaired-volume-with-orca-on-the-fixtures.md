@@ -8,6 +8,7 @@ model: sonnet
 area: [mesh, repair]
 story: US64
 milestone: "VSS:M4"
+sprint: "VSS:SP22"
 depends_on: [241, 228]
 created: 2026-10-25
 ---

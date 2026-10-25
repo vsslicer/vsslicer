@@ -8,6 +8,7 @@ model: sonnet
 area: [import, ui]
 story: US6
 milestone: "VSS:M4"
+sprint: "VSS:SP17"
 depends_on: [16, 21, 33]
 created: 2026-10-25
 ---

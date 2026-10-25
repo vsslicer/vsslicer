@@ -2,8 +2,8 @@
 id: M4
 title: Daily use
 status: draft
-start: "2026-10-28T08:15+00:00"
-due: "2026-10-30T00:15+00:00"
+start: "2026-10-27T01:15+00:00"
+due: "2026-10-27T19:15+00:00"
 initiatives: "I6, I7, I8, I9"
 ---
 
