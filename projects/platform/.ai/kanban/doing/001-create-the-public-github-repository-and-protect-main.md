@@ -9,6 +9,7 @@ area: [monorepo]
 story: US1
 milestone: "VSS:M1"
 sprint: "VSS:SP2"
+owner: PLT-1-worker
 created: 2026-10-25
 ---
 
@@ -29,4 +30,11 @@ Gives the project its remote (D10): public so CI minutes are free and the AGPL s
 
 ## Progress
 
-Not started.
+Local parts done (not verified on GitHub; nothing created or pushed). Waiting on owner answer to Q7.
+
+- `.github/rulesets/main.json`: PR required, required check `ci` (PLT-9 must name its job `ci`), force-push and deletion blocked. JSON parses.
+- `vsslicer/tools/github/apply-repo-settings.sh [--dry-run] <owner/repo>`: enables issues, disables wiki, POSTs the ruleset. Dry-run output checked; never run for real.
+- `.github/ISSUE_TEMPLATE/`: bug_report.yml, feature_request.yml, config.yml.
+- Text for CONTRIBUTING.md "Repository" section is in `.reference/notes/PLT-1-github-repo.md` (PLT-6 owns the file).
+
+Remaining: create the public repo and push (after Q7), run the apply script, confirm GitHub detects AGPL-3.0, record the URL in CONTRIBUTING.md.

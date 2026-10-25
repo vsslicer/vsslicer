@@ -1,0 +1,12 @@
+{
+  "name": "@vsslicer/example",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "node --check src/index.js && node --check src/domain/greeting.js",
+    "build": "node ../../tools/copy-src.mjs",
+    "test": "node --test test/"
+  }
+}
