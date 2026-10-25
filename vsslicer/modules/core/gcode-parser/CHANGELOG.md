@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- Slicer detection (`Chunk.slicer`: PrusaSlicer, SuperSlicer, OrcaSlicer, Bambu Studio, Cura) and flavour detection (`; gcode_flavor =`, Cura `;FLAVOR:`) from header and config comments. The `flavour` option is now an override: option, else detected, else `marlin`.
+- Roles: `;TYPE:` and `; FEATURE:` names (PrusaSlicer, Orca, Bambu, Cura tables, ported with provenance) are written into each move's `role`; untagged files and unknown names give `Unknown` (`unknown-role` warning per distinct name).
+- Layers: `;LAYER_CHANGE`, `; CHANGE_LAYER`, `;LAYER:` fill `Chunk.layers` (`z` from `;Z:` / `; Z_HEIGHT:` or the first extrusion).
+- A file with moves but no role or layer tags gets one `no-slicer-tags` info diagnostic.
+- Goldens gain `slicer`, `flavour`, `layerCount`, `roleHistogram`.
+- Dev: `@vsslicer/tooling` ^0.6.0.
+
 ## 0.2.1
 
 - Fix: G91 makes E relative whatever an earlier M82 said (PrusaSlicer rule); M83 stays relative under G90 (Marlin would revert to absolute).

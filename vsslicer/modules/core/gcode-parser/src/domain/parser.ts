@@ -3,10 +3,15 @@ import type { Chunk, Slicer } from '@vsslicer/gcode-api';
 import { ChunkWriter } from './chunk-writer.ts';
 import { Machine } from './machine.ts';
 import type { Flavour } from './machine.ts';
+import { SlicerTags } from './slicer-tags.ts';
 import { Tokens } from './tokeniser.ts';
 
 export interface ParserOptions {
-  /** Firmware dialect for flavour-dependent units. Default `marlin` (GCP-4 will detect it). */
+  /**
+   * Firmware dialect for flavour-dependent units. Overrides detection; when absent the parser uses
+   * the flavour the file names (`;FLAVOR:`, `; gcode_flavor =`) from that line on, and `marlin`
+   * before that and when the file names none.
+   */
   flavour?: Flavour;
   /** A chunk ends after this many moves. Default 65536 (about 2.2 MB of buffers). */
   chunkMoves?: number;
@@ -27,6 +32,7 @@ const BOM = [0xef, 0xbb, 0xbf];
  */
 export class GCodeParser {
   readonly machine: Machine;
+  private readonly tags: SlicerTags;
   private readonly writer: ChunkWriter;
   private readonly tokens = new Tokens();
   private readonly chunkBytes: number;
@@ -38,18 +44,28 @@ export class GCodeParser {
   private skipping = false;
   /** True once the parse has ended early (4 GiB offset overflow); further input is ignored. */
   done = false;
-  slicer: Slicer = 'unknown';
   /** Leading UTF-8 BOM bytes still to match; 0 once past it (or when resuming at a base offset). */
   private bomLeft = 3;
 
   constructor(opts: ParserOptions = {}) {
     this.writer = new ChunkWriter(opts.chunkMoves ?? 65536);
     this.machine = new Machine(this.writer, opts.flavour ?? 'marlin');
+    this.tags = new SlicerTags(this.writer, this.machine, opts.flavour !== undefined);
     this.chunkBytes = opts.chunkBytes ?? 4 << 20;
     this.base = opts.baseOffset ?? 0;
     this.offset = this.base;
     this.chunkStart = this.base;
     if (this.base > 0) this.bomLeft = 0;
+  }
+
+  /** Detected slicer; `unknown` until the header has been read. */
+  get slicer(): Slicer {
+    return this.tags.slicer;
+  }
+
+  /** The flavour units are read with now: the option, else the detected one, else `marlin`. */
+  get flavour(): Flavour {
+    return this.machine.flavour;
   }
 
   *feed(input: Uint8Array): Generator<Chunk> {
@@ -101,6 +117,7 @@ export class GCodeParser {
     }
     this.carry = null;
     this.offset += this.skipped;
+    this.tags.finish(this.offset);
     yield this.take();
   }
 
@@ -142,5 +159,6 @@ export class GCodeParser {
     let end = length;
     if (end > 0 && buf[end - 1] === 0x0d) end--;
     if (this.tokens.tokenise(buf, 0, end)) this.machine.handle(this.tokens, this.offset);
+    else this.tags.handle(buf, end, this.offset);
   }
 }

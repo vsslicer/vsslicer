@@ -7,7 +7,7 @@ import {
   StateChangeOffset,
   StateKind,
 } from '@vsslicer/gcode-api';
-import type { Chunk, Diagnostic, Marker, Slicer } from '@vsslicer/gcode-api';
+import type { Chunk, Diagnostic, Layer, Marker, Slicer } from '@vsslicer/gcode-api';
 
 const INITIAL_MOVES = 1024;
 const KINDS = 32;
@@ -34,6 +34,13 @@ export class ChunkWriter {
   private changeCount = 0;
   private markers: Marker[] = [];
   private diagnostics: Diagnostic[] = [];
+  private layers: Layer[] = [];
+  /** A layer change was read; the layer joins `layers` with its first move (so the chunk that holds the move lists it). */
+  private pending: Layer | null = null;
+  /** The layer of this chunk whose z is still the first move's: the first extrusion corrects it. */
+  private unsettled: Layer | null = null;
+  /** Role written into every move until the next role tag. */
+  role: MoveRole = MoveRole.Unknown;
   private readonly last = new Float64Array(KINDS * 256).fill(NaN);
 
   private readonly maxMoves: number;
@@ -62,14 +69,39 @@ export class ChunkWriter {
     v.setFloat32(o + MoveOffset.position + 4, y, true);
     v.setFloat32(o + MoveOffset.position + 8, z, true);
     v.setUint32(o + MoveOffset.width, 0, true); // width and height f16 = 0
-    v.setUint8(o + MoveOffset.role, MoveRole.Unknown);
+    v.setUint8(o + MoveOffset.role, this.role);
     v.setUint8(o + MoveOffset.tool, tool);
     v.setUint8(o + MoveOffset.flags, flags);
     v.setUint8(o + MoveOffset.flags + 1, 0);
     v.setUint32(o + MoveOffset.fileOffset, fileOffset, true);
     v.setFloat32(o + MoveOffset.startTime, NaN, true);
     this.extrusionView.setFloat32(this.count * 4, e, true);
+    if (this.pending) {
+      // no z tag (Cura): the first move's z for now
+      if (Number.isNaN(this.pending.z)) {
+        this.pending.z = z;
+        this.unsettled = this.pending;
+      }
+      this.layers.push(this.pending);
+      this.pending = null;
+    } else if (this.unsettled && flags === 0) {
+      this.unsettled.z = z; // the first extrusion's z, unless a z-hop came first
+      this.unsettled = null;
+    }
     this.count++;
+  }
+
+  /** A layer starts with the next move. A layer that got no move before this call is dropped. */
+  layerChange(): void {
+    this.pending = { z: NaN, firstMove: this.nextMove };
+    this.unsettled = null;
+  }
+
+  /** The z the slicer states for the current layer (`;Z:`, `; Z_HEIGHT:`). */
+  layerZ(z: number): void {
+    const layer = this.pending ?? this.unsettled;
+    if (layer) layer.z = z;
+    this.unsettled = null;
   }
 
   /** Records a state change at the next move unless it repeats the last value of that kind and index. */
@@ -109,7 +141,7 @@ export class ChunkWriter {
       stateChanges: this.changes.slice(0, this.changeCount * STATE_CHANGE_STRIDE),
       moveCount: this.count,
       firstMove: this.firstMove,
-      layers: [],
+      layers: this.layers,
       markers: this.markers,
       diagnostics: this.diagnostics,
       bytesRead,
@@ -120,6 +152,8 @@ export class ChunkWriter {
     this.changeCount = 0;
     this.markers = [];
     this.diagnostics = [];
+    this.layers = [];
+    this.unsettled = null; // the chunk is gone: its layer objects must not change any more
     return chunk;
   }
 

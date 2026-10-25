@@ -3,8 +3,18 @@
     "bytes": 109623,
     "sha256": "918379706e63abab93fda7cc8855b7ef52160aed27a7fc336466c11d1ca71933"
   },
+  "slicer": "prusaslicer",
+  "flavour": "marlin",
   "moveCount": 1782,
   "stateChanges": 821,
   "markers": 251,
+  "layerCount": 126,
+  "roleHistogram": {
+    "ExternalPerimeter": 637,
+    "SolidInfill": 528,
+    "TopSolidInfill": 93,
+    "Skirt": 101,
+    "Custom": 6
+  },
   "diagnostics": []
 }

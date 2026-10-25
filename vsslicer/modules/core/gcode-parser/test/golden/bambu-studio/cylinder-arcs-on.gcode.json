@@ -3,8 +3,21 @@
     "bytes": 125753,
     "sha256": "43cc03904232dd7fb575cd24d8de81cbeef0c992e1e7527ccbe8a41763539be8"
   },
+  "slicer": "bambustudio",
+  "flavour": "marlin",
   "moveCount": 2930,
   "stateChanges": 886,
   "markers": 115,
+  "layerCount": 50,
+  "roleHistogram": {
+    "Perimeter": 134,
+    "ExternalPerimeter": 166,
+    "InternalInfill": 930,
+    "SolidInfill": 415,
+    "TopSolidInfill": 107,
+    "BridgeInfill": 86,
+    "Skirt": 64,
+    "BottomSurface": 103
+  },
   "diagnostics": []
 }

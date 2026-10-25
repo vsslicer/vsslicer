@@ -46,7 +46,8 @@ export class Machine implements ModalState {
   private ePosition = 0;
 
   private readonly out: ChunkWriter;
-  private readonly flavour: Flavour;
+  /** Firmware dialect; the parser sets it when the file names its flavour and no option fixed it. */
+  flavour: Flavour;
 
   constructor(out: ChunkWriter, flavour: Flavour) {
     this.out = out;

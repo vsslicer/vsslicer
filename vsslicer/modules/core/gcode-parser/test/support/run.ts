@@ -18,11 +18,13 @@ export interface Result {
   e: number[];
   changes: StateChange[];
   markers: Marker[];
+  /** Without `no-slicer-tags`, which every untagged snippet gets; see `all` for the full list. */
   diagnostics: Diagnostic[];
+  all: Diagnostic[];
 }
 
 export async function run(text: string, opts: ParseSettings = {}, pieceSize = 1 << 20): Promise<Result> {
-  const r: Result = { chunks: [], moves: [], e: [], changes: [], markers: [], diagnostics: [] };
+  const r: Result = { chunks: [], moves: [], e: [], changes: [], markers: [], diagnostics: [], all: [] };
   for await (const c of parse(pieces(encode(text), pieceSize), opts)) {
     r.chunks.push(c);
     const mv = new DataView(c.moves);
@@ -32,7 +34,8 @@ export async function run(text: string, opts: ParseSettings = {}, pieceSize = 1 
     const sv = new DataView(c.stateChanges);
     for (let i = 0; i < c.stateChanges.byteLength / STATE_CHANGE_STRIDE; i++) r.changes.push(readStateChange(sv, i));
     r.markers.push(...c.markers);
-    r.diagnostics.push(...c.diagnostics);
+    r.all.push(...c.diagnostics);
+    r.diagnostics.push(...c.diagnostics.filter((d) => d.code !== 'no-slicer-tags'));
   }
   return r;
 }
