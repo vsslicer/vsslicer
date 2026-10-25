@@ -8,16 +8,15 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 1 |
 | [In progress](doing/_doing.md) | 1 |
-| [In review](review/_review.md) | 4 |
-| [Done](done/_done.md) | 11 |
+| [In review](review/_review.md) | 3 |
+| [Done](done/_done.md) | 12 |
 
 ## Milestones
 
-- [R1: Research](milestones/R1-research.md): active, 11/17 cards done
+- [R1: Research](milestones/R1-research.md): active, 12/17 cards done
 
 ## In review
 
-- [VSS-11](review/011-remote-camera.md): Remote camera streams
 - [VSS-12](review/012-profiles.md): Printer, process and material profiles
 - [VSS-14](review/014-projects-and-fleet.md): Project management and fleet tools
 - [VSS-15](review/015-vscode-platform.md): VS Code platform: fork vs extension
