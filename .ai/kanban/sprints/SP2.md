@@ -1,7 +1,7 @@
 ---
 id: SP2
 title: Preview 1
-status: planned
+status: active
 milestone: M1
 start: "2026-10-25T19:15+00:00"
 end: "2026-10-25T21:15+00:00"
