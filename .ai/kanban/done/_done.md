@@ -12,3 +12,4 @@
 10. [VSS-9: Printer connectivity: open ecosystems](009-printer-connectivity-open.md)
 11. [VSS-10: Bambu Lab connectivity](010-bambu-connectivity.md)
 12. [VSS-11: Remote camera streams](011-remote-camera.md)
+13. [VSS-12: Printer, process and material profiles](012-profiles.md)
