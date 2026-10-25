@@ -35,9 +35,16 @@ test('fields are aligned for vertexAttribPointer and do not overlap', () => {
 
 test('a move round-trips through the buffer', () => {
   const move: Move = {
-    x: 110.5, y: -3.25, z: 0.25, width: 0.4501953125, height: 0.199951171875,
-    role: MoveRole.ExternalPerimeter, tool: 3, flags: MoveFlag.Arc | MoveFlag.Wipe,
-    fileOffset: 0xfffffffe, startTime: 43200.5,
+    x: 110.5,
+    y: -3.25,
+    z: 0.25,
+    width: 0.4501953125,
+    height: 0.199951171875,
+    role: MoveRole.ExternalPerimeter,
+    tool: 3,
+    flags: MoveFlag.Arc | MoveFlag.Wipe,
+    fileOffset: 0xfffffffe,
+    startTime: 43200.5,
   };
   const view = new DataView(new ArrayBuffer(2 * MOVE_STRIDE));
   writeMove(view, 1, move);

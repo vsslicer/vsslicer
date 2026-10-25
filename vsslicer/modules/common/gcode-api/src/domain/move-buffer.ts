@@ -2,7 +2,10 @@
 
 /**
  * One move is one interleaved, fixed-size record in an `ArrayBuffer`, little-endian.
- * A move is the segment from the previous move's `position` to its own.
+ * A move is the segment from the previous move's `position` to its own: start = record `i - 1`,
+ * end = record `i`. A chunk's first move starts at the previous chunk's last record, so a consumer
+ * carries that position across chunk boundaries; global move 0 starts at the machine's position
+ * before the first move.
  *
  * | Offset | Size | Type   | Field        |
  * |-------:|-----:|--------|--------------|
@@ -35,7 +38,11 @@ export const MoveOffset = {
   tool: 17,
   /** u8: bit set of {@link MoveFlag}. */
   flags: 18,
-  /** u32: byte offset in the source file of the line that produced the move (files up to 4 GiB). */
+  /**
+   * u32: byte offset of the line that produced the move in the decoded G-code text stream (for
+   * `.bgcode`, in the decoded text, not the container). Past 4 GiB the parser stops with an
+   * `offset-overflow` diagnostic rather than wrap.
+   */
   fileOffset: 20,
   /** f32: seconds from print start at which the move begins; NaN until a planner (E4) fills it. */
   startTime: 24,

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+- `Chunk.extrusion` / `ParsedFile.extrusion`: one f32 E delta per move, beside the unchanged 28-byte move record.
+- `Chunk.stateChanges` / `ParsedFile.stateChanges`: sparse 12-byte state-change table (`STATE_CHANGE_STRIDE`, `StateChangeOffset`, `StateKind`, `StateChange`, `readStateChange`/`writeStateChange`) for feedrate, fan, temperatures, acceleration and velocity limits, pressure advance and tool changes.
+- Documented the segment start/end binding across chunks, decoded-text `fileOffset` (also for `.bgcode`), the `offset-overflow` diagnostic past 4 GiB, and that `Marker` is for uninterpreted commands only.
+- `pnpm lint` runs the shared ESLint and Prettier configs from `@vsslicer/tooling` 0.4.0.
+
 ## 0.1.0
 
 - Initial G-code model: `Parse` contract, `ParsedFile`, `Chunk`, layer table, markers, diagnostics, and the 28-byte move record (`MOVE_STRIDE`, `MoveOffset`, `MoveRole`, `MoveFlag`, `readMove`/`writeMove`).
