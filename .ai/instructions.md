@@ -119,6 +119,8 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 
 ## Skills, agents, plans
 
+- `.ai/skills/sprint-cycle`: how a sprint runs, from its tasks to the audit, the next sprint's
+  bugfix cards, and close.
 - `.ai/skills/slicer-research`: how a research task runs: clone, analyse, take notes, report.
 - `.ai/agents/vsslicer-reviewer.agent.md`: reviews research reports and plans for unsourced
   claims, missing coverage and licence risks.
