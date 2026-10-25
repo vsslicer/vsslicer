@@ -5,3 +5,4 @@
 3. [PLT-3: Add the TypeScript base config and esbuild bundling to the tooling module](003-add-typescript-base-config-project-references-and-esbuild-bu.md)
 4. [PLT-8: Set up vitest for libraries](008-set-up-vitest-for-libraries.md)
 5. [PLT-4: Add ESLint and Prettier configuration with SPDX header rule](004-add-eslint-and-prettier-configuration-with-spdx-header-rule.md)
+6. [PLT-5: Fail the build on phantom dependencies](005-fail-the-build-on-phantom-dependencies.md)

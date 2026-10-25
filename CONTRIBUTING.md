@@ -13,10 +13,11 @@ There is no remote yet: the public GitHub repository (and with it pull requests,
 
 ```sh
 scripts/registry.sh start          # http://localhost:4873, storage in vsslicer/.registry/
-node scripts/run.mjs ci            # per module, in dependency order: install, lint, build, test, publish
+node scripts/run.mjs ci            # per module, in dependency order: install, lint, build, test, publish; then the repository checks
 scripts/registry.sh stop
 ```
 
+- `node scripts/run.mjs checks`: repository checks that aren't a module's own tests (the phantom-dependency fixture must fail its build; every module's pnpm settings stay strict).
 - Other runner commands: `node scripts/run.mjs <install|build|test|publish>`, and `--changed <git-ref>` to limit any of them to modules changed since that ref and their dependents.
 - One module on its own (its dependencies must already be published, which `ci` does):
   `cd vsslicer/modules/<name> && pnpm install && pnpm test && pnpm build`.

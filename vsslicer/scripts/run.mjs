@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Usage: node scripts/run.mjs <command> [--changed <git-ref>]
-// Commands: install | publish | ci | any pnpm script name (run where the module defines it).
+// Commands: install | publish | checks | ci | any pnpm script name (run where the module defines it).
 import { spawnSync } from 'node:child_process';
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -85,4 +85,11 @@ for (const name of names) {
   } else if (cmd === 'publish') await publish(m);
   else if (cmd === 'install') sh(m, steps.install);
   else if (cmd in m.scripts) sh(m, ['run', cmd]);
+}
+
+// Negative checks over all modules: phantom dependencies fail the build, pnpm settings stay strict.
+if (cmd === 'ci' || cmd === 'checks') {
+  console.log('\n[checks] node --test phantom-dep + npmrc');
+  const r = spawnSync(process.execPath, ['--test', 'test/phantom-dep.test.mjs', 'test/npmrc.test.mjs'], { cwd: join(root, 'scripts'), stdio: 'inherit', env });
+  if (r.status !== 0) (console.error('checks failed'), process.exit(r.status ?? 1));
 }
