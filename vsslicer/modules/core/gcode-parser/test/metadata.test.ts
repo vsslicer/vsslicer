@@ -6,7 +6,7 @@ import type { ParsedFile } from '@vsslicer/gcode-api';
 import { describe, expect, it } from 'vitest';
 import { collect, parse, transferList } from '../src/index.ts';
 import type { ParseSettings } from '../src/index.ts';
-import { fixturesDir, loadManifest, readGolden } from './support/golden.ts';
+import { fixturesDir, loadManifest, lineScannable, readGolden } from './support/golden.ts';
 import { encode, pieces } from './support/run.ts';
 
 const file = (text: string, opts: ParseSettings = {}, size = 1 << 20): Promise<ParsedFile> =>
@@ -227,7 +227,7 @@ describe('config block', () => {
 // A second opinion that does not use the parser's metadata code: grep the fixture text, decode
 // the thumbnails with Buffer, and compare with the golden JSON.
 describe('golden metadata matches an independent read of the fixtures', () => {
-  const text = loadManifest().files.filter((f) => f.format === 'gcode');
+  const text = loadManifest().files.filter(lineScannable);
   const read = (path: string) => readFileSync(join(fixturesDir, path), 'utf8').split('\n');
 
   it.each(text)('$path: thumbnails', (f) => {

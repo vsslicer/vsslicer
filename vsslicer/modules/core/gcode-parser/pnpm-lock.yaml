@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vsslicer/gcode-api':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
     devDependencies:
       '@types/node':
         specifier: 24.19.2
@@ -19,8 +19,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
       '@vsslicer/tooling':
-        specifier: ^0.8.0
-        version: 0.8.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)
+        specifier: ^0.8.1
+        version: 0.8.1(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)
       eslint:
         specifier: 10.13.0
         version: 10.13.0(supports-color@7.2.0)
@@ -972,12 +972,12 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/gcode-api@0.3.0':
-    resolution: {integrity: sha512-3QFGtt4SftjNEVkhXKHq/OIOB0u4R+dItsOEWePgxTTpztJh30x5Rvw9sC/4clUtGDITH5P006QW++Isb0Kavg==}
+  '@vsslicer/gcode-api@0.4.0':
+    resolution: {integrity: sha512-BPSEOe5F6jrBB65nIWM/S9+UTZAWIruS7dg5p1Y745h9ABuExG0GJyl+3UKuedLvdPtrzqSyapJopRyZVDTaIw==}
     engines: {node: '>=24'}
 
-  '@vsslicer/tooling@0.8.0':
-    resolution: {integrity: sha512-VAFnKsbAbyBRYKGXPN/QRaaR03owzepzqvOuwTpglRzh4z1vX4WLSJGhIMFNugmUCo6mr4why37Tq1gn4kd5nA==}
+  '@vsslicer/tooling@0.8.1':
+    resolution: {integrity: sha512-Ui4jltz8agVuc7Dw99ox/zKrz+fhEYor9GqGe5wiNUsYEAx5/Q0hwzbny5yqIVbKHsLbQmC/cHiOaRIJh12uqw==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -3325,9 +3325,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/gcode-api@0.3.0': {}
+  '@vsslicer/gcode-api@0.4.0': {}
 
-  '@vsslicer/tooling@0.8.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)':
+  '@vsslicer/tooling@0.8.1(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.13.0(supports-color@7.2.0))
       '@vscode/vsce': 3.9.2(supports-color@7.2.0)

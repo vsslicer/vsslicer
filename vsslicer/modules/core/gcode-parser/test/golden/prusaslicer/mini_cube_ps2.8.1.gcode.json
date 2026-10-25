@@ -53,5 +53,19 @@
       "printer_model": "MK4S",
       "gcode_flavor": "marlin2"
     }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 252.22,
+        "volumeCm3": 0.61,
+        "weightG": 0.75,
+        "cost": 0.03
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 221,
+      "silent": 227
+    }
   }
 }

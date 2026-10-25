@@ -3,12 +3,12 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { MoveRole, StateKind } from '@vsslicer/gcode-api';
-import { fixturesDir, loadManifest, readGolden } from './support/golden.ts';
+import { fixturesDir, loadManifest, lineScannable, readGolden } from './support/golden.ts';
 import { parseAll, roleHistogram } from './support/parser-summary.ts';
 import { encode, run } from './support/run.ts';
 import { ROLE_BY_NAME } from '../src/domain/tag-tables.ts';
 
-const text = loadManifest().files.filter((f) => f.format === 'gcode');
+const text = loadManifest().files.filter(lineScannable);
 const lines = (path: string): string[] => readFileSync(join(fixturesDir, path), 'utf8').split('\n');
 
 describe('slicer and flavour on the corpus', () => {

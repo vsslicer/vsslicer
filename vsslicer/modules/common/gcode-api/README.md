@@ -12,6 +12,7 @@ type Parse = (source: AsyncIterable<Uint8Array>, opts?: { signal?: AbortSignal }
   `moveCount`, the layers that start in it, markers, diagnostics, `bytesRead` for progress, and
   the detected `slicer`, and the metadata that ends in it (`thumbnails`, `objects`, `config`,
   below).
+- `JobSummary`: per-extruder filament length, volume, weight and cost and the slicer's time estimates, as the slicer's summary comments state them (not summed from E); every statistic optional.
 - `ParsedFile`: all chunks in file order: `slicer`, `moveCount`, `moves`, `extrusion` and
   `stateChanges` (the chunk buffers, not concatenated, so a large file never needs twice its
   memory), `layers`, `markers`, `diagnostics`, `thumbnails`, `objects`, `config`.
@@ -72,7 +73,7 @@ the parser ends the parse with an `error` diagnostic `offset-overflow` at `fileO
 length in mm the move feeds, negative for a retract, after M82/M83 and G92 are applied. Arc chords
 share their arc's E in proportion to length; firmware retracts (G10/G11) are 0 with the
 `Retract`/`Unretract` flag set. Planners (extruder limits, linear-advance cap, retract time) and
-filament totals read it; the renderer does not upload it (width and height already describe the
+planners read it; the renderer does not upload it (width and height already describe the
 bead).
 
 ## State-change table

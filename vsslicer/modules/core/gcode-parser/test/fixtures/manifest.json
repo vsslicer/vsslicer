@@ -120,14 +120,53 @@
       "material": "single",
       "arcFitting": "off",
       "source": "upstream"
+    },
+    {
+      "path": "bambu-studio/h2c-cube.gcode.3mf",
+      "format": "gcode.3mf",
+      "slicer": "Bambu Studio",
+      "slicerVersion": "02.08.02.61",
+      "printer": "Bambu Lab H2C 0.6 nozzle",
+      "model": "cube",
+      "material": "single",
+      "arcFitting": "off",
+      "source": "exported"
+    },
+    {
+      "path": "bambu-studio/h2c-cube.3mf",
+      "format": "3mf",
+      "slicer": "Bambu Studio",
+      "slicerVersion": "02.08.02.61",
+      "printer": "Bambu Lab H2C 0.6 nozzle",
+      "model": "cube",
+      "material": "single",
+      "arcFitting": "off",
+      "source": "exported"
+    },
+    {
+      "path": "cura/cube-cylinder-4.10.0.gcode",
+      "format": "gcode",
+      "slicer": "Cura",
+      "slicerVersion": "4.10.0",
+      "printer": "Voron v2 300 (RepRap flavour)",
+      "model": "cube-and-cylinder",
+      "material": "single",
+      "arcFitting": "off",
+      "source": "upstream"
+    },
+    {
+      "path": "superslicer/superslicer-2.3.56-arcwelder.gcode",
+      "format": "gcode",
+      "slicer": "SuperSlicer",
+      "slicerVersion": "2.3.56",
+      "printer": "Voron_v2_300_aferburner",
+      "model": "unknown (single object)",
+      "material": "single",
+      "arcFitting": "on",
+      "source": "upstream"
     }
   ],
   "pending": [
-    {
-      "slicer": "Bambu Studio",
-      "what": "Bambu Lab H2C .gcode.3mf (US1, D5)",
-      "reason": "CLI 02.08.02.61 cannot slice for the H2C (or H2D): \"Some filaments cannot be mapped to correct extruders for multi-extruder Printer\" in auto and manual mapping, from STL input and from edited project 3MFs. Needs a project exported from the Bambu Studio GUI (one-off) or a CLI fix; see .reference/notes/GCP-2-golden-corpus.md."
-    },
     {
       "slicer": "Bambu Studio",
       "what": "multi-material sample (two filaments)",
@@ -136,17 +175,17 @@
     {
       "slicer": "PrusaSlicer",
       "what": "20 mm calibration cube and a small two-material sample, arc fitting on and off",
-      "reason": "PrusaSlicer is not installed (board question Q9). Present: the 2.8.1 mini cube (.gcode + .bgcode, arcs on) and the 2.9.0-alpha1 vase (arcs off); the upstream multi-material file (resources/test_data/test_multimaterial.gcode, 12 MB) exceeds the 5 MB cap."
+      "reason": "No 20 mm cube and no small multi-material file upstream: the only multi-material sample (prusa3d/PrusaSlicer resources/test_data/test_multimaterial.gcode, 12 MB) exceeds the 5 MB cap and truncation is not acceptable. Present: the 2.8.1 mini cube pair and the 2.9.0-alpha1 vase (MK3MMU2 profile, one material)."
     },
     {
       "slicer": "SuperSlicer",
-      "what": "calibration cube and multi-material sample, arc fitting on and off",
-      "reason": "SuperSlicer is not installed (Q9). The only checked-in G-code in its repository is two 1.8 KB fan-mover snippets without a generator header, not usable as a corpus file."
+      "what": "calibration cube and multi-material sample",
+      "reason": "Present: one single-material print (2.3.56, ArcWelder arcs). No upstream SuperSlicer sample for a cube, a multi-material print or arcs off was found in supermerill/SuperSlicer (only two 1.8 KB header-less snippets); see .reference/notes/GCP-2-golden-corpus.md."
     },
     {
       "slicer": "Cura",
       "what": "calibration cube and multi-material sample",
-      "reason": "Cura is not installed (Q9). Neither the Cura, CuraEngine nor Uranium repositories carry sample G-code."
+      "reason": "Present: one 4.10.0 print (cube plus cylinder, single extruder). Ultimaker/Cura and CuraEngine carry no sample G-code and no multi-material Cura sample under a compatible licence was found."
     }
   ]
 }

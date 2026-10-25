@@ -24,7 +24,7 @@ Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards 
 
 - [ ] Calibration cube and a multi-material sample from PrusaSlicer, SuperSlicer, Orca, Bambu Studio and Cura, arc fitting on and off where available, are checked in with generating slicer and version recorded in a manifest
 - [x] A harness writes and compares golden JSON per file through an injectable summariser; a vitest run fails on a difference. The golden fields grow with the parser: move count (GCP-3), layer count and role histogram (GCP-4), labels and thumbnails (GCP-7), summary (GCP-8), each card's own criterion
-- [ ] One `.gcode.3mf` sliced for the H2C in Bambu Studio is in the corpus (version recorded)
+- [x] One `.gcode.3mf` sliced for the H2C in Bambu Studio is in the corpus (version recorded)
 - [x] A PrusaSlicer `.bgcode` and `.gcode` twin pair is present
 
 ## Tasks
@@ -36,23 +36,15 @@ Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards 
 
 ## Progress
 
-Coordinator: criterion 2 reworded (its fields need parsers that later cards build; the harness itself is done). Blocked on the owner: Q9 (install PrusaSlicer, SuperSlicer, Cura) for criterion 1, and an H2C `.gcode.3mf` exported from the Bambu Studio GUI for criterion 3 (Q10), because Bambu Studio 02.08.02.61's CLI cannot slice for multi-extruder printers. GCP-3 onward proceed on the corpus as it stands.
-
-
-Module `vsslicer/modules/gcode-parser` (`@vsslicer/gcode-parser` 0.1.0), published to the local registry. "Repository root" for tooling read as `vsslicer/`; the corpus is under the module (`test/fixtures`), not a separate fixtures store.
+Module `vsslicer/modules/gcode-parser` (fixtures, manifest, goldens, test support only; no src or version change). "Repository root" for tooling read as `vsslicer/`.
 
 Done:
-- Corpus, 11 files, 2.7 MB: OrcaSlicer 2.5.0-dev (generic Marlin cube; X1C-profile cube, two-material sample with prime tower, cylinder with arc fitting on and off), Bambu Studio 02.08.02.61 (X1C cube, cylinder arcs on and off), PrusaSlicer 2.8.1 mini cube `.gcode` + `.bgcode` twin pair (libbgcode commit d4da907) and the 2.9.0-alpha1 vase. `test/fixtures/manifest.json` records slicer, version, printer, model, material, arc fitting, source; `PROVENANCE.md` per folder. Arc fitting is exercised on a cylinder (a cube has no curves).
-- `scripts/slice-fixtures.sh` (+ `make-model.mjs`, `flatten-profile.mjs`) regenerates the Orca and Bambu Studio files from generated STLs.
-- Harness: `test/golden.test.ts` compares a summary of every file with `test/golden/<file>.json` (injectable `Summariser`, `test/support/golden.ts`); `pnpm golden:update` rewrites them. Fields are interim (bytes, sha256, line count, G0-G3 counts, layer-change markers, thumbnail blocks); GCP-3/4/7/8 swap in move count, layer count, role histogram, labels, thumbnails, summary. Proven: changing a golden value fails the run (`g1: 1` vs 5944), reverted.
-- Verified: `pnpm lint`, `pnpm test` (15 pass), `pnpm build`, published 0.1.0, `pnpm install --frozen-lockfile --store-dir <empty>` then test, build, lint. Registry left running.
+- Harness (criterion 2) and the PrusaSlicer `.bgcode`/`.gcode` twin pair (criterion 4), earlier.
+- Criterion 3 (Q10): owner-exported `bambu-studio/h2c-cube.gcode.3mf` and `h2c-cube.3mf` recorded in manifest.json (Bambu Studio 02.08.02.61, H2C 0.6 nozzle, source `exported`) and bambu-studio/PROVENANCE.md; size+hash goldens; manifest type gained format `3mf`.
+- Q9 (no installs): searched the cloned repos and the upstream GitHub trees (Cura, CuraEngine, SuperSlicer, PrusaSlicer, libbgcode) with `gh api`; none carries Cura/SuperSlicer samples. Added two GPL-3.0 third-party files (kageurufu/preprocess_cancellation, commit 44140d6): `cura/cube-cylinder-4.10.0.gcode` (Cura 4.10.0) and `superslicer/superslicer-2.3.56-arcwelder.gcode` (SuperSlicer 2.3.56, ArcWelder post-processed, so G2/G3). Headers checked; PROVENANCE.md per folder. Corpus now 15 files.
+- Those two files expose parser gaps (SuperSlicer 2.3 role names give `unknown-role`; Cura has no config block, `;LAYER:` layers). The line-scan tests in tags/metadata/summary skip them through `lineScannable` (test/support/golden.ts) until the parser cards cover them; the golden harness covers them. Search details in .reference/notes/GCP-2-golden-corpus.md.
+- Verified: `pnpm golden:update`, `pnpm lint`, `pnpm test` (243 pass), `pnpm build`, `node scripts/run.mjs checks` (check-fixtures passes).
 
-Not done (criteria left unticked):
-- Criterion 1: no PrusaSlicer/SuperSlicer/Cura cube or multi-material samples (not installed, board question Q9; their repos carry no usable sample G-code besides the PrusaSlicer files above); no Bambu Studio multi-material file.
-- Criterion 2: harness works but its fields are the interim ones above.
-- Criterion 3: the H2C `.gcode.3mf`. Bambu Studio 02.08.02.61's CLI cannot slice for the H2C ("Some filaments cannot be mapped to correct extruders"), many workarounds tried, see `.reference/notes/GCP-2-golden-corpus.md` and the manifest `pending`. Needs an H2C project exported once from the Bambu Studio GUI (owner) or a CLI fix.
-- Fixtures size/PROVENANCE check (PLT-13) not run: tooling has none yet; files are all under 0.5 MB and every folder has PROVENANCE.md.
+Not done (criterion 1 stays unticked; pending in manifest.json): PrusaSlicer 20 mm cube and a multi-material sample under the cap (only the 12 MB upstream file), SuperSlicer cube / multi-material / arcs off, Cura multi-material, Bambu Studio multi-material (CLI limit). Orca has cube, multi-material and arcs on/off.
 
-Files (repo-relative, all new, under vsslicer/modules/gcode-parser/): package.json, pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc, .prettierignore, eslint.config.mjs, tsconfig.json, tsconfig.test.json, vitest.config.ts, LICENSE, CHANGELOG.md, src/index.ts, scripts/{make-model.mjs,flatten-profile.mjs,slice-fixtures.sh,update-golden.ts}, test/golden.test.ts, test/support/{golden.ts,interim-summary.ts}, test/fixtures/manifest.json, test/fixtures/{orca,bambu-studio,prusaslicer}/ (PROVENANCE.md and the 11 fixtures), test/golden/** (11 JSON). Also .reference/notes/GCP-2-golden-corpus.md.
-
-Commands: `cd vsslicer/modules/gcode-parser && pnpm install && pnpm lint && pnpm test && pnpm build`; regenerate: `scripts/slice-fixtures.sh && pnpm golden:update`.
+Files (under vsslicer/modules/gcode-parser/): test/fixtures/manifest.json, test/fixtures/bambu-studio/{h2c-cube.gcode.3mf,h2c-cube.3mf,PROVENANCE.md}, test/fixtures/cura/*, test/fixtures/superslicer/*, test/golden/** (4 new, others rewritten by parser cards' summariser), test/support/golden.ts, test/{tags,metadata,summary}.test.ts (use `lineScannable`). Also .reference/notes/GCP-2-golden-corpus.md.

@@ -2,6 +2,7 @@
 import { createHash } from 'node:crypto';
 import { MOVE_STRIDE, MoveFlag, MoveOffset, MoveRole, STATE_CHANGE_STRIDE } from '@vsslicer/gcode-api';
 import type { Chunk } from '@vsslicer/gcode-api';
+import { readSummary } from '../../src/application/read-summary.ts';
 import { GCodeParser } from '../../src/domain/parser.ts';
 import type { Summariser, Summary } from './golden.ts';
 import { pieces } from './run.ts';
@@ -81,7 +82,7 @@ export async function parseAll(bytes: Uint8Array): Promise<{ chunks: Chunk[]; pa
  * the detected slicer and flavour, the layer count and the extruding moves per role. Thumbnails (format,
  * size, hash of the bytes), object labels (ranges and moves) and the config block (key count, hash of
  * the sorted map, a few keys). Binary files (.bgcode, .gcode.3mf) only carry the byte size and hash:
- * their text is decoded by the container cards. GCP-8 adds the summary here.
+ * their text is decoded by the container cards. `summary` is `readSummary`'s result (the slicer's own job statistics).
  */
 export const parserSummary: Summariser = async (bytes, file) => {
   if (file.format !== 'gcode') return {};
@@ -96,5 +97,6 @@ export const parserSummary: Summariser = async (bytes, file) => {
     roleHistogram: roleHistogram(chunks),
     diagnostics: chunks.flatMap((c) => c.diagnostics.map((d) => d.code)),
     ...metadataSummary(chunks),
+    summary: await readSummary(pieces(bytes, 64 * 1024)),
   };
 };

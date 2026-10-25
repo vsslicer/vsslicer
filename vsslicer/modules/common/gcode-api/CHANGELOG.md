@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- `JobSummary` (`extruders: ExtruderUsage[]` with `lengthMm`, `volumeCm3`, `weightG`, `cost`; `estimateSeconds: EstimateSeconds` with `normal`, `silent`, `model`, `total`): the slicer's own job statistics. All statistics optional; absent means the slicer did not state it. Additive.
+- Dev: `@vsslicer/tooling` ^0.8.1.
+
 ## 0.3.0
 
 - US2 metadata: `Thumbnail` / `ThumbnailFormat`, `ObjectLabel` / `MoveRange` and a config map, on `Chunk` (`thumbnails`, `objects`, `config`: each item arrives in the chunk where its block or range ends) and on `ParsedFile` (`thumbnails`, `objects` merged by name, id and copy, `config`). Additive except that code building a `Chunk` or `ParsedFile` by hand must add the three fields.

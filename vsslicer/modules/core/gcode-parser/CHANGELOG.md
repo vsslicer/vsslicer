@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0
+
+- `readSummary(source)` (application) and `readSummaryFile(path)` (adapter): the slicer's own job statistics as a `JobSummary` (`@vsslicer/gcode-api` 0.4.0): per extruder filament length, volume, weight and cost, and the time estimates (`normal`, `silent`, `model`, `total`), read from the summary comments of PrusaSlicer, Orca, Bambu Studio and Cura. No moves are parsed and no move buffers allocated; `readSummaryFile` reads only the first and last 512 KiB. Statistics the slicer did not state are absent; a weight, volume or cost of 0 for a filament that was fed (Bambu Studio without density) is dropped.
+- Totals come from these comments, not from summing the extrusion column.
+- Golden JSON gains `summary`; tests cross-check it against the raw comment lines of every fixture.
+- Fix: the 100 MB heap test moved to `test/memory.test.ts` and runs with `--expose-gc`, collecting before the baseline and before each measurement, so it no longer fails on a loaded machine (GC timing). The `arrayBuffers` retention assertion stays.
+- Depends on `@vsslicer/gcode-api` ^0.4.0. Dev: `@vsslicer/tooling` ^0.8.1.
+
 ## 0.6.0
 
 - Thumbnails (PNG, JPG, QOI; unknown formats leave a marker and `thumbnail-format`), object labels (`; printing object`, `M486`, `EXCLUDE_OBJECT_*`, Cura `;MESH:`) as move ranges, and the config block (PrusaSlicer, Orca/Bambu, Cura `;SETTING_3`) as a key-value map: `Chunk.thumbnails` / `objects` / `config`, gathered by `collect` into `ParsedFile`. `transferList` includes the thumbnail buffers.

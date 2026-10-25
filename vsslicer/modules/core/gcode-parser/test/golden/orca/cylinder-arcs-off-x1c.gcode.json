@@ -40,5 +40,19 @@
       "printer_model": "Bambu Lab X1 Carbon",
       "gcode_flavor": "marlin"
     }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 566.1,
+        "volumeCm3": 1.36,
+        "weightG": 1.72,
+        "cost": 0.03
+      }
+    ],
+    "estimateSeconds": {
+      "model": 278,
+      "total": 297
+    }
   }
 }

@@ -167,3 +167,37 @@ export interface ParseOptions {
  * order: a Node `Readable` and a web `ReadableStream` are both `AsyncIterable<Uint8Array>`.
  */
 export type Parse = (source: AsyncIterable<Uint8Array>, opts?: ParseOptions) => AsyncIterable<Chunk>;
+
+/** What the slicer's own summary comments state for one extruder (tool index = array index). A statistic the slicer did not write is absent, never 0. */
+export interface ExtruderUsage {
+  /** Filament length in mm. */
+  lengthMm?: number;
+  /** Filament volume in cm3. */
+  volumeCm3?: number;
+  /** Filament weight in g. */
+  weightG?: number;
+  /** Cost in the slicer's currency; derived by the slicer from the filament's cost per kg. */
+  cost?: number;
+}
+
+/** The slicer's own time estimate in seconds, per mode it states. */
+export interface EstimateSeconds {
+  /** PrusaSlicer `normal mode`. */
+  normal?: number;
+  /** PrusaSlicer `silent mode`. */
+  silent?: number;
+  /** Orca/Bambu `model printing time`: moves only. */
+  model?: number;
+  /** Orca/Bambu `total estimated time` (with prepare/changes), Cura `;TIME:`. */
+  total?: number;
+}
+
+/**
+ * Per-job statistics from the slicer's summary comments, not from the moves. Every field is
+ * optional: a file without the comment has no entry.
+ */
+export interface JobSummary {
+  /** One entry per extruder, in tool order; empty when the slicer wrote no usage. */
+  extruders: ExtruderUsage[];
+  estimateSeconds?: EstimateSeconds;
+}

@@ -1,0 +1,59 @@
+{
+  "file": {
+    "bytes": 542400,
+    "sha256": "1a98c91036c79830acee6476a1a4064708acc95ac14236e82d7fa2ab0c064023"
+  },
+  "slicer": "cura",
+  "flavour": "marlin",
+  "moveCount": 17889,
+  "stateChanges": 2285,
+  "markers": 4,
+  "layerCount": 25,
+  "roleHistogram": {
+    "Perimeter": 11192,
+    "ExternalPerimeter": 3395,
+    "InternalInfill": 242,
+    "SolidInfill": 346,
+    "Skirt": 749,
+    "SupportMaterial": 162
+  },
+  "diagnostics": [],
+  "thumbnails": [],
+  "objects": [
+    {
+      "name": "cylinder_2.stl",
+      "ranges": 25,
+      "moves": 13217
+    },
+    {
+      "name": "cube_1.stl",
+      "ranges": 25,
+      "moves": 930
+    },
+    {
+      "name": "union_3.stl",
+      "ranges": 25,
+      "moves": 1788
+    },
+    {
+      "name": "cube_1.stl(1)",
+      "ranges": 25,
+      "moves": 929
+    }
+  ],
+  "config": {
+    "keys": 20,
+    "sha256": "f67d9645e7c4184f6ad3afbfa319f96119234588f7881e6a4f2cdbe5d73c75f3",
+    "sample": {}
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 273.87
+      }
+    ],
+    "estimateSeconds": {
+      "total": 451
+    }
+  }
+}

@@ -2,4 +2,4 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
 import base from '@vsslicer/tooling/vitest';
 
-export default mergeConfig(base, defineConfig({}));
+export default mergeConfig(base, defineConfig({ test: { execArgv: ['--expose-gc'] } }));

@@ -40,5 +40,18 @@
       "printer_model": "Generic Marlin Printer",
       "gcode_flavor": "marlin"
     }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 1436.85,
+        "volumeCm3": 3.46,
+        "weightG": 4.29,
+        "cost": 0.09
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 1002
+    }
   }
 }

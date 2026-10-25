@@ -11,6 +11,13 @@ for await (const chunk of parse(fileSource('benchy.gcode'), { flavour: 'marlin' 
 }
 ```
 
+`readSummary(fileSource(path))` / `readSummaryFile(path)` return the slicer's own job statistics
+(`JobSummary`: per-extruder filament length, volume, weight, cost; time estimates) from its summary
+comments, without parsing moves. `readSummaryFile` reads only the first and last 512 KiB; a summary
+comment elsewhere needs `readSummary(fileSource(path))`. Absent statistics are absent fields.
+Filament totals come from these comments, not from summing the E column. Bambu Studio's `.gcode.3mf`
+`slice_info.config` is not read yet (no fixture, Q10).
+
 `collect(parse(...))` gives a `ParsedFile`. `transferList(chunk)` lists a chunk's buffers for
 `postMessage(chunk, transferList(chunk))`; they are exact length and detach on transfer. The last
 chunk is never empty: it exists only if it holds moves, state changes, markers or diagnostics.
@@ -166,10 +173,10 @@ NAME=` (label without ranges), `_START NAME=`, `_END`, Cura `;MESH:name` (`NONME
 `test/fixtures` holds the corpus (see its `PROVENANCE.md` files) and `test/golden/*.json` its
 expected summary: `slicer`, `flavour`, `moveCount`, `stateChanges`, `markers`, `layerCount`,
 `roleHistogram` (extruding moves per role name), `diagnostics` for text G-code, byte size and
-hash for all (binary files get more when their text is decoded), plus `thumbnails` (format, size, byte count, sha256), `objects` (name, id, copy, range and move counts) and `config` (key count, sha256 of the sorted map, a few keys). `pnpm golden:update` rewrites them; review
+hash for all (binary files get more when their text is decoded), plus `thumbnails` (format, size, byte count, sha256), `objects` (name, id, copy, range and move counts) and `config` (key count, sha256 of the sorted map, a few keys) and `summary` (the `readSummary` result). `pnpm golden:update` rewrites them; review
 the diff. Tests count the move lines, the layer-change comments and the extruding moves per role tag of every text file independently and compare. The same for the thumbnails (decoded with `Buffer`), the object names and the config key count. Cura has no fixture yet (Q9): its tags, `;MESH:` and `;SETTING_3` are unit-tested with inline samples.
 
 ## Develop
 
-`pnpm install && pnpm lint && pnpm test && pnpm build`. The 100 MB heap test takes about 2 s; set
+`pnpm install && pnpm lint && pnpm test && pnpm build`. The 100 MB heap test (`test/memory.test.ts`, runs with `--expose-gc`) takes about 2 s; set
 `GCODE_SKIP_HEAP_TEST=1` to skip it.

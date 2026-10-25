@@ -45,5 +45,43 @@
       "printer_model": "MK3MMU2",
       "gcode_flavor": "marlin"
     }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 676.57,
+        "volumeCm3": 1.63,
+        "weightG": 1.76,
+        "cost": 0.05
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      },
+      {
+        "lengthMm": 0,
+        "volumeCm3": 0,
+        "weightG": 0,
+        "cost": 0
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 1047,
+      "silent": 1048
+    }
   }
 }

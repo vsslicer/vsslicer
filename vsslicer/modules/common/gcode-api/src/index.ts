@@ -4,6 +4,9 @@ export type { Move } from './domain/move-buffer.ts';
 export type {
   Chunk,
   Diagnostic,
+  EstimateSeconds,
+  ExtruderUsage,
+  JobSummary,
   Layer,
   Marker,
   MoveRange,

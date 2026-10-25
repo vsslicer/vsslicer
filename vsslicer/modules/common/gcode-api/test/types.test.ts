@@ -5,6 +5,9 @@ import { expectTypeOf, test } from 'vitest';
 import type {
   Chunk,
   Diagnostic,
+  EstimateSeconds,
+  ExtruderUsage,
+  JobSummary,
   Layer,
   Marker,
   Move,
@@ -105,4 +108,15 @@ test('parse(source, opts) -> AsyncIterable<Chunk>', () => {
   expectTypeOf<ParseOptions>().toEqualTypeOf<{ signal?: AbortSignal }>();
   expectTypeOf<Parameters<Parse>>().toEqualTypeOf<[source: AsyncIterable<Uint8Array>, opts?: ParseOptions]>();
   expectTypeOf<ReturnType<Parse>>().toEqualTypeOf<AsyncIterable<Chunk>>();
+});
+
+test('JobSummary shape', () => {
+  expectTypeOf<ExtruderUsage>().toEqualTypeOf<{
+    lengthMm?: number;
+    volumeCm3?: number;
+    weightG?: number;
+    cost?: number;
+  }>();
+  expectTypeOf<EstimateSeconds>().toEqualTypeOf<{ normal?: number; silent?: number; model?: number; total?: number }>();
+  expectTypeOf<JobSummary>().toEqualTypeOf<{ extruders: ExtruderUsage[]; estimateSeconds?: EstimateSeconds }>();
 });
