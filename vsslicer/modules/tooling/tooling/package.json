@@ -1,16 +1,34 @@
 {
   "name": "@vsslicer/tooling",
-  "version": "0.1.0",
-  "description": "Shared VSSlicer tooling (TypeScript, ESLint and test configs land here).",
+  "version": "0.2.0",
+  "description": "Shared VSSlicer tooling: TypeScript base config and the extension bundler (ESLint and test configs land here).",
   "license": "AGPL-3.0-or-later",
-  "main": "src/index.js",
-  "files": ["src", "LICENSE"],
-  "engines": { "node": ">=24" },
+  "type": "module",
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "vsslicer-bundle": "bin/vsslicer-bundle.mjs"
+  },
+  "files": [
+    "tsconfig.base.json",
+    "bin",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
   "packageManager": "pnpm@11.22.0",
-  "publishConfig": { "registry": "http://localhost:4873/" },
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
   "scripts": {
-    "lint": "node --check src/index.js",
-    "build": "node --check src/index.js",
+    "lint": "node --check bin/vsslicer-bundle.mjs",
+    "build": "node --check bin/vsslicer-bundle.mjs",
     "test": "node --test test/"
+  },
+  "dependencies": {
+    "esbuild": "0.28.2"
   }
 }

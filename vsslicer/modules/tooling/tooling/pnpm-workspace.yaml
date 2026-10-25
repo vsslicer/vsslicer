@@ -1,0 +1,3 @@
+# esbuild ships its binary as an optional dependency; its postinstall is only an optimisation
+allowBuilds:
+  esbuild: false

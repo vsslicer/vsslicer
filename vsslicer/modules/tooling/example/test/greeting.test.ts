@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-const test = require('node:test');
-const assert = require('node:assert');
-const { greet } = require('../src/index.js');
+import test from 'node:test';
+import assert from 'node:assert';
+import { greet } from '../src/index.ts';
 
 test('greet', () => assert.strictEqual(greet('VSSlicer'), 'Hello, VSSlicer!'));

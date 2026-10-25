@@ -54,7 +54,15 @@ const sh = (m, argv, env = process.env) => {
 };
 
 const published = async (m) => {
-  const res = await fetch(`${registry}${m.name.replace('/', '%2f')}`);
+  // node's fetch occasionally hits a keep-alive socket Verdaccio just closed: retry
+  let res;
+  for (let i = 0; ; i++)
+    try {
+      res = await fetch(`${registry}${m.name.replace('/', '%2f')}`);
+      break;
+    } catch (e) {
+      if (i >= 2) throw e;
+    }
   if (res.status === 404) return false;
   if (!res.ok) throw new Error(`${m.name}: registry answered ${res.status}`);
   return m.version in ((await res.json()).versions ?? {});

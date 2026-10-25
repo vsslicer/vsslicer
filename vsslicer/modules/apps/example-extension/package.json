@@ -1,21 +1,46 @@
 {
   "name": "@vsslicer/example-extension",
   "displayName": "VSSlicer Example",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sample VSSlicer VS Code extension (presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
   "main": "dist/extension.js",
-  "files": ["dist", "LICENSE"],
-  "engines": { "node": ">=24", "vscode": "^1.100.0" },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=24",
+    "vscode": "^1.100.0"
+  },
   "packageManager": "pnpm@11.22.0",
-  "publishConfig": { "registry": "http://localhost:4873/" },
-  "activationEvents": ["onCommand:vsslicer.example.hello"],
-  "contributes": { "commands": [{ "command": "vsslicer.example.hello", "title": "VSSlicer: Hello" }] },
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "activationEvents": [
+    "onCommand:vsslicer.example.hello"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vsslicer.example.hello",
+        "title": "VSSlicer: Hello"
+      }
+    ]
+  },
   "scripts": {
-    "lint": "node --check src/extension.js",
-    "build": "node -e \"const fs=require('node:fs');fs.rmSync('dist',{recursive:true,force:true});fs.cpSync('src','dist',{recursive:true})\"",
+    "lint": "tsc",
+    "build": "tsc && vsslicer-bundle",
     "test": "node --test test/"
   },
-  "dependencies": { "@vsslicer/example": "^0.1.0" }
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/vscode": "1.100.0",
+    "@vsslicer/tooling": "^0.2.0",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "@vsslicer/example": "^0.2.0"
+  }
 }
