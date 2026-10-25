@@ -8,16 +8,15 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 1 |
 | [In progress](doing/_doing.md) | 1 |
-| [In review](review/_review.md) | 10 |
-| [Done](done/_done.md) | 5 |
+| [In review](review/_review.md) | 9 |
+| [Done](done/_done.md) | 6 |
 
 ## Milestones
 
-- [R1: Research](milestones/R1-research.md): active, 5/17 cards done
+- [R1: Research](milestones/R1-research.md): active, 6/17 cards done
 
 ## In review
 
-- [VSS-4](review/004-features-cura.md): Feature inventory: Cura and CuraEngine
 - [VSS-5](review/005-slicing-engine-embedding.md): Slicing engine architecture and embedding options
 - [VSS-7](review/007-3d-viewer-webview.md): 3D viewer in VS Code webviews
 - [VSS-8](review/008-gcode-viewer-simulation.md): G-code viewer and toolhead simulation
