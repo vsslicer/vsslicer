@@ -55,6 +55,9 @@ Nothing to build yet. Implementation work will add its commands here.
   Umbrella initiatives, milestones and decisions stay here; epics, stories and tasks go on the
   project that delivers them. Ideas become initiatives, epics, stories and tasks through the
   gstack planning cycle in the taskboard skill.
+- Agent models: Opus for high-level and judgment work (planning, design, architecture, reviews,
+  coordination); Sonnet for well-defined, compartmentalised tasks with a clear definition of
+  done. No Fable coordinators. Every task card's `model` field says which, and dispatches use it.
 - Only the coordinator commits. Parallel workers write files and never run `git add` or
   `git commit`, so commits never race on the index.
 - No Co-Authored-By or other AI attribution trailers in commits.

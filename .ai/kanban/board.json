@@ -123,6 +123,17 @@
       ]
     },
     {
+      "name": "model",
+      "label": "Model",
+      "kind": "select",
+      "tile": true,
+      "options": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ]
+    },
+    {
       "name": "area",
       "label": "Area",
       "kind": "multiselect",
