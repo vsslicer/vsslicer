@@ -1,6 +1,12 @@
 {
   "extends": "@vsslicer/tooling/tsconfig.base.json",
   // The package stays CommonJS (VS Code `require`s dist/extension.js) and esbuild does the bundling, so resolve like a bundler.
-  "compilerOptions": { "module": "Preserve", "moduleResolution": "Bundler", "noEmit": true, "types": ["node"] },
+  "compilerOptions": {
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "types": ["node"],
+    "lib": ["ES2023", "DOM"]
+  },
   "include": ["src", "test"]
 }

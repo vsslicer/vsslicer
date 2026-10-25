@@ -1,14 +1,15 @@
 {
   "name": "@vsslicer/example-extension",
   "displayName": "VSSlicer Example",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Sample VSSlicer VS Code extension (presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
   "main": "dist/extension.js",
   "files": [
     "dist",
-    "LICENSE"
+    "LICENSE",
+    "PROVENANCE.md"
   ],
   "engines": {
     "node": ">=24",
@@ -19,19 +20,24 @@
     "registry": "http://localhost:4873/"
   },
   "activationEvents": [
-    "onCommand:vsslicer.example.hello"
+    "onCommand:vsslicer.example.hello",
+    "onCommand:vsslicer.example.webview"
   ],
   "contributes": {
     "commands": [
       {
         "command": "vsslicer.example.hello",
         "title": "VSSlicer: Hello"
+      },
+      {
+        "command": "vsslicer.example.webview",
+        "title": "VSSlicer: Open Sample Webview"
       }
     ]
   },
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc",
-    "build": "tsc && vsslicer-bundle",
+    "build": "tsc && vsslicer-bundle && esbuild src/presentation/webview/main.ts --bundle --platform=browser --format=iife --target=es2023 --sourcemap --outfile=dist/webview.js",
     "test": "node --test test/",
     "format": "prettier --write ."
   },
@@ -39,6 +45,7 @@
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
     "@vsslicer/tooling": "^0.4.0",
+    "esbuild": "0.28.2",
     "eslint": "10.13.0",
     "prettier": "3.9.10",
     "typescript": "7.0.2"
