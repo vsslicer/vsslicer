@@ -138,6 +138,17 @@ Defensible posture for us:
 5. Write our own protocol client from public documentation (OpenBambuAPI is GFDL: facts are not copyrightable but copy no prose; ha-bambulab is MIT).
 6. Not legal advice; the Bambu ToS binds users, enforceability of reverse-engineering clauses against interoperability varies by jurisdiction (unverified).
 
+### 6. Open Bamboo Networking (PRN-1, researched 2026-10-25)
+
+The "bamboo-networking plugin" named by the owner (D3) is https://github.com/ClusterM/open-bamboo-networking, studied at `922c3e9` (2026-10-25; release v2.2.0, 2026-09-24). The full candidate table is in `.reference/notes/PRN-1-bambu-networking.md`, and the proposed choice is D16.
+
+- Licence: AGPL-3.0-or-later (open-bamboo-networking@922c3e9:LICENSE:1-13). GitHub reports NOASSERTION because a project header sits above the licence text.
+- What it is: a C++ drop-in for `libbambu_networking` with the same `dlsym` ABI, file name and install location, for Studio ABI 02.03.00 to 02.08.04 and Orca 2.3.2 and later (README.md:93-99, 128-175). It credits OpenBambuAPI, bambulabs_api, ha-bambulab and MITM captures (README.md:101-105). `research/` holds 79 protocol notes (research/INDEX.md).
+- LAN, Developer Mode, no keys: SSDP on UDP 2021, MQTT/TLS 8883, FTPS 990 with `project_file`, the TLS :6000 file transfer, RTSPS :322 H.264 (X1, P2S, H-series, X2D) and MJPEG over TLS :6000 (A1, P1) (README.md:185-212, 324-357). TLS is verified against Studio's CA bundle plus a per-device leaf pinned on first contact, with CN = SNI = serial; N7/P2S firmware sends only the leaf (STATUS.md:245-258).
+- Cloud: sign-in, cloud MQTT and preset/filament sync work without secrets. Signed commands, cloud print, MakerWorld records and TUTK remote camera need the user's own extracted Bambu slicer key plus `client_name = BambuStudio`, because the API returns HTTP 403 to an honest name (README.md:214-241, 327-340, 357). `research/10.02-secrets.md` documents Bambu's embedded client secrets. Point 3 above applies: copy none of it.
+- H2C: the author has no H2C. There are two community reports on firmware 01.02.00.00 in LAN-only mode, about :6000 `LIST_INFO`/`SUB_FILE` without a USB stick (research/09.06-commands.md:58, 149). H2C camera support rests on the "H-series" row and is untested (unverified).
+- D2 now allows porting AGPL code, so point 5 above ("write our own client") becomes "port the LAN parts of this project with provenance lines" if D16 is accepted.
+
 ## Comparison
 
 | Mode | Auth | Print start | Control | Camera | Cloud | Risk to us |
