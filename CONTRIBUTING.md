@@ -125,6 +125,8 @@ We use the Developer Certificate of Origin, not a CLA; copyright stays with each
 git commit -s
 ```
 
+CI runs `node scripts/check-dco.mjs <base> <head>` (from `vsslicer/`) on every pull request, and the `dco` job is part of the required `ci` check. Each non-merge commit needs a `Signed-off-by: Name <email>` trailer with the author's name and email (email compared case-insensitively); a sign-off by someone else does not count. Run the same command locally before pushing. Fix a missed one with `git commit --amend -s`, or `git rebase --signoff <base>` for a series.
+
 ## Versions and releases
 
 A module's published content changes only with a version bump and a `CHANGELOG.md` entry. A release is the tag `<name>@x.y.z`. The publish step never overwrites a version, so dependents' lockfile hashes stay valid.

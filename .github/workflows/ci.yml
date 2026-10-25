@@ -85,9 +85,25 @@ jobs:
       - if: always()
         run: scripts/registry.sh stop
 
-  # the required check (.github/rulesets/main.json): green only if nothing failed; skipped build means no module changed
+  # DCO sign-off on every commit of the pull request (D10)
+  dco:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: vsslicer/.nvmrc
+      - run: node scripts/check-dco.mjs "$BASE" "$HEAD"
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+
+  # the required check (.github/rulesets/main.json): green only if nothing failed; skipped build means no module changed, skipped dco means a push (it runs on pull requests only)
   ci:
-    needs: [select, build]
+    needs: [select, build, dco]
     if: always()
     runs-on: ubuntu-latest
     defaults:
@@ -97,6 +113,7 @@ jobs:
       - env:
           SELECT: ${{ needs.select.result }}
           BUILD: ${{ needs.build.result }}
+          DCO: ${{ needs.dco.result }}
         run: |
-          echo "select=$SELECT build=$BUILD"
-          [ "$SELECT" = success ] && { [ "$BUILD" = success ] || [ "$BUILD" = skipped ]; }
+          echo "select=$SELECT build=$BUILD dco=$DCO"
+          [ "$SELECT" = success ] && { [ "$BUILD" = success ] || [ "$BUILD" = skipped ]; } && { [ "$DCO" = success ] || [ "$DCO" = skipped ]; }
