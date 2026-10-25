@@ -17,3 +17,4 @@
 15. [VSS-15: VS Code platform: fork vs extension](015-vscode-platform.md)
 16. [VSS-16: Licensing synthesis](016-licensing.md)
 17. [VSS-17: Feature matrix and roadmap](017-feature-matrix-and-roadmap.md)
+18. [VSS-18: Decisions from the owner's answers (D1-D6)](018-decisions-from-the-owner-s-answers-d1-d6.md)

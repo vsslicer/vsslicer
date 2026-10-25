@@ -11,6 +11,25 @@ The product, as the owner defined it: VSSlicer turns VS Code (and later a custom
 - filament management: a database, a spool inventory, and consumption taken from printer feedback;
 - themes, last.
 
+## Owner decisions since this was written (2026-10-25)
+
+The owner answered the six gating questions on the board the same day. The decisions are on the
+VSS board in `.ai/kanban/decisions/` and override this document where they differ:
+
+- **D1** Stock VS Code first, fork late (as recommended).
+- **D2** VSSlicer is **AGPL-3.0**, not Apache-2.0. Porting from the AGPL slicers is allowed with
+  provenance notices; engines may be bundled or run in-process; the "Licence posture" table below
+  and the clean-room rule no longer apply as written.
+- **D3** **Bambu first**, over an open-source networking implementation, behind a generic
+  printer API; the open ecosystems follow inside the same initiative. Phase 7's Bambu work moves
+  into phase 4.
+- **D4** Prusa profile bundles are fetched from upstream, never redistributed.
+- **D5** Test hardware is one Bambu H2C; no budget for signing, CI or counsel.
+- **D6** Scope defaults accepted: FDM only, WebGL2 only, Spoolman optional.
+
+The phases below are kept as the research-time plan; the initiatives in
+`.ai/kanban/initiatives/` are the plan of record.
+
 ## How the phases are ordered
 
 1. **Testability first.** The earliest phases build libraries whose behaviour can be checked against deterministic fixtures and external oracles: G-code, 3MF, profiles, printer protocols, engine output.
