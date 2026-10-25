@@ -55,3 +55,14 @@ test('a missing entry prints one line and exits 1, no stack', async () => {
   assert.strictEqual(r.stderr.trim().split('\n').length, 1, r.stderr);
   assert.match(r.stderr, /^vsslicer-bundle: /);
 });
+
+test('a warning is printed and the build still exits 0', async () => {
+  const { spawnSync } = await import('node:child_process');
+  const d = mkdtempSync(join(tmpdir(), 'bin-warn-'));
+  mkdirSync(join(d, 'src'));
+  writeFileSync(join(d, 'src', 'e.ts'), 'export const u: string = import.meta.url;\n');
+  const bin = new URL('../bin/vsslicer-bundle.mjs', import.meta.url).pathname;
+  const r = spawnSync(process.execPath, [bin, 'src/e.ts', 'dist/extension.js'], { cwd: d, encoding: 'utf8' });
+  assert.strictEqual(r.status, 0, r.stderr);
+  assert.match(r.stderr, /import\.meta/);
+});
