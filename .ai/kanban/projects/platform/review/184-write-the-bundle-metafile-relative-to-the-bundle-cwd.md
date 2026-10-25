@@ -15,7 +15,7 @@ Module: tooling. Finding 8 of the SP2 audit, `.ai/audits/SP2-audit.md` (details,
 
 ## Acceptance criteria
 
-- [ ] `bundle(entry, outfile, cwd)` writes the metafile under `cwd` (test first)
+- [x] `bundle(entry, outfile, cwd)` writes the metafile under `cwd` (test first)
 
 ## Tasks
 
@@ -25,4 +25,4 @@ Module: tooling. Finding 8 of the SP2 audit, `.ai/audits/SP2-audit.md` (details,
 
 ## Progress
 
-Not started.
+Done in tooling (unreleased, coordinator releases). Tests in test/bundle.test.mjs and test/notices.test.mjs.
