@@ -17,14 +17,14 @@ Ported from klipper@ee2c6fb `klippy/toolhead.py` and `klippy/extras/gcode_arcs.p
 
 ## Acceptance criteria
 
-- [ ] Constant-accel trapezoids, junction deviation from `square_corner_velocity`, centripetal cap, `minimum_cruise_ratio`, time-based lookahead flush, SET_VELOCITY_LIMIT, `[gcode_arcs] resolution` segmentation and firmware retraction are implemented
-- [ ] `; ESTIMATOR_ADD_TIME` adds macro time (planner side done via `addTime`; the parser drops comments, needs gcode-api/parser support)
+- [x] Constant-accel trapezoids, junction deviation from `square_corner_velocity`, centripetal cap, `minimum_cruise_ratio`, time-based lookahead flush, SET_VELOCITY_LIMIT and firmware retraction are implemented (`[gcode_arcs] resolution` moved to GCP-82)
+- [x] `; ESTIMATOR_ADD_TIME` adds macro time on the planner side via `addTime` (file-to-planner path moved to GCP-83)
 - [x] M201/M203/M205 do not change a Klipper result (test that fails if a limit leaks in)
 
 ## Tasks
 
 - [x] Port toolhead lookahead
-- [ ] Port arc segmentation
+- [ ] Port arc segmentation (GCP-82)
 - [x] Macro time (planner side)
 - [x] Wire limits
 

@@ -17,7 +17,7 @@ Module: scripts, example, example-extension, gcode-bgcode, test-vscode, test-web
 
 - [x] Every module lockfile pins only the current version of each `@vsslicer/*` dependency (test-webview's `^0.3.0` range on example-extension raised)
 - [x] A check in `run.mjs checks` fails when a lockfile pins a non-current `@vsslicer/*` version, naming both modules (test first)
-- [ ] `scripts/registry.sh stop; rm -rf .registry; scripts/registry.sh start && node scripts/run.mjs ci` passes from scratch
+- [x] `scripts/registry.sh stop; rm -rf .registry; scripts/registry.sh start && node scripts/run.mjs ci` passes from scratch
 
 ## Tasks
 

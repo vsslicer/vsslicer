@@ -19,8 +19,8 @@ Makes `.bgcode` open exactly like text G-code.
 
 - [x] Decoded G-code equals the `.gcode` twin line for line on every twin pair (test)
 - [x] All metadata blocks are exposed (`BgcodeMetadata`); no real fixture has a Slicer3 JSON block yet (synthetic test only)
-- [ ] ~~in the golden JSON~~ moved to a follow-up card on gcode-parser
-- [ ] ~~The same `ParsedFile` results from either file~~ moved to a follow-up card on gcode-parser
+- [ ] ~~in the golden JSON~~ moved to GCP-84
+- [ ] ~~The same `ParsedFile` results from either file~~ moved to GCP-84
 
 ## Tasks
 

@@ -56,3 +56,6 @@
 54. [GCP-74: Add the editTemplate command with a save callback](074-add-the-edittemplate-command-with-a-save-callback.md)
 55. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
 56. [GCP-79: Extend the golden corpus to PrusaSlicer, SuperSlicer, Cura and Bambu multi-material](079-extend-the-golden-corpus-to-prusaslicer-superslicer-cura-and.md)
+57. [GCP-82: Re-segment arcs at Klipper's gcode_arcs resolution](082-re-segment-arcs-at-klipper-s-gcode-arcs-resolution.md)
+58. [GCP-83: Carry ESTIMATOR_ADD_TIME and G4 dwell through gcode-api and the parser to the planners](083-carry-estimator-add-time-and-g4-dwell-through-gcode-api-and-.md)
+59. [GCP-84: Open .bgcode in the parser: same ParsedFile as the .gcode twin, metadata in the golden JSON](084-open-bgcode-in-the-parser-same-parsedfile-as-the-gcode-twin-.md)
