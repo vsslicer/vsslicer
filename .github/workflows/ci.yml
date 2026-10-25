@@ -71,6 +71,11 @@ jobs:
           node-version-file: vsslicer/.nvmrc
           cache: pnpm
           cache-dependency-path: vsslicer/modules/*/pnpm-lock.yaml
+      # generated 50/200/500 MB inputs; the key is the generator's hash, so editing it regenerates them
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: vsslicer/.cache/large-fixtures
+          key: large-fixtures-${{ runner.os }}-${{ hashFiles('vsslicer/scripts/generate-large-fixture.mjs') }}
       - run: scripts/registry.sh start
       - run: node scripts/run.mjs ci --changed "$BASE"
         env:

@@ -18,6 +18,8 @@ scripts/registry.sh stop
 ```
 
 - `node scripts/run.mjs checks`: repository checks that aren't a module's own tests (the phantom-dependency fixture must fail its build; every module's pnpm settings stay strict; `check-licence` over every module and the fixtures dir).
+- `node scripts/run.mjs checks` also runs `scripts/check-fixtures.mjs`: no file under a `fixtures/` folder (`vsslicer/fixtures/` and `modules/*/test/fixtures/`) over 5 MB, and every folder directly under such a root has a `PROVENANCE.md` (generator, version, settings, licence). `modules/tooling/test/fixtures` (hand-written lint/licence violations) is exempt from `PROVENANCE.md` only. Loose files directly in a root (e.g. `manifest.json`) need none.
+- Inputs too big to commit (the 50, 200 and 500 MB G-code budget files) come from `node scripts/generate-large-fixture.mjs --kind gcode --size 500MB --seed 1 --out .cache/large-fixtures/500mb.gcode`: same kind, size, seed and generator version give byte-identical output (size within 1%); exit 0 written, 1 failed, 2 bad arguments or not implemented (currently a stub, filled in by the G-code parser cards). `.cache/` is git-ignored; CI caches `.cache/large-fixtures` keyed by the generator's hash.
 - Other runner commands: `node scripts/run.mjs <install|build|test|publish>`, and `--changed <git-ref>` to limit any of them to modules changed since that ref and their dependents.
 - One module on its own (its dependencies must already be published, which `ci` does):
   `cd vsslicer/modules/<name> && pnpm install && pnpm test && pnpm build`.
@@ -77,6 +79,15 @@ Adopting it in a module:
 3. `package.json`: `"prettier": "@vsslicer/tooling/prettier"`, `"lint": "eslint . && prettier --check . && tsc --noEmit"` (extensions: `tsc`), `"format": "prettier --write ."`.
 4. `.prettierignore` with `dist`, `coverage`, `pnpm-lock.yaml`.
 5. `pnpm-workspace.yaml`: `allowBuilds: { unrs-resolver: false }` (next to esbuild).
+
+### Third-party notices
+
+`third-party-notices [--out THIRD-PARTY-NOTICES.md] [metafile...]` (a bin of `@vsslicer/tooling` 0.6.0 or later; default metafile `dist/extension.meta.json`) runs after bundling. `vsslicer-bundle` writes the esbuild metafile next to the bundle; for any other esbuild call add `--metafile=dist/<name>.meta.json` and pass it. It maps every inlined input file to its owning package (pnpm's `.pnpm/<name>@<ver>/node_modules/<name>` layout and scoped names included; the module's own sources and `@vsslicer/*` are skipped), evaluates each package's SPDX `license` (or legacy `licenses`) expression and writes `THIRD-PARTY-NOTICES.md`: sorted by `name@version`, with the text of every LICENSE/COPYING/NOTICE file, no timestamps, so two runs are byte-identical. An extension with no third-party dependency gets a file saying so.
+
+- Allow-list (AGPL-3.0-compatible): AGPL-3.0, GPL-3.0, GPL-2.0-or-later, LGPL-2.1, LGPL-3.0 (each with `-only`/`-or-later`), MIT, MIT-0, ISC, BSD-2-Clause, BSD-3-Clause, Apache-2.0, 0BSD, Zlib, CC0-1.0, Unlicense, BlueOak-1.0.0, MPL-2.0. `GPL-2.0-only` is not compatible. Sources are in `modules/tooling/bin/spdx.mjs`.
+- `OR`: one allowed branch is enough (`MIT OR GPL-3.0`, `GPL-2.0-only OR MIT`). `AND`: all terms must be allowed (`MIT AND GPL-2.0-only` fails). `WITH` is judged on the base licence; `X+` counts as "or later".
+- Fails (exit 1, nothing written, message names `name@version`): `UNLICENSED`, no licence, a licence off the list, an expression that does not parse (including `SEE LICENSE IN ...`), or a package without a licence file.
+- Wire it into the extension build after the bundles, and ship the file: `"build": "tsc && vsslicer-bundle && third-party-notices"`, `"files": ["dist", "!dist/*.meta.json", "THIRD-PARTY-NOTICES.md", ...]`, and `THIRD-PARTY-NOTICES.md` in `.prettierignore` (see `modules/example-extension`). Tests build fake pnpm-layout trees at run time: `modules/tooling/test/notices.test.mjs`.
 
 ## Adding a module
 

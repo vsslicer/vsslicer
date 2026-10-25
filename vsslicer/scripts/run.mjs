@@ -102,4 +102,7 @@ if (cmd === 'ci' || cmd === 'checks') {
   const dirs = [...modules.map((m) => join(root, 'modules', m.dir)), join(root, 'fixtures', 'phantom-dep')];
   const l = spawnSync(process.execPath, [join(root, 'modules', 'tooling', 'bin', 'check-licence.mjs'), ...dirs], { stdio: 'inherit', env });
   if (l.status !== 0) (console.error('checks failed'), process.exit(l.status ?? 1));
+  console.log('\n[checks] check-fixtures');
+  const f = spawnSync(process.execPath, [join(root, 'scripts', 'check-fixtures.mjs'), root], { stdio: 'inherit', env });
+  if (f.status !== 0) (console.error('checks failed'), process.exit(f.status ?? 1));
 }
