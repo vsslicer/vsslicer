@@ -22,19 +22,22 @@ Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards 
 
 ## Acceptance criteria
 
-- [ ] Calibration cube and a multi-material sample from PrusaSlicer, SuperSlicer, Orca, Bambu Studio and Cura, arc fitting on and off where available, are checked in with generating slicer and version recorded in a manifest
+- [x] Calibration cube and a multi-material sample from Orca, and a calibration cube from Bambu Studio, with arc fitting on and off, are checked in with generating slicer and version recorded in a manifest (narrowed by the owner, Q11: "focus on Bambu/Orca style G-code for now"; PrusaSlicer, SuperSlicer, Cura and Bambu multi-material samples moved to GCP-79)
 - [x] A harness writes and compares golden JSON per file through an injectable summariser; a vitest run fails on a difference. The golden fields grow with the parser: move count (GCP-3), layer count and role histogram (GCP-4), labels and thumbnails (GCP-7), summary (GCP-8), each card's own criterion
 - [x] One `.gcode.3mf` sliced for the H2C in Bambu Studio is in the corpus (version recorded)
 - [x] A PrusaSlicer `.bgcode` and `.gcode` twin pair is present
 
 ## Tasks
 
-- [ ] Slice the fixtures with the installed slicers (ask on the board with `board.py ask` if a slicer is missing)
+- [x] Slice the fixtures with the installed slicers (ask on the board with `board.py ask` if a slicer is missing)
 - [x] Keep files small; use the fixture storage PLT sets up
 - [x] Write the manifest and the golden harness
 - [x] Add a script to regenerate goldens
 
 ## Progress
+
+Coordinator: criterion 1 narrowed to Bambu/Orca per the owner's Q11 answer ("push the full corpus out to a much later sprint, focus on Bambu/Orca style G-code for now"); the rest is GCP-79.
+
 
 Module `vsslicer/modules/gcode-parser` (fixtures, manifest, goldens, test support only; no src or version change). "Repository root" for tooling read as `vsslicer/`.
 
