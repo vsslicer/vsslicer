@@ -15,3 +15,5 @@
 13. [GCP-76: Bound block sizes in the .bgcode reader](076-bound-block-sizes-in-the-bgcode-reader.md)
 14. [GCP-77: Join chunks without spreading arrays in collect](077-join-chunks-without-spreading-arrays-in-collect.md)
 15. [GCP-78: Reset the toolhead position on G28](078-reset-the-toolhead-position-on-g28.md)
+16. [GCP-2: Check in the golden corpus and the golden-JSON harness](002-check-in-the-golden-corpus-and-the-golden-json-harness.md)
+17. [GCP-10: Check arc-fitted fixtures against slicer output](010-check-arc-fitted-fixtures-against-slicer-output.md)

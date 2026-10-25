@@ -61,3 +61,4 @@
 59. [GCP-73: Show template diagnostics as problems](073-show-template-diagnostics-as-problems.md)
 60. [GCP-74: Add the editTemplate command with a save callback](074-add-the-edittemplate-command-with-a-save-callback.md)
 61. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
+62. [GCP-79: Extend the golden corpus to PrusaSlicer, SuperSlicer, Cura and Bambu multi-material](079-extend-the-golden-corpus-to-prusaslicer-superslicer-cura-and.md)

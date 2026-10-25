@@ -20,15 +20,18 @@ Proves the arc row against the real slicers.
 
 ## Acceptance criteria
 
-- [ ] Arc-fitted PrusaSlicer and Orca fixtures tessellate within 0.05 mm chord tolerance (test)
-- [ ] R form resolves to the same centre as I/J on those fixtures (test)
+- [x] Arc-fitted Orca and Bambu Studio fixtures tessellate within 0.05 mm chord tolerance (test)
+- [x] R form resolves to the same centre as I/J on those fixtures (test)
 
 ## Tasks
 
-- [ ] Generate arc-fitted fixtures if missing
-- [ ] Write the tolerance tests
+- [x] Generate arc-fitted fixtures if missing
+- [x] Write the tolerance tests
 
 ## Progress
+
+Coordinator: PrusaSlicer replaced by Bambu Studio per the owner's Q11 answer (focus on Bambu/Orca); the PrusaSlicer arc fixture is GCP-79.
+
 
 Done (Orca, plus Bambu Studio and SuperSlicer/ArcWelder as extras), in `vsslicer/modules/gcode-parser/test/arc-fixtures.test.ts` (tests only, no src change, no version bump; lint and all 286 tests pass):
 - Chord tolerance: for every G2/G3 in the three arc fixtures (568 + 945 + 248), an independent line scan gives the true circle (start + I/J); all chord vertices lie within 0.05 mm of it, chord sagitta <= 0.05 mm, the last vertex is the command's end, the chords' angles sum to the sweep, no `arc-invalid`.
