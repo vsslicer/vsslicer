@@ -5,7 +5,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { changelogSection, integrityProblems, stalePinProblems, isPublishedChange, lockfileIntegrities, registryProblems, releaseTag, versionProblems } from '../versioning.mjs';
+import { changelogSection, integrityProblems, stalePinProblems, isPublishedChange, lockfileIntegrities, prepackProblems, registryProblems, releaseTag, versionProblems } from '../versioning.mjs';
 
 const scripts = join(import.meta.dirname, '..');
 const files = ['dist', '!dist/*.meta.json', 'LICENSE', 'bin'];
@@ -36,11 +36,12 @@ test('changelogSection and releaseTag', () => {
 test('lockfile integrity: a doctored lockfile names both modules', () => {
   const lock = readFileSync(join(scripts, '..', 'modules', 'example-extension', 'pnpm-lock.yaml'), 'utf8');
   const entries = lockfileIntegrities(lock);
-  assert.ok(entries.has('@vsslicer/example@0.3.1'));
+  const ex = JSON.parse(readFileSync(join(scripts, '..', 'modules', 'example', 'package.json'), 'utf8')).version;
+  assert.ok(entries.has(`@vsslicer/example@${ex}`));
   const served = new Map(entries);
   const lookup = (n, v) => served.get(`${n}@${v}`);
   assert.deepStrictEqual(integrityProblems('@vsslicer/example-extension', entries, lookup), []);
-  const doctored = lockfileIntegrities(lock.replace(/(@vsslicer\/example@0\.3\.1':\n\s+resolution: \{integrity: sha512-)\w{4}/, '$1AAAA'));
+  const doctored = lockfileIntegrities(lock.replace(new RegExp(String.raw`(@vsslicer/example@${ex.replaceAll('.', '\\.')}':\n\s+resolution: \{integrity: sha512-)\w{4}`), '$1AAAA'));
   const [p, ...rest] = integrityProblems('@vsslicer/example-extension', doctored, lookup);
   assert.deepStrictEqual(rest, []);
   assert.match(p, /@vsslicer\/example-extension and @vsslicer\/example:/);
@@ -118,4 +119,10 @@ test('ci stops before any install when published files changed without a bump (u
   r = run('ci');
   assert.doesNotMatch(r.stderr, /version-check/);
   assert.ok(reachedInstall(r), r.stdout);
+});
+
+test('prepack: a module shipping dist must build in prepack', () => {
+  assert.strictEqual(prepackProblems('m', { files: ['dist', 'LICENSE'], scripts: { build: 'tsc', prepack: 'pnpm build' } }).length, 0);
+  assert.match(prepackProblems('m', { files: ['dist', 'LICENSE'], scripts: { build: 'tsc' } })[0], /^m: .*prepack/);
+  assert.strictEqual(prepackProblems('m', { files: ['README.md'], scripts: {} }).length, 0);
 });

@@ -89,3 +89,9 @@ export function registryProblems(m) {
     if (/@vsslicer.*registry\.npmjs\.org|registry\.npmjs\.org.*@vsslicer/.test(text)) out.push(`${m.dir}: ${file} references registry.npmjs.org for @vsslicer`);
   return out;
 }
+
+/** A module whose `files` ship build output must build in `prepack`, or a plain `pnpm publish` ships a stale or missing dist. */
+export function prepackProblems(dir, pkg) {
+  const ships = (pkg.files ?? []).some((f) => /^(\.\/)?(dist|build|out)(\/|$)/.test(f));
+  return ships && !/\bbuild\b/.test(pkg.scripts?.prepack ?? '') ? [`${dir}: package.json ships build output but has no prepack that runs the build`] : [];
+}

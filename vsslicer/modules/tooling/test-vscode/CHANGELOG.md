@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- Build in `prepack` (PLT-180). The default mocha runner path is built with `fileURLToPath`, so folders with spaces and Windows drive letters resolve (PLT-186).
+
 ## 0.2.2
 
 - Dev: `@vsslicer/tooling` ^0.8.1; lockfile pins current versions only. (PLT-179)

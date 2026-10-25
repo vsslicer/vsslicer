@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- Build in `prepack`, so a plain `pnpm publish` never ships a stale or missing `dist`. (PLT-180)
+
 ## 0.4.0
 
 - `JobSummary` (`extruders: ExtruderUsage[]` with `lengthMm`, `volumeCm3`, `weightG`, `cost`; `estimateSeconds: EstimateSeconds` with `normal`, `silent`, `model`, `total`): the slicer's own job statistics. All statistics optional; absent means the slicer did not state it. Additive.

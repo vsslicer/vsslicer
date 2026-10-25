@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3
+
+- Build in `prepack`, so a plain `pnpm publish` never ships a stale or missing `dist`. (PLT-180)
+
 ## 0.3.2
 
 - Dev: `@vsslicer/tooling` ^0.8.1; lockfile pins current versions only. (PLT-179)

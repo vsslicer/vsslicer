@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/gcode-bgcode",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Binary G-code (.bgcode) container reader: file header, blocks, CRC32, codec port, Heatshrink 11-4 and 12-4 and MeatPack decoders and typed diagnostics.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
@@ -27,6 +27,7 @@
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc --noEmit -p tsconfig.test.json",
     "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "prepack": "pnpm build",
     "test": "tsc --noEmit -p tsconfig.test.json && vitest run",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write ."

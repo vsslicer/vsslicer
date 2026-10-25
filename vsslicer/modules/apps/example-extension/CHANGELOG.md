@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.3
+
+- Build in `prepack` (PLT-180); dev: `@vsslicer/example` ^0.3.2, `@vsslicer/test-vscode` ^0.2.3.
+
 ## 0.7.2
 
 - Dev: `@vsslicer/tooling` ^0.8.1, `@vsslicer/test-vscode` ^0.2.2, `@vsslicer/example` ^0.3.1; lockfile pins current versions only. (PLT-179)
