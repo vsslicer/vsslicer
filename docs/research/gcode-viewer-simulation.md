@@ -239,6 +239,13 @@ Orca's libvgcode adds colour modes (pressure advance, acceleration, jerk), order
 | Fluidd structure-of-arrays (2D) | 26 | 390 MB |
 | **Proposed:** f32×3 position, f16 width and height, u8 role/tool/flags, u32 file offset, f32 start time; colour from the shader | ~28 | ~420 MB |
 
+**Measured moves per byte (GCP-17, 2026-10-25).** `@vsslicer/gcode-parser@0.8.5` on the 12 text files of the golden corpus (`vsslicer/modules/gcode-parser/test/fixtures`, repo `0714681`), default tessellation (0.05 mm, 15° per chord); raw numbers in `.reference/notes/GCP-17-moves-per-byte.md`:
+
+- The corpus averages 33.4k moves per MB (30 bytes per move, 23–31 bytes per line). Files without arcs reach at most 39.8k per MB, so 500 MB gives 16.7M moves on average and 19.9M at worst.
+- Arc fitting raises moves per byte, because the file shrinks more than the move count. Bambu Studio's cylinder goes from 36.1k to 57.1k per MB (−68% bytes, −50% moves, 5.5 chords per G2/G3). Orca's goes from 30.0k to 32.1k (3.8 chords per arc).
+- The worst case at 500 MB is 28.6M moves: 800 MB at 28 bytes, 914 MB with the 4-byte extrusion column. A tolerance of 0.01 mm gives 46M moves, and a 5° chord limit gives 57M.
+- Unverified: the corpus holds only small prints, scaled up linearly. Large-radius arcs are bound by the tolerance (about 70 chords per circle at r = 50 mm), and no fixture has any.
+
 At 50 MB (about 1.5M moves) every approach except tubes fits comfortably. At 500 MB, only compact typed arrays plus an instanced template stay under about 1 GB in total across the extension host, the webview and the GPU. Above roughly 20M moves, the next step is level of detail for far zoom: merge collinear segments or drop travels out of range.
 
 ### 7. Recommendation
@@ -317,5 +324,5 @@ At 50 MB (about 1.5M moves) every approach except tubes fits comfortably. At 500
 - How Prusa Buddy phase stepping and input shaping affect timing, and whether Buddy's input shaping derives from Klipper.
 - How accurate klipper_estimator, Orca `plan_klipper` and Prusa really are against measured prints. This needs instrumented test prints.
 - For the licensing synthesis (VSS-16): does klipper_estimator's planner count as a derivative of GPL-3.0 Klipper? Is a clean-room reimplementation from Kinematics.md enough for a non-GPL VSSlicer? Is a bundled klipper_estimator binary acceptable?
-- The real ratio of bytes per line to moves per file for current slicers with arc fitting on, to firm up the 500 MB memory estimate.
+- ~~The real ratio of bytes per line to moves per file with arc fitting on.~~ Measured by GCP-17 (§6). What is still open is large-radius arc fitting on a large print.
 - How Sindarius gcodeviewer handles arcs (minified bundle not checked).

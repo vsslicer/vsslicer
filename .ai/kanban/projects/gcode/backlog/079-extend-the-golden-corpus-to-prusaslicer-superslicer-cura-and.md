@@ -7,6 +7,7 @@ effort: M
 model: sonnet
 area: [parser]
 story: US1
+sprint: "VSS:SP4"
 depends_on: [2, 10]
 created: 2026-10-25
 ---

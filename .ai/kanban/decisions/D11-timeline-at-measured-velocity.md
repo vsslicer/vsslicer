@@ -1,7 +1,7 @@
 ---
 id: D11
-title: Plan time at measured agent speed, in two-hour sprints
-status: proposed
+title: "Plan time at measured agent speed, in two-hour sprints"
+status: accepted
 date: 2026-10-25
 ---
 
@@ -33,3 +33,14 @@ one after the other on the same afternoon.
 - **Velocity comes from research and planning.** Writing, testing and reviewing code will likely run
   slower. SP2's close gives the first implementation figure.
 - **Owner review gates** (approvals, accounts, hardware) aren't in the estimate.
+
+## Update after SP3 (2026-10-25, re-plan)
+
+The rule is unchanged; only the figures are remeasured. Implementation velocity across the closed
+implementation sprints is 46 points an hour (SP2 33, SP3 81 at a mean of 2 running agents; the board's
+`velocity()`), so sprints are 92 points. `board.py plan-sprints` re-planned every milestone from 23:30
+on 25 October: M1 SP4 to SP5 (due 26 Oct 03:30), M2 SP6 to SP12 (26 Oct 17:30), M3 SP13 to SP22
+(27 Oct 13:30), M4 SP23 to SP35 (28 Oct 15:30), M5 SP36 to SP48 (29 Oct 17:30), M6 SP49 to SP50
+(29 Oct 21:30). Owner-blocked cards (Q7, Q8, Q12, D14 sessions) are counted in the totals but not in
+capacity, so the dates are optimistic by their points. Retro rule 10 (`.ai/plans/estimation.md`) ties
+capacity to the number of agents running at once; a higher, sustained concurrency remeasures this.

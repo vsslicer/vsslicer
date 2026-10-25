@@ -76,7 +76,8 @@ export class SummaryBuilder {
   }
 
   build(): JobSummary {
-    const extruders = this.extruders.map((e) => {
+    // Array.from visits holes (map skips them): an extruder with no known stats is {}
+    const extruders = Array.from(this.extruders, (e = {}) => {
       const fed = (e.lengthMm ?? 0) > 0;
       const kept = Object.entries(e).filter(([k, v]) => k === 'lengthMm' || v !== 0 || !fed);
       return Object.fromEntries(kept) as ExtruderUsage;

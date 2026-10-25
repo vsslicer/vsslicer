@@ -8,7 +8,7 @@ model: opus
 area: [consumption]
 story: US13
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP32"
 depends_on: [21, PRN-14, PRN-320]
 created: 2026-10-25
 ---

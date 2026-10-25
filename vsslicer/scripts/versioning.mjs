@@ -67,6 +67,19 @@ export function integrityProblems(dependent, entries, lookup) {
   return out;
 }
 
+/** current: Map(module name -> package.json version). A clean registry serves current versions only (D12), so any other pin cannot install there. */
+export function stalePinProblems(dependent, entries, current) {
+  const out = [];
+  for (const spec of entries.keys()) {
+    const at = spec.lastIndexOf('@');
+    const name = spec.slice(0, at);
+    const now = current.get(name);
+    if (now !== undefined && now !== spec.slice(at + 1))
+      out.push(`${dependent} and ${name}: ${dependent}'s lockfile pins ${spec}, but ${name}'s current is ${now}; raise the range, re-lock and bump ${dependent}`);
+  }
+  return out;
+}
+
 /** m: { dir, pkg, texts: { fileName: content } for .npmrc, pnpm-workspace.yaml, pnpm-lock.yaml } -> problems */
 export function registryProblems(m) {
   const out = [];
@@ -75,4 +88,10 @@ export function registryProblems(m) {
   for (const [file, text] of Object.entries({ 'package.json': JSON.stringify(m.pkg), ...m.texts }))
     if (/@vsslicer.*registry\.npmjs\.org|registry\.npmjs\.org.*@vsslicer/.test(text)) out.push(`${m.dir}: ${file} references registry.npmjs.org for @vsslicer`);
   return out;
+}
+
+/** A module whose `files` ship build output must build in `prepack`, or a plain `pnpm publish` ships a stale or missing dist. */
+export function prepackProblems(dir, pkg) {
+  const ships = (pkg.files ?? []).some((f) => /^(\.\/)?(dist|build|out)(\/|$)/.test(f));
+  return ships && !/\bbuild\b/.test(pkg.scripts?.prepack ?? '') ? [`${dir}: package.json ships build output but has no prepack that runs the build`] : [];
 }

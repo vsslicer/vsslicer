@@ -143,3 +143,12 @@ test('works when the module lives under a symlinked directory', async () => {
   assert.deepStrictEqual(problems, []);
   assert.match(markdown, /## a@1\.0\.0/);
 });
+
+test('a missing metafile prints one line and exits 1, no stack', () => {
+  const d = mkdtempSync(join(tmpdir(), 'nometa-'));
+  const bin = new URL('../bin/third-party-notices.mjs', import.meta.url).pathname;
+  const r = spawnSync(process.execPath, [bin], { cwd: d, encoding: 'utf8' });
+  assert.strictEqual(r.status, 1);
+  assert.strictEqual(r.stderr.trim().split('\n').length, 1, r.stderr);
+  assert.match(r.stderr, /^third-party-notices: /);
+});

@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, createWriteStream } from 
 import { homedir, tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { downloadAndUnzipVSCode, runTests } from '@vscode/test-electron';
-import { cachePath, defaultCacheDir, resolveVersion, resultsPath } from './versions.ts';
+import { cachePath, defaultCacheDir, resolveVersion, resultsPath, runnerPath } from './versions.ts';
 
 export interface IntegrationOptions {
   /** The extension folder (its package.json supplies `engines.vscode`). */
@@ -26,7 +26,7 @@ export const runIntegration = async (o: IntegrationOptions): Promise<string[]> =
   const engines = (JSON.parse(readFileSync(join(ext, 'package.json'), 'utf8')) as { engines?: { vscode?: string } })
     .engines?.vscode;
   if (!engines) throw new Error(`${ext}/package.json has no engines.vscode`);
-  const testsPath = o.extensionTestsPath ?? new URL('../runner.cjs', import.meta.url).pathname;
+  const testsPath = o.extensionTestsPath ?? runnerPath(import.meta.url);
   // Set by VS Code terminals and Electron-hosted tools; it would make the downloaded VS Code behave as plain Node.
   delete process.env['ELECTRON_RUN_AS_NODE'];
   const failed: string[] = [];

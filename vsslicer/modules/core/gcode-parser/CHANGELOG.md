@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.5
+
+- Re-lock to gcode-api 0.4.1 (PLT-180 follow-up).
+
+## 0.8.4
+
+- Fix (GCP-81): the summary `extruders` array is dense. A slot whose values are all unparseable (`; filament used [mm] = nan, 120.5`, `= 1,,3`) is `{}` instead of a hole (`undefined`, `null` in JSON), so `for (const e of extruders)` no longer throws.
+- Fix (GCP-80): the 100 MB summary test keeps its memory assertion and its time bound is now 30 s (a regression guard, not a benchmark); the worker corpus test has an explicit 60 s timeout. Both failed on a loaded machine. Tests only.
+
 ## 0.8.3
 
 - Fix: `G28` now homes the toolhead position. The named axes (X, Y, Z; all three when none is named, also for Prusa's `G28 W`) go to machine 0 and lose their `G92` offset, so `G1 X50`, `G28`, `G91`, `G1 X10` ends at X10 (was X60). `E` is unchanged and `G28` still leaves its `Marker`. Positions after a `G28` in files that home mid-file change.

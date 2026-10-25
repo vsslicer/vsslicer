@@ -8,7 +8,7 @@ model: sonnet
 area: [camera, bambu]
 story: US47
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP32"
 depends_on: [287]
 created: 2026-10-25
 ---

@@ -2,8 +2,8 @@
 id: M6
 title: VSSlicer build
 status: draft
-start: "2026-10-28T13:15+00:00"
-due: "2026-10-28T17:15+00:00"
+start: "2026-10-29T17:30+00:00"
+due: "2026-10-29T21:30+00:00"
 initiatives: I11
 ---
 

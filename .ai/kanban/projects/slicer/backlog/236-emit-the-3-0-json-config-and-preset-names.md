@@ -8,7 +8,7 @@ model: sonnet
 area: [prusa]
 story: US69
 milestone: "VSS:M5"
-sprint: "VSS:SP29"
+sprint: "VSS:SP40"
 depends_on: [218, 223]
 created: 2026-10-25
 ---

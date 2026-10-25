@@ -8,7 +8,7 @@ model: opus
 area: [schema]
 story: US7
 milestone: "VSS:M2"
-sprint: "VSS:SP5"
+sprint: "VSS:SP7"
 depends_on: [14]
 created: 2026-10-25
 ---

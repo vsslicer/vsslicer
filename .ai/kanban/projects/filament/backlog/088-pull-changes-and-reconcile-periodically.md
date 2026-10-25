@@ -8,7 +8,7 @@ model: opus
 area: [spoolman]
 story: US35
 milestone: "VSS:M4"
-sprint: "VSS:SP19"
+sprint: "VSS:SP27"
 depends_on: [84, 86]
 created: 2026-10-25
 ---

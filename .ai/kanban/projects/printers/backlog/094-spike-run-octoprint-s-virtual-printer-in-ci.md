@@ -8,7 +8,7 @@ model: opus
 area: [octoprint]
 story: US24
 milestone: "VSS:M3"
-sprint: "VSS:SP13"
+sprint: "VSS:SP18"
 depends_on: [PLT-9]
 created: 2026-10-25
 ---

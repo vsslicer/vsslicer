@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.2
+
+- PLT-183: `third-party-notices` and `vsslicer-bundle` print one `<bin>: <message>` line and exit 1 on user errors (missing metafile, bad entry), no stack trace. `vsslicer-bundle` prints esbuild warnings and every error through `formatMessages`.
+- PLT-184: `bundle(entry, outfile, cwd)` writes the metafile under `cwd`.
+
 ## 0.8.1
 
 - `vsslicer-package`: `main` is optional (an extension pack has none), so `extension/<main>` is only required when `main` is set. A user error (invalid target, no `package.json`) prints one `vsslicer-package: <message>` line and exits 1, with no stack trace.

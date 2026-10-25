@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import test from 'node:test';
 import assert from 'node:assert';
-import { changed, localDeps, order, withDeps } from '../lib.mjs';
+import { changed, fetchRetry, localDeps, order, withDeps } from '../lib.mjs';
 
 const m = (name, deps = []) => ({ name, dir: name.split('/')[1], deps });
 const mods = [m('@vsslicer/ext', ['@vsslicer/lib']), m('@vsslicer/lib', ['@vsslicer/api']), m('@vsslicer/api'), m('@vsslicer/tooling')];
@@ -32,4 +32,12 @@ test('a change under scripts/ selects every module', () =>
 test('withDeps adds transitive dependencies', () => {
   assert.deepStrictEqual([...withDeps(mods, ['@vsslicer/ext'])].sort(), ['@vsslicer/api', '@vsslicer/ext', '@vsslicer/lib']);
   assert.deepStrictEqual([...withDeps(mods, ['@vsslicer/tooling'])], ['@vsslicer/tooling']);
+});
+
+test('fetchRetry retries transient errors, then gives up', async () => {
+  let n = 0;
+  const flaky = async () => (++n < 3 ? Promise.reject(new Error('socket')) : 'ok');
+  assert.strictEqual(await fetchRetry('u', flaky), 'ok');
+  assert.strictEqual(n, 3);
+  await assert.rejects(fetchRetry('u', async () => Promise.reject(new Error('down'))), /down/);
 });

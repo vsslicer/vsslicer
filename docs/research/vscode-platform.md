@@ -47,6 +47,8 @@ Web sources: the VS Code extension API docs, the Code-OSS wiki, the VS Code FAQ,
 | Multiple panels and groups | Panels open in any `ViewColumn` and editor group and can be moved by the user. Each webview is its own iframe and process context, so several viewers mean several WebGL contexts and more memory. | https://code.visualstudio.com/api/extension-guides/webview |
 | Remote | In remote setups, webview content loads through VS Code's resource proxy. Local HTTP servers, such as a camera MJPEG proxy, need `env.asExternalUri` (`vscode.d.ts:10927`). | https://code.visualstudio.com/api/advanced-topics/remote-extensions |
 
+In the webview content frame, messages from the host arrive with `event.source === window.parent`, so a receiver should check that: `vscode@4ef6bab7:src/vs/workbench/contrib/webview/browser/pre/index.html:1305` (per review, not re-read).
+
 ### 3. Workspace model
 
 | API | What it gives | Source |

@@ -8,7 +8,7 @@ model: sonnet
 area: [prusa, engine]
 story: US65
 milestone: "VSS:M5"
-sprint: "VSS:SP28"
+sprint: "VSS:SP40"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---

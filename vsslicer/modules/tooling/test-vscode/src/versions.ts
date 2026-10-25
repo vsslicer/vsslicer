@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 
 /** `min` is the lowest version `engines.vscode` allows; anything else is a literal version or `stable`/`insiders`. */
@@ -21,3 +22,7 @@ export const defaultCacheDir = (env: NodeJS.ProcessEnv, platform: NodeJS.Platfor
   const base = platform === 'win32' && env['LOCALAPPDATA'] ? env['LOCALAPPDATA'] : join(home, '.cache');
   return join(base, 'vsslicer', 'vscode-test');
 };
+
+/** The bundled mocha runner next to the compiled module; `.pathname` would keep `%20` and a `/C:/` prefix. */
+export const runnerPath = (moduleUrl: string, windows?: boolean): string =>
+  fileURLToPath(new URL('../runner.cjs', moduleUrl), { windows });

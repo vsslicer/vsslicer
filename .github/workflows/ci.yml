@@ -73,11 +73,6 @@ jobs:
           node-version-file: vsslicer/.nvmrc
           cache: pnpm
           cache-dependency-path: vsslicer/modules/*/pnpm-lock.yaml
-      # generated 50/200/500 MB inputs; the key is the generator's hash, so editing it regenerates them
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: vsslicer/.cache/large-fixtures
-          key: large-fixtures-${{ runner.os }}-${{ hashFiles('vsslicer/scripts/generate-large-fixture.mjs') }}
       # one VS Code download for every extension module (@vsslicer/test-vscode); `stable` moves, so the key carries the ISO week
       - id: week
         run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
@@ -88,6 +83,17 @@ jobs:
           restore-keys: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-
       - run: scripts/registry.sh start
       - run: node scripts/run.mjs ci --changed "$BASE"
+        env:
+          VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
+          BASE: ${{ needs.select.outputs.base }}
+      # modules with a test:integration script (VS Code extension host); Linux needs a virtual display
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a node scripts/run.mjs test:integration --changed "$BASE"
+        env:
+          VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
+          BASE: ${{ needs.select.outputs.base }}
+      - if: runner.os != 'Linux'
+        run: node scripts/run.mjs test:integration --changed "$BASE"
         env:
           VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
           BASE: ${{ needs.select.outputs.base }}

@@ -31,8 +31,8 @@ export type BlockType = (typeof BlockType)[keyof typeof BlockType];
 export const Compression = { None: 0, Deflate: 1, Heatshrink11: 2, Heatshrink12: 3 } as const;
 export type Compression = (typeof Compression)[keyof typeof Compression];
 
-/** Metadata blocks: only INI. G-code blocks: none, MeatPack, MeatPack keeping comment lines. */
-export const MetadataEncoding = { Ini: 0 } as const;
+/** Metadata blocks: INI, or JSON (the slicer-config block of newer files). G-code blocks: none, MeatPack, MeatPack keeping comment lines. */
+export const MetadataEncoding = { Ini: 0, Json: 1 } as const;
 export const GCodeEncoding = { None: 0, MeatPack: 1, MeatPackComments: 2 } as const;
 export const ThumbnailFormat = { Png: 0, Jpg: 1, Qoi: 2 } as const;
 

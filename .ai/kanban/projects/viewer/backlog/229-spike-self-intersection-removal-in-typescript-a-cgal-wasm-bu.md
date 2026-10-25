@@ -8,7 +8,7 @@ model: opus
 area: [mesh, repair]
 story: US64
 milestone: "VSS:M4"
-sprint: "VSS:SP21"
+sprint: "VSS:SP30"
 depends_on: [228, 44]
 created: 2026-10-25
 ---

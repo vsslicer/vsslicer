@@ -3,6 +3,9 @@
 minimumReleaseAgeExclude:
   - '@vsslicer/*'
 # esbuild and unrs-resolver (via @vsslicer/tooling) ship their binaries as optional dependencies; their postinstalls are only optimisations
+# vsce-sign and keytar (via @vsslicer/tooling's @vscode/vsce) are only for publishing and signing
 allowBuilds:
+  '@vscode/vsce-sign': false
   esbuild: false
+  keytar: false
   unrs-resolver: false

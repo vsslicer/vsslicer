@@ -6,8 +6,8 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { changed, localDeps, order, withDeps } from './lib.mjs';
-import { changelogSection, integrityProblems, lockfileIntegrities, registryProblems, releaseTag, versionProblems } from './versioning.mjs';
+import { changed, fetchRetry, localDeps, order, withDeps } from './lib.mjs';
+import { changelogSection, integrityProblems, stalePinProblems, lockfileIntegrities, prepackProblems, registryProblems, releaseTag, versionProblems } from './versioning.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const registry = 'http://localhost:4873/';
@@ -114,15 +114,7 @@ const sh = (m, argv, e = env) => {
 };
 
 const published = async (m) => {
-  // node's fetch occasionally hits a keep-alive socket Verdaccio just closed: retry
-  let res;
-  for (let i = 0; ; i++)
-    try {
-      res = await fetch(`${registry}${m.name.replace('/', '%2f')}`);
-      break;
-    } catch (e) {
-      if (i >= 2) throw e;
-    }
+  const res = await fetchRetry(`${registry}${m.name.replace('/', '%2f')}`);
   if (res.status === 404) return false;
   if (!res.ok) throw new Error(`${m.name}: registry answered ${res.status}`);
   return m.version in ((await res.json()).versions ?? {});
@@ -150,7 +142,7 @@ if (cmd === 'ci') {
   console.log('\n[checks] lockfile integrity');
   const served = new Map();
   for (const m of modules) {
-    const res = await fetch(`${registry}${m.name.replace('/', '%2f')}`);
+    const res = await fetchRetry(`${registry}${m.name.replace('/', '%2f')}`);
     for (const [v, meta] of Object.entries(res.ok ? ((await res.json()).versions ?? {}) : {})) served.set(`${m.name}@${v}`, meta.dist?.integrity);
   }
   const problems = names.flatMap((n) => {
@@ -166,6 +158,9 @@ if (cmd === 'ci' || cmd === 'checks') {
   const reg = modules.flatMap((m) =>
     registryProblems({ dir: m.dir, pkg: m.pkg, texts: Object.fromEntries(['.npmrc', 'pnpm-workspace.yaml', 'pnpm-lock.yaml'].map((f) => [f, modFile(m, f) ?? ''])) }),
   );
+  const current = new Map(modules.map((m) => [m.name, m.version]));
+  reg.push(...modules.flatMap((m) => stalePinProblems(m.name, lockfileIntegrities(modFile(m, 'pnpm-lock.yaml') ?? ''), current)));
+  reg.push(...modules.flatMap((m) => prepackProblems(m.dir, m.pkg)));
   if (reg.length) (reg.forEach((p) => console.error(`registry: ${p}`)), process.exit(1));
   const r = spawnSync(process.execPath, ['--test', 'test/phantom-dep.test.mjs', 'test/npmrc.test.mjs'], { cwd: join(root, 'scripts'), stdio: 'inherit', env });
   if (r.status !== 0) (console.error('checks failed'), process.exit(r.status ?? 1));

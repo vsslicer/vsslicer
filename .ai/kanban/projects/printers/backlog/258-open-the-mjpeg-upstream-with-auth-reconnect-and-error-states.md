@@ -8,7 +8,7 @@ model: sonnet
 area: [camera, moonraker, octoprint]
 story: US42
 milestone: "VSS:M4"
-sprint: "VSS:SP20"
+sprint: "VSS:SP28"
 depends_on: [255, 246]
 created: 2026-10-25
 ---

@@ -1,7 +1,7 @@
 ---
 id: D15
 title: Product defaults taken while writing the M2 to M6 cards
-status: proposed
+status: accepted
 date: 2026-10-25
 cards: [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
 ---

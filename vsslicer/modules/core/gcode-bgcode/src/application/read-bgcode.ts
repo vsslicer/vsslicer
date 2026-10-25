@@ -120,7 +120,7 @@ export async function* readBgcode(
       if (crc32(covered, crc32(header)) !== expected)
         yield diag('crc-mismatch', at, `CRC32 mismatch in block type ${type}`);
     }
-    const maxEncoding = type === 1 ? 2 : 0;
+    const maxEncoding = type === 1 ? 2 : type === 2 ? 1 : 0; // slicer metadata may be JSON (Slicer3)
     if (type !== 5 && params.type !== 5 && params.encoding > maxEncoding)
       yield diag('unknown-encoding', at, `encoding ${params.encoding} in block type ${type}`);
 

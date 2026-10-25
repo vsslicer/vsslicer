@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/test-vscode",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Integration harness for VSSlicer extensions: runs mocha suites inside a real VS Code (@vscode/test-electron), on the engines minimum and stable.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
@@ -33,6 +33,7 @@
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc --noEmit -p tsconfig.test.json",
     "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "prepack": "pnpm build",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write ."
@@ -44,7 +45,7 @@
   "devDependencies": {
     "@types/node": "24.19.2",
     "@vitest/coverage-v8": "5.0.5",
-    "@vsslicer/tooling": "^0.7.0",
+    "@vsslicer/tooling": "^0.8.1",
     "eslint": "10.13.0",
     "prettier": "3.9.10",
     "typescript": "7.0.2",
