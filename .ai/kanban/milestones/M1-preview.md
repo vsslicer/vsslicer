@@ -1,0 +1,13 @@
+---
+id: M1
+title: Preview
+status: draft
+start: 2026-11-02
+due: 2026-12-20
+initiatives: I1
+---
+
+`vsslicer.gcode` 0.1 on both marketplaces: preview, simulation, G-code language; the monorepo and CI.
+
+Dates are the planner's proposal (D8), assuming two-week sprints and one coordinator with
+parallel agent workers; they move with measured velocity after Sprint 1.
