@@ -90,6 +90,8 @@ export interface ReceiveHandlers {
   onError(stream: string, error: ProtocolError): void;
 }
 
+const CLOSED_MAX = 256;
+
 interface Incoming {
   readonly count: number;
   readonly parts: (ArrayBuffer | undefined)[];
@@ -111,19 +113,27 @@ export function receiveBuffers(
 ): () => void {
   const timeoutMs = options.timeoutMs ?? TRANSFER_DEFAULTS.timeoutMs;
   const streams = new Map<string, Incoming>();
+  // Ids of finished or failed streams, so late duplicate chunks cannot reopen them.
+  // shortcut: bounded FIFO; a duplicate arriving after CLOSED_MAX newer streams closed would reopen its stream.
+  const closed = new Set<string>();
+  const close = (stream: string) => {
+    closed.add(stream);
+    if (closed.size > CLOSED_MAX) closed.delete(closed.values().next().value!);
+  };
   const drop = (stream: string) => {
     clearTimeout(streams.get(stream)?.timer);
     streams.delete(stream);
   };
   const fail = (stream: string, error: ProtocolError) => {
     drop(stream);
+    close(stream);
     handlers.onError(stream, error);
   };
 
   const stop = channel.onMessage((message) => {
     const r = parseEnvelope(message);
     const c = r.ok ? asChunk(r.envelope) : undefined;
-    if (!c) return;
+    if (!c || closed.has(c.stream)) return;
     let s = streams.get(c.stream);
     if (!s) streams.set(c.stream, (s = { count: c.count, parts: [], contiguous: 0 }));
     if (c.count !== s.count)
@@ -133,6 +143,7 @@ export function receiveBuffers(
     channel.post(ack(c.stream, s.contiguous));
     if (s.contiguous === s.count) {
       drop(c.stream);
+      close(c.stream);
       return handlers.onBuffer(c.stream, concat(s.parts as ArrayBuffer[]));
     }
     clearTimeout(s.timer);

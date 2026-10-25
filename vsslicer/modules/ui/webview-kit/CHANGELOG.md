@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- PLT-35: `receiveBuffers` remembers the last 256 finished or failed stream ids and ignores their later chunks, so a late duplicate no longer fires `onBuffer` twice or raises a spurious `TimeoutError`.
+
 ## 0.4.0
 
 - PLT-37: webview adapters: `createWebviewApi` (typed state, `acquireVsCodeApi` called once), `createWindowChannel` (accepts only messages whose source is the VS Code host frame), `watchTheme`/`domThemeHost` (`--vscode-*` tokens with change events) and `watchVisibility`.

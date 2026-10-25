@@ -219,3 +219,50 @@ describe('version mismatch after reload', () => {
     expect(onBuffer).not.toHaveBeenCalled();
   });
 });
+
+describe('late chunks of a closed stream', () => {
+  const setup = () => {
+    vi.useFakeTimers();
+    const [host, webview] = pair();
+    const onBuffer = vi.fn();
+    const onError = vi.fn();
+    receiveBuffers(webview, { onBuffer, onError }, { timeoutMs: 100 });
+    return { host, onBuffer, onError };
+  };
+  const flush = () => vi.advanceTimersByTimeAsync(1000);
+  const one = new ArrayBuffer(1);
+
+  test('a duplicate of a finished single-chunk stream does not fire onBuffer again', async () => {
+    const { host, onBuffer, onError } = setup();
+    host.post(chunk('s', 0, 1, one));
+    host.post(chunk('s', 0, 1, one));
+    await flush();
+    expect(onBuffer).toHaveBeenCalledTimes(1);
+    expect(onError).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+
+  test('a duplicate of chunk 0 after a two-chunk stream finished raises no TimeoutError', async () => {
+    const { host, onBuffer, onError } = setup();
+    host.post(chunk('s', 0, 2, one));
+    host.post(chunk('s', 1, 2, one));
+    await flush();
+    host.post(chunk('s', 0, 2, one));
+    await flush();
+    expect(onBuffer).toHaveBeenCalledTimes(1);
+    expect(onError).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+
+  test('later chunks of a stream that failed do not reopen it', async () => {
+    const { host, onBuffer, onError } = setup();
+    host.post(chunk('s', 0, 2, one));
+    host.post(chunk('s', 1, 3, one));
+    await flush();
+    host.post(chunk('s', 1, 2, one));
+    await flush();
+    expect(onError).toHaveBeenCalledTimes(1);
+    expect(onBuffer).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+});
