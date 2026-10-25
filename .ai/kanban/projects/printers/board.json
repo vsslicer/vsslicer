@@ -1,6 +1,6 @@
 {
-  "name": "Slicer",
-  "key": "SLC",
+  "name": "Printers",
+  "key": "PRN",
   "columns": [
     {
       "id": "backlog",
@@ -134,15 +134,20 @@
       "label": "Area",
       "kind": "multiselect",
       "options": [
-        "engine",
-        "orca",
-        "cura",
-        "prusa",
-        "tasks",
-        "postprocess",
-        "calibration",
-        "multimaterial",
-        "embedded"
+        "api",
+        "bambu",
+        "moonraker",
+        "octoprint",
+        "prusalink",
+        "duet",
+        "daemon",
+        "discovery",
+        "storage",
+        "camera",
+        "fleet",
+        "history",
+        "serial",
+        "unofficial"
       ]
     },
     {
@@ -193,8 +198,7 @@
   },
   "docs": [
     "docs",
-    ".ai/plans",
-    "projects/slicer/docs"
+    ".ai/plans"
   ],
   "notes": ".reference/notes/{ticket}-*.md",
   "stall_minutes": 20,
@@ -205,11 +209,11 @@
   "template": "What the task is for, in a sentence or two.\n\n## Acceptance criteria\n\n- [ ] What has to be true for the task to be done\n\n## Tasks\n\n- [ ] The work, broken down, in order\n\n## Progress\n\nNot started.\n",
   "projects": {
     "VSS": ".ai/kanban",
-    "PLT": "projects/platform/.ai/kanban",
-    "GCP": "projects/gcode/.ai/kanban",
-    "VWR": "projects/viewer/.ai/kanban",
-    "PRF": "projects/profiles/.ai/kanban",
-    "PRN": "projects/printers/.ai/kanban",
-    "FIL": "projects/filament/.ai/kanban"
+    "PLT": ".ai/kanban/projects/platform",
+    "GCP": ".ai/kanban/projects/gcode",
+    "VWR": ".ai/kanban/projects/viewer",
+    "PRF": ".ai/kanban/projects/profiles",
+    "SLC": ".ai/kanban/projects/slicer",
+    "FIL": ".ai/kanban/projects/filament"
   }
 }

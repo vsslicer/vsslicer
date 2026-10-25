@@ -1,6 +1,6 @@
 {
-  "name": "Profiles",
-  "key": "PRF",
+  "name": "Slicer",
+  "key": "SLC",
   "columns": [
     {
       "id": "backlog",
@@ -134,13 +134,15 @@
       "label": "Area",
       "kind": "multiselect",
       "options": [
-        "schema",
-        "importers",
-        "evaluator",
-        "store",
-        "form",
-        "wizard",
-        "export"
+        "engine",
+        "orca",
+        "cura",
+        "prusa",
+        "tasks",
+        "postprocess",
+        "calibration",
+        "multimaterial",
+        "embedded"
       ]
     },
     {
@@ -191,8 +193,7 @@
   },
   "docs": [
     "docs",
-    ".ai/plans",
-    "projects/profiles/docs"
+    ".ai/plans"
   ],
   "notes": ".reference/notes/{ticket}-*.md",
   "stall_minutes": 20,
@@ -203,11 +204,11 @@
   "template": "What the task is for, in a sentence or two.\n\n## Acceptance criteria\n\n- [ ] What has to be true for the task to be done\n\n## Tasks\n\n- [ ] The work, broken down, in order\n\n## Progress\n\nNot started.\n",
   "projects": {
     "VSS": ".ai/kanban",
-    "PLT": "projects/platform/.ai/kanban",
-    "GCP": "projects/gcode/.ai/kanban",
-    "VWR": "projects/viewer/.ai/kanban",
-    "PRN": "projects/printers/.ai/kanban",
-    "SLC": "projects/slicer/.ai/kanban",
-    "FIL": "projects/filament/.ai/kanban"
+    "PLT": ".ai/kanban/projects/platform",
+    "GCP": ".ai/kanban/projects/gcode",
+    "VWR": ".ai/kanban/projects/viewer",
+    "PRF": ".ai/kanban/projects/profiles",
+    "PRN": ".ai/kanban/projects/printers",
+    "FIL": ".ai/kanban/projects/filament"
   }
 }

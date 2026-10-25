@@ -1,6 +1,6 @@
 {
-  "name": "Filament management",
-  "key": "FIL",
+  "name": "3D viewer and project",
+  "key": "VWR",
   "columns": [
     {
       "id": "backlog",
@@ -134,12 +134,15 @@
       "label": "Area",
       "kind": "multiselect",
       "options": [
-        "model",
-        "import",
-        "spoolman",
-        "consumption",
-        "tags",
-        "ui"
+        "3mf",
+        "mesh",
+        "viewer",
+        "plates",
+        "editor",
+        "arrange",
+        "repair",
+        "step",
+        "painting"
       ]
     },
     {
@@ -190,8 +193,7 @@
   },
   "docs": [
     "docs",
-    ".ai/plans",
-    "projects/filament/docs"
+    ".ai/plans"
   ],
   "notes": ".reference/notes/{ticket}-*.md",
   "stall_minutes": 20,
@@ -202,11 +204,11 @@
   "template": "What the task is for, in a sentence or two.\n\n## Acceptance criteria\n\n- [ ] What has to be true for the task to be done\n\n## Tasks\n\n- [ ] The work, broken down, in order\n\n## Progress\n\nNot started.\n",
   "projects": {
     "VSS": ".ai/kanban",
-    "PLT": "projects/platform/.ai/kanban",
-    "GCP": "projects/gcode/.ai/kanban",
-    "VWR": "projects/viewer/.ai/kanban",
-    "PRF": "projects/profiles/.ai/kanban",
-    "PRN": "projects/printers/.ai/kanban",
-    "SLC": "projects/slicer/.ai/kanban"
+    "PLT": ".ai/kanban/projects/platform",
+    "GCP": ".ai/kanban/projects/gcode",
+    "PRF": ".ai/kanban/projects/profiles",
+    "PRN": ".ai/kanban/projects/printers",
+    "SLC": ".ai/kanban/projects/slicer",
+    "FIL": ".ai/kanban/projects/filament"
   }
 }
