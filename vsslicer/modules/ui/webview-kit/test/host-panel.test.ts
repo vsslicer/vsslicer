@@ -6,11 +6,13 @@ function fakePanel() {
   const rx = new Set<(m: unknown) => void>();
   const dis = new Set<() => void>();
   const sent: unknown[] = [];
-  const panel: HostPanel & { dispose(): void; rx: typeof rx; fail: boolean } = {
+  const panel: HostPanel & { dispose(): void; rx: typeof rx; fail: boolean; undeliverable: boolean } = {
     fail: false,
+    undeliverable: false,
     rx,
     webview: {
-      postMessage: (m) => (panel.fail ? Promise.reject(new Error('x')) : (sent.push(m), Promise.resolve(true))),
+      postMessage: (m) =>
+        panel.fail ? Promise.reject(new Error('x')) : (sent.push(m), Promise.resolve(!panel.undeliverable)),
       onDidReceiveMessage: (l) => (rx.add(l), { dispose: () => rx.delete(l) }),
     },
     onDidDispose: (l) => (dis.add(l), { dispose: () => dis.delete(l) }),
@@ -36,6 +38,17 @@ test('disposal mid-transfer: one warning, no listener left', () => {
 test('rejected postMessage is a warning, not an exception', async () => {
   const { panel } = fakePanel();
   panel.fail = true;
+  const warn = vi.fn();
+  const ch = createPanelChannel(panel, { warn });
+  ch.post('a');
+  ch.post('b');
+  await new Promise((r) => setTimeout(r, 0));
+  expect(warn).toHaveBeenCalledTimes(1);
+});
+
+test('a postMessage that resolves false counts as dropped, one warning total', async () => {
+  const { panel } = fakePanel();
+  panel.undeliverable = true;
   const warn = vi.fn();
   const ch = createPanelChannel(panel, { warn });
   ch.post('a');

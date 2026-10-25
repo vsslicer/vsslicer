@@ -30,3 +30,5 @@ Webview side of the transport; typed `getState`/`setState` wrapper over `acquire
 ## Progress
 
 Done in webview-kit 0.4.0 (src/adapters, unit tests with fakes). Not verified in a real VS Code webview or Playwright.
+
+Update 0.4.2: the jsdom test for domThemeHost (test/dom-theme.test.ts) was missing and is now added; jsdom observes style and class changes, so the box stands. The "Playwright with the stub" task was not done.

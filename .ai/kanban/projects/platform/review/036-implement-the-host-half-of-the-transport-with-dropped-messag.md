@@ -30,3 +30,5 @@ Binds the channel to a VS Code `Webview` using `SerializableObjectWithBuffers`; 
 ## Progress
 
 Done in webview-kit 0.4.0 (src/adapters, unit tests with fakes). Not verified in a real VS Code webview or Playwright.
+
+Update 0.4.2: a postMessage resolving false now counts as dropped (test added, written first and seen failing). Review must-fix.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2
+
+- PLT-36: `createPanelChannel` counts a `postMessage` that resolves `false` (VS Code's "could not be delivered") as dropped, with the same one warning in total.
+- PLT-37: test for `domThemeHost` (jsdom): a `--vscode-*` style change and a class change on the root element each fire the observer once.
+
 ## 0.4.1
 
 - PLT-35: `receiveBuffers` remembers the last 256 finished or failed stream ids and ignores their later chunks, so a late duplicate no longer fires `onBuffer` twice or raises a spurious `TimeoutError`.

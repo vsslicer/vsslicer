@@ -12,7 +12,7 @@ export interface HostPanel {
 
 /**
  * Host side `Channel` over a webview panel. Messages are passed through untouched (the envelope is parsed
- * by the application layer, payloads never). After disposal, or when `postMessage` rejects, messages are
+ * by the application layer, payloads never). After disposal, or when `postMessage` rejects or resolves `false`, messages are
  * dropped with one warning in total; all listeners are released on disposal.
  */
 export function createPanelChannel(
@@ -41,7 +41,10 @@ export function createPanelChannel(
     post(message) {
       if (disposed) return drop('the webview is disposed');
       try {
-        panel.webview.postMessage(message).then(undefined, () => drop('postMessage failed'));
+        panel.webview.postMessage(message).then(
+          (ok) => ok || drop('not deliverable'),
+          () => drop('postMessage failed'),
+        );
       } catch {
         drop('postMessage failed');
       }
