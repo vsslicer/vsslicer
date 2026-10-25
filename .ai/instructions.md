@@ -52,8 +52,8 @@ Nothing to build yet. Implementation work will add its commands here.
   prioritise on the dashboard (`serve.py`, port 8125).
 - The suite will split into projects (filament manager, 3D viewer, slicer, G-code preview, ...),
   each with its own board and key, linked from this umbrella board's `board.json` `projects`.
-  Umbrella initiatives, milestones and decisions stay here; epics, stories and tasks go on the
-  project that delivers them. Ideas become initiatives, epics, stories and tasks through the
+  Initiatives, epics (each with `project: <KEY>`), milestones and decisions live on this VSS
+  board; stories (`epic: VSS:E<n>`) and task cards go on the project board that delivers them. Ideas become initiatives, epics, stories and tasks through the
   gstack planning cycle in the taskboard skill.
 - Agent models: Opus for high-level and judgment work (planning, design, architecture, reviews,
   coordination); Sonnet for well-defined, compartmentalised tasks with a clear definition of
