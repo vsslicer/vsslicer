@@ -55,3 +55,16 @@ test('extended commands pass, lowercase and garbage codes fail', () => {
   for (const code of ['g1', 'set_pressure', 'G', '1G', 'G1 X', ''])
     assert.deepEqual(validateEntry({ ...good, code }), [`invalid code: ${code}`]);
 });
+
+test('flavour typos and leading-zero codes fail', () => {
+  assert.deepEqual(validateEntry({ ...good, flavours: ['klippper'] }), ['unknown flavour: klippper']);
+  for (const f of ['bambu', 'prusa-buddy']) assert.deepEqual(validateEntry({ ...good, flavours: [f] }), []);
+  assert.deepEqual(validateEntry({ ...good, code: 'G01' }), ['invalid code: G01']);
+  assert.deepEqual(validateEntry({ ...good, code: 'G0' }), []);
+});
+
+test('a flavour:code pair in two files fails when the files share a seen set', () => {
+  const seen = new Set<string>();
+  parseEntries([good], 'a.json', seen);
+  assert.throws(() => parseEntries([good], 'b.json', seen), /b\.json\[0\] G1: duplicate G1 for flavour marlin/);
+});

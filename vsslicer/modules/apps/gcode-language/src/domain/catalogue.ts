@@ -27,7 +27,11 @@ const SOURCES: readonly { host: string; path: string }[] = [
 ];
 
 /** Standard codes, or Klipper extended commands such as SET_PRESSURE_ADVANCE. */
-const CODE = /^([GMT]\d+(\.\d+)?|[A-Z][A-Z0-9_]+)$/;
+/** No leading zeros: lookups normalise `G01` to `G1`, so a `G01` entry would never show. */
+const CODE = /^([GMT](0|[1-9]\d*)(\.\d+)?|(?![GMT]\d)[A-Z][A-Z0-9_]+)$/;
+
+/** The flavour names the extension can select; a typo would create a flavour nothing selects. */
+export const FLAVOURS: ReadonlySet<string> = new Set(['marlin', 'prusa-buddy', 'bambu', 'klipper', 'reprapfirmware']);
 
 const isText = (v: unknown): v is string => typeof v === 'string' && v.trim() !== '';
 
@@ -56,6 +60,7 @@ export const validateEntry = (raw: unknown): string[] => {
   if (!isText(e.description)) problems.push('missing description');
   if (!Array.isArray(e.flavours) || e.flavours.length === 0 || !e.flavours.every(isText))
     problems.push('missing flavour list');
+  else for (const f of e.flavours) if (!FLAVOURS.has(f)) problems.push(`unknown flavour: ${f}`);
   if (!Array.isArray(e.parameters)) problems.push('parameters must be a list');
   else {
     e.parameters.forEach((p: unknown, i) => {
@@ -68,11 +73,10 @@ export const validateEntry = (raw: unknown): string[] => {
   return problems;
 };
 
-/** Validates a whole file's worth of raw entries, including duplicate codes within one flavour. Throws listing every problem. */
-export const parseEntries = (raw: unknown, where: string): CatalogueEntry[] => {
+/** Validates a whole file's worth of raw entries, including duplicate codes within one flavour; pass one `seen` set across files to catch duplicates between files. Throws listing every problem. */
+export const parseEntries = (raw: unknown, where: string, seen = new Set<string>()): CatalogueEntry[] => {
   if (!Array.isArray(raw)) throw new Error(`${where}: expected a list of entries`);
   const problems: string[] = [];
-  const seen = new Set<string>();
   raw.forEach((entry, i) => {
     const label = `${where}[${i}]${typeof entry?.code === 'string' ? ` ${entry.code}` : ''}`;
     for (const p of validateEntry(entry)) problems.push(`${label}: ${p}`);
