@@ -16,3 +16,6 @@
 14. [PRF-206: Keep each Prusa nozzle's default print and filament profile when splitting](206-keep-each-prusa-nozzle-s-default-print-and-filament-profile-.md)
 15. [PRF-208: Lower the Orca inherited-keys cap to the measured need](208-lower-the-orca-inherited-keys-cap-to-the-measured-need.md)
 16. [PRF-204: Cap the diagnostics of the Orca tree reader and folder loader](204-cap-the-diagnostics-of-the-orca-tree-reader-and-folder-loade.md)
+17. [PRF-128: Check resolved values for 20 Orca and Bambu tuples against the oracle](128-check-resolved-values-for-20-orca-and-bambu-tuples-against-t.md)
+18. [PRF-42: Check resolved values for 20 Prusa tuples against the oracle](042-check-resolved-values-for-20-sample-tuples-per-ecosystem-aga.md)
+19. [PRF-145: Release `profiles-data-orca@0.1.0`: the Orca and Bambu JSON trees](145-release-profiles-data-orca-0-1-0-the-orca-and-bambu-json-tre.md)
