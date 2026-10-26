@@ -3,6 +3,7 @@
 ## 0.9.0
 
 - PLT-194: `third-party-notices` takes a pinned vendored licence text (`vsslicer.licenceTexts`) for a package that ships none; the text must name its licence as a whole word or standard phrase, and stay inside the module.
+
 ## 0.8.2
 
 - PLT-183: `third-party-notices` and `vsslicer-bundle` print one `<bin>: <message>` line and exit 1 on user errors (missing metafile, bad entry), no stack trace. `vsslicer-bundle` prints esbuild warnings and every error through `formatMessages`.
