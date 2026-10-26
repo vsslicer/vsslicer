@@ -25,6 +25,4 @@
 23. [GCP-121: Cut G-code preview memory at 500 MB to the budget](121-cut-g-code-preview-memory-at-500-mb-to-the-budget.md)
 24. [GCP-122: Count move and state-change reads in the planner's linear-time test](122-count-move-and-state-change-reads-in-the-planner-s-linear-ti.md)
 25. [GCP-123: Capture a real Moonraker file_position feed for the follow tests](123-capture-a-real-moonraker-file-position-feed-for-the-follow-t.md)
-26. [GCP-126: Show the fan and temperature colour modes in the G-code preview](126-show-the-fan-and-temperature-colour-modes-in-the-g-code-prev.md)
-27. [GCP-127: Add FileCheck to the gcode-preview API gate's caller-built types](127-add-filecheck-to-the-gcode-preview-api-gate-s-caller-built-t.md)
-28. [GCP-128: Show a follow's reveal warning once per follow](128-show-a-follow-s-reveal-warning-once-per-follow.md)
+26. [GCP-128: Show a follow's reveal warning once per follow](128-show-a-follow-s-reveal-warning-once-per-follow.md)

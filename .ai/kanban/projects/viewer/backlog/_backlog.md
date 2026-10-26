@@ -344,7 +344,4 @@
 342. [VWR-387: Add Auto-orient to the object and plate menus with progress, cancel and the arrange offer](387-add-auto-orient-to-the-object-and-plate-menus-with-progress-.md)
 343. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
 344. [VWR-399: Check the Bambu objects golden against Bambu Studio's GUI](399-check-the-bambu-objects-golden-against-bambu-studio-s-gui.md)
-345. [VWR-407: Cap 3MF layer-data notices while reading, not after](407-cap-3mf-layer-data-notices-while-reading-not-after.md)
-346. [VWR-408: Make the 3mf resolveProject heap assert independent of GC timing](408-make-the-3mf-resolveproject-heap-assert-independent-of-gc-ti.md)
-347. [VWR-409: Merge 3MF custom G-code blocks of one plate and skip bad plate ids](409-merge-3mf-custom-g-code-blocks-of-one-plate-and-skip-bad-pla.md)
-348. [VWR-410: Pass file paths, not URL paths, in the 3mf real-file tests](410-pass-file-paths-not-url-paths-in-the-3mf-real-file-tests.md)
+345. [VWR-409: Merge 3MF custom G-code blocks of one plate and skip bad plate ids](409-merge-3mf-custom-g-code-blocks-of-one-plate-and-skip-bad-pla.md)
