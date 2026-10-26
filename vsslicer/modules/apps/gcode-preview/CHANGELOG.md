@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-110: Playwright snapshots of a Bambu and a PrusaSlicer corpus file through the preview renderer on SwiftShader (`pnpm test:browser`).
 - GCP-113: a failed context restore shows webview-kit 0.7.0's `'restore'` failure (no cast); the error detail is logged.
 - GCP-36: side panel with thumbnails, object labels (hover highlights the object), summary with the slicer estimate beside ours, and a plate picker; `.gcode.3mf` files now open (first plate, then by picker) instead of "not supported yet". Untrusted plate data is capped (256 plates, 10,000 labels, 4 MiB PNG thumbnails dropped in the worker, 256-character strings, text only).
 

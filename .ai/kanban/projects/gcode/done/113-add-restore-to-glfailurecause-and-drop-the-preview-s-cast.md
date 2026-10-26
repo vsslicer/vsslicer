@@ -6,7 +6,7 @@ priority: P2
 effort: S
 model: sonnet
 sprint: "VSS:SP7"
-owner: sp7-gcp-a
+owner: sp7-gcp-39
 docs: [.ai/audits/SP6-audit.md]
 created: 2026-10-26
 ---
@@ -24,12 +24,9 @@ Module: webview-kit, gcode-preview (presentation). Finding 8 of the SP6 audit, `
 
 ## Progress
 
-Kit part done: `'restore'` added to `GlFailureCause` with its message in `MESSAGES` (vsslicer/modules/webview-kit/src/gl/context.ts); test in test/gl-context.test.ts. Verified: webview-kit pnpm lint, test (124/124), build ok.
-Not done: the gcode-preview part (needs webview-kit released first; another agent works in gcode-preview).
+Kit part done earlier: `'restore'` added to `GlFailureCause` in webview-kit (v0.7.0).
+Preview part done: `preview-renderer.ts` imports `GlContextError` as a value and calls `showGlFailure(canvas, new GlContextError('restore'))`; the restore error detail is logged with `console.error('Graphics restore failed', err)` because the kit's message no longer carries it. `test/renderer.test.ts` asserts the kit's message and silences the log.
+Verified in gcode-preview: eslint, prettier, tests (91 pass) green; `tsc` and the full `pnpm build` fail only on the other agent's `test/snapshots.spec.ts` (Playwright not installed, GCP-110); esbuild webview/worker bundles ok.
+Not done: nothing. Shared-file changes: none.
 
-### Coordinator: shared-file changes
-
-- webview-kit: CHANGELOG line "Added `'restore'` to `GlFailureCause` (message: view could not be restored after a graphics reset)"; version bump 0.6.0 -> 0.7.0 (new union member), then release.
-- gcode-preview/package.json: `"@vsslicer/webview-kit": "^0.7.0"`.
-- gcode-preview/src/presentation/webview/preview-renderer.ts (~L133-140): replace the `showGlFailure(canvas, {cause:'restore', message:...} as unknown as GlContextError)` expression with `showGlFailure(canvas, new GlContextError('restore'))` (GlContextError is already imported there). The message no longer carries `String(err)`; log it separately if wanted.
-Review (sp7-rev-a): PASS (webview-kit part). Read the diff (src/gl/context.ts, test/gl-context.test.ts); no shared files touched; `'restore'` is in the union and in `MESSAGES` (a `Record<GlFailureCause, string>`, so tsc forces the message); nothing in the kit switches on `cause` (`showGlFailure` only copies it to `data-cause`). `pnpm lint && pnpm test && pnpm build` green (124 tests). The new test fails without the fix (`'restore'` is not a GlFailureCause, and the message would be empty). Deferred gcode-preview edit checked against preview-renderer.ts:L11-L18,L144-L153: right except one detail, corrected here: `GlContextError` is imported there as `type GlContextError` (L16), so the edit must also change that to a value import (`GlContextError,`), or `new GlContextError('restore')` fails tsc. The `^0.7.0` range is needed (pre-1.0, `^0.6.0` does not admit 0.7.0). The user message loses `String(err)`, as the note says.
+Review (sp7-rev-gcp3): PASS. preview-renderer.ts imports GlContextError as a value and calls `showGlFailure(canvas, new GlContextError('restore'))`, no cast; detail logged via console.error; renderer.test.ts asserts cause 'restore' and the kit message. Ran in the module: `pnpm lint` (eslint, prettier, tsc) green, `pnpm test` 91 pass, `pnpm build` green up to third-party-notices (saxes, PLT-194, not this card).
