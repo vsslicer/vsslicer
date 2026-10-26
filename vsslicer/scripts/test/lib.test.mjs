@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import test from 'node:test';
 import assert from 'node:assert';
-import { changed, fetchRetry, localDeps, order, withDeps } from '../lib.mjs';
+import { changed, fetchRetry, isUnreleased, localDeps, order, unreleasedDepProblems, withDeps } from '../lib.mjs';
 
 const m = (name, deps = []) => ({ name, dir: name.split('/')[1], deps });
 const mods = [m('@vsslicer/ext', ['@vsslicer/lib']), m('@vsslicer/lib', ['@vsslicer/api']), m('@vsslicer/api'), m('@vsslicer/tooling')];
@@ -40,4 +40,19 @@ test('fetchRetry retries transient errors, then gives up', async () => {
   assert.strictEqual(await fetchRetry('u', flaky), 'ok');
   assert.strictEqual(n, 3);
   await assert.rejects(fetchRetry('u', async () => Promise.reject(new Error('down'))), /down/);
+});
+
+test('isUnreleased is true only for 0.0.0', () => {
+  assert.equal(isUnreleased({ version: '0.0.0' }), true);
+  assert.equal(isUnreleased({ version: '0.0.1' }), false);
+});
+
+test('unreleasedDepProblems names the dependent and the 0.0.0 dependency', () => {
+  const mods = [
+    { name: '@vsslicer/a', version: '0.0.0', deps: [] },
+    { name: '@vsslicer/b', version: '1.0.0', deps: ['@vsslicer/a'] },
+    { name: '@vsslicer/c', version: '1.0.0', deps: ['@vsslicer/b'] },
+  ];
+  assert.deepEqual(unreleasedDepProblems(mods), ['@vsslicer/b depends on @vsslicer/a, which is at unreleased version 0.0.0']);
+  assert.deepEqual(unreleasedDepProblems(mods.slice(1)), []);
 });

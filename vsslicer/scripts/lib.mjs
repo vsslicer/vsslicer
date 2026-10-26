@@ -64,3 +64,12 @@ export async function fetchRetry(url, fetchFn = fetch, tries = 3) {
       if (i >= tries) throw e;
     }
 }
+
+/** A 0.0.0 module is unreleased by definition: publish skips it and no module may depend on it. */
+export const isUnreleased = (m) => m.version === '0.0.0';
+
+/** modules: [{ name, version, deps }] -> one message per dependency on an unreleased @vsslicer/* module. */
+export function unreleasedDepProblems(modules) {
+  const unreleased = new Set(modules.filter(isUnreleased).map((m) => m.name));
+  return modules.flatMap((m) => m.deps.filter((d) => unreleased.has(d)).map((d) => `${m.name} depends on ${d}, which is at unreleased version 0.0.0`));
+}
