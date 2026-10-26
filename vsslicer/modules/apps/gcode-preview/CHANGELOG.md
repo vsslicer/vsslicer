@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
+- Depends on gcode-planner ^0.4.0 and webview-kit ^0.5.1.
 - GCP-38: timeline with play, pause, step and speed multiplier over the print's start times (read from the move records), a toolhead marker at the interpolated position (constant speed between start times; trapezoids: GCP-97), and the extruded path drawn up to it (only the visibility range changes). Playback runs on requestAnimationFrame and pauses when hidden.
 - GCP-35: layer range (bottom and top) and move sliders, feature and travel toggles, per-layer and range time, and the legend in the preview; scrubbing changes only the draw range (no upload, counted).
 - GCP-89: the planner follows the file's `;FLAVOR:` header (`ParsedFile.flavourName`), e.g. a Klipper file without a config block. Depends on gcode-api ^0.6.0 and gcode-parser ^0.11.0.
