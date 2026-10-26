@@ -264,5 +264,3 @@
 262. [SLC-274: Write the TimeLapse step for Cura output](274-write-the-timelapse-step-for-cura-output.md)
 263. [SLC-275: Register the TimeLapse step only when the engine has no timelapse key](275-register-the-timelapse-step-only-when-the-engine-has-no-time.md)
 264. [SLC-276: H2C: print a fixture with timelapse G-code](276-h2c-print-a-fixture-with-timelapse-g-code.md)
-265. [SLC-277: Make the runProcess kill tests independent of node start-up time](277-make-the-runprocess-kill-tests-independent-of-node-start-up-.md)
-266. [SLC-278: Bound the slicer timeout setting to what runProcess accepts](278-bound-the-slicer-timeout-setting-to-what-runprocess-accepts.md)

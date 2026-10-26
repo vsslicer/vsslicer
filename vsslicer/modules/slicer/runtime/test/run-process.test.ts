@@ -8,6 +8,9 @@ import { LineSplitter, runProcess, type RunOptions } from '../src/adapters/run-p
 const node = (script: string, extra: Partial<RunOptions> = {}, args: string[] = []) =>
   runProcess({ command: process.execPath, args: ['-e', script, ...args], timeoutMs: 60_000, ...extra });
 const GUARD = 60_000;
+// sh starts in milliseconds and installs its traps before the ready line, so the timeout cannot race node start-up.
+const sh = (script: string, extra: Partial<RunOptions> = {}) =>
+  runProcess({ command: '/bin/sh', args: ['-c', script], timeoutMs: GUARD, ...extra });
 
 describe('runProcess', () => {
   test('exit code and line streams', async () => {
@@ -45,20 +48,17 @@ describe('runProcess', () => {
   });
 
   test.skipIf(process.platform === 'win32')('SIGTERM-ignoring child gets SIGKILL', { timeout: GUARD }, async () => {
-    const r = await node(`process.on('SIGTERM',()=>{});console.log('up');setInterval(()=>{},1000)`, {
-      timeoutMs: 1000,
-      killGraceMs: 200,
-    });
+    const r = await sh(`trap "" TERM; echo up; while :; do sleep 1; done`, { timeoutMs: 1000, killGraceMs: 200 });
+    expect(r.lines[0]?.text).toBe('up');
     expect(r.timedOut).toBe(true);
     expect(r.signal).toBe('SIGKILL');
   });
 
   test.skipIf(process.platform === 'win32')('grandchildren in the group are killed', { timeout: GUARD }, async () => {
-    const r = await node(
-      `const c=require('child_process').spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'inherit'});console.log(c.pid);setInterval(()=>{},1000)`,
-      { timeoutMs: 1500, killGraceMs: 200 },
-    );
+    const r = await sh('sleep 1000 & echo $!; wait', { timeoutMs: 1000, killGraceMs: 200 });
+    expect(r.lines[0]).toBeDefined();
     const pid = Number(r.lines[0]!.text);
+    expect(Number.isInteger(pid)).toBe(true);
     expect(() => process.kill(pid, 0)).toThrow(/ESRCH/);
   });
 
