@@ -5,6 +5,7 @@ import type { IndexedMesh } from '../../domain/indexed-mesh.ts';
 
 const HEADER = 84; // 80 free-text bytes + uint32 triangle count
 const RECORD = 50; // normal + 3 vertices as float32 LE, then a 2-byte attribute
+const BLOCK = 9 * 65536; // floats per soup block (2.4 MB)
 
 /**
  * Binary or ASCII by length, never by the `solid` header (many binary files start with it):
@@ -29,12 +30,20 @@ export async function parseBinaryStl(chunks: AsyncIterable<Uint8Array> | Iterabl
   let total = 0;
   let declared = -1; // -1 until the header is complete
   let read = 0; // whole triangles stored
-  // Grows as data arrives, so a hostile count in a tiny file cannot force a huge allocation.
-  let soup = new Float32Array(9 * 1024);
+  // Fixed-size blocks allocated as data arrives: a hostile count in a tiny file cannot force a huge
+  // allocation, and nothing is ever copied, so the soup costs its own size plus at most one block.
+  const blocks: Float32Array[] = [];
+  let block = new Float32Array(0);
+  let at9 = 0; // floats used in `block`
 
   const store = (v: DataView, at: number) => {
-    if (read * 9 + 9 > soup.length) soup = Float32Array.from({ length: soup.length * 2 }, (_, i) => soup[i] ?? 0);
-    for (let k = 0; k < 9; k++) soup[read * 9 + k] = v.getFloat32(at + 12 + 4 * k, true); // skip the normal
+    if (at9 === block.length) {
+      block = new Float32Array(BLOCK);
+      blocks.push(block);
+      at9 = 0;
+    }
+    for (let k = 0; k < 9; k++) block[at9 + k] = v.getFloat32(at + 12 + 4 * k, true); // skip the normal
+    at9 += 9;
     read++;
   };
 
@@ -73,5 +82,6 @@ export async function parseBinaryStl(chunks: AsyncIterable<Uint8Array> | Iterabl
   const actual = Math.floor((total - HEADER) / RECORD);
   if (total < expected && (total - HEADER) % RECORD !== 0) throw new TruncatedMeshError(expected, total);
   if (total !== expected) throw new TriangleCountMismatchError(declared, actual);
-  return weld(soup.subarray(0, read * 9));
+  if (blocks.length > 0) blocks[blocks.length - 1] = block.subarray(0, at9);
+  return weld(blocks);
 }

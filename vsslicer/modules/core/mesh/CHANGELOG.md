@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- VWR-389: weld and computeStats use typed-array hash tables (no Map size limit) and binary STL keeps its triangles in fixed blocks: 20 M triangles parse in about 4 s (was 43 s) and computeStats no longer throws.
+- VWR-48: `nodeModelWorker` (`ModelWorker` port): parse and build the BVH in a worker_thread, buffers transferred, typed errors across the boundary, abort terminates; `WorkerCrashedError`.
+- VWR-47: `parseModel` (format detection, soft triangle cap with confirm, hard cap and file-size cap) and `TooManyTrianglesError`; text parsers refuse lines over 1 MiB.
 - VWR-40: `parseAsciiStl` (streaming ASCII STL, CRLF and odd whitespace) and `MalformedMeshError`.
 - VWR-41: `parseObj` (streaming OBJ geometry: n-gon fans, negative indices, groups and objects as parts).
 - VWR-39: `parseBinaryStl` (streaming binary STL with guard rails) and `isBinaryStl`.

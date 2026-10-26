@@ -27,3 +27,4 @@
 25. [VWR-37: Spike: parse, dedup and BVH time and memory at 1, 5 and 20 M](037-spike-parse-dedup-and-bvh-time-and-memory-at-1-5-and-20-m.md)
 26. [VWR-47: Add parseModel with the triangle cap](047-add-parsemodel-with-the-triangle-cap.md)
 27. [VWR-73: Release 3mf@0.1.0: container API (open, parts, replace, add, remove, save)](073-release-3mf-0-1-0-container-api-open-parts-replace-add-remov.md)
+28. [VWR-389: Make weld, computeStats and binary STL parsing work at 20 M triangles](389-make-weld-computestats-and-binary-stl-parsing-work-at-20-m-t.md)

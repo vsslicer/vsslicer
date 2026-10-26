@@ -5,7 +5,7 @@ import type { MeshStats } from '../mesh-stats.ts';
 /**
  * Triangle count, bounds, signed volume (sum of origin tetrahedra, float64), edge health and zero-area triangles.
  * Written from the divergence-theorem formula; no admesh (GPL) code.
- * shortcut: edge keys assume under ~9e7 vertices (a*n+b stays exact in a double); upgrade past that.
+ * Edges are counted in an open-addressing hash over typed arrays, so there is no `Map` size limit.
  */
 export function computeStats(mesh: IndexedMesh): MeshStats {
   const { positions: p, indices: ix } = mesh;
@@ -13,10 +13,50 @@ export function computeStats(mesh: IndexedMesh): MeshStats {
   const triangleCount = ix.length / 3;
   let volume = 0;
   let degenerateTriangles = 0;
-  const edges = new Map<number, number>();
-  const addEdge = (a: number, b: number): void => {
-    const key = a < b ? a * n + b : b * n + a;
-    edges.set(key, (edges.get(key) ?? 0) + 1);
+  // a closed mesh has 1.5 edges per triangle, so 2 slots per triangle keeps the load near 0.75 at worst
+  let mask = 15;
+  while (mask < triangleCount * 2) mask = mask * 2 + 1;
+  let lo = new Uint32Array(mask + 1); // smaller vertex + 1, 0 = empty
+  let hi = new Uint32Array(mask + 1);
+  let hits = new Uint8Array(mask + 1); // uses, capped at 3 (all the result needs)
+  let used = 0;
+  const slotOf = (a: number, b: number, m: number): number => {
+    const h = Math.imul(a, 0x9e3779b1) ^ Math.imul(b, 0x85ebca77);
+    return (Math.imul(h ^ (h >>> 16), 0x85ebca6b) >>> 0) & m;
+  };
+  const addEdge = (p0: number, p1: number): void => {
+    const a = p0 < p1 ? p0 : p1;
+    const b = p0 < p1 ? p1 : p0;
+    let s = slotOf(a, b, mask);
+    for (;;) {
+      if (lo[s] === 0) {
+        lo[s] = a + 1;
+        hi[s] = b;
+        hits[s] = 1;
+        if (++used * 10 > mask * 8) grow();
+        return;
+      }
+      if (lo[s] === a + 1 && hi[s] === b) {
+        if ((hits[s] as number) < 3) hits[s] = (hits[s] as number) + 1;
+        return;
+      }
+      s = (s + 1) & mask;
+    }
+  };
+  const grow = (): void => {
+    const [oLo, oHi, oHits] = [lo, hi, hits];
+    mask = mask * 2 + 1;
+    lo = new Uint32Array(mask + 1);
+    hi = new Uint32Array(mask + 1);
+    hits = new Uint8Array(mask + 1);
+    for (let i = 0; i < oLo.length; i++) {
+      if (oLo[i] === 0) continue;
+      let s = slotOf((oLo[i] as number) - 1, oHi[i] as number, mask);
+      while (lo[s] !== 0) s = (s + 1) & mask;
+      lo[s] = oLo[i] as number;
+      hi[s] = oHi[i] as number;
+      hits[s] = oHits[i] as number;
+    }
   };
   for (let t = 0; t < triangleCount; t++) {
     const a = ix[t * 3] as number;
@@ -49,9 +89,9 @@ export function computeStats(mesh: IndexedMesh): MeshStats {
   }
   let openEdges = 0;
   let nonManifoldEdges = 0;
-  for (const count of edges.values()) {
-    if (count === 1) openEdges++;
-    else if (count >= 3) nonManifoldEdges++;
+  for (let i = 0; i < hits.length; i++) {
+    if (hits[i] === 1) openEdges++;
+    else if (hits[i] === 3) nonManifoldEdges++;
   }
   return {
     triangleCount,
