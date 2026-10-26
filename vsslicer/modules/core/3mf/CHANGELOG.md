@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-390: `resolveProject` refuses component fan-out above 100,000 parts or 10,000,000 triangles (`MalformedXmlError`).
 - VWR-391: the real-file tests use committed fixtures (`test/fixtures/real`, with PROVENANCE); only the large OrcaBadge sample still skips without `.reference`.
 
 ## 0.1.0
