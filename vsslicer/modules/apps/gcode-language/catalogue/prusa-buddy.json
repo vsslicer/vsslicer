@@ -1,0 +1,234 @@
+[
+  {
+    "code": "G1",
+    "flavours": ["prusa-buddy"],
+    "description": "Moves the toolhead in a straight line to the given position, optionally extruding while it goes.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Target position on the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Target position on the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Target position on the Z axis."
+      },
+      {
+        "name": "E",
+        "description": "Filament to push or pull over the move."
+      },
+      {
+        "name": "F",
+        "description": "Feed rate, in millimetres per minute."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M104",
+    "flavours": ["prusa-buddy"],
+    "description": "Sets the hotend target temperature and returns at once.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target temperature in degrees Celsius; 0 switches the heater off."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "G80",
+    "flavours": ["prusa-buddy"],
+    "description": "Runs mesh bed levelling over a limited area, which slicers set to the printed footprint.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Centre of the area on X."
+      },
+      {
+        "name": "Y",
+        "description": "Centre of the area on Y."
+      },
+      {
+        "name": "W",
+        "description": "Area width."
+      },
+      {
+        "name": "H",
+        "description": "Area height."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M74",
+    "flavours": ["prusa-buddy"],
+    "description": "Tells the firmware how much filament weight the print has used so far, for the filament-left display.",
+    "parameters": [
+      {
+        "name": "W",
+        "description": "Filament weight used, in grams."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M142",
+    "flavours": ["prusa-buddy"],
+    "description": "Sets a secondary cooler or heatbreak target temperature in files for newer Prusa printers (exact meaning unverified).",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target temperature in degrees Celsius."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M403",
+    "flavours": ["prusa-buddy"],
+    "description": "Tells the multi-material unit which filament type is loaded in an extruder slot.",
+    "parameters": [
+      {
+        "name": "E",
+        "description": "Slot or extruder index."
+      },
+      {
+        "name": "F",
+        "description": "Filament type code; 0 means unspecified."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M555",
+    "flavours": ["prusa-buddy"],
+    "description": "Gives the bounding box of the print so the firmware limits its bed probing and purge to that area.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Left edge on X."
+      },
+      {
+        "name": "Y",
+        "description": "Front edge on Y."
+      },
+      {
+        "name": "W",
+        "description": "Width of the box."
+      },
+      {
+        "name": "H",
+        "description": "Height of the box."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M572",
+    "flavours": ["prusa-buddy"],
+    "description": "Sets pressure advance for the extruder.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Pressure advance time in seconds; 0 switches it off."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M593",
+    "flavours": ["prusa-buddy"],
+    "description": "Configures input shaping, which cancels vibration in the given axis.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Configure the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Configure the Y axis."
+      },
+      {
+        "name": "T",
+        "description": "Shaper type."
+      },
+      {
+        "name": "F",
+        "description": "Resonance frequency in Hz; 0 means the default."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M702",
+    "flavours": ["prusa-buddy"],
+    "description": "Unloads the filament from the hotend.",
+    "parameters": [
+      {
+        "name": "C",
+        "description": "Unload mode flag (exact effect unverified)."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M862.1",
+    "flavours": ["prusa-buddy"],
+    "description": "Checks that the printer nozzle diameter matches the sliced file and warns otherwise.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Expected nozzle diameter in millimetres."
+      },
+      {
+        "name": "A",
+        "description": "Whether to abort on a mismatch (unverified)."
+      },
+      {
+        "name": "F",
+        "description": "Whether the check is forced (unverified)."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M862.3",
+    "flavours": ["prusa-buddy"],
+    "description": "Checks that the printer model matches the model the file was sliced for.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Expected printer model name, in quotes."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M862.5",
+    "flavours": ["prusa-buddy"],
+    "description": "Checks that the printer supports the G-code level the file needs.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Required G-code level."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  },
+  {
+    "code": "M862.6",
+    "flavours": ["prusa-buddy"],
+    "description": "Checks that the printer firmware has a feature the file needs.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Feature name, in quotes."
+      }
+    ],
+    "source": "https://github.com/prusa3d/Prusa-Firmware-Buddy"
+  }
+]

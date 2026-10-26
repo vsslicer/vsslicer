@@ -1,0 +1,596 @@
+[
+  {
+    "code": "G0",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Moves the toolhead to the given position as fast as allowed, without extruding; slicers use it for travel moves.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Target position on the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Target position on the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Target position on the Z axis."
+      },
+      {
+        "name": "E",
+        "description": "Filament length to move, if any."
+      },
+      {
+        "name": "F",
+        "description": "Feed rate, in millimetres per minute."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#G0_.26_G1:_Move"
+  },
+  {
+    "code": "G2",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Moves along a clockwise circular arc to the given end point, optionally extruding.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Target position on the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Target position on the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Target position on the Z axis."
+      },
+      {
+        "name": "E",
+        "description": "Filament to extrude over the arc."
+      },
+      {
+        "name": "F",
+        "description": "Feed rate, in millimetres per minute."
+      },
+      {
+        "name": "I",
+        "description": "X offset from the start point to the arc centre."
+      },
+      {
+        "name": "J",
+        "description": "Y offset from the start point to the arc centre."
+      },
+      {
+        "name": "R",
+        "description": "Arc radius, used instead of I and J."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#G2_.26_G3:_Controlled_Arc_Move"
+  },
+  {
+    "code": "G3",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Moves along a counter-clockwise circular arc to the given end point, optionally extruding.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Target position on the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Target position on the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Target position on the Z axis."
+      },
+      {
+        "name": "E",
+        "description": "Filament to extrude over the arc."
+      },
+      {
+        "name": "F",
+        "description": "Feed rate, in millimetres per minute."
+      },
+      {
+        "name": "I",
+        "description": "X offset from the start point to the arc centre."
+      },
+      {
+        "name": "J",
+        "description": "Y offset from the start point to the arc centre."
+      },
+      {
+        "name": "R",
+        "description": "Arc radius, used instead of I and J."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#G2_.26_G3:_Controlled_Arc_Move"
+  },
+  {
+    "code": "G4",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Pauses the move queue for a set time before the next command runs.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Pause length in milliseconds."
+      },
+      {
+        "name": "S",
+        "description": "Pause length in seconds."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#G4:_Dwell"
+  },
+  {
+    "code": "G21",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Selects millimetres as the unit for positions and feed rates.",
+    "parameters": [],
+    "source": "https://reprap.org/wiki/G-code#G21:_Set_Units_to_Millimeters"
+  },
+  {
+    "code": "G28",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Homes the axes by driving them to their endstops, which establishes the machine position.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Home the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Home the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Home the Z axis."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#G28:_Move_to_Origin_.28Home.29"
+  },
+  {
+    "code": "G29",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Runs automatic bed levelling: probes the bed and stores a height map the firmware then compensates with.",
+    "parameters": [],
+    "source": "https://reprap.org/wiki/G-code#G29:_Detailed_Z-Probe"
+  },
+  {
+    "code": "G90",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Makes X, Y and Z positions absolute coordinates; on Marlin it also sets the extruder to absolute unless M83 follows.",
+    "parameters": [],
+    "source": "https://reprap.org/wiki/G-code#G90:_Set_to_Absolute_Positioning"
+  },
+  {
+    "code": "G92",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Redefines the current position without moving; slicers use G92 E0 to reset the extruder counter.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Target position on the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Target position on the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Target position on the Z axis."
+      },
+      {
+        "name": "E",
+        "description": "New extruder position."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#G92:_Set_Position"
+  },
+  {
+    "code": "M17",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Powers up the stepper motors so they hold position.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Enable only the X motor."
+      },
+      {
+        "name": "Y",
+        "description": "Enable only the Y motor."
+      },
+      {
+        "name": "Z",
+        "description": "Enable only the Z motor."
+      },
+      {
+        "name": "E",
+        "description": "Enable only the extruder motor."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M17:_Enable.2FPower_all_stepper_motors"
+  },
+  {
+    "code": "M73",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Reports print progress and remaining time so the display can show them.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Percent complete."
+      },
+      {
+        "name": "R",
+        "description": "Minutes remaining."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M73:_Set.2FGet_build_percentage"
+  },
+  {
+    "code": "M82",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Makes E values absolute positions of the filament.",
+    "parameters": [],
+    "source": "https://reprap.org/wiki/G-code#M82:_Set_extruder_to_absolute_mode"
+  },
+  {
+    "code": "M83",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Makes E values relative: each move extrudes the amount given.",
+    "parameters": [],
+    "source": "https://reprap.org/wiki/G-code#M83:_Set_extruder_to_relative_mode"
+  },
+  {
+    "code": "M84",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Switches the stepper motors off so the axes move freely (or after a given idle time).",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Idle seconds before the motors switch off."
+      },
+      {
+        "name": "X",
+        "description": "Disable only the X motor."
+      },
+      {
+        "name": "Y",
+        "description": "Disable only the Y motor."
+      },
+      {
+        "name": "Z",
+        "description": "Disable only the Z motor."
+      },
+      {
+        "name": "E",
+        "description": "Disable only the extruder motor."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M84:_Stop_idle_hold"
+  },
+  {
+    "code": "M106",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the part-cooling fan speed.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Speed from 0 (off) to 255 (full)."
+      },
+      {
+        "name": "P",
+        "description": "Fan number, when there is more than one."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M106:_Fan_On"
+  },
+  {
+    "code": "M107",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Switches the part-cooling fan off.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Fan number, when there is more than one."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M107:_Fan_Off"
+  },
+  {
+    "code": "M109",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the hotend temperature and waits until it is reached.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target temperature in degrees Celsius; waits only while heating up."
+      },
+      {
+        "name": "R",
+        "description": "Target temperature in degrees Celsius; waits for cooling down as well."
+      },
+      {
+        "name": "T",
+        "description": "Which tool or extruder to heat."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M109_in_Marlin.2C_MK4duo.2C_Sprinter_.28ATmega_port.29.2C_RepRapFirmware.2C_Prusa"
+  },
+  {
+    "code": "M115",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Asks the firmware to report its version and capabilities.",
+    "parameters": [
+      {
+        "name": "U",
+        "description": "Firmware version the host expects; Prusa firmware compares it with its own and may warn."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M115:_Get_Firmware_Version_and_Capabilities"
+  },
+  {
+    "code": "M140",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the heated bed target temperature and returns at once.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target temperature in degrees Celsius; 0 switches the bed off."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M140:_Set_Bed_Temperature_.28Fast.29"
+  },
+  {
+    "code": "M141",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the chamber target temperature and returns at once.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target temperature in degrees Celsius; 0 switches it off."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M141:_Set_Chamber_Temperature_.28Fast.29"
+  },
+  {
+    "code": "M190",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the heated bed temperature and waits until it is reached.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target temperature in degrees Celsius; waits only while heating up."
+      },
+      {
+        "name": "R",
+        "description": "Target temperature in degrees Celsius; waits for cooling down as well."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M190:_Wait_for_bed_temperature_to_reach_target_temp"
+  },
+  {
+    "code": "M201",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the maximum acceleration each axis may use.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X limit, mm/s^2."
+      },
+      {
+        "name": "Y",
+        "description": "Y limit, mm/s^2."
+      },
+      {
+        "name": "Z",
+        "description": "Z limit, mm/s^2."
+      },
+      {
+        "name": "E",
+        "description": "Extruder limit, mm/s^2."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M201:_Set_max_acceleration"
+  },
+  {
+    "code": "M203",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the maximum feed rate each axis may reach.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X limit, mm/s."
+      },
+      {
+        "name": "Y",
+        "description": "Y limit, mm/s."
+      },
+      {
+        "name": "Z",
+        "description": "Z limit, mm/s."
+      },
+      {
+        "name": "E",
+        "description": "Extruder limit, mm/s."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M203:_Set_maximum_feedrate"
+  },
+  {
+    "code": "M204",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the default acceleration for printing, retracting and travel moves.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Acceleration for moves that extrude, mm/s^2."
+      },
+      {
+        "name": "R",
+        "description": "Acceleration for retract moves, mm/s^2."
+      },
+      {
+        "name": "T",
+        "description": "Acceleration for travel moves, mm/s^2."
+      },
+      {
+        "name": "S",
+        "description": "One value for printing and travel, in older syntax."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M204:_Set_default_acceleration"
+  },
+  {
+    "code": "M205",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets advanced motion limits such as jerk and the minimum feed rates.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X jerk, mm/s."
+      },
+      {
+        "name": "Y",
+        "description": "Y jerk, mm/s."
+      },
+      {
+        "name": "Z",
+        "description": "Z jerk, mm/s."
+      },
+      {
+        "name": "E",
+        "description": "Extruder jerk, mm/s."
+      },
+      {
+        "name": "S",
+        "description": "Minimum feed rate while extruding, mm/s."
+      },
+      {
+        "name": "T",
+        "description": "Minimum feed rate for travel, mm/s."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M205:_Advanced_settings"
+  },
+  {
+    "code": "M221",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Scales the amount of filament extruded by a percentage (flow rate).",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Flow percentage; 100 is normal."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M221:_Set_extrude_factor_override_percentage"
+  },
+  {
+    "code": "M302",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Controls whether the extruder may move when the hotend is too cold.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Minimum temperature in degrees Celsius that allows extrusion; 0 allows cold extrusion."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M302:_Allow_cold_extrudes"
+  },
+  {
+    "code": "M486",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Labels objects so a single object can be cancelled during the print.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Index of the object that following moves belong to; -1 means no object."
+      },
+      {
+        "name": "A",
+        "description": "Name of the object being declared."
+      },
+      {
+        "name": "T",
+        "description": "Total number of objects."
+      },
+      {
+        "name": "P",
+        "description": "Index of an object to cancel."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M486:_Cancel_Object"
+  },
+  {
+    "code": "M569",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Chooses the stepper driver mode for the given axes; Prusa files use it for the extruder.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Driver mode: 0 or 1 selects the quiet or the fast mode."
+      },
+      {
+        "name": "E",
+        "description": "Apply to the extruder."
+      },
+      {
+        "name": "X",
+        "description": "Apply to the X axis."
+      },
+      {
+        "name": "Y",
+        "description": "Apply to the Y axis."
+      },
+      {
+        "name": "Z",
+        "description": "Apply to the Z axis."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M569:_Stepper_driver_control"
+  },
+  {
+    "code": "M900",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the linear advance factor, which compensates for pressure in the nozzle.",
+    "parameters": [
+      {
+        "name": "K",
+        "description": "Advance factor; 0 switches it off."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M900:_Set_Linear_Advance_Scaling_Factors"
+  },
+  {
+    "code": "M907",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Sets the motor current for the stepper drivers.",
+    "parameters": [
+      {
+        "name": "E",
+        "description": "Extruder motor current in milliamps."
+      },
+      {
+        "name": "X",
+        "description": "X motor current."
+      },
+      {
+        "name": "Y",
+        "description": "Y motor current."
+      },
+      {
+        "name": "Z",
+        "description": "Z motor current."
+      }
+    ],
+    "source": "https://reprap.org/wiki/G-code#M907:_Set_digital_trimpot_motor_current"
+  },
+  {
+    "code": "T0",
+    "flavours": ["marlin", "prusa-buddy"],
+    "description": "Selects tool 0 (the first extruder) as the active one.",
+    "parameters": [],
+    "source": "https://reprap.org/wiki/G-code#M6:_Tool_change"
+  }
+]
