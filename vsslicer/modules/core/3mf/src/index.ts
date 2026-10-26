@@ -50,3 +50,9 @@ export { addContentType, dropRelationshipsTo, removeContentType } from './adapte
 export { createCuraReader } from './adapters/cura/readCura.ts';
 export { MODEL_CONFIG, PRINT_CONFIG, readModelConfig, readPrusa2 } from './adapters/prusa/readPrusa2.ts';
 export type { ObjectConfig, VolumeConfig } from './adapters/prusa/readPrusa2.ts';
+export { readInNodeWorker } from './adapters/worker/nodeWorkerClient.ts';
+export type { NodeWorkerOptions } from './adapters/worker/nodeWorkerClient.ts';
+export { readInWebWorker } from './adapters/worker/webWorkerClient.ts';
+export type { WebWorkerLike } from './adapters/worker/webWorkerClient.ts';
+export { WorkerReadError } from './adapters/worker/protocol.ts';
+export type { WorkerResult, WorkerErrorCode } from './adapters/worker/protocol.ts';

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-31: run `openPackage` and `readProject` in a `worker_threads` or Web Worker (`readInNodeWorker`, `readInWebWorker`): input copied when it is a partial view, results transferred, one worker per file, typed `WorkerReadError` on a crash, out of memory or a failed post.
 - VWR-25: read PrusaSlicer 2.x projects (`readPrusa2`, registered as `prusa2` in `readProject`): objects, volumes (parts, modifiers, negative volumes, blockers) and per-object and per-volume config from `Slic3r_PE_model.config`, and `Slic3r_PE.config` as a raw blob.
 - VWR-21: `bambu` and `orca` dialect readers (`createBambuReader`, registered in `readProject`): `project_settings.config` and the embedded presets kept byte for byte in `rawConfig`; `Project.printableArea` from `printable_area`.
 - VWR-27: `cura` dialect reader (`createCuraReader`, registered in `readProject`): `Cura/*.cfg` containers raw in `rawConfig`, objects from the core model.

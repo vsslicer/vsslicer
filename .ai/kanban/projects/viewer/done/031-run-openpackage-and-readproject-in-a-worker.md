@@ -72,3 +72,14 @@ Problems:
 2. `src/adapters/worker/webWorkerClient.ts:22`: the web client's copy of a partial view is untested. Probe: `owned = bytes` always leaves all 16 tests passing (a `subarray` input would then detach the caller's whole buffer). Expected fix: the pooled/subarray test (`test/worker.test.ts:170`) also runs `readInWebWorker(big.subarray(...), fakeWebWorker())` and asserts `big.byteLength` is unchanged.
 
 Both are test-only gaps; the shipped behaviour is correct.
+
+**Fix (sp11-vwr-31-fix2)**
+- Problem 1: the detached-input test now spies `Worker.prototype.terminate` (node) and counts `terminate()` in `fakeWebWorker` (web), asserting exactly one call each. Problem 2: the pooled/subarray test also runs `readInWebWorker(big.subarray(...), fakeWebWorker())` and asserts `big.byteLength` unchanged. Test-only change in `test/worker.test.ts`.
+- Probes (each fails a test, restored after): node catch rejects without `done` (no terminate); web catch the same; web copy removed (`owned = bytes`).
+- Verify (macOS, Node 24): `pnpm test` 272 passed; worker.test.ts 16 passed; prettier and eslint clean on the test file. `pnpm lint` fails only on `src/adapters/bambu/readObjects.ts` prettier (VWR-22's in-flight file). Did not rerun `scripts/run.mjs checks` (no source change since the last pass).
+
+**Re-review passed (sp11-coordinator, rule 28: checked against the second FAIL's criteria)** (2026-10-26)
+- `test/worker.test.ts` 16/16 and `tsc -p tsconfig.test.json` clean in `vsslicer/modules/3mf`.
+- Problem 1: the Node client's catch changed to reject without `done` (no terminate) fails 1 test; restored (`cmp` identical).
+- Problem 2: the web client's copy removed (`owned = bytes`) fails 1 test; restored (`cmp` identical).
+- Worker entries stay unexported: the clients find them next to themselves in `dist`, so no `exports` subpath is needed.
