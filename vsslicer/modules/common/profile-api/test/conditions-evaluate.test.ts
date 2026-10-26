@@ -111,6 +111,22 @@ describe('regex engine', () => {
     expect(match(p, s)).toEqual({ compatible: want });
     expect(performance.now() - t).toBeLessThan(100);
   });
+  test('multi-line printer_notes match as PrusaSlicer (Boost) does', () => {
+    const notes = "Don't remove the following keywords!\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK4S\n";
+    const r = evaluate('printer.notes =~ /.*PRINTER_VENDOR_PRUSA3D.*/', { printer: { notes } });
+    expect(r).toEqual({ compatible: true });
+  });
+  // Boost line breaks are \n \r \f, never inside \r\n; JavaScript's `m` differs on \f, \u2028 and the \r\n middle.
+  test.each([
+    ['a.b', 'a\nb', true],
+    ['a$\\s^b', 'a\nb', true],
+    ['a$\\s^b', 'a\fb', true],
+    ['a$\\s^b', 'a\rb', true],
+    ['a\\s$\\s^b', 'a\r\nb', false],
+    ['a$\\s\\s^b', 'a\r\nb', true],
+    ['a$\\s^b', 'a\u2028b', false],
+    ['a.$', 'a\n', true],
+  ])('%s on %j is %s', (p, s, want) => expect(match(p, s)).toEqual({ compatible: want }));
   test.each(['(a)\\1', '(?=a)a', '(?<n>a)', '\\p{L}', '(?:(?:a){1000}){1000}', '(){999999999}b', '.{5001}'])(
     'rejects %s instantly with a diagnostic',
     (p) => {
@@ -132,6 +148,12 @@ describe('regex engine', () => {
     expect(performance.now() - t).toBeLessThan(100);
   });
 
+  // Boost's full match as RegExp, for subjects whose only line break is \n: `s` and `m` (Boost's defaults), sticky
+  // at 0 and `(?![^])` at the very end, since `^`/`$` would also match at line breaks.
+  const boostLike = (p: string) => {
+    const re = new RegExp(`(?:${p})(?![^])`, 'msuy');
+    return (s: string) => ((re.lastIndex = 0), re.test(s));
+  };
   const lines = (f: string) =>
     readFileSync(new URL(f, import.meta.url), 'utf8')
       .split('\n')
@@ -144,7 +166,7 @@ describe('regex engine', () => {
     const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
     let positives = 0;
     for (const p of pats) {
-      const re = new RegExp(`^(?:${p})$`, 'u');
+      const re = boostLike(p);
       const chars = [...new Set(p + 'aZ09_ \n.@-')];
       const own = [...subjects];
       for (let k = 0; k < 40; k++) {
@@ -155,7 +177,7 @@ describe('regex engine', () => {
       for (const s of own) {
         const r = match(p, s);
         expect(r.diagnostic, p).toBeUndefined();
-        expect(r.compatible, `${p} on ${JSON.stringify(s)}`).toBe(re.test(s));
+        expect(r.compatible, `${p} on ${JSON.stringify(s)}`).toBe(re(s));
         if (r.compatible) positives++;
       }
     }
@@ -182,11 +204,11 @@ describe('regex engine', () => {
     const alphabet = ['a', 'b', '1', ' ', '_', '.', '\n', 'é', '😀'];
     for (let i = 0; i < 2000; i++) {
       const p = gen(0);
-      const re = new RegExp(`^(?:${p})$`, 'u');
+      const re = boostLike(p); // the alphabet's only line break is \n
       for (let k = 0; k < 10; k++) {
         let s = '';
         for (let j = Math.floor(rnd() * 8); j > 0; j--) s += pick(alphabet);
-        expect(match(p, s), `${p} on ${JSON.stringify(s)}`).toEqual({ compatible: re.test(s) });
+        expect(match(p, s), `${p} on ${JSON.stringify(s)}`).toEqual({ compatible: re(s) });
       }
     }
   });

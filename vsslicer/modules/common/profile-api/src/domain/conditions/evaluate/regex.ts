@@ -1,7 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // A backtracking-free full-match regex engine for condition literals: the pattern is compiled to an NFA and
 // simulated Thompson-style (all states in step), so the time is O(states x subject length) whatever the pattern.
-// Accepts the regular subset of JavaScript `u`-flag syntax; matches exactly as `new RegExp('^(?:p)$', 'u').test`.
+// Accepts the regular subset of JavaScript `u`-flag syntax. Matches as PrusaSlicer's `boost::regex_match` with default
+// flags does (PrusaSlicer-2.9@b028299:src/libslic3r/PlaceholderParser.cpp:681): `.` matches any character, newlines
+// included (boostorg/regex@a640597:include/boost/regex/v5/basic_regex_parser.hpp parse_match_any, dont_care mask);
+// `^`/`$` match at the ends and at line breaks \n \r \f, never inside \r\n (v5/perl_matcher_common.hpp
+// match_start_line/match_end_line, v5/regex_traits_defaults.hpp is_separator<char>). For subjects whose only line
+// break is \n, that is exactly `new RegExp('^(?:p)$', 'msu').test`.
+// shortcut: Boost matches UTF-8 bytes, we match code points, so `.`/classes differ on one non-ASCII character; upgrade
+// if a vendor regex depends on it.
 
 /** Most NFA states a pattern may compile to (counted repeats are expanded). At the cap, 512 chars take ~15 ms (35 ms cold). */
 export const MAX_REGEX_STATES = 5000;
@@ -26,6 +33,8 @@ const OP_MATCH = 3;
 
 const isWord = (cp: number | undefined): boolean =>
   cp !== undefined && ((cp >= 48 && cp <= 57) || (cp >= 65 && cp <= 90) || (cp >= 97 && cp <= 122) || cp === 95);
+/** Boost's line separators for `char`: \n \r \f. */
+const isBreak = (cp: number | undefined): boolean => cp === 10 || cp === 13 || cp === 12;
 
 /** Compiles `pattern` to a full-match tester, or throws {@link RegexRejected}. */
 export function compileRegex(pattern: string): (subject: string) => boolean {
@@ -93,7 +102,7 @@ export function compileRegex(pattern: string): (subject: string) => boolean {
       x = e === 'b' || e === 'B' ? { t: 'assert', a: e } : { t: 'atom', pred: charRe(pattern.slice(start, i)) };
     } else if (c === '.') {
       i++;
-      x = { t: 'atom', pred: charRe('.') };
+      x = { t: 'atom', pred: charRe('[^]') };
     } else if (c === '*' || c === '+' || c === '?' || c === '{') return fail(`'${c}' has nothing to repeat`);
     else {
       const cp = pattern.codePointAt(i)!;
@@ -191,12 +200,15 @@ export function compileRegex(pattern: string): (subject: string) => boolean {
         else if (o === OP_SPLIT) stack.push(out[t]!, out2[t]!);
         else if (o === OP_ASSERT) {
           const a = arg[t]!;
+          const prev = cps[pos - 1];
+          const cur = cps[pos];
+          const crlf = prev === 13 && cur === 10;
           const ok =
             a === 0
-              ? pos === 0
+              ? pos === 0 || (isBreak(prev) && !crlf)
               : a === 1
-                ? pos === cps.length
-                : (isWord(cps[pos - 1]) !== isWord(cps[pos])) === (a === 2);
+                ? pos === cps.length || (isBreak(cur) && !crlf)
+                : (isWord(prev) !== isWord(cur)) === (a === 2);
           if (ok) stack.push(out[t]!);
         }
       }

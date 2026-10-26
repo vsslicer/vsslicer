@@ -11,3 +11,4 @@
 9. [PRF-9: Apply overrides[] blocks with match first or all](009-apply-overrides-blocks-with-match-first-or-all.md)
 10. [PRF-8: Evaluate conditions over a context with Prusa's failure semantics and a fuzz test](008-evaluate-conditions-over-a-context-with-prusa-s-failure-sema.md)
 11. [PRF-13: Implement the conversion kinds both ways](013-implement-the-conversion-kinds-both-ways.md)
+12. [PRF-177: Match newlines in conditions the way PrusaSlicer's Boost regex does](177-match-newlines-in-conditions-the-way-prusaslicer-s-boost-reg.md)
