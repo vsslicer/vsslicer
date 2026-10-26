@@ -109,6 +109,28 @@ describe('slice_info.config declared size', () => {
   });
 });
 
+describe('plate thumbnails', () => {
+  it('never inflates a thumbnail declaring over 4 MiB and says so', () => {
+    const big = writeZip(h2c, new Map([['Metadata/plate_1.png', new Uint8Array(300 * 1024 * 1024)]]));
+    inflatedNames.length = 0;
+    const p = readGcode3mfPlate(big, 1);
+    expect(inflatedNames).not.toContain('Metadata/plate_1.png');
+    expect(p.thumbnail).toBeUndefined();
+    expect(p.diagnostics.map((d) => d.code)).toContain('gcode-3mf-thumbnail-size');
+  }, 30000);
+
+  it('reads at most 16 of 100 thumbnails with one diagnostic', () => {
+    const many = writeZip(
+      h2c,
+      new Map(Array.from({ length: 100 }, (_, i) => [`Metadata/plate_1_t${i}.png`, enc('x')])),
+    );
+    const p = readGcode3mfPlate(many, 1);
+    expect(p.thumbnails.size).toBe(16);
+    expect(p.diagnostics.filter((d) => d.code === 'gcode-3mf-thumbnail-count')).toHaveLength(1);
+    expect(p.thumbnail).toBeDefined();
+  });
+});
+
 describe('slice_info.config scanner is linear on hostile input', () => {
   const cfg = (xml: string) => writeZip(h2c, new Map([['Metadata/slice_info.config', enc(xml)]]));
   const P = (b: string) => `<plate><metadata key="index" value="1"/>${b}</plate>`;

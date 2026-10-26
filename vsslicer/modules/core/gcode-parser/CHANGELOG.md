@@ -2,7 +2,9 @@
 
 ## Unreleased
 
+- GCP-114: `.gcode.3mf` plate thumbnails declared over 4 MiB (`MAX_THUMBNAIL_BYTES`) are never inflated; at most 16 per plate; new `thumbnails` map on `Gcode3mfPlate`.
 - GCP-112: `.gcode.3mf` checks `slice_info.config`'s declared size against 4 MiB before inflating it.
+
 ## 0.13.0
 
 - GCP-111: the `.gcode.3mf` readers (`gcode3mfSource`, `gcode3mfEntries`, `gcode3mfPlates`, `readGcode3mfPlate`, `CorruptZipError`, `SizeCapExceededError`) move to the `@vsslicer/gcode-parser/gcode-3mf` entry, so the main entry no longer loads @vsslicer/3mf (breaking for importers of those names from the main entry, which 0.12.0 added an hour earlier).
