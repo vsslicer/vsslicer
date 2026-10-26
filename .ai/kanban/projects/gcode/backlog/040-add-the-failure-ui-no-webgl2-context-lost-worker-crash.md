@@ -8,7 +8,7 @@ model: sonnet
 area: [editor]
 story: US13
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [30]
 created: 2026-10-25
 ---
@@ -31,3 +31,4 @@ The preview breaks alone; the host and other extensions are unaffected.
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: the gcode-preview lane is full (one card per module at a time); after GCP-31, 32, 35, 38 at about 69 minutes, a fifth serial card breaks rule 5's 72-minute critical path. First to pull back in if the lane runs ahead.

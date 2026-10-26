@@ -4,7 +4,7 @@ import type * as vscode from 'vscode';
 import { createPanelChannel, createWebviewHtml, localResourceRoots } from '@vsslicer/webview-kit/host';
 import { openPreview, type LoadPort, type PreviewSession } from '../application/preview-session.ts';
 import { GCODE_VIEW_TYPE, OPEN_GCODE_SETTING, PREVIEW_VIEW_TYPE, nextAssociations } from '../domain/associations.ts';
-import type { Received, ViewState } from '../domain/summary.ts';
+import type { Progress, Received, TimelineCommand, ViewState } from '../domain/summary.ts';
 
 export type Api = Pick<typeof vscode, 'window' | 'workspace' | 'Uri' | 'ConfigurationTarget'>;
 type Context = Pick<vscode.ExtensionContext, 'subscriptions' | 'extensionUri'>;
@@ -15,6 +15,10 @@ export interface PreviewProbe {
   state(uri: string): Promise<ViewState>;
   /** Resolves when a webview of `uri` has received every move buffer. */
   received(uri: string): Promise<Received>;
+  /** Drives the timeline of the webview open for `uri`. */
+  command(uri: string, command: TimelineCommand): void;
+  /** The latest progress the webview of `uri` reported (undefined before the first). */
+  progress(uri: string): Progress | undefined;
 }
 
 interface GcodeDocument extends vscode.CustomDocument {
@@ -32,6 +36,10 @@ const deferred = <T>() => {
 
 export const registerPreview = (context: Context, api: Api, load: LoadPort): PreviewProbe => {
   const states = new Map<string, Promise<ViewState>>();
+  const open = new Map<
+    string,
+    { channel: ReturnType<typeof createPanelChannel>; session: PreviewSession; progress?: Progress }
+  >();
   const received = new Map<string, ReturnType<typeof deferred<Received>>>();
   const receivedFor = (uri: string) => received.get(uri) ?? received.set(uri, deferred<Received>()).get(uri)!;
 
@@ -44,6 +52,8 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
       const dispose = () => {
         session.dispose();
         states.delete(key);
+        // a reopened file may already have registered under the same key
+        if (open.get(key)?.session === session) open.delete(key);
         received.delete(key);
       };
       return { uri, session, dispose };
@@ -62,9 +72,13 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
           title: 'G-code Preview',
         }));
       // subscribe before the HTML is set: the webview's hello is not retried
-      const stop = document.session.serve(createPanelChannel(panel), {
+      const channel = createPanelChannel(panel);
+      const entry = { channel, session: document.session };
+      open.set(document.uri.toString(), entry);
+      const stop = document.session.serve(channel, {
         onMismatch: setHtml,
         onReceived: (r) => receivedFor(document.uri.toString()).resolve(r),
+        onProgress: (p) => Object.assign(entry, { progress: p }),
       });
       panel.onDidDispose(stop);
       setHtml();
@@ -90,5 +104,11 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
   return {
     state: (uri) => states.get(uri) ?? Promise.reject(new Error(`${uri} is not open in the preview`)),
     received: (uri) => receivedFor(uri).promise,
+    command(uri, command) {
+      const c = open.get(uri);
+      if (!c) throw new Error(`${uri} has no preview open`);
+      c.session.command(c.channel, command);
+    },
+    progress: (uri) => open.get(uri)?.progress,
   };
 };

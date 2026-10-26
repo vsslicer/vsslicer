@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+- Depends on gcode-api ^0.6.0.
+- GCP-89: Cura `;FLAVOR:` names: `RepRap` ("RepRap (RepRap)", for Duet) selects the RepRapFirmware planner; `Griffin`, `Cheetah`, `Marlin(Volumetric)` and `RepRap (Volumetric)` the Marlin planner without the assumed flag (CuraEngine@47b0388); `UltiGCode` stays assumed.
+- GCP-92: `createKlipperPlanner` throws RangeError unless `checkpointInterval` is a positive integer.
+- GCP-93: a G4 dwell in a file with no moves counts in `totalTime` in every planner (`TimingBuilder.finish` adds the leftover lead; Klipper dwells it when no move was held); the constant-speed planner now honours G4 (one map of dwells per move).
+- GCP-37: `ToolheadWindow(planner, parsed, timing, start, end).positionAt(t, out?)` gives the toolhead XYZ, the move's fed E and the tool at time t inside a window of moves (binary search, no allocation with `out`): Klipper moves follow their `trapezoidsFor` trapezoid and hold through G4 dwells; other planners run each move at constant speed between start times, holding G4 dwells. `moveAtTime(parsed, t)` finds the move running at t.
+- GCP-90: the RRF planner clamps M204 P/T/S to 0.1 mm/s² as RepRapFirmware does (Configuration.h:56), so M204 P0 or S0 no longer makes the total NaN.
+- GCP-91: the RRF planner honours the latest of M204 S, P and T (S sets print and travel), so M204 S after M204 P changes the print acceleration (RepRapFirmware@aebf629 GCodes5.cpp:344-354).
+- GCP-88: the Klipper planner drops reported moves from its queue every 4096 moves, so memory stays bounded on long files with no G4/M400 (was one 370-byte object per move until the end).
+
 ## 0.3.0
 
 - GCP-23: `trapezoidsFor(planner, parsed, timing, start, end)` returns each move's `Trapezoid` (start time, entry, cruise, exit, accel), recomputed from the nearest checkpoint; a property test over random windows checks it equals the full pass. A checkpoint may carry the planner's `state` snapshot (`TimingBuilder.snapshot`, `snapshotDue`, `replay`, `stop`); `Planner.plan` takes an optional `Replay`. The Klipper planner snapshots (checkpoints at the first resumable move per interval, so not always at the multiple) and has `KlipperOptions.checkpointInterval`; the other planners keep stateless checkpoints and `trapezoidsFor` throws for them. `TimingBuilder.add` takes optional cruise, exit and accel; `MoveCursor.save`/`restore`. Spacing stays 4096, chosen by spike (about 1 ms per 1 s scrub window, 0.4-1.1 B/move).

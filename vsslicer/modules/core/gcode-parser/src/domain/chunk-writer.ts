@@ -9,6 +9,10 @@ import {
 } from '@vsslicer/gcode-api';
 import type { Chunk, Diagnostic, Layer, Marker, ObjectLabel, Slicer, Thumbnail } from '@vsslicer/gcode-api';
 
+// shortcut: restates gcode-api's optional `flavourName` so this builds against gcode-api 0.5.0 too; drop once the range requires the release that has it.
+/** A `Chunk` with the flavour name the file has stated so far. */
+export type NamedChunk = Chunk & { flavourName?: string };
+
 const INITIAL_MOVES = 1024;
 const KINDS = 32;
 
@@ -171,8 +175,8 @@ export class ChunkWriter {
   }
 
   /** Ends the current chunk and starts the next one at the following move. */
-  take(bytesRead: number, slicer: Slicer): Chunk {
-    const chunk: Chunk = {
+  take(bytesRead: number, slicer: Slicer, flavourName?: string): NamedChunk {
+    const chunk: NamedChunk = {
       moves: this.moves.slice(0, this.count * MOVE_STRIDE),
       extrusion: this.extrusion.slice(0, this.count * 4),
       stateChanges: this.changes.slice(0, this.changeCount * STATE_CHANGE_STRIDE),
@@ -183,6 +187,7 @@ export class ChunkWriter {
       diagnostics: this.diagnostics,
       bytesRead,
       slicer,
+      ...(flavourName !== undefined && { flavourName }),
       thumbnails: this.thumbnails,
       objects: [...this.labels.values()],
       config: Object.fromEntries(this.entries),

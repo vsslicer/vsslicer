@@ -64,4 +64,41 @@ describe('trackContextLoss', () => {
     res.dispose();
     expect(frees.map((f) => f.mock.calls.length)).toEqual([0, 0, 1, 1]);
   });
+
+  it('does not call the lost context free on remove or dispose after a failed restore', () => {
+    const c = canvas();
+    const res = trackContextLoss(c);
+    const oldFree = vi.fn();
+    let armed = false;
+    const build = () => {
+      if (armed) throw new Error('boom');
+      return oldFree;
+    };
+    const remove = res.add(build);
+    res.add(build);
+    armed = true;
+    fire(c, 'webglcontextrestored');
+    remove();
+    res.dispose();
+    expect(oldFree).not.toHaveBeenCalled();
+  });
+
+  it('finishes the rebuild loop when one entry throws and reports the first error', () => {
+    const c = canvas();
+    const onRestored = vi.fn();
+    const res = trackContextLoss(c, { onRestored });
+    const boom = new Error('boom');
+    let armed = false;
+    res.add(() => {
+      if (armed) throw boom;
+    });
+    const second = vi.fn();
+    res.add(second);
+    armed = true;
+    fire(c, 'webglcontextrestored');
+    expect(second).toHaveBeenCalledTimes(2);
+    expect(onRestored).toHaveBeenCalledWith(boom);
+    fire(c, 'webglcontextrestored');
+    expect(onRestored).toHaveBeenCalledTimes(2);
+  });
 });

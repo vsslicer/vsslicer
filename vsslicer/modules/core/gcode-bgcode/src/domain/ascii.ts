@@ -79,4 +79,9 @@ export function dropBlankLines(text: string): string {
 /** Lossless bytes <-> string (one char per byte); `TextDecoder('latin1')` is windows-1252 and not lossless. Buffer runs in Node and the desktop extension host. */
 export const bytesToLatin1 = (b: Uint8Array): string =>
   Buffer.from(b.buffer, b.byteOffset, b.length).toString('latin1');
-export const latin1ToBytes = (s: string): Uint8Array => Buffer.from(s, 'latin1');
+/** Own ArrayBuffer sized exactly to the text (Buffer.from pools small strings, so its `.buffer` would be 8 KiB). */
+export const latin1ToBytes = (s: string): Uint8Array => {
+  const b = Buffer.allocUnsafeSlow(s.length);
+  b.write(s, 'latin1');
+  return b;
+};

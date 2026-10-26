@@ -1,0 +1,159 @@
+>; hand-written Klipper macros and extended commands
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>SET_VELOCITY_LIMIT ACCEL=3000 VELOCITY=200 SQUARE_CORNER_VELOCITY=5.0
+#^^^^^^^^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+#                  ^ source.gcode
+#                   ^^^^^ source.gcode variable.parameter.gcode
+#                        ^ source.gcode keyword.operator.assignment.gcode
+#                         ^^^^ source.gcode constant.numeric.gcode
+#                             ^ source.gcode
+#                              ^^^^^^^^ source.gcode variable.parameter.gcode
+#                                      ^ source.gcode keyword.operator.assignment.gcode
+#                                       ^^^ source.gcode constant.numeric.gcode
+#                                          ^ source.gcode
+#                                           ^^^^^^^^^^^^^^^^^^^^^^ source.gcode variable.parameter.gcode
+#                                                                 ^ source.gcode keyword.operator.assignment.gcode
+#                                                                  ^^^ source.gcode constant.numeric.gcode
+>SET_PRESSURE_ADVANCE ADVANCE=0.045 SMOOTH_TIME=0.04
+#^^^^^^^^^^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+#                    ^ source.gcode
+#                     ^^^^^^^ source.gcode variable.parameter.gcode
+#                            ^ source.gcode keyword.operator.assignment.gcode
+#                             ^^^^^ source.gcode constant.numeric.gcode
+#                                  ^ source.gcode
+#                                   ^^^^^^^^^^^ source.gcode variable.parameter.gcode
+#                                              ^ source.gcode keyword.operator.assignment.gcode
+#                                               ^^^^ source.gcode constant.numeric.gcode
+>START_PRINT BED_TEMP=60 EXTRUDER_TEMP={params.EXTRUDER|default(200)|float}
+#^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+#           ^ source.gcode
+#            ^^^^^^^^ source.gcode variable.parameter.gcode
+#                    ^ source.gcode keyword.operator.assignment.gcode
+#                     ^^ source.gcode constant.numeric.gcode
+#                       ^ source.gcode
+#                        ^^^^^^^^^^^^^ source.gcode variable.parameter.gcode
+#                                     ^ source.gcode keyword.operator.assignment.gcode
+#                                      ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.begin.gcode
+#                                       ^^^^^^^^^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                                                      ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                                                       ^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                                                              ^ source.gcode meta.embedded.expression.braces.gcode
+#                                                               ^^^ source.gcode meta.embedded.expression.braces.gcode constant.numeric.gcode
+#                                                                  ^ source.gcode meta.embedded.expression.braces.gcode
+#                                                                   ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                                                                    ^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                                                                         ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.end.gcode
+>SET_GCODE_VARIABLE MACRO=PRINT_START VARIABLE=bed VALUE="[first_layer_bed_temperature]"
+#^^^^^^^^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+#                  ^ source.gcode
+#                   ^^^^^ source.gcode variable.parameter.gcode
+#                        ^ source.gcode keyword.operator.assignment.gcode
+#                         ^^^^^^^^^^^^ source.gcode
+#                                     ^^^^^^^^ source.gcode variable.parameter.gcode
+#                                             ^ source.gcode keyword.operator.assignment.gcode
+#                                              ^^^^ source.gcode
+#                                                  ^^^^^ source.gcode variable.parameter.gcode
+#                                                       ^ source.gcode keyword.operator.assignment.gcode
+#                                                        ^ source.gcode string.quoted.double.gcode
+#                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode string.quoted.double.gcode
+#                                                                                      ^ source.gcode string.quoted.double.gcode
+>{% set x = params.X|default(10)|float %}
+#^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.begin.gcode
+# ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#  ^ source.gcode meta.embedded.expression.braces.gcode
+#   ^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#      ^ source.gcode meta.embedded.expression.braces.gcode
+#       ^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#        ^ source.gcode meta.embedded.expression.braces.gcode
+#         ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#          ^ source.gcode meta.embedded.expression.braces.gcode
+#           ^^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                   ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                    ^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                           ^ source.gcode meta.embedded.expression.braces.gcode
+#                            ^^ source.gcode meta.embedded.expression.braces.gcode constant.numeric.gcode
+#                              ^ source.gcode meta.embedded.expression.braces.gcode
+#                               ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                                ^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                                     ^ source.gcode meta.embedded.expression.braces.gcode
+#                                      ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                                       ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.end.gcode
+>G1 X{x} Y[position_y] F6000 ; move
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.begin.gcode
+#     ^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#      ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.end.gcode
+#       ^ source.gcode
+#        ^ source.gcode variable.parameter.gcode
+#         ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#          ^^^^^^^^^^ source.gcode meta.embedded.expression.brackets.gcode variable.other.gcode
+#                    ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                     ^ source.gcode
+#                      ^ source.gcode variable.parameter.gcode
+#                       ^^^^ source.gcode constant.numeric.gcode
+#                           ^ source.gcode
+#                            ^^^^^^ source.gcode comment.line.semicolon.gcode
+>TIMELAPSE_TAKE_FRAME
+#^^^^^^^^^^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+>M104 S{first_layer_temperature[0] + 5}
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.begin.gcode
+#       ^^^^^^^^^^^^^^^^^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                              ^ source.gcode meta.embedded.expression.braces.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                               ^ source.gcode meta.embedded.expression.braces.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                ^ source.gcode meta.embedded.expression.braces.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                                 ^ source.gcode meta.embedded.expression.braces.gcode
+#                                  ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                                   ^ source.gcode meta.embedded.expression.braces.gcode
+#                                    ^ source.gcode meta.embedded.expression.braces.gcode constant.numeric.gcode
+#                                     ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.end.gcode
+>M109 S[nozzle_temperature_initial_layer]
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode meta.embedded.expression.brackets.gcode variable.other.gcode
+#                                       ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+>EXCLUDE_OBJECT_DEFINE NAME=cube_1 CENTER=110,110 POLYGON=[[100,100],[120,100],[120,120]]
+#^^^^^^^^^^^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+#                     ^ source.gcode
+#                      ^^^^ source.gcode variable.parameter.gcode
+#                          ^ source.gcode keyword.operator.assignment.gcode
+#                           ^^^^^^^ source.gcode
+#                                  ^^^^^^ source.gcode variable.parameter.gcode
+#                                        ^ source.gcode keyword.operator.assignment.gcode
+#                                         ^^^ source.gcode constant.numeric.gcode
+#                                            ^ source.gcode
+#                                             ^^^ source.gcode constant.numeric.gcode
+#                                                ^ source.gcode
+#                                                 ^^^^^^^ source.gcode variable.parameter.gcode
+#                                                        ^ source.gcode keyword.operator.assignment.gcode
+#                                                         ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                                                          ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                                                           ^^^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                                              ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode
+#                                                               ^^^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                                                  ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                                                                   ^ source.gcode meta.embedded.expression.brackets.gcode
+#                                                                    ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                                                                     ^^^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                                                        ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode
+#                                                                         ^^^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                                                            ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                                                                             ^ source.gcode meta.embedded.expression.brackets.gcode
+#                                                                              ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                                                                               ^^^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                                                                  ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode
+#                                                                                   ^^^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                                                                                      ^ source.gcode meta.embedded.expression.brackets.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                                                                                       ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+>G92 E0
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^ source.gcode variable.parameter.gcode
+#     ^ source.gcode constant.numeric.gcode
+>

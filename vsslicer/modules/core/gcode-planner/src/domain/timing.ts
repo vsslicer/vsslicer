@@ -197,6 +197,7 @@ export class TimingBuilder {
 
   finish(planner: string, estimate: boolean, limits: ResolvedLimits): Timing {
     if (this.checkpoints.at(-1)?.move === this.move) this.checkpoints.pop(); // a snapshot after the last move
+    this.time += this.lead; // a dwell with no move to join (a file without moves)
     return {
       planner,
       estimate,

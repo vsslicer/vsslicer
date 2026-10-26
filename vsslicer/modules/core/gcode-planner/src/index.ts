@@ -20,6 +20,7 @@ export type { CursorState } from './domain/move-cursor.ts';
 export { constantSpeedPlanner } from './domain/planner.ts';
 export type { Planner, Replay } from './domain/planner.ts';
 export { trapezoidsFor } from './domain/trapezoids.ts';
+export { moveAtTime, ToolheadWindow, type ToolheadSample } from './domain/interp.ts';
 export { CHECKPOINT_INTERVAL, TimingBuilder } from './domain/timing.ts';
 export type { Checkpoint, Timing, Trapezoid } from './domain/timing.ts';
 export { planSync, runPlanner } from './application/run-planner.ts';

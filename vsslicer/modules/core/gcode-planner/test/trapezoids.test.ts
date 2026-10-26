@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { MOVE_STRIDE, MoveOffset } from '@vsslicer/gcode-api';
 import type { ParsedFile } from '@vsslicer/gcode-api';
 import { constantSpeedPlanner, createKlipperPlanner, planSync, resolveLimits, trapezoidsFor } from '../src/index.ts';
-import { checkPlanner } from './harness.ts';
+import { checkPlanner, fixture } from './harness.ts';
 import { randomFile, rng } from './random-file.ts';
 
 function startTimes(parsed: ParsedFile): number[] {
@@ -17,6 +17,26 @@ function startTimes(parsed: ParsedFile): number[] {
 
 describe('trapezoidsFor (Klipper)', () => {
   const limits = resolveLimits({ flavour: 'klipper' });
+
+  it('frees reported moves without a G4 or M400, leaving totals and replays unchanged', () => {
+    const n = 20_000;
+    const parsed = fixture(
+      Array.from({ length: n }, (_, i) => ({ x: (i % 2) * 10, y: i % 7 })),
+      [],
+      [],
+      1000,
+    );
+    const planner = createKlipperPlanner({ checkpointInterval: 512 });
+    const splice = vi.spyOn(Array.prototype, 'splice');
+    const timing = planSync(planner, parsed, limits);
+    const dropped = splice.mock.calls.filter(([start, count]) => start === 0 && (count as number) > 4096).length;
+    splice.mockRestore();
+    expect(dropped).toBeGreaterThan(0);
+    const full = trapezoidsFor(planner, parsed, timing, 0, n);
+    expect(full).toHaveLength(n);
+    expect(Math.fround(full.at(-1)!.start)).toBe(startTimes(parsed).at(-1));
+    expect(trapezoidsFor(planner, parsed, timing, 9000, 9100)).toEqual(full.slice(9000, 9100));
+  });
 
   for (const [seed, interval, chunk] of [
     [1, 256, 1000],

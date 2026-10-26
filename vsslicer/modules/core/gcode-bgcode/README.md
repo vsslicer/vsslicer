@@ -16,6 +16,8 @@ for await (const e of readBgcode(stream, [deflateCodec, heatshrink11Codec, heats
 - Heatshrink (compression 2, 3) needs its codec passed; without it the block has `data: undefined` plus an `unsupported-compression` warning. `readBgcode` itself leaves G-code `params.encoding` (MeatPack 1, 2) alone.
 - Consumers map a diagnostic's byte `offset` to `Diagnostic.fileOffset` (offset in decoded text) of `@vsslicer/gcode-api`.
 
+Requires Node >= 24 (or an extension host with Node's `Buffer`): the latin1 helpers use it, and `latin1ToBytes` returns bytes whose `.buffer` is exactly the text.
+
 ## G-code text
 
 ```ts

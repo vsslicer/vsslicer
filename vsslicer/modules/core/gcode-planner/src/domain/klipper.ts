@@ -203,6 +203,10 @@ function flush(queue: KMove[], lazy: boolean): number {
 export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
   const resolution = options.resolution ?? 1;
   if (!(resolution > 0)) throw new RangeError(`resolution must be > 0, got ${resolution}`);
+  const ci = options.checkpointInterval;
+  if (ci !== undefined && !(Number.isInteger(ci) && ci >= 1)) {
+    throw new RangeError(`checkpointInterval must be an integer >= 1, got ${ci}`);
+  }
   return {
     name: 'klipper',
     estimate: false,
@@ -280,6 +284,10 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
         }
         if (!firstLeft) {
           order.length = 0;
+          head = 0;
+        } else if (head > 4096) {
+          // Drop the reported prefix, or a file with no G4/M400 keeps every move until the end.
+          order.splice(0, head);
           head = 0;
         }
       };
@@ -460,7 +468,9 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
       }
       flushArc();
       flushAll();
-      if (held) add(held.time + (added.get(parsed.moveCount) ?? 0), held.p); // time after the last move
+      if (held)
+        add(held.time + (added.get(parsed.moveCount) ?? 0), held.p); // time after the last move
+      else out.dwell(lead + (added.get(parsed.moveCount) ?? 0)); // no move to join (a file without moves)
       return out.finish(this.name, this.estimate, resolved);
     },
   };

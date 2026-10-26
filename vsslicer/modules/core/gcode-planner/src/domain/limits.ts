@@ -187,13 +187,26 @@ const ZERO_VALID: ReadonlySet<LimitKey> = new Set<LimitKey>([
   'minTravelFeedrate',
 ]);
 
-const MARLIN_NAMES = new Set(['marlin', 'marlin2', 'marlinlegacy', 'reprap (marlin/sprinter)']);
+// Cura: `;FLAVOR:Marlin` is "RepRap (Marlin/Sprinter)"; Griffin/Cheetah are Marlin-based Ultimaker firmware (CuraEngine@47b0388 include/settings/EnumSettings.h:197-214).
+// UltiGCode (UM2, volumetric E, own firmware) stays unknown, so it is reported as assumed.
+const MARLIN_NAMES = new Set([
+  'marlin',
+  'marlin2',
+  'marlinlegacy',
+  'marlin(volumetric)',
+  'reprap (marlin/sprinter)',
+  'reprap (volumetric)',
+  'griffin',
+  'cheetah',
+]);
+// Cura writes `;FLAVOR:RepRap` for "RepRap (RepRap)", the original RepRap firmware family (gcodeExport.cpp:210-211, Settings.cpp:397-398).
+const RRF_NAMES = new Set(['reprapfirmware', 'reprap', 'reprap (reprap)']);
 
 /** Maps a `gcode_flavor` / `;FLAVOR:` name to a flavour; `undefined` for an unknown name. */
 export function flavourFromName(name: string): Flavour | undefined {
   const n = name.trim().toLowerCase();
   if (n === 'klipper') return 'klipper';
-  if (n === 'reprapfirmware') return 'reprapfirmware';
+  if (RRF_NAMES.has(n)) return 'reprapfirmware';
   return MARLIN_NAMES.has(n) ? 'marlin' : undefined;
 }
 

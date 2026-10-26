@@ -8,7 +8,7 @@ model: sonnet
 area: [live]
 story: US17
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [50, 16]
 created: 2026-10-25
 ---
@@ -27,3 +27,4 @@ For printers that report no offset (Bambu).
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: dependency-blocked in SP5 (rule 7): depends on GCP-16, which is in SP7.

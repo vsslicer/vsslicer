@@ -9,7 +9,15 @@ import {
   type Channel,
 } from '@vsslicer/webview-kit/host';
 import { fileKind } from '../domain/file-kind.ts';
-import { Method, moveStream, summarise, type Received, type ViewState } from '../domain/summary.ts';
+import {
+  Method,
+  moveStream,
+  summarise,
+  type Progress,
+  type Received,
+  type TimelineCommand,
+  type ViewState,
+} from '../domain/summary.ts';
 import type { Loaded } from './load-preview.ts';
 
 /** Parses and plans `path` off the calling thread (the worker adapter). Rejects with an Error that may carry a `code`. */
@@ -21,6 +29,8 @@ export const UNSUPPORTED_3MF =
 export interface ServeHandlers {
   /** The webview reported every move buffer of a `ready` state as received. */
   onReceived?(received: Received): void;
+  /** The timeline of the webview changed state or advanced. */
+  onProgress?(progress: Progress): void;
   /** The webview runs another transport version: set its HTML again from the current build. */
   onMismatch(): void;
 }
@@ -30,6 +40,8 @@ export interface PreviewSession {
   readonly state: Promise<ViewState>;
   /** Serves one webview for its lifetime: answers each handshake with the state and the buffers. Returns the unsubscribe. */
   serve(channel: Channel, handlers: ServeHandlers): () => void;
+  /** Tells the webview on `channel` to drive its timeline. */
+  command(channel: Channel, command: TimelineCommand): void;
   /** Stops a running load (terminates the worker) and drops the buffers. */
   dispose(): void;
 }
@@ -74,7 +86,7 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
 
   return {
     state,
-    serve(channel, { onReceived, onMismatch }) {
+    serve(channel, { onReceived, onProgress, onMismatch }) {
       const stops = [
         serveHandshake(channel, {
           // a send cut short by a reload or a closed editor is superseded by the next handshake, or by nothing
@@ -85,10 +97,13 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
           const r = parseEnvelope(m);
           if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.received)
             onReceived?.(r.envelope.payload as Received);
+          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.progress)
+            onProgress?.(r.envelope.payload as Progress);
         }),
       ];
       return () => stops.forEach((stop) => stop());
     },
+    command: (channel, command) => channel.post(notify(Method.command, command)),
     dispose() {
       abort.abort();
       buffers = [];

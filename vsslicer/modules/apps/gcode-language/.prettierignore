@@ -1,0 +1,8 @@
+dist
+coverage
+pnpm-lock.yaml
+test/fixtures
+syntaxes
+test-results
+.vscode-test
+dist-test

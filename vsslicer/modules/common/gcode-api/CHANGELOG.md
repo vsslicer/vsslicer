@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+- GCP-89: `flavourName?: string` on `Chunk` and `ParsedFile`: the flavour name the file states (`;FLAVOR:`, `; gcode_flavor =`, last wins), to pass to gcode-planner's `resolveLimits({ flavour })`.
+
 ## 0.5.0
 
 - GCP-83: `Marker.seconds`, the time a command takes by itself: the `G4` dwell (as the file's flavour reads it, 0 when it states none) and the new `ESTIMATOR_ADD_TIME` marker for klipper_estimator's `; ESTIMATOR_ADD_TIME <seconds>` comment. Optional and additive; absent on every other marker.

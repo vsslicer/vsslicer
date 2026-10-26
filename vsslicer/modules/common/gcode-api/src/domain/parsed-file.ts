@@ -124,6 +124,8 @@ export interface Chunk {
   bytesRead: number;
   /** Detected slicer; `unknown` until the header has been read. */
   slicer: Slicer;
+  /** The flavour name the file has stated so far (see `ParsedFile.flavourName`); absent until one is read. */
+  flavourName?: string;
   /** Thumbnails whose block ends in this chunk, decoded. Their `data` buffers can be transferred. */
   thumbnails: Thumbnail[];
   /**
@@ -140,6 +142,14 @@ export interface Chunk {
 /** The whole parsed file: every chunk's results, in file order. */
 export interface ParsedFile {
   slicer: Slicer;
+  /**
+   * The firmware flavour the file names, as written (trimmed): Cura's `;FLAVOR:` header or the
+   * config block's `; gcode_flavor =` (`Klipper`, `marlin2`, `Griffin`, ...). When the file names
+   * it more than once, the last one wins, as it does for the units the parser reads. Absent when
+   * the file names none. Pass it as gcode-planner's `resolveLimits({ flavour })`, which maps the
+   * name and reports an unknown one as `flavourAssumed`.
+   */
+  flavourName?: string;
   moveCount: number;
   /**
    * The chunks' move buffers in file order, not concatenated (concatenating would double the

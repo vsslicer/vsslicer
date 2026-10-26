@@ -157,14 +157,16 @@ function create(
   moves: ArrayBuffer,
   options: { layerStarts?: readonly number[]; maxTextureSize?: number },
 ): SegmentRenderer {
+  if (!(moves instanceof ArrayBuffer)) throw new TypeError('moves must be an ArrayBuffer, not a typed-array view');
   const { table, ranges } = analyseMoves(moves, options.layerStarts ?? []);
   const chunks: MoveTextureChunk[] = uploadMoveTextures(gl, moves, options.maxTextureSize);
+  // Start time bits of the record after each chunk's last, which ends its last move. Read once so
+  // the CPU buffer is not held after creation.
   const words = new Uint32Array(moves);
-  // Start time bits of the record after the chunk's last, which ends the chunk's last move.
-  const nextStart = (c: MoveTextureChunk) => {
+  const nextStarts = chunks.map((c) => {
     const r = c.firstRecord + c.recordCount;
     return r * MOVE_WORDS < words.length ? words[r * MOVE_WORDS + 6]! : NAN_BITS;
-  };
+  });
 
   const program = compile(gl);
   const vao = gl.createVertexArray();
@@ -242,16 +244,16 @@ function create(
       gl.uniform1ui(loc.mode, view.colorMode);
       const range = view.colorRange ?? (view.colorMode === ColorMode.LayerTime ? ranges.layerTime : ranges.speed);
       gl.uniform2f(loc.range, range[0], range[1]);
-      for (const c of chunks) {
+      chunks.forEach((c, i) => {
         const inst = chunkInstances(c, view.first, view.count);
-        if (!inst) continue;
+        if (!inst) return;
         gl.bindTexture(gl.TEXTURE_2D, c.texture);
         gl.uniform1i(loc.firstLocal, inst.lo);
         gl.uniform1i(loc.chunkFirst, c.firstRecord);
         gl.uniform1i(loc.recordCount, c.recordCount);
-        gl.uniform1ui(loc.nextStart, nextStart(c));
+        gl.uniform1ui(loc.nextStart, nextStarts[i]!);
         gl.drawElementsInstanced(gl.TRIANGLES, SEGMENT_INDICES.length, gl.UNSIGNED_SHORT, 0, inst.n);
-      }
+      });
     },
     dispose() {
       for (const c of chunks) gl.deleteTexture(c.texture);

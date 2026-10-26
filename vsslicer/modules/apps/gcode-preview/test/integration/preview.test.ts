@@ -3,6 +3,7 @@
 import assert from 'node:assert';
 import * as path from 'node:path';
 import * as vscode from 'vscode';
+import type { Progress } from '../../src/domain/summary.ts';
 import type { PreviewProbe } from '../../src/presentation/provider.ts';
 import { GCODE_VIEW_TYPE, OPEN_GCODE_SETTING, PREVIEW_VIEW_TYPE } from '../../src/domain/associations.ts';
 
@@ -71,6 +72,34 @@ describe('G-code preview custom editor', () => {
       const summary = await expectDelivered(uri);
       assert.notStrictEqual(summary?.slicer, 'unknown');
     });
+
+  it('plays, pauses, steps and changes speed on the timeline', async () => {
+    const uri = fixture('orca/cube-marlin.gcode');
+    const key = uri.toString();
+    await vscode.commands.executeCommand('vscode.openWith', uri, GCODE_VIEW_TYPE);
+    await until(() => customTab(uri), 'the custom editor tab');
+    const summary = await expectDelivered(uri);
+    const at = (what: string, ok: (p: Progress) => boolean) =>
+      until(() => (probe.progress(key) && ok(probe.progress(key)!) ? probe.progress(key) : undefined), what);
+    await until(() => probe.progress(key), 'the timeline to be ready'); // reported once the webview has mounted
+    probe.command(key, { action: 'speed', value: 500 });
+    await at('the speed', (p) => p.speed === 500);
+    probe.command(key, { action: 'play' });
+    const playing = await at('time to advance while playing', (p) => p.playing && p.time > 0);
+    assert.ok(playing.move > 0);
+    probe.command(key, { action: 'pause' });
+    const paused = await at('the pause', (p) => !p.playing);
+    await sleep(500);
+    assert.strictEqual(probe.progress(key)?.time, paused.time, 'a paused timeline stands still');
+    probe.command(key, { action: 'step', direction: 1 });
+    const stepped = await at('the step', (p) => p.time > paused.time);
+    assert.ok(stepped.move >= paused.move && !stepped.playing);
+    probe.command(key, { action: 'step', direction: -1 });
+    await at('the step back', (p) => p.time < stepped.time);
+    probe.command(key, { action: 'play' });
+    const end = await at('the print to end', (p) => !p.playing && p.time >= summary!.totalTime - 1e-3);
+    assert.strictEqual(end.move, summary!.moveCount - 1, 'the marker ends on the last move');
+  });
 
   it('opens a .bgcode in the preview by default', async () => {
     const uri = fixture('prusaslicer/mini_cube_ps2.8.1.bgcode');

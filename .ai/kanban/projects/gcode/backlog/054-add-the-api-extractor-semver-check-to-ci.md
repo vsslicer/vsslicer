@@ -8,7 +8,7 @@ model: sonnet
 area: [live]
 story: US17
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [50]
 created: 2026-10-25
 ---
@@ -29,3 +29,4 @@ Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards 
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: depends on GCP-50 (moved to SP6), and its CI criterion waits on Q7.

@@ -1,7 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Written from the description in docs/research/rrf-planner.md (RepRapFirmware 3.6.3 @ aebf629,
 // GPL-3.0): the algorithm and constants, not RRF's source text.
-import { MOVE_STRIDE, MoveFlag, MoveOffset, StateKind } from '@vsslicer/gcode-api';
+import {
+  MOVE_STRIDE,
+  MoveFlag,
+  MoveOffset,
+  STATE_CHANGE_STRIDE,
+  StateChangeOffset,
+  StateKind,
+} from '@vsslicer/gcode-api';
 import type { LimitKey } from './limits.ts';
 import { MoveCursor } from './move-cursor.ts';
 import type { Planner } from './planner.ts';
@@ -12,6 +19,8 @@ export const RRF_WINDOW = 40;
 
 /** Feedrate before the file's first F word: RRF's DefaultFeedRate 3000 mm/min (RepRapFirmware@aebf629:src/Config/Configuration.h:214). */
 const START_FEEDRATE = 50;
+/** RRF's lowest M204 value, mm/s^2 (RepRapFirmware@aebf629:src/Config/Configuration.h:56). */
+const MIN_ACCEL = 0.1;
 const AXES = ['X', 'Y', 'Z', 'E'] as const;
 const MAX_FEED = AXES.map((a) => `maxFeedrate${a}` as LimitKey);
 const MAX_ACCEL = AXES.map((a) => `maxAccel${a}` as LimitKey);
@@ -100,15 +109,38 @@ export const rrfPlanner: Planner = {
       out.dwell(seconds);
     };
 
+    // M204 S sets print and travel together, P print, T travel; the latest command wins
+    // (RepRapFirmware@aebf629:src/GCodes/GCodes5.cpp:344-354), which the cursor's per-kind fold cannot tell.
+    const m204 = { print: NaN, travel: NaN };
+    let tb = 0;
+    let ti = 0;
+    const foldAccel = () => {
+      for (; tb < parsed.stateChanges.length; ti++) {
+        const t = new DataView(parsed.stateChanges[tb]!);
+        const o = ti * STATE_CHANGE_STRIDE;
+        if (o >= t.byteLength) {
+          tb++;
+          ti = -1;
+          continue;
+        }
+        if (t.getUint32(o + StateChangeOffset.moveIndex, true) > cur.index) return;
+        const kind = t.getUint8(o + StateChangeOffset.kind);
+        const v = t.getFloat32(o + StateChangeOffset.value, true);
+        if (kind === StateKind.Accel || kind === StateKind.AccelPrint) m204.print = v;
+        if (kind === StateKind.Accel || kind === StateKind.AccelTravel) m204.travel = v;
+      }
+    };
+    // RRF clamps M204 to at least 0.1 mm/s^2 (GCodes5.cpp:344-354, src/Config/Configuration.h:56),
+    // so a 0 never reaches the trapezoid maths.
     const accelCap = (printing: boolean): number => {
       const key = printing ? 'accelPrint' : 'accelTravel';
-      if (limits.sources[key] === 'override') return limits.limits[key];
-      const own = cur.state(printing ? StateKind.AccelPrint : StateKind.AccelTravel);
-      if (!Number.isNaN(own)) return own;
-      return cur.state(StateKind.Accel, 0, limits.limits[key]); // M204 S stands in for an unset P/T
+      const own = printing ? m204.print : m204.travel;
+      const v = limits.sources[key] === 'override' || Number.isNaN(own) ? limits.limits[key] : own;
+      return Math.max(v, MIN_ACCEL);
     };
 
     while (cur.next()) {
+      foldAccel();
       dwell(cur.index);
       vl++;
       while (vl * MOVE_STRIDE >= views[vb]!.byteLength) {

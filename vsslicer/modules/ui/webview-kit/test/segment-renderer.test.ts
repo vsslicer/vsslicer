@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { analyseMoves, chunkInstances } from '../src/gl/segment-renderer.ts';
+import { analyseMoves, chunkInstances, createSegmentRenderer } from '../src/gl/segment-renderer.ts';
 
 describe('chunkInstances', () => {
   const chunk = { firstRecord: 10, recordCount: 5 }; // ends moves 11..14 (local 1..4)
@@ -39,5 +39,40 @@ describe('analyseMoves', () => {
     const nan = new DataView(new ArrayBuffer(3 * 28));
     [0, 1, 2].forEach((i) => nan.setFloat32(i * 28 + 24, NaN, true));
     expect(analyseMoves(nan.buffer, [1]).ranges).toEqual({ speed: [0, 0], layerTime: [0, 0] });
+  });
+});
+
+describe('createSegmentRenderer', () => {
+  const fake = () => {
+    const next: number[] = [];
+    const gl = new Proxy(
+      {
+        getParameter: () => 8,
+        getShaderParameter: () => true,
+        getProgramParameter: () => true,
+        getUniformLocation: (_p: unknown, n: string) => n,
+        uniform1ui: (l: string, v: number) => l === 'uNextStart' && next.push(v),
+      },
+      {
+        get: (o, k) =>
+          k in o ? o[k as keyof typeof o] : typeof k === 'string' && /^[A-Z_0-9]+$/.test(k) ? 0 : () => ({}),
+      },
+    ) as unknown as WebGL2RenderingContext;
+    return { gl, next };
+  };
+  it('refuses a typed-array view', () => {
+    expect(() => createSegmentRenderer(fake().gl, new Uint8Array(28 * 3) as never)).toThrow(TypeError);
+  });
+  it('does not read the move buffer after creation', () => {
+    // maxTextureSize 4 holds 2 records per chunk, so the chunks have real next-start values.
+    const buf = new ArrayBuffer(5 * 28);
+    const v = new DataView(buf);
+    for (let i = 0; i < 5; i++) v.setFloat32(i * 28 + 24, i, true);
+    const { gl, next } = fake();
+    const r = createSegmentRenderer(gl, buf, { maxTextureSize: 4 });
+    structuredClone(buf, { transfer: [buf] }); // detaches: a renderer that kept a view would now see zero length
+    r.draw({ view: new Float32Array(16), projection: new Float32Array(16), first: 0, count: 100, colorMode: 0 });
+    expect(next.length).toBeGreaterThan(1);
+    expect(next.slice(0, -1).every((b) => b !== 0x7fc00000)).toBe(true);
   });
 });

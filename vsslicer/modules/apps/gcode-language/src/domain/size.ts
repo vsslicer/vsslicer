@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+/** Above this size language features stay off: scanning a file this large on every edit would stall the extension host. */
+export const MAX_FEATURE_BYTES = 50 * 1024 * 1024;
+
+export const featuresAvailable = (sizeBytes: number): boolean => sizeBytes <= MAX_FEATURE_BYTES;
+
+export const OVERSIZE_REASON = 'the file is over 50 MB';

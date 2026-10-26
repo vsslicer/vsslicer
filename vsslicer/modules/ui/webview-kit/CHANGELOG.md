@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+- PLT-189: `trackContextLoss` keeps rebuilding when one entry throws, drops that entry's stale free function, and passes the first error to `onRestored(error?)`.
+- PLT-190: `uploadMoveTextures` and `createSegmentRenderer` throw a TypeError for a typed-array view instead of uploading scrambled data.
+- PLT-191: the segment renderer reads each chunk's next-start value once at create, so it no longer keeps the CPU move buffer alive until dispose.
+
 ## 0.5.0
 
 - PLT-48: `gl` entry: `createSegmentRenderer(..., { foreign: true })` draws into a context three.js owns: create and `draw` save and restore the GL state they change with the new `saveGlState(gl)`. `draw` now also turns depth writes on and culling and blending off. SwiftShader spec with three.js 0.186.1 (dev dependency only): a textured plane plus segments composite, unchanged GL state and an identical next three.js frame, and the leak seen without foreign mode.

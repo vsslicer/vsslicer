@@ -1,0 +1,833 @@
+[
+  {
+    "code": "G0",
+    "flavours": ["klipper"],
+    "description": "Moves the toolhead in a straight line; Klipper treats it exactly like G1.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Target X position."
+      },
+      {
+        "name": "Y",
+        "description": "Target Y position."
+      },
+      {
+        "name": "Z",
+        "description": "Target Z position."
+      },
+      {
+        "name": "E",
+        "description": "Filament to extrude over the move."
+      },
+      {
+        "name": "F",
+        "description": "Feed rate in millimetres per minute."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "G2",
+    "flavours": ["klipper"],
+    "description": "Draws a clockwise arc; only available when the printer config enables the arcs section.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Arc end X."
+      },
+      {
+        "name": "Y",
+        "description": "Arc end Y."
+      },
+      {
+        "name": "I",
+        "description": "Centre offset on X from the start point."
+      },
+      {
+        "name": "J",
+        "description": "Centre offset on Y from the start point."
+      },
+      {
+        "name": "R",
+        "description": "Radius, used instead of I and J."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#gcode_arcs"
+  },
+  {
+    "code": "G3",
+    "flavours": ["klipper"],
+    "description": "Draws a counter-clockwise arc; needs the arcs section in the printer config, like G2.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Arc end X."
+      },
+      {
+        "name": "Y",
+        "description": "Arc end Y."
+      },
+      {
+        "name": "I",
+        "description": "Centre offset on X from the start point."
+      },
+      {
+        "name": "J",
+        "description": "Centre offset on Y from the start point."
+      },
+      {
+        "name": "R",
+        "description": "Radius, used instead of I and J."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#gcode_arcs"
+  },
+  {
+    "code": "G4",
+    "flavours": ["klipper"],
+    "description": "Pauses the printer for a number of milliseconds.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Pause length in milliseconds."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "G10",
+    "flavours": ["klipper"],
+    "description": "Retracts the filament using the retraction settings from the printer config; needs the firmware retraction section.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#firmware_retraction"
+  },
+  {
+    "code": "G11",
+    "flavours": ["klipper"],
+    "description": "Pushes the filament back after a G10, using the configured settings.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#firmware_retraction"
+  },
+  {
+    "code": "G28",
+    "flavours": ["klipper"],
+    "description": "Homes the named axes, or all axes when none are named.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Home X."
+      },
+      {
+        "name": "Y",
+        "description": "Home Y."
+      },
+      {
+        "name": "Z",
+        "description": "Home Z."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "G90",
+    "flavours": ["klipper"],
+    "description": "Switches positions to absolute coordinates.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "G91",
+    "flavours": ["klipper"],
+    "description": "Switches positions to relative coordinates.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "G92",
+    "flavours": ["klipper"],
+    "description": "Redefines the current position without moving, e.g. G92 E0 to zero the extruder.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "New X value."
+      },
+      {
+        "name": "Y",
+        "description": "New Y value."
+      },
+      {
+        "name": "Z",
+        "description": "New Z value."
+      },
+      {
+        "name": "E",
+        "description": "New extruder value."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M18",
+    "flavours": ["klipper"],
+    "description": "Turns the stepper motors off; same as M84. Klipper forgets the homed state afterwards.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M84",
+    "flavours": ["klipper"],
+    "description": "Turns the stepper motors off; same as M18.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M82",
+    "flavours": ["klipper"],
+    "description": "Lifts the forced relative-extrusion mode set by M83; it does not itself force absolute extruder moves.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M83",
+    "flavours": ["klipper"],
+    "description": "Forces extruder moves to be relative even while G90 absolute mode is active.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M104",
+    "flavours": ["klipper"],
+    "description": "Sets the hotend target temperature without waiting.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target in degrees Celsius."
+      },
+      {
+        "name": "T",
+        "description": "Extruder index."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M105",
+    "flavours": ["klipper"],
+    "description": "Reports the extruder and bed temperatures.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M106",
+    "flavours": ["klipper"],
+    "description": "Sets the part-cooling fan speed.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Speed from 0 to 255."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M107",
+    "flavours": ["klipper"],
+    "description": "Turns the part-cooling fan off.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M109",
+    "flavours": ["klipper"],
+    "description": "Sets the hotend target and always waits until the temperature has settled there.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target in degrees Celsius."
+      },
+      {
+        "name": "T",
+        "description": "Extruder index."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M112",
+    "flavours": ["klipper"],
+    "description": "Emergency stop: shuts the printer down until it is restarted.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M114",
+    "flavours": ["klipper"],
+    "description": "Reports the current toolhead position.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M115",
+    "flavours": ["klipper"],
+    "description": "Reports the firmware version.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M117",
+    "flavours": ["klipper"],
+    "description": "Shows a message on the printer display (needs a display configured).",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#display"
+  },
+  {
+    "code": "M118",
+    "flavours": ["klipper"],
+    "description": "Sends a message back to the host console (needs the respond section in the printer config).",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#respond"
+  },
+  {
+    "code": "M140",
+    "flavours": ["klipper"],
+    "description": "Sets the bed target temperature without waiting.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target in degrees Celsius."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M190",
+    "flavours": ["klipper"],
+    "description": "Sets the bed target and always waits until it has settled.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Target in degrees Celsius."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M204",
+    "flavours": ["klipper"],
+    "description": "Sets acceleration. S sets one value for everything. Without S, P and T together set it to the lower of the two; with only one of P or T the command does nothing, unlike Marlin where they set print and travel limits separately.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Acceleration for all moves, in mm/s^2."
+      },
+      {
+        "name": "P",
+        "description": "With T and no S: one of the two values, the lower wins."
+      },
+      {
+        "name": "T",
+        "description": "With P and no S: one of the two values, the lower wins."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M220",
+    "flavours": ["klipper"],
+    "description": "Scales the print speed by a percentage.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Percentage, 100 is normal."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M221",
+    "flavours": ["klipper"],
+    "description": "Scales extrusion by a percentage.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Percentage, 100 is normal."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "M400",
+    "flavours": ["klipper"],
+    "description": "Waits until all queued moves have finished.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
+  },
+  {
+    "code": "SET_VELOCITY_LIMIT",
+    "flavours": ["klipper"],
+    "description": "Changes the velocity limits set in the printer config for the rest of the session.",
+    "parameters": [
+      {
+        "name": "VELOCITY",
+        "description": "Maximum toolhead speed in mm/s."
+      },
+      {
+        "name": "ACCEL",
+        "description": "Maximum acceleration in mm/s^2."
+      },
+      {
+        "name": "MINIMUM_CRUISE_RATIO",
+        "description": "Share of a move that must stay at cruise speed."
+      },
+      {
+        "name": "SQUARE_CORNER_VELOCITY",
+        "description": "Speed allowed through a sharp corner, in mm/s."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_velocity_limit"
+  },
+  {
+    "code": "SET_PRESSURE_ADVANCE",
+    "flavours": ["klipper"],
+    "description": "Sets pressure advance for an extruder; slicers emit it per filament.",
+    "parameters": [
+      {
+        "name": "EXTRUDER",
+        "description": "Extruder config name; defaults to the active hotend."
+      },
+      {
+        "name": "ADVANCE",
+        "description": "Pressure advance value in seconds."
+      },
+      {
+        "name": "SMOOTH_TIME",
+        "description": "Smoothing window in seconds."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_pressure_advance"
+  },
+  {
+    "code": "EXCLUDE_OBJECT",
+    "flavours": ["klipper"],
+    "description": "Excludes a printed object from the rest of the print; with no parameters it lists the excluded objects.",
+    "parameters": [
+      {
+        "name": "NAME",
+        "description": "Object to exclude."
+      },
+      {
+        "name": "CURRENT",
+        "description": "Set to 1 to exclude the object being printed now."
+      },
+      {
+        "name": "RESET",
+        "description": "Set to 1 to clear the excluded list, or only NAME if given."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#exclude_object"
+  },
+  {
+    "code": "EXCLUDE_OBJECT_DEFINE",
+    "flavours": ["klipper"],
+    "description": "Declares an object (slicers emit these at the top of the file) so it can be excluded later; with no parameters it lists known objects.",
+    "parameters": [
+      {
+        "name": "NAME",
+        "description": "Identifier used by the other exclude commands."
+      },
+      {
+        "name": "CENTER",
+        "description": "Object centre as X,Y."
+      },
+      {
+        "name": "POLYGON",
+        "description": "Outline as a list of X,Y points."
+      },
+      {
+        "name": "RESET",
+        "description": "Set to 1 to forget all defined objects."
+      },
+      {
+        "name": "JSON",
+        "description": "Set to 1 to list objects as JSON."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#exclude_object_define"
+  },
+  {
+    "code": "EXCLUDE_OBJECT_START",
+    "flavours": ["klipper"],
+    "description": "Marks where one object's G-code begins on the current layer.",
+    "parameters": [
+      {
+        "name": "NAME",
+        "description": "Object identifier."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#exclude_object_start"
+  },
+  {
+    "code": "EXCLUDE_OBJECT_END",
+    "flavours": ["klipper"],
+    "description": "Marks where the object's G-code ends for the layer; pairs with EXCLUDE_OBJECT_START.",
+    "parameters": [
+      {
+        "name": "NAME",
+        "description": "Optional; only used to warn on a mismatch."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#exclude_object_end"
+  },
+  {
+    "code": "SET_RETRACTION",
+    "flavours": ["klipper"],
+    "description": "Adjusts firmware retraction settings, often set from slicer filament start G-code.",
+    "parameters": [
+      {
+        "name": "RETRACT_LENGTH",
+        "description": "Filament retracted, in mm."
+      },
+      {
+        "name": "RETRACT_SPEED",
+        "description": "Retract speed in mm/s."
+      },
+      {
+        "name": "UNRETRACT_EXTRA_LENGTH",
+        "description": "Extra filament pushed on unretract, in mm."
+      },
+      {
+        "name": "UNRETRACT_SPEED",
+        "description": "Unretract speed in mm/s."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_retraction"
+  },
+  {
+    "code": "SET_FAN_SPEED",
+    "flavours": ["klipper"],
+    "description": "Sets the speed of a named generic fan, or attaches a display template to drive it.",
+    "parameters": [
+      {
+        "name": "FAN",
+        "description": "Fan config name."
+      },
+      {
+        "name": "SPEED",
+        "description": "Speed from 0.0 to 1.0."
+      },
+      {
+        "name": "TEMPLATE",
+        "description": "Display template name to drive the fan instead of SPEED."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_fan_speed"
+  },
+  {
+    "code": "SET_HEATER_TEMPERATURE",
+    "flavours": ["klipper"],
+    "description": "Sets a named heater's target temperature; without TARGET the target becomes 0.",
+    "parameters": [
+      {
+        "name": "HEATER",
+        "description": "Heater config name."
+      },
+      {
+        "name": "TARGET",
+        "description": "Target temperature."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_heater_temperature"
+  },
+  {
+    "code": "TEMPERATURE_WAIT",
+    "flavours": ["klipper"],
+    "description": "Waits until a temperature sensor is at or above MINIMUM and/or at or below MAXIMUM.",
+    "parameters": [
+      {
+        "name": "SENSOR",
+        "description": "Sensor config name."
+      },
+      {
+        "name": "MINIMUM",
+        "description": "Lower bound to wait for."
+      },
+      {
+        "name": "MAXIMUM",
+        "description": "Upper bound to wait for."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#temperature_wait"
+  },
+  {
+    "code": "BED_MESH_CALIBRATE",
+    "flavours": ["klipper"],
+    "description": "Probes the bed at the configured points and builds a height mesh that is active straight away.",
+    "parameters": [
+      {
+        "name": "PROFILE",
+        "description": "Name to save the mesh under."
+      },
+      {
+        "name": "METHOD",
+        "description": "Set to manual to probe by hand."
+      },
+      {
+        "name": "HORIZONTAL_MOVE_Z",
+        "description": "Z height used for travel between points."
+      },
+      {
+        "name": "ADAPTIVE",
+        "description": "Set to 1 to probe only the area the print uses."
+      },
+      {
+        "name": "ADAPTIVE_MARGIN",
+        "description": "Extra margin around the adaptive area."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#bed_mesh_calibrate"
+  },
+  {
+    "code": "BED_MESH_PROFILE",
+    "flavours": ["klipper"],
+    "description": "Loads, saves or removes a stored bed mesh profile.",
+    "parameters": [
+      {
+        "name": "LOAD",
+        "description": "Profile to load."
+      },
+      {
+        "name": "SAVE",
+        "description": "Name to save the current mesh as."
+      },
+      {
+        "name": "REMOVE",
+        "description": "Profile to delete."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#bed_mesh_profile"
+  },
+  {
+    "code": "PROBE",
+    "flavours": ["klipper"],
+    "description": "Lowers the nozzle until the probe triggers and reports the Z; the parameters override the probe config for this run.",
+    "parameters": [
+      {
+        "name": "PROBE_SPEED",
+        "description": "Descent speed in mm/s."
+      },
+      {
+        "name": "LIFT_SPEED",
+        "description": "Lift speed in mm/s."
+      },
+      {
+        "name": "SAMPLES",
+        "description": "Number of probe samples."
+      },
+      {
+        "name": "SAMPLE_RETRACT_DIST",
+        "description": "Lift between samples, in mm."
+      },
+      {
+        "name": "SAMPLES_TOLERANCE",
+        "description": "Allowed spread between samples, in mm."
+      },
+      {
+        "name": "SAMPLES_TOLERANCE_RETRIES",
+        "description": "Retries when the spread is too large."
+      },
+      {
+        "name": "SAMPLES_RESULT",
+        "description": "median or average."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#probe"
+  },
+  {
+    "code": "QUAD_GANTRY_LEVEL",
+    "flavours": ["klipper"],
+    "description": "Probes the configured points and adjusts each Z stepper independently to level the gantry.",
+    "parameters": [
+      {
+        "name": "RETRIES",
+        "description": "Override the configured retry count."
+      },
+      {
+        "name": "RETRY_TOLERANCE",
+        "description": "Override the configured tolerance."
+      },
+      {
+        "name": "HORIZONTAL_MOVE_Z",
+        "description": "Override the travel Z height."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#quad_gantry_level"
+  },
+  {
+    "code": "Z_TILT_ADJUST",
+    "flavours": ["klipper"],
+    "description": "Probes the configured points and adjusts the Z steppers to remove bed tilt.",
+    "parameters": [
+      {
+        "name": "RETRIES",
+        "description": "Override the configured retry count."
+      },
+      {
+        "name": "RETRY_TOLERANCE",
+        "description": "Override the configured tolerance."
+      },
+      {
+        "name": "HORIZONTAL_MOVE_Z",
+        "description": "Override the travel Z height."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#z_tilt_adjust"
+  },
+  {
+    "code": "SET_GCODE_OFFSET",
+    "flavours": ["klipper"],
+    "description": "Adds a positional offset to later moves, such as a live Z offset or a tool XY offset.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Set the X offset."
+      },
+      {
+        "name": "Y",
+        "description": "Set the Y offset."
+      },
+      {
+        "name": "Z",
+        "description": "Set the Z offset."
+      },
+      {
+        "name": "X_ADJUST",
+        "description": "Add to the X offset."
+      },
+      {
+        "name": "Y_ADJUST",
+        "description": "Add to the Y offset."
+      },
+      {
+        "name": "Z_ADJUST",
+        "description": "Add to the Z offset."
+      },
+      {
+        "name": "MOVE",
+        "description": "Set to 1 to move now so the offset applies at once."
+      },
+      {
+        "name": "MOVE_SPEED",
+        "description": "Speed of that move, in mm/s."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_gcode_offset"
+  },
+  {
+    "code": "SAVE_GCODE_STATE",
+    "flavours": ["klipper"],
+    "description": "Saves the G-code parser state (positioning mode, origin, offsets, overrides, speed, position) for macros to restore.",
+    "parameters": [
+      {
+        "name": "NAME",
+        "description": "State name; defaults to \"default\"."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#save_gcode_state"
+  },
+  {
+    "code": "RESTORE_GCODE_STATE",
+    "flavours": ["klipper"],
+    "description": "Restores a state saved by SAVE_GCODE_STATE.",
+    "parameters": [
+      {
+        "name": "NAME",
+        "description": "State name; defaults to \"default\"."
+      },
+      {
+        "name": "MOVE",
+        "description": "Set to 1 to move back to the saved position."
+      },
+      {
+        "name": "MOVE_SPEED",
+        "description": "Speed of that move, in mm/s."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#restore_gcode_state"
+  },
+  {
+    "code": "PAUSE",
+    "flavours": ["klipper"],
+    "description": "Pauses the print and remembers the position for RESUME.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#pause"
+  },
+  {
+    "code": "RESUME",
+    "flavours": ["klipper"],
+    "description": "Resumes a paused print after moving back to the saved position.",
+    "parameters": [
+      {
+        "name": "VELOCITY",
+        "description": "Speed of the return move."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#resume"
+  },
+  {
+    "code": "CLEAR_PAUSE",
+    "flavours": ["klipper"],
+    "description": "Clears the paused state without resuming, e.g. before cancelling.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#clear_pause"
+  },
+  {
+    "code": "CANCEL_PRINT",
+    "flavours": ["klipper"],
+    "description": "Cancels the current print.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#cancel_print"
+  },
+  {
+    "code": "SET_KINEMATIC_POSITION",
+    "flavours": ["klipper"],
+    "description": "Diagnostic: forces the kinematics to believe the toolhead is at a position and sets or clears homed flags.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Assumed X."
+      },
+      {
+        "name": "Y",
+        "description": "Assumed Y."
+      },
+      {
+        "name": "Z",
+        "description": "Assumed Z."
+      },
+      {
+        "name": "SET_HOMED",
+        "description": "Axes to mark as homed."
+      },
+      {
+        "name": "CLEAR_HOMED",
+        "description": "Axes to mark as not homed."
+      }
+    ],
+    "source": "https://www.klipper3d.org/G-Codes.html#set_kinematic_position"
+  },
+  {
+    "code": "RESTART",
+    "flavours": ["klipper"],
+    "description": "Reloads the config and resets the host software; does not clear microcontroller errors.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#restart"
+  },
+  {
+    "code": "FIRMWARE_RESTART",
+    "flavours": ["klipper"],
+    "description": "Like RESTART but also restarts the microcontroller and clears its error state.",
+    "parameters": [],
+    "source": "https://www.klipper3d.org/G-Codes.html#firmware_restart"
+  }
+]
