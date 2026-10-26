@@ -61,3 +61,5 @@ export {
 } from './adapters/download/fetch.ts';
 export type { CuraFetchLimits, CuraFetchOptions, CuraFetchResult } from './adapters/download/fetch.ts';
 export { readCuraProfile } from './adapters/bundles/cura/read.ts';
+export { writeCuraProfile } from './adapters/bundles/cura/write.ts';
+export type { CuraProfileExport } from './adapters/bundles/cura/write.ts';

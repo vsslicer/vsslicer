@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added: `writeCuraProfile` exports a `.curaprofile` (global entry first, credential-like keys dropped with a warning); the archive writer keeps entries named `__proto__` and writes Cura's `0o600` zip attributes, so an untouched profile re-exports byte for byte (PRF-113).
+
 ## 0.1.0
 
 - Added: `readCuraProfile` reads a `.curaprofile` export as quality_changes entities with the parent quality_type in native and a setting_version diagnostic (PRF-112).

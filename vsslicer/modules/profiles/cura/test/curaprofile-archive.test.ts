@@ -218,3 +218,15 @@ describe('limits at the bound and one over', () => {
     expect(resolveLimits({ maxEntries: 5 })).toEqual({ ...CURA_ARCHIVE_LIMITS, maxEntries: 5 });
   });
 });
+
+describe('entry names from ids', () => {
+  test.each(['__proto__', 'constructor', 'toString'])('%s is written under its own name', (id) => {
+    expect(readCuraProfileArchive(writeCuraProfileArchive([{ id, text: 'x' }]))).toEqual([{ id, text: 'x' }]);
+  });
+  test('entries carry the 0o600 external attributes Cura writes', () => {
+    const b = writeCuraProfileArchive([{ id: 'a', text: 'x' }]);
+    const v = new DataView(b.buffer, b.byteOffset);
+    const cd = v.getUint32(b.length - 22 + 16, true);
+    expect(v.getUint32(cd + 38, true)).toBe(0o600 * 65536);
+  });
+});
