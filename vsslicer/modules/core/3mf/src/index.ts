@@ -23,6 +23,14 @@ export type {
   Project,
   Transform,
 } from './domain/project/project.ts';
+export type {
+  CustomGcode,
+  PlateCustomGcodes,
+  LayerRange,
+  LayerHeightProfile,
+  CutConnector,
+  CutInfo,
+} from './domain/project/project.ts';
 export type { ZipArchive, ZipEntry } from './application/zipArchive.ts';
 export { DEFAULT_MAX_ENTRY_BYTES, DEFAULT_MAX_TOTAL_BYTES, openZip } from './adapters/zip/fflateZip.ts';
 export { writeZip } from './adapters/zip/zipWriter.ts';

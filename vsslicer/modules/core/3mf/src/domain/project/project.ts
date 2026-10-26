@@ -84,9 +84,60 @@ export interface Plate {
   readonly config: ReadonlyMap<string, string>;
 }
 
+/** One custom G-code at a print height (colour change, pause, template, ...). Unknown XML attributes stay in `attributes`. */
+export interface CustomGcode {
+  readonly printZ: number;
+  /** Upstream `CustomGCode::Type` as written: 0 colour change, 1 pause, 2 tool change, 3 template, 4 custom. */
+  readonly type: number;
+  readonly extruder: number;
+  readonly color: string;
+  readonly extra: string;
+  readonly attributes: ReadonlyMap<string, string>;
+}
+
+export interface PlateCustomGcodes {
+  readonly plateId: number;
+  /** `SingleExtruder`, `MultiAsSingle` or `MultiExtruder` as written; absent when the file has no mode. */
+  readonly mode?: string;
+  readonly items: readonly CustomGcode[];
+}
+
+/** Per-object settings over a z range (`layer_config_ranges.xml`), option key to value as written. */
+export interface LayerRange {
+  readonly objectId: number;
+  readonly minZ: number;
+  readonly maxZ: number;
+  readonly options: ReadonlyMap<string, string>;
+}
+
+/** Variable layer height profile of an object: z, height pairs flattened (`layer_heights_profile.txt`). */
+export interface LayerHeightProfile {
+  readonly objectId: number;
+  readonly profile: readonly number[];
+}
+
+export interface CutConnector {
+  readonly volumeId: number;
+  readonly type: number;
+  readonly rTolerance: number;
+  readonly hTolerance: number;
+  readonly attributes: ReadonlyMap<string, string>;
+}
+
+/** Cut information of an object (`cut_information.xml`). */
+export interface CutInfo {
+  readonly objectId: number;
+  readonly cutId?: { readonly id: number; readonly checkSum: number; readonly connectorsCount: number };
+  readonly connectors: readonly CutConnector[];
+}
+
 export interface Project {
   readonly dialect: Dialect;
   readonly plates: readonly Plate[];
+  readonly customGcodes: readonly PlateCustomGcodes[];
+  readonly layerRanges: readonly LayerRange[];
+  readonly layerHeightProfiles: readonly LayerHeightProfile[];
+  readonly cuts: readonly CutInfo[];
   readonly objects: readonly ModelObject[];
   readonly instances: readonly Instance[];
   /** Raw project config exactly as stored (text or JSON), by part name. Empty when absent. */
@@ -112,6 +163,10 @@ export function createProject(init: Partial<Project> & Pick<Project, 'dialect'>)
   }
   return {
     plates: [],
+    customGcodes: [],
+    layerRanges: [],
+    layerHeightProfiles: [],
+    cuts: [],
     rawConfig: new Map(),
     preserved: [],
     ...init,

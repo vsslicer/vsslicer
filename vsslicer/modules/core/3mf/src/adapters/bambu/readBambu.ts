@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { DialectReader } from '../../application/readProject.ts';
 import { createProject, type Dialect } from '../../domain/project/project.ts';
+import { readLayerData } from './readLayerData.ts';
 import { readBambuObjects } from './readObjects.ts';
 
 /*
@@ -65,6 +66,8 @@ export const createBambuReader =
   (dialect: Extract<Dialect, 'bambu' | 'orca'>): DialectReader =>
   (pkg) => {
     const { objects, instances, notices } = readBambuObjects(pkg);
+    const { notices: layerNotices, ...layerData } = readLayerData(pkg);
+    notices.push(...layerNotices);
     const configs = pkg.parts.filter((p) => isConfigPart(p.name));
     const preserved = pkg.parts.filter((p) => !isConfigPart(p.name) && !lower(p.name).endsWith('.model'));
     let printableArea: readonly Point[] | undefined;
@@ -89,6 +92,7 @@ export const createBambuReader =
       dialect,
       objects,
       instances,
+      ...layerData,
       rawConfig: new Map(configs.map((p) => [p.name, p.bytes] as const)),
       preserved,
       ...(printableArea ? { printableArea } : {}),

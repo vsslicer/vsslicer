@@ -351,4 +351,3 @@
 349. [VWR-403: Test the p:path refusal on a PrusaSlicer 2.x build item](403-test-the-p-path-refusal-on-a-prusaslicer-2-x-build-item.md)
 350. [VWR-404: Give the slow 3mf opc test its own hang-guard timeout](404-give-the-slow-3mf-opc-test-its-own-hang-guard-timeout.md)
 351. [VWR-405: Cap the Bambu reader's notices](405-cap-the-bambu-reader-s-notices.md)
-352. [VWR-406: Pass file paths, not URL paths, to admesh in the mesh oracle test](406-pass-file-paths-not-url-paths-to-admesh-in-the-mesh-oracle-t.md)
