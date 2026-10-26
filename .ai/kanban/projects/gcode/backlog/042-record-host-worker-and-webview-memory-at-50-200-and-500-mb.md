@@ -8,7 +8,7 @@ model: sonnet
 area: [editor]
 story: US14
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [41, 38]
 created: 2026-10-25
 ---
@@ -31,3 +31,4 @@ Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards 
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: dependency-blocked in SP5 (rule 7): depends on GCP-41 (moved to SP6).

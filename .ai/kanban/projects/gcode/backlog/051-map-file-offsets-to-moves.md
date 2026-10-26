@@ -8,7 +8,7 @@ model: sonnet
 area: [live]
 story: US17
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [50, 5]
 created: 2026-10-25
 ---
@@ -29,3 +29,4 @@ Binary search over E3's file offsets as Fluidd and Mainsail do.
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: depends on GCP-50 (moved to SP6).

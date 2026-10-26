@@ -8,7 +8,7 @@ model: sonnet
 area: [language]
 story: US16
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [46, 44]
 created: 2026-10-25
 ---
@@ -32,3 +32,4 @@ Plain providers in the extension host, no language server. Slicer tag comments h
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: rule 18: @vscode/test-electron per flavour makes it at least L, and the gcode-language chain GCP-43, 44, 45, 46/47 already runs about 66 of rule 5's 72 minutes.

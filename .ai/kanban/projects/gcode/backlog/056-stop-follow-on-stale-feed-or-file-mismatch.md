@@ -8,7 +8,7 @@ model: sonnet
 area: [live]
 story: US18
 milestone: "VSS:M1"
-sprint: "VSS:SP5"
+sprint: "VSS:SP6"
 depends_on: [55]
 created: 2026-10-25
 ---
@@ -30,3 +30,4 @@ Zero silent failures.
 ## Progress
 
 Not started.
+- Moved SP5 to SP6 at SP5 start: dependency-blocked in SP5 (rule 7): depends on GCP-55 (moved to SP6).
