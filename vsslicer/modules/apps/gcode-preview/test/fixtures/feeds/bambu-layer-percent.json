@@ -1,0 +1,115 @@
+{
+  "file": "bambu-studio/cube.gcode",
+  "expectedMoves": [
+    0,
+    1,
+    1062,
+    1062,
+    2199,
+    4170,
+    6091,
+    8144,
+    8333
+  ],
+  "messages": [
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2000",
+        "gcode_state": "RUNNING",
+        "layer_num": 0,
+        "total_layer_num": 100,
+        "mc_percent": 0
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2001",
+        "gcode_state": "RUNNING",
+        "layer_num": 1,
+        "total_layer_num": 100,
+        "mc_percent": 1
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2002",
+        "gcode_state": "RUNNING",
+        "layer_num": 10,
+        "total_layer_num": 100,
+        "mc_percent": 9
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2003",
+        "gcode_state": "RUNNING",
+        "layer_num": 10,
+        "total_layer_num": 100,
+        "mc_percent": 10
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2004",
+        "gcode_state": "RUNNING",
+        "layer_num": 25,
+        "total_layer_num": 100,
+        "mc_percent": 24
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2005",
+        "gcode_state": "RUNNING",
+        "layer_num": 50,
+        "total_layer_num": 100,
+        "mc_percent": 50
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2006",
+        "gcode_state": "RUNNING",
+        "layer_num": 75,
+        "total_layer_num": 100,
+        "mc_percent": 74
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2007",
+        "gcode_state": "RUNNING",
+        "layer_num": 99,
+        "total_layer_num": 100,
+        "mc_percent": 98
+      }
+    },
+    {
+      "print": {
+        "command": "push_status",
+        "msg": 0,
+        "sequence_id": "2008",
+        "gcode_state": "RUNNING",
+        "layer_num": 100,
+        "total_layer_num": 100,
+        "mc_percent": 100
+      }
+    }
+  ]
+}

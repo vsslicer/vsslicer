@@ -38,6 +38,10 @@ class Growable<T extends Float32Array | Uint32Array> {
 const DECIMAL = /^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/;
 const MAX_DEPTH = 64;
 const UINT32_MAX = 2 ** 32 - 1;
+/** Triangle attributes the core read interprets; every other one is kept raw in `triangleAttributes`. */
+const TRIANGLE_CORE = new Set(['v1', 'v2', 'v3', 'pid', 'p1', 'p2', 'p3']);
+/** Rule 25: distinct raw triangle attributes kept per object (Orca writes 13 at most, bbs_3mf.cpp:355-367). */
+export const MAX_TRIANGLE_ATTRIBUTES = 16;
 
 function num(value: string | undefined, what: string): number {
   const n = value === undefined || !DECIMAL.test(value.trim()) ? NaN : Number(value);
@@ -67,7 +71,9 @@ function parseTransform(value: string | undefined): Transform {
  * Streams a model part (core spec 2015/02 namespace) into objects, typed-array meshes, build items and metadata.
  * The bytes are decoded and fed to the SAX parser in 1 MiB chunks, so the XML text is never held whole.
  * Elements outside the core namespace are skipped. Any XML or structural error becomes `MalformedXmlError` naming `part`.
- * Base materials and colour groups (materials extension) land in `propertyGroups`, per-triangle pid/p1..p3 in `triangleProps`.
+ * Base materials and colour groups (materials extension) land in `propertyGroups`, per-triangle pid/p1..p3 in `triangleProps`,
+ * and any other triangle attribute (painting) raw in `triangleAttributes`.
+ * shortcut: attributes past the first `MAX_TRIANGLE_ATTRIBUTES` names of an object are dropped; raise if a slicer needs more.
  * shortcut: slices and textures are ignored; add when a dialect reader needs them.
  */
 export function readModel(bytes: Uint8Array, part: string): CoreModel {
@@ -84,12 +90,13 @@ export function readModel(bytes: Uint8Array, part: string): CoreModel {
   let skipFrom = 0;
   let obj:
     | {
-        fields: Omit<CoreObject, 'mesh' | 'triangleProps' | 'components' | 'metadata'>;
+        fields: Omit<CoreObject, 'mesh' | 'triangleProps' | 'triangleAttributes' | 'components' | 'metadata'>;
         components: Component[];
         meta: Map<string, string>;
         mesh?: Mesh;
         triangleProps?: Int32Array;
         props?: number[];
+        attrs?: Map<string, string[]>;
       }
     | undefined;
   let verts: Growable<Float32Array> | undefined;
@@ -157,6 +164,18 @@ export function readModel(bytes: Uint8Array, part: string): CoreModel {
           if (obj.props === undefined && attr('pid') !== undefined)
             obj.props = new Array<number>((tris.length / 3) * 4).fill(-1);
           obj.props?.push(opt('pid'), opt('p1'), opt('p2'), opt('p3'));
+          const t = tris.length / 3;
+          for (const { name, value } of Object.values(tag.attributes)) {
+            if (TRIANGLE_CORE.has(name) || name.startsWith('xmlns')) continue;
+            obj.attrs ??= new Map();
+            let list = obj.attrs.get(name);
+            if (!list) {
+              if (obj.attrs.size >= MAX_TRIANGLE_ATTRIBUTES) continue;
+              obj.attrs.set(name, (list = []));
+            }
+            while (list.length < t) list.push('');
+            list.push(value);
+          }
         }
         tris?.push3(
           index(attr('v1'), 'triangle v1', UINT32_MAX),
@@ -217,12 +236,14 @@ export function readModel(bytes: Uint8Array, part: string): CoreModel {
       for (const i of triangles) if (i >= count) throw new Fail(`triangle index ${i} out of range (${count} vertices)`);
       obj.mesh = { vertices, triangles };
       if (obj.props) obj.triangleProps = Int32Array.from(obj.props);
+      for (const list of obj.attrs?.values() ?? []) while (list.length < triangles.length / 3) list.push('');
       verts = tris = undefined;
     } else if (tag.local === 'object' && obj) {
       objects.push({
         ...obj.fields,
         ...(obj.mesh && { mesh: obj.mesh }),
         ...(obj.triangleProps && { triangleProps: obj.triangleProps }),
+        ...(obj.attrs && obj.mesh && { triangleAttributes: obj.attrs }),
         components: obj.components,
         metadata: obj.meta,
       });

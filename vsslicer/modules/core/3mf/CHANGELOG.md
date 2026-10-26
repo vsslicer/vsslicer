@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0
+
+- VWR-22: Bambu and Orca objects, parts and instances (`readBambuObjects`, `readModelSettings`): `model_settings.config` object and part metadata, part `subtype` (modifiers, negative volumes, enforcers, blockers), per-object config, one instance per build item; `readModel` keeps raw per-triangle attributes (painting) in `CoreObject.triangleAttributes`, carried to `ModelPart.triangleAttributes`. `createBambuReader` now takes only the dialect.
+- VWR-31: run `openPackage` and `readProject` in a `worker_threads` or Web Worker (`readInNodeWorker`, `readInWebWorker`): input copied when it is a partial view, results transferred, one worker per file, typed `WorkerReadError` on a crash, out of memory or a failed post.
+- VWR-25: read PrusaSlicer 2.x projects (`readPrusa2`, registered as `prusa2` in `readProject`): objects, volumes (parts, modifiers, negative volumes, blockers) and per-object and per-volume config from `Slic3r_PE_model.config`, and `Slic3r_PE.config` as a raw blob.
+- VWR-21: `bambu` and `orca` dialect readers (`createBambuReader`, registered in `readProject`): `project_settings.config` and the embedded presets kept byte for byte in `rawConfig`; `Project.printableArea` from `printable_area`.
+- VWR-27: `cura` dialect reader (`createCuraReader`, registered in `readProject`): `Cura/*.cfg` containers raw in `rawConfig`, objects from the core model.
+- VWR-20: `readProject(pkg)` dispatches on the detected dialect; a disabled, missing or failing dialect reader falls back to core plus preserved parts with `Project.notices`; a core package keeps its non-model parts in `preserved`. `createReadProject(deps)` builds one with dialect readers.
+- VWR-398: `detectDialect` matches part names case-insensitively and with a leading `/`.
+
 ## 0.1.3
 
 - VWR-13: `detectDialect(metadata, partNames)` names the writer (bambu, orca, prusa2, prusa3, cura, core) from metadata and part names (a `Cura/` part wins over a foreign `Application`; Prusa versions parse like upstream `semver_parse`, patch optional); the `Dialect` value `prusa` is now `prusa2`.

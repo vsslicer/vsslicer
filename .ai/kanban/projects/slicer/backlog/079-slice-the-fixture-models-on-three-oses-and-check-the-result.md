@@ -8,7 +8,7 @@ model: sonnet
 area: [cura]
 story: US17
 milestone: "VSS:M3"
-sprint: "VSS:SP21"
+sprint: "VSS:SP22"
 depends_on: [76, 77, 1, GCP-3, GCP-4, GCP-24]
 created: 2026-10-25
 ---

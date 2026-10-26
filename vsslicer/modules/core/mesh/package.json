@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/mesh",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Triangle meshes for VSSlicer: the IndexedMesh model and typed mesh errors (domain), with parsers and statistics to follow.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
@@ -15,7 +15,8 @@
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "test/bench/budget.json"
   ],
   "engines": {
     "node": ">=24"

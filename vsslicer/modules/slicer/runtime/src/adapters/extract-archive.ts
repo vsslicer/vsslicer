@@ -259,7 +259,14 @@ class Output {
       const parent = await realpath(dirname(path));
       if (parent !== root && !parent.startsWith(root + sep))
         throw new ArchiveError(`symlink ${JSON.stringify(path.slice(this.root.length + 1))} parent escapes target`);
-      await symlink(target, path);
+      try {
+        await symlink(target, path);
+      } catch (e) {
+        // names aliased by Unicode normalisation or case reach an existing entry
+        if ((e as NodeJS.ErrnoException).code === 'EEXIST')
+          throw new ArchiveError(`${JSON.stringify(path.slice(this.root.length + 1))}: collides with another entry`);
+        throw e;
+      }
     }
     for (const { path } of this.links) {
       let real: string;

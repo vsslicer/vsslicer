@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.14.1
 
+- Depends on `@vsslicer/3mf` ^0.2.0 (only `openZip` is used; unchanged).
 - GCP-115: tests count reads and scanner work instead of asserting wall time.
 
 ## 0.14.0

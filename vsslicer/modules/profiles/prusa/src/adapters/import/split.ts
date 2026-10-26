@@ -26,7 +26,8 @@ const nozzleIs = (id: string) => `nozzle.id == '${id.replace(/[\\']/g, (c) => `\
  */
 export function splitVariants(mapped: readonly Mapped[], diag: Diag): Mapped[] {
   const models = new Map<string, PrinterModel>();
-  for (const r of mapped) if (r.native.kind === 'printer_model') models.set(r.entity.id, r.entity as PrinterModel);
+  // keyed by section name, which a preset's `printer_model` names, even when the model's id was kind-qualified
+  for (const r of mapped) if (r.native.kind === 'printer_model') models.set(r.native.name, r.entity as PrinterModel);
   const groups = new Map<string, { nozzle: Nozzle; settings: Settings }[]>();
   const out = mapped.map((r): Mapped => {
     if (r.native.kind !== 'printer') return r;
@@ -56,10 +57,12 @@ export function splitVariants(mapped: readonly Mapped[], diag: Diag): Mapped[] {
       flow: v['nozzle_high_flow']?.split(',')[0]?.trim() === '1' ? 'high_flow' : 'standard',
       ...(p.renamed_from ? { renamed_from: p.renamed_from } : {}),
     };
-    const g = groups.get(model.id) ?? [];
+    const g = groups.get(p.family!) ?? [];
     g.push({ nozzle, settings: p.settings ?? {} });
-    groups.set(model.id, g);
-    return { entity: nozzle, native: r.native };
+    groups.set(p.family!, g);
+    // a Nozzle has no defaults field: the preset's default print and filament stay native so they are not lost
+    const defaults = ['default_print_profile', 'default_filament_profile'].filter((k) => Object.hasOwn(v, k));
+    return { entity: nozzle, native: { ...r.native, native_only: [...r.native.native_only, ...defaults] } };
   });
   for (const [id, g] of groups) {
     const first = g[0]!.settings;

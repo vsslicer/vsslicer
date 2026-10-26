@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { parseYaml, yamlGet, yamlScalar } from './parse.ts';
+import { parseYaml, pushDiagnostic, yamlGet, yamlScalar } from './parse.ts';
 import type { YamlDiagnostic, YamlMap, YamlNode, YamlReason, YamlStream } from './parse.ts';
 
 /** Variant levels below a root; a deeper variant is dropped with a diagnostic. */
@@ -74,7 +74,7 @@ export function readPresetStream(
 ): PresetYamlDocument {
   const doc: PresetYamlDocument = { presets: [], diagnostics: [] };
   const warn = (reason: YamlReason, line: number, message: string) =>
-    doc.diagnostics.push({ severity: 'warning', code: 'unknown-type', reason, file, line, message });
+    pushDiagnostic(doc.diagnostics, { severity: 'warning', code: 'unknown-type', reason, file, line, message });
   if (options.experimental !== true) {
     doc.diagnostics.push({
       severity: 'warning',

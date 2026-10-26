@@ -88,11 +88,14 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
   let generation = 0;
   let running: AbortController | undefined;
   let chosen: number | undefined;
+  // the last revealed move: a webview served after the reveal (or still receiving its buffers) seeks there once its moves are in
+  let revealed: number | undefined;
   const served = new Set<Channel>();
   const start = (plate?: number): Promise<ViewState> => {
     if (!kind) return Promise.resolve({ status: 'unsupported', message: `Not a G-code file: ${path}` });
     const mine = ++generation;
     chosen = plate;
+    revealed = undefined; // a move of another plate or parse means nothing here
     // each load has its own controller, so a superseded one (and its worker) is stopped, not left running
     running?.abort(new Error('superseded by another plate'));
     const own = (running = new AbortController());
@@ -109,8 +112,10 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
     channel.post(notify(Method.state, { status: 'loading' } satisfies ViewState));
     const s = await state;
     channel.post(notify(Method.state, s));
-    if (s.status === 'ready')
-      for (const [i, b] of (loaded?.parsed.moves ?? []).entries()) await sendBuffer(channel, moveStream(session, i), b);
+    if (s.status !== 'ready') return;
+    for (const [i, b] of (loaded?.parsed.moves ?? []).entries()) await sendBuffer(channel, moveStream(session, i), b);
+    // a seek posted before the buffers lands on an empty timeline (move 0), so it is posted again after the last one
+    if (revealed !== undefined) self.command(channel, { action: 'seek', move: revealed });
   };
 
   const sendWindow = async (channel: Channel, session: string, { seq, from, to }: WindowRequest) => {
@@ -190,6 +195,7 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
       if (s.status !== 'ready' || !loaded) throw new Error(`nothing to reveal: the preview is ${s.status}`);
       const { parsed, timing } = loaded;
       const r = resolvePosition({ ...parsed, totalTime: timing.totalTime }, position);
+      revealed = r.move;
       for (const channel of served) self.command(channel, { action: 'seek', move: r.move });
       return r;
     },

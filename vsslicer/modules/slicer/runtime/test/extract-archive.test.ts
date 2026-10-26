@@ -359,6 +359,29 @@ describe.skipIf(!aliasing)('extractArchive: aliased names', () => {
     expect((err as Error).message).toMatch(/collides/);
     expect((err as Error).message).not.toMatch(/gzip/);
   });
+
+  test.each([
+    [
+      'a file and a symlink',
+      [
+        { name: '\u00e9', data: '1' },
+        { name: 'e\u0301', type: '2', link: 'x' },
+      ],
+    ],
+    [
+      'two symlinks',
+      [
+        { name: '\u00e9', type: '2', link: 'x' },
+        { name: 'e\u0301', type: '2', link: 'x' },
+      ],
+    ],
+  ])('a normalisation collision of %s is an ArchiveError', async (_n, entries) => {
+    const err = await extract(tarGz([...entries, { name: 'x', data: 'x' }]), join(fresh(), 'out')).catch(
+      (e: unknown) => e,
+    );
+    expect(err).toBeInstanceOf(ArchiveError);
+    expect((err as Error).message).toMatch(/collides/);
+  });
 });
 
 // Case aliasing: NTFS and default APFS fold case, ext4 does not: probe it.

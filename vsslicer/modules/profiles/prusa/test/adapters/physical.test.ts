@@ -132,3 +132,37 @@ describe('2.9 INI presets and authorization', () => {
     );
   });
 });
+
+describe('host_type lookup (PRF-205)', () => {
+  test.each(['constructor', 'toString', 'hasOwnProperty', '__proto__'])(
+    'inherited key %s is an unknown host type',
+    (k) => {
+      const ini = readPhysicalPrinterIni(`host_type = ${k}\nprint_host = h\nprinthost_apikey = ${KEY}\n`, 'x');
+      const json = readPhysicalPrinterJson(
+        JSON.stringify({
+          physical_printer_user_given_name: 'x',
+          physical_printer_host: 'h',
+          physical_printer_host_type: k,
+          physical_printer_api_key: KEY,
+          hw_config: {},
+        }),
+        'x.json',
+      );
+      for (const r of [ini, json]) {
+        expect(r.instance!.entity.connection).toBeUndefined();
+        expect(r.instance!.credential).toBeUndefined();
+        expect(r.diagnostics.some((d) => d.code === 'unknown-type')).toBe(true);
+      }
+    },
+  );
+});
+
+describe('preset_names list (PRF-207)', () => {
+  test('quoted and escaped names go through splitList', () => {
+    const r = readPhysicalPrinterIni('preset_names = "a;b"; c\nhost_type = octoprint\nprint_host = h\n', 'x');
+    expect(r.instance!.entity.model).toBe('a;b');
+    expect(
+      readPhysicalPrinterIni('preset_names = "a\n', 'x').diagnostics.some((d) => d.message.includes('malformed')),
+    ).toBe(true);
+  });
+});

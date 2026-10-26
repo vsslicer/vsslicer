@@ -1,0 +1,173 @@
+{
+  "file": "prusaslicer/mini_cube_ps2.8.1.gcode",
+  "fileSize": 85818,
+  "expectedMoves": [
+    0,
+    0,
+    0,
+    168,
+    572,
+    939,
+    939,
+    1363,
+    1662,
+    1662,
+    1662
+  ],
+  "messages": [
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 1718,
+            "progress": 0.02,
+            "is_active": true
+          }
+        },
+        1000
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 8603,
+            "progress": 0.1002,
+            "is_active": true
+          }
+        },
+        1001.25
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 8603,
+            "progress": 0.1002,
+            "is_active": true
+          }
+        },
+        1002.5
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 21459,
+            "progress": 0.2501,
+            "is_active": true
+          }
+        },
+        1003.75
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 34344,
+            "progress": 0.4002,
+            "is_active": true
+          }
+        },
+        1005
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 47222,
+            "progress": 0.5503,
+            "is_active": true
+          }
+        },
+        1006.25
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 47222,
+            "progress": 0.5503,
+            "is_active": true
+          }
+        },
+        1007.5
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 60090,
+            "progress": 0.7002,
+            "is_active": true
+          }
+        },
+        1008.75
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 72951,
+            "progress": 0.8501,
+            "is_active": true
+          }
+        },
+        1010
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 83228,
+            "progress": 0.9698,
+            "is_active": true
+          }
+        },
+        1011.25
+      ]
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "notify_status_update",
+      "params": [
+        {
+          "virtual_sdcard": {
+            "file_position": 85817,
+            "progress": 1,
+            "is_active": true
+          }
+        },
+        1012.5
+      ]
+    }
+  ]
+}

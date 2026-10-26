@@ -1,0 +1,82 @@
+{
+    "name": "Elegoo",
+    "version": "02.04.00.11",
+    "force_update": "0",
+    "description": "Elegoo configurations",
+    "machine_model_list": [
+        {
+            "name": "Elegoo Centauri",
+            "sub_path": "machine/EC/Elegoo Centauri.json"
+        },
+        {
+            "name": "Elegoo Centauri 2",
+            "sub_path": "machine/EC2/Elegoo Centauri 2.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "fdm_process_elegoo_common",
+            "sub_path": "process/fdm_process_elegoo_common.json"
+        },
+        {
+            "name": "fdm_process_elegoo_04020",
+            "sub_path": "process/fdm_process_elegoo_04020.json"
+        },
+        {
+            "name": "0.20mm Standard @Elegoo C 0.4 nozzle",
+            "sub_path": "process/EC/0.20mm Standard @Elegoo C 0.4 nozzle.json"
+        },
+        {
+            "name": "0.20mm Standard @Elegoo C2 0.4 nozzle",
+            "sub_path": "process/EC2/0.20mm Standard @Elegoo C2 0.4 nozzle.json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/fdm_filament_pla.json"
+        },
+        {
+            "name": "Elegoo PLA @base",
+            "sub_path": "filament/BASE/Elegoo PLA @base.json"
+        },
+        {
+            "name": "Elegoo PLA @EC",
+            "sub_path": "filament/EC/Elegoo PLA @EC.json"
+        },
+        {
+            "name": "Elegoo PLA Basic @base",
+            "sub_path": "filament/BASE/Elegoo PLA Basic @base.json"
+        },
+        {
+            "name": "Elegoo PLA Basic @EC2",
+            "sub_path": "filament/EC2/Elegoo PLA Basic @EC2.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_machine_common",
+            "sub_path": "machine/fdm_machine_common.json"
+        },
+        {
+            "name": "fdm_elegoo_3dp_001_common",
+            "sub_path": "machine/fdm_elegoo_3dp_001_common.json"
+        },
+        {
+            "name": "Elegoo Centauri 0.4 nozzle",
+            "sub_path": "machine/EC/Elegoo Centauri 0.4 nozzle.json"
+        },
+        {
+            "name": "Elegoo Centauri 2 0.4 nozzle",
+            "sub_path": "machine/EC2/Elegoo Centauri 2 0.4 nozzle.json"
+        }
+    ]
+}

@@ -42,7 +42,12 @@ describe('detectDialect', () => {
     ['prusa version without patch is legacy', { Application: 'PrusaSlicer-2.9' }, [], 'prusa2'],
     ['prusa version without patch past the cut-off', { Application: 'PrusaSlicer-3.0' }, [], 'prusa3'],
     ['prusa version with four parts is unparsable', { Application: 'PrusaSlicer-2.9.1.1' }, [], 'prusa3'],
-    ['cura-like name is not the folder', {}, ['Curaf/x', 'cura/x'], 'core'],
+    ['cura-like name is not the folder', {}, ['Curaf/x', 'curb/x'], 'core'],
+    ['cura folder in another case', {}, ['CURA/x.cfg'], 'cura'],
+    ['cura folder with a leading slash', {}, ['/Cura/x.cfg'], 'cura'],
+    ['prusa2 config with a leading slash', {}, ['/Metadata/Slic3r_PE.config'], 'prusa2'],
+    ['prusa2 config in lower case', {}, ['metadata/slic3r_pe.config'], 'prusa2'],
+    ['prusa3 project in another case', {}, ['/METADATA/PrusaSlicer3_Project.json'], 'prusa3'],
     ['unknown writer keeps Application', { Application: 'Fusion 360' }, [], 'core'],
     ['empty', {}, [], 'core'],
   ];

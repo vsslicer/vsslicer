@@ -44,3 +44,11 @@ export type { CfgSections } from './adapters/definitions/inst-cfg.ts';
 export { curaCfgOf, readCuraQualities, readCuraUserChanges } from './adapters/quality/read.ts';
 export type { CuraCfgKind } from './adapters/quality/read.ts';
 export type { CuraFolder } from './adapters/definitions/folder.ts';
+export {
+  CURA_EXPORT_LIMITS,
+  CURA_SETTING_VERSION,
+  curaExporter,
+  writeCuraUserChanges,
+} from './adapters/export/cura/write.ts';
+export { readCuraMachineInstances } from './adapters/instances/read.ts';
+export type { CuraInstancesImport } from './adapters/instances/read.ts';

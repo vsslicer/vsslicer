@@ -3,7 +3,6 @@
 // Reads fdmprinter.def.json and fdmextruder.def.json as JSON and XmlMaterialProfile.py as text; nothing upstream is
 // built or run, and Cura's `value` formulas are stored verbatim as `{expr}`, never evaluated.
 // Run through generate.ts `outputs()`, which merges the Cura names of Orca keys into orca.json (PRF-18).
-import { readFileSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type {
@@ -39,13 +38,6 @@ export const CURA_NOTICE =
   'ported from Cura, Copyright (C) Ultimaker B.V. and the Cura contributors. Cura is licensed under the GNU Lesser ' +
   'General Public License v3.0 (https://github.com/Ultimaker/Cura/blob/main/LICENSE), so the ported Cura material ' +
   "stays under LGPL-3.0; fdm_materials is CC0-1.0. VSSlicer's own additions are AGPL-3.0-or-later. Do not edit; regenerate.";
-
-/** Reads one upstream file, refusing anything over MAX_FILE_BYTES before reading it. */
-export const readBounded = (path: string): string => {
-  const size = statSync(path).size;
-  if (size > MAX_FILE_BYTES) throw new Error(`${path}: ${size} bytes is over the ${MAX_FILE_BYTES}-byte limit`);
-  return readFileSync(path, 'utf8');
-};
 
 interface CuraNode {
   label?: string;
@@ -559,10 +551,5 @@ export const generateCura = (
 };
 
 export const CURA_OUTPUT = join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/catalogue/data/cura.json');
-export const CURA_SOURCE =
-  process.env.CURA_SOURCE ?? join(dirname(fileURLToPath(import.meta.url)), '../../../../../.reference/repos/Cura');
-export const FDM_MATERIALS_SOURCE =
-  process.env.FDM_MATERIALS_SOURCE ??
-  join(dirname(fileURLToPath(import.meta.url)), '../../../../../.reference/repos/fdm_materials');
 
 export const renderCura = (file: CuraCatalogueFile): string => render(file as CatalogueFile);

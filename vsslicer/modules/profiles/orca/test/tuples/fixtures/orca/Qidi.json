@@ -1,0 +1,54 @@
+{
+    "name": "Qidi",
+    "version": "02.04.00.18",
+    "force_update": "0",
+    "description": "Qidi configurations",
+    "machine_model_list": [
+        {
+            "name": "Qidi X-Max",
+            "sub_path": "machine/Qidi X-Max.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "fdm_process_qidi_common",
+            "sub_path": "process/fdm_process_qidi_common.json"
+        },
+        {
+            "name": "0.20mm Standard @Qidi XMax",
+            "sub_path": "process/0.20mm Standard @Qidi XMax.json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/fdm_filament_pla.json"
+        },
+        {
+            "name": "Generic PLA @Qidi",
+            "sub_path": "filament/Generic PLA @Qidi.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_machine_common",
+            "sub_path": "machine/fdm_machine_common.json"
+        },
+        {
+            "name": "fdm_qidi_common",
+            "sub_path": "machine/fdm_qidi_common.json"
+        },
+        {
+            "name": "Qidi X-Max 0.4 nozzle",
+            "sub_path": "machine/Qidi X-Max 0.4 nozzle.json"
+        }
+    ]
+}

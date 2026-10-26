@@ -54,6 +54,10 @@ export interface ModelPart {
   readonly mesh: Mesh;
   readonly transform: Transform;
   readonly material?: Material;
+  /** Volume kind as the dialect wrote it (Bambu/Orca `subtype`: normal_part, modifier_part, negative_part, ...). */
+  readonly subtype?: string;
+  /** Raw per-triangle attributes of `mesh` (painting and the like) by name, '' where unset. Absent when none. */
+  readonly triangleAttributes?: ReadonlyMap<string, readonly string[]>;
   /** Per-part settings, key to value as the dialect wrote them. */
   readonly config: ReadonlyMap<string, string>;
 }
@@ -87,8 +91,12 @@ export interface Project {
   readonly instances: readonly Instance[];
   /** Raw project config exactly as stored (text or JSON), by part name. Empty when absent. */
   readonly rawConfig: ReadonlyMap<string, Uint8Array>;
+  /** Printable area (bed shape) as x,y polygon vertices in mm, from the project config. Absent when not stored. */
+  readonly printableArea?: readonly (readonly [x: number, y: number])[];
   /** Parts the model does not interpret, kept byte for byte so a save can write them back. */
   readonly preserved: readonly Part[];
+  /** User-facing notes about the read, e.g. that a dialect reader was skipped. Absent when there are none. */
+  readonly notices?: readonly string[];
 }
 
 export function createProject(init: Partial<Project> & Pick<Project, 'dialect'>): Project {

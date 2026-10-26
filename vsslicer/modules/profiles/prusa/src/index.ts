@@ -6,3 +6,4 @@ export * from './adapters/yaml/index.ts';
 export * from './adapters/physical/index.ts';
 export * from './adapters/import/index.ts';
 export * from './adapters/download/index.ts';
+export * from './adapters/export/prusa/index.ts';

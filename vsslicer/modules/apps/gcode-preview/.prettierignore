@@ -6,3 +6,5 @@ test-results
 .vscode-test
 dist-test
 test/fixtures
+etc/gcode-preview.api.md
+.cache

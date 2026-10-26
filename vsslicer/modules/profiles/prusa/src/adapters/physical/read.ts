@@ -2,6 +2,7 @@
 import { MAX_CONNECTION_STRING, HOST_TYPES } from '@vsslicer/profile-api';
 import type { Diagnostic, InstanceImport } from '@vsslicer/profile-api';
 import { parseIni } from '../ini/index.ts';
+import { splitList } from '../import/flatten.ts';
 
 /** JSON input cap in bytes, checked before parse. */
 export const MAX_PHYSICAL_JSON_BYTES = 1024 * 1024;
@@ -56,7 +57,7 @@ function build(f: Fields, file: string, diagnostics: Diagnostic[], opts: Physica
     model,
     toolheads: nozzle ? [{ slot: 0, nozzle }] : [],
   };
-  const hostType = HOST_MAP[f.hostType];
+  const hostType = Object.hasOwn(HOST_MAP, f.hostType) ? HOST_MAP[f.hostType] : undefined; // not Object.prototype keys
   if (!hostType) {
     diag(
       'warning',
@@ -78,37 +79,6 @@ function build(f: Fields, file: string, diagnostics: Diagnostic[], opts: Physica
 }
 
 /**
- * Port of `unescape_strings_cstyle` (PrusaSlicer-2.9@b028299 Config.cpp:151-215): items split on `;`, optionally
- * double-quoted with `\\r` `\\n` and backslash-escaped characters inside; malformed input (where upstream returns false) returns undefined.
- */
-function unescapeStrings(str: string): string[] | undefined {
-  const out: string[] = [];
-  let i = 0;
-  while (i < str.length) {
-    while (str[i] === ' ' || str[i] === '\t') if (++i === str.length) return out;
-    let buf = '';
-    if (str[i] === '"') {
-      for (i++; i < str.length && str[i] !== '"'; i++) {
-        let c = str[i]!;
-        if (c === '\\') {
-          if (++i === str.length) return undefined;
-          c = str[i] === 'r' ? '\r' : str[i] === 'n' ? '\n' : str[i]!;
-        }
-        buf += c;
-      }
-      if (i === str.length) return undefined; // unterminated quote
-      i++;
-    } else for (; i < str.length && str[i] !== ';'; i++) buf += str[i];
-    out.push(buf);
-    while (str[i] === ' ' || str[i] === '\t') i++;
-    if (i >= str.length) return out;
-    if (str[i] !== ';') return undefined;
-    if (++i === str.length) out.push('');
-  }
-  return out;
-}
-
-/**
  * 2.9 physical printer file: a header-less INI of `PhysicalPrinter::printer_options()` keys, written by
  * `this->config.save(this->file)` (Preset.cpp:1849). Keys: `preset_names` (`;`-joined), `host_type`, `print_host`,
  * `printhost_apikey`, `printhost_password`. The key list is Preset.cpp:1760-1772 (`s_PhysicalPrinter_opts`).
@@ -126,7 +96,7 @@ export function readPhysicalPrinterIni(
   // OctoPrint.cpp:597-604: `user` authenticates with the password, anything else with the API key.
   const cred =
     (v.get('printhost_authorization_type') === 'user' ? v.get('printhost_password') : v.get('printhost_apikey')) ?? '';
-  const presets = unescapeStrings(v.get('preset_names') ?? v.get('preset_name') ?? '');
+  const presets = splitList(v.get('preset_names') ?? v.get('preset_name') ?? '');
   if (!presets) {
     // Config.cpp:500 throws BadOptionValueException; Preset.cpp:1996-2021 skips the printer. The value is not quoted.
     return {

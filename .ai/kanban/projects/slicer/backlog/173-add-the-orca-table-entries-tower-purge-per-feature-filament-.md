@@ -8,7 +8,7 @@ model: sonnet
 area: [orca, multimaterial]
 story: US54
 milestone: "VSS:M5"
-sprint: "VSS:SP38"
+sprint: "VSS:SP39"
 depends_on: [172, 92, 160]
 created: 2026-10-25
 ---

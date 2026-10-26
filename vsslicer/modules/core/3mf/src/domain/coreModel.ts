@@ -20,6 +20,11 @@ export interface CoreObject {
   readonly pindex?: number;
   /** Per triangle `pid, p1, p2, p3`, -1 where absent. Only when some triangle sets `pid`. */
   readonly triangleProps?: Int32Array;
+  /**
+   * Other triangle attributes (`paint_color`, `paint_supports`, `slic3rpe:mmu_segmentation`, ...) by qualified name,
+   * one raw string per triangle, '' where a triangle lacks it. Only when some triangle has one.
+   */
+  readonly triangleAttributes?: ReadonlyMap<string, readonly string[]>;
   readonly components: readonly Component[];
   readonly metadata: ReadonlyMap<string, string>;
 }

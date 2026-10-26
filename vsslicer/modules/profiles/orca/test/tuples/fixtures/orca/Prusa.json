@@ -1,0 +1,50 @@
+{
+    "name": "Prusa",
+    "version": "02.04.00.17",
+    "force_update": "0",
+    "description": "Prusa configurations",
+    "machine_model_list": [
+        {
+            "name": "Prusa MINI",
+            "sub_path": "machine/Prusa MINI.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "0.20mm Standard @MINI",
+            "sub_path": "process/0.20mm Standard @MINI.json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/fdm_filament_pla.json"
+        },
+        {
+            "name": "Generic PLA @Prusa base",
+            "sub_path": "filament/Generic PLA @Prusa base.json"
+        },
+        {
+            "name": "Generic PLA @Prusa",
+            "sub_path": "filament/Generic PLA @Prusa.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_machine_common",
+            "sub_path": "machine/fdm_machine_common.json"
+        },
+        {
+            "name": "Prusa MINI 0.4 nozzle",
+            "sub_path": "machine/Prusa MINI 0.4 nozzle.json"
+        }
+    ]
+}

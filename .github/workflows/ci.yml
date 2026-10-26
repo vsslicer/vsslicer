@@ -82,6 +82,12 @@ jobs:
           path: ${{ runner.temp }}/vscode-test
           key: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-${{ hashFiles('vsslicer/modules/*/package.json') }}
           restore-keys: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-
+      # VWR-45: admesh is the oracle for the mesh module's MeshStats; with VSS_REQUIRE_ADMESH the test fails instead of skipping when it is missing
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'mesh')
+        run: |
+          sudo apt-get update && sudo apt-get install -y admesh
+          admesh --version
+          echo "VSS_REQUIRE_ADMESH=1" >> "$GITHUB_ENV"
       - run: scripts/registry.sh start
       - run: node scripts/run.mjs ci --changed "$BASE"
         env:
@@ -105,6 +111,32 @@ jobs:
           pnpm exec playwright install --with-deps chromium
           # PRs gate 50 and 200 MB; the 500 MB set (minutes, GBs) only on a manual run
           if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then pnpm bench; else pnpm bench --sizes 50,200; fi
+      # VWR-50: parse, dedup and BVH time and peak memory at 1, 5 (PRs) and 20 M triangles (manual run), Node worker and
+      # Chromium Web Worker, against test/bench/budget.json (memory gated, time recorded). Playwright comes from test-webview.
+      # Until a linux budget is recorded the step records one and uploads it, to be committed (no gate without a budget).
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'mesh')
+        id: mesh-bench
+        working-directory: vsslicer/modules/mesh
+        run: |
+          (cd ../test-webview && pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium)
+          export PLAYWRIGHT_MODULE="$PWD/../test-webview/node_modules/@playwright/test/index.mjs"
+          sizes=1,5; if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then sizes=1,5,20; fi
+          if node -e "process.exit(require('./test/bench/budget.json').platforms.linux ? 0 : 1)"; then
+            node --no-warnings test/bench/run.ts --sizes "$sizes"
+          else
+            node --no-warnings test/bench/run.ts --update --sizes "$sizes"
+          fi
+      - if: always() && steps.mesh-bench.outcome != 'skipped'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mesh-bench-budget
+          path: vsslicer/modules/mesh/test/bench/budget.json
+      # GCP-54: the api-extractor report must match the source, and a breaking change needs a higher GCODE_PREVIEW_API_VERSION
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'gcode-preview')
+        working-directory: vsslicer/modules/gcode-preview
+        run: pnpm api:check --base "$BASE"
+        env:
+          BASE: ${{ needs.select.outputs.base }}
       - if: always()
         run: scripts/registry.sh stop
 

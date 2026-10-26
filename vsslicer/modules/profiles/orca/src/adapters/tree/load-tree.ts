@@ -3,7 +3,7 @@ import { constants } from 'node:fs';
 import { open, opendir } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { SourceFile } from '@vsslicer/profile-api';
-import { treeLimits, type TreeDiagnostic, type TreeLimits } from './read-tree.ts';
+import { pushCapped, treeLimits, type TreeDiagnostic, type TreeLimits } from './read-tree.ts';
 
 /** Folder levels below the root: `<Vendor>/<machine|process|filament>/` plus slack for nested sub_paths. */
 export const MAX_TREE_DIRS_DEEP = 8;
@@ -16,13 +16,16 @@ export const MAX_TREE_DIRS_DEEP = 8;
 export async function loadProfileTree(
   root: string,
   limits?: Partial<TreeLimits>,
+  /** File suffixes to read; user presets also need their `.info` sidecars. */
+  suffixes: readonly string[] = ['.json'],
 ): Promise<{ files: SourceFile[]; diagnostics: TreeDiagnostic[] }> {
   const lim = treeLimits(limits);
   const files: SourceFile[] = [];
   const diagnostics: TreeDiagnostic[] = [];
   const report = (file: string, message: string, code: TreeDiagnostic['code'] = 'limit') =>
-    diagnostics.push({ severity: 'error', code, file, message });
+    pushCapped(diagnostics, { severity: 'error', code, file, message });
   let total = 0;
+  let entries = 0;
   const pending: { rel: string; depth: number }[] = [{ rel: '', depth: 0 }];
   while (pending.length > 0) {
     const { rel, depth } = pending.pop()!;
@@ -36,12 +39,17 @@ export async function loadProfileTree(
     }
     for await (const d of dir) {
       const path = rel === '' ? d.name : `${rel}/${d.name}`;
+      // Every entry counts, so links and stray files cannot flood the diagnostics.
+      if (++entries > lim.maxFiles) {
+        report(path, `more than ${lim.maxFiles} folder entries; the rest are ignored`);
+        return { files, diagnostics };
+      }
       if (d.isSymbolicLink()) {
         report(path, 'symbolic link; not followed', 'unsafe-path');
       } else if (d.isDirectory()) {
         if (depth + 1 > MAX_TREE_DIRS_DEEP) report(path, `folder deeper than ${MAX_TREE_DIRS_DEEP} levels; skipped`);
         else pending.push({ rel: path, depth: depth + 1 });
-      } else if (d.isFile() && d.name.endsWith('.json')) {
+      } else if (d.isFile() && suffixes.some((x) => d.name.endsWith(x))) {
         if (files.length >= lim.maxFiles) {
           report(path, `more than ${lim.maxFiles} files; the rest are ignored`);
           return { files, diagnostics };

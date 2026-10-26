@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-// The 356 setting names SuperSlicer@1f3d287 defines and PrusaSlicer@b028299 does not (docs/research/features-prusaslicer-superslicer.md, Appendix: SuperSlicer-only keys).
+// The 351 setting names SuperSlicer@1f3d287 defines and PrusaSlicer@b028299 does not (docs/research/features-prusaslicer-superslicer.md, Appendix: SuperSlicer-only keys).
 // Taken from SuperSlicer src/libslic3r/PrintConfig.cpp and PrintConfig.hpp; some are G-code placeholders or UI state, not preset options.
 export const SUPERSLICER_ONLY_KEYS: ReadonlySet<string> = new Set([
   'allow_empty_layers',
@@ -312,7 +312,6 @@ export const SUPERSLICER_ONLY_KEYS: ReadonlySet<string> = new Set([
   'support_material_interface_layer_height',
   'support_material_layer_height',
   'support_material_top_interface_pattern',
-  'support_points_minimal_distance',
   'thin_perimeters',
   'thin_perimeters_all',
   'thin_walls_acceleration',
@@ -350,12 +349,8 @@ export const SUPERSLICER_ONLY_KEYS: ReadonlySet<string> = new Set([
   'wipe_return',
   'wipe_speed',
   'wipe_tower_extrusion_width',
-  'wipe_tower_rotation_angle',
   'wipe_tower_speed',
   'wipe_tower_wipe_starting_speed',
-  'wipe_tower_x',
-  'wipe_tower_y',
-  'wiping_volumes_extruders',
   'xy_inner_size_compensation',
   'z_step',
 ]);

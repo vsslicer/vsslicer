@@ -24,7 +24,8 @@ export type CuraStack = Partial<Readonly<Record<CuraStackSlot, Readonly<Settings
 
 /**
  * A key's raw value (a formula stays `{ expr }`) through `stacks` in order: an extruder stack, then the global stack.
- * A key that is not `settable_per_extruder` is looked up in the global stack alone (ExtruderStack.py:135-136).
+ * This walks every stack it is given: for a key that is not `settable_per_extruder` the caller passes the global stack
+ * alone (Cura reads such a key there, ExtruderStack.py:135-136); the function does not check the flag.
  */
 export function curaStackValue(key: string, ...stacks: readonly CuraStack[]): SettingValue | undefined {
   for (const stack of stacks) {

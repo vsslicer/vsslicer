@@ -67,7 +67,8 @@ export type TreeDiagnosticCode =
   | 'cycle'
   | 'duplicate'
   | 'unsafe-path'
-  | 'limit';
+  | 'limit'
+  | 'name-mismatch';
 
 export interface TreeDiagnostic {
   severity: 'error' | 'warning';
@@ -140,11 +141,21 @@ const nil = (v: unknown): unknown =>
   v === 'nil' ? null : Array.isArray(v) ? v.map((x) => (x === 'nil' ? null : x)) : v;
 const isObject = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
+export const MAX_TREE_DIAGNOSTICS = 1000;
+
+/** Pushes `d`, but at most MAX_TREE_DIAGNOSTICS of them plus one closing "suppressed" line. */
+export function pushCapped(diagnostics: TreeDiagnostic[], d: TreeDiagnostic): void {
+  if (diagnostics.length > MAX_TREE_DIAGNOSTICS) return;
+  diagnostics.push(
+    diagnostics.length === MAX_TREE_DIAGNOSTICS ? { ...d, message: 'further diagnostics suppressed' } : d,
+  );
+}
+
 export function readOrcaTree(files: readonly SourceFile[], limits?: Partial<TreeLimits>): OrcaTree {
   const lim = treeLimits(limits);
   const diagnostics: TreeDiagnostic[] = [];
   const report = (code: TreeDiagnosticCode, file: string, message: string, severity: 'error' | 'warning' = 'error') =>
-    diagnostics.push({ severity, code, file, message });
+    pushCapped(diagnostics, { severity, code, file, message });
 
   // Accept files: safe path, no case or Unicode alias of another, within the size caps.
   const byPath = new Map<string, Uint8Array>();

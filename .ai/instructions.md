@@ -99,11 +99,11 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 
 ## Conventions
 
-- Tasks live on the board in `.ai/kanban` (the taskboard skill, `~/.claude/skills/taskboard`).
-  Ticket IDs are `VSS-<n>`, and commit subjects start with theirs. One commit per finished,
-  verified task. Agents move cards with `board.py` (pass `--agent <name>`), never by editing
-  column lists; run `board.py check` before committing board changes. People reorder and
-  prioritise on the dashboard (`serve.py`, port 8125).
+- Tasks live on the board in `.ai/kanban` (taskboard, `~/Workspace/taskboard`: its Claude Code plugin gives agents
+  the board's MCP tools, and the `taskboard` command does the same in a shell). Ticket IDs are `VSS-<n>`, and commit
+  subjects start with theirs. One commit per finished, verified task. Agents move cards with the tools (passing their
+  agent name), never by editing column lists; run `taskboard check` before committing board changes. People reorder
+  and prioritise on the dashboard: the taskboard VS Code extension, whose background runner also runs the sprint loop.
 - The suite will split into projects (filament manager, 3D viewer, slicer, G-code preview, ...),
   each with its own board and key, linked from this umbrella board's `board.json` `projects`.
   Initiatives, epics (each with `project: <KEY>`), milestones and decisions live on this VSS

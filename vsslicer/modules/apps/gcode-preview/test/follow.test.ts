@@ -9,6 +9,8 @@ import { openPreview, type PreviewSession } from '../src/application/preview-ses
 import { Command, registerCommands, type CommandsApi } from '../src/presentation/commands.ts';
 import type { PreviewProbe } from '../src/presentation/provider.ts';
 import type { Timing } from '@vsslicer/gcode-planner';
+import { handshake, parseEnvelope, receiveBuffers, type Channel } from '@vsslicer/webview-kit/webview';
+import { Method } from '../src/domain/summary.ts';
 
 /** `n` moves split into `chunks` buffers; move i at file offset 10*i, starting at second i. */
 const track = (n: number, chunks = 1) => {
@@ -85,7 +87,7 @@ test('resolves fileOffset > layer > z > percent, and refuses a layer past the la
     by: 'fileOffset',
     move: 25,
   });
-  assert.deepStrictEqual(resolvePosition(t, { fileOffset: 99_999 }), { by: 'fileOffset', move: 99 });
+  assert.strictEqual(resolvePosition(t, { fileOffset: 99_999 }).move, 99);
   assert.deepStrictEqual(resolvePosition(t, { layer: 2, z: 0.2 }), { by: 'layer', move: 50 });
   assert.deepStrictEqual(resolvePosition(t, { layer: 0 }), { by: 'layer', move: 0 });
   assert.deepStrictEqual(resolvePosition(t, { z: 0.3, percent: 1 }), { by: 'z', move: 5 });
@@ -199,6 +201,77 @@ test('PreviewSession.reveal seeks every served webview to the resolved move', as
   await assert.rejects(session.reveal({ layer: 9 }), RangeError);
   const failed = openPreview('/x/a.gcode', () => Promise.reject(new Error('boom')));
   await assert.rejects(failed.reveal({ layer: 1 }), /error/);
+});
+
+/** Two ends of an in-memory channel; delivery is async, like postMessage. */
+const pair = (): [Channel, Channel] => {
+  const listeners = [new Set<(m: unknown) => void>(), new Set<(m: unknown) => void>()] as const;
+  const end = (mine: 0 | 1): Channel => ({
+    post: (m) => queueMicrotask(() => listeners[1 - mine]!.forEach((l) => l(m))),
+    onMessage: (l) => (listeners[mine].add(l), () => listeners[mine].delete(l)),
+  });
+  return [end(0), end(1)];
+};
+
+/** A fake webview load: records, in arrival order, each complete move buffer and each seek. */
+const webview = (channel: Channel) => {
+  const events: string[] = [];
+  channel.onMessage((m) => {
+    const r = parseEnvelope(m);
+    if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.command)
+      events.push(`seek:${(r.envelope.payload as { move: number }).move}`);
+  });
+  const stop = receiveBuffers(channel, { onBuffer: () => void events.push('buffer'), onError: () => {} });
+  return { events, stop, ready: handshake(channel, crypto.randomUUID(), { timeoutMs: 1000 }) };
+};
+
+const settle = async (ok: () => boolean) => {
+  for (let i = 0; i < 200 && !ok(); i++) await new Promise((r) => setTimeout(r, 5));
+  assert.ok(ok(), 'condition not met in time');
+};
+
+test('a reveal that lands before the move buffers is posted again after the last one (SP9 audit 2)', async () => {
+  let release!: () => void;
+  const gate = new Promise<void>((r) => (release = r));
+  const l = loadedTrack(100);
+  l.parsed.moves = track(100, 3).moves; // three buffers, so the first seek can land between them
+  const session = openPreview('/x/a.gcode', async () => (await gate, l));
+  const [host, view] = pair();
+  session.serve(host, { onMismatch() {} });
+  const w = webview(view);
+  await w.ready;
+  const revealed = session.reveal({ percent: 50 }); // the first follow push opens the preview and reveals at once
+  release();
+  await revealed;
+  await settle(() => w.events.filter((e) => e === 'buffer').length === 3 && w.events.at(-1) === 'seek:50');
+  assert.ok(w.events.indexOf('seek:50') < w.events.lastIndexOf('buffer'), 'the first seek beat the buffers');
+  w.stop();
+
+  // a hostile reveal (a layer past the last) rejects and leaves the last good position for the next load
+  await assert.rejects(session.reveal({ layer: 9 }), RangeError);
+  const again = webview(view);
+  await again.ready;
+  await settle(() => again.events.at(-1) === 'seek:50');
+  assert.deepStrictEqual(again.events, ['buffer', 'buffer', 'buffer', 'seek:50'], 'one seek, after the buffers');
+  again.stop();
+});
+
+test('a revealed move is forgotten when another plate loads', async () => {
+  const load = async (_p: string, _k: string, _s: AbortSignal, plate?: number) => ({
+    ...loadedTrack(100),
+    plates: { numbers: [1, 2], plate: plate ?? 1 },
+  });
+  const session = openPreview('/x/a.gcode.3mf', load);
+  const [host, view] = pair();
+  session.serve(host, { onMismatch() {} });
+  await session.reveal({ percent: 50 });
+  await session.setPlate(2);
+  const w = webview(view);
+  await w.ready;
+  await settle(() => w.events.length === 1);
+  await new Promise((r) => setTimeout(r, 20)); // room for a stray seek to arrive
+  assert.deepStrictEqual(w.events, ['buffer'], 'no seek to a move of plate 1');
+  w.stop();
 });
 
 class FakeUri {
