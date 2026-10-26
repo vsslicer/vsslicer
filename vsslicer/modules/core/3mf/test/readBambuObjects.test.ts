@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
   MAX_COMPONENTS,
+  MAX_NOTICES,
   MODEL_SETTINGS,
   readBambuObjects,
   readModelSettings,
@@ -207,6 +208,22 @@ describe('readBambuObjects', () => {
       `<resources><object id="1" type="model"><components><component objectid="1"/></components></object></resources><build><item objectid="1"/></build>`,
     );
     expect(() => readBambuObjects(pkg(loop))).toThrow(new RegExp(`more than ${MAX_COMPONENTS} component`));
+  });
+
+  test.each([
+    [1000, 0],
+    [1001, 1],
+    [1500, 500],
+  ])('%i missing components give at most the cap of notices plus one suppressed line', (n, extra) => {
+    const missing = Array.from({ length: n }, (_, i) => `<component objectid="${i + 100}"/>`).join('');
+    const hostile = model(
+      `<resources><object id="1" type="model"><components>${missing}</components></object></resources><build><item objectid="1"/></build>`,
+    );
+    const { notices: got } = readBambuObjects(pkg(hostile));
+    expect(MAX_NOTICES).toBe(1000);
+    expect(got).toHaveLength(Math.min(n, 1000) + (extra > 0 ? 1 : 0));
+    if (extra > 0) expect(got.at(-1)).toBe(`${extra} more notices suppressed.`);
+    else expect(got.at(-1)).toMatch(/which is missing/);
   });
 
   test('nested components compose the inner transform first, then the outer', () => {

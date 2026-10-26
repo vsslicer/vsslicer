@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fixed: the Bambu reader keeps at most 1,000 missing-component notices and adds one 'N more notices suppressed.' line (VWR-405).
 - Added: read Bambu and Orca plates (`Project.plates`: names, lock, instances, thumbnails, G-code part, slice time, weight, filaments, warnings, `plate_N.json` layout); `Instance.plateId` set for Bambu and Orca (VWR-23).
 - Fixed: readProject parses the root model once instead of two or three times (readModelOnce, shared by dialect detection, readers and the core fallback) (VWR-401).
 - VWR-32: 500 MB 3MF generator (test/large/generate.ts) and run.ts gate: opened through readInNodeWorker with host-thread CPU between event-loop turns under 50 ms, counted through the turn after the worker returns, and peak RSS under 1536 MB (test/large/budget.json). Elapsed time is not gated, so the gate cannot see the host blocked while waiting off-CPU (Atomics.wait, sync I/O).

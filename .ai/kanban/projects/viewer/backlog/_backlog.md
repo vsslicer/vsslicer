@@ -343,6 +343,4 @@
 341. [VWR-386: Test that auto-orient never touches locked plates under random commands](386-test-that-auto-orient-never-touches-locked-plates-under-rand.md)
 342. [VWR-387: Add Auto-orient to the object and plate menus with progress, cancel and the arrange offer](387-add-auto-orient-to-the-object-and-plate-menus-with-progress-.md)
 343. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
-344. [VWR-29: Test untouched open and save for every dialect](029-test-untouched-open-and-save-for-every-dialect.md)
-345. [VWR-399: Check the Bambu objects golden against Bambu Studio's GUI](399-check-the-bambu-objects-golden-against-bambu-studio-s-gui.md)
-346. [VWR-405: Cap the Bambu reader's notices](405-cap-the-bambu-reader-s-notices.md)
+344. [VWR-399: Check the Bambu objects golden against Bambu Studio's GUI](399-check-the-bambu-objects-golden-against-bambu-studio-s-gui.md)

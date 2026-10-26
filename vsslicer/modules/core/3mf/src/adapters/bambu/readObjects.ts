@@ -25,6 +25,8 @@ import { MAX_XML_DEPTH } from '../opc/xml.ts';
 export const MODEL_SETTINGS = 'Metadata/model_settings.config';
 /** Rule 25: component references queued in one read (upstream's per-object `max_components`, :5177). */
 export const MAX_COMPONENTS = 100_000;
+/** Rule 25: notices kept in one read; the rest collapse into one "suppressed" line. */
+export const MAX_NOTICES = 1000;
 
 type Pairs = [key: string, value: string][];
 export interface PartSettings {
@@ -145,6 +147,7 @@ export function readBambuObjects(pkg: Package): { objects: ModelObject[]; instan
   const settingsPart = pkg.parts.find((p) => p.name.toLowerCase() === MODEL_SETTINGS.toLowerCase());
   const settings = settingsPart ? readModelSettings(settingsPart.bytes, settingsPart.name) : new Map<number, never>();
   const notices: string[] = [];
+  let suppressed = 0;
 
   let queued = 0;
   const leavesOf = (root: CoreObject, path: string | undefined): { obj: CoreObject; at: Transform }[] => {
@@ -162,10 +165,11 @@ export function readBambuObjects(pkg: Package): { objects: ModelObject[]; instan
         const where = c.path ?? file;
         const target = modelAt(where)?.get(c.objectId);
         if (target) queue.push({ obj: target, path: where, at: composeTransforms(c.transform, at) });
-        else
+        else if (notices.length < MAX_NOTICES)
           notices.push(
             `Object ${obj.id} references object ${c.objectId}${where ? ` in ${where}` : ''}, which is missing: skipped.`,
           );
+        else suppressed++;
       }
     }
     return leaves;
@@ -229,5 +233,6 @@ export function readBambuObjects(pkg: Package): { objects: ModelObject[]; instan
     const t = composeTransforms(part.transform, inst.transform);
     instances[i] = { ...inst, transform: withOffset(inst.transform, t[9], t[10], t[11]) };
   }
+  if (suppressed > 0) notices.push(`${suppressed} more notices suppressed.`);
   return { objects, instances, notices };
 }
