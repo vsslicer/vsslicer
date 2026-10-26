@@ -108,5 +108,8 @@
   "activationEvents": [
     "onLanguage:gcode",
     "onStartupFinished"
-  ]
+  ],
+  "dependencies": {
+    "@vsslicer/gcode-api": "^0.7.0"
+  }
 }

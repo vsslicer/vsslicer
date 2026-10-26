@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@vsslicer/gcode-api':
+        specifier: ^0.7.0
+        version: 0.7.0
     devDependencies:
       '@types/mocha':
         specifier: 10.0.10
@@ -826,6 +830,10 @@ packages:
     resolution: {integrity: sha512-XSxMosEEDO6vLxELAHVkwmhC0qe0ijZni2jB9Rcs8kQsW4lhTDQ/wMzmwFs/buotAWSnpmUp/dRWD2ufG3UYKA==}
     engines: {node: '>= 20'}
     hasBin: true
+
+  '@vsslicer/gcode-api@0.7.0':
+    resolution: {integrity: sha512-jXm7NlRExnwITIkKO6J5l/wXLfcDlF0VHO0QsqXtW9CJRZ24ccAU8OpwG+nUJSYzuOY0szLv6d79GeB/vEr2IQ==}
+    engines: {node: '>=24'}
 
   '@vsslicer/test-vscode@0.2.3':
     resolution: {integrity: sha512-zgJnS78SbRcksEvAXFpMrCz7aSE1jLb9IhynWGhSUStbIotNs8X5h0yeRDcsNV7qSxNTUQwEW7dFg9D6xKBt1w==}
@@ -3078,6 +3086,8 @@ snapshots:
       keytar: 7.9.0
     transitivePeerDependencies:
       - supports-color
+
+  '@vsslicer/gcode-api@0.7.0': {}
 
   '@vsslicer/test-vscode@0.2.3(supports-color@8.1.1)':
     dependencies:

@@ -4,7 +4,7 @@
     "sha256": "1a98c91036c79830acee6476a1a4064708acc95ac14236e82d7fa2ab0c064023"
   },
   "slicer": "cura",
-  "flavour": "marlin",
+  "flavour": "reprapfirmware",
   "moveCount": 17889,
   "stateChanges": 2285,
   "markers": 4,

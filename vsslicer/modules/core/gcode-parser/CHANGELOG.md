@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- GCP-99: flavour names come from gcode-api 0.7.0's `flavourFromName` (depends on ^0.7.0); Cura's `;FLAVOR:RepRap` is RepRapFirmware, not Marlin, so its `M203` limits and units follow RepRapFirmware.
+- GCP-105: chunks and `collect()` use gcode-api's `Chunk` and `ParsedFile` `flavourName` directly (the `NamedChunk` shortcut is gone).
+
 ## 0.11.0
 
 - Depends on gcode-api ^0.6.0 and gcode-bgcode ^0.4.3.

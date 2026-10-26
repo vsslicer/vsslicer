@@ -36,7 +36,4 @@
 34. [GCP-74: Add the editTemplate command with a save callback](074-add-the-edittemplate-command-with-a-save-callback.md)
 35. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
 36. [GCP-96: Add width, flow, fan and temperature colour modes](096-add-width-flow-fan-and-temperature-colour-modes.md)
-37. [GCP-97: Drive the timeline marker from ToolheadWindow trapezoids and dwells](097-drive-the-timeline-marker-from-toolheadwindow-trapezoids-and.md)
-38. [GCP-103: Rescan only the edited lines for unknown-command warnings](103-rescan-only-the-edited-lines-for-unknown-command-warnings.md)
-39. [GCP-104: Catch flavour typos, leading-zero codes and cross-file duplicates in the catalogue lint](104-catch-flavour-typos-leading-zero-codes-and-cross-file-duplic.md)
-40. [GCP-106: Describe what gcode-language ships in its README and PROVENANCE](106-describe-what-gcode-language-ships-in-its-readme-and-provena.md)
+37. [GCP-107: Add fan and temperature colour modes](107-add-fan-and-temperature-colour-modes.md)

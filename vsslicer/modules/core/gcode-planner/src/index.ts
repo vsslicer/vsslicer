@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-export { FLAVOUR_DEFAULTS, FLAVOUR_FIELDS, flavourFromName, resolveLimits } from './domain/limits.ts';
-export type { Flavour, LimitInputs, LimitKey, LimitSource, MachineLimits, ResolvedLimits } from './domain/limits.ts';
+export { flavourFromName } from '@vsslicer/gcode-api';
+export type { Flavour } from '@vsslicer/gcode-api';
+export { FLAVOUR_DEFAULTS, FLAVOUR_FIELDS, resolveLimits } from './domain/limits.ts';
+export type { LimitInputs, LimitKey, LimitSource, MachineLimits, ResolvedLimits } from './domain/limits.ts';
 export { bambuPlanner, conditionalBlocks, isBambuFile, plannerFor } from './domain/bambu.ts';
 export type { BambuLimitsSource, BambuTiming, ConditionalBlock } from './domain/bambu.ts';
 export { createKlipperPlanner, klipperPlanner } from './domain/klipper.ts';

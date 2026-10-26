@@ -3,7 +3,7 @@ import type { Chunk, Slicer } from '@vsslicer/gcode-api';
 import { ChunkWriter } from './chunk-writer.ts';
 import { Machine } from './machine.ts';
 import { Metadata } from './metadata.ts';
-import type { Flavour } from './machine.ts';
+import type { Flavour } from '@vsslicer/gcode-api';
 import { SlicerTags } from './slicer-tags.ts';
 import { Tokens } from './tokeniser.ts';
 

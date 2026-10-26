@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { MoveFlag, StateKind } from '@vsslicer/gcode-api';
+import type { Flavour } from '@vsslicer/gcode-api';
 import { tessellateArc } from './arc.ts';
 import type { ChunkWriter } from './chunk-writer.ts';
 import type { Tokens } from './tokeniser.ts';
 
-/**
- * Firmware dialect, for the few commands whose units differ: RepRapFirmware's M203 and M566 are
- * in mm/min and M106 `S` is 0..1 or 0..255, Marlin's and Klipper's M203 is mm/s.
- */
-export type Flavour = 'marlin' | 'klipper' | 'reprapfirmware';
+// `Flavour` (from gcode-api) is the firmware dialect, for the few commands whose units differ:
+// RepRapFirmware's M203 and M566 are in mm/min and M106 `S` is 0..1 or 0..255, Marlin's and Klipper's M203 is mm/s.
 
 export type Plane = 17 | 18 | 19;
 

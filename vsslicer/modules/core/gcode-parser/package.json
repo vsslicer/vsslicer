@@ -34,7 +34,7 @@
     "golden:update": "node scripts/update-golden.ts"
   },
   "dependencies": {
-    "@vsslicer/gcode-api": "^0.6.0",
+    "@vsslicer/gcode-api": "^0.7.0",
     "@vsslicer/gcode-bgcode": "^0.4.3"
   },
   "devDependencies": {

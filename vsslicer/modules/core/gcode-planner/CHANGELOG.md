@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-99: `Flavour` and `flavourFromName` come from gcode-api 0.7.0 (depends on ^0.7.0) and are still re-exported; no behaviour change.
+
 ## 0.4.0
 
 - Depends on gcode-api ^0.6.0.

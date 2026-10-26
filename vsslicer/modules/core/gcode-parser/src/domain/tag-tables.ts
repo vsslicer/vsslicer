@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { MoveRole } from '@vsslicer/gcode-api';
 import type { Slicer } from '@vsslicer/gcode-api';
-import type { Flavour } from './machine.ts';
 
 /**
  * Role names written after `;TYPE:` (PrusaSlicer, SuperSlicer, OrcaSlicer on non-Bambu printers,
@@ -87,19 +86,3 @@ export const SLICER_BY_NAME: ReadonlyMap<string, Slicer> = new Map<string, Slice
   ['OrcaSlicer', 'orcaslicer'],
   ['BambuStudio', 'bambustudio'],
 ]);
-
-/**
- * `gcode_flavor` values of PrusaSlicer/Orca/Bambu configs and Cura's `;FLAVOR:` values that change
- * how we read units. Every other value (marlin, marlin2, Griffin, UltiGCode, RepRap, ...) is read
- * as Marlin.
- */
-export const flavourFromName = (name: string): Flavour => {
-  switch (name.toLowerCase()) {
-    case 'klipper':
-      return 'klipper';
-    case 'reprapfirmware':
-      return 'reprapfirmware';
-    default:
-      return 'marlin';
-  }
-};

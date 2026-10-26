@@ -33,7 +33,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@vsslicer/gcode-api": "^0.6.0"
+    "@vsslicer/gcode-api": "^0.7.0"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { flavourFromName } from '@vsslicer/gcode-api';
 import type { CatalogueEntry } from './catalogue.ts';
 
 /** Entries by catalogue flavour, then by normalised code. */
@@ -7,6 +8,7 @@ export type CatalogueIndex = ReadonlyMap<string, ReadonlyMap<string, CatalogueEn
 const FALLBACK = [
   ['bambu', 'marlin'],
   ['prusa-buddy', 'marlin'],
+  ['reprapfirmware', 'marlin'], // shortcut: RRF's catalogue is small and shares the RepRap core (G0, M82, M106, M140...); replace with RRF entries when it grows
 ] as const;
 
 export const buildIndex = (entries: readonly CatalogueEntry[]): CatalogueIndex => {
@@ -18,7 +20,7 @@ export const buildIndex = (entries: readonly CatalogueEntry[]): CatalogueIndex =
       const known = index.get(f)?.get(e.code);
       if (!known || e.flavours.length < known.flavours.length) index.get(f)?.set(e.code, e);
     }
-  // firmware built on Marlin: a code its own catalogue lacks is Marlin's
+  // firmware built on or sharing Marlin's core: a code its own catalogue lacks is Marlin's
   for (const [f, base] of FALLBACK)
     for (const [code, e] of index.get(base) ?? [])
       if (index.has(f) && !index.get(f)?.has(code)) index.get(f)?.set(code, e);
@@ -27,12 +29,13 @@ export const buildIndex = (entries: readonly CatalogueEntry[]): CatalogueIndex =
 
 /**
  * The catalogue flavour a flavour name (a header comment, or an override) stands for, or undefined when we do not know it.
- * "Marlin" and "Marlin Legacy" are marlin; unknown names such as "UltiGCode" give undefined, so nothing is flagged for them.
+ * Names map through gcode-api (Marlin and Marlin Legacy are marlin, Cura's RepRap is reprapfirmware); unknown names such as "UltiGCode" give undefined, so nothing is flagged for them.
  */
 export const resolveFlavour = (index: CatalogueIndex, name: string | undefined): string | undefined => {
   const n = name?.trim().toLowerCase();
   if (!n) return undefined;
-  const key = n.startsWith('marlin') ? 'marlin' : n;
+  // the catalogue's flavour keys are gcode-api's Flavour values, plus the printer refinements (bambu, prusa-buddy) an override names directly
+  const key = n.startsWith('marlin') ? 'marlin' : (flavourFromName(n) ?? n); // human spellings ("Marlin Legacy") are Marlin too
   return index.has(key) ? key : undefined;
 };
 
