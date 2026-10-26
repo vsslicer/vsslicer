@@ -1,0 +1,27 @@
+{
+  "id": "bbl.pla-basic",
+  "vendor": "bambu",
+  "name": "Bambu PLA Basic",
+  "type": "PLA",
+  "diameter": 1.75,
+  "brand": "Bambu Lab",
+  "density": 1.26,
+  "cost": {
+    "amount": 15.99,
+    "currency": "USD",
+    "per": "kg"
+  },
+  "external_ids": {
+    "cura_guid": "506c9f0d-e3aa-4bd4-b2d2-23e2425b1aa9",
+    "bambu_filament_id": "OFoiVqVM",
+    "orca_filament_id": "OFDSrzZ8",
+    "prusa_name": "Prusament PLA @MK4S"
+  },
+  "settings": {
+    "nozzle_temp": 220,
+    "flow_ratio": 0.98,
+    "cool_plate_temp": 35,
+    "hot_plate_temp": 55,
+    "textured_plate_temp": 55
+  }
+}

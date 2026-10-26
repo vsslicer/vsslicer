@@ -24,10 +24,17 @@ test.beforeAll(async () => {
 test.afterAll(() => browser.close());
 
 type Px = [number, number, number];
-type Result = { px: number[]; left: Px; right: Px; ranges: { speed: number[]; layerTime: number[] }; error: number };
+type Result = {
+  px: number[];
+  left: Px;
+  right: Px;
+  ranges: { speed: number[]; layerTime: number[]; width: number[]; flow: number[] };
+  error: number;
+};
 const render = (o: object = {}) =>
   page.evaluate((o) => (globalThis as unknown as { render: (o: object) => Result }).render(o), o);
 const [FEATURE, SPEED, TOOL, LAYER_TIME] = [0, 1, 2, 3];
+const [WIDTH, FLOW] = [4, 5];
 const LAYER1 = 17; // first record of layer 1 (the right half)
 const lit = (p: Px) => p.some((v) => v > 0);
 
@@ -42,7 +49,7 @@ test('draws the move set at two visible ranges', async () => {
 });
 
 test('a range across many small textures draws as one texture does, in every mode', async () => {
-  for (const colorMode of [FEATURE, SPEED, TOOL, LAYER_TIME]) {
+  for (const colorMode of [FEATURE, SPEED, TOOL, LAYER_TIME, WIDTH, FLOW]) {
     const range = { first: 5, count: 20, colorMode };
     const one = await render(range);
     const many = await render({ ...range, maxTextureSize: 4 }); // 2 records, so 1 segment, per texture
@@ -84,4 +91,20 @@ test('colour modes feature, speed, tool and layer time are chosen by uniform', a
   // A wider colour range maps both speeds to the low end.
   const wide = await render({ colorMode: SPEED, colorRange: [0, 1e4] });
   expect(wide.right[2]).toBeGreaterThan(wide.right[0]);
+});
+
+test('width and flow modes colour by the data range, which is exposed for a legend', async () => {
+  const width = await render({ colorMode: WIDTH, colorRange: [0, 6] });
+  const flow = await render({ colorMode: FLOW });
+  expect([width.error, flow.error]).toEqual([0, 0]);
+  expect(width.ranges.width).toEqual([3, 3]);
+  expect(width.ranges.flow[0]).toBeCloseTo(16.8, 2); // left: 28 mm/s * 3 mm * 0.2 mm
+  expect(width.ranges.flow[1]).toBeCloseTo(168, 1); // right: 280 mm/s
+  // Width 3 is mid-range of [0, 6]: neither end colour.
+  expect(width.left).toEqual(width.right);
+  expect(width.left[0]).toBeGreaterThan(width.left[2] + 100); // yellow-green mid stop: not blue
+  expect(width.left[1]).toBeGreaterThan(width.left[2] + 100);
+  // Flow: left the low end (blue), right the high end (red).
+  expect(flow.left[2]).toBeGreaterThan(flow.left[0]);
+  expect(flow.right[0]).toBeGreaterThan(flow.right[2]);
 });

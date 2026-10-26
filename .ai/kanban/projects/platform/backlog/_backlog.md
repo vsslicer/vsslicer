@@ -139,3 +139,4 @@
 137. [PLT-174: Test that a signed macOS or Windows build updates from a GitHub release](174-test-that-a-signed-macos-or-windows-build-updates-from-a-git.md)
 138. [PLT-175: Release signed macOS and Windows installers](175-release-signed-macos-and-windows-installers.md)
 139. [PLT-181: Reconcile the DCO requirement with the project commit convention](181-reconcile-the-dco-requirement-with-the-project-commit-conven.md)
+140. [PLT-193: Add gcode-language to the extension pack](193-add-gcode-language-to-the-extension-pack.md)

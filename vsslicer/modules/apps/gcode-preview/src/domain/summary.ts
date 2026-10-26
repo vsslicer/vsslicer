@@ -62,7 +62,27 @@ export const Method = {
   progress: 'gcode-preview/progress',
   /** Host to webview: `TimelineCommand` (the integration tests drive the timeline with it). */
   command: 'gcode-preview/command',
+  /** Webview to host: no payload; load the file again after a failed load (the error panel's Retry). */
+  retry: 'gcode-preview/retry',
+  /** Webview to host: `WindowRequest`; the host answers with the packed window on `windowStream`. */
+  window: 'gcode-preview/window',
 } as const;
+
+/** The webview wants the toolhead window over moves `from` to `to` (exclusive), as request number `seq`. */
+export interface WindowRequest {
+  seq: number;
+  from: number;
+  to: number;
+}
+
+/** Stream id of the window answering request `seq`. */
+export const windowStream = (session: string, seq: number): string => `${session}/window/${seq}`;
+
+/** The request number a `windowStream` id carries, or undefined for any other stream. */
+export const windowSeq = (session: string, stream: string): number | undefined => {
+  const prefix = `${session}/window/`;
+  return stream.startsWith(prefix) ? Number(stream.slice(prefix.length)) : undefined;
+};
 
 /** Stream id of move buffer `index` for one webview load. */
 export const moveStream = (session: string, index: number): string => `${session}/moves/${index}`;

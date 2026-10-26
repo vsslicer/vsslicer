@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { loadCatalogue } from '../src/adapters/catalogue.ts';
 import { completionsAt, hoverAt, unknownCommands } from '../src/application/features.ts';
 import { buildIndex, commandWord, lookup, resolveFlavour } from '../src/domain/lookup.ts';
-import { featuresAvailable, MAX_FEATURE_BYTES } from '../src/domain/size.ts';
+import { featuresAvailable, MAX_FEATURE_BYTES, MAX_SCAN_ON_EDIT_CHARS, scansOnEdit } from '../src/domain/size.ts';
 
 const entries = loadCatalogue(fileURLToPath(new URL('../catalogue', import.meta.url)));
 const index = buildIndex(entries);
@@ -14,8 +14,17 @@ test('resolves flavour names to catalogue flavours, unknown ones to undefined', 
   assert.equal(resolveFlavour(index, 'Marlin'), 'marlin');
   assert.equal(resolveFlavour(index, 'Marlin Legacy'), 'marlin');
   assert.equal(resolveFlavour(index, 'klipper'), 'klipper');
+  assert.equal(resolveFlavour(index, 'RepRap'), 'reprapfirmware'); // Cura's `;FLAVOR:RepRap`
+  assert.equal(lookup(index, resolveFlavour(index, 'RepRap'), 'M550')?.flavours[0], 'reprapfirmware');
   assert.equal(resolveFlavour(index, 'UltiGCode'), undefined);
   assert.equal(resolveFlavour(index, undefined), undefined);
+});
+
+test('bambu and prusa-buddy fall back to marlin for codes their own catalogue lacks', () => {
+  assert.equal(lookup(index, 'bambu', 'G28')?.code, 'G28');
+  assert.equal(lookup(index, 'prusa-buddy', 'M400')?.code, 'M400');
+  assert.equal(lookup(index, 'bambu', 'M862.5'), undefined); // Buddy-only
+  assert.equal(resolveFlavour(index, 'bambu'), 'bambu');
 });
 
 test('finds the command word, skipping line numbers and comments, normalising case and zeros', () => {
@@ -84,4 +93,9 @@ test('unknown commands are found only when the flavour is known, and only G, M a
 test('the size gate switches features off above 50 MB', () => {
   assert.ok(featuresAvailable(MAX_FEATURE_BYTES));
   assert.ok(!featuresAvailable(MAX_FEATURE_BYTES + 1));
+});
+
+test('files above a few MB are scanned on open and save only', () => {
+  assert.equal(scansOnEdit(MAX_SCAN_ON_EDIT_CHARS), true);
+  assert.equal(scansOnEdit(MAX_SCAN_ON_EDIT_CHARS + 1), false);
 });

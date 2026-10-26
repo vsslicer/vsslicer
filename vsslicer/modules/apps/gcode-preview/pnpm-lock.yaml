@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@vsslicer/gcode-api':
+        specifier: ^0.7.0
+        version: 0.7.0
+      '@vsslicer/gcode-parser':
+        specifier: ^0.13.0
+        version: 0.13.0
+      '@vsslicer/gcode-planner':
+        specifier: ^0.5.0
+        version: 0.5.0
+      '@vsslicer/webview-kit':
         specifier: ^0.6.0
         version: 0.6.0
-      '@vsslicer/gcode-parser':
-        specifier: ^0.11.0
-        version: 0.11.0
-      '@vsslicer/gcode-planner':
-        specifier: ^0.4.0
-        version: 0.4.0
-      '@vsslicer/webview-kit':
-        specifier: ^0.5.1
-        version: 0.5.1
     devDependencies:
       '@types/mocha':
         specifier: 10.0.10
@@ -831,20 +831,24 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/gcode-api@0.6.0':
-    resolution: {integrity: sha512-ygp8MSafvYTx/N7spTrMllK+7eTk3QCbU9wEp4/DMTQYiHA8DohxkwjxoB3mBwdqfGEJXi2uxRZ5/taAlRJd+A==}
+  '@vsslicer/3mf@0.1.0':
+    resolution: {integrity: sha512-Utup/kJmwzh7ncG8mtaTywMb7IyADq0r1YslqmaBdY8fwWbmwuhaoaqAdFlePmt31gLKUDt3SO59z386kwEg2A==}
+    engines: {node: '>=24'}
+
+  '@vsslicer/gcode-api@0.7.0':
+    resolution: {integrity: sha512-jXm7NlRExnwITIkKO6J5l/wXLfcDlF0VHO0QsqXtW9CJRZ24ccAU8OpwG+nUJSYzuOY0szLv6d79GeB/vEr2IQ==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-bgcode@0.4.3':
     resolution: {integrity: sha512-PigT/jVQ9DONuiOTNJL048q9jsrc+ISSFM9OcaoR9KZj6JW9iKOlDkBD67uuv0M9L1HEapkF69Z3mTwQf/6jgQ==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-parser@0.11.0':
-    resolution: {integrity: sha512-vvAPQl1vWFXGhL3lI18n7tEUgiYtU1tQnybo56+CqvQeX45VZqVdPvhg25znnC3in8tyyGYKO2zvMS+xbV8UTg==}
+  '@vsslicer/gcode-parser@0.13.0':
+    resolution: {integrity: sha512-Wo5FsVM96e67EDWu5qZ5u7/+vyO22LaoDeoDhbx4vKKOXm5+bpAnnz7A7I6apfU5VBv7vKriVxiuHpPb9DlXiQ==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-planner@0.4.0':
-    resolution: {integrity: sha512-gN4slooX1bIDptVZNZpaF5wReoSJUnsP+soXfdGxDP6WtiKw4pZy5MX2xlwD7kGZWoHUy+NV9yLWLewiHfSJeA==}
+  '@vsslicer/gcode-planner@0.5.0':
+    resolution: {integrity: sha512-f2IK6t9qlG942pZBfJ6j9HLKaxFPtyyWj6WQisPmcs1+3OH53q5P6x8GWGNNJzfG5dpvUEJAP/f/53NPzpRrlg==}
     engines: {node: '>=24'}
 
   '@vsslicer/test-vscode@0.2.3':
@@ -857,8 +861,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.5.1':
-    resolution: {integrity: sha512-WbhvpN5K9HMv2lMgHVOou/cn3sVPiM2DJzc+sFRnO0MtViZLHYcBkFJBMo6q+89xU36/GnliEwIPDrBqjmIXpQ==}
+  '@vsslicer/webview-kit@0.6.0':
+    resolution: {integrity: sha512-RfK3kUZhFUHwRVyxybxYZ/qJ+mvNRsw1uu39jC26241JnQQUR+J0BiHIW8wGZOZzKqmpIeH0rQx8ApIXY8qg2w==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -1289,6 +1293,9 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
 
   file-entry-cache@11.1.5:
     resolution: {integrity: sha512-+PFTHITI08JIGhnNpGNI8T8inUpgZfk3GNEqfT9R2zZV2iFXg3CvqzSl/uEhs7TSGujYRELEANyDvS8Fj7+S7Q==}
@@ -1931,6 +1938,10 @@ packages:
     resolution: {integrity: sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==}
     engines: {node: '>=11.0.0'}
 
+  saxes@6.0.0:
+    resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
+    engines: {node: '>=v12.22.7'}
+
   secretlint@10.2.2:
     resolution: {integrity: sha512-xVpkeHV/aoWe4vP4TansF622nBEImzCY73y/0042DuJ29iKIaqgoJ8fGxre3rVSHHbxar4FdJobmTnLp9AU0eg==}
     engines: {node: '>=20.0.0'}
@@ -2232,6 +2243,9 @@ packages:
   xmlbuilder@11.0.1:
     resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
     engines: {node: '>=4.0'}
+
+  xmlchars@2.2.0:
+    resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
 
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
@@ -3023,18 +3037,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/gcode-api@0.6.0': {}
+  '@vsslicer/3mf@0.1.0':
+    dependencies:
+      fflate: 0.8.3
+      saxes: 6.0.0
+
+  '@vsslicer/gcode-api@0.7.0': {}
 
   '@vsslicer/gcode-bgcode@0.4.3': {}
 
-  '@vsslicer/gcode-parser@0.11.0':
+  '@vsslicer/gcode-parser@0.13.0':
     dependencies:
-      '@vsslicer/gcode-api': 0.6.0
+      '@vsslicer/3mf': 0.1.0
+      '@vsslicer/gcode-api': 0.7.0
       '@vsslicer/gcode-bgcode': 0.4.3
 
-  '@vsslicer/gcode-planner@0.4.0':
+  '@vsslicer/gcode-planner@0.5.0':
     dependencies:
-      '@vsslicer/gcode-api': 0.6.0
+      '@vsslicer/gcode-api': 0.7.0
 
   '@vsslicer/test-vscode@0.2.3(supports-color@8.1.1)':
     dependencies:
@@ -3064,7 +3084,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.5.1': {}
+  '@vsslicer/webview-kit@0.6.0': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
@@ -3537,6 +3557,8 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
+
+  fflate@0.8.3: {}
 
   file-entry-cache@11.1.5:
     dependencies:
@@ -4204,6 +4226,10 @@ snapshots:
 
   sax@1.6.1: {}
 
+  saxes@6.0.0:
+    dependencies:
+      xmlchars: 2.2.0
+
   secretlint@10.2.2(supports-color@8.1.1):
     dependencies:
       '@secretlint/config-creator': 10.2.2
@@ -4553,6 +4579,8 @@ snapshots:
       xmlbuilder: 11.0.1
 
   xmlbuilder@11.0.1: {}
+
+  xmlchars@2.2.0: {}
 
   yallist@4.0.0: {}
 

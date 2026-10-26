@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/gcode-language",
   "displayName": "VSSlicer G-code Language",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "G-code language support: language contribution, TextMate grammar (G/M/T codes, parameters, comments, Klipper and RepRapFirmware extensions, placeholders).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-language@0.1.0/vsslicer/modules/gcode-language",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-language@0.2.0/vsslicer/modules/gcode-language",
   "vsslicer": {
     "sizeBudgetKB": 200
   },
@@ -67,11 +67,13 @@
             "type": "string",
             "enum": [
               "marlin",
+              "prusa-buddy",
+              "bambu",
               "klipper",
               "reprapfirmware"
             ]
           },
-          "markdownDescription": "Overrides the G-code flavour shown for a file. Keys are the file path relative to its workspace folder (or the absolute path), values are `marlin`, `klipper` or `reprapfirmware`."
+          "markdownDescription": "Overrides the G-code flavour shown for a file. Keys are the file path relative to its workspace folder (or the absolute path), values are `marlin`, `prusa-buddy`, `bambu`, `klipper` or `reprapfirmware`."
         }
       }
     }
@@ -106,5 +108,8 @@
   "activationEvents": [
     "onLanguage:gcode",
     "onStartupFinished"
-  ]
+  ],
+  "dependencies": {
+    "@vsslicer/gcode-api": "^0.7.0"
+  }
 }

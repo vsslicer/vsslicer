@@ -1,0 +1,10 @@
+{
+  "id": "cura.ultimaker_s5.glass",
+  "type": "glass",
+  "settings": {
+    "machine_buildplate_type": "glass",
+    "material_bed_temperature": {
+      "expr": "=default_material_bed_temperature"
+    }
+  }
+}

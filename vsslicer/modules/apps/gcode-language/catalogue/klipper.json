@@ -144,6 +144,13 @@
     "source": "https://www.klipper3d.org/G-Codes.html#g-code-commands"
   },
   {
+    "code": "G21",
+    "flavours": ["klipper"],
+    "description": "Selects millimetres as the unit. Klipper only works in millimetres, so the command is accepted and does nothing (G20 is an error).",
+    "parameters": [],
+    "source": "https://github.com/Klipper3d/klipper/blob/ee2c6fb6b00b2b5d097ef70d0868df7d74943b51/klippy/extras/gcode_move.py#L166"
+  },
+  {
     "code": "G92",
     "flavours": ["klipper"],
     "description": "Redefines the current position without moving, e.g. G92 E0 to zero the extruder.",

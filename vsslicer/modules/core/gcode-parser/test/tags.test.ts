@@ -7,7 +7,6 @@ import { fixturesDir, loadManifest, lineScannable, readGolden } from './support/
 import { parseAll, roleHistogram } from './support/parser-summary.ts';
 import { encode, pieces, run } from './support/run.ts';
 import { collect, parse } from '../src/index.ts';
-import type { NamedChunk } from '../src/domain/chunk-writer.ts';
 import { ROLE_BY_NAME } from '../src/domain/tag-tables.ts';
 
 const text = loadManifest().files.filter(lineScannable);
@@ -226,7 +225,7 @@ describe('flavour', () => {
     expect(await maxFeed(`${m203}; gcode_flavor = reprapfirmware\n`)).toBe(6000); // too late for the earlier line
   });
   it('is read from Cura ;FLAVOR:', async () => {
-    expect(await maxFeed(`;FLAVOR:RepRap\n${m203}`)).toBe(6000);
+    expect(await maxFeed(`;FLAVOR:RepRap\n${m203}`)).toBe(100);
   });
   it('the flavour option overrides what the file says', async () => {
     expect(await maxFeed(`; gcode_flavor = marlin\n${m203}`, { flavour: 'reprapfirmware' })).toBe(100);
@@ -249,7 +248,7 @@ describe('flavour', () => {
   it('carries the name into chunks after the one that read it', async () => {
     const { chunks } = await run(`;FLAVOR:Klipper\n${'G1 X1 E1\n'.repeat(5)}`, { chunkMoves: 2 });
     expect(chunks.length).toBeGreaterThan(1);
-    expect(chunks.map((c: NamedChunk) => c.flavourName)).toEqual(chunks.map(() => 'Klipper'));
+    expect(chunks.map((c) => c.flavourName)).toEqual(chunks.map(() => 'Klipper'));
   });
 });
 

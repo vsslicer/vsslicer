@@ -32,6 +32,18 @@ After SP5 (retro `.ai/retros/SP5-retro.md`):
   no long spike in the sprint. Rule 10's formula held: 65 minutes x 1.54 agents / 1.5 = 67 against 63.
 - close-sprint records 4 more points than delivered: the audit and retro cards (rule 24; SP5 67).
 
+After SP6 (retro `.ai/retros/SP6-retro.md`):
+
+- **Plan at 20 points an hour per lane with work** (rule 23 confirmed): SP6 ran four lanes at 20 to 22
+  each, 73.2 points an hour (155 delivered points, 02:27 to 04:34), and again stopped early (56 minutes)
+  with two workable cards in SP7. A 3-hour sprint with four lanes holds about 240 workable points.
+- Agent time is **1.76 agent-minutes per done point** (SP5 1.6): Opus workers 1.6 a point, Sonnet 0.6;
+  reviews and fixes are half of all agent time (143 of 273 minutes). Rule 10's divisor is 1.75, not 1.5.
+- Dispatch stays in waves: one agent per message serialises the sprint (rule 11). Idle time from the first
+  wave to the last review is 22% (SP5 29%); finished agents waited 449 agent-minutes, mostly behind two
+  long agents (rule 17).
+- close-sprint records 159 of 223 (155 plus the audit and retro cards).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -91,6 +103,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     `run_in_background: true` still returned per message; no agent ran for 26.1 of 65.1 minutes (40%):
     7.2 for the trim at the start, 3.0 for the release, 15.9 in ten gaps (median 1.2), 29% without the
     first two; all 25 card and release commits (`913e9b5` to `2c12e29`) fall in those gaps.
+    **Amended SP6:** one agent per message is not per-lane dispatch: a `run_in_background` Agent call
+    still blocks its message until the agent stops, so one agent per message runs one agent at a time.
+    Dispatch in waves; measure idle from the first wave's start to the last review's stop. Testable: under
+    15% on that basis. Evidence: SP6 the GCP-98 worker, sent alone at 02:31:41, returned at 02:37:17 (5.6
+    min); no other agent ran and the coordinator wrote no event, while five cards it had moved to doing at
+    02:31 waited until 02:38. With waves after that: 22% idle from 02:38:11 to 04:28:15 (28% over the whole
+    sprint), 17 gaps of median 1.7 min, three over 2 min; no commit or coordinator event inside a wave.
 12. **Budget fix rounds by kind:** one per 9 bugfix cards, one per 2 cards of new code (ports of
     upstream algorithms, protocols, contracts, research decisions). Each fix round costs a review
     wave, about 5 minutes wall, even when the fix takes under a minute. Evidence: SP3 8 of 22 failed
@@ -131,6 +150,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     in the preview) together, or with lanes whose next card is also long. Evidence: SP5 the GCP-49
     spike (6.3) held wave 1's 0.6-minute fixes 22 agent-minutes, GCP-37 (5.4) wave 4's 25, GCP-38
     (10.4) wave 8's 15.
+    **Amended SP6:** a card that runs a browser or VS Code suite (Playwright, VS Code integration tests)
+    or measures with repeated runs counts as long whatever its size: it goes in a message only with
+    other long agents, or last. Testable: finished agents wait under 150 agent-minutes in a sprint.
+    Evidence: SP6 PLT-192 (S, Playwright suite) ran 16.3 min among 13 agents of median 1.6 (190
+    agent-minutes waiting; PRF-7's and VWR-5+6's fixes held 16 to 18 min); the VWR-37 spike (15.2) and
+    PRF-14 (9.7) went with five short agents (64.5); 449 in all (SP5 98). The median stop to review was
+    still 5.3 min.
 18. **A card that creates a module with VS Code integration tests, or a spike that measures with
     repeated runs, is XL or is split into build and measure**, and every OS a spike must run on other
     than the coordinator's is its own owner-blocked card at planning (rule 6). Testable: no card ends a
@@ -138,6 +164,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     ran 32.9 agent-min, three to five times the other L cards (6.3 to 8.6); PLT-31 (L) ran 41.6 and,
     with PLT-33, GCP-79 and GCP-18, ended partial on owner input (Q15, Q16, slicer exports, Q7): 14
     points. Since SP4.
+    **Amended SP6:** a measuring card (a spike or CI benchmark over large inputs) is at least L. Evidence:
+    SP6 VWR-37 (M, Opus) measured parse, dedup and BVH at 1, 5 and 20 M triangles for 15.2 agent-min,
+    about five times an Opus M build (3.2 to 5.6), and created VWR-389; VWR-32, VWR-50 and GCP-42 re-sized
+    M to L.
 19. **Reviewers fix in place only what changes no behaviour** (docs, comments, attribution, licence
     headers, CHANGELOG, ignore files) and record it in Progress; a behaviour change, however small, is a
     fix round. With that, budget one fix round per 6 new-code cards (replacing rule 12's one per 2),
@@ -151,6 +181,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     bugs 2 of 11 (PLT-189, GCP-93), new code 3 of 13 (GCP-45, GCP-38, and GCP-47 reworked after GCP-45's
     validator changed: GCP-46 and 47 were dispatched at 01:41 while GCP-45 was in review); wall 3.6 to
     12.3 minutes, median 7.2, for 0.5 to 1.4 agent-minutes each.
+    **Amended SP6:** the rate held; budget about 15 minutes of wall a failed card under waves, two rounds
+    for a card that parses hostile input (rule 25). Evidence: SP6 13 of 62 done cards failed first review
+    (1 in 4.8), all new code (bugs 0 of 12); 14 fix agents; wall 2.7 to 28.4 min, median 14.8; PRF-8 and
+    GCP-16 took two rounds each.
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -177,6 +211,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     0.4.3, gcode-api 0.6.0, gcode-parser 0.11.0, webview-kit 0.5.1, gcode-planner 0.4.0, gcode-preview
     0.3.0, gcode-language 0.1.0), but the ci passed on the third run: gcode-language (GCP-43) had no
     `prepack`, then the version check wanted the change committed.
+    **Amended SP6:** before publishing a module that gains a runtime dependency, run its consumers'
+    notices and licence checks against the packed module; a dependency only some consumers need goes on a
+    subpath export, not the main entry. Testable: one version per module and the ci passes on its first
+    run. Evidence: SP6 gcode-parser 0.12.0 put `@vsslicer/3mf` (and saxes) in its main entry, the
+    preview's notices check refused saxes's missing licence file, and GCP-111 shipped gcode-parser 0.13.0
+    and gcode-preview 0.4.1 (`2b522ab`); the ci passed on its third run (stale pins, then the licence
+    check's "Ported from" rule on two test files, `8453720`).
 22. **Every agent prompt names a `mktemp -d` scratch directory**; agents delete only files they
     created there and use `command ls -1` (not the aliased `ls`) in scripts. The coordinator runs
     `git status --short` after each wave and restores any change outside the dispatched cards' files.
@@ -189,6 +230,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     the scratch directory, importing the module by absolute path. Evidence: SP5 four incidents in 51
     agents: review lines written to a literal `review/088-*.md` (unmatched glob) and to a stale
     `review/189-*.md` after the move, and probe tests left in gcode-planner's and gcode-preview's `test/`.
+    **Amended SP6:** workers format only the files they changed (`prettier --write <their files>`, never
+    a module), change their card only by appending under Progress, and a reviewer's last step is the
+    `board.py move`. Evidence: SP6 workers ran `prettier --write` over whole modules, the VWR-2 worker
+    truncated and rewrote its card, and the VWR-8 and GCP-34 reviewers passed without moving (the
+    coordinator moved them, 03:42:37 and 04:05:34).
 23. **Capacity is the busiest lane.** A sprint lasts as long as its longest single-module chain: plan
     about 20 points an hour per lane with work (40 in a 2-hour sprint), give a hot module a second card
     on disjoint files (rule 14) where one exists, and keep an ordered pull-in list of next-sprint cards
@@ -198,6 +244,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     work (GCP-31, 32+33, 35, 38 and the GCP-89 and GCP-95 preview parts, 01:13 to 02:09, 18 points an
     hour), while GCP-40, GCP-50 and GCP-97 were workable in SP6; only GCP-48 was pulled back. The trim
     used rule 5's estimate of 69 minutes for that chain; it took 56. Since SP5.
+    **Amended SP6:** confirmed at 20 to 22 points an hour per lane; keep pulling in until the sprint's
+    planned end, not until the planned cards are done. Evidence: SP6 3mf 22, mesh 22, profile-api 20,
+    the gcode modules 20 (73.2 an hour); 74 points pulled in from SP7 as lanes freed, but no dispatch after
+    04:32 and the sprint ended 56 minutes early with PRF-16 and PRF-17 workable since 04:13.
 24. **Report delivered and closed points.** close-sprint counts every card whose `sprint` is the sprint
     at close, done or not, including the audit and retro cards and cards pulled in, and its committed
     figure moves with any re-sizing of carried cards before the close. Retros give both figures and
@@ -205,3 +255,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     sprint doc's `completed`. Evidence: SP4 closed at 76 of 133 against the retro's 72 of 139 (VSS-43
     and VSS-78; four carried cards re-sized); SP5's retro expects 67 of 124 (63 plus VSS-44 and VSS-79).
     Since SP5.
+25. **A card that parses untrusted input names its resource bounds at planning.** Size, nesting, count
+    and time bounds, and linear-time scanning (no backtracking regex over input bytes), go in its
+    acceptance criteria with a hostile-input test (bomb, deep nesting, unterminated tags, pathological
+    pattern). Testable: at most one fix round in a sprint for a resource-bound finding. Evidence: SP6
+    seven of thirteen failed first reviews, and one bug card, were missing bounds on hostile input: PRF-7 (nesting), VWR-5+6
+    (zip bomb), PRF-8 (regex backtracking: a denylist and a step budget failed review, then an own
+    Thompson NFA), VWR-8 (overlapping entries), VWR-15 (index wrap, XML depth), GCP-16 (quadratic regexes,
+    two rounds), and VWR-389 from the VWR-37 spike at 20 M triangles. Since SP6.

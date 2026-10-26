@@ -159,3 +159,38 @@ test('the setting adds and removes only our *.gcode association', () => {
   assert.deepStrictEqual(nextAssociations({ '*.gcode': GCODE_VIEW_TYPE, '*.md': 'x' }, false), { '*.md': 'x' });
   assert.strictEqual(nextAssociations({ '*.gcode': 'default' }, false), undefined, "the user's own choice stays");
 });
+
+test('a crashed worker becomes an error state, and Retry loads again and serves the result', async () => {
+  let calls = 0;
+  const session = openPreview('/x/a.gcode', async () => {
+    if (++calls === 1) throw Object.assign(new Error('preview worker exited with code 3'), { code: 'worker-crashed' });
+    return loaded([buffer(28, 1)]);
+  });
+  assert.deepStrictEqual(await session.state, {
+    status: 'error',
+    code: 'worker-crashed',
+    message: 'preview worker exited with code 3',
+  });
+  const [host, view] = pair();
+  session.serve(host, { onMismatch: () => {} });
+  const w = webview(view);
+  await w.ready;
+  await until(() => w.states.length === 2);
+  assert.strictEqual(w.states[1]!.status, 'error');
+  view.post({ tag: 'vsslicer/webview-kit', v: TRANSPORT_SCHEMA_VERSION, kind: 'notification', method: Method.retry });
+  await until(() => w.buffers.size === 1);
+  assert.deepStrictEqual(
+    w.states.map((s) => s.status),
+    ['loading', 'error', 'loading', 'ready'],
+  );
+  assert.strictEqual((await session.state).status, 'ready');
+  assert.strictEqual(calls, 2);
+});
+
+test('Retry does nothing once the load succeeded', async () => {
+  let calls = 0;
+  const session = openPreview('/x/a.gcode', async () => (calls++, loaded([])));
+  await session.state;
+  assert.strictEqual((await session.retry()).status, 'ready');
+  assert.strictEqual(calls, 1);
+});

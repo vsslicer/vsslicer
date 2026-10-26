@@ -15,6 +15,7 @@ const gl = {} as WebGL2RenderingContext;
 test('no WebGL2 in the browser', () => {
   const r = createGl2Context(document.createElement('canvas'));
   expect(r).toMatchObject({ ok: false, error: { cause: 'no-webgl2' } });
+  expect(!r.ok && r.error.message).toContain('disable-hardware-acceleration');
 });
 
 test('only a software context available: acceleration disabled, with argv.json hint', () => {
@@ -22,6 +23,7 @@ test('only a software context available: acceleration disabled, with argv.json h
   const r = createGl2Context(canvasWith((_, a) => (a.failIfMajorPerformanceCaveat ? null : gl)));
   expect(r).toMatchObject({ ok: false, error: { cause: 'hardware-acceleration-disabled' } });
   expect(!r.ok && r.error.message).toContain('argv.json');
+  expect(!r.ok && r.error.message).toContain('software rendering');
 });
 
 test('creation refused (null or throwing), with argv.json hint', () => {
@@ -34,7 +36,8 @@ test('creation refused (null or throwing), with argv.json hint', () => {
   ]) {
     const r = createGl2Context(canvasWith(fn));
     expect(r).toMatchObject({ ok: false, error: { cause: 'creation-refused' } });
-    expect(!r.ok && r.error.message).toContain('argv.json');
+    expect(!r.ok && r.error.message).toContain('disable-hardware-acceleration');
+    expect(!r.ok && r.error.message).toContain('software rendering');
   }
 });
 

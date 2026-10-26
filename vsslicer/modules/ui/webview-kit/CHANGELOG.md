@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- GCP-34: Playwright snapshots of the segment renderer on SwiftShader (six colour modes, a layer range, travel hidden); refresh with `pnpm test:browser --update-snapshots`.
+
+## 0.6.0
+
+- GCP-40: WebGL2 failure messages name `disable-hardware-acceleration` and software rendering.
+- PLT-192: `ColorMode.Width` and `ColorMode.Flow` in the segment renderer; `ranges` gains `width` and `flow` (the default colour range of those modes).
+
 ## 0.5.1
 
 - PLT-189: `trackContextLoss` keeps rebuilding when one entry throws, drops that entry's stale free function, and passes the first error to `onRestored(error?)`.

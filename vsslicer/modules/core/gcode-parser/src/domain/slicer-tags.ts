@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { MoveRole } from '@vsslicer/gcode-api';
+import { flavourFromName, MoveRole } from '@vsslicer/gcode-api';
 import type { Slicer } from '@vsslicer/gcode-api';
 import type { ChunkWriter } from './chunk-writer.ts';
 import type { Machine } from './machine.ts';
-import { flavourFromName, ROLE_BY_NAME, SLICER_BY_NAME } from './tag-tables.ts';
+import { ROLE_BY_NAME, SLICER_BY_NAME } from './tag-tables.ts';
 
 const SEMICOLON = 0x3b;
 const SPACE = 0x20;
@@ -135,7 +135,7 @@ export class SlicerTags {
 
   private flavour(name: string): void {
     if (name !== '') this.flavourName = name;
-    if (!this.flavourFixed) this.machine.flavour = flavourFromName(name);
+    if (!this.flavourFixed) this.machine.flavour = flavourFromName(name) ?? 'marlin';
   }
 
   private layer(): void {

@@ -14,18 +14,24 @@ export interface CatalogueEntry {
   readonly source: string;
 }
 
-/** Pages an entry may cite: RepRap wiki, Marlin, Prusa Buddy, Klipper, RepRapFirmware (Duet) and OrcaSlicer (Bambu templates). */
+/** Pages an entry may cite: RepRap wiki, Marlin, Prusa Buddy and its Prusa-Firmware command list, Klipper (docs and source), RepRapFirmware (Duet) and OrcaSlicer (Bambu templates). */
 const SOURCES: readonly { host: string; path: string }[] = [
   { host: 'reprap.org', path: '/wiki/G-code' },
   { host: 'marlinfw.org', path: '/docs/gcode' },
   { host: 'github.com', path: '/prusa3d/Prusa-Firmware-Buddy' },
   { host: 'github.com', path: '/SoftFever/OrcaSlicer' },
+  { host: 'github.com', path: '/Klipper3d/klipper' },
+  { host: 'help.prusa3d.com', path: '/article/prusa-firmware-specific-g-code-commands_112173' },
   { host: 'www.klipper3d.org', path: '/G-Codes.html' },
   { host: 'docs.duet3d.com', path: '' },
 ];
 
 /** Standard codes, or Klipper extended commands such as SET_PRESSURE_ADVANCE. */
-const CODE = /^([GMT]\d+(\.\d+)?|[A-Z][A-Z0-9_]+)$/;
+/** No leading zeros: lookups normalise `G01` to `G1`, so a `G01` entry would never show. */
+const CODE = /^([GMT](0|[1-9]\d*)(\.\d+)?|(?![GMT]\d)[A-Z][A-Z0-9_]+)$/;
+
+/** The flavour names the extension can select; a typo would create a flavour nothing selects. */
+export const FLAVOURS: ReadonlySet<string> = new Set(['marlin', 'prusa-buddy', 'bambu', 'klipper', 'reprapfirmware']);
 
 const isText = (v: unknown): v is string => typeof v === 'string' && v.trim() !== '';
 
@@ -42,7 +48,7 @@ const sourceProblem = (source: unknown): string | undefined => {
     SOURCES.some((s) => url.hostname === s.host && (url.pathname === s.path || url.pathname.startsWith(`${s.path}/`)));
   return ok
     ? undefined
-    : `source is not an allowed reference (reprap.org/wiki/G-code, marlinfw.org/docs/gcode, docs.duet3d.com, www.klipper3d.org/G-Codes.html, github.com/prusa3d/Prusa-Firmware-Buddy or github.com/SoftFever/OrcaSlicer): ${source}`;
+    : `source is not an allowed reference (reprap.org/wiki/G-code, marlinfw.org/docs/gcode, docs.duet3d.com, www.klipper3d.org/G-Codes.html, github.com/prusa3d/Prusa-Firmware-Buddy, github.com/SoftFever/OrcaSlicer, github.com/Klipper3d/klipper or help.prusa3d.com/article/prusa-firmware-specific-g-code-commands_112173): ${source}`;
 };
 
 /** Every problem with one raw entry; empty when it is valid. */
@@ -54,6 +60,7 @@ export const validateEntry = (raw: unknown): string[] => {
   if (!isText(e.description)) problems.push('missing description');
   if (!Array.isArray(e.flavours) || e.flavours.length === 0 || !e.flavours.every(isText))
     problems.push('missing flavour list');
+  else for (const f of e.flavours) if (!FLAVOURS.has(f)) problems.push(`unknown flavour: ${f}`);
   if (!Array.isArray(e.parameters)) problems.push('parameters must be a list');
   else {
     e.parameters.forEach((p: unknown, i) => {
@@ -66,11 +73,10 @@ export const validateEntry = (raw: unknown): string[] => {
   return problems;
 };
 
-/** Validates a whole file's worth of raw entries, including duplicate codes within one flavour. Throws listing every problem. */
-export const parseEntries = (raw: unknown, where: string): CatalogueEntry[] => {
+/** Validates a whole file's worth of raw entries, including duplicate codes within one flavour; pass one `seen` set across files to catch duplicates between files. Throws listing every problem. */
+export const parseEntries = (raw: unknown, where: string, seen = new Set<string>()): CatalogueEntry[] => {
   if (!Array.isArray(raw)) throw new Error(`${where}: expected a list of entries`);
   const problems: string[] = [];
-  const seen = new Set<string>();
   raw.forEach((entry, i) => {
     const label = `${where}[${i}]${typeof entry?.code === 'string' ? ` ${entry.code}` : ''}`;
     for (const p of validateEntry(entry)) problems.push(`${label}: ${p}`);

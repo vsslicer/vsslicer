@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-export { FLAVOUR_DEFAULTS, FLAVOUR_FIELDS, flavourFromName, resolveLimits } from './domain/limits.ts';
-export type { Flavour, LimitInputs, LimitKey, LimitSource, MachineLimits, ResolvedLimits } from './domain/limits.ts';
+export { flavourFromName } from '@vsslicer/gcode-api';
+export type { Flavour } from '@vsslicer/gcode-api';
+export { FLAVOUR_DEFAULTS, FLAVOUR_FIELDS, resolveLimits } from './domain/limits.ts';
+export type { LimitInputs, LimitKey, LimitSource, MachineLimits, ResolvedLimits } from './domain/limits.ts';
 export { bambuPlanner, conditionalBlocks, isBambuFile, plannerFor } from './domain/bambu.ts';
 export type { BambuLimitsSource, BambuTiming, ConditionalBlock } from './domain/bambu.ts';
 export { createKlipperPlanner, klipperPlanner } from './domain/klipper.ts';
@@ -20,7 +22,7 @@ export type { CursorState } from './domain/move-cursor.ts';
 export { constantSpeedPlanner } from './domain/planner.ts';
 export type { Planner, Replay } from './domain/planner.ts';
 export { trapezoidsFor } from './domain/trapezoids.ts';
-export { moveAtTime, ToolheadWindow, type ToolheadSample } from './domain/interp.ts';
+export { moveAtTime, ToolheadWindow, type ToolheadSample, type WindowTransfer } from './domain/interp.ts';
 export { CHECKPOINT_INTERVAL, TimingBuilder } from './domain/timing.ts';
 export type { Checkpoint, Timing, Trapezoid } from './domain/timing.ts';
 export { planSync, runPlanner } from './application/run-planner.ts';

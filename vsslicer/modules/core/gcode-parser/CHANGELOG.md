@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.13.0
+
+- GCP-111: the `.gcode.3mf` readers (`gcode3mfSource`, `gcode3mfEntries`, `gcode3mfPlates`, `readGcode3mfPlate`, `CorruptZipError`, `SizeCapExceededError`) move to the `@vsslicer/gcode-parser/gcode-3mf` entry, so the main entry no longer loads @vsslicer/3mf (breaking for importers of those names from the main entry, which 0.12.0 added an hour earlier).
+
+## 0.12.0
+
+- GCP-16: `gcode3mfPlates` and `readGcode3mfPlate`: plate enumeration, `slice_info.config` statistics (linear quote-aware scanner, 4 MiB cap), the plate thumbnail and the `plate_N.gcode.md5` check for `.gcode.3mf`.
+- GCP-15: `gcode3mfSource` and `gcode3mfEntries` read `.gcode.3mf` entries through @vsslicer/3mf ^0.1.0 (stored, deflated, data descriptors, zip64; typed `CorruptZipError` and `SizeCapExceededError`); the archive and entry are held in memory for now.
+- GCP-99: flavour names come from gcode-api 0.7.0's `flavourFromName` (depends on ^0.7.0); Cura's `;FLAVOR:RepRap` is RepRapFirmware, not Marlin, so its `M203` limits and units follow RepRapFirmware.
+- GCP-105: chunks and `collect()` use gcode-api's `Chunk` and `ParsedFile` `flavourName` directly (the `NamedChunk` shortcut is gone).
+
 ## 0.11.0
 
 - Depends on gcode-api ^0.6.0 and gcode-bgcode ^0.4.3.

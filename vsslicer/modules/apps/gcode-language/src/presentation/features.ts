@@ -2,7 +2,7 @@
 import type * as vscode from 'vscode';
 import { completionsAt, hoverAt, unknownCommands } from '../application/features.ts';
 import { resolveFlavour, type CatalogueIndex } from '../domain/lookup.ts';
-import { featuresAvailable, OVERSIZE_REASON } from '../domain/size.ts';
+import { featuresAvailable, OVERSIZE_REASON, scansOnEdit } from '../domain/size.ts';
 import { flavourOf, type Api as StatusApi } from './status.ts';
 
 export type Api = Pick<
@@ -116,6 +116,7 @@ export const registerLanguageFeatures = (
     );
   };
   const schedule = (doc: vscode.TextDocument): void => {
+    if (!scansOnEdit(doc.offsetAt(doc.lineAt(doc.lineCount - 1).range.end))) return; // big files: open and save only
     const key = doc.uri.toString();
     clearTimeout(timers.get(key));
     timers.set(
@@ -154,6 +155,7 @@ export const registerLanguageFeatures = (
     host.workspace.onDidOpenTextDocument(opened),
     host.workspace.onDidChangeTextDocument((e) => schedule(e.document)),
     host.workspace.onDidSaveTextDocument((d) => {
+      void scan(d);
       sizes.delete(d.uri.toString());
       checkTabs();
     }),

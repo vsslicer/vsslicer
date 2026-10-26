@@ -80,6 +80,17 @@ export function moveAtTime(parsed: ParsedFile, t: number): number {
   return base + i;
 }
 
+/** A `ToolheadWindow` as plain numbers and one typed array, for `postMessage` or a file. */
+export interface WindowTransfer {
+  start: number;
+  end: number;
+  startTime: number;
+  endTime: number;
+  profiled: boolean;
+  /** The per-move rows (17 doubles each, `end - start` rows); opaque, only `fromTransfer` reads it. */
+  data: Float64Array;
+}
+
 /**
  * Toolhead positions over moves `start` to `end` (exclusive), built once per window and sampled
  * per frame: `positionAt` is a binary search and a closed-form trapezoid, with no allocation when
@@ -176,6 +187,21 @@ export class ToolheadWindow {
     }
     this.startTime = d[T0]!;
     this.endTime = startAt(end);
+  }
+
+  /** The window as plain data (shares `data`, no copy); `ToolheadWindow.fromTransfer` rebuilds it with no planner. */
+  toTransfer(): WindowTransfer {
+    const { start, end, startTime, endTime, profiled, data } = this;
+    return { start, end, startTime, endTime, profiled, data };
+  }
+
+  /** The window `toTransfer` made (keeps `t.data`, no copy); `positionAt` works on it as on the original. */
+  static fromTransfer(t: WindowTransfer): ToolheadWindow {
+    if (!(t.end > t.start) || t.data.length !== (t.end - t.start) * N)
+      throw new RangeError('malformed window transfer');
+    const { data, ...rest } = t;
+    const w = Object.create(ToolheadWindow.prototype) as { data: Float64Array };
+    return Object.assign(w, rest, { data }) as unknown as ToolheadWindow;
   }
 
   /** Stores the trapezoid's phases at row `r` if it fits the move in `budget` seconds. */

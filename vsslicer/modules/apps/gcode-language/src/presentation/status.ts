@@ -6,16 +6,16 @@ export type Api = Pick<typeof vscode, 'window' | 'workspace' | 'StatusBarAlignme
 
 /** The flavour a document's head states and the user's override for it. */
 export const flavourOf = (
-  host: Pick<Api, 'workspace' | 'Range'>,
+  host: Pick<Api, 'workspace'>,
   doc: vscode.TextDocument,
 ): { detected: string | undefined; override: string | undefined } => {
-  const head = doc.getText(new host.Range(doc.positionAt(0), doc.positionAt(HEAD_BYTES)));
+  const text = doc.getText();
   // the override is keyed by workspace-relative path (or absolute path when outside a folder)
   const overrides = host.workspace
     .getConfiguration('vsslicer.gcode', doc.uri)
     .get<Record<string, string>>('flavourOverrides', {});
   return {
-    detected: detectFlavour(head),
+    detected: detectFlavour(text.slice(0, HEAD_BYTES), text.slice(-HEAD_BYTES)),
     override: overrides[host.workspace.asRelativePath(doc.uri, false)] ?? overrides[doc.uri.fsPath],
   };
 };

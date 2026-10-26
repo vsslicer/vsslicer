@@ -14,7 +14,7 @@
   },
   {
     "code": "M104",
-    "flavours": ["marlin", "reprapfirmware", "klipper"],
+    "flavours": ["marlin", "reprapfirmware"],
     "description": "Sets the hotend target temperature and returns at once without waiting for it to be reached.",
     "parameters": [
       { "name": "S", "description": "Target temperature in degrees Celsius; 0 switches the heater off." },

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { analyseMoves, chunkInstances, createSegmentRenderer } from '../src/gl/segment-renderer.ts';
+import { analyseMoves, chunkInstances, halfToNumber, createSegmentRenderer } from '../src/gl/segment-renderer.ts';
 
 describe('chunkInstances', () => {
   const chunk = { firstRecord: 10, recordCount: 5 }; // ends moves 11..14 (local 1..4)
@@ -13,6 +13,21 @@ describe('chunkInstances', () => {
     expect(chunkInstances(chunk, 15, 3)).toBeNull();
     expect(chunkInstances(chunk, 1, 10)).toBeNull(); // moves 1..10; 10 is the previous chunk's
     expect(chunkInstances(chunk, 12, 0)).toBeNull();
+  });
+});
+
+const f16 = (x: number) => {
+  const d = new DataView(new ArrayBuffer(2));
+  d.setFloat16(0, x, true);
+  return d.getUint16(0, true);
+};
+
+describe('halfToNumber', () => {
+  it('decodes normals, subnormals, signs and specials', () => {
+    for (const x of [0, 0.5, -2, 0.2, 65504, 2 ** -24, 3 * 2 ** -24])
+      expect(halfToNumber(f16(x))).toBe(new Float16Array([x])[0]);
+    expect(halfToNumber(f16(Infinity))).toBe(Infinity);
+    expect(halfToNumber(f16(NaN))).toBeNaN();
   });
 });
 
@@ -34,11 +49,33 @@ describe('analyseMoves', () => {
     expect(Array.from(new Float32Array(table.buffer).filter((_, i) => i % 2 === 1))).toEqual([2, 1]);
     expect(ranges.layerTime).toEqual([1, 2]);
   });
+  it('takes the width and flow ranges over non-travel moves with a cross-section', () => {
+    const v = new DataView(moves());
+    [
+      [0.5, 0.2],
+      [0.5, 0.2],
+      [0.4, 0.2],
+      [0.6, 0.3],
+    ].forEach(([w, h], i) => {
+      v.setUint16(i * 28 + 12, f16(w!), true);
+      v.setUint16(i * 28 + 14, f16(h!), true);
+    });
+    const { ranges } = analyseMoves(v.buffer, [1, 2]);
+    expect(ranges.width[0]).toBeCloseTo(0.5, 3); // record 2 is a travel
+    expect(ranges.width[1]).toBeCloseTo(0.6, 3); // record 3 is the last: width counts, no flow (no next start)
+    expect(ranges.flow[0]).toBeCloseTo(5 * 0.5 * 0.2, 3); // 5 mm/s
+    expect(ranges.flow[1]).toBeCloseTo(5 * 0.5 * 0.2, 3);
+  });
   it('reports [0, 0] when start times are unknown', () => {
     expect(analyseMoves(new ArrayBuffer(3 * 28), []).ranges.speed).toEqual([0, 0]); // zero durations
     const nan = new DataView(new ArrayBuffer(3 * 28));
     [0, 1, 2].forEach((i) => nan.setFloat32(i * 28 + 24, NaN, true));
-    expect(analyseMoves(nan.buffer, [1]).ranges).toEqual({ speed: [0, 0], layerTime: [0, 0] });
+    expect(analyseMoves(nan.buffer, [1]).ranges).toEqual({
+      speed: [0, 0],
+      layerTime: [0, 0],
+      width: [0, 0],
+      flow: [0, 0],
+    });
   });
 });
 

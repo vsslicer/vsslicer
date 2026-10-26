@@ -1,0 +1,5 @@
+{
+  "id": "prusa.xl-toolchanger",
+  "slots": 2,
+  "type": "toolchanger"
+}

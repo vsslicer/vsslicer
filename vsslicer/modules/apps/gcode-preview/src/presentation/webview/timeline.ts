@@ -2,6 +2,8 @@
 // The timeline behind play/pause/step/speed: a clock over the print's seconds and the toolhead position read from
 // the move records, which carry the planner's start times (f32). Pure, no DOM.
 import { MOVE_STRIDE, MoveOffset, type Layer } from '@vsslicer/gcode-api';
+import type { ToolheadSample, ToolheadWindow } from '@vsslicer/gcode-planner/window';
+import { unpackWindow } from '../../domain/window.ts';
 
 /** Speed multipliers offered, 1 = real time. */
 export const SPEEDS = [0.5, 1, 2, 5, 10, 50, 100, 500, 2000];
@@ -75,7 +77,7 @@ export const timeOfMove = (moves: ArrayBuffer, i: number): number => {
  * Toolhead at `t`: constant speed from the previous move's end point to this move's over its start-to-next-start
  * span (the planner's own fallback; trapezoid profiles and dwells need the host's timing, not sent to the webview).
  * Writes x, y, z into `out` and returns the move index.
- * shortcut: no acceleration shape, a dwell shows as slow motion; build `ToolheadWindow` in the host if that matters.
+ * The marker's fallback while `createMarker` has no window for `t`: no acceleration shape, a dwell shows as slow motion.
  */
 export const positionAt = (moves: ArrayBuffer, t: number, duration: number, out: number[] = [0, 0, 0]): number => {
   const i = moveAtTime(moves, t);
@@ -91,6 +93,52 @@ export const positionAt = (moves: ArrayBuffer, t: number, duration: number, out:
     out[k] = from + f * (to - from);
   }
   return i;
+};
+
+/** Moves per window: 2048 * 136 B = 278 KB over the message channel, about 4 ms of host time per window (Klipper replay). */
+export const WINDOW_MOVES = 2048;
+
+/**
+ * The marker's position from planner windows fetched on demand: `sample` answers from the window covering `t`,
+ * prefetches the next one once `t` is 3/4 through it, and returns undefined (the caller falls back to `positionAt`)
+ * while none covers `t`. One request is in flight at a time. `request` asks the host; `accept` takes its reply.
+ */
+export const createMarker = (
+  moves: ArrayBuffer,
+  moveCount: number,
+  request: (seq: number, from: number, to: number) => void,
+  size = WINDOW_MOVES,
+) => {
+  let cur: ToolheadWindow | undefined;
+  let next: ToolheadWindow | undefined;
+  let pending = -1;
+  let askedAt = 0;
+  let seq = 0;
+  const covers = (w: ToolheadWindow | undefined, t: number): w is ToolheadWindow =>
+    !!w && t >= w.startTime && (t < w.endTime || w.end >= moveCount);
+  const ask = (from: number) => {
+    // a request the host dropped (bad range, closed panel) frees the slot after 2 s
+    if (pending >= 0 && performance.now() - askedAt < 2000) return;
+    askedAt = performance.now();
+    pending = ++seq;
+    request(pending, from, Math.min(moveCount, from + size));
+  };
+  const out: ToolheadSample = { move: 0, x: 0, y: 0, z: 0, e: 0, tool: 0 };
+  return {
+    sample(t: number, xyz: number[]): number | undefined {
+      if (!covers(cur, t) && covers(next, t)) [cur, next] = [next, undefined];
+      if (!covers(cur, t)) return void ask(Math.max(0, moveAtTime(moves, t) - size / 4));
+      if (!next && cur.end < moveCount && t > cur.startTime + 0.75 * (cur.endTime - cur.startTime)) ask(cur.end);
+      cur.positionAt(t, out);
+      [xyz[0], xyz[1], xyz[2]] = [out.x, out.y, out.z];
+      return out.move;
+    },
+    /** The reply to request `n`; kept for when its span is asked for. */
+    accept(n: number, packed: ArrayBuffer) {
+      if (n === pending) pending = -1;
+      next = unpackWindow(packed);
+    },
+  };
 };
 
 /** The layer holding global move `i`, and how many of its moves are done once `i` has run. Moves before layer 0 count as layer 0. */

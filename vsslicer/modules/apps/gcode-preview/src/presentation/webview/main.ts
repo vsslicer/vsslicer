@@ -20,11 +20,13 @@ import {
   type Progress,
   type Received,
   type TimelineCommand,
+  type WindowRequest,
+  windowSeq,
   type ViewState,
 } from '../../domain/summary.ts';
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
-import { SPEEDS, createClock, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
-import { presentRoles, roleName } from './controls.ts';
+import { SPEEDS, createClock, createMarker, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
+import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
 import {
   concatMoves,
@@ -71,6 +73,7 @@ let clock = createClock(0);
 /** Marker position in world coordinates; undefined before the first sample. */
 let head: number[] | undefined;
 let headMove = 0;
+let windows: ReturnType<typeof createMarker> | undefined;
 const stage = document.createElement('div');
 stage.style.position = 'relative';
 const marker = document.createElement('div');
@@ -134,23 +137,15 @@ const toggle = (label: string, checked: boolean, onChange: (on: boolean) => void
 };
 let roleBoxes: [number, HTMLInputElement][] = [];
 let travelBox: HTMLInputElement | undefined;
-const patch = (p: Partial<SavedView>) => {
-  api.setState({ ...api.getState()!, ...p });
+const patch = (e: ViewEvent) => {
+  api.setState(nextView(api.getState()!, e));
   redraw();
 };
-topLayer.input.addEventListener('input', () => {
-  const layer = Number(topLayer.input.value);
-  patch({ layer, move: undefined, bottom: Math.min(api.getState()?.bottom ?? 0, layer) });
-});
-bottomLayer.input.addEventListener('input', () => {
-  const bottom = Number(bottomLayer.input.value);
-  const layer = Math.max(bottom, api.getState()?.layer ?? 0);
-  patch({ bottom, layer, move: layer === api.getState()?.layer ? api.getState()?.move : undefined });
-});
-moveSlider.input.addEventListener('input', () => {
-  const n = Number(moveSlider.input.value);
-  patch({ move: n >= Number(moveSlider.input.max) ? undefined : n });
-});
+topLayer.input.addEventListener('input', () => patch({ kind: 'top', value: Number(topLayer.input.value) }));
+bottomLayer.input.addEventListener('input', () => patch({ kind: 'bottom', value: Number(bottomLayer.input.value) }));
+moveSlider.input.addEventListener('input', () =>
+  patch({ kind: 'move', value: Number(moveSlider.input.value), max: Number(moveSlider.input.max) }),
+);
 panel.append(layerTime, toggles);
 const modes = document.createElement('select');
 modes.ariaLabel = 'Colour by';
@@ -252,13 +247,8 @@ const syncControls = (s: SavedView) => {
 
 const buildToggles = () => {
   toggles.replaceChildren();
-  roleBoxes = info.roles.map((r) => [
-    r,
-    toggle(roleName(r), true, () => patch({ roleMask: ((api.getState()?.roleMask ?? 0xffffffff) ^ (1 << r)) >>> 0 })),
-  ]);
-  travelBox = toggle('Travel moves', false, () =>
-    patch({ hiddenFlags: (api.getState()?.hiddenFlags ?? MoveFlag.Travel) ^ MoveFlag.Travel }),
-  );
+  roleBoxes = info.roles.map((r) => [r, toggle(roleName(r), true, () => patch({ kind: 'role', value: r }))]);
+  travelBox = toggle('Travel moves', false, () => patch({ kind: 'travel' }));
 };
 window.addEventListener('resize', redraw);
 
@@ -279,7 +269,15 @@ const render = (state: ViewState) => {
   cancelAnimationFrame(frame);
   if (state.status === 'loading') return show('Loading G-code...');
   if (state.status === 'unsupported') return show('Not supported yet', [state.message]);
-  if (state.status === 'error') return show('Could not open this file', [`${state.message} (${state.code})`]);
+  if (state.status === 'error') {
+    show('Could not open this file', [`${state.message} (${state.code})`]);
+    const retry = Object.assign(document.createElement('button'), { textContent: 'Retry' });
+    retry.addEventListener('click', () => {
+      retry.disabled = true;
+      channel.post({ tag: PROTOCOL_TAG, v: TRANSPORT_SCHEMA_VERSION, kind: 'notification', method: Method.retry });
+    });
+    return root.append(retry);
+  }
   summary = state.summary;
   buffers = summary.moveBuffers.map(() => undefined);
   const s = summary;
@@ -297,8 +295,7 @@ const render = (state: ViewState) => {
 
 const done = () => {
   if (!summary || buffers.some((b) => !b)) return;
-  const saved = api.getState();
-  api.setState({ ...saved, layer: saved?.layer ?? Math.max(0, summary.layers.length - 1) });
+  api.setState(nextView(api.getState(), { kind: 'load', layerCount: summary.layers.length }));
   const received: Received = {
     buffers: buffers.map((b) => ({ byteLength: b!.byteLength, arrayBuffer: b instanceof ArrayBuffer })),
     stateSaved: api.getState() !== undefined,
@@ -321,6 +318,15 @@ const done = () => {
     duration: s.totalTime,
   };
   clock = createClock(s.totalTime);
+  windows = createMarker(moves, s.moveCount, (seq, from, to) =>
+    channel.post({
+      tag: PROTOCOL_TAG,
+      v: TRANSPORT_SCHEMA_VERSION,
+      kind: 'notification',
+      method: Method.window,
+      payload: { seq, from, to } satisfies WindowRequest,
+    }),
+  );
   speeds.value = '1';
   clockSlider.max = String(s.totalTime);
   buildToggles();
@@ -350,14 +356,13 @@ const report = () => {
 const apply = (setView = true) => {
   if (!renderer || !info.moveCount) return;
   const xyz = [0, 0, 0];
-  headMove = positionAt(info.moves, clock.state.time, info.duration, xyz);
+  headMove = windows?.sample(clock.state.time, xyz) ?? positionAt(info.moves, clock.state.time, info.duration, xyz);
   head = xyz;
   const { layer, move } = layerOfMove(info.layers, headMove);
-  const bottom = Math.min(api.getState()?.bottom ?? 0, layer);
   clockSlider.value = String(clock.state.time);
   clockOut.textContent = `${time(clock.state.time)} / ${time(info.duration)}`;
   playButton.textContent = clock.state.playing ? 'Pause' : 'Play';
-  if (setView) patch({ layer, move, bottom });
+  if (setView) patch({ kind: 'play', layer, move });
   else redraw();
 };
 const seekTo = (t: number) => {
@@ -403,6 +408,12 @@ clockSlider.addEventListener('input', () => seekTo(Number(clockSlider.value)));
 // subscribe before the handshake: the host answers the welcome with the state and the buffers
 receiveBuffers(channel, {
   onBuffer(stream, data) {
+    const w = windowSeq(session, stream);
+    if (w !== undefined) {
+      windows?.accept(w, data as ArrayBuffer);
+      if (!clock.state.playing) apply(false); // a paused marker moves to the planner's position
+      return;
+    }
     const i = buffers.findIndex((_, j) => moveStream(session, j) === stream);
     if (i < 0) return;
     buffers[i] = data;

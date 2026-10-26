@@ -16,7 +16,14 @@ function run() {
   const r = createSegmentRenderer(spy.gl, buffer, { layerStarts });
   const atCreate = { ...spy.uploads };
   spy.reset();
-  const modes = [ColorMode.Feature, ColorMode.Speed, ColorMode.Tool, ColorMode.LayerTime];
+  const modes = [
+    ColorMode.Feature,
+    ColorMode.Speed,
+    ColorMode.Tool,
+    ColorMode.LayerTime,
+    ColorMode.Width,
+    ColorMode.Flow,
+  ];
   let draws = 0;
   for (const colorMode of modes)
     for (let count = 1; count <= 2000; count += 97) {

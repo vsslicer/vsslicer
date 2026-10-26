@@ -1,0 +1,12 @@
+# Changelog
+
+## Unreleased
+
+- PRF-14: `orcaCatalogue`: 804 entries generated from OrcaSlicer@09aa0114 PrintConfig.cpp (`tools/catalogue/generate.ts`), with an AGPL-3.0 notice and per-entry provenance; the per-extruder key list in the schema now comes from it.
+- PRF-15: Bambu Studio native names on 512 Orca entries (14 through Orca's legacy renames) and 96 `bambu.` entries in `bambuCatalogue`, generated from BambuStudio@79df7ae with an AGPL-3.0 notice and per-entry provenance.
+- PRF-177: condition regexes match newlines as PrusaSlicer's `boost::regex_match` does: `.` matches a newline, and `^`/`$` also match at \n, \r, \f line breaks (never inside \r\n).
+- PRF-13: `fromNative`/`toNative` convert a value per conversion kind (identity, scale, sign flip, percent-of, enum map, split) as exact inverses, with `lossy` reasons and a typed `ConversionError`.
+- PRF-1: module skeleton (`domain/`, `application/`), no public API yet.
+- PRF-2: entity types `Vendor`, `PrinterModel`, `Nozzle`, `Surface`, `Feeder`, `Material`, `Process`, `PrinterInstance`, the shared `EntityBase` fields and `SettingValue` (types only).
+- PRF-8: `evaluate(expr, context)` returns `{compatible, diagnostic?}`; parse errors, unknown keys and type mismatches yield compatible plus a diagnostic (PrusaSlicer semantics); regexes are full-match and guarded against catastrophic backtracking.
+- PRF-12: settings catalogue contract: `CatalogueEntry`, `Catalogue`, the 14 FFF `GROUPS` (with home entities), `RESERVED_GROUPS`, `KEY_PREFIXES`, the closed `Conversion` set (identity, scale, sign_flip, percent_of, enum_map, split), override scopes, and `catalogueEntrySchema`/`catalogueSchema` (JSON Schema 2020-12).

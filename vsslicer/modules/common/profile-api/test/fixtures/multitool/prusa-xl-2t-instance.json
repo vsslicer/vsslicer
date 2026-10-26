@@ -1,0 +1,18 @@
+{
+  "id": "user.xl-2t",
+  "model": "prusa.xl-2t",
+  "toolheads": [
+    {
+      "slot": 0,
+      "nozzle": "prusa.nozzle.0.4"
+    },
+    {
+      "slot": 1,
+      "nozzle": "prusa.nozzle.0.4"
+    }
+  ],
+  "feeder": {
+    "type": "toolchanger",
+    "slots": 2
+  }
+}

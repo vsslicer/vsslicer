@@ -1,0 +1,7 @@
+{
+  "id": "prusa.nozzle.0.4",
+  "diameter": 0.4,
+  "flow": "standard",
+  "material": "brass",
+  "extruder_type": "direct"
+}

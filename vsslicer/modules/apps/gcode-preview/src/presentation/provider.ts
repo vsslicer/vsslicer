@@ -35,7 +35,7 @@ const deferred = <T>() => {
 };
 
 export const registerPreview = (context: Context, api: Api, load: LoadPort): PreviewProbe => {
-  const states = new Map<string, Promise<ViewState>>();
+  const states = new Map<string, PreviewSession>();
   const open = new Map<
     string,
     { channel: ReturnType<typeof createPanelChannel>; session: PreviewSession; progress?: Progress }
@@ -48,7 +48,7 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
       // fsPath is read by the worker with Node fs; other schemes need workspace.fs (later)
       const session = openPreview(uri.fsPath, uri.scheme === 'file' ? load : notLocal);
       const key = uri.toString();
-      states.set(key, session.state);
+      states.set(key, session);
       const dispose = () => {
         session.dispose();
         states.delete(key);
@@ -102,7 +102,7 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
   void syncAssociations();
 
   return {
-    state: (uri) => states.get(uri) ?? Promise.reject(new Error(`${uri} is not open in the preview`)),
+    state: (uri) => states.get(uri)?.state ?? Promise.reject(new Error(`${uri} is not open in the preview`)),
     received: (uri) => receivedFor(uri).promise,
     command(uri, command) {
       const c = open.get(uri);

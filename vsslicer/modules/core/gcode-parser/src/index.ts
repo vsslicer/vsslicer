@@ -15,6 +15,6 @@ export type {
   WorkerParseSettings,
 } from './application/parse-in-worker.ts';
 export type { ParseSettings } from './application/parse.ts';
-export type { Flavour } from './domain/machine.ts';
+export type { Flavour } from '@vsslicer/gcode-api';
 export type { ParserOptions } from './domain/parser.ts';
 export { transferList } from './domain/transfer.ts';

@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { MOVE_STRIDE, MoveFlag, MoveOffset, MoveRole, readMove } from '@vsslicer/gcode-api';
 import type { ParsedFile } from '@vsslicer/gcode-api';
@@ -297,5 +299,38 @@ describe('moveAtTime', () => {
     expect(moveAtTime(parsed, 8)).toBe(8);
     expect(moveAtTime(parsed, 1000)).toBe(22);
     expect(moveAtTime(fixture([], [], []), 1)).toBe(-1);
+  });
+});
+
+describe('transfer form and the planner-free entry', () => {
+  it('round-trips a window exactly', () => {
+    const { parsed, timing } = plan(
+      [
+        { x: 50, y: 0, flags: T, role: MoveRole.None },
+        { x: 50, y: 40, flags: T, role: MoveRole.None },
+        { x: 0, y: 40 },
+      ],
+      [[0, 300]],
+    );
+    const w = new ToolheadWindow(klipper, parsed, timing, 0, 3);
+    const t = w.toTransfer();
+    const r = ToolheadWindow.fromTransfer(structuredClone(t));
+    expect(r.toTransfer()).toEqual(t);
+    for (const s of [0, 0.01, 0.05, 0.1, 0.2, 5]) expect(r.positionAt(s)).toEqual(w.positionAt(s));
+    expect(() => ToolheadWindow.fromTransfer({ ...t, data: t.data.subarray(1) })).toThrow(RangeError);
+  });
+
+  it('src/window.ts loads no planner module (type-only imports are erased)', () => {
+    const seen = new Set<string>();
+    const walk = (f: string): void => {
+      if (seen.has(f)) return;
+      seen.add(f);
+      for (const m of readFileSync(f, 'utf8').matchAll(/^(?:import|export)\s(?!type\s)[^;]*?from '(\.[^']+)'/gms))
+        walk(resolve(dirname(f), m[1]!));
+    };
+    walk(resolve(import.meta.dirname, '../src/window.ts'));
+    const names = [...seen].map((f) => f.split('/').pop());
+    expect(names).toContain('interp.ts');
+    for (const n of ['klipper.ts', 'marlin.ts', 'rrf-planner.ts', 'planner.ts']) expect(names).not.toContain(n);
   });
 });

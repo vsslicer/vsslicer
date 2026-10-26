@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.1
+
+- GCP-111: depends on gcode-api ^0.7.0 and gcode-parser ^0.13.0, so the preview parses with the one flavour table (GCP-99): a Cura `;FLAVOR:RepRap` file is parsed and timed as RepRapFirmware.
+
+## 0.4.0
+
+- Depends on gcode-planner ^0.5.0 and webview-kit ^0.6.0. Stays on gcode-parser ^0.11.0: 0.12.0 bundles @vsslicer/3mf's saxes, which ships no licence file, so the notices check refuses it (GCP-111).
+- GCP-109: uses gcode-planner 0.5.0's `toTransfer`/`fromTransfer` and `/window` entry; the webview bundle drops the planners (112 KB to 75 KB).
+- GCP-96: Width (mm) and Flow (mm³/s) colour modes with their legends (depends on webview-kit ^0.6.0).
+- GCP-97: the timeline marker follows the planner's acceleration trapezoids and holds still through G4 dwells (`ToolheadWindow` windows built in the host on demand).
+- GCP-40: the error panel has a Retry button that reloads the file after a failed load or worker crash.
+- GCP-102: the webview's slider, toggle and saved-view rules are one pure, tested function (`nextView` in controls.ts).
+- GCP-101: a failed GPU context restore shows the failure message instead of a blank preview.
+
 ## 0.3.0
 
 - Depends on gcode-planner ^0.4.0 and webview-kit ^0.5.1.

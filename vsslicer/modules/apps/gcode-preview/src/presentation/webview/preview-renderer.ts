@@ -7,7 +7,14 @@
  * and OrcaSlicer contributors. */
 import { MOVE_STRIDE, MoveFlag, type Layer } from '@vsslicer/gcode-api';
 import { cameraMatrices, presetCamera, type CameraState } from './camera.ts';
-import { ColorMode, createSegmentRenderer, trackContextLoss, type SegmentRenderer } from '@vsslicer/webview-kit/gl';
+import {
+  ColorMode,
+  createSegmentRenderer,
+  showGlFailure,
+  trackContextLoss,
+  type GlContextError,
+  type SegmentRenderer,
+} from '@vsslicer/webview-kit/gl';
 
 /** What is visible; kept in the webview state. */
 export interface Visibility {
@@ -123,7 +130,14 @@ export const createPreviewRenderer = (
   };
   const resources = trackContextLoss(canvas, {
     onLost: () => (renderer = undefined),
-    onRestored: () => last && draw(last),
+    onRestored: (err) =>
+      err
+        ? // the kit's GlFailureCause has no 'restore' yet; showGlFailure reads only cause and message
+          showGlFailure(canvas, {
+            cause: 'restore',
+            message: `The 3D view could not be restored after a graphics reset: ${String(err)}`,
+          } as unknown as GlContextError)
+        : last && draw(last),
   });
   resources.add(() => {
     const r = createSegmentRenderer(gl, moves, {

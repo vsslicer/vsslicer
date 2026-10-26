@@ -1,0 +1,921 @@
+# Real subjects for the vendor regexes: every distinct printer_notes / printer_model value (<= 512 chars) and every
+# 8th [print:]/[printer:] section name in PrusaSlicer-settings@a40f669 live/**/*.ini (AGPL-3.0 data). One per line,
+# ini-escaped as written (a literal backslash-n is a newline).
+
+
+""
+4MAXPRO20
+;Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_HSP\nPRINTER_MODEL_HSP1-I\n
+;Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_HSP\nPRINTER_MODEL_HSP1-I\nDUPLICATOR_MODE\n
+A10M
+A10Pro
+A10T
+A20
+A20M
+A20T
+A250
+A30M
+A30Pro
+A30T
+A350
+AK
+AK
+AKLP
+AKLP
+AQD
+AQI
+BIBO2
+BIQUBX
+Base printer notes is EMPTY!
+CR10
+CR10
+CR10MAX
+CR10MAX
+CR10MINI
+CR10MINI
+CR10S
+CR10S
+CR10S4
+CR10S4
+CR10S5
+CR10S5
+CR10SMART
+CR10SMART
+CR10SMARTPRO
+CR10SPRO
+CR10SPRO
+CR10SPROV2
+CR10SPROV2
+CR10V2
+CR10V2
+CR10V3
+CR10V3
+CR20
+CR20
+CR200B
+CR200B
+CR20PRO
+CR20PRO
+CR5PRO
+CR5PRO
+CR5PROH
+CR5PROH
+CR6MAX
+CR6MAX
+CR6SE
+CR6SE
+CR8
+CR8
+Cocoa_Press
+DEV-200
+DEV-350
+DQ2
+DQ2
+DQ2+FP
+DQ2+FP
+DQ2+FP2
+DQ2+FP2
+DQ2P
+DQ2P
+DQ2P+FP
+DQ2P+FP
+DQ2P+FP2
+DQ2P+FP2
+DQL
+DQL
+DQM
+DQM
+DQXL
+DQXL
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_I3_MEGA\nPRINTER_HAS_BOWDEN
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_I3_MEGA\nPRINTER_HAS_BOWDEN
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_I3_MEGA_S\nPRINTER_HAS_BOWDEN
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_I3_MEGA_S\nPRINTER_HAS_BOWDEN
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_MEGA0
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_MEGA0
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PREDATOR\nPRINTER_HAS_BOWDEN\n
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PREDATOR\nPRINTER_HAS_BOWDEN\n
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AKLP\nPRINTER_HAS_BOWDEN\n
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AKLP\nPRINTER_HAS_BOWDEN\n
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AK\nPRINTER_HAS_BOWDEN\n
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AK\nPRINTER_HAS_BOWDEN\n
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_BIBO\nPRINTER_MODEL_BIBO2
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE1
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE2D
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE2D\nPRINTER_HAS_BOWDEN
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE2S
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE2\nPRINTER_HAS_BOWDEN
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE3
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE3MAX
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE3PLUS
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNE3PRO
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ELEGOO\nPRINTER_MODEL_NEPTUNEX
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MizarM&A10M&A20M&A30M
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MizarT&A10T&A20T&A30T
+Do not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_Thunder series
+Do not remove the keywords below.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK4\nPG
+Do not remove the keywords below.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK4\nPG
+Do not remove the keywords below.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_XLIS\nPG\nINPUT_SHAPER
+Do not remove the keywords below.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_XLIS\nPG\nINPUT_SHAPER
+Do not remove the keywords below.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_XL\nPG
+Do not remove the keywords below.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_XL\nPG
+Don not remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANKERMAKE\nPRINTER_MODEL_M5
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile. \n\nPRINTER_MODEL_MK3.9\nPRINTER_MODEL_MK4IS\nPRINTER_MODEL_MK3.9MMU3\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile. \n\nPRINTER_MODEL_MK3.9\nPRINTER_MODEL_MK4IS\nPRINTER_MODEL_MK3.9MMU3\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.'\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PHOTONMONOSE\nPRINTER_TECHNOLOGY_SLA\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.'\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PHOTONMONOX6K\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.'\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PHOTONMONOX\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.'\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PHOTONMONOX\nPRINTER_TECHNOLOGY_SLA\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.'\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PHOTONMONO\nPRINTER_TECHNOLOGY_SLA\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_MODEL_MK4IS\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_MODEL_MK4IS\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_MODEL_MK4IS\nPRINTER_MODEL_MK3.9\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_MODEL_MK4IS\nPRINTER_MODEL_MK3.9\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_MODEL_MK4IS\nPRINTER_MODEL_MK4MMU3\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_MODEL_MK4IS\nPRINTER_MODEL_MK4MMU3\nPG
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANKERMAKE\nPRINTER_MODEL_M5
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_MEGA0
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_MEGA0
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PREDATOR\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ANYCUBIC\nPRINTER_MODEL_PREDATOR\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AKLP\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AKLP\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AK\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Anycubic\nPRINTER_MODEL_AK\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Artillery\nPRINTER_MODEL_Genius
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Artillery\nPRINTER_MODEL_Hornet\nPRINTER_HAS_Bowden
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Artillery\nPRINTER_MODEL_X1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_BIQU\nPRINTER_MODEL_BIQUBX
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10MAX\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10MAX\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10MINI\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10MINI\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10S4\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10S4\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10S5\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10S5\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SMARTPRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SMARTPRO\nPRINTER_HAS_ULTRADETAIL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SMART\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SMART\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SPROV2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SPROV2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SPRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10SPRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10S\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10S\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10V2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10V2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10V3
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10V3
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR10\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR200B\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR200B\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR20PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR20PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR20\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR20\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR5PROH\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR5PROH\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR5PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR5PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR6MAX\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR6MAX\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR6SE\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR6SE\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR8\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_CR8\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER2PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER2PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3BLTOUCH\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3MAXNEO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3MAX\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3MAX\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3NEO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1PLUS
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1PLUS\nPRINTER_HAS_ULTRADETAIL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1PRO
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1PRO
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1PRO\nPRINTER_HAS_ULTRADETAIL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3S1\nPRINTER_HAS_ULTRADETAIL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3V2NEO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3V2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3V2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER3\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER4\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER4\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER5PLUS\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER5PLUS\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER5PRO\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER5S1\nPRINTER_HAS_ULTRADETAIL\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER5\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER5\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER6\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER6\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER6\nPRINTER_HAS_BOWDEN\nPRINTER_HAS_HIGHSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER7\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER7\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_ENDER7\nPRINTER_HAS_BOWDEN\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_SERMOOND1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_SERMOOND1\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_SERMOOND1\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_SERMOONV1PRO\nPRINTER_HAS_ULTRADETAIL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_CREALITY\nPRINTER_MODEL_SERMOONV1\nPRINTER_HAS_ULTRADETAIL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_FLSun\nPRINTER_MODEL_Q5\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_FLSun\nPRINTER_MODEL_QQSP\nPRINTER_HAS_BOWDEN\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_GCREATE\nPRINTER_MODEL_GMAX15P
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_GCREATE\nPRINTER_MODEL_GMAX2
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_GCREATE\nPRINTER_MODEL_GMAX2DUAL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_GCREATE\nPRINTER_MODEL_GMAX2DUAL2IN1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_GCREATE\nPRINTER_MODEL_GMAX2PRO
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A10M\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A10Pro\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A10T\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A20M\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A20T\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A20\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A30M\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A30Pro\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_A30T\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_E180\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_GiantArmD200\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_I3ProB\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_I3ProC\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_I3ProW\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MeCreator2\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MeCreator\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MeDucer\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MizarM\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MizarMax\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MizarPro\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_MizarS\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_Mizar\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_ThunderPro\nPRINTER_HAS_DirectDriveExtruder
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_Geeetech\nPRINTER_MODEL_Thunder\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_LNL3D\nPRINTER_MODEL_LNL3D_D3\nPRINTER_HAS_ULTRADETAIL\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_LNL3D\nPRINTER_MODEL_LNL3D_D3_V2\nPRINTER_HAS_ULTRADETAIL\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_LNL3D\nPRINTER_MODEL_LNL3D_D3_VULCAN\nPRINTER_HAS_ULTRADETAIL\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_LNL3D\nPRINTER_MODEL_LNL3D_D5\nPRINTER_HAS_ULTRADETAIL\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_LNL3D\nPRINTER_MODEL_LNL3D_D6\nPRINTER_HAS_ULTRADETAIL\nPRINTER_HAS_HIGHSPEED\nPRINTER_HAS_SUPERSPEED
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRINT4TASTE\nPRINTER_MODEL_MYCUSINI2.0
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MINIIS\nNO_TEMPLATES\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MINIIS\nNO_TEMPLATES\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MINI\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MINI\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK2.5\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK2.5\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK2\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK2\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK2\nPRINTER_HAS_BOWDEN
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK3\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK3\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_SL1S\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_SL1\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_SL1\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_MUCIT2\nPRINTER_HAS_HEATEDBED\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_MUCIT2\nPRINTER_HAS_HEATEDBED\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_MUCIT\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_MUCIT\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_ZERO2\nPRINTER_HAS_HEATEDBED\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_ZERO2\nPRINTER_HAS_HEATEDBED\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_ZERO3\nPRINTER_HAS_HEATEDBED\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RIGID3D\nPRINTER_MODEL_ZERO3\nPRINTER_HAS_HEATEDBED\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RatRig\nPRINTER_MODEL_VCORE\nPRINTER_HAS_Directextruder\nE3DV6
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_RatRig\nPRINTER_MODEL_VMINION\nPRINTER_HAS_Directextruder\nE3DV6
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV01 PRO\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV01\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV02\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV03\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV04\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV05\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV06 PLUS\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_SOVOL\nPRINTER_MODEL_SV06\n
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_AQ\nPRINTER_MODEL_AQD
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_AQ\nPRINTER_MODEL_AQI
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQ2
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQ2
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQ2+FP\nFLEXPRINT1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQ2+FP\nFLEXPRINT1
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQ2+FP\nFLEXPRINT2
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQ2+FP\nFLEXPRINT2
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQL
+Don't remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_TRILAB\nPRINTER_FAMILY_DQ\nPRINTER_MODEL_DQL
+Don't remove the following keywords. \nPRINTER_MODEL_MK3.5\n
+Don't remove the following keywords. \nPRINTER_MODEL_MK3.5\n
+Don't remove the following keywords. \nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK3.5MMU\n
+Don't remove the following keywords. \nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK3.5MMU\n
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\n
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\n
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M2\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M2\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M2_DUAL\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M2_DUAL\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_0\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_0\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_0_DUPLICATION\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_0_DUPLICATION\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_1\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_1\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_1_DUPLICATION\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_ID_1_DUPLICATION\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_SE\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_M3_SE\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_MICRO\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_MICRO\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_U1\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_U1\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_U1_DUPLICATION\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_MAKERGEAR\nPRINTER_MODEL_MAKERGEAR_U1_DUPLICATION\n 
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ULTIMAKER\nPRINTER_MODEL_ULTIMAKER2
+Dont remove the following keywords! These keywords are used in the "compatible printer" condition of the print and filament profiles to link the particular print and filament profiles to this printer profile.\nPRINTER_VENDOR_ULTIMAKER\nPRINTER_MODEL_ULTIMAKERSline
+E180
+ENDER2
+ENDER2
+ENDER2PRO
+ENDER2PRO
+ENDER3
+ENDER3
+ENDER3BLTOUCH
+ENDER3BLTOUCH
+ENDER3MAX
+ENDER3MAX
+ENDER3MAXNEO
+ENDER3NEO
+ENDER3PRO
+ENDER3PRO
+ENDER3S1
+ENDER3S1
+ENDER3S1PLUS
+ENDER3S1PRO
+ENDER3S1PRO
+ENDER3V2
+ENDER3V2
+ENDER3V2NEO
+ENDER4
+ENDER4
+ENDER5
+ENDER5
+ENDER5PLUS
+ENDER5PLUS
+ENDER5PRO
+ENDER5S1
+ENDER6
+ENDER6
+ENDER7
+ENDER7
+GMAX15P
+GMAX2
+GMAX2DUAL
+GMAX2DUAL2IN1
+GMAX2PRO
+Genius
+GiantArmD200
+HSP1-I
+HSP1-I Duplicator Mode
+Hornet
+I3MEGA
+I3MEGA
+I3MEGAS
+I3MEGAS
+I3ProB
+I3ProC
+I3ProW
+Jubilee
+LNL3D_D3
+LNL3D_D3_V2
+LNL3D_D3_VULCAN
+LNL3D_D5
+LNL3D_D6
+LulzBot Mini w/ Aerostruder profile for Delaware Library System, Rt9 Library and Innovation Center.
+LulzBot Mini w/ Aerostruder profile for Delaware Library System, Rt9 Library and Innovation Center.
+LulzBot Taz 6 w/ Aerostruder profile for Delaware Library System, Rt9 Library and Innovation Center.
+LulzBot Taz 6 w/ Aerostruder profile for Delaware Library System, Rt9 Library and Innovation Center.
+M5
+M5C
+MACHINE_M5C_\n PRINTER_VENDOR_ANKERMAKE\n P_PRECISION P_NORMAL P_FAST\n
+MACHINE_M5_\n PRINTER_VENDOR_ANKERMAKE\n PRINTER_MODEL_M5\n
+MAKERGEAR_M2
+MAKERGEAR_M2
+MAKERGEAR_M2_DUAL
+MAKERGEAR_M2_DUAL
+MAKERGEAR_M3_ID_0_DUPLICATION
+MAKERGEAR_M3_ID_0_DUPLICATION
+MAKERGEAR_M3_ID_1
+MAKERGEAR_M3_ID_1
+MAKERGEAR_M3_ID_1_DUPLICATION
+MAKERGEAR_M3_ID_1_DUPLICATION
+MAKERGEAR_M3_SE
+MAKERGEAR_M3_SE
+MAKERGEAR_MICRO
+MAKERGEAR_MICRO
+MAKERGEAR_U1
+MAKERGEAR_U1
+MAKERGEAR_U1_DUPLICATION
+MAKERGEAR_U1_DUPLICATION
+MC2.0
+MEGA0
+MEGA0
+MINI
+MINI
+MINIIS
+MINIIS
+MINI_AERO
+MINI_AERO
+MK2.5
+MK2.5
+MK2.5MMU2
+MK2.5MMU2
+MK2.5S
+MK2.5S
+MK2.5SMMU2S
+MK2.5SMMU2S
+MK2S
+MK2S
+MK2SMM
+MK2SMM
+MK3
+MK3
+MK3.5
+MK3.5
+MK3.5MMU3
+MK3.5MMU3
+MK3.9
+MK3.9
+MK3.9MMU3
+MK3.9MMU3
+MK3MM2
+MK3MMU2
+MK3MMU2
+MK3S
+MK3S
+MK3SMM
+MK3SMMU2S
+MK3SMMU2S
+MK3SMMU3
+MK3SMMU3
+MK4
+MK4
+MK4IS
+MK4IS
+MK4ISMMU3
+MK4ISMMU3
+MeCreator
+MeCreator2
+MeDucer
+Mizar
+MizarM
+MizarMax
+MizarPro
+MizarS
+Mucit
+Mucit
+Mucit2
+Mucit2
+NEPTUNE1
+NEPTUNE2
+NEPTUNE2D
+NEPTUNE2S
+NEPTUNE3
+NEPTUNE3MAX
+NEPTUNE3PLUS
+NEPTUNE3PRO
+NEPTUNEX
+PHOTON MONO
+PHOTON MONO SE
+PHOTON MONO X
+PHOTON MONO X 6K
+PREDATOR
+PREDATOR
+PRINTER_HAS_BOWDEN\nSTU\nE3DV6
+PRINTER_HAS_BOWDEN\nVOLCANO
+PRINTER_MODEL_SNAPMAKER_A250\n
+PRINTER_MODEL_SNAPMAKER_A250\nPRINTER_MODEL_SNAPMAKER_A250_BRACINGKIT\n
+PRINTER_MODEL_SNAPMAKER_A250\nPRINTER_MODEL_SNAPMAKER_A250_QUICKSWAPKIT\n
+PRINTER_MODEL_SNAPMAKER_A250\nPRINTER_MODEL_SNAPMAKER_A250_QUICKSWAPKIT\nPRINTER_MODEL_SNAPMAKER_A250_BRACINGKIT\n
+PRINTER_MODEL_SNAPMAKER_A250_DUAL\n
+PRINTER_MODEL_SNAPMAKER_A250_DUAL\nPRINTER_MODEL_SNAPMAKER_A250_DUAL_BRACINGKIT\n
+PRINTER_MODEL_SNAPMAKER_A250_DUAL\nPRINTER_MODEL_SNAPMAKER_A250_DUAL_QUICKSWAPKIT\n
+PRINTER_MODEL_SNAPMAKER_A250_DUAL\nPRINTER_MODEL_SNAPMAKER_A250_DUAL_QUICKSWAPKIT\nPRINTER_MODEL_SNAPMAKER_A250_DUAL_BRACINGKIT\n
+PRINTER_MODEL_SNAPMAKER_A350\n
+PRINTER_MODEL_SNAPMAKER_A350\nPRINTER_MODEL_SNAPMAKER_A350_BRACINGKIT\n
+PRINTER_MODEL_SNAPMAKER_A350\nPRINTER_MODEL_SNAPMAKER_A350_BRACINGKIT\nPRINTER_MODEL_SNAPMAKER_A350_QUICKSWAPKIT\n
+PRINTER_MODEL_SNAPMAKER_A350\nPRINTER_MODEL_SNAPMAKER_A350_QUICKSWAPKIT\n
+PRINTER_MODEL_SNAPMAKER_A350_DUAL\n
+PRINTER_MODEL_SNAPMAKER_A350_DUAL\nPRINTER_MODEL_SNAPMAKER_A350_DUAL_BRACINGKIT\n
+PRINTER_MODEL_SNAPMAKER_A350_DUAL\nPRINTER_MODEL_SNAPMAKER_A350_DUAL_BRACINGKIT\nPRINTER_MODEL_SNAPMAKER_A350_DUAL_QUICKSWAPKIT\n
+PRINTER_MODEL_SNAPMAKER_A350_DUAL\nPRINTER_MODEL_SNAPMAKER_A350_DUAL_QUICKSWAPKIT\n
+PRINTER_MODEL_SNAPMAKER_ARTISAN\nPRINTER_MODEL_SNAPMAKER_A400_DUAL\n
+PRINTER_MODEL_SNAPMAKER_J1\n
+PRINTER_VENDOR_COCOA_PRESS\nPRINTER_MODEL_MINICHEF\nPRINTER_MATERIAL_PASTE
+PRINTER_VENDOR_COCOA_PRESS\nPRINTER_MODEL_MINICHEF\nPRINTER_MATERIAL_PASTE\nNO_TEMPLATES
+PRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_XL\nPG
+PROTON_XE750
+PROTON_X_RAIL
+PROTON_X_RAIL
+PROTON_X_ROD
+PROTON_X_ROD
+Papapiu_N1S
+Predator
+Predator
+Q5
+QQSP
+SERMOOND1
+SERMOOND1
+SERMOONV1
+SERMOONV1PRO
+SL1
+SL1
+SL1S
+SL1S
+STU\nE3DV6
+SV01
+SV01 PRO
+SV02
+SV03
+SV04
+SV05
+SV06
+SV06 PLUS
+Snapmaker A250
+Snapmaker A250 BKit
+Snapmaker A250 Dual
+Snapmaker A250 Dual BKit
+Snapmaker A250 Dual QS+B Kit
+Snapmaker A250 Dual QSKit
+Snapmaker A250 QS+B Kit
+Snapmaker A250 QSKit
+Snapmaker A350
+Snapmaker A350 BKit
+Snapmaker A350 Dual
+Snapmaker A350 Dual BKit
+Snapmaker A350 Dual QS+B Kit
+Snapmaker A350 Dual QSKit
+Snapmaker A350 QS+B Kit
+Snapmaker A350 QSKit
+Snapmaker Artisan
+Snapmaker J1
+TAZ6_AERO
+TAZ6_AERO
+TRILAB
+Thunder
+ThunderPro
+Trimaker Cosmos II
+Trimaker Nebula
+Trimaker Nebula Cloud
+ULTIMAKER2
+ULTIMAKERSline
+Unoffical profile.\nE3DV6
+Unoffical profile.\nPRINTER_HAS_BOWDEN\nE3DV6
+Unoffical profile.\nPRINTER_HAS_BOWDEN\nVOLCANO
+Unoffical profile.\nVOLCANO
+V6
+VC3_300
+VC3_400
+VC3_500
+VC4_300 COREXY
+VC4_300 HYBRID
+VC4_400 COREXY
+VC4_400 HYBRID
+VC4_500 COREXY
+VC4_500 HYBRID
+VCore3settings
+VCore4HYBRIDsettings
+VCore4XYsettings
+VMINION
+VMinionsettings
+VOLCANO
+Volcano
+Voron_SW
+Voron_SW_afterburner
+Voron_v0_120
+Voron_v1_250_afterburner
+Voron_v1_300_afterburner
+Voron_v1_350_afterburner
+Voron_v2_250
+Voron_v2_250_afterburner
+Voron_v2_300
+Voron_v2_300_afterburner
+Voron_v2_350
+Voron_v2_350_afterburner
+X1
+X3 Plus
+X3 Pro
+X4 Max
+X4 Plus
+X4 Pro
+XL
+XL
+XL2
+XL2
+XL2IS
+XL2IS
+XL5
+XL5
+XL5IS
+XL5IS
+XLIS
+XLIS
+Z5
+Z5X
+Z6
+Z8
+Z9
+Zero2
+Zero2
+Zero3
+Zero3
+voron
+0.05mm 0.25nozzle SW
+0.05mm 0.4nozzle SW
+0.05mm DETAIL @MINIIS 0.25
+0.05mm ULTRADETAIL @0.25 nozzle
+0.05mm ULTRADETAIL @0.3 nozzle SV06
+0.05mm ULTRADETAIL @SV02
+0.05mm ULTRADETAIL MK3
+0.06mm - Ultra @Rigid3D
+0.07mm SUPERDETAIL @BIBO2
+0.07mm ULTRADETAIL @0.3 nozzle SV04
+0.07mm ULTRADETAIL @SV02
+0.07mm ULTRADETAIL MK3
+0.08 mm SUPERDETAIL (0.3mm nozzle) @Geeetech
+0.08 mm SUPERDETAIL (0.6mm nozzle) @Geeetech
+0.08mm DETAIL @MK4 0.3
+0.1 Layer - 0,4 Nozzle
+0.10 mm HIGHDETAIL (0.3mm nozzle) @Geeetech
+0.10 mm HIGHDETAIL (0.6mm nozzle) @Geeetech
+0.10mm 0.25nozzle V0
+0.10mm 0.4nozzle V0
+0.10mm 0.6nozzle V0
+0.10mm DETAIL 0.25 nozzle
+0.10mm DETAIL @0.3 nozzle SV02
+0.10mm DETAIL @MK3
+0.10mm DETAIL @SV06
+0.10mm FAST DETAIL @MK4IS 0.4
+0.10mm HIGHDETAIL @BIQU
+0.10mm STRUCTURAL @MK4IS 0.5
+0.12 mm DETAIL (0.3 mm nozzle) @CREALITY
+0.12 mm DETAIL (0.6 mm nozzle) @LNL3D
+0.12mm DETAIL @Artillery
+0.12mm Fine @PROTON_X
+0.12mm SPEED @MK4IS 0.25
+0.12mm STRUCTURAL @XLIS 0.3
+0.15mm 0.25nozzle V1
+0.15mm 0.4nozzle V1
+0.15mm 0.6nozzle V1
+0.15mm 1.0nozzle V2
+0.15mm 100mms Linear Advance MK2.5
+0.15mm DETAIL @0.6 nozzle SV04
+0.15mm HF @RatRig
+0.15mm OPTIMAL 0.6 nozzle
+0.15mm OPTIMAL MK2.5
+0.15mm OPTIMAL SOLUBLE FULL MK2.5
+0.15mm QUALITY @0.25 nozzle MK3
+0.15mm QUALITY @MINI
+0.15mm QUALITY @SV05
+0.15mm Quality @0.35 nozzle MakerGear
+0.15mm SOLUBLE FULL @0.3 nozzle SV05
+0.15mm SOLUBLE INTERFACE @0.3 nozzle SV03
+0.15mm SPEED @MINIIS 0.4
+0.15mm SPEED @MK4IS 0.4
+0.15mm SPEED @XLIS 0.25
+0.15mm STRUCTURAL @MK3.5 0.4
+0.15mm STRUCTURAL @XLIS 0.25
+0.16 Optimal @Snapmaker J1 (0.4 nozzle)
+0.16 mm OPTIMAL (0.4 mm nozzle) @LNL3D
+0.16 mm OPTIMAL @Geeetech
+0.16 mm OPTIMAL HIGHSPEED (0.6 mm nozzle) @CREALITY
+0.16 mm OPTIMAL SPEED (0.6 mm nozzle) @CREALITY
+0.16 mm OPTIMAL SUPERSPEED (0.6 mm nozzle) @CREALITY
+0.16mm 0.6 nozzle DETAILED QUALITY @PREDATOR
+0.16mm QUALITY @AKOSSEL
+0.16mm SPEED @XLIS 0.3
+0.2 Layer - 0,4 Nozzle - Speed
+0.20 mm NORMAL (0.3 mm nozzle) @CREALITY
+0.20 mm NORMAL (0.6 mm nozzle) @LNL3D
+0.20 mm NORMAL HIGHSPEED (0.3 mm nozzle) @CREALITY
+0.20 mm NORMAL SPEED (0.3 mm nozzle) @CREALITY
+0.20 mm NORMAL SUPERSPEED (0.3 mm nozzle) @CREALITY
+0.20mm - Dual 2in1 PLA with PVA Support @GCREATE
+0.20mm 100mms Linear Advance
+0.20mm DETAIL @0.6 nozzle MINI
+0.20mm DETAIL @MK4 0.6
+0.20mm FAST MK3 MMU2
+0.20mm NORMAL
+0.20mm NORMAL @ENDER3
+0.20mm NORMAL @ULTIMAKER2
+0.20mm NORMAL SOLUBLE INTERFACE @MK2.5
+0.20mm QUALITY @AKOSSEL
+0.20mm QUALITY @SV02
+0.20mm QUALITY MK3
+0.20mm SOLUBLE FULL @XL 0.5
+0.20mm SOLUBLE INTERFACE MK3
+0.20mm SPEED @MK3
+0.20mm SPEED @MK4IS 0.4
+0.20mm SPEED @SV06
+0.20mm STRUCTURAL @MINIIS 0.4
+0.20mm STRUCTURAL @XLIS 0.4
+0.24 Draft @Snapmaker J1 (0.4 nozzle)
+0.24 mm DRAFT (0.4 mm nozzle) @ANKER
+0.24 mm DRAFT (0.6mm nozzle) @High-speed
+0.24 mm DRAFT HIGHSPEED (0.6 mm nozzle) @LNL3D
+0.24 mm DRAFT SUPERSPEED (0.4 mm nozzle) @CREALITY
+0.24mm 0.4 nozzle DETAILED QUALITY @PREDATOR
+0.24mm 0.8 nozzle DETAILED SPEED @PREDATOR
+0.24mm DRAFT @FLSUN
+0.25mm DRAFT MINI
+0.25mm SOLUBLE FULL @XLIS 0.5
+0.25mm SPEED @MK4 0.5
+0.25mm STRUCTURAL @MINIIS 0.6
+0.25mm Speed @0.35 nozzle MakerGear
+0.28 mm SUPERDRAFT (0.5mm nozzle) @Geeetech
+0.28 mm SUPERDRAFT @Multi-extruder
+0.28 mm SUPERDRAFT SPEED (0.4 mm nozzle) @LNL3D
+0.28 mm SUPERDRAFT SUPERSPEED (0.6 mm nozzle) @CREALITY
+0.28mm SUPERDRAFT @ELEGOO
+0.2mm 0.4nozzle V0
+0.2mm 0.6nozzle V0
+0.2mm 1.0nozzle V0
+0.2mm Standard @PROTON_XE750
+0.30 Standard @Snapmaker (0.6 nozzle)
+0.30mm DETAIL @0.8 nozzle
+0.30mm DETAIL @MINIIS 0.8
+0.30mm DRAFT @MK3
+0.30mm DRAFT @XL 0.4
+0.30mm QUALITY 0.6 nozzle MINI
+0.30mm QUALITY @0.6 nozzle SV04
+0.30mm SOLUBLE INTERFACE @0.6 nozzle MK3
+0.32 Standard @Snapmaker Artisan (0.8 nozzle)
+0.32mm 0.8 nozzle COARSE QUALITY @PREDATOR
+0.32mm QUALITY @XL 0.6
+0.32mm STRUCTURAL @XLIS 0.6
+0.35mm FAST MK2.5
+0.35mm SOLUBLE FULL @0.6 nozzle MK2.5
+0.35mm SPEED @0.6 nozzle SV01
+0.36 Standard @Snapmaker (0.8 nozzle)
+0.36 mm CHUNKY (0.6mm nozzle) @High-speed
+0.36 mm CHUNKY SPEED (0.5 mm nozzle) @CREALITY
+0.38 Standard @Snapmaker (0.6 nozzle)
+0.3mm 0.4nozzle V0
+0.3mm 0.6nozzle V0
+0.3mm 1.0nozzle V0
+0.40 Standard @Snapmaker J1 (0.8 nozzle)
+0.40mm DRAFT @0.6 nozzle SV02
+0.40mm FAST @Infinity3D_DEV_350
+0.40mm QUALITY @0.8 nozzle SV04
+0.40mm QUALITY @XLIS 0.8
+0.44 mm SUPERCHUNKY (0.6mm nozzle) @Geeetech
+0.44 mm SUPERCHUNKY SPEED (0.6 mm nozzle) @CREALITY
+0.48 Draft @Snapmaker J1 (0.8 nozzle)
+0.4mm 0.3nozzle V1
+0.4mm 0.6 nozzle DETAILED SPEED @PREDATOR
+0.4mm 0.8 nozzle DETAILED SPEED @PREDATOR
+0.4mm 1.2nozzle SW
+0.55mm DRAFT @0.8 nozzle MINI
+0.55mm DRAFT @MK4 0.8
+0.6mm 0.8nozzle V1
+0.6mm 1.2nozzle V1
+100 Micron Soluble Interface Detail @HSP1
+200 Micron Standard @HSP1
+300 Micron Soluble Interface Standard @HSP1
+350 Micron Soluble Interface Detail @HSP1
+400 Micron Standard @HSP1
+600 Micron Soluble Interface Fast @HSP1
+Anycubic 4Max Pro 2.0
+Anycubic Predator 0.4 nozzle
+Artillery Sidewinder X1
+ArtillerySlicer X4 Max ABS @Artillery
+ArtillerySlicer X4 Plus PLA Silk @Artillery
+AzteQ Industrial
+AzteQ Industrial 0.30mm Normal @0.6 nozzle
+BIBO2 Touch E1 right only extrusion
+Cocoa Press (1.0mm layerheight)
+Creality CR-10 Max
+Creality CR-10 Mini (0.5 mm nozzle)
+Creality CR-10 S Pro (0.3 mm nozzle)
+Creality CR-10 S Pro V2 (0.6 mm nozzle)
+Creality CR-10 S5 (0.4 mm nozzle)
+Creality CR-10 SMART Pro (0.3 mm nozzle)
+Creality CR-10 V2 (0.6 mm nozzle)
+Creality CR-20 (0.4 mm nozzle)
+Creality CR-200B
+Creality CR-5 Pro (0.5 mm nozzle)
+Creality CR-6 Max (0.3 mm nozzle)
+Creality CR-6 SE (0.6 mm nozzle)
+Creality Ender-2 (0.3 mm nozzle)
+Creality Ender-2 Pro (0.6 mm nozzle)
+Creality Ender-3 BLTouch (0.4 mm nozzle)
+Creality Ender-3 Max Neo (0.3 mm nozzle)
+Creality Ender-3 Pro
+Creality Ender-3 S1 (0.5 mm nozzle)
+Creality Ender-3 S1 Pro (0.4 mm nozzle)
+Creality Ender-3 V2 Neo (0.3 mm nozzle)
+Creality Ender-4 (0.5 mm nozzle)
+Creality Ender-5 Plus (0.3 mm nozzle)
+Creality Ender-5 S1 (0.3 mm nozzle)
+Creality Ender-6 (0.6 mm nozzle)
+Creality Sermoon-D1 (0.4 mm nozzle)
+Creality Sermoon-V1 Pro (0.4 mm nozzle)
+DeltiQ 0.20mm FLEX
+DeltiQ 0.40mm Normal @0.8 nozzle
+DeltiQ 2 Plus
+DeltiQ XL
+Elegoo Neptune-3 Pro
+Geeetech A10Pro
+Geeetech A20 (0.2 mm nozzle)
+Geeetech A30Pro
+Geeetech E180 (0.2 mm nozzle)
+Geeetech GiantArmD200 (0.5 mm nozzle)
+Geeetech I3ProB (0.8 mm nozzle)
+Geeetech MeCreator
+Geeetech MeCreator2 (0.3 mm nozzle)
+Geeetech MeDucer (0.6 mm nozzle)
+Geeetech MizarM
+Geeetech MizarPro (0.2 mm nozzle)
+Geeetech MizarS (0.5 mm nozzle)
+Geeetech ThunderPro (0.2 mm nozzle)
+HSP1-I - 0.6mm Takoto Mirror
+HSP1-I - 2x1.0mm Takoto
+LNL3D D3 (0.8 mm nozzle)
+LNL3D D3 Vulcan (0.8 mm nozzle)
+LNL3D D6 (0.8 mm nozzle)
+MakerGear M2 Dual 0.75 Nozzle
+MakerGear M3 Independent Dual Rev.0 0.75 Nozzle (Duplication Mode)
+MakerGear M3 Independent Dual Rev.1 0.75 Nozzle (Duplication Mode)
+MakerGear Ultra One 0.25 Nozzle
+Original Prusa MINI
+Original Prusa MINI & MINI+ Input Shaper (Alpha) 0.6 nozzle
+Original Prusa MK3.5 0.3 nozzle
+Original Prusa MK3.9 0.25 nozzle
+Original Prusa MK4 0.3 nozzle
+Original Prusa MK4 Input Shaper (Alpha) 0.5 nozzle
+Original Prusa MK4 Input Shaper 0.8 nozzle
+Original Prusa XL - 2T 0.5 nozzle
+Original Prusa XL - 2T Input Shaper (Alpha) 0.8 nozzle
+Original Prusa XL - 5T 0.3 nozzle
+Original Prusa XL - 5T Input Shaper (Alpha) 0.5 nozzle
+Original Prusa XL - 5T Input Shaper 0.8 nozzle
+Original Prusa XL Input Shaper (Alpha) 0.3 nozzle
+Original Prusa XL Input Shaper 0.5 nozzle
+Original Prusa i3 MK2 MMU1
+Original Prusa i3 MK2.5 0.6 nozzle
+Original Prusa i3 MK2.5 MMU2 Single 0.8 nozzle
+Original Prusa i3 MK2.5S MMU2S Single
+Original Prusa i3 MK2S MMU1 0.6 nozzle
+Original Prusa i3 MK3 MMU2 0.25 nozzle
+Original Prusa i3 MK3S & MK3S+ 0.25 nozzle
+Original Prusa i3 MK3S & MK3S+ MMU2S Single 0.6 nozzle
+Original Prusa i3 MK3S & MK3S+ MMU3 Single 0.8 nozzle
+Papapiu N1S
+QUALITY_0.20mm_Nozzle_0.4_VM
+QUALITY_SPEED_0.25mm_Nozzle_0.4_VM
+QUALITY_SPEED_0.25mm_Nozzle_0.6_VM
+RatRig V-Core-3.1-400 0.5Nozzle
+RatRig V-Core-4.0_CoreXY-400 0.4Nozzle
+RatRig V-Core-4.0_HYBRID-300 0.6Nozzle
+RatRig V-Minion-180 0.4Nozzle
+SPEED_0.25mm_Nozzle_0.4_VC4_HYBRID
+SV01 0.8 nozzle
+SV02 0.6 nozzle
+SV04
+SV04 Dual Mode
+SV04 Single Mode 01
+SV05
+SV06 PLUS
+Snapmaker A250 (0.4 nozzle)
+Snapmaker A250 Dual (0.4 nozzle)
+Snapmaker A250 Dual QS+B Kit (0.4 nozzle)
+Snapmaker A250 QS+B Kit (0.4 nozzle)
+Snapmaker A350 (0.2 nozzle)
+Snapmaker A350 Dual (0.2 nozzle)
+Snapmaker A350 Dual QS+B Kit (0.2 nozzle)
+Snapmaker A350 QS+B Kit (0.2 nozzle)
+Snapmaker Artisan (0.2 nozzle)
+Taz6 Aero 0.5mm
+Voron_Switchwire 0.25 nozzle
+Voron_Switchwire 1.0 volcano
+Voron_Switchwire_afterburner volcano 0.6 nozzle
+Voron_v0 0.6 nozzle
+Voron_v1_250_afterburner 0.4 nozzle
+Voron_v1_300_afterburner 0.6 nozzle
+Voron_v2_250 0.25 nozzle
+Voron_v2_250 1.0 volcano
+Voron_v2_250_afterburner 0.8 nozzle
+Voron_v2_300 0.6 nozzle
+Voron_v2_300_afterburner 0.4 nozzle
+Voron_v2_350 0.25 nozzle
+Voron_v2_350 volcano 1.0 nozzle
+Voron_v2_350_afterburner volcano 0.6 nozzle
+Zonestar Z8+DDE
+gMax 1.5XT Plus - 0.3mm nozzle
+gMax 2 - 0.8mm nozzle
+gMax 2 Pro - 1.0mm nozzle

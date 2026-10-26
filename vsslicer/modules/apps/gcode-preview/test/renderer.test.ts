@@ -57,7 +57,7 @@ const fakeGl = (maxTextureSize: number) => {
   }) as unknown as WebGL2RenderingContext;
   const count = (name: string) => calls.filter((c) => c[0] === name).length;
   const named = (name: string) => calls.filter((c) => c[0] === name);
-  return { gl, calls, count, named };
+  return { gl, calls, count, named, fixed };
 };
 
 const instances = (f: ReturnType<typeof fakeGl>) =>
@@ -124,6 +124,29 @@ test('a context loss drops the renderer and a restore rebuilds and redraws', () 
     1,
     'only the live build is freed; the lost one is gone with its context',
   );
+});
+
+test('a restore whose rebuild throws shows the failure message instead of a blank view', () => {
+  const f = fakeGl(16384);
+  let shown: { dataset: Record<string, string>; textContent?: string } | undefined;
+  const canvas = Object.assign(new EventTarget(), {
+    ownerDocument: {
+      createElement: () => {
+        shown = { dataset: {} };
+        return Object.assign(shown, { setAttribute() {} });
+      },
+    },
+    replaceWith() {},
+  }) as unknown as HTMLCanvasElement;
+  const r = createPreviewRenderer(canvas, f.gl, new ArrayBuffer(3 * MOVE_STRIDE), []);
+  f.fixed['createProgram'] = () => {
+    throw new Error('driver reset');
+  };
+  canvas.dispatchEvent(new Event('webglcontextlost', { cancelable: true }));
+  canvas.dispatchEvent(new Event('webglcontextrestored'));
+  assert.strictEqual(shown?.dataset['cause'], 'restore');
+  assert.match(shown?.textContent ?? '', /driver reset/);
+  r.dispose();
 });
 
 test('concatMoves joins the per-chunk buffers in order', () => {
@@ -195,7 +218,7 @@ test('every colour mode draws the corpus; switching modes sets a uniform and upl
 });
 
 test('legend data: gradients carry their range, feature and tool are categories', () => {
-  const ranges = { speed: [10, 200], layerTime: [3, 40] } as const;
+  const ranges = { speed: [10, 200], layerTime: [3, 40], width: [0.2, 0.6], flow: [1, 12] } as const;
   assert.deepStrictEqual(legendFor(ColorMode.Speed, ranges), {
     label: 'Speed',
     kind: 'gradient',
@@ -203,6 +226,18 @@ test('legend data: gradients carry their range, feature and tool are categories'
     range: [10, 200],
   });
   assert.deepStrictEqual(legendFor(ColorMode.LayerTime, ranges).range, [3, 40]);
+  assert.deepStrictEqual(legendFor(ColorMode.Width, ranges), {
+    label: 'Width',
+    kind: 'gradient',
+    unit: 'mm',
+    range: [0.2, 0.6],
+  });
+  assert.deepStrictEqual(legendFor(ColorMode.Flow, ranges), {
+    label: 'Flow',
+    kind: 'gradient',
+    unit: 'mm³/s',
+    range: [1, 12],
+  });
   assert.strictEqual(legendFor(ColorMode.Tool, ranges).kind, 'categories');
   assert.strictEqual(legendFor(ColorMode.Feature, undefined).kind, 'categories');
 });

@@ -45,6 +45,8 @@ test('new allowed sources pass, lookalikes fail', () => {
   assert.deepEqual(src('https://github.com/SoftFever/OrcaSlicer/blob/main/x'), []);
   assert.deepEqual(src('https://github.com/prusa3d/Prusa-Firmware-Buddy'), []);
   assert.equal(src('https://github.com/prusa3d/Prusa-Firmware-Buddy-evil/x').length, 1);
+  assert.deepEqual(src('https://github.com/Klipper3d/klipper/blob/abc/klippy/extras/gcode_move.py#L166'), []);
+  assert.deepEqual(src('https://help.prusa3d.com/article/prusa-firmware-specific-g-code-commands_112173'), []);
   assert.equal(src('http://docs.duet3d.com/x').length, 1);
 });
 
@@ -52,4 +54,17 @@ test('extended commands pass, lowercase and garbage codes fail', () => {
   assert.deepEqual(validateEntry({ ...good, code: 'SET_PRESSURE_ADVANCE' }), []);
   for (const code of ['g1', 'set_pressure', 'G', '1G', 'G1 X', ''])
     assert.deepEqual(validateEntry({ ...good, code }), [`invalid code: ${code}`]);
+});
+
+test('flavour typos and leading-zero codes fail', () => {
+  assert.deepEqual(validateEntry({ ...good, flavours: ['klippper'] }), ['unknown flavour: klippper']);
+  for (const f of ['bambu', 'prusa-buddy']) assert.deepEqual(validateEntry({ ...good, flavours: [f] }), []);
+  assert.deepEqual(validateEntry({ ...good, code: 'G01' }), ['invalid code: G01']);
+  assert.deepEqual(validateEntry({ ...good, code: 'G0' }), []);
+});
+
+test('a flavour:code pair in two files fails when the files share a seen set', () => {
+  const seen = new Set<string>();
+  parseEntries([good], 'a.json', seen);
+  assert.throws(() => parseEntries([good], 'b.json', seen), /b\.json\[0\] G1: duplicate G1 for flavour marlin/);
 });

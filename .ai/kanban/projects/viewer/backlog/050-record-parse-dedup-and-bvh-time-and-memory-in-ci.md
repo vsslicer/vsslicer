@@ -3,7 +3,7 @@ id: 50
 title: "Record parse, dedup and BVH time and memory in CI"
 type: chore
 priority: P0
-effort: M
+effort: L
 model: opus
 area: [mesh]
 story: US10

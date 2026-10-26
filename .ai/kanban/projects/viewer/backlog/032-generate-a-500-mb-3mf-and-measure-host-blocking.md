@@ -3,12 +3,12 @@ id: 32
 title: Generate a 500 MB 3MF and measure host blocking
 type: chore
 priority: P0
-effort: M
+effort: L
 model: opus
 area: [3mf]
 story: US8
 milestone: "VSS:M2"
-sprint: "VSS:SP6"
+sprint: "VSS:SP7"
 depends_on: [31, PLT-13]
 created: 2026-10-25
 ---
