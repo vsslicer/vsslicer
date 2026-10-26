@@ -15,6 +15,44 @@ test('cycle error names the cycle', () =>
   assert.throws(() => order([m('@vsslicer/a', ['@vsslicer/b']), m('@vsslicer/b', ['@vsslicer/a'])]),
     /dependency cycle: @vsslicer\/a -> @vsslicer\/b -> @vsslicer\/a/));
 
+const dev = (name, deps, devDeps) => ({ ...m(name, [...deps, ...devDeps]), devDeps });
+
+test('a devDependency edge closing a cycle is dropped with one note', () => {
+  const notes = [];
+  const mm = [dev('@vsslicer/a', [], ['@vsslicer/b']), dev('@vsslicer/b', ['@vsslicer/a'], [])];
+  assert.deepStrictEqual(
+    order(mm, (x) => notes.push(x)),
+    ['@vsslicer/a', '@vsslicer/b']
+  );
+  assert.deepStrictEqual(notes, ['note: ordering ignores devDependency edge(s) closing a cycle: @vsslicer/a -> @vsslicer/b']);
+});
+
+test('a devDependency edge outside any cycle still orders and prints no note', () => {
+  const notes = [];
+  const mm = [dev('@vsslicer/a', [], ['@vsslicer/b']), dev('@vsslicer/b', [], [])];
+  assert.deepStrictEqual(
+    order(mm, (x) => notes.push(x)),
+    ['@vsslicer/b', '@vsslicer/a']
+  );
+  assert.deepStrictEqual(notes, []);
+});
+
+test('a cycle through runtime dependencies still throws', () => assert.throws(() => order([dev('@vsslicer/a', ['@vsslicer/b'], []), dev('@vsslicer/b', ['@vsslicer/a'], [])], () => {}), /dependency cycle/));
+
+// each module has 10 dev edges in the cycle: re-reading deps per edge would cost ~10n reads
+test('a dev cycle of 200 modules reads each module once', () => {
+  let visits = 0;
+  const n = 200;
+  const mm = Array.from({ length: n }, (_, i) => {
+    const o = { ...dev(`@vsslicer/m${i}`, [], Array.from({ length: 10 }, (_, k) => `@vsslicer/m${(i + k + 1) % n}`)) };
+    const deps = o.deps;
+    Object.defineProperty(o, 'deps', { get: () => (visits++, deps) });
+    return o;
+  });
+  assert.strictEqual(order(mm, () => {}).length, n);
+  assert.ok(visits <= n, `visits ${visits}`);
+});
+
 test('changed = touched modules plus transitive dependents', () => {
   assert.deepStrictEqual([...changed(mods, ['modules/api/src/x.js'])].sort(), ['@vsslicer/api', '@vsslicer/ext', '@vsslicer/lib']);
   assert.deepStrictEqual([...changed(mods, ['modules/ext/a'])], ['@vsslicer/ext']);
@@ -55,4 +93,18 @@ test('unreleasedDepProblems names the dependent and the 0.0.0 dependency', () =>
   ];
   assert.deepEqual(unreleasedDepProblems(mods), ['@vsslicer/b depends on @vsslicer/a, which is at unreleased version 0.0.0']);
   assert.deepEqual(unreleasedDepProblems(mods.slice(1)), []);
+});
+
+test('a 10,000-deep chain orders without recursion', () => {
+  const n = 10000;
+  const mm = Array.from({ length: n }, (_, i) => m(`@vsslicer/c${i}`, i + 1 < n ? [`@vsslicer/c${i + 1}`] : []));
+  const out = order(mm, () => {});
+  assert.strictEqual(out.length, n);
+  assert.strictEqual(out[0], `@vsslicer/c${n - 1}`);
+});
+
+test('a 10,000-deep runtime cycle throws the cycle error', () => {
+  const n = 10000;
+  const mm = Array.from({ length: n }, (_, i) => m(`@vsslicer/c${i}`, [`@vsslicer/c${(i + 1) % n}`]));
+  assert.throws(() => order(mm, () => {}), /dependency cycle/);
 });

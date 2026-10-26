@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
-import test from 'node:test';
+import test, { after } from 'node:test';
 import { checkManifest, extensionName, pack, packAll } from '../bin/vsslicer-package.mjs';
 
 const write = (file, text) => (mkdirSync(dirname(file), { recursive: true }), writeFileSync(file, text));
@@ -189,4 +189,74 @@ test('the override names the VSIX and the id; an invalid one stops before vsce',
   } finally {
     rmSync(bad, { recursive: true, force: true });
   }
+});
+
+const schemaExt = (schema, extra = {}) =>
+  extension(
+    { contributes: { jsonValidation: [{ fileMatch: '*.x', url: './schemas/a.json' }] } },
+    { 'schemas/a.json': JSON.stringify(schema), 'schemas/defs.json': '{"$defs":{}}', ...extra },
+  );
+
+test('a file reached by a relative $ref from a contributed schema packs; an unreferenced file does not', async () => {
+  const ok = await run(
+    schemaExt(
+      { properties: { x: { $ref: './defs.json#/$defs/x' } } },
+      {
+        '.vscodeignore':
+          '**\n!dist/*.js\n!schemas/**\n!media/**\n!LICENSE\n!THIRD-PARTY-NOTICES.md\n!README.md\n!CHANGELOG.md\n',
+      },
+    ),
+  );
+  assert.deepStrictEqual(ok.problems, []);
+  const extra = await run(
+    schemaExt(
+      { type: 'object' },
+      {
+        '.vscodeignore':
+          '**\n!dist/*.js\n!schemas/**\n!media/**\n!LICENSE\n!THIRD-PARTY-NOTICES.md\n!README.md\n!CHANGELOG.md\n',
+      },
+    ),
+  );
+  assert.deepStrictEqual(extra.problems, ['content: unexpected extension/schemas/defs.json']);
+});
+
+test('a $ref that escapes the folder, is absolute or names a missing file fails', async () => {
+  const outside = `outside-${randomBytes(6).toString('hex')}.json`;
+  writeFileSync(join(tmpdir(), outside), '{}'); // exists, so only the folder check can reject it
+  after(() => rmSync(join(tmpdir(), outside), { force: true }));
+  for (const [ref, msg] of [
+    [`../../${outside}`, /leaves the extension folder/],
+    ['/etc/passwd', /absolute/],
+    ['https://x.test/s.json', /absolute/],
+    ['./nope.json', /missing/],
+  ]) {
+    const { problems } = await run(schemaExt({ $ref: ref }));
+    assert.ok(
+      problems.some((p) => msg.test(p)),
+      `${ref}: ${problems}`,
+    );
+  }
+});
+
+test('$ref scanning is capped by file size, ref count and depth', async () => {
+  const big = await run(schemaExt({ pad: 'x'.repeat(1024 * 1024) }));
+  assert.ok(big.problems.some((p) => /larger than/.test(p)));
+  const many = await run(schemaExt({ a: Array.from({ length: 10001 }, () => ({ $ref: '#/x' })) }));
+  assert.ok(many.problems.some((p) => /more than 10000/.test(p)));
+  // a.json -> d1 -> d2 -> d3 -> d4: d3 is reached, its own refs are not followed, so d4 is unexpected
+  const all = '**\n!dist/*.js\n!schemas/**\n!media/**\n!LICENSE\n!THIRD-PARTY-NOTICES.md\n!README.md\n!CHANGELOG.md\n';
+  const chain = await run(
+    schemaExt(
+      { $ref: './d1.json' },
+      {
+        '.vscodeignore': all,
+        'schemas/d1.json': '{"$ref":"./d2.json"}',
+        'schemas/d2.json': '{"$ref":"./d3.json"}',
+        'schemas/d3.json': '{"$ref":"./d4.json"}',
+        'schemas/d4.json': '{}',
+        'schemas/defs.json': null,
+      },
+    ),
+  );
+  assert.deepStrictEqual(chain.problems, ['content: unexpected extension/schemas/d4.json']);
 });

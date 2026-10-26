@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/gcode-preview",
   "displayName": "VSSlicer G-code Preview",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Read-only custom editor for .gcode, .bgcode and .gcode.3mf: parses and plans in a worker and hands the move buffers to the webview.",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
@@ -108,7 +108,8 @@
     "test": "node --test test/*.test.ts",
     "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode",
     "format": "prettier --write .",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "bench": "node --no-warnings bench/run.ts"
   },
   "dependencies": {
     "@vsslicer/gcode-api": "^0.7.0",

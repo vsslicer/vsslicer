@@ -3,7 +3,7 @@
 // into data/ and checks them against source.commit and tree.sha256. Reads bytes only; the only
 // process run is read-only `git rev-parse HEAD`. Usage: node scripts/generate.mjs [reposDir]
 // (or VSS_PROFILE_REPOS). Per-repo override: VSS_REPO_<ORCASLICER|BAMBUSTUDIO>.
-import { cpSync, mkdirSync, readFileSync, realpathSync, rmSync, statSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, realpathSync, renameSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hashFiles, listJson, MAX_FILE_BYTES, MAX_FILES, MAX_TOTAL_BYTES } from './tree.mjs';
@@ -31,6 +31,7 @@ export function generate({
   maxBytes = MAX_FILE_BYTES,
   maxFiles = MAX_FILES,
   maxTotal = MAX_TOTAL_BYTES,
+  rename = renameSync,
 } = {}) {
   const out = resolve(outDir);
   let totalFiles = 0;
@@ -54,6 +55,7 @@ export function generate({
   });
   // Stage beside the target, verify, then swap, so a failed run leaves no half-written data/.
   const tmp = `${out}.tmp`;
+  const old = `${out}.old`;
   rmSync(tmp, { recursive: true, force: true });
   try {
     const lines = [];
@@ -69,11 +71,20 @@ export function generate({
       if (sum !== p.sha256) throw new Error(`tree hash mismatch for ${p.name}: got ${sum}, expected ${p.sha256}`);
       lines.push(`${p.repo} ${p.commit} ${files.length} files`);
     }
-    rmSync(out, { recursive: true, force: true });
-    cpSync(tmp, out, { recursive: true });
+    // Swap by rename: if the second rename fails the old data/ is put back.
+    rmSync(old, { recursive: true, force: true });
+    const had = existsSync(out);
+    if (had) rename(out, old);
+    try {
+      rename(tmp, out);
+    } catch (e) {
+      if (had) renameSync(old, out);
+      throw e;
+    }
     return lines;
   } finally {
     rmSync(tmp, { recursive: true, force: true });
+    rmSync(old, { recursive: true, force: true });
   }
 }
 

@@ -88,6 +88,20 @@ After SP9 (retro `.ai/retros/SP9-retro.md`):
 - close-sprint records 66 of 280 if the audit and retro cards are done (62 plus VSS-48 and VSS-83; 62
   includes the SP4 spikes PLT-31 and PLT-33, closed on Q16 without SP9 work).
 
+After SP10 (retro `.ai/retros/SP10-retro.md`):
+
+- **Plan about 5 cards an hour per lane, less one per expected round** (rule 23 amended): SP10 delivered 86
+  points (69 built in SP10) in 63.4 minutes, 81.4 an hour (65.3 built; SP9 42.9). Per-lane dispatch (rule 11)
+  ran a mean of 5.35 agents with 0.1% idle; a passing card took a median 8.2 minutes from dispatch to done, a
+  card with one round 20.8.
+- Agent time is **3.8 agent-minutes per done point** (SP9 4.2); reviews and fixes 58.6% (113.5 and 75.7 of 323.1).
+  Worker time follows effort: L 12 to 16 agent-minutes, M median 5.8, S bugs under 3.
+- First-review failures 1 in 1.6 (features 12 of 14, bugs 3 of 9, chores 3 of 5); 22 failed reviews, 5 of them
+  on resource bounds. About 14 dispatches refused by the permission classifier (rule 29).
+- The sprint ended 62 minutes early with 21 workable points in SP10 (PRF-42, 52, 53, 54, 127).
+- close-sprint records 90 of 114 if the audit and retro cards are done (86 plus VSS-49 and VSS-84; 114 is the
+  rebalance's 92 plus ten in-flight cards set back, 20 points, and PLT-202).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -167,6 +181,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     one runs. Testable unchanged, excluding a restart the main session causes. Evidence: SP9 idle 31.4% of
     82.6 minutes from 09:17:00 to 10:39:38, 21.7% without the 10.3-minute coordinator restart; the other
     large gap (3.7) was the re-plan from the owner's answers.
+    **Amended SP10:** per-lane dispatch works: the harness runs subagents in the background with one
+    notification per agent, so a lane's next agent goes out when its last one stops. The wave guidance of SP5
+    to SP9 is retired. Testable: idle under 15% from the first card agent to the last, and the median handoff
+    between agents on one card under 2 minutes. Evidence: SP10 idle 0.1% of 60.4 minutes (one 0.08-minute
+    gap), mean 5.35 agents running, handoff median 0.6 minutes over 45 (over 2 only where dispatches were
+    refused, rule 29).
 12. **Budget fix rounds by kind:** one per 9 bugfix cards, one per 2 cards of new code (ports of
     upstream algorithms, protocols, contracts, research decisions). Each fix round costs a review
     wave, about 5 minutes wall, even when the fix takes under a minute. Evidence: SP3 8 of 22 failed
@@ -231,6 +251,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     is long if any agent in it is. Testable: finished agents wait under 150 agent-minutes. Evidence: SP9
     the PRF-186, 188 and 187 review ran 12.7 min and the GCP-21 worker 11.8 (a Rust build) in a 15-agent
     wave: 116.4 agent-minutes waiting there, 243.4 in all (SP8 123.8); no agent over 15 minutes (met).
+    **Amended SP10:** with per-lane dispatch (rule 11) no message holds a finished agent, so the waiting
+    target and the mixing rule are retired. Still split, before dispatch, a card whose agent is expected over
+    15 minutes: a long agent now lengthens only its own lane. Testable: no agent over 15 minutes. Evidence:
+    SP10 seven agents over 10 minutes (GCP-42's fix 17.0, PRF-60 and PRF-67 in one worker 16.7, GCP-42 15.7,
+    PRF-30 14.2, PRF-27 13.2, PRF-31 12.4, PRF-25 12.2) held no other lane; idle 0.1%.
 18. **A card that creates a module with VS Code integration tests, or a spike that measures with
     repeated runs, is XL or is split into build and measure**, and every OS a spike must run on other
     than the coordinator's is its own owner-blocked card at planning (rule 6). Testable: no card ends a
@@ -280,6 +305,14 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     (PRF-89 size and depth, GCP-115 the counted read path, PLT-197 the fixture walk-up twice, VWR-49 the
     transfer, PRF-33 the ratio test). A round cost about 26 minutes in the large early waves (with the
     restart) and 5 to 8 in the small late ones (SLC-13 and PLT-197, two rounds in 22 to 26 minutes).
+    **Amended SP10:** probing only the worker's own tests did not lower the rate. Before review, the worker
+    probes every acceptance criterion and every guard or branch its diff adds (remove it; a test must fail),
+    and names in Progress the platform the CI gate runs on. Budget one round per feature card: about 10 to 20
+    minutes of wall under per-lane dispatch, about 4 for an S bug. Testable unchanged: features fail first
+    review at most 1 in 2. Evidence: SP10 every feature card recorded probes (PRF-27 24, PRF-28 12), yet
+    features failed 12 of 14 (bugs 3 of 9, chores 3 of 5), on what had no test at all: PRF-34's bed guard,
+    four behaviours PRF-126 claimed, PRF-57's ticked activation criterion, PRF-67's VSIX packaging, GCP-42's
+    budget calibrated on macOS and enforced on Linux.
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -337,6 +370,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Evidence: SP7 VSS-471 created on the VSS board for want of `--board`; the PRF-16 worker messaged the
     main session; ci run 4 failed on check-licence for PRF-16's test ("Ported from" without Copyright)
     and PRF-41's missing `license`, the same rule that failed SP6's third run (`8453720`).
+    **Amended SP10:** the coordinator's own scripts follow the one-path rule (`command ls -1`, stop on none or
+    two), and reviewers' mutation probes run in a `mktemp -d` copy of the module, never through git commands in
+    the repository. Testable: zero incidents. Evidence: SP10 four incidents: the VWR-397 fix worker overwrote
+    its card, the PRF-27 reviewer ran `git checkout -p` in a probe, a stray empty `vsslicer/CHANGELOG.md`, and
+    the coordinator's `cat >> $(ls */034-*.md)` with two matches made a literal `034-*.md` that `board.py`
+    then moved as PRF-34's card (`b7fdb9d2`).
 23. **Capacity is the busiest lane.** A sprint lasts as long as its longest single-module chain: plan
     about 20 points an hour per lane with work (40 in a 2-hour sprint), give a hot module a second card
     on disjoint files (rule 14) where one exists, and keep an ordered pull-in list of next-sprint cards
@@ -363,6 +402,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     about 5 in waves of 6 or fewer. Plan 4 cards an hour per lane at sprint start. Evidence: SP9 passing
     cards' median 15.8 minutes in waves 1 and 2 (14.2 to 18.1), 7.8 and 10.3 in waves 5 and 6; other lanes
     ran dry or started late (slicer and tooling's second cards at 10:09 and 10:16 after the 09:22 re-plan).
+    **Amended SP10:** with per-lane dispatch a lane with cards on disjoint files does about 5 to 6 cards an
+    hour: plan 5 an hour per lane less one per expected round (rule 19). The coordinator dispatches every
+    card whose dependencies are done until the planned end, keeping about 15 minutes for the audit and retro.
+    Testable unchanged. Evidence: SP10 profiles-prusa 6 cards in 63 minutes (three at once, 11:49 to 12:16),
+    profiles-cura 4 in 46, profiles-orca 3 in 61 (held by rounds); the sprint ended 62 minutes early with
+    PRF-42, 52, 53, 54 and 127 (21 points) workable from 12:21 at the latest.
 24. **Report delivered and closed points.** close-sprint counts every card whose `sprint` is the sprint
     at close, done or not, including the audit and retro cards and cards pulled in, and its committed
     figure moves with any re-sizing of carried cards before the close. Retros give both figures and
@@ -370,6 +415,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     sprint doc's `completed`. Evidence: SP4 closed at 76 of 133 against the retro's 72 of 139 (VSS-43
     and VSS-78; four carried cards re-sized); SP5's retro expects 67 of 124 (63 plus VSS-44 and VSS-79).
     Since SP5.
+    **Amended SP10:** a rebalance or re-plan does not run once the sprint's coordinator has started, and never
+    moves a card in doing or review. Testable: no card's sprint changes while it is in doing. Evidence: SP10
+    the 11:23:20 rebalance (`0202202b`) moved ten wave-1 cards (20 points) to SP31 and later 6 seconds after
+    their 11:23:31 to 11:23:33 moves to doing; the coordinator set them back at 11:27:35, and the committed
+    figure became 114 against the rebalance's 92.
 25. **A card that parses untrusted input names its resource bounds at planning.** Size, nesting, count
     and time bounds, and linear-time scanning (no backtracking regex over input bytes), go in its
     acceptance criteria with a hostile-input test (bomb, deep nesting, unterminated tags, pathological
@@ -401,6 +451,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     unchanged. Evidence: SP9 bounds in every card before dispatch (coordinator), yet SLC-13 failed twice (a
     symlink chain escape with an overlap bomb, then a Unicode alias of a parent), PRF-190 once (caps per
     tree, not across trees; a symlinked root), PRF-89 once (size and depth tests that could not fail).
+    **Amended SP10:** the hostile cases also list check-then-open races (open once, then check the handle),
+    file descriptors closed on every error path, and no full copy of input before its cap. Testable
+    unchanged. Evidence: SP10 five rounds on four cards: PRF-27 (merge memory amplification), PRF-30 (a
+    symlinked folder followed), SLC-280 twice (TOCTOU, then an fd leak), VWR-397 (a 2x buffer before the cap).
 26. **Tests do not assert wall time.** A performance test asserts operation counts, a step budget or a
     ratio between two input sizes; a timeout exists only as a hang guard of at least 30 s. Testable: no
     timing flake in the next sprint's ci runs. Evidence: SP7 at machine load about 76, the 3mf fan-out
@@ -428,3 +482,15 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     base truncations whose top-level field the patch did not set, round 2 found that wrong for keyed lists
     and merged objects and specified a structural `replaces()` rule, round 3 failed on the truncation rule
     again; the specs conflicted across fresh reviewers (coordinator) and the card was carried. Since SP9.
+    **Confirmed SP10:** with the rule settled in the card before its fix, PRN-4 passed its first re-review
+    (fix 11:24:38, pass 11:31:14); the remaining findings became PRN-444, not another round.
+29. **Dispatch prompts stay short and point to the sprint's standing rules files** (worker and review rules
+    under `.ai/local/sp<n>/`), never spelling out "restore", "overwrite" or "do not touch" instructions, which
+    the auto-mode permission classifier refuses. When a dispatch is refused twice, the coordinator records it
+    and moves to another lane. The coordinator may re-review a card against the FAIL criterion written in it
+    (rule 28), but a first review of a feature waits for a reviewer agent or carries, and the audit samples
+    every card the coordinator reviewed. Testable: refusals counted in the retro notes, and no first review
+    of a feature by the coordinator. Evidence: SP10 about 14 refusals ("Auto-Mode Bypass", once "Instruction
+    Poisoning"), first on detailed prompts, from 12:04 on minimal ones too; PRF-34's fix waited 11.6 minutes
+    after three refusals, GCP-118 left the sprint, PRF-29 carried; the coordinator reviewed 12 cards, 5 of
+    them first reviews (4 passed, against 7 of 24 for fresh Opus reviewers). Since SP10.

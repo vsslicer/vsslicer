@@ -1,0 +1,187 @@
+{
+  "comment": "A budget is valid only on the OS it was measured on: run.ts fails with no budget for <os> otherwise. linux was measured in mcr.microsoft.com/playwright:v1.64.1-noble on arm64; the x64 CI runner is unverified and may need one `pnpm bench --update` there.",
+  "platforms": {
+    "darwin": {
+      "machine": {
+        "cpu": "Apple M1 Pro",
+        "cores": 8,
+        "memGB": 16,
+        "os": "darwin 27.2.0",
+        "node": "v26.12.1"
+      },
+      "budgetMB": {
+        "straight-50MB": {
+          "hostRssMB": 167,
+          "workerHeapPlusExternalMB": 100,
+          "webviewTreeRssMB": 589
+        },
+        "straight-200MB": {
+          "hostRssMB": 384,
+          "workerHeapPlusExternalMB": 303,
+          "webviewTreeRssMB": 949
+        },
+        "straight-500MB": {
+          "hostRssMB": 820,
+          "workerHeapPlusExternalMB": 702,
+          "webviewTreeRssMB": 1223
+        },
+        "arc-heavy-50MB": {
+          "hostRssMB": 252,
+          "workerHeapPlusExternalMB": 153,
+          "webviewTreeRssMB": 719
+        },
+        "arc-heavy-200MB": {
+          "hostRssMB": 640,
+          "workerHeapPlusExternalMB": 492,
+          "webviewTreeRssMB": 1279
+        },
+        "arc-heavy-500MB": {
+          "hostRssMB": 1320,
+          "workerHeapPlusExternalMB": 1153,
+          "webviewTreeRssMB": 2410
+        }
+      },
+      "measured": {
+        "straight-50MB": {
+          "hostRssMB": 133,
+          "workerHeapPlusExternalMB": 80,
+          "webviewTreeRssMB": 471,
+          "moves": 1700743,
+          "webviewBaselineMB": 254,
+          "sumOfPeaksMB": 604
+        },
+        "straight-200MB": {
+          "hostRssMB": 307,
+          "workerHeapPlusExternalMB": 242,
+          "webviewTreeRssMB": 759,
+          "moves": 6805907,
+          "webviewBaselineMB": 255,
+          "sumOfPeaksMB": 1066
+        },
+        "straight-500MB": {
+          "hostRssMB": 656,
+          "workerHeapPlusExternalMB": 561,
+          "webviewTreeRssMB": 978,
+          "moves": 17018067,
+          "webviewBaselineMB": 250,
+          "sumOfPeaksMB": 1634
+        },
+        "arc-heavy-50MB": {
+          "hostRssMB": 201,
+          "workerHeapPlusExternalMB": 122,
+          "webviewTreeRssMB": 575,
+          "moves": 2883439,
+          "webviewBaselineMB": 255,
+          "sumOfPeaksMB": 776
+        },
+        "arc-heavy-200MB": {
+          "hostRssMB": 512,
+          "workerHeapPlusExternalMB": 393,
+          "webviewTreeRssMB": 1023,
+          "moves": 11534006,
+          "webviewBaselineMB": 255,
+          "sumOfPeaksMB": 1535
+        },
+        "arc-heavy-500MB": {
+          "hostRssMB": 1056,
+          "workerHeapPlusExternalMB": 922,
+          "webviewTreeRssMB": 1928,
+          "moves": 28831718,
+          "webviewBaselineMB": 255,
+          "sumOfPeaksMB": 2984
+        }
+      }
+    },
+    "linux": {
+      "machine": {
+        "cpu": "unknown",
+        "cores": 8,
+        "memGB": 11,
+        "os": "linux 7.2.12-orbstack-00394-gbecdd6130068",
+        "node": "v24.22.1"
+      },
+      "budgetMB": {
+        "straight-50MB": {
+          "hostRssMB": 245,
+          "workerHeapPlusExternalMB": 122,
+          "webviewTreeRssMB": 694
+        },
+        "straight-200MB": {
+          "hostRssMB": 462,
+          "workerHeapPlusExternalMB": 318,
+          "webviewTreeRssMB": 1198
+        },
+        "straight-500MB": {
+          "hostRssMB": 895,
+          "workerHeapPlusExternalMB": 709,
+          "webviewTreeRssMB": 2452
+        },
+        "arc-heavy-50MB": {
+          "hostRssMB": 303,
+          "workerHeapPlusExternalMB": 153,
+          "webviewTreeRssMB": 963
+        },
+        "arc-heavy-200MB": {
+          "hostRssMB": 690,
+          "workerHeapPlusExternalMB": 494,
+          "webviewTreeRssMB": 1474
+        },
+        "arc-heavy-500MB": {
+          "hostRssMB": 1467,
+          "workerHeapPlusExternalMB": 1194,
+          "webviewTreeRssMB": 3657
+        }
+      },
+      "measured": {
+        "straight-50MB": {
+          "hostRssMB": 196,
+          "workerHeapPlusExternalMB": 97,
+          "webviewTreeRssMB": 555,
+          "moves": 1700743,
+          "webviewBaselineMB": 396,
+          "sumOfPeaksMB": 751
+        },
+        "straight-200MB": {
+          "hostRssMB": 369,
+          "workerHeapPlusExternalMB": 254,
+          "webviewTreeRssMB": 958,
+          "moves": 6805907,
+          "webviewBaselineMB": 393,
+          "sumOfPeaksMB": 1327
+        },
+        "straight-500MB": {
+          "hostRssMB": 716,
+          "workerHeapPlusExternalMB": 567,
+          "webviewTreeRssMB": 1961,
+          "moves": 17018067,
+          "webviewBaselineMB": 395,
+          "sumOfPeaksMB": 2677
+        },
+        "arc-heavy-50MB": {
+          "hostRssMB": 242,
+          "workerHeapPlusExternalMB": 122,
+          "webviewTreeRssMB": 770,
+          "moves": 2883439,
+          "webviewBaselineMB": 394,
+          "sumOfPeaksMB": 1012
+        },
+        "arc-heavy-200MB": {
+          "hostRssMB": 552,
+          "workerHeapPlusExternalMB": 395,
+          "webviewTreeRssMB": 1179,
+          "moves": 11534006,
+          "webviewBaselineMB": 394,
+          "sumOfPeaksMB": 1731
+        },
+        "arc-heavy-500MB": {
+          "hostRssMB": 1173,
+          "workerHeapPlusExternalMB": 955,
+          "webviewTreeRssMB": 2925,
+          "moves": 28831718,
+          "webviewBaselineMB": 394,
+          "sumOfPeaksMB": 4098
+        }
+      }
+    }
+  }
+}

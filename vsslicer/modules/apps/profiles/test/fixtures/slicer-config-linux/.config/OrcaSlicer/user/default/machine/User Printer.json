@@ -1,0 +1,10 @@
+{
+  "type": "machine",
+  "name": "User Printer",
+  "from": "User",
+  "inherits": "Fixture Printer 0.4 nozzle",
+  "nozzle_diameter": [
+    "0.4"
+  ],
+  "version": "1.0.0.0"
+}

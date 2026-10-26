@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./process.json",
+  "title": "process",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./defs.json#/$defs/id"
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/id"
+      }
+    },
+    "abstract": {
+      "type": "boolean"
+    },
+    "when": {
+      "$ref": "./defs.json#/$defs/condition"
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/override"
+      }
+    },
+    "settings": {
+      "$ref": "./defs.json#/$defs/settings"
+    },
+    "renamed_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "$ref": "./defs.json#/$defs/meta"
+    },
+    "name": {
+      "type": "string"
+    },
+    "layer_height": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "intent": {
+      "enum": [
+        "standard",
+        "quality",
+        "speed",
+        "engineering"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "layer_height"
+  ],
+  "additionalProperties": false
+}

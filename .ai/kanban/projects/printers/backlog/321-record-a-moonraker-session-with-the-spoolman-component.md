@@ -8,7 +8,7 @@ model: sonnet
 area: [moonraker]
 story: "FIL:US37"
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP25"
 depends_on: [87]
 created: 2026-10-25
 ---

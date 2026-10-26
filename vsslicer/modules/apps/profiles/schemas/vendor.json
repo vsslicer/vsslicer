@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./vendor.json",
+  "title": "vendor",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "update": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "channel"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "enum": [
+            "prusa-ini",
+            "prusa-yaml",
+            "orca-json",
+            "bambu-json",
+            "cura"
+          ]
+        },
+        "origin": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "format",
+        "origin",
+        "commit"
+      ],
+      "additionalProperties": false
+    },
+    "attribution": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "version",
+    "license"
+  ],
+  "additionalProperties": false
+}

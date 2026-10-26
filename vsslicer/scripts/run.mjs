@@ -29,7 +29,7 @@ const modules = readdirSync(join(root, 'modules'), { withFileTypes: true })
   .filter((e) => existsSync(join(root, 'modules', e.name, 'package.json')) || (console.warn(`warning: modules/${e.name} has no package.json yet, skipping`), false))
   .map((e) => {
     const pkg = JSON.parse(readFileSync(join(root, 'modules', e.name, 'package.json'), 'utf8'));
-    return { dir: e.name, name: pkg.name, version: pkg.version, pkg, scripts: pkg.scripts ?? {}, deps: localDeps(pkg) };
+    return { dir: e.name, name: pkg.name, version: pkg.version, pkg, scripts: pkg.scripts ?? {}, deps: localDeps(pkg), devDeps: localDeps({ devDependencies: pkg.devDependencies }).filter((n) => !localDeps({ ...pkg, devDependencies: {} }).includes(n)) };
   });
 
 const modFile = (m, f) => (existsSync(join(root, 'modules', m.dir, f)) ? readFileSync(join(root, 'modules', m.dir, f), 'utf8') : undefined);
@@ -83,9 +83,9 @@ if (cmd === 'ci' && !args.includes('--allow-unbumped')) {
   }
 }
 
-let names;
+let names, fullOrder;
 try {
-  names = order(modules);
+  names = fullOrder = order(modules);
 } catch (e) {
   console.error(e.message);
   process.exit(1);
@@ -105,7 +105,7 @@ if (ref) {
 if (args.includes('--list')) (console.log(JSON.stringify(names)), process.exit(0));
 // ci on a subset: unselected dependencies are still installed, built and published (a clean registry has none), but not linted or tested
 const selected = new Set(names);
-if (cmd === 'ci') names = order(modules).filter((n) => withDeps(modules, selected).has(n));
+if (cmd === 'ci') names = fullOrder.filter((n) => withDeps(modules, selected).has(n));
 
 if (cmd === 'ci') {
   const bad = unreleasedDepProblems(modules.filter((m) => names.includes(m.name)));

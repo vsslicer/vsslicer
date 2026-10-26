@@ -39,6 +39,8 @@ export { DETECTED_EXTENSIONS, SUPPORTED_EXTENSIONS, createOpenPackage } from './
 export type { OpenedPackage, OpenPackageDeps } from './application/openPackage.ts';
 export type { EditablePackage, EditPackageDeps } from './application/editPackage.ts';
 export { CORE_NS, readModel } from './adapters/model/readModel.ts';
+export { detectDialect } from './domain/detectDialect.ts';
+export type { DialectGuess } from './domain/detectDialect.ts';
 export { composeTransforms, readProject, resolveProject } from './adapters/model/resolveProject.ts';
 export type { BuildItem, Component, CoreModel, CoreObject } from './domain/coreModel.ts';
 export { addContentType, dropRelationshipsTo, removeContentType } from './adapters/opc/opcEdit.ts';

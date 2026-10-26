@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./nozzle.json",
+  "title": "nozzle",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./defs.json#/$defs/id"
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/id"
+      }
+    },
+    "abstract": {
+      "type": "boolean"
+    },
+    "when": {
+      "$ref": "./defs.json#/$defs/condition"
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/override"
+      }
+    },
+    "settings": {
+      "$ref": "./defs.json#/$defs/settings"
+    },
+    "renamed_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "$ref": "./defs.json#/$defs/meta"
+    },
+    "diameter": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "flow": {
+      "enum": [
+        "standard",
+        "high_flow"
+      ]
+    },
+    "material": {
+      "type": "string"
+    },
+    "hrc": {
+      "type": "number"
+    },
+    "extruder_type": {
+      "enum": [
+        "direct",
+        "bowden"
+      ]
+    },
+    "volume_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "diameter"
+  ],
+  "additionalProperties": false
+}

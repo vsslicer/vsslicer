@@ -99,23 +99,42 @@ describe('G4 in a file with no moves', () => {
 });
 
 describe('constant-speed G4 lookup', () => {
-  it('stays linear in moves plus markers (300k moves, 20k dwells)', () => {
-    const n = 300_000;
+  const build = (n: number, dwells: number) => {
     const parsed = fixture(
       Array.from({ length: n }, (_, i) => ({ x: i % 100, y: 0 })),
       [],
       [],
       1000,
     );
-    parsed.markers = Array.from({ length: 20_000 }, (_, i) => ({
+    const list = Array.from({ length: dwells }, (_, i) => ({
       name: 'G4',
       fileOffset: i,
       moveIndex: i * 15,
       seconds: 1,
     }));
-    const t0 = performance.now();
+    let reads = 0; // element reads of the markers array: a per-move scan makes this moves x markers
+    parsed.markers = new Proxy(list, {
+      get(t, k, r) {
+        if (typeof k === 'string' && /^\d+$/.test(k)) reads++;
+        return Reflect.get(t, k, r);
+      },
+    });
     const timing = planSync(constantSpeedPlanner, parsed, resolveLimits({ flavour: 'marlin' }));
-    expect(performance.now() - t0).toBeLessThan(2000); // the per-move marker scan took ~11 s
+    return { reads, timing };
+  };
+
+  it('reads each marker a bounded number of times, and scales with the input (operation count)', () => {
+    const small = build(3_000, 200);
+    const big = build(6_000, 400); // both inputs doubled: linear work doubles, quadratic work quadruples
+    expect(small.reads).toBeLessThanOrEqual(4 * 200);
+    expect(big.reads).toBeLessThanOrEqual(4 * 400);
+    expect(big.reads / small.reads).toBeLessThanOrEqual(2.5);
+    expect(big.timing.totalTime).toBeGreaterThan(400);
+  });
+
+  // Hang guard only: the timeout fails a planner that never returns; nothing here asserts how long it took.
+  it('finishes a 300k-move file with 20k dwells', { timeout: 60_000 }, () => {
+    const { timing } = build(300_000, 20_000);
     expect(timing.totalTime).toBeGreaterThan(20_000);
   });
 });

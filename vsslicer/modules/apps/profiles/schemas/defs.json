@@ -1,0 +1,520 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./defs.json",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "condition": {
+      "type": "string"
+    },
+    "settingValue": {
+      "anyOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/settingValue"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/settingValue"
+          }
+        }
+      ]
+    },
+    "perExtruderValue": {
+      "$ref": "#/$defs/settingValue",
+      "not": {
+        "type": "array"
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "extruder_printable_height": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "top_solid_infill_flow_ratio": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "enable_overhang_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "slowdown_for_curled_perimeters": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "overhang_1_4_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "overhang_2_4_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "overhang_3_4_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "overhang_4_4_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "bridge_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "internal_bridge_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "default_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "travel_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_travel_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "bridge_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "default_filament_profile": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "activate_air_filtration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "activate_air_filtration_during_print": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "activate_air_filtration_on_completion": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "during_print_exhaust_fan_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "complete_print_exhaust_fan_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "outer_wall_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "small_perimeter_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "small_perimeter_threshold": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "extruder_colour": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "extruder_offset": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_flow_ratio": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "enable_pressure_advance": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "pressure_advance": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "adaptive_pressure_advance": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "adaptive_pressure_advance_model": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "adaptive_pressure_advance_overhangs": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "adaptive_pressure_advance_bridges": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_flush_temp": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_flush_volumetric_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_max_volumetric_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_flush_dataset": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_adaptive_volumetric_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "volumetric_speed_coefficients": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_minimal_purge_on_wipe_tower": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_cooling_before_tower": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_multitool_ramming": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_multitool_ramming_volume": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_multitool_ramming_flow": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "top_surface_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "outer_wall_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "inner_wall_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "sparse_infill_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "internal_solid_infill_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_acceleration": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "default_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "default_junction_deviation": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "outer_wall_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "inner_wall_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "top_surface_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "infill_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "travel_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_travel_jerk": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_infill_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "initial_layer_travel_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_temperature_initial_layer": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ironing_flow": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ironing_spacing": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ironing_inset": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ironing_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "gap_infill_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_type": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "sparse_infill_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "fan_max_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "max_layer_height": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "fan_min_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "additional_cooling_fan_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "min_layer_height": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_diameter": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_volume": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "inner_wall_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retraction_minimum_travel": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_before_wipe": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_after_wipe": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_when_changing_layer": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retraction_length": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "long_retractions_when_cut": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retraction_distances_when_cut": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "long_retractions_when_ec": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retraction_distances_when_ec": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_length_toolchange": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "z_hop": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_lift_above": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_lift_below": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "z_hop_types": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "travel_slope": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_lift_enforce": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "extruder_type": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "default_nozzle_volume_type": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "printer_extruder_id": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "printer_extruder_variant": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "print_extruder_id": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "print_extruder_variant": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_extruder_variant": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_restart_extra": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retract_restart_extra_toolchange": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "retraction_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "deretraction_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "internal_solid_infill_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "support_interface_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "support_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_temperature": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_temperature_range_low": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "nozzle_temperature_range_high": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "top_surface_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "travel_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "travel_speed_z": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "wipe": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "wipe_distance": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retraction_length": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_z_hop": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_z_hop_types": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_lift_above": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_lift_below": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_lift_enforce": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retraction_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_deretraction_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_restart_extra": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retraction_minimum_travel": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_length_toolchange": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_restart_extra_toolchange": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_wipe_distance": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_when_changing_layer": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_wipe": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_before_wipe": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_after_wipe": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_long_retractions_when_cut": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retraction_distances_when_cut": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "hotend_cooling_rate": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "hotend_heating_rate": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ramming_travel_time": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_pre_cooling_temperature": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ramming_volumetric_speed": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ramming_travel_time_nc": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_pre_cooling_temperature_nc": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_ramming_volumetric_speed_nc": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_retract_length_nc": {
+          "$ref": "#/$defs/perExtruderValue"
+        },
+        "filament_preheat_temperature_delta": {
+          "$ref": "#/$defs/perExtruderValue"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/settingValue"
+      }
+    },
+    "override": {
+      "type": "object",
+      "properties": {
+        "when": {
+          "$ref": "#/$defs/condition"
+        },
+        "match": {
+          "enum": [
+            "first",
+            "all"
+          ]
+        },
+        "settings": {
+          "$ref": "#/$defs/settings"
+        }
+      },
+      "required": [
+        "when",
+        "settings"
+      ],
+      "additionalProperties": false
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        },
+        "base_version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

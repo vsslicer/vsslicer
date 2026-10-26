@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Part } from '../package.ts';
 
-export type Dialect = 'core' | 'prusa' | 'prusa3' | 'bambu' | 'orca' | 'cura';
+export type Dialect = 'core' | 'prusa2' | 'prusa3' | 'bambu' | 'orca' | 'cura';
 
 /** 4x3 affine transform, row-major as 3MF writes it: 12 numbers m00 m01 m02 m10 .. m22 tx ty tz. */
 export type Transform = readonly [

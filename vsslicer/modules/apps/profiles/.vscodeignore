@@ -1,0 +1,7 @@
+**
+!dist/*.js
+!LICENSE
+!THIRD-PARTY-NOTICES.md
+!README.md
+!CHANGELOG.md
+!schemas/*.json

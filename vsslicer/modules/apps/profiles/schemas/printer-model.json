@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./printer-model.json",
+  "title": "printer-model",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./defs.json#/$defs/id"
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/id"
+      }
+    },
+    "abstract": {
+      "type": "boolean"
+    },
+    "when": {
+      "$ref": "./defs.json#/$defs/condition"
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/override"
+      }
+    },
+    "settings": {
+      "$ref": "./defs.json#/$defs/settings"
+    },
+    "renamed_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "$ref": "./defs.json#/$defs/meta"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "technology": {
+      "enum": [
+        "fff"
+      ]
+    },
+    "bed": {
+      "type": "object",
+      "properties": {
+        "shape": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 3
+        },
+        "max_height": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "shape",
+        "max_height"
+      ],
+      "additionalProperties": false
+    },
+    "toolheads": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "kinematics": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "count",
+        "kinematics"
+      ],
+      "additionalProperties": false
+    },
+    "family": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "object",
+      "properties": {
+        "bed_model": {
+          "type": "string"
+        },
+        "bed_texture": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "input_shaper": {
+          "type": "boolean"
+        },
+        "chamber": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "nozzles": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "./defs.json#/$defs/condition"
+        }
+      ]
+    },
+    "surfaces": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "./defs.json#/$defs/condition"
+        }
+      ]
+    },
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "process": {
+          "type": "string"
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "firmware": {
+      "type": "object",
+      "properties": {
+        "flavor": {
+          "type": "string"
+        },
+        "gcode_templates": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "vendor",
+    "name",
+    "technology",
+    "bed",
+    "toolheads"
+  ],
+  "additionalProperties": false
+}

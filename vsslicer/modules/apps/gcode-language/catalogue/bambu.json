@@ -2,11 +2,11 @@
   {
     "code": "M620",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5), which reads: \"enable remap\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch on remapping of AMS filament slots. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "M",
-        "description": "Seen as \"M620 M\" (remap)."
+        "description": "Seen bare, as M620 M (slot remapping)."
       }
     ],
     "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20A1%200.4%20nozzle%20template%20machine_start_gcode.json#L5"
@@ -14,14 +14,14 @@
   {
     "code": "M623",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_end_gcode.json:5), which reads: \"end of \"timelapse_record_flag\"\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_end_gcode.json:5) indicates it appears to close the conditional block opened for the timelapse-recording flag (see M622). Parameter meanings are guesses from that template alone.",
     "parameters": [],
     "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20A1%200.4%20nozzle%20template%20machine_end_gcode.json#L5"
   },
   {
     "code": "M622.1",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template time_lapse_gcode.json:5), which reads: \"for prev firmware, default turned on\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template time_lapse_gcode.json:5) indicates it appears to set a compatibility default for older firmware, normally on. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -33,7 +33,7 @@
   {
     "code": "M620.3",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5), which reads: \"=== turn on filament tangle detection===\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch on the check for tangled filament. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "W",
@@ -45,14 +45,14 @@
   {
     "code": "M1002",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5), which reads: \"set_gcode_claim_speed_level 5 ;Reset speed level\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5) indicates it takes a named sub-command; there it appears to restore the default G-code speed level. Parameter meanings are guesses from that template alone.",
     "parameters": [],
     "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20H2C%200.4%20nozzle%20template%20machine_start_gcode.json#L5"
   },
   {
     "code": "M1004",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template time_lapse_gcode.json:5), which reads: \"external shutter\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template time_lapse_gcode.json:5) indicates it appears to trigger a camera shutter outside the printer. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -68,7 +68,7 @@
   {
     "code": "M1007",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template change_filament_gcode.json:5), which reads: \"turn off mass estimation\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template change_filament_gcode.json:5) indicates it appears to switch the estimate of extruded filament mass on or off. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -80,7 +80,7 @@
   {
     "code": "M1015.3",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template change_filament_gcode.json:5), which reads: \"enable tpu clog detect\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template change_filament_gcode.json:5) indicates it appears to switch nozzle clog detection for TPU on or off. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -96,7 +96,7 @@
   {
     "code": "M1015.4",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template change_filament_gcode.json:5), which reads: \"enable E air printing detect\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template change_filament_gcode.json:5) indicates it appears to switch on or off detection of the extruder running with no filament coming out. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -116,7 +116,7 @@
   {
     "code": "M141",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_end_gcode.json:5), which reads: \"turn off chamber heating\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_end_gcode.json:5) indicates it appears to set the chamber heater, here to switch it off. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -128,7 +128,7 @@
   {
     "code": "M142",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template change_filament_gcode.json:5), which reads: \"set PLASILK gear warning temperature when filament change\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template change_filament_gcode.json:5) indicates it appears to set the temperature at which the extruder gear warns, for silk PLA during a filament change. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "P",
@@ -144,7 +144,7 @@
   {
     "code": "M145",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5), which reads: \"set airduct mode to heating mode for heating\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to put the air duct into the mode used while the chamber heats. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "P",
@@ -156,7 +156,7 @@
   {
     "code": "M201.2",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_end_gcode.json:5), which reads: \"Reset acc magnitude\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_end_gcode.json:5) indicates it appears to restore the acceleration scaling factor to its default. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "K",
@@ -168,7 +168,7 @@
   {
     "code": "M73.2",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_end_gcode.json:5), which reads: \"Reset left time magnitude\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_end_gcode.json:5) indicates it appears to restore the remaining-time scaling factor to its default. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "R",
@@ -180,7 +180,7 @@
   {
     "code": "M412",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5), which reads: \"===turn on  filament runout detection===\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to enable the sensor that notices when the filament runs out, as in Marlin. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -192,7 +192,7 @@
   {
     "code": "M481",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5), which reads: \"turn off cutter pos comp\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch off the correction for the filament cutter position. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -204,7 +204,7 @@
   {
     "code": "M960",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5), which reads: \"turn on logo lamp\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch on the lamp behind the front logo. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -220,7 +220,7 @@
   {
     "code": "M972",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5), which reads: \"live-view camera foolproof\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to run a sanity check with the live-view camera. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -240,7 +240,7 @@
   {
     "code": "M975",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5), which reads: \"turn on\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch on suppression of mechanical resonances. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -252,7 +252,7 @@
   {
     "code": "M982.2",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5), which reads: \"turn on cog noise reduction\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch on reduction of motor cogging noise. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -264,7 +264,7 @@
   {
     "code": "M983.4",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5), which reads: \"turn on deformation compensation\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab H2C 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to switch on compensation for bed or frame deformation. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -276,7 +276,7 @@
   {
     "code": "M991",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template layer_change_gcode.json:5), which reads: \"notify layer change\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template layer_change_gcode.json:5) indicates it appears to tell the printer that a new layer starts. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "S",
@@ -292,7 +292,7 @@
   {
     "code": "M993",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template machine_start_gcode.json:5), which reads: \"nozzle cam detection not allowed.\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A2L 0.4 nozzle template machine_start_gcode.json:5) indicates it appears to disable detection with the nozzle camera. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "A",
@@ -312,7 +312,7 @@
   {
     "code": "M9833",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. The only evidence is a comment in a OrcaSlicer machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template change_filament_gcode.json:5), which reads: \"cali dynamic extrusion compensation\". Parameter meanings are guesses from that comment alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. A comment in an OrcaSlicer BBL machine template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab A1 0.4 nozzle template change_filament_gcode.json:5) indicates it appears to calibrate the dynamic extrusion (pressure) compensation. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "F",
@@ -328,7 +328,7 @@
   {
     "code": "M620.1",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 tool-change template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template change_filament_gcode.json:5) writes it after the comment \"get travel path for change filament\" (X, Y, P) and before and after the T command with the flush speed and temperature (E, F, T). Parameter meanings are guesses from that template alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 tool-change template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template change_filament_gcode.json:5) writes it with X, Y and P where it sets up the travel for a filament change, and with E, F and T before and after the T command, carrying the flush speed and temperature. Parameter meanings are guesses from that template alone.",
     "parameters": [
       {
         "name": "E",
@@ -388,7 +388,7 @@
   {
     "code": "M624",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes it before each object's moves (and per layer, after \"; object ids of layer N start\"), with the object label ids encoded in base64 (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:6505), so the printer can skip a cancelled object; M625 ends the block. Meaning inferred from that code alone.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes it before each object's moves (and at each layer, after the comment listing that layer's object ids), with the object label ids encoded in base64 (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:6505), so the printer can skip a cancelled object; M625 ends the block. Meaning inferred from that code alone.",
     "parameters": [],
     "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/src/libslic3r/GCode.cpp#L6505"
   },
@@ -478,7 +478,7 @@
   {
     "code": "M976",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 start template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template machine_start_gcode.json:5) comments M976 S3 P2 as \"register void printing detection\"; Bambu Studio writes M976 S1 P1 with \"scan model before printing 2nd layer\". Parameter meanings are guesses.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 start template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template machine_start_gcode.json:5) writes M976 S3 P2 where it appears to set up detection of printing into empty space; Bambu Studio writes M976 S1 P1 where it appears to scan the model before the second layer. Parameter meanings are guesses.",
     "parameters": [
       {
         "name": "S",
@@ -494,7 +494,7 @@
   {
     "code": "M981",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes M981 S1 P20000 commented \"open spaghetti detector\" (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:4607) and M981 S0 P20000 to close it, also telling the camera the last layer is done (GCode.cpp:4808). Parameter meanings are guesses.",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes M981 S1 P20000 to start the spaghetti (failed print) detection (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:4607) and M981 S0 P20000 to stop it, also telling the camera the last layer is done (GCode.cpp:4808). Parameter meanings are guesses.",
     "parameters": [
       {
         "name": "S",
@@ -510,7 +510,7 @@
   {
     "code": "M1003",
     "flavours": ["bambu"],
-    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes M1003 S1 or S0 for Bambu printers to switch power-loss recovery on or off (OrcaSlicer@09aa0114:src/libslic3r/GCodeWriter.cpp:761); Bambu Studio comments it \"open powerlost recovery\".",
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes M1003 S1 or S0 for Bambu printers to switch power-loss recovery on or off (OrcaSlicer@09aa0114:src/libslic3r/GCodeWriter.cpp:761); Bambu Studio writes it for the same purpose.",
     "parameters": [
       {
         "name": "S",

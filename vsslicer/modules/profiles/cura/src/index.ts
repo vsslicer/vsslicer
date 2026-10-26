@@ -24,3 +24,23 @@ export {
   writeCuraProfileArchive,
 } from './adapters/archive/curaprofile-archive.ts';
 export type { CuraArchiveLimits, CuraProfileEntry } from './adapters/archive/curaprofile-archive.ts';
+export {
+  CURA_RESOURCE_LIMITS,
+  MAX_RESOURCE_DIAGNOSTICS,
+  curaResourceOf,
+  readCuraResources,
+  resolveResourceLimits as resolveCuraResourceLimits,
+} from './adapters/definitions/read.ts';
+export type {
+  CuraDefinition,
+  CuraResourceKind,
+  CuraResourceLimits,
+  CuraResources,
+  CuraVariant,
+} from './adapters/definitions/read.ts';
+export { readCuraResourceFolder } from './adapters/definitions/folder.ts';
+export { parseInstCfg } from './adapters/definitions/inst-cfg.ts';
+export type { CfgSections } from './adapters/definitions/inst-cfg.ts';
+export { curaCfgOf, readCuraQualities, readCuraUserChanges } from './adapters/quality/read.ts';
+export type { CuraCfgKind } from './adapters/quality/read.ts';
+export type { CuraFolder } from './adapters/definitions/folder.ts';

@@ -10,6 +10,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./materials": {
+      "types": "./dist/materials.d.ts",
+      "default": "./dist/materials.js"
     }
   },
   "files": [
@@ -44,6 +48,7 @@
   "prettier": "@vsslicer/tooling/prettier",
   "dependencies": {
     "@vsslicer/profile-api": "^0.1.1",
-    "fflate": "0.8.3"
+    "fflate": "0.8.3",
+    "saxes": "6.0.0"
   }
 }

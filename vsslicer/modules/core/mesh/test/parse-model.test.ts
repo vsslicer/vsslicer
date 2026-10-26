@@ -49,12 +49,20 @@ test('file-size cap and a header that lies about its count', async () => {
   await expect(parseModel(read('box-binary-count-too-large.stl'))).rejects.toBeInstanceOf(TriangleCountMismatchError);
 });
 
-test('one endless line, fed in chunks, is refused fast', async () => {
-  const chunk = new TextEncoder().encode('1 '.repeat(32_768));
-  const t = performance.now();
-  await expect(parseObj(Array.from({ length: 200 }, () => chunk))).rejects.toBeInstanceOf(MalformedMeshError);
-  expect(performance.now() - t).toBeLessThan(2000);
-});
+test('one endless line, fed in chunks, is refused after a bounded number of chunks', async () => {
+  const chunk = new TextEncoder().encode('1 '.repeat(32_768)); // 64 KiB; the line cap is 1 MiB
+  let consumed = 0;
+  const chunks = {
+    *[Symbol.iterator]() {
+      for (let i = 0; i < 200; i++) {
+        consumed++;
+        yield chunk;
+      }
+    },
+  };
+  await expect(parseObj(chunks)).rejects.toBeInstanceOf(MalformedMeshError);
+  expect(consumed).toBeLessThanOrEqual(32);
+}, 30_000); // hang guard only
 
 test('worker: parses with a BVH, transfers the input, returns transferred buffers', async () => {
   const bytes = read('cura-BIQU_BX_PLATE.stl').slice();

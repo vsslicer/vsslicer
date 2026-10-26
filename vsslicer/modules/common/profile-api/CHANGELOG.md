@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- PRF-179: the README states the licences: the module's code is AGPL-3.0-or-later; the Orca and Bambu catalogue data is AGPL-3.0-only (PROVENANCE.md names the upstream commits) and is moving to `@vsslicer/profile-catalogue-data`.
+
 ## 0.1.2
 
 - PRF-186: the catalogue and mapping tests guard against hangs in a child process instead of asserting wall time.

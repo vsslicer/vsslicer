@@ -6,9 +6,10 @@ milestone: M1
 start: "2026-10-25T23:16+00:00"
 end: "2026-10-26T01:30+00:00"
 capacity: 92
-committed: 133
+committed: 84
 completed: 76
 closed: "2026-10-26T01:06+00:00"
+scheduled: 133
 ---
 
 Planned by `board.py plan-sprints M1`: 91 points, 27 cards.

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./material.json",
+  "title": "material",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./defs.json#/$defs/id"
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/id"
+      }
+    },
+    "abstract": {
+      "type": "boolean"
+    },
+    "when": {
+      "$ref": "./defs.json#/$defs/condition"
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/override"
+      }
+    },
+    "settings": {
+      "$ref": "./defs.json#/$defs/settings"
+    },
+    "renamed_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "$ref": "./defs.json#/$defs/meta"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "diameter": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "brand": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "density": {
+      "type": "number"
+    },
+    "cost": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "per": {
+          "enum": [
+            "kg"
+          ]
+        }
+      },
+      "required": [
+        "amount",
+        "currency",
+        "per"
+      ],
+      "additionalProperties": false
+    },
+    "spool_weight": {
+      "type": "number"
+    },
+    "external_ids": {
+      "type": "object",
+      "properties": {
+        "cura_guid": {
+          "type": "string"
+        },
+        "bambu_filament_id": {
+          "type": "string"
+        },
+        "orca_filament_id": {
+          "type": "string"
+        },
+        "prusa_name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "vendor",
+    "name",
+    "type",
+    "diameter"
+  ],
+  "additionalProperties": false
+}

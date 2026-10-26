@@ -1,0 +1,50 @@
+{
+  "name": "@vsslicer/profile-catalogue-data",
+  "version": "0.1.0",
+  "description": "The generated settings catalogue (Orca, Bambu, Prusa, SuperSlicer, Cura) and its generator, with a bounded loader (data only).",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "LICENSE-OrcaSlicer",
+    "LICENSE-BambuStudio",
+    "PROVENANCE.md",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check . && tsc --noEmit -p tsconfig.test.json",
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "prepack": "pnpm build",
+    "test": "tsc --noEmit -p tsconfig.test.json && vitest run",
+    "test:coverage": "vitest run --coverage",
+    "format": "prettier --write .",
+    "regenerate": "node tools/catalogue/generate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@vitest/coverage-v8": "5.0.5",
+    "@vsslicer/profile-api": "^0.1.1",
+    "@vsslicer/tooling": "^0.8.4",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}

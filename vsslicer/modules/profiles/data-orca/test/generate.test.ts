@@ -1,5 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  renameSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -93,6 +104,27 @@ describe('generate', () => {
     rmSync(join(repos, 'Repo', 'resources', 'profiles'), { recursive: true });
     symlinkSync(outside, profiles(repos));
     expect(run(repos).go).toThrow(/leaves the clone/);
+  });
+});
+
+describe('generate swap', () => {
+  it('keeps the old data/ when the swap fails, and leaves no temp dirs', () => {
+    const { out, go } = run(fixture);
+    mkdirSync(out);
+    writeFileSync(join(out, 'keep.txt'), 'old');
+    let calls = 0;
+    const rename = (a: string, b: string) => {
+      if (++calls === 2) throw new Error('injected');
+      renameSync(a, b);
+    };
+    const failing = run(fixture, { outDir: out, rename });
+    expect(failing.go).toThrow(/injected/);
+    expect(calls).toBe(2);
+    expect(readFileSync(join(out, 'keep.txt'), 'utf8')).toBe('old');
+    expect(existsSync(`${out}.tmp`) || existsSync(`${out}.old`)).toBe(false);
+    go();
+    expect(existsSync(join(out, 'keep.txt'))).toBe(false);
+    expect(existsSync(join(out, 'repo', 'V.json'))).toBe(true);
   });
 });
 

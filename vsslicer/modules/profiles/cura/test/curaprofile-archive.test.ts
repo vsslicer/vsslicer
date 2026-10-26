@@ -113,15 +113,19 @@ describe('round trip and upstream layout', () => {
   });
 });
 
+describe('Cura ids with a colon or a trailing dot or space', () => {
+  test.each(['ultimaker_s5_draft:_pla.', 'um3:custom', 'abc ', 'v1.', 'C:x'])('%s round-trips', (id) => {
+    const bytes = writeCuraProfileArchive([{ id, text: 'x' }]);
+    expect(readCuraProfileArchive(bytes)).toEqual([{ id, text: 'x' }]);
+  });
+});
+
 describe('hostile archives are refused with a message', () => {
   test.each([
     ['../evil', /\.\./],
     ['a/../../evil', /\.\./],
     ['/etc/passwd', /absolute path/],
-    ['C:/evil', /drive-letter/],
     ['a\\..\\evil', /backslash/],
-    ['ab:stream', /colon/],
-    ['evil.', /Windows trims/],
   ])('path %s', (name, why) => refuses(rawZip([{ name, data: enc.encode('x') }]), why));
 
   test('symbolic link', () =>
@@ -155,7 +159,7 @@ describe('hostile archives are refused with a message', () => {
   });
 
   test('the writer refuses unsafe ids, duplicates and directories', () => {
-    for (const id of ['../x', '/x', 'x/', '', 'a:b'])
+    for (const id of ['../x', '/x', 'x/', '', 'a\\b'])
       expect(() => writeCuraProfileArchive([profile(id)])).toThrow(CuraArchiveError);
     expect(() => writeCuraProfileArchive([profile('a'), profile('A')])).toThrow(/duplicate/);
   });

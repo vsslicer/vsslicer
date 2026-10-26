@@ -1,0 +1,30 @@
+{
+  "name": "FixtureVendor",
+  "version": "01.00.00.00",
+  "force_update": "0",
+  "description": "Synthetic vendor",
+  "machine_model_list": [
+    {
+      "name": "Fixture Printer",
+      "sub_path": "machine/Fixture Printer.json"
+    }
+  ],
+  "process_list": [
+    {
+      "name": "0.20mm Standard @Fixture",
+      "sub_path": "process/0.20mm Standard @Fixture.json"
+    }
+  ],
+  "filament_list": [
+    {
+      "name": "Fixture PLA",
+      "sub_path": "filament/Fixture PLA.json"
+    }
+  ],
+  "machine_list": [
+    {
+      "name": "Fixture Printer 0.4 nozzle",
+      "sub_path": "machine/Fixture Printer 0.4 nozzle.json"
+    }
+  ]
+}

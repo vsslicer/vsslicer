@@ -6,8 +6,8 @@ priority: P1
 effort: M
 model: opus
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
-depends_on: [192]
+sprint: "VSS:SP13"
+depends_on: [192, PLT-200]
 created: 2026-10-26
 ---
 
@@ -24,3 +24,5 @@ Split from PRF-192 (Q20, separate data package). After `profile-catalogue-data@0
 ## Progress
 
 Not started.
+
+**Coordinator (SP10), from PLT-200's review:** PLT-200 lets the runner order a devDependency cycle, but on a clean registry (CI) `profile-catalogue-data` cannot install before `profile-api` is published, and profile-api will need catalogue-data published first. Before switching profile-api over, break the cycle at install time: e.g. move the generator (`tools/catalogue/`, the only user of the devDependency) out of the published package's install graph (its own private module that depends on both), or bootstrap by publishing catalogue-data without the devDependency. Decide and record it in this card's criteria before building.

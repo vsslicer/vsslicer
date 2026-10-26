@@ -156,3 +156,52 @@ test('the worker hands the mesh and BVH buffers over in the transfer list', asyn
   expect(sent!.transfer).toContain(mesh.indices.buffer);
   expect(sent!.transfer.length).toBeGreaterThanOrEqual(3); // plus the BVH roots
 });
+
+test('parseUrl refuses before downloading when running, queued and downloading requests fill the limits', async () => {
+  const { pool } = setup({ size: 1, maxQueued: 1 });
+  let fetches = 0;
+  const real = globalThis.fetch;
+  globalThis.fetch = (async () => {
+    fetches++;
+    return new Response(new Uint8Array(8));
+  }) as typeof fetch;
+  try {
+    const calls = Array.from({ length: 10 }, () => settled(pool.parseUrl('blob:x')));
+    await new Promise((r) => setTimeout(r, 20)); // the fake workers never reply: let every call reach its decision
+    pool.dispose(); // rejects the two accepted ones
+    const results = await Promise.all(calls);
+    // capacity is 1 running + 1 queued: two downloads start, the other eight are refused without a fetch
+    expect(fetches).toBe(2);
+    expect(results.filter((r) => r instanceof PoolQueueFullError).length).toBe(8);
+  } finally {
+    globalThis.fetch = real;
+    pool.dispose();
+  }
+});
+
+test('a failed download and a finished download each free their slot', async () => {
+  const { pool, spawned } = setup({ size: 1, maxQueued: 0 }); // capacity 1: a leaked slot refuses every later call
+  let fetches = 0;
+  let fail = true;
+  const real = globalThis.fetch;
+  globalThis.fetch = (async () => {
+    fetches++;
+    if (fail) throw new Error('network down');
+    return new Response(new Uint8Array(8));
+  }) as typeof fetch;
+  const tick = () => new Promise((r) => setTimeout(r, 20));
+  try {
+    expect(await settled(pool.parseUrl('blob:x'))).toBeInstanceOf(Error);
+    fail = false;
+    for (let i = 0; i < 3; i++) {
+      const p = settled(pool.parseUrl('blob:x'));
+      await tick();
+      spawned[0]!.reply();
+      expect(await p).toBe('ok');
+    }
+    expect(fetches).toBe(4); // every call reached fetch, none was refused
+  } finally {
+    globalThis.fetch = real;
+    pool.dispose();
+  }
+});

@@ -8,7 +8,7 @@ model: opus
 area: [store]
 story: US35
 milestone: "VSS:M2"
-sprint: "VSS:SP11"
+sprint: "VSS:SP18"
 depends_on: [85]
 created: 2026-10-25
 ---
