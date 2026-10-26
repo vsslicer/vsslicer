@@ -21,6 +21,7 @@ test.each([
   ['host', 'node'],
   ['webview', 'browser'],
   ['gl', 'browser'],
+  ['testing', 'node'],
 ] as const)('entry %s bundles with esbuild for %s without vscode', async (entry, platform) => {
   const file = join(root, `${entry}.ts`);
   writeFileSync(
