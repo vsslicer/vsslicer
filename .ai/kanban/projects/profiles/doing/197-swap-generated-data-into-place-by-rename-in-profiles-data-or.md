@@ -1,17 +1,17 @@
 ---
-id: 397
-title: Check the queue limit before downloading in the mesh worker pool parseUrl
+id: 197
+title: Swap generated data into place by rename in profiles-data-orca generate.mjs
 type: bug
 priority: P2
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP22"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 6 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 10 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

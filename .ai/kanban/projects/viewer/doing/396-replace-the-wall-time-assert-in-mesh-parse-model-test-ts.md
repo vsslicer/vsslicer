@@ -1,17 +1,17 @@
 ---
-id: 197
-title: Swap generated data into place by rename in profiles-data-orca generate.mjs
+id: 396
+title: Replace the wall-time assert in mesh parse-model.test.ts
 type: bug
-priority: P2
+priority: P1
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP22"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 10 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 4b of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

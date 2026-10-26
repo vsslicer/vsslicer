@@ -8,7 +8,7 @@ model: opus
 area: [camera, bambu]
 story: US48
 milestone: "VSS:M4"
-sprint: "VSS:SP34"
+sprint: "VSS:SP35"
 depends_on: [310, 288]
 created: 2026-10-25
 ---

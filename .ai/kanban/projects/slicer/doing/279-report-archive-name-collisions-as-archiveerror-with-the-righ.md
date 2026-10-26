@@ -1,17 +1,17 @@
 ---
-id: 280
-title: Bound tar.gz extraction by the archive size and require a sha256 check before extract
+id: 279
+title: Report archive name collisions as ArchiveError with the right format label
 type: bug
 priority: P2
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP35"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 8 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 7 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

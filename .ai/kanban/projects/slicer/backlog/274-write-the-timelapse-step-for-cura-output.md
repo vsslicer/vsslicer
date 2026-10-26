@@ -8,7 +8,7 @@ model: sonnet
 area: [postprocess]
 story: US63
 milestone: "VSS:M5"
-sprint: "VSS:SP39"
+sprint: "VSS:SP40"
 created: 2026-10-25
 ---
 

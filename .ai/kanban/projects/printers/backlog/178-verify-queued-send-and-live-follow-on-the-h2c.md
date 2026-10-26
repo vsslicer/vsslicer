@@ -8,7 +8,7 @@ model: opus
 area: [daemon, bambu]
 story: US32
 milestone: "VSS:M3"
-sprint: "VSS:SP21"
+sprint: "VSS:SP29"
 depends_on: [175, 173, 148]
 created: 2026-10-25
 ---

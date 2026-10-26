@@ -6,8 +6,8 @@ priority: P1
 effort: M
 model: opus
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
-depends_on: [192]
+sprint: "VSS:SP13"
+depends_on: [192, PLT-200]
 created: 2026-10-26
 ---
 

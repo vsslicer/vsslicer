@@ -1,17 +1,17 @@
 ---
-id: 118
-title: Apply a follow position that arrives before the preview has loaded its moves
+id: 119
+title: Replace the wall-time assert in gcode-planner planner.test.ts
 type: bug
 priority: P1
 effort: S
-model: opus
+model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP11"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 2 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 4a of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

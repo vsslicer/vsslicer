@@ -8,7 +8,7 @@ model: sonnet
 area: [octoprint]
 story: US20
 milestone: "VSS:M3"
-sprint: "VSS:SP18"
+sprint: "VSS:SP19"
 depends_on: [101, 94]
 created: 2026-10-25
 ---

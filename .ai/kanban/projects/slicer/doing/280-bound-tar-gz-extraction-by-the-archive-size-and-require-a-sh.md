@@ -1,17 +1,17 @@
 ---
-id: 396
-title: Replace the wall-time assert in mesh parse-model.test.ts
+id: 280
+title: Bound tar.gz extraction by the archive size and require a sha256 check before extract
 type: bug
-priority: P1
+priority: P2
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP35"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 4b of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 8 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

@@ -8,7 +8,7 @@ model: sonnet
 area: [camera, octoprint]
 story: US46
 milestone: "VSS:M4"
-sprint: "VSS:SP32"
+sprint: "VSS:SP33"
 depends_on: [281, 280, 84, PLT-13, 327]
 created: 2026-10-25
 ---

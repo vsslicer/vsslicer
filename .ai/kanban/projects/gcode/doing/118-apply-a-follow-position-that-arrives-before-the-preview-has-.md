@@ -1,17 +1,17 @@
 ---
-id: 198
-title: Require a non-empty PROVENANCE.md and a data package for AGPL-3.0-only in check-licence
+id: 118
+title: Apply a follow position that arrives before the preview has loaded its moves
 type: bug
-priority: P2
+priority: P1
 effort: S
-model: sonnet
+model: opus
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP11"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 5 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 2 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

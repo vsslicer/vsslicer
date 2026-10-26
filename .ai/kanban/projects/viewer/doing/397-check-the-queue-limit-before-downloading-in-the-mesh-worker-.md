@@ -1,17 +1,17 @@
 ---
-id: 279
-title: Report archive name collisions as ArchiveError with the right format label
+id: 397
+title: Check the queue limit before downloading in the mesh worker pool parseUrl
 type: bug
 priority: P2
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP10"
+sprint: "VSS:SP40"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---
 
-Finding 7 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
+Finding 6 of the SP9 audit (`.ai/audits/SP9-audit.md`): see the report for module, layer, the probe and the fix.
 
 ## Acceptance criteria
 

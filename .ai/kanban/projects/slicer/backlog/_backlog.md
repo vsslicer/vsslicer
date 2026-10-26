@@ -263,5 +263,3 @@
 261. [SLC-274: Write the TimeLapse step for Cura output](274-write-the-timelapse-step-for-cura-output.md)
 262. [SLC-275: Register the TimeLapse step only when the engine has no timelapse key](275-register-the-timelapse-step-only-when-the-engine-has-no-time.md)
 263. [SLC-276: H2C: print a fixture with timelapse G-code](276-h2c-print-a-fixture-with-timelapse-g-code.md)
-264. [SLC-279: Report archive name collisions as ArchiveError with the right format label](279-report-archive-name-collisions-as-archiveerror-with-the-righ.md)
-265. [SLC-280: Bound tar.gz extraction by the archive size and require a sha256 check before extract](280-bound-tar-gz-extraction-by-the-archive-size-and-require-a-sh.md)
