@@ -12,7 +12,7 @@ import {
   type VsCodeApi,
 } from '@vsslicer/webview-kit/webview';
 import { ColorMode, createGl2Context, showGlFailure } from '@vsslicer/webview-kit/gl';
-import { MoveFlag, type Layer } from '@vsslicer/gcode-api';
+import { MOVE_STRIDE, MoveFlag, MoveOffset, type Layer } from '@vsslicer/gcode-api';
 import {
   Method,
   moveStream,
@@ -29,6 +29,7 @@ import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } fro
 import { SPEEDS, createClock, createMarker, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
 import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
 import type { PanelLabel } from '../../domain/panel.ts';
+import { moveFileOffset, type TextRequest, type TextWindow } from '../../domain/text-window.ts';
 import { renderPanel, type SidePanel } from './side-panel.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
 import {
@@ -331,13 +332,29 @@ const render = (state: ViewState) => {
           payload: { plate } satisfies PlateRequest,
         });
       },
+      onGoTo: requestText,
+      onCurrent() {
+        const at = moveFileOffset(buffers, headMove, MOVE_STRIDE, MoveOffset.fileOffset);
+        if (at !== undefined) requestText(at);
+      },
       imageUrl: (data) => URL.createObjectURL(new Blob([data as BlobPart], { type: 'image/png' })),
       releaseUrl: (url) => URL.revokeObjectURL(url),
     },
+    { ...s, text: s.kind === 'gcode' },
   );
   aside.replaceChildren(sidePanel.element);
   done();
 };
+
+let textSeq = 0;
+const requestText = (offset: number) =>
+  channel.post({
+    tag: PROTOCOL_TAG,
+    v: TRANSPORT_SCHEMA_VERSION,
+    kind: 'notification',
+    method: Method.text,
+    payload: { seq: ++textSeq, offset } satisfies TextRequest,
+  });
 
 const done = () => {
   if (!summary || buffers.some((b) => !b)) return;
@@ -471,7 +488,10 @@ channel.onMessage((m) => {
   const r = parseEnvelope(m);
   if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.state)
     render(r.envelope.payload as ViewState);
-  else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.command)
+  else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.textWindow) {
+    const w = r.envelope.payload as TextWindow;
+    if (w.seq === textSeq) sidePanel?.showText(w); // an older answer is dropped
+  } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.command)
     command(r.envelope.payload as TimelineCommand);
 });
 handshake(channel, session).catch((e: Error) => show('Could not connect to VS Code', [e.message]));

@@ -2,10 +2,11 @@
 import type { Diagnostic, JobSummary, Layer, ParsedFile, Slicer } from '@vsslicer/gcode-api';
 import type { Flavour, Timing } from '@vsslicer/gcode-planner';
 import type { FileKind } from './file-kind.ts';
-import { panelOf, type PanelModel, type PlateInfo } from './panel.ts';
+import { flagsOf, type Flag } from './flags.ts';
+import { clip, panelOf, type PanelModel, type PlateInfo } from './panel.ts';
 
 /** Most diagnostics sent to the webview; `diagnosticCount` has the total. */
-export const MAX_DIAGNOSTICS = 200;
+export const MAX_DIAGNOSTICS = 10_000;
 
 /** What the webview gets as JSON next to the move buffers (sent one stream per buffer, `moveBuffers[i]` bytes each). */
 export interface PreviewSummary {
@@ -26,6 +27,8 @@ export interface PreviewSummary {
   panel: PanelModel;
   diagnostics: Diagnostic[];
   diagnosticCount: number;
+  /** What the timing assumes or cannot see. */
+  flags: Flag[];
 }
 
 export const summarise = (
@@ -46,8 +49,9 @@ export const summarise = (
   flavour: timing.limits.flavour,
   flavourAssumed: timing.limits.flavourAssumed,
   panel: panelOf(parsed, extra),
-  diagnostics: parsed.diagnostics.slice(0, MAX_DIAGNOSTICS),
+  diagnostics: parsed.diagnostics.slice(0, MAX_DIAGNOSTICS).map((d) => ({ ...d, message: clip(d.message) })),
   diagnosticCount: parsed.diagnostics.length,
+  flags: flagsOf(parsed, timing),
 });
 
 /** The state the host tells the webview after every handshake. */
@@ -71,6 +75,10 @@ export const Method = {
   retry: 'gcode-preview/retry',
   /** Webview to host: `WindowRequest`; the host answers with the packed window on `windowStream`. */
   window: 'gcode-preview/window',
+  /** Webview to host: `TextRequest`; the host answers with a `textWindow` notification. */
+  text: 'gcode-preview/text',
+  /** Host to webview: `TextWindow`. */
+  textWindow: 'gcode-preview/text-window',
   /** Webview to host: `PlateRequest`; the host loads that plate of a `.gcode.3mf` and answers with a new state. */
   plate: 'gcode-preview/plate',
 } as const;

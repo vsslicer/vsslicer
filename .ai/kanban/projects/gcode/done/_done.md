@@ -5,3 +5,4 @@
 3. [GCP-114: Refuse oversize plate thumbnails before inflating them](114-refuse-oversize-plate-thumbnails-before-inflating-them.md)
 4. [GCP-113: Add 'restore' to GlFailureCause and drop the preview's cast](113-add-restore-to-glfailurecause-and-drop-the-preview-s-cast.md)
 5. [GCP-110: Snapshot real corpus files through the preview's webview](110-snapshot-real-corpus-files-through-the-preview-s-webview.md)
+6. [GCP-39: Show diagnostics and flags, and the lazy G-code text pane](039-show-diagnostics-and-flags-and-the-lazy-g-code-text-pane.md)

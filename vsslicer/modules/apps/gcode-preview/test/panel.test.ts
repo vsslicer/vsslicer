@@ -198,6 +198,9 @@ class FakeEl {
   fire(type: string) {
     this.listeners[type]?.forEach((f) => f());
   }
+  replaceChildren(...kids: FakeEl[]) {
+    this.children = kids;
+  }
   all(): FakeEl[] {
     return [this, ...this.children.flatMap((c) => c.all())];
   }
@@ -215,6 +218,8 @@ const doc = { createElement: (tag: string) => new FakeEl(tag) } as unknown as Pi
 const handlers = (log: unknown[] = []): PanelHandlers => ({
   onHover: (i) => log.push(['hover', i]),
   onPlate: (p) => log.push(['plate', p]),
+  onGoTo: (o) => log.push(['goto', o]),
+  onCurrent: () => log.push(['current']),
   imageUrl: (d) => (log.push(['url', d.byteLength]), `blob:${d.byteLength}`),
   releaseUrl: (u) => log.push(['release', u]),
 });
@@ -279,4 +284,49 @@ test('no oversize or non-PNG thumbnail leaves the worker', () => {
     [10],
   );
   assert.strictEqual(l.plates!.thumbnail, undefined);
+});
+
+test('flags, diagnostics with go-to, and the text pane render as text', () => {
+  const log: unknown[] = [];
+  const issues = {
+    diagnostics: [{ code: 'arc-invalid', severity: 'warning' as const, fileOffset: 1234, message: '<b>bad</b>' }],
+    diagnosticCount: 5,
+    flags: [{ code: 'estimate' as const, text: 'an estimate' }],
+    text: true,
+  };
+  const panel = renderPanel(
+    doc,
+    panelOf({ thumbnails: [], objects: [] }),
+    { seconds: 1, planner: 'm' },
+    handlers(log),
+    issues,
+  );
+  const els = (panel.element as unknown as FakeEl).all();
+  assert.ok(els.some((e) => e.tag === 'li' && e.textContent === 'an estimate'));
+  assert.ok(els.some((e) => e.tag === 'h3' && e.textContent === 'Diagnostics (first 1 of 5)'));
+  assert.ok(els.some((e) => e.textContent.startsWith('warning arc-invalid: <b>bad</b>')));
+  els.find((e) => e.textContent === 'Go to offset 1234')!.fire('click');
+  els.find((e) => e.textContent === 'Show current move')!.fire('click');
+  assert.deepStrictEqual(log, [['goto', 1234], ['current']]);
+  panel.showText({
+    seq: 1,
+    focus: 1,
+    lines: [
+      { offset: 0, text: 'G1', clipped: false },
+      { offset: 3, text: 'x', clipped: true },
+    ],
+  });
+  const rows = (panel.element as unknown as FakeEl).all().filter((e) => e.tag === 'div');
+  assert.deepStrictEqual(
+    rows.map((r) => r.textContent),
+    ['0: G1', '3: x ...'],
+  );
+  assert.strictEqual(rows[1]!.attrs['aria-current'], 'true');
+  // the pane is absent for a .bgcode / .gcode.3mf, whose offsets are not file offsets
+  const none = renderPanel(doc, panelOf({ thumbnails: [], objects: [] }), { seconds: 1, planner: 'm' }, handlers(), {
+    ...issues,
+    text: false,
+  });
+  const noEls = (none.element as unknown as FakeEl).all();
+  assert.ok(noEls.every((e) => e.tag !== 'pre' && !e.textContent.startsWith('Go to offset')));
 });

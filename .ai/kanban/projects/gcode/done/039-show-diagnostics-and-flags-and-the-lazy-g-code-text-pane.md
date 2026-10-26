@@ -9,7 +9,7 @@ area: [editor]
 story: US13
 milestone: "VSS:M1"
 sprint: "VSS:SP7"
-owner: sp7-gcp-39
+owner: sp7-gcp-39-fix
 depends_on: [36, 14]
 created: 2026-10-25
 ---
@@ -40,3 +40,9 @@ Shared-file changes: none (CHANGELOG line suggestion: "Diagnostics and flags in 
 Review (sp7-rev-gcp3): FAIL.
 - Request flood is unbounded (rule 25): src/application/preview-session.ts:156-160 starts a `readTextWindow` for every `Method.text` notification with no in-flight cap, and src/adapters/file-read.ts:9-12 opens the file and allocates a 64 KiB buffer per request. Repro (scratch probe calling `readTextWindow(fileReadAt(p), {seq:i, offset:i*100})` 20,000 times concurrently, as a webview loop posting `Method.text` would): peak RSS +1.48 GB in 2.5 s; 100,000 messages would take the extension host past 7 GB. Fix: keep at most one read in flight per session and coalesce to the latest request (older seqs are dropped by the webview anyway), with a hostile test that posts e.g. 100,000 requests and asserts at most one or two reads.
 Passed otherwise: payload is only {seq, offset}; the path is the open document's (provider.ts passes `fileReadAt(uri.fsPath)` only for `file:` scheme + plain `.gcode`), extra fields (path, length) are ignored; offset -1, NaN, Infinity, 1e300, '5', non-integer seq, null are dropped; 2^53-1 and past-EOF return focus -1, no lines; 64 KiB read / 400 lines / 4 KiB per line held on a 200,000-line file with 6000-byte lines. Panel uses no innerHTML. Invisible-macros definition (markers kept by name but not timed, excluding timed G4/ESTIMATOR_ADD_TIME and zero-time M486/EXCLUDE_OBJECT*, 1000 names tracked, 8 listed) is a sensible reading of the E4 "time is missing from the total" caveat. lint/test(91)/build green except third-party-notices (saxes, PLT-194).
+
+Review (sp7-rev2-gcp39): PASS.
+- Flood fix verified with an own probe (scratch /private/tmp/sp7w.cS63/gcp39r2/probe.test.ts, real `fileReadAt` on a 200,000-line temp file): 100,000 synchronous `Method.text` messages -> 2 reads, max 1 in flight, answers seqs [0, 99999], peak RSS +13-25 MB (was +1.48 GB for 20,000).
+- Last request always answered; a throwing read (seq 1) does not wedge: seqs 2 and 3 answered after it; an invalid payload in flight does not wedge (seq 4 answered); a missing file drops all requests without throwing.
+- Note (non-blocking): neither `dispose()` nor the `serve` unsubscribe clears the one queued request, so after a panel closes at most one more 64 KiB read runs and its post (to a disposed webview) is swallowed by the catch. Bounded to one read; `dispose()` alone also does not stop text reads on a still-subscribed channel, but provider.ts unsubscribes on panel dispose first. A follow-up could clear `waiting` in the unsubscribe.
+- pnpm lint && pnpm test (92/92) && pnpm build: green, including third-party notices. No shared files (index.ts, package.json, lockfile, CHANGELOG) touched; no vscode import outside presentation. Rest of the card unchanged from the last round's passing checks.

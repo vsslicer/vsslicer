@@ -271,3 +271,35 @@ test('rapid plate switching aborts the superseded loads; only the last plate is 
   w.stop();
   session.dispose();
 });
+
+test('a flood of text requests keeps one read in flight and answers the last', async () => {
+  let reads = 0;
+  let release!: () => void;
+  const gate = new Promise<void>((r) => (release = r));
+  const readAt = async () => (reads++, await gate, new TextEncoder().encode('G1 X1\n'));
+  const session = openPreview('/x/a.gcode', async () => loaded([buffer(28, 1)]), readAt);
+  const [host, view] = pair();
+  session.serve(host, { onMismatch: () => {} });
+  const w = webview(view);
+  await w.ready;
+  const answered: number[] = [];
+  view.onMessage((m) => {
+    const r = parseEnvelope(m);
+    if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.textWindow)
+      answered.push((r.envelope.payload as { seq: number }).seq);
+  });
+  const N = 100_000;
+  for (let seq = 1; seq <= N; seq++)
+    view.post({
+      tag: PROTOCOL_TAG,
+      v: TRANSPORT_SCHEMA_VERSION,
+      kind: 'notification',
+      method: Method.text,
+      payload: { seq, offset: 0 },
+    });
+  await new Promise((r) => setTimeout(r, 20));
+  release();
+  await until(() => answered.includes(N));
+  assert.ok(reads <= 2, `reads: ${reads}`);
+  w.stop();
+});

@@ -23,6 +23,7 @@ import {
   type WindowRequest,
 } from '../domain/summary.ts';
 import { packWindow } from '../domain/window.ts';
+import { readTextWindow, type ReadAt } from './read-text.ts';
 import type { Loaded } from './load-preview.ts';
 
 /** Parses and plans `path` off the calling thread (the worker adapter). Rejects with an Error that may carry a `code`. */
@@ -72,7 +73,8 @@ const failure = (e: unknown): ViewState => ({
   message: e instanceof Error ? e.message : String(e),
 });
 
-export const openPreview = (path: string, load: LoadPort): PreviewSession => {
+/** `readAt` reads the file itself, for the text pane; only plain `.gcode` has one (other kinds' offsets are not file offsets). */
+export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): PreviewSession => {
   const abort = new AbortController();
   const kind = fileKind(path);
   // The parse stays here so a reloaded webview can be served again and can ask for toolhead windows.
@@ -128,6 +130,21 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
     },
     serve(channel, { onReceived, onProgress, onMismatch }) {
       let current = '';
+      // one text read in flight; later requests replace the one waiting (the webview ignores stale seqs)
+      let reading = false;
+      let waiting: { payload: unknown } | undefined;
+      const readText = (payload: unknown): void => {
+        reading = true;
+        void readTextWindow(readAt!, payload)
+          .then((w) => w && channel.post(notify(Method.textWindow, w)))
+          .catch(() => {}) // an invalid request or a read error (file gone) is dropped: the pane keeps what it showed
+          .then(() => {
+            reading = false;
+            const next = waiting;
+            waiting = undefined;
+            if (next) readText(next.payload);
+          });
+      };
       const stops = [
         serveHandshake(channel, {
           // a send cut short by a reload or a closed editor is superseded by the next handshake, or by nothing
@@ -151,7 +168,10 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
           } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.window && current)
             // a bad range (the file changed under a stale webview) or a closed panel is dropped: the marker falls back
             void sendWindow(channel, current, r.envelope.payload as WindowRequest).catch(() => {});
-          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.progress)
+          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.text && readAt) {
+            if (reading) waiting = { payload: r.envelope.payload };
+            else readText(r.envelope.payload);
+          } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.progress)
             onProgress?.(r.envelope.payload as Progress);
         }),
       ];
