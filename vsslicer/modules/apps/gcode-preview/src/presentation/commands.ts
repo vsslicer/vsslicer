@@ -4,15 +4,22 @@
 // printer panel) runs in another extension host under Remote-SSH and WSL, where `exports` cannot reach. Every
 // argument is untrusted and validated here. Type-only import of the VS Code API, so tests run in plain Node.
 import type * as vscode from 'vscode';
-import { createFollower, type Follower } from '../application/follow.ts';
+import { fileMismatch, parseFileCheck } from '../application/file-check.ts';
+import { createFollower, createWatchdog, realTimers, type Follower, type Timers } from '../application/follow.ts';
 import { GCODE_VIEW_TYPE, PREVIEW_VIEW_TYPE } from '../domain/associations.ts';
 import { fileKind } from '../domain/file-kind.ts';
+import type { FileCheck } from '../application/file-check.ts';
 import { parsePosition, type PrintPosition } from '../domain/print-position.ts';
 import type { PreviewProbe } from './provider.ts';
 
 export type { PrintPosition, ResolvedBy, Revealed } from '../domain/print-position.ts';
 
+export type { FileCheck } from '../application/file-check.ts';
+
 export const GCODE_PREVIEW_API_VERSION = 1;
+
+/** No position for this long ends a follow with a message. */
+export const STALE_MS = 60_000;
 
 export const Command = {
   open: 'vsslicer.gcode.open',
@@ -34,17 +41,25 @@ export interface GcodePreviewApi {
   /** Opens the preview of `uri` (and the plate, once loaded). */
   open(uri: UriArg, options?: OpenOptions): Promise<void>;
   /** Shows `position` in the preview of `uri`, opening it on the first call; later calls coalesce (newest wins). */
-  follow(uri: UriArg, position: PrintPosition): void;
-  /** Ends following `uri`: a position still waiting is dropped. */
+  follow(uri: UriArg, position: PrintPosition, file?: FileCheck): void;
+  /**
+   * Ends following `uri`: a position still waiting is dropped. A follow also ends, with a message, when no position
+   * arrives for a minute, or when the first call's `file` (the printer's size and/or MD5) differs from the file here.
+   */
   stopFollow(uri: UriArg): void;
 }
 
-export type CommandsApi = Pick<typeof vscode, 'commands' | 'Uri'>;
+export type CommandsApi = Pick<typeof vscode, 'commands' | 'Uri' | 'window' | 'workspace'>;
 type Context = Pick<vscode.ExtensionContext, 'subscriptions'>;
 
 const MAX_URI = 8192;
 
-export const registerCommands = (context: Context, api: CommandsApi, probe: PreviewProbe): GcodePreviewApi => {
+export const registerCommands = (
+  context: Context,
+  api: CommandsApi,
+  probe: PreviewProbe,
+  { staleMs = STALE_MS, timers = realTimers }: { staleMs?: number; timers?: Timers } = {},
+): GcodePreviewApi => {
   const toUri = (u: unknown): vscode.Uri => {
     if (u instanceof api.Uri) return u;
     if (typeof u !== 'string' || !u || u.length > MAX_URI)
@@ -71,11 +86,14 @@ export const registerCommands = (context: Context, api: CommandsApi, probe: Prev
     if (session && plate !== undefined) await session.state.then(() => session.setPlate(plate));
   };
 
-  const followers = new Map<string, Follower>();
+  const followers = new Map<string, { follower: Follower; dog: { kick(): void; cancel(): void } }>();
   const stop = (key: string) => {
-    followers.get(key)?.stop();
+    const f = followers.get(key);
+    f?.follower.stop();
+    f?.dog.cancel();
     followers.delete(key);
   };
+  const warn = (message: string) => void Promise.resolve(api.window.showWarningMessage(message)).catch(() => {});
 
   const self: GcodePreviewApi = {
     version: GCODE_PREVIEW_API_VERSION,
@@ -87,27 +105,61 @@ export const registerCommands = (context: Context, api: CommandsApi, probe: Prev
         return Promise.reject(e);
       }
     },
-    follow(u, position) {
+    follow(u, position, file) {
       const uri = toUri(u);
       const p = parsePosition(position);
+      const expect = file === undefined ? undefined : parseFileCheck(file);
       const key = uri.toString();
       let f = followers.get(key);
       if (!f) {
         let first = true;
-        const follower = createFollower(
+        let outOfRange = false; // one notification per follow, not per reveal
+        const name = uri.path.slice(-100);
+        const current = () => followers.get(key)?.follower === follower; // a stopped follow stays quiet
+        let checked = !expect; // the printer's file is compared once, on the first reveal
+        const mismatch = async () => {
+          try {
+            const { size } = await api.workspace.fs.stat(uri);
+            return await fileMismatch(expect!, { size, read: () => Promise.resolve(api.workspace.fs.readFile(uri)) });
+          } catch (e) {
+            return `the file could not be checked: ${String((e as Error)?.message ?? e).slice(0, 200)}`;
+          }
+        };
+        const follower: Follower = createFollower(
           async (pos) => {
             if (first && !probe.session(key)) await openUri(uri, {});
             first = false;
             const session = probe.session(key);
             if (!session) throw new Error(`${key} is no longer open`);
-            return session.reveal(pos);
+            if (!checked) {
+              checked = true;
+              const bad = await mismatch();
+              if (!current()) return;
+              if (bad) return (stop(key), warn(`Stopped following ${name}: ${bad}.`));
+            }
+            const r = await session.reveal(pos);
+            if (r.warning && current()) warn(r.warning);
+            return r;
           },
-          // a closed preview ends the follow; a position outside the file is skipped and the feed goes on
-          () => !probe.session(key) && followers.get(key) === follower && stop(key),
+          // a closed preview ends the follow quietly; any other error (a position outside the file) is shown, the feed goes on
+          (e) => {
+            if (!current()) return;
+            if (!probe.session(key)) stop(key);
+            else if (!outOfRange) {
+              outOfRange = true;
+              warn(`Cannot follow: ${String((e as Error)?.message ?? e).slice(0, 300)}`);
+            }
+          },
         );
-        followers.set(key, (f = follower));
+        const dog = createWatchdog(
+          staleMs,
+          () => (stop(key), warn(`Stopped following ${name}: no position for ${Math.round(staleMs / 1000)} s.`)),
+          timers,
+        );
+        followers.set(key, (f = { follower, dog }));
       }
-      f.push(p);
+      f.dog.kick();
+      f.follower.push(p);
     },
     stopFollow: (u) => stop(toUri(u).toString()),
   };

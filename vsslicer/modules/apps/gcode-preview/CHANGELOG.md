@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.0
+
+- Re-range `@vsslicer/webview-kit` to ^0.8.0 and re-lock to `gcode-parser` 0.14.2 (SP12 release).
+- Follow ends with a message when no position arrives for 60 s or the printer's file (size, MD5, optional third argument of follow) differs from the open one; a position outside the file shows a message (GCP-56).
+- Fixed: `api:check --base` now counts a new required member of `PrintPosition` or `OpenOptions` (types other extensions build) as a breaking change (GCP-125).
+- Follow mode: the part after the followed position is dimmed; the user can break out (sliders, play, step, time) and rejoin at the newest fed position (GCP-55).
+
 ## 0.6.1
 
 - Re-locked to `@vsslicer/gcode-parser` 0.14.1 and `@vsslicer/3mf` 0.2.0.

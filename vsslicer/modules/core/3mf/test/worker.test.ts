@@ -214,6 +214,17 @@ describe('results are transferred, not copied', () => {
     expect(collectBuffers(a)).toHaveLength(1);
   });
 
+  test('collectBuffers scans 200,000-item arrays, sets and objects without overflowing the stack', () => {
+    const n = 200_000;
+    const tail = new Uint8Array(1);
+    const arr: unknown[] = Array.from({ length: n }, (_, i) => `s${i}`);
+    arr.push(tail);
+    expect(collectBuffers(arr)).toEqual([tail.buffer]);
+    expect(collectBuffers(new Set(arr))).toEqual([tail.buffer]);
+    const obj: Record<string, unknown> = Object.fromEntries(arr.map((x, i) => [`k${i}`, x]));
+    expect(collectBuffers(obj)).toEqual([tail.buffer]);
+  });
+
   test('handle lists the project mesh buffers', () => {
     const { response, transfer } = handle({ bytes: fixture(REAL) });
     expect(response.ok).toBe(true);

@@ -116,6 +116,16 @@ describe('Cura user-change export', () => {
     expect(r.files[0]!.path).toBe('quality_changes/mine.inst.cfg');
   });
 
+  test('booleans are written as Python literals', () => {
+    const r = writeCuraUserChanges({
+      entities: [{ id: 'b', name: 'B', layer_height: 0.2, settings: { support_enable: true, adhesion: false } }],
+      native: { b: { definition: 'fdmprinter', quality_type: 'normal' } },
+    });
+    const t = dec.decode(r.files[0]!.bytes);
+    expect(t).toContain('support_enable = True\n');
+    expect(t).toContain('adhesion = False\n');
+  });
+
   test('ids are percent-encoded so the loader reads the same id; a leading dot is hidden', () => {
     const r = writeCuraUserChanges({
       entities: [

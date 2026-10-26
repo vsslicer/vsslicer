@@ -31,6 +31,8 @@ export interface BundleArchive {
   manifest?: BundleStructure;
   /** File entries by name, inflated in memory; directory entries and the manifest are not included. */
   entries: Map<string, Uint8Array>;
+  /** Manifest-listed files absent from the archive; only ever non-empty when read with `lenient`. */
+  missing: string[];
 }
 
 const INPUT_SLICE = 64 * 1024;
@@ -66,8 +68,11 @@ export function unsafeEntryName(name: string): string | undefined {
   return undefined;
 }
 
-/** Reads a bundle into memory, refusing anything unsafe before inflating a byte. Nothing touches disk. */
-export function readBundleArchive(data: Uint8Array): BundleArchive {
+/**
+ * Reads a bundle into memory, refusing anything unsafe before inflating a byte. Nothing touches disk.
+ * `lenient`: a manifest-listed file missing from the archive is reported in `missing` instead of refused.
+ */
+export function readBundleArchive(data: Uint8Array, options: { lenient?: boolean } = {}): BundleArchive {
   const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
   const need = (at: number, len: number): void => {
     if (at < 0 || at + len > data.length) fail('corrupt archive: record outside the file');
@@ -166,7 +171,7 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     }
 
   const manifestBytes = out.get(BUNDLE_STRUCTURE_NAME);
-  if (!manifestBytes) return { entries: out };
+  if (!manifestBytes) return { entries: out, missing: [] };
   out.delete(BUNDLE_STRUCTURE_NAME);
   let text = '';
   try {
@@ -174,9 +179,11 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
   } catch {
     fail(`${BUNDLE_STRUCTURE_NAME} is not UTF-8`);
   }
-  const parsed = parseBundleStructure(text, new Set(out.keys()));
+  const parsed = parseBundleStructure(text, options.lenient ? undefined : new Set(out.keys()));
   if (!parsed.ok) return fail(`${BUNDLE_STRUCTURE_NAME}: ${parsed.error.message}`);
-  return { manifest: parsed.bundle, entries: out };
+  const { printerConfig, filamentConfig, processConfig } = parsed.bundle;
+  const missing = [...printerConfig, ...filamentConfig, ...processConfig].filter((f) => !out.has(f));
+  return { manifest: parsed.bundle, entries: out, missing };
 }
 
 /** Inflates one entry, stopping as soon as the output passes its declared size (the declared size was capped above). */

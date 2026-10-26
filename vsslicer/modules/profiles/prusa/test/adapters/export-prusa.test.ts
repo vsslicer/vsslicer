@@ -18,6 +18,7 @@ import {
 } from '../../src/adapters/export/prusa/export.ts';
 import { canon, g } from '../../src/adapters/export/prusa/serialize.ts';
 import { OPTION_TYPES } from '../../src/adapters/export/prusa/types.ts';
+import { unescapeString } from '../../src/adapters/import/flatten.ts';
 import { importPrusaIni, type PrusaNative } from '../../src/adapters/import/import.ts';
 import { MAX_DIAGNOSTICS, MAX_KEYS_PER_SECTION, MAX_LINE_LENGTH } from '../../src/adapters/ini/parse.ts';
 
@@ -70,7 +71,8 @@ describe('PrusaSlicer serializer (port of the PRF-43 probe)', () => {
     expect(canon('coInt', '3')).toBe('3');
     expect(canon('coInt', 'x')).toBeUndefined();
     expect(canon('coFloat', 'abc')).toBeUndefined();
-    expect(canon('coString', 'M104 \\"x\\"\nG28')).toBe('M104 "x"\\nG28');
+    // decoded text in, `escape_string_cstyle` out: newline -> `\n`, one backslash -> two, quotes as they are
+    expect(canon('coString', 'M104 "x"\nM117 C:\\temp\r')).toBe('M104 "x"\\nM117 C:\\\\temp\\r');
     expect(canon('coStrings', '"PLA"')).toBe('PLA');
     expect(canon('coStrings', '""')).toBe('""');
     expect(canon('coStrings', 'a b;c')).toBe('"a b";c');
@@ -95,7 +97,70 @@ describe('PrusaSlicer serializer (port of the PRF-43 probe)', () => {
     const lines = body(read('export-prusa/default_fff.ini').toString('utf8')).split('\n').filter(Boolean);
     const typed = lines.map((l) => l.split(' = ')).filter(([k]) => OPTION_TYPES.has(k!));
     expect(typed.length).toBeGreaterThan(300);
-    expect(typed.filter(([k, v]) => canon(OPTION_TYPES.get(k!)!, v!) !== v)).toEqual([]);
+    const decoded = (t: string, v: string) => (t === 'coString' ? unescapeString(v)! : v); // as the importer reads it
+    expect(typed.filter(([k, v]) => canon(OPTION_TYPES.get(k!)!, decoded(OPTION_TYPES.get(k!)!, v!)) !== v)).toEqual(
+      [],
+    );
+  });
+});
+
+describe('backslashes in strings (SP11 audit finding 4)', () => {
+  test('converted G-code keeps a single backslash when written to Prusa INI', () => {
+    // what the Orca, Bambu and Cura importers hand over: decoded text, one real backslash
+    const p: Process = {
+      id: 'conv',
+      name: 'Conv',
+      layer_height: 0.2,
+      settings: { machine_start_gcode: 'G28\nM117 C:\\temp' },
+    };
+    const r = exportPrusaIni({ entities: [p], native: {} });
+    expect(out(r, 'print/Conv.ini')).toBe('start_gcode = G28\\nM117 C:\\\\temp\n');
+    expect(errors(r)).toEqual([]);
+  });
+
+  test('the Prusa importer gives decoded text, and an edit with a backslash reads back', () => {
+    const src = 'end_gcode = M84\\nM117 C:\\\\old\nlayer_height = 0.2\n';
+    const imp = importPrusaIni([file('print/b.ini', src)]);
+    expect(proc(imp, 'b').settings!['machine_end_gcode']).toBe('M84\nM117 C:\\old');
+    expect(out(exportPrusaIni(imp), 'print/b.ini')).toBe(src); // unedited: stored text
+    const r = exportPrusaIni(edited(imp, 'b', (s) => (s['machine_end_gcode'] = 'M84 ; C:\\temp')));
+    expect(out(r, 'print/b.ini')).toBe('end_gcode = M84 ; C:\\\\temp\nlayer_height = 0.2\n');
+    const back = importPrusaIni([file('print/b.ini', out(r, 'print/b.ini'))]);
+    expect(proc(back, 'b').settings!['machine_end_gcode']).toBe('M84 ; C:\\temp');
+  });
+
+  test('a trailing lone backslash, which PrusaSlicer rejects, stays native', () => {
+    const imp = importPrusaIni([file('print/t.ini', 'end_gcode = M84\\\nlayer_height = 0.2\n')]);
+    expect(proc(imp, 't').settings!['machine_end_gcode']).toBeUndefined();
+    expect((imp.native['t'] as PrusaNative).native_only).toContain('end_gcode');
+    expect(imp.diagnostics).toEqual([expect.objectContaining({ message: expect.stringContaining('lone backslash') })]);
+    expect(unescapeString('a\\\\')).toBe('a\\');
+    expect(unescapeString('a\\')).toBeUndefined();
+  });
+
+  test(`escaping cannot push an edited line past ${MAX_LINE_LENGTH} characters`, () => {
+    // `start_gcode = ` + value + newline is at most MAX_LINE_LENGTH; each backslash is written as two
+    const at = (n: number, head = 'a') => ({
+      entities: [
+        {
+          id: 'x',
+          name: 'X',
+          layer_height: 0.2,
+          settings: { machine_start_gcode: `${head}${'\\'.repeat(n)}` },
+        } as Process,
+      ],
+      native: {},
+    });
+    const cap = 32_760; // 14 + (1 + 2 * 32 760) + 1 = 65 536 exactly; one more backslash gives 65 538
+    expect(MAX_LINE_LENGTH).toBe(65_536);
+    const ok = out(exportPrusaIni(at(cap)), 'print/X.ini');
+    expect(ok).toHaveLength(MAX_LINE_LENGTH);
+    const back = importPrusaIni([file('print/X.ini', `${ok}layer_height = 0.2\n`)]); // a print needs one
+    expect(proc(back, 'X').settings!['machine_start_gcode']).toBe(`a${'\\'.repeat(cap)}`);
+    const over = exportPrusaIni(at(cap + 1));
+    expect(out(over, 'print/X.ini')).toBe('');
+    expect(errors(over)).toEqual([expect.objectContaining({ message: expect.stringContaining('one line') })]);
+    expect(out(exportPrusaIni(at(cap, 'aa')), 'print/X.ini')).toBe(''); // 65 537: the cap plus one
   });
 });
 
@@ -326,6 +391,23 @@ describe('guards', () => {
     });
     expect(r.files).toHaveLength(1);
     expect(errors(r)).toEqual([expect.objectContaining({ message: expect.stringContaining('already written') })]);
+  });
+
+  test('names differing only in case or Unicode form: the second is skipped', () => {
+    for (const [a, b] of [
+      ['Generic PLA', 'generic pla'],
+      ['caf\u00e9', 'cafe\u0301'],
+    ] as const) {
+      const r = exportPrusaIni({
+        entities: [
+          { ...proc(base, 'p'), name: a },
+          { ...proc(base, 'p'), id: 'q', name: b },
+        ],
+        native: {},
+      });
+      expect(r.files.map((f) => f.path)).toEqual([`print/${a}.ini`]);
+      expect(errors(r)).toEqual([expect.objectContaining({ message: expect.stringContaining('already written') })]);
+    }
   });
 
   test('a malformed native form is ignored, the entity written from its settings', () => {

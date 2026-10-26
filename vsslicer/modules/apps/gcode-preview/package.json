@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/gcode-preview",
   "displayName": "VSSlicer G-code Preview",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Read-only custom editor for .gcode, .bgcode and .gcode.3mf: parses and plans in a worker and hands the move buffers to the webview.",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
@@ -117,7 +117,7 @@
     "@vsslicer/gcode-api": "^0.7.0",
     "@vsslicer/gcode-parser": "^0.14.0",
     "@vsslicer/gcode-planner": "^0.5.0",
-    "@vsslicer/webview-kit": "^0.7.0"
+    "@vsslicer/webview-kit": "^0.8.0"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.59.4",

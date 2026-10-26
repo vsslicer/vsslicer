@@ -151,3 +151,20 @@ test.skipIf(!existsSync(badge))('OrcaBadge.3mf (OrcaSlicer@09aa0114): raw projec
   const expected = unzipSync(readFileSync(badge), { filter: (f) => f.name === 'Metadata/project_settings.config' });
   expect(p.rawConfig.get('Metadata/project_settings.config')).toEqual(expected['Metadata/project_settings.config']);
 });
+
+test('the k-th build item of an object lands on the plate that lists instance k', () => {
+  const plate = (id: number, k: number) =>
+    `<plate><metadata key="plater_id" value="${id}"/><model_instance><metadata key="object_id" value="1"/><metadata key="instance_id" value="${k}"/></model_instance></plate>`;
+  const pkg = openPackage(
+    buildZip(
+      minimalEntries({
+        '3D/3dmodel.model': model('OrcaSlicer-2.3.0').replace(
+          '<item objectid="1"/>',
+          '<item objectid="1"/><item objectid="1"/>',
+        ),
+        'Metadata/model_settings.config': `<config>${plate(1, 0)}${plate(2, 1)}</config>`,
+      }),
+    ),
+  );
+  expect(readProject(pkg).instances.map((i) => i.plateId)).toEqual([1, 2]);
+});

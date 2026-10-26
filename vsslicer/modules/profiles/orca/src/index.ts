@@ -8,3 +8,8 @@ export * from './adapters/variants/variants.ts';
 export * from './adapters/user/read-user-presets.ts';
 export * from './adapters/split/split.ts';
 export * from './adapters/export/orca/write-json.ts';
+export * from './adapters/bundles/orca/import-orca-bundle.ts';
+export * from './adapters/bundles/bambu/import-bambu-bundle.ts';
+export * from './adapters/bundles/orca/export-orca-bundle.ts';
+export * from './adapters/instances/read-instances.ts';
+export { exportBambuBundle } from './adapters/bundles/bambu/export-bambu-bundle.ts';

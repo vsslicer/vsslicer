@@ -48,3 +48,29 @@ export const createFollower = (
     },
   };
 };
+
+export interface Timers {
+  /** Calls `fn` once after `ms`; returns the cancel function. */
+  set(fn: () => void, ms: number): () => void;
+}
+
+export const realTimers: Timers = {
+  set: (fn, ms) => {
+    const t = setTimeout(fn, ms);
+    return () => clearTimeout(t);
+  },
+};
+
+/** Fires `onStale` once when `ms` pass without a `kick`; `cancel` ends it. */
+export const createWatchdog = (ms: number, onStale: () => void, timers: Timers = realTimers) => {
+  if (!(Number.isFinite(ms) && ms > 0)) throw new RangeError('the stale time must be a positive number');
+  let cancelTimer: (() => void) | undefined;
+  const cancel = () => (cancelTimer?.(), (cancelTimer = undefined));
+  return {
+    kick() {
+      cancel();
+      cancelTimer = timers.set(() => ((cancelTimer = undefined), onStale()), ms);
+    },
+    cancel,
+  };
+};

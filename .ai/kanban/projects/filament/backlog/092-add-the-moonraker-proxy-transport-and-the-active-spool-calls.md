@@ -8,7 +8,7 @@ model: sonnet
 area: [spoolman]
 story: US37
 milestone: "VSS:M4"
-sprint: "VSS:SP35"
+sprint: "VSS:SP36"
 depends_on: [83, PRN-325]
 created: 2026-10-25
 ---

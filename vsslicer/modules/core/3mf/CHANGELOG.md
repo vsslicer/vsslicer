@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- Fixed: the Bambu reader keeps at most 1,000 missing-component notices and adds one 'N more notices suppressed.' line (VWR-405).
+- Added: read Bambu and Orca plates (`Project.plates`: names, lock, instances, thumbnails, G-code part, slice time, weight, filaments, warnings, `plate_N.json` layout); `Instance.plateId` set for Bambu and Orca (VWR-23).
+- Fixed: readProject parses the root model once instead of two or three times (readModelOnce, shared by dialect detection, readers and the core fallback) (VWR-401).
+- VWR-32: 500 MB 3MF generator (test/large/generate.ts) and run.ts gate: opened through readInNodeWorker with host-thread CPU between event-loop turns under 50 ms, counted through the turn after the worker returns, and peak RSS under 1536 MB (test/large/budget.json). Elapsed time is not gated, so the gate cannot see the host blocked while waiting off-CPU (Atomics.wait, sync I/O).
+- Fixed: the worker no longer crashes with a stack overflow when a result holds more than about 125,000 items in one array, set or object (painted Bambu/Orca objects) (VWR-400).
+- Bambu and Orca projects expose custom G-code per layer (per plate), layer config ranges, layer height profiles and cut information (Project.customGcodes, layerRanges, layerHeightProfiles, cuts) (VWR-24).
+
 ## 0.2.0
 
 - VWR-22: Bambu and Orca objects, parts and instances (`readBambuObjects`, `readModelSettings`): `model_settings.config` object and part metadata, part `subtype` (modifiers, negative volumes, enforcers, blockers), per-object config, one instance per build item; `readModel` keeps raw per-triangle attributes (painting) in `CoreObject.triangleAttributes`, carried to `ModelPart.triangleAttributes`. `createBambuReader` now takes only the dialect.

@@ -6,7 +6,7 @@ priority: P2
 effort: S
 model: sonnet
 area: [3mf]
-sprint: "VSS:SP42"
+sprint: "VSS:SP48"
 depends_on: [22]
 created: 2026-10-26
 ---

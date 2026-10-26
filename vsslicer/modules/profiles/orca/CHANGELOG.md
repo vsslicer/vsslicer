@@ -1,7 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
+- Added: `exportBambuBundle` writes Bambu Studio `.bbscfg` and `.bbsflmt` bundles without host or credential keys, each preset with the semver `version`, `*_settings_id` and `from` Studio needs to load it (PRF-109).
+- Added: `readOrcaInstances` reads Orca and Bambu user machine presets as printer instances (the model and nozzle ids `splitOrcaPrinters` makes, the print host connection); the credential is returned beside the entity, and an unknown host type or a name repeated across user folders gives a diagnostic (PRF-90).
+- Added: `exportOrcaBundle` writes `.orca_printer`, `.orca_filament` and `.orca_bundle` from entities (preset named by the entity's name, offline bundle id, Orca's seven host and credential keys erased); `importOrcaBundle` keeps each preset's file layout so an untouched bundle re-exports byte for byte (PRF-107).
+- Added: `importBambuBundle` reads Bambu Studio `.bbscfg` and `.bbsflmt` bundles into an ImportResult; ajv is a devDependency for the schema test (PRF-108).
+- Added: `importOrcaBundle` reads `.orca_printer`, `.orca_filament` and `.orca_bundle` into printer, material and process entities; `readBundleArchive` takes `{ lenient }` and returns `missing` (PRF-106).
 - PRF-128: 20 Orca and Bambu tuples (printer, filament, process) checked against OrcaSlicer CLI exports and hand-checked values (`test/tuples/`, upstream fixtures with PROVENANCE).
 - PRF-204: the Orca tree reader and folder loader cap diagnostics at 1,000 (plus one suppressed line) and count every folder entry against `maxFiles`.
 - PRF-53: native export to Orca and Bambu Studio preset JSON: `readOrcaJson` keeps each member's source text; `writeOrcaJson` and `writeOrcaUserPreset` write `inherits`, `from`, `"nil"` and keyed extruder-variant values back to arrays; unchanged presets export byte for byte.

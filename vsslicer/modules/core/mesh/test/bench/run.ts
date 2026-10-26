@@ -8,6 +8,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { cpus, platform, release, tmpdir, totalmem } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { STAGES, type Stage } from './stages.ts';
 
 const BUDGET = new URL('./budget.json', import.meta.url);
@@ -40,7 +41,7 @@ const dir = mkdtempSync(join(tmpdir(), 'mesh-bench-'));
 const failures: string[] = [];
 
 const child = (script: string, arg: string): Case => {
-  const r = spawnSync(process.execPath, [new URL(script, import.meta.url).pathname, arg], {
+  const r = spawnSync(process.execPath, [fileURLToPath(new URL(script, import.meta.url)), arg], {
     encoding: 'utf8',
     maxBuffer: 1 << 20,
     env: { ...process.env, NODE_OPTIONS: '--no-warnings' },
@@ -53,7 +54,7 @@ try {
   for (const m of sizes) {
     const name = `${m}M`;
     const stl = join(dir, `${name}.stl`);
-    const generator = new URL('../../scripts/generate-large-fixture.mjs', import.meta.url).pathname;
+    const generator = fileURLToPath(new URL('../../scripts/generate-large-fixture.mjs', import.meta.url));
     execFileSync(process.execPath, [generator, String(Math.round(m * 1e6)), stl, '1']);
     for (const host of hosts) {
       const got = child(HOSTS[host], stl);

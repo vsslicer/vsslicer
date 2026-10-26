@@ -6,7 +6,9 @@
 // (ViewerImpl.cpp also: Vojtěch Bubník @bubnikv, Oleksandra Iushchenko @YuSanka). OrcaSlicer contributors made
 // the changes upstream marks ORCA that are kept here: top specular 0.6 * 0.25 and role colours 15-19.
 // Changes: reads the 28-byte move record through MOVE_TEXTURE_GLSL, colours in the shader from a palette
-// texture, range and masks as uniforms; joints, translucency, shadows and clipping dropped (caps always pointy).
+// texture, range and masks as uniforms; fan and temperature (ViewerImpl.cpp:1766-1770, per vertex upstream)
+// read from step tables folded from the parser's state changes, as D17 keeps them out of the move record;
+// joints, translucency, shadows and clipping dropped (caps always pointy).
 import { MOVE_TEXTURE_GLSL } from './move-textures.ts';
 
 /** Corner indices of one segment's prism, 8 corners (`gl_VertexID`), from SegmentTemplate.cpp. */
@@ -76,7 +78,7 @@ export const SEGMENT_VS = /* glsl */ `#version 300 es
 precision highp float;
 precision highp int;
 ${MOVE_TEXTURE_GLSL}
-uniform highp usampler2D uLayers;
+uniform highp usampler2D uSteps;
 uniform lowp sampler2D uPalette;
 uniform mat4 uView;
 uniform mat4 uProjection;
@@ -86,6 +88,8 @@ uniform int uChunkFirst;
 uniform int uRecordCount;
 uniform uint uNextStart;
 uniform int uLayerCount;
+uniform ivec2 uFan;
+uniform ivec2 uTemperature;
 uniform uint uRoleMask;
 uniform uint uHiddenFlags;
 uniform uint uMode;
@@ -128,16 +132,18 @@ float speed(int b, float len) {
   return finite(t0) && finite(t1) && d > 0.0 ? len / d : -1.0;
 }
 
-float layerTime(int g) {
-  if (uLayerCount == 0) return -1.0;
-  int w = textureSize(uLayers, 0).x;
-  int lo = 0;
-  int hi = uLayerCount - 1;
+// Value of the last of rows first .. first + count - 1 of uSteps ([first move, f32 bits]) starting at or
+// before move g (the first row if none does); -1 when there are no rows or the value is not finite.
+float stepValue(int first, int count, int g) {
+  if (count == 0) return -1.0;
+  int w = textureSize(uSteps, 0).x;
+  int lo = first;
+  int hi = first + count - 1;
   while (lo < hi) {
     int mid = (lo + hi + 1) / 2;
-    if (int(texelFetch(uLayers, ivec2(mid % w, mid / w), 0).r) <= g) lo = mid; else hi = mid - 1;
+    if (int(texelFetch(uSteps, ivec2(mid % w, mid / w), 0).r) <= g) lo = mid; else hi = mid - 1;
   }
-  uint t = texelFetch(uLayers, ivec2(lo % w, lo / w), 0).g;
+  uint t = texelFetch(uSteps, ivec2(lo % w, lo / w), 0).g;
   return finite(t) ? uintBitsToFloat(t) : -1.0;
 }
 
@@ -196,7 +202,9 @@ void main() {
   else if (uMode == 2u) base = palette(1, int(rtf.y % ${TOOL_COLORS.length}u));
   else if (uMode == 4u) base = gradient(rawWidth);
   else if (uMode == 5u) base = gradient(flow);
-  else base = gradient(uMode == 1u ? speed(b, line_len) : layerTime(uChunkFirst + b));
+  else if (uMode == 6u) base = gradient(stepValue(uFan.x, uFan.y, uChunkFirst + b));
+  else if (uMode == 7u) base = gradient(stepValue(uTemperature.x, uTemperature.y, uChunkFirst + b));
+  else base = gradient(uMode == 1u ? speed(b, line_len) : stepValue(0, uLayerCount, uChunkFirst + b));
   vColor = base * (ambient + emission + direct_lighting(eye_position, eye_normal));
   gl_Position = uProjection * vec4(eye_position, 1.0);
 }`;

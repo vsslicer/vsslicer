@@ -78,15 +78,139 @@ export interface Instance {
   readonly plateId?: number;
 }
 
+/** One object instance on a plate: the object's id and which of its instances (0-based) sits there. */
+export interface PlateInstance {
+  readonly objectId: number;
+  readonly instanceId: number;
+  /** Bambu's `identify_id`, the id the G-code and the slice info refer to the instance by. */
+  readonly identifyId?: number;
+}
+
+/** Filament use of a sliced plate (`slice_info.config` `<filament>`). */
+export interface SliceFilament {
+  /** 1-based filament slot as written. */
+  readonly id: number;
+  readonly type: string;
+  readonly color: string;
+  readonly usedMeters: number;
+  readonly usedGrams: number;
+  readonly trayInfoId: string;
+  readonly usedForObject?: boolean;
+  readonly usedForSupport?: boolean;
+}
+
+export interface SliceWarning {
+  readonly message: string;
+  readonly level: number;
+  readonly errorCode: string;
+}
+
+/** What the slicer recorded about a sliced plate. Unread plate metadata stays raw in `attributes`. */
+export interface SliceInfo {
+  readonly predictionSeconds?: number;
+  readonly weightGrams?: number;
+  readonly printerModelId?: string;
+  readonly supportUsed?: boolean;
+  /** The toolpath reaches outside the bed (`outside`). */
+  readonly toolpathOutside?: boolean;
+  readonly filaments: readonly SliceFilament[];
+  readonly warnings: readonly SliceWarning[];
+  readonly attributes: ReadonlyMap<string, string>;
+}
+
+/** Object box on a plate (`plate_N.json` `bbox_objects`). */
+export interface PlateObjectBox {
+  readonly id: number;
+  readonly name: string;
+  /** min x, min y, max x, max y as written. */
+  readonly bbox: readonly number[];
+}
+
+/** The layout file `plate_N.json`. */
+export interface PlateLayout {
+  readonly bboxAll: readonly number[];
+  readonly filamentIds: readonly number[];
+  readonly filamentColors: readonly string[];
+  readonly objects: readonly PlateObjectBox[];
+  readonly nozzleDiameter?: number;
+  readonly bedType?: string;
+  readonly version?: number;
+}
+
 export interface Plate {
   readonly id: number;
   readonly name?: string;
+  /** Plate metadata not interpreted below, key to value as written. */
   readonly config: ReadonlyMap<string, string>;
+  readonly locked?: boolean;
+  /** Instances assigned to the plate. Absent in dialects without plate assignment. */
+  readonly instances?: readonly PlateInstance[];
+  /** Names of package parts (`Metadata/plate_N.png` and so on), as written. */
+  readonly thumbnail?: string;
+  readonly noLightThumbnail?: string;
+  readonly topImage?: string;
+  readonly pickImage?: string;
+  /** Part holding the plate's G-code, when the package carries it. */
+  readonly gcodePart?: string;
+  /** Present when the package carries slice info for the plate; absent means unsliced. */
+  readonly slice?: SliceInfo;
+  readonly layout?: PlateLayout;
+}
+
+/** One custom G-code at a print height (colour change, pause, template, ...). Unknown XML attributes stay in `attributes`. */
+export interface CustomGcode {
+  readonly printZ: number;
+  /** Upstream `CustomGCode::Type` as written: 0 colour change, 1 pause, 2 tool change, 3 template, 4 custom. */
+  readonly type: number;
+  readonly extruder: number;
+  readonly color: string;
+  readonly extra: string;
+  readonly attributes: ReadonlyMap<string, string>;
+}
+
+export interface PlateCustomGcodes {
+  readonly plateId: number;
+  /** `SingleExtruder`, `MultiAsSingle` or `MultiExtruder` as written; absent when the file has no mode. */
+  readonly mode?: string;
+  readonly items: readonly CustomGcode[];
+}
+
+/** Per-object settings over a z range (`layer_config_ranges.xml`), option key to value as written. */
+export interface LayerRange {
+  readonly objectId: number;
+  readonly minZ: number;
+  readonly maxZ: number;
+  readonly options: ReadonlyMap<string, string>;
+}
+
+/** Variable layer height profile of an object: z, height pairs flattened (`layer_heights_profile.txt`). */
+export interface LayerHeightProfile {
+  readonly objectId: number;
+  readonly profile: readonly number[];
+}
+
+export interface CutConnector {
+  readonly volumeId: number;
+  readonly type: number;
+  readonly rTolerance: number;
+  readonly hTolerance: number;
+  readonly attributes: ReadonlyMap<string, string>;
+}
+
+/** Cut information of an object (`cut_information.xml`). */
+export interface CutInfo {
+  readonly objectId: number;
+  readonly cutId?: { readonly id: number; readonly checkSum: number; readonly connectorsCount: number };
+  readonly connectors: readonly CutConnector[];
 }
 
 export interface Project {
   readonly dialect: Dialect;
   readonly plates: readonly Plate[];
+  readonly customGcodes: readonly PlateCustomGcodes[];
+  readonly layerRanges: readonly LayerRange[];
+  readonly layerHeightProfiles: readonly LayerHeightProfile[];
+  readonly cuts: readonly CutInfo[];
   readonly objects: readonly ModelObject[];
   readonly instances: readonly Instance[];
   /** Raw project config exactly as stored (text or JSON), by part name. Empty when absent. */
@@ -112,6 +236,10 @@ export function createProject(init: Partial<Project> & Pick<Project, 'dialect'>)
   }
   return {
     plates: [],
+    customGcodes: [],
+    layerRanges: [],
+    layerHeightProfiles: [],
+    cuts: [],
     rawConfig: new Map(),
     preserved: [],
     ...init,

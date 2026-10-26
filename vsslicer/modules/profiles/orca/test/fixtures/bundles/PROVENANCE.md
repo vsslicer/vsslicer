@@ -1,0 +1,14 @@
+# Bundle fixtures
+
+Layout source: OrcaSlicer@09aa0114b4e1 `src/slic3r/GUI/ExportPresetBundleDialog.cpp:374-463`; Bambu Studio@79df7ae
+shares the format (`.bbscfg`). Licence of both: AGPL-3.0; only the format is used, no upstream code is copied.
+
+| Folder                                            | Kind                           | App / version                                | Origin                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------- | ------------------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orca-documented/documented.orca_printer`         | documented layout              | Orca 2.5.0-dev layout (`@09aa0114`)          | Invented presets, zipped by this module's `writeBundleArchive` (`clock` 20261026120000).                                                                                                                                                                                                                                        |
+| `bambu-documented/documented.bbscfg`              | documented layout              | Bambu Studio 02.08.02.61 layout (`@79df7ae`) | Invented presets, zipped by `writeBundleArchive`.                                                                                                                                                                                                                                                                               |
+| `bambu-studio-saved-presets/saved-presets.bbscfg` | real presets, assembled bundle | Bambu Studio 02.08.02.61                     | Three user presets as Bambu Studio saved them under `~/Library/Application Support/BambuStudio/user/<id>/` (machine `Bambu Lab X1 Carbon 0.4 nozzle - NoAuxFan`, filament `Generic PLA - Copy`, process `0.20mm Standard ASA-CF`), copied byte for byte, zipped by `writeBundleArchive`. Account-linked `.info` files left out. |
+
+Not a GUI export: the zip container of `bambu-studio-saved-presets` was written by our writer, not by Bambu Studio's
+Export Preset Bundle dialog. No real bundle saved by OrcaSlicer exists yet (no user presets on the capture machine, and the
+export dialog cannot be driven from a script); capture one by hand and add it as `orca-saved/`.

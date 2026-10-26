@@ -52,3 +52,14 @@ export {
 } from './adapters/export/cura/write.ts';
 export { readCuraMachineInstances } from './adapters/instances/read.ts';
 export type { CuraInstancesImport } from './adapters/instances/read.ts';
+export {
+  fetchCuraResources,
+  readCuraTar,
+  CURA_PINNED_COMMIT,
+  CURA_ORIGIN,
+  CURA_FETCH_LIMITS,
+} from './adapters/download/fetch.ts';
+export type { CuraFetchLimits, CuraFetchOptions, CuraFetchResult } from './adapters/download/fetch.ts';
+export { readCuraProfile } from './adapters/bundles/cura/read.ts';
+export { writeCuraProfile } from './adapters/bundles/cura/write.ts';
+export type { CuraProfileExport } from './adapters/bundles/cura/write.ts';

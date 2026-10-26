@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- Added: fan and temperature colour modes (GCP-107). `ColorMode.Fan` (part-cooling fan duty, %) and `ColorMode.Temperature` (hotend target of the move's tool, °C). `createSegmentRenderer` takes the parser's state-change tables as the `stateChanges` option, folds them into step tables in the existing step texture and exposes `ranges.fan` and `ranges.temperature`. Switching modes still uploads nothing.
+
 ## 0.7.0
 
 - GCP-113: `GlFailureCause` gains `'restore'` with its message, for a context restore that fails.

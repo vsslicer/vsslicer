@@ -107,7 +107,7 @@ export function curaResourceOf(path: string): { kind: CuraResourceKind; id: stri
 }
 
 /** Python's `urllib.parse.unquote_plus`, leaving a malformed escape as written. */
-function unquotePlus(s: string): string {
+export function unquotePlus(s: string): string {
   const spaced = s.replaceAll('+', ' ');
   try {
     return decodeURIComponent(spaced);

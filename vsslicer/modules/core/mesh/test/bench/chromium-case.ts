@@ -9,6 +9,7 @@ import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { Stage, StageResult } from './stages.ts';
 
 const MB = 1024 * 1024;
@@ -39,9 +40,9 @@ const treeRss = (): number => {
 };
 
 const dir = mkdtempSync(join(tmpdir(), 'mesh-bench-'));
-const esbuild = new URL('../../node_modules/.bin/esbuild', import.meta.url).pathname;
+const esbuild = fileURLToPath(new URL('../../node_modules/.bin/esbuild', import.meta.url));
 execFileSync(esbuild, [
-  new URL('./browser-worker.ts', import.meta.url).pathname,
+  fileURLToPath(new URL('./browser-worker.ts', import.meta.url)),
   '--bundle',
   '--format=iife',
   `--outfile=${join(dir, 'worker.js')}`,

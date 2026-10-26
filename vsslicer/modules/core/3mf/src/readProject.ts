@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { readProject as readCore } from './adapters/model/resolveProject.ts';
-import { readModel } from './adapters/model/readModel.ts';
+import { readModelOnce } from './adapters/model/readModelOnce.ts';
 import { createReadProject } from './application/readProject.ts';
 import { createBambuReader } from './adapters/bambu/readBambu.ts';
 import { createCuraReader } from './adapters/cura/readCura.ts';
@@ -16,5 +16,5 @@ export const readProject = createReadProject({
     ['prusa2', readPrusa2],
   ]),
   readMetadata: (pkg) =>
-    readModel(pkg.parts.find((p) => p.name === pkg.rootModel)?.bytes ?? new Uint8Array(), pkg.rootModel).metadata,
+    readModelOnce(pkg.parts.find((p) => p.name === pkg.rootModel)?.bytes ?? new Uint8Array(), pkg.rootModel).metadata,
 });

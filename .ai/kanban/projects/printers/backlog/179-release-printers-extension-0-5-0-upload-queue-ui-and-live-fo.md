@@ -8,7 +8,7 @@ model: sonnet
 area: [daemon]
 story: US31
 milestone: "VSS:M3"
-sprint: "VSS:SP30"
+sprint: "VSS:SP31"
 depends_on: [178, 177, 176]
 created: 2026-10-25
 ---

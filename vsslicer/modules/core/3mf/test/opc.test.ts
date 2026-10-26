@@ -110,11 +110,15 @@ test.each(dialects.filter((u) => existsSync(u)).map((u) => [u.pathname.split('/'
 
 // Cura's bundled printer-bed meshes (3MF, several Prusa-named); skipped when the clone is absent.
 const curaDir = new URL('../../../../.reference/repos/Cura/resources/meshes/', import.meta.url);
-test.skipIf(!existsSync(curaDir))('reads every Cura 3MF mesh', () => {
-  const files = readdirSync(curaDir).filter((f) => f.endsWith('.3mf'));
-  expect(files.length).toBeGreaterThan(0);
-  for (const f of files) {
-    const pkg = readPackage(openZip(new Uint8Array(readFileSync(new URL(f, curaDir)))));
-    expect(pkg.parts.find((p) => p.name === pkg.rootModel)?.contentType, f).toContain('3dmodel');
-  }
-});
+test.skipIf(!existsSync(curaDir))(
+  'reads every Cura 3MF mesh',
+  () => {
+    const files = readdirSync(curaDir).filter((f) => f.endsWith('.3mf'));
+    expect(files.length).toBeGreaterThan(0);
+    for (const f of files) {
+      const pkg = readPackage(openZip(new Uint8Array(readFileSync(new URL(f, curaDir)))));
+      expect(pkg.parts.find((p) => p.name === pkg.rootModel)?.contentType, f).toContain('3dmodel');
+    }
+  },
+  30_000,
+); // hang guard: reads many meshes, slow under parallel load

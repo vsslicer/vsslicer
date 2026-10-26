@@ -6,6 +6,7 @@ import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
 // Needs Playwright and its Chromium, which the mesh module does not depend on: set PLAYWRIGHT_MODULE to the
@@ -32,10 +33,10 @@ let browser: any;
 beforeAll(async () => {
   if (!playwright) return;
   dir = mkdtempSync(join(tmpdir(), 'mesh-web-'));
-  const esbuild = new URL('../node_modules/.bin/esbuild', import.meta.url).pathname;
+  const esbuild = fileURLToPath(new URL('../node_modules/.bin/esbuild', import.meta.url));
   const bundle = (entry: string, out: string) =>
     execFileSync(esbuild, [
-      new URL(entry, import.meta.url).pathname,
+      fileURLToPath(new URL(entry, import.meta.url)),
       '--bundle',
       '--format=iife',
       `--outfile=${join(dir, out)}`,

@@ -13,7 +13,12 @@
 import type { Diagnostic, InstanceImport, PrinterInstance, SourceFile } from '@vsslicer/profile-api';
 import { validateConnection } from '@vsslicer/profile-api';
 import { parseInstCfg } from '../definitions/inst-cfg.ts';
-import { MAX_RESOURCE_DIAGNOSTICS, resolveResourceLimits, type CuraResourceLimits } from '../definitions/read.ts';
+import {
+  MAX_RESOURCE_DIAGNOSTICS,
+  resolveResourceLimits,
+  unquotePlus,
+  type CuraResourceLimits,
+} from '../definitions/read.ts';
 
 const DEFINITION_CHANGES = 6;
 const STACK_VERSION = '6';
@@ -40,7 +45,7 @@ function stemOf(path: string, dir: string, suffix: string): string | undefined {
   const name = parts.at(-1)!;
   if (parts.length !== 2 || parts[0] !== dir || !name.endsWith(suffix) || name.length === suffix.length)
     return undefined;
-  return name.slice(0, -suffix.length);
+  return unquotePlus(name.slice(0, -suffix.length)); // Uranium saves ids as quote_plus(id)
 }
 
 const diameter = (v: string | undefined): number | undefined => {

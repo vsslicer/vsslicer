@@ -110,6 +110,7 @@ describe('readProject on fixtures', () => {
       const p = readProject(pk);
       expect(['core', 'bambu', 'orca', 'prusa2', 'prusa3', 'cura']).toContain(p.dialect);
       expect(p.objects.length).toBeGreaterThan(0);
+      expect(p.notices ?? []).toEqual([]);
       const kept = new Set(p.preserved.map((x) => x.name));
       for (const part of pk.parts)
         if (!part.name.toLowerCase().endsWith('.model'))
@@ -122,5 +123,11 @@ describe('readProject on fixtures', () => {
     expect(p.dialect).toBe('bambu');
     expect(p.notices ?? []).toEqual([]);
     expect(p.rawConfig.has('Metadata/project_settings.config')).toBe(true);
+  });
+
+  test('a PrusaSlicer 2.x file is read by the prusa2 reader, not the core fallback', () => {
+    const p = readProject(openPackage(readFileSync(join(__dirname, 'fixtures/real/fdm_roundtrip1.3mf'))));
+    expect(p.dialect).toBe('prusa2');
+    expect(p.notices ?? []).toEqual([]);
   });
 });

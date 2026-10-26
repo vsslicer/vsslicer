@@ -37,6 +37,33 @@ describe('readCuraMachineInstances', () => {
     expect(JSON.stringify(r.instances[0]!.entity)).not.toContain('SECRET');
     expect(JSON.stringify(r.native)).not.toContain('SECRET');
   });
+  test('a quote_plus file name (space, %2B, unicode) finds its definition_changes', () => {
+    for (const [name, id] of [
+      ['Creality+Ender-3', 'Creality Ender-3'],
+      ['a%2Bb+c', 'a+b c'],
+      ['caf%C3%A9', 'café'],
+    ] as const) {
+      const r = readCuraMachineInstances([
+        file(`machine_instances/${name}.global.cfg`, stack(id, '', `6 = ${id}_settings\n7 = printer_a`)),
+        file(
+          `definition_changes/${name}_settings.inst.cfg`,
+          changes('', 'machine_nozzle_size = 0.6').replace('\nname = \n', '\n'),
+        ),
+      ]);
+      expect(r.diagnostics).toEqual([]);
+      expect(r.instances[0]!.entity.toolheads).toEqual([{ slot: 0, nozzle: '0.6' }]);
+    }
+  });
+  test('a malformed escape in a file name stays as written, with + as space', () => {
+    const r = readCuraMachineInstances([
+      file('machine_instances/m%ZZ+x.global.cfg', stack('m%ZZ x', '', '6 = m%ZZ x_settings\n7 = printer_a')),
+      file(
+        'definition_changes/m%ZZ+x_settings.inst.cfg',
+        changes('', 'machine_nozzle_size = 0.6').replace('\nname = \n', '\n'),
+      ),
+    ]);
+    expect(r.instances[0]!.entity.toolheads).toEqual([{ slot: 0, nozzle: '0.6' }]);
+  });
   test('only the position-0 extruder sets the nozzle', () => {
     const r = readCuraMachineInstances([
       file('machine_instances/m1.global.cfg', stack('m1', '')),

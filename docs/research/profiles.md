@@ -324,7 +324,7 @@ Places where conversion loses information, in addition to the notes above:
 | Versioning | vendor `config_version` + `.idx` ranges | new `.idx` (`1.0.x`) | vendor `version` (4-part) | `setting_version` per container + upgrade plugins |
 | Update channel | preset-repo-api.prusa3d.com zip of indices | local `RepositoryManifest.json` (test URLs) | check-version.orcaslicer.com (opt-in) / Bambu OTA via plugin | app releases + Marketplace packages |
 | User sync | none built in (snapshots only) | not seen | Orca cloud / Bambu cloud via `.info` sidecar | none (Ultimaker account backups, unverified) |
-| Portable bundle | config bundle `.ini` export | n/a in alpha | `.orca_printer`, `.orca_filament`, `.orca_bundle`; `.bbscfg`, `.bbsflmt` | `.curaprofile` (unverified), `.curapackage` |
+| Portable bundle | config bundle `.ini` export | n/a in alpha | `.orca_printer`, `.orca_filament`, `.orca_bundle`; `.bbscfg`, `.bbsflmt` | `.curaprofile` (flat STORED zip of `quality_changes` `.inst.cfg` entries, one global and one per extruder, verified on seven Cura 5.0-5.3 files: `vsslicer/modules/profiles-cura/docs/spikes/curaprofile.md`), `.curapackage` |
 
 ## Implications for VSSlicer
 

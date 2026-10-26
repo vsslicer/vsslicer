@@ -1,0 +1,13 @@
+{
+  "from": "User",
+  "inherits": "MyMarlin 0.4 nozzle",
+  "is_custom_defined": "0",
+  "name": "MyMarlin 0.4 nozzle - Octo",
+  "print_host": "https://octopi.local",
+  "printer_settings_id": "MyMarlin 0.4 nozzle - Octo",
+  "printhost_apikey": "unused-key",
+  "printhost_authorization_type": "user",
+  "printhost_password": "fixture-password-0002",
+  "printhost_user": "pi",
+  "version": "2.5.0.0"
+}

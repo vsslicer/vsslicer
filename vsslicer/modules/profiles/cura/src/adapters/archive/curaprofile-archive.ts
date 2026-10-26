@@ -8,7 +8,7 @@
 //     archive's ZIP_DEFLATED: the entry is STORED and dated 1980-01-01 (checked with CPython 3.9 zipfile).
 // The same approach as profiles-orca's bundle reader (central directory validated before a byte is inflated,
 // streaming inflate capped at the declared size), not shared code. An archive is untrusted input.
-import { Inflate, zipSync, type Zippable } from 'fflate';
+import { Inflate } from 'fflate';
 
 export interface CuraArchiveLimits {
   /** Most entries, directories included. */
@@ -234,8 +234,55 @@ function inflate(packed: Uint8Array, e: { name: string; method: number; size: nu
   return out;
 }
 
-// Python's ZipInfo default date; local-time components because zip DOS times are local.
-const FIXED_MTIME = new Date(1980, 0, 1, 0, 0, 0);
+// ZipFile._open_to_write sets this when a ZipInfo has none (CPython zipfile/__init__.py:1851-1852; spike PRF-111).
+const CURA_ENTRY_ATTRS = 0o600 << 16;
+
+/**
+ * A STORED zip as Python's `ZipFile` writes a bare `ZipInfo`: version 2.0 from FAT, no flags (UTF-8 flag for a non-ASCII
+ * name), 1980-01-01 00:00, `0o600` attributes. Written by hand because fflate's `zipSync` collects entries in a plain
+ * object, which loses an entry named `__proto__`.
+ */
+function storedZip(files: { name: Uint8Array; bytes: Uint8Array; crc: number }[]): Uint8Array {
+  const locals = files.reduce((n, f) => n + 30 + f.name.length + f.bytes.length, 0);
+  const centrals = files.reduce((n, f) => n + 46 + f.name.length, 0);
+  const out = new Uint8Array(locals + centrals + 22);
+  const v = new DataView(out.buffer);
+  let at = 0;
+  let cd = locals;
+  for (const f of files) {
+    const flags = f.name.some((b) => b > 127) ? 0x800 : 0;
+    v.setUint32(at, 0x04034b50, true);
+    v.setUint16(at + 4, 20, true);
+    v.setUint16(at + 6, flags, true);
+    v.setUint16(at + 12, 0x21, true); // date 1980-01-01; method and time are 0
+    v.setUint32(at + 14, f.crc, true);
+    v.setUint32(at + 18, f.bytes.length, true);
+    v.setUint32(at + 22, f.bytes.length, true);
+    v.setUint16(at + 26, f.name.length, true);
+    out.set(f.name, at + 30);
+    out.set(f.bytes, at + 30 + f.name.length);
+    v.setUint32(cd, 0x02014b50, true);
+    v.setUint16(cd + 4, 20, true);
+    v.setUint16(cd + 6, 20, true);
+    v.setUint16(cd + 8, flags, true);
+    v.setUint16(cd + 14, 0x21, true);
+    v.setUint32(cd + 16, f.crc, true);
+    v.setUint32(cd + 20, f.bytes.length, true);
+    v.setUint32(cd + 24, f.bytes.length, true);
+    v.setUint16(cd + 28, f.name.length, true);
+    v.setUint32(cd + 38, CURA_ENTRY_ATTRS, true);
+    v.setUint32(cd + 42, at, true);
+    out.set(f.name, cd + 46);
+    at += 30 + f.name.length + f.bytes.length;
+    cd += 46 + f.name.length;
+  }
+  v.setUint32(cd, 0x06054b50, true);
+  v.setUint16(cd + 8, files.length, true);
+  v.setUint16(cd + 10, files.length, true);
+  v.setUint32(cd + 12, centrals, true);
+  v.setUint32(cd + 16, locals, true);
+  return out;
+}
 
 /** Writes profiles as Cura does: one STORED entry per profile, named by its id, holding its UTF-8 text. */
 export function writeCuraProfileArchive(
@@ -244,7 +291,7 @@ export function writeCuraProfileArchive(
 ): Uint8Array {
   const lim = resolveLimits(limits);
   if (profiles.length > lim.maxEntries) fail(`${profiles.length} profiles, over the limit of ${lim.maxEntries}`);
-  const files: Zippable = {};
+  const files: { name: Uint8Array; bytes: Uint8Array; crc: number }[] = [];
   const taken = new Set<string>();
   let total = 0;
   for (const { id, text } of profiles) {
@@ -260,7 +307,7 @@ export function writeCuraProfileArchive(
       fail(`profile ${shown(id)} is ${bytes.length} bytes, over the limit of ${lim.maxEntryBytes}`);
     total += bytes.length;
     if (total > lim.maxTotalBytes) fail(`profiles are over ${lim.maxTotalBytes} bytes in total`);
-    files[id] = [bytes, { mtime: FIXED_MTIME }];
+    files.push({ name: encoder.encode(id), bytes, crc: crc32(bytes) });
   }
-  return zipSync(files, { level: 0 });
+  return storedZip(files);
 }

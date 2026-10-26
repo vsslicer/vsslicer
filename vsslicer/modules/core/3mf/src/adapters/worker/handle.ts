@@ -20,8 +20,9 @@ export function collectBuffers(root: unknown): ArrayBuffer[] {
     if (ArrayBuffer.isView(v)) {
       if (v.buffer instanceof ArrayBuffer) buffers.add(v.buffer);
     } else if (v instanceof Map) for (const [k, x] of v) stack.push(k, x);
-    else if (v instanceof Set || Array.isArray(v)) stack.push(...v);
-    else stack.push(...Object.values(v));
+    // Loops, not push(...spread): a spread of ~125,000+ items overflows the call stack.
+    else if (v instanceof Set || Array.isArray(v)) for (const x of v) stack.push(x);
+    else for (const x of Object.values(v)) stack.push(x);
   }
   return [...buffers];
 }

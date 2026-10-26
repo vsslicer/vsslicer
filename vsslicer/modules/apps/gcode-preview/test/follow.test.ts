@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import test from 'node:test';
 import assert from 'node:assert';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { MOVE_STRIDE, MoveRole, writeMove, type ParsedFile } from '@vsslicer/gcode-api';
 import { parsePosition, resolvePosition, type PrintPosition } from '../src/domain/print-position.ts';
-import { createFollower } from '../src/application/follow.ts';
+import { createFollower, createWatchdog } from '../src/application/follow.ts';
 import { openPreview, type PreviewSession } from '../src/application/preview-session.ts';
 import { Command, registerCommands, type CommandsApi } from '../src/presentation/commands.ts';
 import type { PreviewProbe } from '../src/presentation/provider.ts';
@@ -291,7 +292,11 @@ class FakeUri {
   }
 }
 
-const setup = () => {
+const setup = (
+  local: { size: number; bytes?: Uint8Array; revealError?: Error; hold?: Promise<void> } = { size: 0 },
+) => {
+  const messages: string[] = [];
+  const timers: { fn: () => void; ms: number; live: boolean }[] = [];
   const handlers = new Map<string, (...a: unknown[]) => unknown>();
   const opened: unknown[][] = [];
   const sessions = new Map<string, PreviewSession>();
@@ -301,10 +306,21 @@ const setup = () => {
     ({
       state: Promise.resolve({ status: 'ready' }),
       setPlate: async (p: number) => (plates.push(p), { status: 'ready' }),
-      reveal: async (p: PrintPosition) => (reveals.push(p), { by: 'layer', move: 0 }),
+      reveal: async (p: PrintPosition) => {
+        if (local.revealError) throw local.revealError;
+        reveals.push(p);
+        return p.fileOffset ? { by: 'fileOffset', move: 0, warning: 'past the last move' } : { by: 'layer', move: 0 };
+      },
     }) as unknown as PreviewSession;
   const api = {
     Uri: FakeUri,
+    window: { showWarningMessage: async (m: string) => void messages.push(m) },
+    workspace: {
+      fs: {
+        stat: async () => (await local.hold, { size: local.size }),
+        readFile: async () => local.bytes ?? new Uint8Array(),
+      },
+    },
     commands: {
       registerCommand: (id: string, h: (...a: unknown[]) => unknown) => (handlers.set(id, h), { dispose() {} }),
       executeCommand: async (...a: unknown[]) => {
@@ -315,8 +331,21 @@ const setup = () => {
   } as unknown as CommandsApi;
   const probe = { session: (k: string) => sessions.get(k) } as PreviewProbe;
   const context = { subscriptions: [] as { dispose(): void }[] };
-  const exported = registerCommands(context, api, probe);
-  return { exported, handlers, opened, sessions, reveals, plates, context };
+  const clock = {
+    set: (fn: () => void, ms: number) => {
+      const t = { fn, ms, live: true };
+      timers.push(t);
+      return () => void (t.live = false);
+    },
+  };
+  const exported = registerCommands(context, api, probe, { staleMs: 5000, timers: clock });
+  const fire = () => {
+    const t = timers.filter((t) => t.live).at(-1)!;
+    t.live = false;
+    t.fn();
+  };
+  const live = () => timers.filter((t) => t.live).length;
+  return { exported, handlers, opened, sessions, reveals, plates, context, messages, fire, live, timers };
 };
 
 test('the commands exist, match the manifest, and are the exports', () => {
@@ -379,4 +408,104 @@ test('follow opens once, coalesces, validates before anything; stopFollow ends i
   await new Promise((r) => setTimeout(r, 10));
   assert.strictEqual(opened.length, 1);
   assert.deepStrictEqual(reveals.at(-1), { percent: 10 });
+});
+
+const tick = () => new Promise((r) => setTimeout(r, 10));
+
+test('no update for the stale time stops the follow with a message; every update restarts the timer', async () => {
+  const { exported, reveals, messages, fire, live, timers } = setup();
+  exported.follow('file:///a.gcode', { layer: 1 });
+  exported.follow('file:///a.gcode', { layer: 2 });
+  await tick();
+  assert.strictEqual(live(), 1, 'one timer runs, each update replaced the last');
+  assert.strictEqual(timers[0]!.ms, 5000);
+  fire();
+  assert.match(messages[0]!, /no position for 5 s/);
+  exported.follow('file:///a.gcode', { layer: 3 }); // a stopped follow starts afresh
+  await tick();
+  assert.strictEqual(reveals.at(-1)?.layer, 3);
+  exported.stopFollow('file:///a.gcode');
+  assert.strictEqual(live(), 0, 'stopFollow cancels the timer');
+  assert.strictEqual(messages.length, 1);
+});
+
+test('a size or MD5 mismatch with the printer file stops the follow with a message; a match goes on', async () => {
+  const bytes = new TextEncoder().encode('G1 X1\n');
+  const md5 = '5cf9e32d54f4a1e0a1b6a0c0b2d8bb0d'; // md5 of nothing in particular: only the wrong case needs a fixed value
+  const good = createHash('md5').update(bytes).digest('hex');
+  const run = async (file: { size?: number; md5?: string }) => {
+    const t = setup({ size: bytes.length, bytes });
+    t.exported.follow('file:///a.gcode', { layer: 1 }, file);
+    t.exported.follow('file:///a.gcode', { layer: 2 }, file);
+    await tick();
+    return t;
+  };
+  let t = await run({ size: bytes.length + 1 });
+  assert.deepStrictEqual(t.reveals, []);
+  assert.match(t.messages[0]!, /is 6 bytes but the printer's is 7/);
+  assert.strictEqual(t.live(), 0, 'the stopped follow has no timer');
+  t = await run({ md5 });
+  assert.deepStrictEqual(t.reveals, []);
+  assert.match(t.messages[0]!, new RegExp(`MD5 ${good}`));
+  t = await run({ size: bytes.length, md5: good.toUpperCase() });
+  assert.deepStrictEqual(t.reveals, [{ layer: 1 }, { layer: 2 }], 'a match follows, checked once');
+  assert.deepStrictEqual(t.messages, []);
+  const edge = setup({ size: 256 * 1024 * 1024, bytes: new Uint8Array(0) }); // the cap itself is hashed
+  edge.exported.follow('file:///a.gcode', { layer: 1 }, { md5: good });
+  await tick();
+  assert.match(edge.messages[0]!, /has MD5/);
+  const big = setup({ size: 256 * 1024 * 1024 + 1 });
+  big.exported.follow('file:///a.gcode', { layer: 1 }, { md5: good });
+  await tick();
+  assert.match(big.messages[0]!, /too large/);
+  for (const bad of [
+    {},
+    { size: -1 },
+    { size: 1.5 },
+    { md5: 'xyz' },
+    { md5: good.slice(1) },
+    { md5: good + '0' },
+    { md5: good, extra: 1 },
+    [],
+    null,
+  ])
+    assert.throws(() => setup().exported.follow('file:///a.gcode', { layer: 1 }, bad as never), TypeError);
+});
+
+test('a mismatch found after the follow was stopped stays quiet and leaves the new follow alone', async () => {
+  let release!: () => void;
+  const t = setup({ size: 1, hold: new Promise<void>((r) => (release = r)) });
+  t.exported.follow('file:///a.gcode', { layer: 1 }, { size: 2 });
+  await tick();
+  t.exported.stopFollow('file:///a.gcode');
+  t.exported.follow('file:///a.gcode', { layer: 2 });
+  release();
+  await tick();
+  assert.deepStrictEqual(t.messages, []);
+  assert.strictEqual(t.live(), 1, 'the new follow keeps its timer');
+});
+
+test('a position out of range shows a message and the feed goes on', async () => {
+  const t = setup({ size: 0, revealError: new RangeError('layer 99 is past the last layer (2)') });
+  t.exported.follow('file:///a.gcode', { layer: 99 });
+  await tick();
+  assert.deepStrictEqual(t.messages, ['Cannot follow: layer 99 is past the last layer (2)']);
+  assert.strictEqual(t.live(), 1, 'still following');
+  t.exported.follow('file:///a.gcode', { layer: 100 });
+  await tick();
+  assert.strictEqual(t.messages.length, 1, 'one notification per follow');
+  const c = setup();
+  c.exported.follow('file:///a.gcode', { fileOffset: 10 ** 9 }); // clamped: shown, with a warning
+  await tick();
+  assert.deepStrictEqual(c.messages, ['past the last move']);
+});
+
+test('the watchdog fires once after the time and refuses a bad time', () => {
+  const fns: (() => void)[] = [];
+  let n = 0;
+  const w = createWatchdog(1000, () => n++, { set: (fn) => (fns.push(fn), () => {}) });
+  w.kick();
+  fns[0]!();
+  assert.strictEqual(n, 1);
+  for (const bad of [0, -1, NaN, Infinity]) assert.throws(() => createWatchdog(bad, () => {}), RangeError);
 });

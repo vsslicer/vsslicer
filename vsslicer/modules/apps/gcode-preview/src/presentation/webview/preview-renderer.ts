@@ -33,6 +33,8 @@ export interface Visibility {
   colorMode?: ColorMode;
   /** Default: the iso view fitting the print. */
   camera?: CameraState;
+  /** Draws the moves after the visible range in one flat colour (follow mode: the part not yet printed). */
+  dimAbove?: boolean;
 }
 
 export interface PreviewRenderer {
@@ -103,6 +105,9 @@ export const frameCamera = (bounds: [number[], number[]], aspect: number, camera
   cameraMatrices(camera, aspect);
 
 const HIGHLIGHT_RANGE = [1e9, 2e9] as const;
+// shortcut: no alpha or darkening in the kit's shader, so the dimmed part is the gradient's first colour (the
+// highlight's trick), flat; a real fade needs a uniform in webview-kit.
+const DIM_RANGE = HIGHLIGHT_RANGE;
 
 /** Uploads `moves` once (rebuilt after a context loss) and draws the visible part on `draw`. */
 export const createPreviewRenderer = (
@@ -133,13 +138,25 @@ export const createPreviewRenderer = (
       hiddenFlags: vis.hiddenFlags ?? MoveFlag.Travel,
     };
     const visible = visibleRange(layers, moveCount, vis.layer, vis.move, vis.bottom);
-    if (!highlight?.length) return renderer.draw({ ...base, ...visible });
+    const end = visible.first + visible.count;
+    const dim = () =>
+      vis.dimAbove &&
+      end < moveCount &&
+      renderer!.draw({
+        ...base,
+        first: end,
+        count: moveCount - end,
+        colorMode: ColorMode.Width,
+        colorRange: DIM_RANGE,
+      });
+    if (!highlight?.length) return (renderer.draw({ ...base, ...visible }), dim());
     // The object's moves are left out of the normal draw and drawn again alone, so equal depths never fight.
     // Width mode with a range far above any width paints them with the gradient's first colour.
     const { hit, rest } = splitRange(visible, highlight);
     for (const [a, b] of rest) renderer.draw({ ...base, first: a, count: b - a });
     for (const [a, b] of hit)
       renderer.draw({ ...base, first: a, count: b - a, colorMode: ColorMode.Width, colorRange: HIGHLIGHT_RANGE });
+    dim();
   };
   const resources = trackContextLoss(canvas, {
     onLost: () => (renderer = undefined),

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.14.2
+
+- Re-range `@vsslicer/3mf` to ^0.3.0 (SP12 release).
+
 ## 0.14.1
 
 - Depends on `@vsslicer/3mf` ^0.2.0 (only `openZip` is used; unchanged).

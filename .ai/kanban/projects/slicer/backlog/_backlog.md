@@ -263,4 +263,3 @@
 261. [SLC-274: Write the TimeLapse step for Cura output](274-write-the-timelapse-step-for-cura-output.md)
 262. [SLC-275: Register the TimeLapse step only when the engine has no timelapse key](275-register-the-timelapse-step-only-when-the-engine-has-no-time.md)
 263. [SLC-276: H2C: print a fixture with timelapse G-code](276-h2c-print-a-fixture-with-timelapse-g-code.md)
-264. [SLC-282: Wait for the grandchild to exit in the runProcess kill test](282-wait-for-the-grandchild-to-exit-in-the-runprocess-kill-test.md)

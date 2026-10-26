@@ -28,13 +28,20 @@ type Result = {
   px: number[];
   left: Px;
   right: Px;
-  ranges: { speed: number[]; layerTime: number[]; width: number[]; flow: number[] };
+  ranges: {
+    speed: number[];
+    layerTime: number[];
+    width: number[];
+    flow: number[];
+    fan: number[];
+    temperature: number[];
+  };
   error: number;
 };
 const render = (o: object = {}) =>
   page.evaluate((o) => (globalThis as unknown as { render: (o: object) => Result }).render(o), o);
 const [FEATURE, SPEED, TOOL, LAYER_TIME] = [0, 1, 2, 3];
-const [WIDTH, FLOW] = [4, 5];
+const [WIDTH, FLOW, FAN, TEMPERATURE] = [4, 5, 6, 7];
 const LAYER1 = 17; // first record of layer 1 (the right half)
 const lit = (p: Px) => p.some((v) => v > 0);
 
@@ -49,8 +56,9 @@ test('draws the move set at two visible ranges', async () => {
 });
 
 test('a range across many small textures draws as one texture does, in every mode', async () => {
-  for (const colorMode of [FEATURE, SPEED, TOOL, LAYER_TIME, WIDTH, FLOW]) {
-    const range = { first: 5, count: 20, colorMode };
+  test.setTimeout(60_000);
+  for (const colorMode of [FEATURE, SPEED, TOOL, LAYER_TIME, WIDTH, FLOW, FAN, TEMPERATURE]) {
+    const range = { first: 5, count: 20, colorMode, states: true };
     const one = await render(range);
     const many = await render({ ...range, maxTextureSize: 4 }); // 2 records, so 1 segment, per texture
     expect(one.px.some((v, i) => i % 4 !== 3 && v > 0)).toBe(true);
@@ -107,4 +115,23 @@ test('width and flow modes colour by the data range, which is exposed for a lege
   // Flow: left the low end (blue), right the high end (red).
   expect(flow.left[2]).toBeGreaterThan(flow.left[0]);
   expect(flow.right[0]).toBeGreaterThan(flow.right[2]);
+});
+
+test('fan and temperature modes colour by the folded state changes, exposed for a legend', async () => {
+  test.setTimeout(60_000);
+  const fan = await render({ colorMode: FAN, states: true });
+  const temperature = await render({ colorMode: TEMPERATURE, states: true });
+  expect([fan.error, temperature.error]).toEqual([0, 0]);
+  expect(fan.ranges.fan).toEqual([0, 100]);
+  expect(fan.ranges.temperature).toEqual([200, 250]);
+  // Left: fan 0 and 200 C, the low end (blue); right: 100% and 250 C (tool 1), the high end (red).
+  for (const r of [fan, temperature]) {
+    expect(r.left[2]).toBeGreaterThan(r.left[0]);
+    expect(r.right[0]).toBeGreaterThan(r.right[2]);
+  }
+  // Without state changes both modes draw every move as unknown: the flat grey of DUMMY_COLOR.
+  const unknown = await render({ colorMode: FAN });
+  expect(unknown.ranges.fan).toEqual([0, 0]);
+  expect(unknown.left[0]).toBe(unknown.left[2]);
+  expect(unknown.left[0]).toBe(unknown.left[1]);
 });

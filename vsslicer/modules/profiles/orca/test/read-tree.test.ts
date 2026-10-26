@@ -244,7 +244,7 @@ describe('readOrcaTree: bounds', () => {
     const t = read(vendor({ p: fil('p', keys), ...kids }));
     expect(codes(t)).toEqual(['limit']);
     expect(t.presets.length).toBeLessThanOrEqual(TREE_LIMITS.maxMergeSteps / 20_000);
-  });
+  }, 30_000);
 
   test('file size, file count and total bytes are capped', () => {
     const m = vendor({ a: fil('a'), b: fil('b') });

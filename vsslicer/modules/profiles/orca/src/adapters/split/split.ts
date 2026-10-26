@@ -21,7 +21,7 @@ const first = (v: unknown): unknown => (Array.isArray(v) ? v[0] : v);
  * reads it, OrcaSlicer@09aa0114:src/libslic3r/Config.hpp:1619-1640) as points; undefined unless every point is two
  * finite numbers.
  */
-function bedShape(a: unknown): [number, number][] | undefined {
+export function bedShape(a: unknown): [number, number][] | undefined {
   const v = typeof a === 'string' ? a.split(',') : a;
   if (!Array.isArray(v) || v.length < 3) return undefined;
   const out: [number, number][] = [];

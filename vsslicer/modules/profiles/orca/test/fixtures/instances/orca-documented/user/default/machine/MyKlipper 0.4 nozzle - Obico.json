@@ -1,0 +1,11 @@
+{
+  "from": "User",
+  "host_type": "obico",
+  "inherits": "MyKlipper 0.4 nozzle",
+  "is_custom_defined": "0",
+  "name": "MyKlipper 0.4 nozzle - Obico",
+  "print_host": "https://app.obico.io",
+  "printer_settings_id": "MyKlipper 0.4 nozzle - Obico",
+  "printhost_apikey": "fixture-api-key-0003",
+  "version": "2.5.0.0"
+}
