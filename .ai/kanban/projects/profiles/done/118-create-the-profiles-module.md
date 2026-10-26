@@ -41,3 +41,9 @@ Not done: `node scripts/run.mjs ci` not run (rule 7 forbids ci/publish; coordina
 
 ### Coordinator: shared-file changes
 None. Later (PRF-135): add `"@vsslicer/profile-api": "^<version>"` to dependencies.
+
+Review (sp7-rev-c): PASS
+- Checked: `diff -rq` against profiles-prusa: only name/description, domain export (`MODULE`), its test and README differ; LICENSE, CHANGELOG, configs, layers test identical. package.json: `@vsslicer/profiles` 0.0.0 AGPL-3.0-or-later, no runtime deps (profile-api unreleased until PRF-135, stated in README), tooling ^0.8.1. node_modules/dist ignored by vsslicer/.gitignore.
+- Ran a clean copy (no node_modules/dist) in /private/tmp/claude-501/sp7w.rSFX/profiles: `pnpm install --frozen-lockfile && pnpm lint && pnpm test && pnpm build` pass (3 tests), dist has domain/ application/. Broken import `src/domain/bad.ts` -> `../application/index.ts` in that copy fails with `boundaries/dependencies`. In-place lint/test/build also pass.
+- run.mjs discovers modules by directory with a package.json, so ci will pick it up; the ci criterion stays with the coordinator's final ci.
+- Notes: no `.reference/notes/PRF-118-*.md` file; the card's `sprint` field says VSS:SP9 although it was done in SP7.

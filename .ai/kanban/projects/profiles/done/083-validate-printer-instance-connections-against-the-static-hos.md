@@ -47,3 +47,5 @@ Not done / notes: the JSON Schema (`src/domain/schema/`) was NOT changed: it alr
 export { HOST_TYPES, MAX_CONNECTION_STRING, resolveToolheads, validateConnection } from './domain/entities/printer-instance/index.ts';
 export type { ConnectionIssue, HostType, ResolvedToolhead } from './domain/entities/printer-instance/index.ts';
 ```
+
+Review (sp7-rev-d): PASS. Host types match D3 exactly (bambu-lan, moonraker, octoprint, prusalink, duet; case-sensitive). Probed in `/private/tmp/claude-501/sp7w.IRyk/rev-d/probe.ts`: unknown and wrong-case host_type give `connection.host_type`; `password`/`apiKey` give the credential message, and any other extra key (`api_key`, `__proto__` from JSON.parse) fails as unknown property, so no credential key can pass; 2,048 accepted and 2,049 refused for `url`; 10 M-char host_type in about 0 ms, 200 k keys in 120 ms (linear, no regex). H2C slot test present. Ran `pnpm lint`/`test`/`build` (only failures are in other cards' catalogue files). Note, not a failure: credentials embedded in the URL (`http://user:pass@host`) are not refused; a follow-up card for E16 if wanted.
