@@ -35,6 +35,19 @@ export interface BundleArchive {
 
 const INPUT_SLICE = 64 * 1024;
 const utf8 = new TextDecoder('utf-8', { fatal: true });
+const CRC_TABLE = Uint32Array.from({ length: 256 }, (_, n) => {
+  let c = n;
+  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+  return c >>> 0;
+});
+/** CRC-32 (IEEE), as zip stores it. */
+function crc32(bytes: Uint8Array): number {
+  let c = 0xffffffff;
+  for (const b of bytes) c = CRC_TABLE[(c ^ b) & 0xff]! ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+}
+/** Names collide on case-insensitive and normalising file systems (APFS, NTFS) when this key matches. */
+const nameKey = (name: string): string => name.normalize('NFC').toLowerCase();
 const fail = (why: string): never => {
   throw new BundleArchiveError(why);
 };
@@ -47,7 +60,9 @@ export function unsafeEntryName(name: string): string | undefined {
   if (name.includes('\\')) return 'backslash in name';
   if (name.startsWith('/')) return 'absolute path';
   if (name.charCodeAt(1) === 0x3a) return 'drive-letter path';
+  if (name.includes(':')) return 'colon in name (NTFS alternate stream)';
   if (name.split('/').some((s) => /^[. ]*$/.test(s))) return 'empty, "." or ".." segment'; // single-class star: linear
+  if (name.split('/').some((s) => /[. ]$/.test(s))) return 'segment ends in "." or space (Windows trims it)';
   return undefined;
 }
 
@@ -68,6 +83,9 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     }
   }
   if (eocd < 0) fail('not a zip archive: no end of central directory');
+  // The record must end the file: a fake record inside the comment or bytes after it are refused.
+  if (eocd + 22 + u16(eocd + 20) !== data.length)
+    fail('corrupt archive: end of central directory does not end the file');
   const count = u16(eocd + 10);
   const cdOffset = u32(eocd + 16);
   // shortcut: ZIP64 is refused, bundles are far below 4 GiB; add it if an exporter ever emits it for small files.
@@ -80,6 +98,7 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     method: number;
     compressedSize: number;
     size: number;
+    crc: number;
     start: number;
   }
   const entries: Entry[] = [];
@@ -90,6 +109,7 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     const host = data[p + 5]!;
     const flags = u16(p + 8);
     const method = u16(p + 10);
+    const crc = u32(p + 16);
     const compressedSize = u32(p + 20);
     const size = u32(p + 24);
     const nameLen = u16(p + 28);
@@ -108,12 +128,12 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     const dir = name.endsWith('/');
     const why = unsafeEntryName(dir ? name.slice(0, -1) : name);
     if (why) fail(`unsafe entry ${shown}: ${why}`);
-    // Unix host: the high 16 bits are st_mode; S_IFLNK is 0o120000.
-    if (host === 3 && ((attrs >>> 16) & 0o170000) === 0o120000) fail(`unsafe entry ${shown}: symbolic link`);
+    // Unix modes sit in the high 16 bits (host 3 Unix, 19 OS X, others may carry them); S_IFLNK is 0o120000.
+    if (host >= 0 && ((attrs >>> 16) & 0o170000) === 0o120000) fail(`unsafe entry ${shown}: symbolic link`);
     if (flags & 1) fail(`entry ${shown} is encrypted`);
     if (!dir && method !== 0 && method !== 8) fail(`entry ${shown} uses unsupported compression method ${method}`);
     // Case-folded so the names stay distinct on case-insensitive file systems too.
-    const key = name.toLowerCase();
+    const key = nameKey(name);
     if (seen.has(key)) fail(`duplicate entry ${shown}`);
     seen.add(key);
     if (size > MAX_BUNDLE_ENTRY_BYTES)
@@ -127,7 +147,7 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     // shortcut: the local header's own name and sizes are not compared with the central directory, which alone is used.
     const start = localOffset + 30 + u16(localOffset + 26) + u16(localOffset + 28);
     need(start, compressedSize);
-    entries.push({ name, dir, method, compressedSize, size, start });
+    entries.push({ name, dir, method, compressedSize, size, crc, start });
     p += 46 + nameLen + extraLen + commentLen;
   }
 
@@ -139,7 +159,12 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
   }
 
   const out = new Map<string, Uint8Array>();
-  for (const e of entries) if (!e.dir) out.set(e.name, inflate(data.subarray(e.start, e.start + e.compressedSize), e));
+  for (const e of entries)
+    if (!e.dir) {
+      const bytes = inflate(data.subarray(e.start, e.start + e.compressedSize), e);
+      if (crc32(bytes) !== e.crc) fail(`entry ${JSON.stringify(e.name.slice(0, 80))} is damaged: CRC-32 mismatch`);
+      out.set(e.name, bytes);
+    }
 
   const manifestBytes = out.get(BUNDLE_STRUCTURE_NAME);
   if (!manifestBytes) return { entries: out };
@@ -215,8 +240,8 @@ export function writeBundleArchive(input: BundleWriteInput): Uint8Array {
         unsafeEntryName(preset.fileName) ?? (preset.fileName.includes('/') ? 'more than one segment' : undefined);
       if (why) fail(`unsafe preset file name ${JSON.stringify(preset.fileName.slice(0, 80))}: ${why}`);
       const name = `${kind}/${preset.fileName}`;
-      if (taken.has(name.toLowerCase())) fail(`duplicate preset ${JSON.stringify(name)}`);
-      taken.add(name.toLowerCase());
+      if (taken.has(nameKey(name))) fail(`duplicate preset ${JSON.stringify(name)}`);
+      taken.add(nameKey(name));
       if (++count > MAX_BUNDLE_ENTRIES) fail(`more than ${MAX_BUNDLE_ENTRIES} entries`);
       if (preset.data.length > MAX_BUNDLE_ENTRY_BYTES)
         fail(`preset ${JSON.stringify(name)} is over ${MAX_BUNDLE_ENTRY_BYTES} bytes`);

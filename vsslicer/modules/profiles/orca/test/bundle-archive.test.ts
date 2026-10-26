@@ -68,6 +68,10 @@ describe('readBundleArchive', () => {
     ['../evil.json', /segment/],
     ['printer/../../evil.json', /segment/],
     ['printer/.. /evil.json', /segment/],
+    ['printer/C:evil.json', /colon/],
+    ['printer/x.json:ads', /colon/],
+    ['printer/x.', /segment/],
+    ['printer/x ', /segment/],
     ['/etc/passwd', /absolute/],
     ['C:/evil.json', /drive-letter/],
     ['printer\\..\\evil.json', /backslash/],
@@ -83,6 +87,44 @@ describe('readBundleArchive', () => {
     expect(() => readBundleArchive(zip)).toThrow(/symbolic link/);
     const regular = zipSync({ 'printer/a.json': [preset('a'), { os: 3, attrs: (0o100644 << 16) >>> 0 }] });
     expect(readBundleArchive(regular).entries.size).toBe(1);
+  });
+
+  test('refuses a symbolic link on host 19 (OS X) and on any host carrying mode bits', () => {
+    for (const os of [19, 0]) {
+      const zip = zipSync({ 'printer/a.json': [enc('/etc/passwd'), { os, attrs: (0o120777 << 16) >>> 0 }] });
+      expect(() => readBundleArchive(zip)).toThrow(/symbolic link/);
+    }
+  });
+
+  test('refuses names that collide after Unicode normalisation', () => {
+    const files = { 'printer/\u00e9.json': preset('a'), 'printer/e\u0301.json': preset('b') };
+    expect(() => readBundleArchive(zipSync(files))).toThrow(/duplicate/);
+  });
+
+  test('refuses a damaged entry (CRC-32 mismatch), stored or deflated', () => {
+    for (const level of [0, 6] as const) {
+      const zip = zipSync({ 'printer/a.json': preset('a') }, { level });
+      const [record] = centralRecords(zip);
+      patch32(zip, record! + 16, new DataView(zip.buffer).getUint32(record! + 16, true) ^ 1);
+      expect(() => readBundleArchive(zip)).toThrow(/CRC-32/);
+    }
+  });
+
+  test('the end-of-central-directory record must end the file', () => {
+    const zip = zipSync({ 'printer/a.json': preset('a') });
+    const trailing = new Uint8Array(zip.length + 1);
+    trailing.set(zip);
+    expect(() => readBundleArchive(trailing)).toThrow(/does not end the file/);
+    // A fake record inside a comment: the real one gets a comment holding another EOCD.
+    const fake = zip.slice(zip.length - 22);
+    const withComment = new Uint8Array(zip.length + fake.length);
+    withComment.set(zip);
+    withComment.set(fake, zip.length);
+    new DataView(withComment.buffer).setUint16(zip.length - 2, fake.length, true);
+    // The fake claims an empty archive, so the real one is hidden; it carries a comment length that is wrong for it.
+    new DataView(withComment.buffer).setUint16(zip.length + 10, 0, true);
+    new DataView(withComment.buffer).setUint16(zip.length + 20, 1, true);
+    expect(() => readBundleArchive(withComment)).toThrow(/does not end the file/);
   });
 
   test('refuses duplicate names, also differing only in case', () => {
@@ -181,6 +223,14 @@ describe('writeBundleArchive', () => {
       );
     },
   );
+
+  test('refuses a colon or a trailing dot or space in a file name', () => {
+    for (const fileName of ['a:b.json', 'x.', 'x ']) {
+      expect(() => writeBundleArchive({ name: 'B', clock: '1', printer: [{ fileName, data: preset('x') }] })).toThrow(
+        /unsafe preset file name/,
+      );
+    }
+  });
 
   test('refuses duplicates and over-limit input', () => {
     const p = { fileName: 'a.json', data: preset('a') };
