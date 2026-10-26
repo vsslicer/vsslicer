@@ -3,7 +3,7 @@ id: 133
 title: Check resolve of the tuple fixtures through the composed importers
 type: feature
 priority: P0
-effort: M
+effort: L
 model: opus
 area: [store]
 story: US22
