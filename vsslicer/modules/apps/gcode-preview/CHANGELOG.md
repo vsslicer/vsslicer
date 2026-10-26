@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-101: a failed GPU context restore shows the failure message instead of a blank preview.
+
 ## 0.3.0
 
 - Depends on gcode-planner ^0.4.0 and webview-kit ^0.5.1.

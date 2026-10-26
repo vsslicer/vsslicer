@@ -2,3 +2,5 @@
 
 1. [GCP-79: Extend the golden corpus to PrusaSlicer, SuperSlicer, Cura and Bambu multi-material](079-extend-the-golden-corpus-to-prusaslicer-superslicer-cura-and.md)
 2. [GCP-18: Benchmark memory and throughput on synthetic 50, 200 and 500 MB files in CI](018-benchmark-memory-and-throughput-on-synthetic-50-200-and-500-.md)
+3. [GCP-105: Drop the NamedChunk shortcut now that gcode-api ^0.6.0 has flavourName](105-drop-the-namedchunk-shortcut-now-that-gcode-api-0-6-0-has-fl.md)
+4. [GCP-100: Detect the flavour from the end-of-file config block too](100-detect-the-flavour-from-the-end-of-file-config-block-too.md)

@@ -57,7 +57,7 @@ const fakeGl = (maxTextureSize: number) => {
   }) as unknown as WebGL2RenderingContext;
   const count = (name: string) => calls.filter((c) => c[0] === name).length;
   const named = (name: string) => calls.filter((c) => c[0] === name);
-  return { gl, calls, count, named };
+  return { gl, calls, count, named, fixed };
 };
 
 const instances = (f: ReturnType<typeof fakeGl>) =>
@@ -124,6 +124,29 @@ test('a context loss drops the renderer and a restore rebuilds and redraws', () 
     1,
     'only the live build is freed; the lost one is gone with its context',
   );
+});
+
+test('a restore whose rebuild throws shows the failure message instead of a blank view', () => {
+  const f = fakeGl(16384);
+  let shown: { dataset: Record<string, string>; textContent?: string } | undefined;
+  const canvas = Object.assign(new EventTarget(), {
+    ownerDocument: {
+      createElement: () => {
+        shown = { dataset: {} };
+        return Object.assign(shown, { setAttribute() {} });
+      },
+    },
+    replaceWith() {},
+  }) as unknown as HTMLCanvasElement;
+  const r = createPreviewRenderer(canvas, f.gl, new ArrayBuffer(3 * MOVE_STRIDE), []);
+  f.fixed['createProgram'] = () => {
+    throw new Error('driver reset');
+  };
+  canvas.dispatchEvent(new Event('webglcontextlost', { cancelable: true }));
+  canvas.dispatchEvent(new Event('webglcontextrestored'));
+  assert.strictEqual(shown?.dataset['cause'], 'restore');
+  assert.match(shown?.textContent ?? '', /driver reset/);
+  r.dispose();
 });
 
 test('concatMoves joins the per-chunk buffers in order', () => {
