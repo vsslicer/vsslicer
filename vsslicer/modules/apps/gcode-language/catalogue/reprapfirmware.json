@@ -1,0 +1,269 @@
+[
+  {
+    "code": "G28",
+    "flavours": ["reprapfirmware"],
+    "description": "Homes axes by running the homing macros (homeall.g, homex.g and so on); with no axis letters it runs homeall.g.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Home X."
+      },
+      {
+        "name": "Y",
+        "description": "Home Y."
+      },
+      {
+        "name": "Z",
+        "description": "Home Z."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#g28"
+  },
+  {
+    "code": "M92",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets steps per millimetre for the named axes or extruder drives.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X steps/mm."
+      },
+      {
+        "name": "Y",
+        "description": "Y steps/mm."
+      },
+      {
+        "name": "Z",
+        "description": "Z steps/mm."
+      },
+      {
+        "name": "E",
+        "description": "Extruder steps/mm."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m92"
+  },
+  {
+    "code": "M98",
+    "flavours": ["reprapfirmware"],
+    "description": "Runs a macro file, the way config.g and slicer start code call other files.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Path of the macro file, in quotes, e.g. \"0:/macros/start.g\"."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m98"
+  },
+  {
+    "code": "M117",
+    "flavours": ["reprapfirmware"],
+    "description": "Shows a message on the printer display or web interface.",
+    "parameters": [],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m117"
+  },
+  {
+    "code": "M201",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets the maximum acceleration for the named axes and extruders.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X acceleration, mm/s^2."
+      },
+      {
+        "name": "Y",
+        "description": "Y acceleration, mm/s^2."
+      },
+      {
+        "name": "Z",
+        "description": "Z acceleration, mm/s^2."
+      },
+      {
+        "name": "E",
+        "description": "Extruder acceleration, mm/s^2."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m201"
+  },
+  {
+    "code": "M203",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets the maximum speed for the named axes and extruders, in millimetres per minute.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X maximum speed."
+      },
+      {
+        "name": "Y",
+        "description": "Y maximum speed."
+      },
+      {
+        "name": "Z",
+        "description": "Z maximum speed."
+      },
+      {
+        "name": "E",
+        "description": "Extruder maximum speed."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m203"
+  },
+  {
+    "code": "M204",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets print and travel acceleration: P for moves that extrude, T for travel-only moves. S sets both at once for slicers written for old Marlin.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Acceleration for printing moves, mm/s^2."
+      },
+      {
+        "name": "T",
+        "description": "Acceleration for travel moves, mm/s^2."
+      },
+      {
+        "name": "S",
+        "description": "Sets both P and T."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m204"
+  },
+  {
+    "code": "M291",
+    "flavours": ["reprapfirmware"],
+    "description": "Shows a message box on the web interface or display, optionally waiting for the user to answer.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Message text, in quotes."
+      },
+      {
+        "name": "R",
+        "description": "Box title, in quotes."
+      },
+      {
+        "name": "S",
+        "description": "Box type: 0 plain message up to 3 with a choice."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m291"
+  },
+  {
+    "code": "M550",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets the machine name shown on the network.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Name, in quotes."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m550"
+  },
+  {
+    "code": "M566",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets the speed change a move may make at a corner without slowing (jerk), in millimetres per minute.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X value."
+      },
+      {
+        "name": "Y",
+        "description": "Y value."
+      },
+      {
+        "name": "Z",
+        "description": "Z value."
+      },
+      {
+        "name": "E",
+        "description": "Extruder value."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m566"
+  },
+  {
+    "code": "M569",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets how a stepper driver behaves, such as its direction.",
+    "parameters": [
+      {
+        "name": "P",
+        "description": "Driver number."
+      },
+      {
+        "name": "S",
+        "description": "Direction: 0 backwards, 1 forwards."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m569"
+  },
+  {
+    "code": "M572",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets pressure advance: the time in seconds by which the extruder runs ahead of the move to compensate for filament compression.",
+    "parameters": [
+      {
+        "name": "D",
+        "description": "Extruder drive number."
+      },
+      {
+        "name": "S",
+        "description": "Advance time in seconds; 0 turns it off."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m572"
+  },
+  {
+    "code": "M584",
+    "flavours": ["reprapfirmware"],
+    "description": "Maps axes and extruders to driver numbers.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "Driver for X."
+      },
+      {
+        "name": "Y",
+        "description": "Driver for Y."
+      },
+      {
+        "name": "Z",
+        "description": "Driver for Z."
+      },
+      {
+        "name": "E",
+        "description": "Driver or drivers for extruders."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m584"
+  },
+  {
+    "code": "M906",
+    "flavours": ["reprapfirmware"],
+    "description": "Sets the motor current for the named axes and extruders, in milliamps.",
+    "parameters": [
+      {
+        "name": "X",
+        "description": "X current."
+      },
+      {
+        "name": "Y",
+        "description": "Y current."
+      },
+      {
+        "name": "Z",
+        "description": "Z current."
+      },
+      {
+        "name": "E",
+        "description": "Extruder current."
+      }
+    ],
+    "source": "https://docs.duet3d.com/User_manual/Reference/Gcodes#m906"
+  }
+]
