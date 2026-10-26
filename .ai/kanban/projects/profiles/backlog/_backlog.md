@@ -109,3 +109,6 @@
 107. [PRF-201: Merge only own keys in profile-api so __proto__ keys stay data](201-merge-only-own-keys-in-profile-api-so-proto-keys-stay-data.md)
 108. [PRF-218: Add a real OrcaSlicer-exported bundle fixture](218-add-a-real-orcaslicer-exported-bundle-fixture.md)
 109. [PRF-219: Write nested Cura booleans as Python literals in exported .inst.cfg](219-write-nested-cura-booleans-as-python-literals-in-exported-in.md)
+110. [PRF-220: Carry Orca ratio_over and max_literal, and Cura's literal default beside formulas, in the catalogue](220-carry-orca-ratio-over-and-max-literal-and-cura-s-literal-def.md)
+111. [PRF-221: Pick the form widget from the value as well as the default, per extruder too](221-pick-the-form-widget-from-the-value-as-well-as-the-default-p.md)
+112. [PRF-222: Build the percent-or-absolute widget and the read-only formula view](222-build-the-percent-or-absolute-widget-and-the-read-only-formu.md)

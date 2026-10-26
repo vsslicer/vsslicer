@@ -7,3 +7,5 @@
 5. [PRF-212: Decode quote_plus'd Cura machine instance file names](212-decode-quote-plus-d-cura-machine-instance-file-names.md)
 6. [PRF-213: Write Cura booleans as Python literals in exported .inst.cfg](213-write-cura-booleans-as-python-literals-in-exported-inst-cfg.md)
 7. [PRF-69: Spike: usability of percent-or-absolute and Cura formula widgets](069-spike-usability-of-percent-or-absolute-and-cura-formula-widg.md)
+8. [PRF-111: Spike: the .curaprofile layout from a file saved by Cura 5.x](111-spike-the-curaprofile-layout-from-a-file-saved-by-cura-5-x.md)
+9. [PRF-215: Refuse Prusa export file names that differ only in case](215-refuse-prusa-export-file-names-that-differ-only-in-case.md)
