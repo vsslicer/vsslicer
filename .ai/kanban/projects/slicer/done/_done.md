@@ -6,3 +6,4 @@
 4. [SLC-43: Create the `slicer-output` module](043-create-the-slicer-output-module.md)
 5. [SLC-55: Create the `cura-settings` module](055-create-the-cura-settings-module.md)
 6. [SLC-65: Create the `slicer-cura` module](065-create-the-slicer-cura-module.md)
+7. [SLC-100: Create the `slicer-extension` module](100-create-the-slicer-extension-module.md)

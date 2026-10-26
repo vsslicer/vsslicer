@@ -1,0 +1,61 @@
+{
+  "name": "@vsslicer/slicer-extension",
+  "displayName": "VSSlicer Slicer",
+  "version": "0.0.0",
+  "description": "VSSlicer slicing (VS Code extension, presentation layer).",
+  "publisher": "vsslicer",
+  "license": "AGPL-3.0-or-later",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/slicer-extension@0.0.0/vsslicer/modules/slicer-extension",
+  "vsslicer": {
+    "sizeBudgetKB": 200
+  },
+  "main": "dist/extension.js",
+  "files": [
+    "dist",
+    "!dist/*.meta.json",
+    "THIRD-PARTY-NOTICES.md",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24",
+    "vscode": "^1.100.0"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "activationEvents": [
+    "onCommand:vsslicer.slicer.about"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vsslicer.slicer.about",
+        "title": "VSSlicer: About Slicer Extension"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check . && tsc",
+    "build": "tsc && vsslicer-bundle && third-party-notices dist/extension.meta.json",
+    "prepack": "pnpm build",
+    "package": "vsslicer-package",
+    "test": "node --test test/*.test.ts",
+    "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.10",
+    "@types/node": "24.19.2",
+    "@types/vscode": "1.100.0",
+    "@vsslicer/test-vscode": "^0.2.3",
+    "@vsslicer/tooling": "^0.8.1",
+    "esbuild": "0.28.2",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}

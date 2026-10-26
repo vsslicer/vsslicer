@@ -33,3 +33,9 @@ The `vsslicer.slicer` extension: engine registry and settings, `Slicer.slice` ex
 ## Progress
 
 Not started.
+
+Review (sp8-reviewer-15, 2026-10-26): PASS
+1. Ran install, test, lint, build, package, test:integration (cached VS Code, activates, command registered): all green; `run.mjs checks` green; module picked up by directory scan. Package `@vsslicer/slicer-extension`, 0.0.0, AGPL-3.0-or-later. Artefacts git-ignored; no project-extension leftovers except the intended PROVENANCE line.
+2. Deliberate violation: `vscode` import in `src/domain` fails eslint (`no-restricted-imports`), proven in scratch and removed.
+3. Carried owner/architecture question, not a FAIL: VSIX id is `vsslicer.slicer-extension`, not `vsslicer.slicer`, because `vsslicer-package` derives the name from the unscoped package name (tooling `shortName`). Meeting the card needs an npm rename or a tooling override: cross-module decision.
+4. node --test instead of vitest (accepted, as project-extension).
