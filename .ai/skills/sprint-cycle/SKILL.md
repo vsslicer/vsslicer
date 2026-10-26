@@ -8,6 +8,10 @@ description: How a VSSlicer sprint runs from start to close, ending with an auto
 One coordinator (Opus) runs one sprint. The board is the taskboard skill
 (`~/.claude/skills/taskboard/SKILL.md`); pass `--agent <name>` to every `board.py` call.
 
+0. **Read the owner's answers first.** Run `board.py inbox` and check every decision's `status`
+   before treating anything as owner-blocked. Apply each answer to its cards (unblock, move,
+   descope). A blocked list in a brief or a previous report is not evidence: SP3 to SP8 carried
+   cards for questions the owner had already answered.
 1. **Finish the sprint's tasks.** Every card with `sprint: VSS:SP<n>` (or `SP<n>` on the VSS board),
    including the bugfix cards the previous sprint's audit created. Work them in dependency order,
    each on the model its card names, with independent verification and one commit per card.
