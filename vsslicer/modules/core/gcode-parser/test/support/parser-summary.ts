@@ -2,6 +2,8 @@
 import { createHash } from 'node:crypto';
 import { MOVE_STRIDE, MoveFlag, MoveOffset, MoveRole, STATE_CHANGE_STRIDE } from '@vsslicer/gcode-api';
 import type { Chunk } from '@vsslicer/gcode-api';
+import type { BgcodeMetadata } from '@vsslicer/gcode-bgcode';
+import { bgcodeSource } from '../../src/adapters/bgcode-source.ts';
 import { readSummary } from '../../src/application/read-summary.ts';
 import { GCodeParser } from '../../src/domain/parser.ts';
 import type { Summariser, Summary } from './golden.ts';
@@ -93,11 +95,37 @@ export function metadataSummary(chunks: readonly Chunk[]): Summary {
   };
 }
 
+/** Every bgcode metadata block: the small ones in full, the slicer config as count, hash and a few keys. */
+export function bgcodeSummary(m: BgcodeMetadata): Summary {
+  const slicer = Object.fromEntries(m.slicer);
+  return {
+    file: m.file,
+    printer: m.printer,
+    print: m.print,
+    slicer: {
+      keys: m.slicer.length,
+      sha256: sha256(JSON.stringify(m.slicer)),
+      sample: Object.fromEntries(SAMPLE_KEYS.filter((k) => k in slicer).map((k) => [k, slicer[k]])),
+    },
+    slicerJson: m.slicerJson === undefined ? null : { bytes: m.slicerJson.length, sha256: sha256(m.slicerJson) },
+    thumbnails: m.thumbnails.map((t) => ({
+      format: t.format,
+      width: t.width,
+      height: t.height,
+      bytes: t.data.length,
+      sha256: sha256(t.data),
+    })),
+  };
+}
+
 /** Parses `bytes` in 64 KiB pieces; returns the chunks and the parser (for what it detected). */
-export async function parseAll(bytes: Uint8Array): Promise<{ chunks: Chunk[]; parser: GCodeParser }> {
+export async function parseAll(
+  bytes: Uint8Array,
+  source: (s: AsyncIterable<Uint8Array>) => AsyncIterable<Uint8Array> = (s) => s,
+): Promise<{ chunks: Chunk[]; parser: GCodeParser }> {
   const parser = new GCodeParser();
   const chunks: Chunk[] = [];
-  for await (const piece of pieces(bytes, 64 * 1024)) chunks.push(...parser.feed(piece));
+  for await (const piece of source(pieces(bytes, 64 * 1024))) chunks.push(...parser.feed(piece));
   chunks.push(...parser.end());
   return { chunks, parser };
 }
@@ -106,13 +134,18 @@ export async function parseAll(bytes: Uint8Array): Promise<{ chunks: Chunk[]; pa
  * Golden fields from the real parser: move, state-change and marker counts, the diagnostic codes,
  * the detected slicer and flavour, the layer count and the extruding moves per role. Thumbnails (format,
  * size, hash of the bytes), object labels (ranges and moves) and the config block (key count, hash of
- * the sorted map, a few keys). Binary files (.bgcode, .gcode.3mf) only carry the byte size and hash:
- * their text is decoded by the container cards. `summary` is `readSummary`'s result (the slicer's own job statistics).
+ * the sorted map, a few keys). A .bgcode is decoded to its text and gets the same fields plus a
+ * `bgcode` entry with every metadata block. A .gcode.3mf only carries the byte size and hash:
+ * its text is decoded by its container card. `summary` is `readSummary`'s result (the slicer's own job statistics).
  */
 export const parserSummary: Summariser = async (bytes, file) => {
-  if (file.format !== 'gcode') return {};
-  const { chunks, parser } = await parseAll(bytes);
+  if (file.format !== 'gcode' && file.format !== 'bgcode') return {};
+  let meta: BgcodeMetadata | undefined;
+  const text = (s: AsyncIterable<Uint8Array>): AsyncIterable<Uint8Array> =>
+    file.format === 'bgcode' ? bgcodeSource(s, { onMetadata: (m) => (meta = m) }) : s;
+  const { chunks, parser } = await parseAll(bytes, text);
   return {
+    ...(meta && { bgcode: bgcodeSummary(meta) }),
     slicer: parser.slicer,
     flavour: parser.flavour,
     moveCount: chunks.reduce((n, c) => n + c.moveCount, 0),
@@ -123,6 +156,6 @@ export const parserSummary: Summariser = async (bytes, file) => {
     roleHistogram: roleHistogram(chunks),
     diagnostics: chunks.flatMap((c) => c.diagnostics.map((d) => d.code)),
     ...metadataSummary(chunks),
-    summary: await readSummary(pieces(bytes, 64 * 1024)),
+    summary: await readSummary(text(pieces(bytes, 64 * 1024))),
   };
 };

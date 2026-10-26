@@ -1,0 +1,76 @@
+{
+  "file": {
+    "bytes": 641092,
+    "sha256": "bdbccf44443fdfdfd78048856dea8b1afffa6939e147d94219b0a56b03588b3b"
+  },
+  "slicer": "prusaslicer",
+  "flavour": "marlin",
+  "moveCount": 21703,
+  "stateChanges": 3176,
+  "markers": 138,
+  "layerCount": 120,
+  "arcs": {
+    "commands": 0,
+    "segments": 0
+  },
+  "roleHistogram": {
+    "Perimeter": 480,
+    "ExternalPerimeter": 1432,
+    "InternalInfill": 16318,
+    "SolidInfill": 1141,
+    "TopSolidInfill": 60,
+    "BridgeInfill": 96,
+    "Skirt": 101,
+    "Custom": 2
+  },
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "bytes": 461,
+      "sha256": "516a51596b7b562b269441980036cd0298dfd5eba523790bfbcc7acd058b65f7"
+    },
+    {
+      "format": "png",
+      "width": 220,
+      "height": 124,
+      "bytes": 4836,
+      "sha256": "a542fd29aeb3f6b3dafcec1383eb9a8bd3e747d24a54a32b6e78224a53e817dc"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Shape-Box",
+      "id": "0",
+      "copy": 0,
+      "ranges": 120,
+      "moves": 20988
+    }
+  ],
+  "config": {
+    "keys": 302,
+    "sha256": "67ae2a2a617ea7dc5411161734d4e5b8db8371b757af4e3f602220295c4a60fd",
+    "sample": {
+      "layer_height": "0.15",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PETG",
+      "printer_model": "MINI",
+      "gcode_flavor": "marlin2"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 986.61,
+        "volumeCm3": 2.37,
+        "weightG": 3.01,
+        "cost": 0.08
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 1926
+    }
+  }
+}

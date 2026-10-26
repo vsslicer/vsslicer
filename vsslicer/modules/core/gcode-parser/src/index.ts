@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 export { parseInWorker } from './adapters/worker-host.ts';
 export { fileSource } from './adapters/file-source.ts';
+export { bgcodeSource } from './adapters/bgcode-source.ts';
+export type { BgcodeSourceOptions } from './adapters/bgcode-source.ts';
 export { readSummaryFile } from './adapters/summary-file.ts';
 export { readSummary } from './application/read-summary.ts';
 export { collect } from './application/collect.ts';

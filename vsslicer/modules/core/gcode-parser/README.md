@@ -23,7 +23,7 @@ Filament totals come from these comments, not from summing the E column. Bambu S
 chunk is never empty: it exists only if it holds moves, state changes, markers or diagnostics.
 
 Layers: `src/domain` (tokeniser, modal state machine and command handlers, chunk writer, line
-splitter; pure), `src/application` (`parse`), `src/adapters` (`fileSource`, a Node file stream).
+splitter; pure), `src/application` (`parse`), `src/adapters` (`fileSource`, a Node file stream; `bgcodeSource`).
 
 ## Options (`parse(source, options)`)
 
@@ -63,8 +63,11 @@ with the warning `line-too-long`, however the input is cut.
 | `SET_VELOCITY_LIMIT`, `SET_PRESSURE_ADVANCE` | Klipper kinds, `KEY=value`, case-insensitive.                                                                                                                                                                       |
 
 Everything else (`G4` dwell, `G28`, `M73`, `M600`, `M486`, `EXCLUDE_OBJECT_*`, ...) is a `Marker`
-with its upper-cased name, file offset and next move index. `G4` stays a marker: no state kind
-exists for a dwell yet.
+with its upper-cased name, file offset and next move index. A `G4` marker also carries
+`seconds`, the dwell as the flavour reads it: Marlin and RRF take `S` (seconds) over `P` (ms),
+Klipper only `P`; none stated, or a negative value, is 0. A whole-line `; ESTIMATOR_ADD_TIME <s> [label]`
+comment (klipper_estimator's macro time) becomes an `ESTIMATOR_ADD_TIME` marker with `seconds`
+(finite and >= 0, else the comment is ignored).
 
 Width and height are 0 and `startTime` NaN until the cards that read them land.
 
@@ -150,7 +153,14 @@ for await (const chunk of parseInWorker('/path/model.gcode', {
 
 Read in the same pass (`src/domain/metadata.ts`). Each result is a field of the chunk where it is
 complete (`thumbnails`, `objects`, `config`); `collect` gathers them into `ParsedFile`. Text only:
-the thumbnails, labels and config of `.bgcode` / `.gcode.3mf` come with the container cards.
+`.bgcode` goes through `bgcodeSource` (below); `.gcode.3mf` comes with its container card.
+
+## .bgcode
+
+`parse(bgcodeSource(fileSource('part.bgcode'), { onMetadata, onDiagnostic }))` decodes the binary container
+(`@vsslicer/gcode-bgcode`) to its `.gcode` twin's text and parses that, so the `ParsedFile` equals the twin's.
+`onMetadata` gets every metadata block (file, printer, print, slicer INI, Slicer3 JSON, thumbnails) after the
+last chunk of text; `onDiagnostic` gets container problems (bad CRC, undecodable block).
 
 - **Thumbnails**: `; thumbnail begin WxH len` (PNG), `; thumbnail_JPG begin ...`,
   `; thumbnail_QOI begin ...` up to the matching `end`, base64 decoded; magic bytes are checked
