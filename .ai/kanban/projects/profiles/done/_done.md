@@ -16,3 +16,4 @@
 14. [PRF-130: Download Cura resources from upstream when Cura is not installed](130-download-cura-resources-from-upstream-when-cura-is-not-insta.md)
 15. [PRF-106: Import .orca_printer, .orca_filament and .orca_bundle](106-import-orca-printer-orca-filament-and-orca-bundle.md)
 16. [PRF-112: 112-import-curaprofile.md](112-import-curaprofile.md)
+17. [PRF-139: Release `profiles-cura@0.1.0`: Cura import, conditions and resource download](139-release-profiles-cura-0-1-0-cura-import-conditions-and-resou.md)

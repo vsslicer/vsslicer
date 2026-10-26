@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/profiles-cura",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Cura definitions and quality profiles (.def.json, .inst.cfg) to and from the shared profile model.",
   "license": "AGPL-3.0-or-later",
   "type": "module",

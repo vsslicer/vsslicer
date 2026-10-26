@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
 - Added: `readCuraProfile` reads a `.curaprofile` export as quality_changes entities with the parent quality_type in native and a setting_version diagnostic (PRF-112).
 - Added: `fetchCuraResources(dest, options)` downloads Cura's definitions, extruders, variants and quality resources at a pinned commit (default Cura@5bea2f8) into a new folder with `source.json`: atomic placement, a bounded tar reader, an `idleTimeoutMs` option, a cache written only after the archive unpacks, and a retryable-error result (PRF-130).
