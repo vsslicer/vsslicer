@@ -22,3 +22,4 @@
 20. [PRF-129: Check resolved values for 20 Cura tuples against the oracle](129-check-resolved-values-for-20-cura-tuples-against-the-oracle.md)
 21. [PRF-52: Write native export to PrusaSlicer INI](052-write-native-export-to-prusaslicer-ini.md)
 22. [PRF-137: Release `profiles-prusa@0.1.0`: PrusaSlicer and SuperSlicer import, per-nozzle split, conditions and upstream download](137-release-profiles-prusa-0-1-0-prusaslicer-and-superslicer-imp.md)
+23. [PRF-211: Check Cura machine instances against a real Cura app fixture](211-check-cura-machine-instances-against-a-real-cura-app-fixture.md)

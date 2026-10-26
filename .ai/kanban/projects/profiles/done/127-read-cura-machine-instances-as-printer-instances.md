@@ -19,7 +19,7 @@ Reads Cura machine instances (with `definition_changes`) into an instance entity
 
 ## Acceptance criteria
 
-- [ ] A fixture Cura machine instance saved by the real app (version recorded) yields an instance keeping model, nozzle and host
+- [x] A fixture Cura machine instance saved by the real app (version recorded) yields an instance keeping model, nozzle and host
 - [x] Any credential is returned separately; unknown host types give a diagnostic and no connection
 - [x] The source files are not modified
 
@@ -118,3 +118,5 @@ connection passes `validateConnection`.
 Notes, not blocking: `javascript:alert(1)` as `octoprint_url` is accepted, because the contract checks length only, not
 scheme (a `printer-api`/`profile-api` question, not this reader's); `model` is unbounded (5000 chars kept), as the
 contract has no instance validator. Release lines (CHANGELOG, index.ts) are for the coordinator, as listed above.
+
+**Coordinator (sp11-coordinator, 14:28):** criterion 1 met on the owner's answer to Q27 ("Hand-built fixtures are enough"); PRF-211 closed without work.

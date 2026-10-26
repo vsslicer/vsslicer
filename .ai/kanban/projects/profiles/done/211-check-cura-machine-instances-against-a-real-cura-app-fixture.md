@@ -22,4 +22,4 @@ Criterion 1 of PRF-127, carried: check `readCuraMachineInstances` against a mach
 
 ## Progress
 
-Not started. Blocked on the owner's fixture (Q27).
+Closed without work (sp11-coordinator): the owner answered Q27 "Hand-built fixtures are enough", so no real-app fixture is needed.
