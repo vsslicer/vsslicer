@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- PRF-20: native <-> unified conversions for the 56 keys of profiles.md section 6 (Prusa, Orca, Bambu, Cura), with lossy notes and bounded parsing.
+- PRF-19: catalogue coverage test over the pinned key lists of every dialect (committed fixtures).
 - PRF-18: every catalogue key has a group, home and override_scope from its slicer's own pages (Orca/Bambu Tab.cpp, SuperSlicer .ui, Cura categories); hidden keys flagged; retraction lives in machine with a material override; Prusa 3.0 sheet/feeder features live in surface/feeder; Cura names move from cura.json names into orca.json native.cura (65 marked lossy per extruder); generated report data/groups.json (Orca reconciled with E11's table, 272 hidden keys with reasons).
 - PRF-104: parseBundleStructure and buildBundleStructure for Orca/Bambu bundle_structure.json, with size, depth, file-count and unsafe-path bounds.
 - PRF-16: PrusaSlicer 2.9 (b028299), 3.0 (30ef591, pinned, legacy-flagged, namespaced hardware names) and SuperSlicer (1f3d287) native names on Orca entries, with lossy notes; 122 prusa. entries (prusaCatalogue) and 279 superslicer. entries (superslicerCatalogue); native names may contain '.'; the generator reads only pinned checkouts through a linear-time tokenizer with a 16 MiB cap and token caps (SourceLimitError), which also fixes 104 units, 17 tooltips and 5 enums in orca.json and adds 7 Bambu filament overrides (103 entries).
