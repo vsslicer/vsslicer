@@ -47,7 +47,7 @@ Web sources: the VS Code extension API docs, the Code-OSS wiki, the VS Code FAQ,
 | Multiple panels and groups | Panels open in any `ViewColumn` and editor group and can be moved by the user. Each webview is its own iframe and process context, so several viewers mean several WebGL contexts and more memory. | https://code.visualstudio.com/api/extension-guides/webview |
 | Remote | In remote setups, webview content loads through VS Code's resource proxy. Local HTTP servers, such as a camera MJPEG proxy, need `env.asExternalUri` (`vscode.d.ts:10927`). | https://code.visualstudio.com/api/advanced-topics/remote-extensions |
 
-In the webview content frame, messages from the host arrive with `event.source === window.parent`, so a receiver should check that: `vscode@4ef6bab7:src/vs/workbench/contrib/webview/browser/pre/index.html:1305` (per review, not re-read).
+In the webview content frame, host messages are posted by the outer frame (`vscode@4ef6bab7:src/vs/workbench/contrib/webview/browser/pre/index.html:1305`), but VS Code's injected script then sets `window.parent = window`, `window.top = window` and `window.frameElement = null` (`pre/index.html:252-254`). So `event.source === window.parent` is **always false** for host messages; measured in 1.143.1 (PLT-31, §8). Check `event.origin === location.origin` instead.
 
 ### 3. Workspace model
 
@@ -117,6 +117,61 @@ Mapping a 3D printing project to this model: the workspace folder is the project
 | Web-only (vscode.dev) | Browser WebWorker extension host only: no Node, terminal, debugger, native modules or child processes. Local folders need the File System Access API, which only Chrome and Edge support. | It can host the viewer and G-code preview as `web`-target extensions (WASM parsing, WebGL). It cannot slice natively, open serial ports, open raw MQTT/TCP, or reach LAN printers from an HTTPS origin without a relay. | https://code.visualstudio.com/docs/setup/vscode-web ; https://code.visualstudio.com/api/extension-guides/web-extensions |
 | Self-hosted web (code-server, openvscode-server) | A Node server plus browser UI. Extensions run on the server. | It works for a print-farm or Raspberry Pi deployment, where the host is next to the printers. Hardware access is on the server. | `(unverified, not researched in depth)` |
 
+### 7. WebGPU and workers in webviews, measured (PLT-33)
+
+Measured 2026-10-25 with a probe extension. Its webview HTML came from `createWebviewHtml` in `@vsslicer/webview-kit@0.4.2/host`, unchanged, and a control variant dropped `blob:` from `worker-src`. `@vsslicer/test-vscode@0.2.3` ran it on VS Code 1.100.0 (Electron 34.5.1, Chrome 132.0.6834.210) and 1.143.1 (Electron 43.7.7, Chrome 150.0.7871.250). Versions are from the webview's `navigator.userAgent` and the extension host's `process.versions`. Raw results and the probe source are in `.reference/notes/PLT-33-webgpu-workers-probe.md`. Windows and Linux with a real GPU are not measured yet (asked on the board, Q15).
+
+| Check | macOS 27.2, Apple M1 Pro | Linux arm64 container, Xvfb, no GPU |
+|---|---|---|
+| `'gpu' in navigator` | true | true |
+| `requestAdapter()` | adapter `apple`, `common-3` (1.100) / `metal-3` (1.143), not fallback; `requestDevice()` ok, `maxBufferSize` 256 MiB | `null` on both versions, no exception |
+| WebGL2 | ANGLE Metal, Apple M1 Pro | 1.100: SwiftShader, with Chromium's warning that automatic software WebGL fallback is deprecated; 1.143: **no context** |
+| `isSecureContext` / `crossOriginIsolated` / `SharedArrayBuffer` | true / false / absent | same |
+| `new Worker(blob:)`, classic and `type: 'module'` | ok; `navigator.gpu` and `OffscreenCanvas` exist inside | ok |
+| `new Worker(asWebviewUri(...))` | `SecurityError`: the script on `https://file+.vscode-resource.vscode-cdn.net` "cannot be accessed from origin `vscode-webview://<id>`". This is the Worker same-origin rule, not CSP (no violation event) | same |
+| `fetch(asWebviewUri)`, then a `blob:` URL, then a Worker | ok (`connect-src` allows the fetch) | ok |
+| `new Worker(data:)` | refused, `worker-src` violation | same |
+| Control: `worker-src` without `blob:` | every `blob:` form refused with a `worker-src blob` violation | same |
+
+What follows:
+
+- **Workers.** The kit's `worker-src <cspSource> blob:` is needed and is enough. Without `blob:`, no worker can start, because `asWebviewUri` scripts are cross-origin to the webview, so `blob:` is the only way in. A worker bundle ships as a file under `localResourceRoots`. The webview fetches it and starts it from a `blob:` URL, or inlines it as a string at build time. A module worker from a `blob:` URL cannot resolve relative imports (inference, not tested), so worker bundles must be self-contained. The `cspSource` part of `worker-src` (`'self' https://*.vscode-cdn.net`) matches nothing a Worker can load, but it does no harm.
+- **WebGPU.** It works in a stock VS Code webview with no flags on macOS, from 1.100 on. On a machine without a GPU, `navigator.gpu` is still present but `requestAdapter()` resolves to `null`. Feature detection must await the adapter; checking that `navigator.gpu` exists is not enough. The Chromium Linux rollout (Intel Gen12+ since Chrome 144, NVIDIA on Wayland since 147, per `3d-viewer.md` §2) is unverified in Electron until the owner runs the probe on a Linux GPU.
+- **WebGL2 baseline (D6).** On Chrome 150 with no GPU there is no WebGL2 context at all, which confirms the risk in `3d-viewer.md` §2. GPU-less VMs, containers and CI cannot render, so the viewer needs a visible "no GPU" state. A headless Linux integration test (Xvfb, no GPU) cannot test rendering.
+- `crossOriginIsolated` is false, so `SharedArrayBuffer` is absent in webviews on both versions, as `3d-viewer.md` §2 assumed.
+
+### 8. Bulk transfer to a webview: messages versus `fetch(asWebviewUri)`, measured (PLT-31)
+
+Measured 2026-10-25 on macOS 27.2, Apple M1 Pro (GPU: ANGLE Metal, Apple M1 Pro), 16 GB, VS Code 1.143.1 (Electron 43.7.7, Node 24.21.0), with a probe extension run by `@vsslicer/test-vscode@0.2.3` and `@vsslicer/webview-kit@0.4.2`'s `sendBuffer`, `receiveBuffers` and `createWebviewHtml`. Three runs per cell, 50, 200 and 500 MiB of deterministic bytes. Each run gets a fresh panel. A position-dependent checksum is compared in the webview: all 81 checksummed runs matched, and the 9 count-only runs got the right length. Time is from the host's first send (or posting the URL) until the webview holds every byte. Memory is the peak RSS of VS Code's process tree, sampled with `ps` in a loop (50 ms pause plus the time `ps` takes), minus the value just before the run. Memory figures are noisy (the median of 3 is given) because garbage from the previous run is still being collected. Other VS Code instances (another worker's gcode-preview tests) were running on the same machine during the measurements, which adds noise to the timings. Windows and Linux are not measured yet (board Q16). Raw rows are in `.reference/notes/PLT-31-results-darwin.jsonl`, and the probe source and run commands are in `.reference/notes/PLT-31-probe.md`.
+
+| Method | 50 MiB ms | 200 MiB ms | 500 MiB ms | 500 MiB MB/s | 500 MiB peak RSS delta, MiB (renderer / ext host) |
+|---|---|---|---|---|---|
+| kit `sendBuffer`, 256 KiB chunks, window 16 | 114 | 371 | 1032 | 508 | 640 (543 / 260) |
+| kit, 1 MiB, window 4 (current `TRANSFER_DEFAULTS`) | 102 | 319 | 748 | 701 | 1286 (679 / 587) |
+| kit, 4 MiB, window 4 | 90 | 246 | 658 | 797 | 1344 (580 / 596) |
+| kit, 16 MiB, window 4 | 96 | 293 | 612 | 857 | 1353 (768 / 588) |
+| kit, 16 MiB, window 2 | 88 | 313 | 766 | 684 | 1233 (659 / 405) |
+| raw `postMessage`, 4 MiB chunks, no acks | 83 | 250 | 527 | 995 | 1097 (365 / 678) |
+| raw `postMessage`, one message | 137 | 648 | 2618 | 200 | 649 (1026 / 387) |
+| `fetch(asWebviewUri)`, then `arrayBuffer()` | 170 | 670 | 2069 | 253 | 247 (473 / 14) |
+| `fetch`, `body.getReader()`, count bytes only | 114 | 414 | 1190 | 441 | 513 (537 / 0) |
+| `fetch`, `body.getReader()`, checksum each chunk | 587 | 2305 | 5565 | 94 | 61 (64 / 0) |
+
+The checksum alone costs about 11 ms per MiB on every method (5.4 s at 500 MiB), so the last row is limited by the consumer, not by the pipe. Writing the payload to a file first took 19, 83 and 196 ms. On the fetch side, `Range: bytes=1048576-2097151` returned `206` with exactly 1 MiB at every size.
+
+What the code says, at `vscode@4ef6bab7`:
+
+- **Messages.** `webview.postMessage` takes every `ArrayBuffer` and typed array out of the JSON and sends them as `VSBuffer`s (`src/vs/workbench/api/common/extHostWebviewMessaging.ts:22-50`, `extHostWebview.ts:129-135`). The main thread revives them and posts them into the frame with a transfer list (`api/browser/mainThreadWebviews.ts:66-73`, `contrib/webview/browser/pre/index.html:1305`). A typed-array **view** sends its whole underlying buffer (`extHostWebviewMessaging.ts:37-40`): posting `big.subarray(0, 1024)` sends all of `big`. The kit's `sendBuffer` slices each chunk into its own buffer (`webview-kit@0.4.2:src/application/transfer.ts:61-63`), so it never hits this.
+- **Buffers become JSON when no extension is found.** This only happens when `shouldSerializeBuffersForPostMessage` holds, meaning `engines.vscode` is at least 1.57 (`extHostWebview.ts:170-177`). It is decided for the extension that `require('vscode')` resolves to. An extension without `main` is not in the path index (`extHostExtensionService.ts:370-374`), so it gets the null extension's API, and every `ArrayBuffer` arrives as `{}`. Measured: the probe's buffers arrived empty until it got a `main`. That matters for test extensions.
+- **Resources.** `fetch(asWebviewUri)` is answered by `loadResource` (`contrib/webview/browser/webviewElement.ts:830-945`). It reads with `fileService.readFileStream` and gives the service worker a transferable `ReadableStream`, which honours `Range` with `206`. The stream enqueues each file chunk as it is read, without waiting on the reader's `desiredSize` (`webviewElement.ts:884-893`). The measured body chunks were 64 KiB, never larger.
+
+What follows:
+
+- **Bulk data that lives in a file goes by `fetch(asWebviewUri)` and is read incrementally.** That covers G-code, `.bgcode`, 3MF and the slicer's output files. Its memory stays flat only when the consumer is slower than the pipe (about 440 MB/s here): the checksumming reader peaked at about 64 MiB at 500 MiB, but the count-only reader peaked at 513 MiB (renderer 537 MiB), about the file size and more than `arrayBuffer()` (247 MiB), for a reason not yet known (Open questions). Either way it stays below the 1.1 to 1.4 GB of chunked messages. It costs the extension host nothing, and the parser overlaps with I/O, so the time to a parsed result is about the parser's own time. `Range` gives random access, for example a 3MF central directory or a G-code layer index. The file's folder has to be in `localResourceRoots` (the kit's `localResourceRoots` helper). It also has to be readable by the workbench file service, which holds in remote setups through the resource proxy, `(unverified for remote)`. The chunk size is VS Code's, 64 KiB, not ours. A consumer that wants bigger pieces collects them itself.
+- **Bulk data the host makes in memory goes by the kit's `sendBuffer` with 4 MiB chunks and a window of 4.** That covers buffers parsed or generated in the extension host. 4 MiB is the fastest setting at 200 MiB and within 8 % of the fastest at 500 MiB. 16 MiB adds nothing reliable, and 1 MiB is about 15 to 30 % slower. Acknowledgements cost little: the unacknowledged raw variant is no faster at 200 MiB (250 against 246 ms) and 25 % faster at 500 MiB (995 against 797 MB/s), and it gives up backpressure. Throughput is 600 to 860 MB/s, against 200 MB/s for one 500 MiB message. Expect the RSS peak to be about 2 to 3 times the payload (2.2 times at 200 MiB, 2.7 times at 500 MiB for 4 MiB chunks), because the host slices copy and the receiver concatenates. A consumer that can take chunks one at a time, instead of `receiveBuffers`' concatenated buffer, would save one copy `(not measured)`.
+- **Never send one big message.** At 500 MiB it is 4 times slower than chunking, and the renderer peaked at about 1 GiB.
+- **Kit bug.** The webview `createWindowChannel` in `webview-kit@0.4.2` (`src/adapters/webview-window.ts`) accepts only messages whose `event.source === window.parent`. Because of `pre/index.html:252-254` that is false for every host message, so `receiveBuffers` and `handshake` over it never hear the host. Measured: `sendBuffer` timed out after 120 s. The probe used `event.origin === location.origin`, which works.
+
 ## Comparison
 
 The decision table below, the build-pipeline table (§4) and the alternatives table (§6) serve as the comparison.
@@ -172,8 +227,8 @@ The decision table below, the build-pipeline table (§4) and the alternatives ta
 
 ## Open questions
 
-- WebGPU availability in webviews: tracked by VSS-7 (`docs/research/3d-viewer.md`).
-- Measured `postMessage` throughput for ArrayBuffers of 50–500 MB of G-code geometry. Is chunking needed?
+- WebGPU availability in webviews: measured on macOS and on GPU-less Linux (§7). Windows and Linux with a GPU are still open (PLT-33, board Q15).
+- `postMessage` versus `fetch(asWebviewUri)` for 50 to 500 MB: measured on macOS (§8). Windows and Linux are still open (PLT-31, board Q16). Why does a fast stream consumer peak at about the file size in the renderer when a slow one stays near 64 MiB (§8)?
 - Can a web-target extension reach LAN printers (Moonraker over `ws://`) from `https://vscode.dev`? Mixed-content and Private Network Access rules suggest not without a relay.
 - Default V8 heap limit of the extension host in Electron 43, and whether `--max-old-space-size` can be raised per host.
 - Whether Microsoft will finalise any proposed API we would want (the shared-process or IPC proposals, `vscode.proposed.ipc.d.ts`). Without one, the daemon stays our own.
