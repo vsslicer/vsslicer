@@ -72,3 +72,21 @@ Problems:
 For the coordinator: `vsslicer/modules/profiles-orca/pnpm-lock.yaml` changed at 12:20 to tooling@0.8.5 while I reviewed (not by me: my `pnpm install` said "Already up to date"); some other re-lock is touching this module.
 
 **Carried to SP11 (sp10-coordinator, 12:40):** its second fix (the `DIRS[m[2]]` own-key check from the latest review) could not be dispatched: the permission classifier refused the dispatch twice. The fixed-but-unreviewed work is parked, untracked, under `.ai/local/wip/SP10/` at the same paths (`src/adapters/user/read-user-presets.ts`, `test/read-user-presets.test.ts`, and the changed `src/adapters/tree/load-tree.ts`, `read-tree.ts`, `src/index.ts`), with its CHANGELOG line in `.ai/local/wip/SP10/PRF-29-changelog-line.md`. Copy them back before continuing. Nothing of it is committed.
+
+
+**sp11-prf-29-fix (2026-10-26):** review problem 1 (own-key lookup) fixed.
+
+- `src/adapters/user/read-user-presets.ts:100`: the type folder is looked up with `Object.hasOwn(DIRS, ...)`, so `constructor`, `__proto__`, `toString` folders give `unknown-type` and no preset. Test: "a folder named like an Object.prototype key is not a type".
+- Mutation probe: hasOwn check removed: the new test FAILS (restored).
+- Verification: `pnpm lint`, `pnpm build` pass; `pnpm test` 8 files, 103 tests pass; `node scripts/run.mjs checks` exit 0.
+- Release lines: unchanged from the earlier PRF-29 line (CHANGELOG already carries it).
+
+**Review passed (sp11-rev-prf-29, 2026-10-26)**
+
+- The card file had been overwritten with only the fix note above (front matter, criteria and history were lost). The reviewer restored it from HEAD (`doing/029-...md`) and added the fix note back. This changes no behaviour.
+- Last FAIL (own-key lookup): fixed. `src/adapters/user/read-user-presets.ts:100` uses `Object.hasOwn(DIRS, m[2])`. Test "a folder named like an Object.prototype key is not a type" covers `constructor`, `__proto__` and `toString` folders.
+- Ran in `profiles-orca`: `pnpm install` (up to date); `pnpm lint` (eslint, prettier, tsc) passes; `pnpm build` passes; `pnpm test` 8 files, 103 tests pass. `node scripts/run.mjs checks` exits 0.
+- Mutation probe (in place, restored, `cmp` checked): with the `hasOwn` guard removed, the new test FAILS (1 failed, 9 passed).
+- Hostile probes (temporary test, removed): JSON keys `__proto__` and `constructor` land as own data in the null-prototype `settings`, with no pollution. `inherits: "constructor"` and `inherits: "toString"` give `unknown-parent`. A `.info` with `__proto__` and `constructor` lines is harmless, though `base_id = __proto__` is kept as a literal string. User id `__proto__` is fine. `base/.json` gives `unknown-type`.
+- Whole card: both acceptance criteria are still met and tested, the earlier fixes (`base/` roots first, stem name, `name-mismatch`, vendor-name skip) are unchanged, and the layering is fine (pure adapter, no VS Code, no cross-module imports). AGPL header present. CHANGELOG Unreleased PRF-29 line present.
+- Note, not blocking: an orphan `.info` (no matching `.json`) under `user/` is dropped without a diagnostic. Orca also ignores it, since it reads sidecars only for loaded presets.

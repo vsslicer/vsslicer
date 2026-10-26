@@ -16,6 +16,8 @@ export const MAX_TREE_DIRS_DEEP = 8;
 export async function loadProfileTree(
   root: string,
   limits?: Partial<TreeLimits>,
+  /** File suffixes to read; user presets also need their `.info` sidecars. */
+  suffixes: readonly string[] = ['.json'],
 ): Promise<{ files: SourceFile[]; diagnostics: TreeDiagnostic[] }> {
   const lim = treeLimits(limits);
   const files: SourceFile[] = [];
@@ -41,7 +43,7 @@ export async function loadProfileTree(
       } else if (d.isDirectory()) {
         if (depth + 1 > MAX_TREE_DIRS_DEEP) report(path, `folder deeper than ${MAX_TREE_DIRS_DEEP} levels; skipped`);
         else pending.push({ rel: path, depth: depth + 1 });
-      } else if (d.isFile() && d.name.endsWith('.json')) {
+      } else if (d.isFile() && suffixes.some((x) => d.name.endsWith(x))) {
         if (files.length >= lim.maxFiles) {
           report(path, `more than ${lim.maxFiles} files; the rest are ignored`);
           return { files, diagnostics };

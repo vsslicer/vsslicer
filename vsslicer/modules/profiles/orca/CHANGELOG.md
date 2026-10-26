@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- PRF-29: `readOrcaUserPresets` reads `user/<id>/{machine,process,filament}` presets with their `.info` sidecars, links `inherits` to vendor (or other user) presets, sets `meta.base_version` from the sidecar `base_id`, and keeps a preset with a missing parent as standalone with a warning. `loadProfileTree` takes optional file suffixes (to read `.info`). The `base/` custom roots of each type folder are read first; a preset is named by its file stem (an inner `name` that differs warns `name-mismatch`); one named like a vendor preset of its type is skipped as in Orca; other files under `user/` warn instead of vanishing.
+
 - PRF-126: `splitOrcaPrinters` turns the machine presets of a read tree into one `printer_model` per `machine_model` (shared settings, an `overrides` block per nozzle, `nozzles`) and a `nozzle` entity per preset, matched by `printer_model` and `printer_variant`; presets with no model, no variant or another bed or nozzle count stay standalone `printer_model`s. `native` keeps every source preset by entity id.
 
 - PRF-28: `decodeVariants` and `encodeVariants` turn the per-extruder-variant arrays of machine and process presets (H2D, H2C) into values keyed by 0-based extruder then variant name (machine limits as `[normal, silent]` pairs; per-extruder options by extruder) and back to the original array order; a wrong-length array or malformed slot list stays as it is with a warning.

@@ -67,7 +67,8 @@ export type TreeDiagnosticCode =
   | 'cycle'
   | 'duplicate'
   | 'unsafe-path'
-  | 'limit';
+  | 'limit'
+  | 'name-mismatch';
 
 export interface TreeDiagnostic {
   severity: 'error' | 'warning';
