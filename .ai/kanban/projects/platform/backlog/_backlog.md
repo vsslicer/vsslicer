@@ -139,6 +139,3 @@
 137. [PLT-174: Test that a signed macOS or Windows build updates from a GitHub release](174-test-that-a-signed-macos-or-windows-build-updates-from-a-git.md)
 138. [PLT-175: Release signed macOS and Windows installers](175-release-signed-macos-and-windows-installers.md)
 139. [PLT-181: Reconcile the DCO requirement with the project commit convention](181-reconcile-the-dco-requirement-with-the-project-commit-conven.md)
-140. [PLT-189: Keep rebuilding and redraw when one context-restore rebuild throws](189-keep-rebuilding-and-redraw-when-one-context-restore-rebuild-.md)
-141. [PLT-190: Accept typed-array views in uploadMoveTextures](190-accept-typed-array-views-in-uploadmovetextures.md)
-142. [PLT-191: Stop the segment renderer holding the CPU move buffer until dispose](191-stop-the-segment-renderer-holding-the-cpu-move-buffer-until-.md)
