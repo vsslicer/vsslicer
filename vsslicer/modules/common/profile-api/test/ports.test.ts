@@ -2,6 +2,7 @@
 import { describe, expect, expectTypeOf, test } from 'vitest';
 import type { Diagnostic, ImportedEntity, ImportResult } from '../src/domain/import-result/index.ts';
 import type { Material, PrinterModel, Settings } from '../src/domain/entities/index.ts';
+import { BUNDLE_LIMITS } from '../src/domain/bundle/index.ts';
 import { entitySchemas } from '../src/domain/schema/index.ts';
 import {
   runExporterContract,
@@ -158,6 +159,34 @@ describe('exporter contract', () => {
     expect(error).toMatch(/file 0 has no path/);
     expect(error).toMatch(/not a Uint8Array/);
     expect(error).toMatch(/export\(sample\) wrote no file/);
+  });
+
+  const writing = (path: string): Exporter => ({
+    formats: ['orca-json'],
+    canHandle: () => true,
+    export: async ({ entities }) => ({
+      files: entities.length ? [{ path, bytes: new Uint8Array() }] : [],
+      diagnostics: [],
+    }),
+  });
+  const withPath = (path: string) =>
+    runExporterContract(writing(path), { entities: [{ id: 'a' } as ImportedEntity], native: { a: 1 } });
+
+  test('a safe nested output path passes', async () => {
+    await expect(withPath('printer/a b.json')).resolves.toBeUndefined();
+  });
+
+  test.each([
+    ['absolute', '/etc/passwd'],
+    ['absolute backslash', '\\x.json'],
+    ['dot-dot segment', 'a/../b.json'],
+    ['leading dot-dot', '../b.json'],
+    ['backslash', 'a\\b.json'],
+    ['drive letter', 'C:b.json'],
+    ['NUL', 'a\0b.json'],
+    ['over the length cap', 'a'.repeat(BUNDLE_LIMITS.maxPathLength + 1)],
+  ])('an output path that is %s fails', async (_, path) => {
+    await expect(withPath(path)).rejects.toThrow(/file 0 has an unsafe path/);
   });
 });
 
