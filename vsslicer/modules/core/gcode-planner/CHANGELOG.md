@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.4.0
 
+- Depends on gcode-api ^0.6.0.
 - GCP-89: Cura `;FLAVOR:` names: `RepRap` ("RepRap (RepRap)", for Duet) selects the RepRapFirmware planner; `Griffin`, `Cheetah`, `Marlin(Volumetric)` and `RepRap (Volumetric)` the Marlin planner without the assumed flag (CuraEngine@47b0388); `UltiGCode` stays assumed.
 - GCP-92: `createKlipperPlanner` throws RangeError unless `checkpointInterval` is a positive integer.
 - GCP-93: a G4 dwell in a file with no moves counts in `totalTime` in every planner (`TimingBuilder.finish` adds the leftover lead; Klipper dwells it when no move was held); the constant-speed planner now honours G4 (one map of dwells per move).
