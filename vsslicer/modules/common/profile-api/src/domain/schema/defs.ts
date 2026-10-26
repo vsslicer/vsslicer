@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // JSON Schema draft 2020-12 for the profile entities (profiles.md §6). Hand-written; test/schema.test.ts
 // checks property and required keys against the TypeScript types so the two cannot drift.
+import { orcaCatalogue } from '../catalogue/orca.ts';
 export type JsonSchema = { [key: string]: unknown };
 
 export const SCHEMA_BASE = 'https://vsslicer.dev/schema/profile/';
@@ -13,21 +14,10 @@ const bool = { type: 'boolean' };
 const stringMap = (value: JsonSchema = str): JsonSchema => ({ type: 'object', additionalProperties: value });
 
 // Per-extruder values are keyed maps, never positional arrays (profiles.md §6 Inheritance); other keys may hold lists.
-// shortcut: hand list of the per-extruder keys in the PRF-4/PRF-5 fixtures; derive it from the catalogue's
-// `per_extruder` entries once PRF-14 generates the data.
-const PER_EXTRUDER_KEYS = [
-  'nozzle_diameter',
-  'extruder_offset',
-  'extruder_colour',
-  'extruder_variant_list',
-  'printer_extruder_id',
-  'printer_extruder_variant',
-  'nozzle_volume',
-  'hotend_heating_rate',
-  'retract_length',
-  'retraction_length',
-  'retract_length_toolchange',
-];
+// The per-extruder keys are the catalogue's `per_extruder` entries (PRF-14).
+const PER_EXTRUDER_KEYS = Object.entries(orcaCatalogue.entries)
+  .filter(([, e]) => e.per_extruder)
+  .map(([k]) => k);
 
 export const defsSchema: JsonSchema = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',

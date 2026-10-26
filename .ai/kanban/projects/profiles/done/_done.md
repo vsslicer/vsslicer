@@ -12,3 +12,5 @@
 10. [PRF-8: Evaluate conditions over a context with Prusa's failure semantics and a fuzz test](008-evaluate-conditions-over-a-context-with-prusa-s-failure-sema.md)
 11. [PRF-13: Implement the conversion kinds both ways](013-implement-the-conversion-kinds-both-ways.md)
 12. [PRF-177: Match newlines in conditions the way PrusaSlicer's Boost regex does](177-match-newlines-in-conditions-the-way-prusaslicer-s-boost-reg.md)
+13. [PRF-14: Generate catalogue entries from the Orca key list](014-generate-catalogue-entries-from-the-orca-key-list.md)
+14. [PRF-15: Extend the catalogue with Bambu Studio keys and the bambu. prefix](015-extend-the-catalogue-with-bambu-studio-keys-and-the-bambu-pr.md)
