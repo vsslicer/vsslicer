@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.0
+
+- GCP-111: the `.gcode.3mf` readers (`gcode3mfSource`, `gcode3mfEntries`, `gcode3mfPlates`, `readGcode3mfPlate`, `CorruptZipError`, `SizeCapExceededError`) move to the `@vsslicer/gcode-parser/gcode-3mf` entry, so the main entry no longer loads @vsslicer/3mf (breaking for importers of those names from the main entry, which 0.12.0 added an hour earlier).
+
 ## 0.12.0
 
 - GCP-16: `gcode3mfPlates` and `readGcode3mfPlate`: plate enumeration, `slice_info.config` statistics (linear quote-aware scanner, 4 MiB cap), the plate thumbnail and the `plate_N.gcode.md5` check for `.gcode.3mf`.

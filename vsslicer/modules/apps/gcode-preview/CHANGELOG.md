@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- GCP-111: depends on gcode-api ^0.7.0 and gcode-parser ^0.13.0, so the preview parses with the one flavour table (GCP-99): a Cura `;FLAVOR:RepRap` file is parsed and timed as RepRapFirmware.
+
 ## 0.4.0
 
 - Depends on gcode-planner ^0.5.0 and webview-kit ^0.6.0. Stays on gcode-parser ^0.11.0: 0.12.0 bundles @vsslicer/3mf's saxes, which ships no licence file, so the notices check refuses it (GCP-111).

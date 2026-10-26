@@ -1,14 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { deflateRawSync } from 'node:zlib';
 import { describe, expect, it } from 'vitest';
-import {
-  CorruptZipError,
-  SizeCapExceededError,
-  collect,
-  gcode3mfEntries,
-  gcode3mfSource,
-  parse,
-} from '../src/index.ts';
+import { collect, parse } from '../src/index.ts';
+import { CorruptZipError, SizeCapExceededError, gcode3mfEntries, gcode3mfSource } from '../src/gcode-3mf.ts';
 
 interface Item {
   name: string;

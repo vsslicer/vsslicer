@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/gcode-preview",
   "displayName": "VSSlicer G-code Preview",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Read-only custom editor for .gcode, .bgcode and .gcode.3mf: parses and plans in a worker and hands the move buffers to the webview.",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-preview@0.4.0/vsslicer/modules/gcode-preview",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-preview@0.4.1/vsslicer/modules/gcode-preview",
   "vsslicer": {
     "sizeBudgetKB": 200
   },
@@ -78,8 +78,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@vsslicer/gcode-api": "^0.6.0",
-    "@vsslicer/gcode-parser": "^0.11.0",
+    "@vsslicer/gcode-api": "^0.7.0",
+    "@vsslicer/gcode-parser": "^0.13.0",
     "@vsslicer/gcode-planner": "^0.5.0",
     "@vsslicer/webview-kit": "^0.6.0"
   },

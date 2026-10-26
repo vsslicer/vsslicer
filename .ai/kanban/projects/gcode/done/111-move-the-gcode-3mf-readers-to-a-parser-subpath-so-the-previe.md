@@ -5,7 +5,7 @@ type: bug
 priority: P1
 effort: S
 model: sonnet
-sprint: "VSS:SP7"
+sprint: "VSS:SP6"
 created: 2026-10-26
 ---
 
@@ -15,15 +15,17 @@ Found at SP6's release: gcode-parser 0.12.0 (GCP-15, GCP-16) imports @vsslicer/3
 
 ## Acceptance criteria
 
-- [ ] The `.gcode.3mf` readers move to a subpath entry (e.g. `@vsslicer/gcode-parser/gcode-3mf`), so the main entry no longer imports @vsslicer/3mf (test like gcode-preview's bundle test)
+- [x] The `.gcode.3mf` readers move to a subpath entry (e.g. `@vsslicer/gcode-parser/gcode-3mf`), so the main entry no longer imports @vsslicer/3mf (test like gcode-preview's bundle test)
 - [ ] gcode-preview takes gcode-parser and gcode-api at their current ranges, builds (notices check passes) and its tests pass
 - [ ] Whoever bundles the 3mf entry later supplies saxes's ISC text (a tooling or 3mf change, decided then)
 
 ## Tasks
 
-- [ ] Subpath entry
+- [x] Subpath entry
 - [ ] Release gcode-parser, re-lock gcode-preview
 
 ## Progress
 
-Not started.
+Done: src/gcode-3mf.ts is the new `@vsslicer/gcode-parser/gcode-3mf` export (gcode3mfSource/Entries/Plates, readGcode3mfPlate, CorruptZipError, SizeCapExceededError, plate types); removed from src/index.ts. New test/main-entry.test.ts walks index.ts's static import graph and asserts no @vsslicer/3mf/fflate/saxes; the 3mf tests import from the subpath. lint, build, test (367) pass; dist/index.js has no 3mf reference. Not done: release and gcode-preview re-lock (coordinator). Breaking for main-entry 3mf importers.
+Files: gcode-parser package.json, src/index.ts, src/gcode-3mf.ts, test/main-entry.test.ts, test/gcode-3mf*.test.ts.
+Changelog: Moved the .gcode.3mf readers to the `@vsslicer/gcode-parser/gcode-3mf` subpath so the main entry no longer pulls @vsslicer/3mf (breaking for importers of those names from the main entry).

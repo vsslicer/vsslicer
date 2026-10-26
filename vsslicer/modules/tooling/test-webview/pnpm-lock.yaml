@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vsslicer/webview-kit':
-        specifier: ^0.5.0
-        version: 0.5.1
+        specifier: ^0.6.0
+        version: 0.6.0
     devDependencies:
       '@playwright/test':
         specifier: 1.64.1
@@ -996,8 +996,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.5.1':
-    resolution: {integrity: sha512-WbhvpN5K9HMv2lMgHVOou/cn3sVPiM2DJzc+sFRnO0MtViZLHYcBkFJBMo6q+89xU36/GnliEwIPDrBqjmIXpQ==}
+  '@vsslicer/webview-kit@0.6.0':
+    resolution: {integrity: sha512-RfK3kUZhFUHwRVyxybxYZ/qJ+mvNRsw1uu39jC26241JnQQUR+J0BiHIW8wGZOZzKqmpIeH0rQx8ApIXY8qg2w==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -3385,7 +3385,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.5.1': {}
+  '@vsslicer/webview-kit@0.6.0': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:

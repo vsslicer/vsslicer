@@ -17,3 +17,4 @@
 15. [GCP-34: Set up Playwright snapshots on Chromium with SwiftShader](034-set-up-playwright-snapshots-on-chromium-with-swiftshader.md)
 16. [GCP-15: Write the read-only zip entry reader](015-write-the-read-only-zip-entry-reader.md)
 17. [GCP-16: Open .gcode.3mf plates with statistics, thumbnails and MD5 check](016-open-gcode-3mf-plates-with-statistics-thumbnails-and-md5-che.md)
+18. [GCP-111: Move the .gcode.3mf readers to a parser subpath so the preview can take gcode-parser 0.12](111-move-the-gcode-3mf-readers-to-a-parser-subpath-so-the-previe.md)

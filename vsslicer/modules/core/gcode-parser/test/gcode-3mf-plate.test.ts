@@ -2,7 +2,8 @@
 import { readFileSync } from 'node:fs';
 import { writeZip } from '@vsslicer/3mf';
 import { describe, expect, it } from 'vitest';
-import { collect, gcode3mfPlates, gcode3mfSource, parse, readGcode3mfPlate } from '../src/index.ts';
+import { collect, parse } from '../src/index.ts';
+import { gcode3mfPlates, gcode3mfSource, readGcode3mfPlate } from '../src/gcode-3mf.ts';
 
 const h2c = new Uint8Array(readFileSync(new URL('./fixtures/bambu-studio/h2c-cube.gcode.3mf', import.meta.url)));
 const enc = (s: string): Uint8Array => new TextEncoder().encode(s);
