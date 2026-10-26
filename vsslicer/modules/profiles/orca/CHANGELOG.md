@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
 - Added: `exportBambuBundle` writes Bambu Studio `.bbscfg` and `.bbsflmt` bundles without host or credential keys, each preset with the semver `version`, `*_settings_id` and `from` Studio needs to load it (PRF-109).
 - Added: `readOrcaInstances` reads Orca and Bambu user machine presets as printer instances (the model and nozzle ids `splitOrcaPrinters` makes, the print host connection); the credential is returned beside the entity, and an unknown host type or a name repeated across user folders gives a diagnostic (PRF-90).

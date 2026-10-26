@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/profiles-orca",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "OrcaSlicer and Bambu Studio profiles (.json, .3mf config) to and from the shared profile model.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
