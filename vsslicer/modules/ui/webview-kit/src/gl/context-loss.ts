@@ -18,12 +18,13 @@ export interface GpuResources {
 /**
  * Keeps GPU resources alive across WebGL context loss. Cancels `webglcontextlost` (without that
  * the browser never restores) and rebuilds the registered resources, in registration order, on
- * restore, then calls `onRestored` so the renderer can redraw. Nothing goes through the host:
+ * restore, then calls `onRestored` so the renderer can redraw. A throwing rebuild does not stop the
+ * others; the first error is passed to `onRestored` so the renderer can show its failure UI. Nothing goes through the host:
  * the CPU arrays are already in the webview.
  */
 export function trackContextLoss(
   canvas: HTMLCanvasElement,
-  hooks: { onLost?: () => void; onRestored?: () => void } = {},
+  hooks: { onLost?: () => void; onRestored?: (error?: unknown) => void } = {},
 ): GpuResources {
   const entries = new Map<object, { build: GpuBuild; free: void | (() => void) }>();
   const lost = (e: Event) => {
@@ -31,10 +32,19 @@ export function trackContextLoss(
     hooks.onLost?.();
   };
   const restored = () => {
-    // Re-adding while rebuilding is safe: Map iteration visits entries added meanwhile once.
+    // Iterate a snapshot: entries added or removed meanwhile are not rebuilt by this pass.
     // The lost context's objects are gone, so the old `free` is dropped; keep the rebuild's.
-    for (const e of [...entries.values()]) e.free = e.build();
-    hooks.onRestored?.();
+    let error: unknown;
+    let failed = false;
+    for (const e of [...entries.values()]) {
+      try {
+        e.free = e.build();
+      } catch (err) {
+        e.free = undefined; // the lost context's free must not run on a context that never rebuilt it
+        if (!failed) [failed, error] = [true, err];
+      }
+    }
+    hooks.onRestored?.(...(failed ? [error] : []));
   };
   canvas.addEventListener('webglcontextlost', lost);
   canvas.addEventListener('webglcontextrestored', restored);
