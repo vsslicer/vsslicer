@@ -17,12 +17,15 @@ importers:
       '@types/vscode':
         specifier: 1.100.0
         version: 1.100.0
+      '@vsslicer/profile-api':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@vsslicer/test-vscode':
         specifier: ^0.2.3
         version: 0.2.3(supports-color@8.1.1)
       '@vsslicer/tooling':
         specifier: ^0.8.4
-        version: 0.8.4(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
+        version: 0.8.5(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
       esbuild:
         specifier: 0.28.2
         version: 0.28.2
@@ -818,13 +821,17 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
+  '@vsslicer/profile-api@0.1.2':
+    resolution: {integrity: sha512-PDasEB360+d979g1sb+W8f2SPTc36gGKLM4DQz8hAPjA56+jPfQkI/CtpizWZc2n8F6JFHgT71tyMwjaSI5gEw==}
+    engines: {node: '>=24'}
+
   '@vsslicer/test-vscode@0.2.3':
     resolution: {integrity: sha512-zgJnS78SbRcksEvAXFpMrCz7aSE1jLb9IhynWGhSUStbIotNs8X5h0yeRDcsNV7qSxNTUQwEW7dFg9D6xKBt1w==}
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/tooling@0.8.4':
-    resolution: {integrity: sha512-1i4sNmp3zHo1VnnzEGZgtiasnFrxFkmEqIu+nC85E00Htcxelgxp9C+plZGxCKIWL3+uGmbJdFnjqOO2/9kj5w==}
+  '@vsslicer/tooling@0.8.5':
+    resolution: {integrity: sha512-d+ZPpjyQG+R3dIxDrQxjeuOx5tJFY+JxE81kqELZLErKK5QDb/n0VQWc90Q6AnZY8oJBQyM1l2ImZ9KO2jSd8Q==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -2990,6 +2997,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@vsslicer/profile-api@0.1.2': {}
+
   '@vsslicer/test-vscode@0.2.3(supports-color@8.1.1)':
     dependencies:
       '@vscode/test-electron': 3.1.0(supports-color@8.1.1)
@@ -2997,7 +3006,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/tooling@0.8.4(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@vsslicer/tooling@0.8.5(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.13.0(supports-color@8.1.1))
       '@vscode/vsce': 3.9.2(supports-color@8.1.1)
