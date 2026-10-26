@@ -11,3 +11,5 @@
 9. [PRF-27: Read Orca and Bambu JSON trees and flatten include and inherits](027-read-orca-and-bambu-json-trees-and-flatten-include-and-inher.md)
 10. [PRF-43: Spike: confirm the flattened Prusa export is byte-equivalent on 10 presets](043-spike-confirm-the-flattened-prusa-export-is-byte-equivalent-.md)
 11. [PRF-40: Download Prusa vendor bundles from upstream at a pinned commit](040-download-prusa-vendor-bundles-from-upstream-at-a-pinned-comm.md)
+12. [PRF-32: Import fdm_materials XML as material entities](032-import-fdm-materials-xml-as-material-entities.md)
+13. [PRF-31: Read Cura quality, quality_changes and definition_changes](031-read-cura-quality-quality-changes-and-definition-changes.md)

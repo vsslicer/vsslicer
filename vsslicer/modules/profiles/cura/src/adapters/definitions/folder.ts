@@ -10,13 +10,17 @@ import type { Diagnostic, SourceFile } from '@vsslicer/profile-api';
 import { constants } from 'node:fs';
 import { lstat, open, opendir } from 'node:fs/promises';
 import { join } from 'node:path';
+import { curaCfgOf } from '../quality/read.ts';
 import { curaResourceOf, MAX_RESOURCE_DIAGNOSTICS, resolveResourceLimits, type CuraResourceLimits } from './read.ts';
 
 const FOLDERS = ['definitions', 'extruders', 'variants'] as const;
+/** Top folders readCuraResourceFolder can be asked for; the first three are the default. */
+export type CuraFolder = (typeof FOLDERS)[number] | 'quality' | 'quality_changes' | 'definition_changes';
 
 export async function readCuraResourceFolder(
   root: string,
   limits: Partial<CuraResourceLimits> = {},
+  folders: readonly CuraFolder[] = FOLDERS,
 ): Promise<{ files: SourceFile[]; diagnostics: Diagnostic[] }> {
   const lim = resolveResourceLimits(limits);
   const files: SourceFile[] = [];
@@ -32,7 +36,7 @@ export async function readCuraResourceFolder(
 
   // Breadth first, sorted per folder, so the first file of an id is the same on every file system.
   const queue: { rel: string; depth: number }[] = [];
-  for (const top of FOLDERS) queue.push({ rel: top, depth: 0 });
+  for (const top of folders) queue.push({ rel: top, depth: 0 });
   while (queue.length > 0) {
     const { rel, depth } = queue.shift()!;
     let names: { name: string; kind: 'file' | 'dir' | 'link' | 'other' }[] = [];
@@ -69,7 +73,7 @@ export async function readCuraResourceFolder(
       else if (kind === 'dir') {
         if (depth + 1 > lim.maxFolderDepth) diag('error', path, `deeper than ${lim.maxFolderDepth} folders; not read`);
         else queue.push({ rel: path, depth: depth + 1 });
-      } else if (kind === 'file' && curaResourceOf(path)) {
+      } else if (kind === 'file' && (curaResourceOf(path) || curaCfgOf(path))) {
         const bytes = await readCapped(join(root, path), lim.maxFileBytes);
         if (typeof bytes === 'string') {
           diag('error', path, bytes);
@@ -89,7 +93,7 @@ export async function readCuraResourceFolder(
 }
 
 /** The file's bytes, or why not: never follows a link, never reads past `max` + 1 bytes. */
-async function readCapped(path: string, max: number): Promise<Uint8Array | string> {
+export async function readCapped(path: string, max: number): Promise<Uint8Array | string> {
   let handle;
   try {
     handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
