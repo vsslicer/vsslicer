@@ -1,7 +1,7 @@
 ---
 id: D18
 title: "Bulk data to webviews: fetch(asWebviewUri) for files, 4 MiB sendBuffer chunks for host-built buffers"
-status: proposed
+status: accepted
 date: 2026-10-26
 cards: [PLT-31, PLT-39]
 ---

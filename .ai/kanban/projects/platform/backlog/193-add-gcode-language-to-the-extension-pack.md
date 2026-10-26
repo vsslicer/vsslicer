@@ -5,7 +5,7 @@ type: chore
 priority: P2
 effort: XS
 model: sonnet
-sprint: "VSS:SP8"
+sprint: "VSS:SP9"
 depends_on: [28]
 created: 2026-10-26
 ---

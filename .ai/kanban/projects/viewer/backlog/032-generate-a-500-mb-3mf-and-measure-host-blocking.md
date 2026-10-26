@@ -8,7 +8,7 @@ model: opus
 area: [3mf]
 story: US8
 milestone: "VSS:M2"
-sprint: "VSS:SP8"
+sprint: "VSS:SP9"
 depends_on: [31, PLT-13]
 created: 2026-10-25
 ---

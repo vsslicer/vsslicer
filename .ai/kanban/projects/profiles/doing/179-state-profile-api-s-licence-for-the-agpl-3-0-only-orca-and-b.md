@@ -5,7 +5,7 @@ type: bug
 priority: P1
 effort: S
 model: opus
-sprint: "VSS:SP8"
+sprint: "VSS:SP9"
 owner: sp7-prf-lic
 docs: [.ai/audits/SP6-audit.md]
 created: 2026-10-26

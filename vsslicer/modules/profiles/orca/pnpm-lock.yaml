@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@vsslicer/profile-api':
+        specifier: ^0.1.1
+        version: 0.1.1
+      fflate:
+        specifier: 0.8.3
+        version: 0.8.3
     devDependencies:
       '@types/node':
         specifier: 24.19.2
@@ -968,6 +975,10 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
+  '@vsslicer/profile-api@0.1.1':
+    resolution: {integrity: sha512-a1Owba+X22xAZgsw94G3nsdP9jKJb5hOGSmGysE3ixhnwUdiZFCgQQJQSnBF1jYJJ8FLG87gVD4wJ3hzzpcblQ==}
+    engines: {node: '>=24'}
+
   '@vsslicer/tooling@0.8.3':
     resolution: {integrity: sha512-zX3z002vJow2a6TK57/5xzTnbCfoIKtP9SacjO8yfPX9r0D0HSt/jsj06GLp6hZ++cc1Fo9iMkQBx6U0cY2pFQ==}
     engines: {node: '>=24'}
@@ -1394,6 +1405,9 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
 
   file-entry-cache@11.1.5:
     resolution: {integrity: sha512-+PFTHITI08JIGhnNpGNI8T8inUpgZfk3GNEqfT9R2zZV2iFXg3CvqzSl/uEhs7TSGujYRELEANyDvS8Fj7+S7Q==}
@@ -3317,6 +3331,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@vsslicer/profile-api@0.1.1': {}
+
   '@vsslicer/tooling@0.8.3(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.13.0(supports-color@7.2.0))
@@ -3806,6 +3822,8 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
+
+  fflate@0.8.3: {}
 
   file-entry-cache@11.1.5:
     dependencies:

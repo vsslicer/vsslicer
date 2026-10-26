@@ -1,7 +1,7 @@
 ---
 id: D16
 title: "Bambu networking: port the LAN protocol of Open Bamboo Networking (ClusterM) into printer-bambu"
-status: proposed
+status: accepted
 date: 2026-10-25
 cards: [PRN-1]
 question: Q3

@@ -1,7 +1,7 @@
 ---
 id: D17
 title: "Freeze the 28-byte move record; add the far-zoom merge to E5, gated on GCP-18"
-status: proposed
+status: accepted
 date: 2026-10-25
 cards: [GCP-17, GCP-18]
 ---
