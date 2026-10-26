@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added: importer registry (`createImporterRegistry`), a composite Importer that routes files to the first claiming importer and turns a failing importer into a diagnostic, and the `importProfiles` use case over a `ProfileSource` with an `EntityValidator` port; at most 50000 files per import (PRF-38).
 - PRF-71: `buildSearchIndex` searches settings over keys, labels, native names and tooltips; name hits rank above tooltip hits; query and per-query work are bounded (`lastCost`).
 - PRF-181: form model special widget kinds: percent-or-absolute, per-extruder, gcode and `{expr}`.
 - PRF-70: `buildFormModel` generates the form model from the settings catalogue: groups, per-home-entity subgroups, fields and base widget kinds; a full-catalogue snapshot; depends on `@vsslicer/profile-api` ^0.1.0.
