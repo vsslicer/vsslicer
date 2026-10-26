@@ -26,3 +26,4 @@
 24. [VWR-17: Resolve Production sub-models and required extensions](017-resolve-production-sub-models-and-required-extensions.md)
 25. [VWR-37: Spike: parse, dedup and BVH time and memory at 1, 5 and 20 M](037-spike-parse-dedup-and-bvh-time-and-memory-at-1-5-and-20-m.md)
 26. [VWR-47: Add parseModel with the triangle cap](047-add-parsemodel-with-the-triangle-cap.md)
+27. [VWR-73: Release 3mf@0.1.0: container API (open, parts, replace, add, remove, save)](073-release-3mf-0-1-0-container-api-open-parts-replace-add-remov.md)

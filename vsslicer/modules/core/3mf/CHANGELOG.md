@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
+
+- VWR-73: first release: the container API (`openPackage`, parts, thumbnails, `save`, `replacePart`, `addPart`, `removePart`, raw-copy writer), core model reading (`readModel`, `resolveProject`, `readProject`) and typed errors.
 
 - VWR-2: module scaffold (`@vsslicer/3mf`, layers `domain`, `application`, `adapters`), with `saxes` 6.0.0 and `fflate` 0.8.3.
 - VWR-3: `Package` and `Part` types and the typed `ThreeMfError` classes (domain).
