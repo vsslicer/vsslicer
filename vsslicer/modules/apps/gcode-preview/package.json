@@ -1,0 +1,99 @@
+{
+  "name": "@vsslicer/gcode-preview",
+  "displayName": "VSSlicer G-code Preview",
+  "version": "0.1.0",
+  "description": "Read-only custom editor for .gcode, .bgcode and .gcode.3mf: parses and plans in a worker and hands the move buffers to the webview.",
+  "publisher": "vsslicer",
+  "license": "AGPL-3.0-or-later",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-preview@0.1.0/vsslicer/modules/gcode-preview",
+  "vsslicer": {
+    "sizeBudgetKB": 200
+  },
+  "main": "dist/extension.js",
+  "files": [
+    "dist",
+    "!dist/*.meta.json",
+    "THIRD-PARTY-NOTICES.md",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24",
+    "vscode": "^1.100.0"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "vsslicer.gcode.preview",
+        "displayName": "G-code Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.bgcode"
+          },
+          {
+            "filenamePattern": "*.gcode.3mf"
+          }
+        ],
+        "priority": "default"
+      },
+      {
+        "viewType": "vsslicer.gcode.preview.gcode",
+        "displayName": "G-code Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.gcode"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "configuration": {
+      "title": "VSSlicer G-code Preview",
+      "properties": {
+        "vsslicer.gcode.preview.openGcodeByDefault": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Open `*.gcode` files in the G-code Preview instead of the text editor. Sets a `workbench.editorAssociations` entry in your user settings; turning it off removes that entry again. `*.bgcode` and `*.gcode.3mf` always open in the preview."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check . && tsc",
+    "build": "tsc && vsslicer-bundle && pnpm build:worker && pnpm build:webview && third-party-notices dist/extension.meta.json dist/worker.meta.json dist/webview.meta.json",
+    "build:worker": "esbuild src/adapters/worker-entry.ts --bundle --platform=node --format=cjs --target=node24 --sourcemap --define:import.meta.url=__importMetaUrl --banner:js=\"const __importMetaUrl = require('node:url').pathToFileURL(__filename).href;\" --outfile=dist/worker.js --metafile=dist/worker.meta.json",
+    "build:webview": "esbuild src/presentation/webview/main.ts --bundle --platform=browser --format=iife --target=es2023 --sourcemap --outfile=dist/webview.js --metafile=dist/webview.meta.json",
+    "prepack": "pnpm build",
+    "package": "vsslicer-package",
+    "test": "node --test test/*.test.ts",
+    "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@vsslicer/gcode-api": "^0.4.1",
+    "@vsslicer/gcode-bgcode": "^0.4.2",
+    "@vsslicer/gcode-parser": "^0.8.5",
+    "@vsslicer/gcode-planner": "^0.2.1",
+    "@vsslicer/webview-kit": "^0.4.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.10",
+    "@types/node": "24.19.2",
+    "@types/vscode": "1.100.0",
+    "@vsslicer/test-vscode": "^0.2.3",
+    "@vsslicer/tooling": "^0.8.2",
+    "esbuild": "0.28.2",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}
