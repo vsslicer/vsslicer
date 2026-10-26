@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-83: validateConnection checks printer_instance host_type against D3, refuses credential keys and strings over 2,048 characters; resolveToolheads maps slots to nozzles.
 - PRF-123: Importer, Exporter and ProfileStore read ports, and the runImporterContract / runExporterContract suites; src/ may not import Node built-ins (lint).
 - PRF-122: ImportResult, Diagnostic (closed code union) and InstanceImport types, credential kept outside the entity.
 - PRF-178: the regex linearity tests assert an NFA step bound (`RegexStats` hook) instead of wall-clock time.
