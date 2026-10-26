@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- VWR-398: `detectDialect` matches part names case-insensitively and with a leading `/`.
+
 ## 0.1.3
 
 - VWR-13: `detectDialect(metadata, partNames)` names the writer (bambu, orca, prusa2, prusa3, cura, core) from metadata and part names (a `Cura/` part wins over a foreign `Application`; Prusa versions parse like upstream `semver_parse`, patch optional); the `Dialect` value `prusa` is now `prusa2`.

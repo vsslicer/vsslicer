@@ -36,17 +36,19 @@ function isPrusa2Version(version: string): boolean {
  */
 export function detectDialect(metadata: ReadonlyMap<string, string>, partNames: Iterable<string>): DialectGuess {
   const application = metadata.get('Application');
-  const names = new Set(partNames);
+  // OPC part names are case-insensitive and may carry a leading `/` (see opcEdit.ts).
+  const names = new Set<string>();
+  for (const n of partNames) names.add((n.startsWith('/') ? n.slice(1) : n).toLowerCase());
   const found = (dialect: Dialect): DialectGuess =>
     application === undefined ? { dialect } : { dialect, application };
 
-  for (const n of names) if (n.startsWith('Cura/')) return found('cura');
+  for (const n of names) if (n.startsWith('cura/')) return found('cura');
   if (application?.startsWith('BambuStudio-')) return found(metadata.has('OrcaSlicer') ? 'orca' : 'bambu');
   if (application?.startsWith('OrcaSlicer-')) return found('orca');
   if (application?.startsWith('PrusaSlicer-'))
     return found(isPrusa2Version(application.slice('PrusaSlicer-'.length)) ? 'prusa2' : 'prusa3');
-  if (names.has('Metadata/PrusaSlicer3_project.json')) return found('prusa3');
-  if (names.has('Metadata/Slic3r_PE.config')) return found('prusa2');
+  if (names.has('metadata/prusaslicer3_project.json')) return found('prusa3');
+  if (names.has('metadata/slic3r_pe.config')) return found('prusa2');
   if (metadata.has('OrcaSlicer')) return found('orca');
   return found('core');
 }
