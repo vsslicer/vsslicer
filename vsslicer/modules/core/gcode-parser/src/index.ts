@@ -18,3 +18,7 @@ export type { ParseSettings } from './application/parse.ts';
 export type { Flavour } from '@vsslicer/gcode-api';
 export type { ParserOptions } from './domain/parser.ts';
 export { transferList } from './domain/transfer.ts';
+export { gcode3mfEntries, gcode3mfSource } from './adapters/gcode-3mf-source.ts';
+export { CorruptZipError, SizeCapExceededError } from '@vsslicer/3mf';
+export { gcode3mfPlates, readGcode3mfPlate } from './adapters/gcode-3mf-plate.ts';
+export type { Gcode3mfPlate, PlateFilament, PlateStatistics } from './adapters/gcode-3mf-plate.ts';
