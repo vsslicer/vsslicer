@@ -135,5 +135,4 @@
 133. [PRF-175: Prove no network request happens when updates are off](175-prove-no-network-request-happens-when-updates-are-off.md)
 134. [PRF-176: Add Edit in template editor to G-code fields](176-add-edit-in-template-editor-to-g-code-fields.md)
 135. [PRF-57: Create the `profiles-extension` module (vsslicer.profiles)](057-create-the-vsslicer-profiles-extension-skeleton.md)
-136. [PRF-190: Generate profiles-data-orca's data at publish time from the pinned upstream commit](190-generate-profiles-data-orca-s-data-at-publish-time-from-the-.md)
-137. [PRF-191: Read the PrusaSlicer 3.0 preset trees and variants behind the experimental flag](191-read-the-prusaslicer-3-0-preset-trees-and-variants-behind-th.md)
+136. [PRF-191: Read the PrusaSlicer 3.0 preset trees and variants behind the experimental flag](191-read-the-prusaslicer-3-0-preset-trees-and-variants-behind-th.md)

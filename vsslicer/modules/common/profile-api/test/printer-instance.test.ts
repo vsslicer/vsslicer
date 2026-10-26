@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, test } from 'vitest';
 import { HOST_TYPES, resolveToolheads, validateConnection } from '../src/domain/entities/printer-instance/index.ts';
+import { GUARDED_TIMEOUT, guarded } from './support/guard.ts';
 import type { Nozzle, PrinterInstance } from '../src/index.ts';
 
 const conn = (over: Record<string, unknown> = {}) => ({
@@ -31,12 +32,18 @@ describe('connection', () => {
     expect(paths(conn({ url: 'h'.repeat(2048) }))).toEqual([]);
   });
 
-  test('hostile: pathological strings validate in linear time', () => {
-    const t = Date.now();
-    paths(conn({ url: 'a'.repeat(2048) + '!', host_type: '(a+)+$'.repeat(300) }));
-    paths(conn({ url: 'http://' + '@:/.'.repeat(500) }));
-    expect(Date.now() - t).toBeLessThan(200);
-  });
+  test(
+    'hostile: pathological strings validate in linear time',
+    () => {
+      const body = `
+      const { validateConnection } = await load('src/domain/entities/printer-instance/index.ts');
+      const conn = (over) => ({ host_type: 'moonraker', url: 'http://p.local', secret_ref: 'vsslicer/p', ...over });
+      validateConnection(conn({ url: 'a'.repeat(2048) + '!', host_type: '(a+)+$'.repeat(300) }));
+      validateConnection(conn({ url: 'http://' + '@:/.'.repeat(500) }));`;
+      expect(guarded(body)).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 
   test('non-object connection', () => {
     expect(paths(null)).toEqual(['connection']);

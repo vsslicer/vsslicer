@@ -11,6 +11,7 @@ import {
   unifiedToNative,
   type MappedDialect,
 } from '../src/domain/catalogue/mappings/index.ts';
+import { GUARDED_TIMEOUT, guarded } from './support/guard.ts';
 import { ConversionError } from '../src/domain/catalogue/conversion/index.ts';
 
 const DIALECTS: MappedDialect[] = ['orca', 'bambu', 'prusa', 'prusa3', 'cura'];
@@ -338,17 +339,18 @@ describe('hostile input (rule 25)', () => {
       code(() => nativeToUnified('prusa', 'machine_start_gcode', { start_gcode: 'x'.repeat((1 << 20) + 1) })),
     ).toBe('value_too_long');
   });
-  test('parsing is linear on adversarial input', () => {
-    const t = performance.now();
-    const pts = Array.from({ length: 4096 }, () => '1'.repeat(60) + 'x' + '1'.repeat(3));
-    nativeToUnified('orca', 'printable_area', { printable_area: pts });
-    for (let i = 0; i < 2000; i++) {
-      try {
-        nativeToUnified('prusa', 'line_width', { extrusion_width: '1'.repeat(63) + '%x' });
-      } catch {
-        /* rejected */
-      }
-    }
-    expect(performance.now() - t).toBeLessThan(2000);
-  });
+  test(
+    'parsing is linear on adversarial input',
+    () => {
+      const body = `
+      const { nativeToUnified } = await load('src/domain/catalogue/mappings/index.ts');
+      const pts = Array.from({ length: 4096 }, () => '1'.repeat(60) + 'x' + '1'.repeat(3));
+      nativeToUnified('orca', 'printable_area', { printable_area: pts });
+      for (let i = 0; i < 2000; i++) {
+        try { nativeToUnified('prusa', 'line_width', { extrusion_width: '1'.repeat(63) + '%x' }); } catch { /* rejected */ }
+      }`;
+      expect(guarded(body)).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 });
