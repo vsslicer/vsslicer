@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+- GCP-23: `trapezoidsFor(planner, parsed, timing, start, end)` returns each move's `Trapezoid` (start time, entry, cruise, exit, accel), recomputed from the nearest checkpoint; a property test over random windows checks it equals the full pass. A checkpoint may carry the planner's `state` snapshot (`TimingBuilder.snapshot`, `snapshotDue`, `replay`, `stop`); `Planner.plan` takes an optional `Replay`. The Klipper planner snapshots (checkpoints at the first resumable move per interval, so not always at the multiple) and has `KlipperOptions.checkpointInterval`; the other planners keep stateless checkpoints and `trapezoidsFor` throws for them. `TimingBuilder.add` takes optional cruise, exit and accel; `MoveCursor.save`/`restore`. Spacing stays 4096, chosen by spike (about 1 ms per 1 s scrub window, 0.4-1.1 B/move).
+
+- GCP-22: `test/klipper-rules.test.ts`, one test per Klipper planner rule with hand-derived expectations from klipper@ee2c6fb: junction at 90 and 180 degrees, minimum cruise ratio on a zig-zag, lookahead flush on a long straight, arc segmentation count, and M201/M203/M205 ignored. Tests only.
+
+- GCP-82: the Klipper planner re-cuts G2/G3 at `[gcode_arcs] resolution` (klipper@ee2c6fb `gcode_arcs.py:100-175`): the parser's Arc chords are refitted to their circle and timed as `max(1, floor(arc length / resolution))` equal segments, so the time no longer depends on the parser's tolerance. The chords share the arc's time by length. New `KlipperOptions.resolution` (mm, default 1; must be > 0). New `src/domain/arc.ts` (`fitArc`, `arcPoint`, `resegmentArc`); `marlin.ts` `planArc` shares its circle fit.
+
+- GCP-27: `rrfPlanner` (RepRapFirmware 3.6, `estimate: true`), written from `docs/research/rrf-planner.md`: per-drive M201/M203 box limits, M204 P/T (S stands in), M566 jerk per drive, joins only between moves that match on printing / XY / non-printing E, 40-move backward and forward lookahead, pressure-advance cap on E accel, arc chords re-segmented to RRF's turn, G4 dwell. `FLAVOUR_DEFAULTS.reprapfirmware` now holds RRF's values and `FLAVOUR_FIELDS.reprapfirmware` adds `minFeedrate`; `plannerFor` routes RepRapFirmware to `rrfPlanner` (change in `bambu.ts`, GCP-28's file).
+
+- GCP-83: the planners read time from the file's markers (`@vsslicer/gcode-api` ^0.5.0, `Marker.seconds`). Klipper adds every `G4` dwell and `; ESTIMATOR_ADD_TIME` (a full flush each, as before), also after the last move; `KlipperOptions.addTime` stays for macro time the caller knows of. Marlin and Buddy now synchronize at `G4` (the queue runs out, the next move starts from its safe speed) and add its dwell. `TimingBuilder.dwell(seconds)` charges standstill time to the last move (before any move, to the first). The harness checks G4 dwell (`checkDwell`).
+
+- GCP-28: `bambuPlanner`, the labelled Bambu estimate: the Marlin model (profile jerk and accel, the file's M201-M205) with `estimate: true`. Its `BambuTiming` adds `limitsSource` (`profile`, `default` or `mixed`) and `conditionalBlocks` (M622...M623 ranges, timed as executed). `isBambuFile`, `conditionalBlocks`, and `plannerFor(parsed, limits)` routes Bambu, Klipper and Marlin files.
+
+- Fix (GCP-85): a zero or negative accel or velocity no longer makes the Klipper total time NaN. `resolveLimits` rejects an override of 0 for `accel` and `maxVelocity` (as the config reader ignores them; Marlin's per-axis maxima keep 0 as "no limit"), and the planner ignores a non-positive `SET_VELOCITY_LIMIT VELOCITY`.
+
 ## 0.2.1
 
 - Fix (GCP-24 review): the Marlin and Buddy lookahead window is the busy block plus 14, as Marlin's ring holds BLOCK_BUFFER_SIZE - 1 blocks including the busy one (Marlin@2ef3ee6 `planner.h:917`); it was one block deeper. The steady-state lookahead test now pins the exact time. Header says the port follows PrusaSlicer, not Marlin's kennovo correction or `minimum_planner_speed_sqr`.

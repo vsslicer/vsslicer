@@ -6,11 +6,13 @@
 //   klipper@ee2c6fb:klippy/extras/firmware_retraction.py:10-16,53-71 (G10/G11)
 // Copyright (C) 2016-2024 Kevin O'Connor <kevin@koconnor.net>. Ported from reading, not copied.
 // `; ESTIMATOR_ADD_TIME` follows klipper_estimator@dbcff4a:lib/src/planner.rs:171-178 (MIT, Lasse Dalegaard).
-import { MoveFlag, StateKind } from '@vsslicer/gcode-api';
+import { MOVE_STRIDE, MoveFlag, MoveOffset, StateKind } from '@vsslicer/gcode-api';
 import type { ParsedFile } from '@vsslicer/gcode-api';
+import { resegmentArc } from './arc.ts';
+import type { ArcPoint } from './arc.ts';
 import type { ResolvedLimits } from './limits.ts';
 import { MoveCursor } from './move-cursor.ts';
-import type { Planner } from './planner.ts';
+import type { Planner, Replay } from './planner.ts';
 import { TimingBuilder } from './timing.ts';
 
 /** printer.cfg values Klipper reads that are not in `MachineLimits`. Unset ones take Klipper's defaults. */
@@ -35,10 +37,14 @@ export interface KlipperOptions {
   unretractExtraLength?: number;
   unretractSpeed?: number;
   /**
-   * `; ESTIMATOR_ADD_TIME <seconds>` lines (macro time): seconds added before the move at `moveIndex`.
-   * shortcut: the parser drops comments, so the caller passes these until gcode-api carries them.
+   * Macro time the caller knows of, beyond the file's own `G4` and `ESTIMATOR_ADD_TIME` markers
+   * (which are always added): seconds added before the move at `moveIndex`, with a full flush.
    */
   addTime?: readonly { moveIndex: number; seconds: number }[];
+  /** `[gcode_arcs] resolution`, mm: arcs are timed on segments this long; default 1. */
+  resolution?: number;
+  /** Moves between checkpoints; default `CHECKPOINT_INTERVAL`. */
+  checkpointInterval?: number;
 }
 
 /** klipper@ee2c6fb:klippy/toolhead.py:116 and 196 */
@@ -64,9 +70,31 @@ interface KMove {
   deltaV2: number;
   maxMcrStartV2: number;
   mcrDeltaV2: number;
-  /** Set by the flush: entry speed and duration. */
+  /** Set by the flush: entry, cruise and exit speed, and duration. */
   startV: number;
+  cruiseV: number;
+  endV: number;
   time: number;
+}
+
+/** What `trapezoidsFor` reports for a move. */
+type Profile = Pick<KMove, 'startV' | 'cruiseV' | 'endV' | 'accel'>;
+/** A move Klipper drops. */
+const STILL: Profile = { startV: 0, cruiseV: 0, endV: 0, accel: 0 };
+
+/** The segments Klipper cuts one arc into, shared by the parser chords that stand for it. */
+interface ArcGroup {
+  segs: KMove[];
+  /** Summed chord length, mm. */
+  total: number;
+}
+
+/** A parser chord of an arc: it takes its share of the arc's time by length. */
+interface ChordSlot {
+  group: ArcGroup;
+  /** Chord start along the arc, and its length, mm. */
+  from: number;
+  len: number;
 }
 
 interface Toolhead {
@@ -119,6 +147,8 @@ function setJunction(m: KMove, startV2: number, cruiseV2: number, endV2: number)
   const cruiseV = Math.sqrt(cruiseV2);
   const endV = Math.sqrt(endV2);
   m.startV = startV;
+  m.cruiseV = cruiseV;
+  m.endV = endV;
   m.time =
     accelD / ((startV + cruiseV) * 0.5) + (m.moveD - accelD - decelD) / cruiseV + decelD / ((endV + cruiseV) * 0.5);
 }
@@ -171,10 +201,12 @@ function flush(queue: KMove[], lazy: boolean): number {
 
 /** Builds a Klipper planner for one printer.cfg; `klipperPlanner` uses Klipper's defaults. */
 export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
+  const resolution = options.resolution ?? 1;
+  if (!(resolution > 0)) throw new RangeError(`resolution must be > 0, got ${resolution}`);
   return {
     name: 'klipper',
     estimate: false,
-    *plan(parsed: ParsedFile, resolved: ResolvedLimits) {
+    *plan(parsed: ParsedFile, resolved: ResolvedLimits, replay?: Replay) {
       // M201/M203/M205 (MaxAccel, MaxFeedrate, Jerk, JD) are Marlin's: Klipper ignores them.
       const lim = resolved.limits;
       const th: Toolhead = { maxVelocity: lim.maxVelocity, maxAccel: lim.accel, jd: 0, mcrPseudoAccel: 0 };
@@ -201,32 +233,50 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
       // G4 and M400 drain the lookahead (toolhead.py:418-423); so do macro delays.
       const stops = new Set(parsed.markers.filter((m) => m.name === 'G4' || m.name === 'M400').map((m) => m.moveIndex));
       const added = new Map<number, number>();
-      for (const a of o.addTime ?? []) {
-        added.set(a.moveIndex, (added.get(a.moveIndex) ?? 0) + a.seconds);
+      // G4 dwell (toolhead.py:565-568) and `; ESTIMATOR_ADD_TIME` (klipper_estimator@dbcff4a:lib/src/planner.rs:171-178)
+      const timed = parsed.markers.filter((m) => m.name === 'G4' || m.name === 'ESTIMATOR_ADD_TIME');
+      for (const a of [...(o.addTime ?? []), ...timed]) {
+        added.set(a.moveIndex, (added.get(a.moveIndex) ?? 0) + (a.seconds ?? 0));
         stops.add(a.moveIndex);
       }
 
       const cur = new MoveCursor(parsed);
-      const out = new TimingBuilder(parsed);
+      const out = replay?.out ?? new TimingBuilder(parsed, o.checkpointInterval);
       // Every parser move in order; null for moves Klipper drops (no XYZ or E motion).
-      const order: (KMove | null)[] = [];
+      const order: (KMove | ChordSlot | null)[] = [];
       let head = 0;
       const queue: KMove[] = [];
       let junctionFlush = BUFFER_TIME_HIGH;
       // The last emitted move is held back so a macro delay after it can join its duration.
-      let held: { time: number; speed: number } | undefined;
+      let held: { time: number; p: Profile } | undefined;
       let lead = 0; // macro time before the first move: joins the first move's duration
-      const emit = (time: number, speed: number): void => {
-        if (held) out.add(held.time, held.speed);
+      const add = (time: number, p: Profile): void => out.add(time, p.startV, p.cruiseV, p.endV, p.accel);
+      const emit = (time: number, p: Profile): void => {
+        if (held) add(held.time, held.p);
         else time += lead;
-        held = { time, speed };
+        held = { time, p };
       };
+      // A chord is final only once all of its arc's segments are.
+      const isNext = (slot: KMove | ChordSlot | null, firstLeft: KMove | undefined): boolean =>
+        slot !== null &&
+        (slot === firstLeft || ('group' in slot && firstLeft !== undefined && slot.group.segs.includes(firstLeft)));
       const commit = (n: number): void => {
         queue.splice(0, n);
         const firstLeft = queue[0];
-        while (head < order.length && order[head] !== firstLeft) {
+        while (head < order.length && !isNext(order[head]!, firstLeft)) {
           const m = order[head++];
-          emit(m ? m.time : 0, m ? m.startV : 0);
+          if (m && 'group' in m) {
+            const { segs, total } = m.group;
+            const t = segs.reduce((sum, k) => sum + k.time, 0);
+            const at = (d: number): number =>
+              Math.max(0, Math.min(segs.length - 1, Math.ceil((d / (total || 1)) * segs.length) - 1));
+            const i = Math.min(segs.length - 1, Math.floor((m.from / (total || 1)) * segs.length));
+            const j = Math.max(i, at(m.from + m.len));
+            // The chord's profile spans the segments it overlaps: first entry, top cruise, last exit.
+            const cruiseV = segs.slice(i, j + 1).reduce((v, k) => Math.max(v, k.cruiseV), 0);
+            const p = segs[i] ? { startV: segs[i].startV, cruiseV, endV: segs[j]!.endV, accel: segs[i].accel } : STILL;
+            emit((t * m.len) / (total || 1), p);
+          } else emit(m ? m.time : 0, m ?? STILL);
         }
         if (!firstLeft) {
           order.length = 0;
@@ -241,8 +291,113 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
       let lastP = NaN;
       let lastT = NaN;
 
+      /** A move as Klipper's `Move`; null when it has no XYZ or E motion (Klipper drops it). */
+      const build = (dx: number, dy: number, dz: number, e: number, speed: number): KMove | null => {
+        const kinematic = Math.hypot(dx, dy, dz) >= 1e-9;
+        const moveD = kinematic ? Math.hypot(dx, dy, dz) : Math.abs(e);
+        if (!moveD) return null;
+        const velocity = kinematic ? Math.min(speed, th.maxVelocity) : speed;
+        const inv = 1 / moveD;
+        const m: KMove = {
+          moveD,
+          rx: kinematic ? dx * inv : 0,
+          ry: kinematic ? dy * inv : 0,
+          rz: kinematic ? dz * inv : 0,
+          re: e * inv,
+          kinematic,
+          accel: kinematic ? th.maxAccel : 99999999.9,
+          jd: th.jd,
+          minMoveT: moveD / velocity,
+          maxStartV2: 0,
+          maxCruiseV2: velocity * velocity,
+          deltaV2: 0,
+          maxMcrStartV2: 0,
+          mcrDeltaV2: 2 * moveD * th.mcrPseudoAccel,
+          startV: 0,
+          cruiseV: 0,
+          endV: 0,
+          time: 0,
+        };
+        m.deltaV2 = 2 * moveD * m.accel;
+        if (kinematic && dz) {
+          const zRatio = moveD / Math.abs(dz);
+          limitSpeed(m, maxZV * zRatio, maxZA * zRatio);
+        }
+        if (e && ((!dx && !dy) || m.re < 0)) limitSpeed(m, maxEV / Math.abs(m.re), maxEA / Math.abs(m.re));
+        return m;
+      };
+      const enqueue = (m: KMove): void => {
+        queue.push(m);
+        if (queue.length > 1) {
+          calcJunction(m, queue[queue.length - 2]!, icv);
+          junctionFlush -= m.minMoveT;
+          if (junctionFlush <= 0) {
+            // toolhead.py:135-136 resets the budget on every flush attempt
+            junctionFlush = LOOKAHEAD_FLUSH_TIME;
+            commit(flush(queue, true));
+          }
+        }
+      };
+      // The parser's chords of one arc, held until the arc ends and then run as Klipper's segments.
+      let arc: { offset: number; points: ArcPoint[]; speed: number; group: ArcGroup } | undefined;
+      const flushArc = (): void => {
+        if (!arc) return;
+        const { points, speed, group } = arc;
+        arc = undefined;
+        let prev = points[0]!;
+        for (const p of resegmentArc(points, resolution) ?? points.slice(1)) {
+          const m = build(p[0] - prev[0], p[1] - prev[1], p[2] - prev[2], p[3] - prev[3], speed);
+          if (m) {
+            group.segs.push(m);
+            enqueue(m);
+          }
+          prev = p;
+        }
+      };
+      const views = parsed.moves.map((b) => new DataView(b));
+      let vb = 0;
+      let vl = -1;
+
+      // Everything the loop carries from one move to the next: a checkpoint's snapshot.
+      const state = () => ({
+        cur: cur.save(),
+        th,
+        scv,
+        mcr,
+        retracted,
+        lastAccel,
+        lastP,
+        lastT,
+        order: order.slice(head),
+        queue,
+        junctionFlush,
+        held,
+        lead,
+        arc,
+        vb,
+        vl,
+      });
+      if (replay) {
+        const s = structuredClone(replay.from.state) as ReturnType<typeof state>;
+        cur.restore(s.cur);
+        Object.assign(th, s.th);
+        ({ scv, mcr, retracted, lastAccel, lastP, lastT, junctionFlush, held, lead, arc, vb, vl } = s);
+        order.push(...s.order);
+        queue.push(...s.queue);
+      }
+      if (out.snapshotDue) out.snapshot(structuredClone(state()));
+
       while (cur.next()) {
+        vl++;
+        while (vl * MOVE_STRIDE >= views[vb]!.byteLength) {
+          vb++;
+          vl = 0;
+        }
+        const offset = views[vb]!.getUint32(vl * MOVE_STRIDE + MoveOffset.fileOffset, true);
+        const isArc = (cur.flags & MoveFlag.Arc) !== 0;
+        if (arc && !(isArc && arc.offset === offset)) flushArc();
         if (stops.has(cur.index)) {
+          flushArc();
           flushAll();
           const extra = added.get(cur.index);
           if (extra && held) held.time += extra;
@@ -250,7 +405,8 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
         }
         // SET_VELOCITY_LIMIT and M204 (toolhead.py:534-616): new moves only, no flush.
         // An `accel` override pins S, P and T to it, so M204 never changes the accel.
-        const v = cur.limit(resolved, 'maxVelocity', StateKind.MaxVelocity, 0, th.maxVelocity);
+        const vLimit = cur.limit(resolved, 'maxVelocity', StateKind.MaxVelocity, 0, th.maxVelocity);
+        const v = vLimit > 0 ? vLimit : th.maxVelocity; // Klipper refuses VELOCITY=0 (above=0.)
         const s = cur.limit(resolved, 'accel', StateKind.Accel, 0, NaN);
         const p = cur.limit(resolved, 'accel', StateKind.AccelPrint, 0, NaN);
         const t = cur.limit(resolved, 'accel', StateKind.AccelTravel, 0, NaN);
@@ -274,64 +430,37 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
         let speed = cur.state(StateKind.Feedrate, 0, START_FEEDRATE);
         if (!(speed > 0)) speed = START_FEEDRATE;
         const len = cur.length;
-        // G10/G11 arrive as motionless flagged moves (gcode-parser machine.ts firmwareRetract).
-        if (len === 0 && e === 0 && cur.flags & (MoveFlag.Retract | MoveFlag.Unretract)) {
-          const retract = (cur.flags & MoveFlag.Retract) !== 0;
-          if (retract !== retracted) {
-            retracted = retract;
-            e = retract ? -retractLength : unretractLength;
-            speed = retract ? (o.retractSpeed ?? 20) : (o.unretractSpeed ?? 10);
-          }
-        }
-
-        const kinematic = len >= 1e-9;
-        const moveD = kinematic ? len : Math.abs(e);
-        if (!moveD) {
-          order.push(null);
-          if (!queue.length) commit(0);
-        } else {
-          const velocity = kinematic ? Math.min(speed, th.maxVelocity) : speed;
-          const inv = 1 / moveD;
-          const m: KMove = {
-            moveD,
-            rx: kinematic ? cur.dx * inv : 0,
-            ry: kinematic ? cur.dy * inv : 0,
-            rz: kinematic ? cur.dz * inv : 0,
-            re: e * inv,
-            kinematic,
-            accel: kinematic ? th.maxAccel : 99999999.9,
-            jd: th.jd,
-            minMoveT: moveD / velocity,
-            maxStartV2: 0,
-            maxCruiseV2: velocity * velocity,
-            deltaV2: 0,
-            maxMcrStartV2: 0,
-            mcrDeltaV2: 2 * moveD * th.mcrPseudoAccel,
-            startV: 0,
-            time: 0,
+        if (isArc) {
+          arc ??= {
+            offset,
+            points: [[cur.x - cur.dx, cur.y - cur.dy, cur.z - cur.dz, 0]],
+            speed,
+            group: { segs: [], total: 0 },
           };
-          m.deltaV2 = 2 * moveD * m.accel;
-          if (kinematic && cur.dz) {
-            const zRatio = moveD / Math.abs(cur.dz);
-            limitSpeed(m, maxZV * zRatio, maxZA * zRatio);
-          }
-          if (e && ((!cur.dx && !cur.dy) || m.re < 0)) limitSpeed(m, maxEV / Math.abs(m.re), maxEA / Math.abs(m.re));
-          queue.push(m);
-          order.push(m);
-          if (queue.length > 1) {
-            calcJunction(m, queue[queue.length - 2]!, icv);
-            junctionFlush -= m.minMoveT;
-            if (junctionFlush <= 0) {
-              // toolhead.py:135-136 resets the budget on every flush attempt
-              junctionFlush = LOOKAHEAD_FLUSH_TIME;
-              commit(flush(queue, true));
+          arc.points.push([cur.x, cur.y, cur.z, arc.points.at(-1)![3] + e]);
+          order.push({ group: arc.group, from: arc.group.total, len });
+          arc.group.total += len;
+        } else {
+          // G10/G11 arrive as motionless flagged moves (gcode-parser machine.ts firmwareRetract).
+          if (len === 0 && e === 0 && cur.flags & (MoveFlag.Retract | MoveFlag.Unretract)) {
+            const retract = (cur.flags & MoveFlag.Retract) !== 0;
+            if (retract !== retracted) {
+              retracted = retract;
+              e = retract ? -retractLength : unretractLength;
+              speed = retract ? (o.retractSpeed ?? 20) : (o.unretractSpeed ?? 10);
             }
           }
+          const m = build(cur.dx, cur.dy, cur.dz, e, speed);
+          order.push(m);
+          if (m) enqueue(m);
+          else if (!queue.length) commit(0);
         }
-        if (cur.bufferEnd) yield out.count;
+        if (out.snapshotDue) out.snapshot(structuredClone(state()));
+        if (cur.bufferEnd || out.stop) yield out.count;
       }
+      flushArc();
       flushAll();
-      if (held) out.add(held.time, held.speed);
+      if (held) add(held.time + (added.get(parsed.moveCount) ?? 0), held.p); // time after the last move
       return out.finish(this.name, this.estimate, resolved);
     },
   };

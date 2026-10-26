@@ -8,6 +8,8 @@
 // (see segment), not PrusaSlicer@30ef591 batching 256 blocks and keeping 64 (…/libpgcode/TimeProcessor.hpp:14-17).
 import { MOVE_STRIDE, MoveFlag, MoveOffset, StateKind } from '@vsslicer/gcode-api';
 import type { LimitKey, ResolvedLimits } from './limits.ts';
+import { arcPoint, fitArc } from './arc.ts';
+import type { ArcPoint } from './arc.ts';
 import { MoveCursor } from './move-cursor.ts';
 import type { Planner } from './planner.ts';
 import { TimingBuilder } from './timing.ts';
@@ -292,10 +294,15 @@ class Machine {
     this.recalculate();
   }
 
-  /** Runs every remaining block and emits the last groups. */
+  /**
+   * Runs every remaining block and emits the last groups (planner.synchronize()). The next block
+   * starts from its safe speed, as Marlin's junction needs a queued block (Marlin@2ef3ee6
+   * Marlin/src/module/planner.cpp:2522, 2693).
+   */
   finish(): void {
     while (this.blocks.length) this.retire();
     this.emit();
+    this.hasPrev = false;
   }
 
   /** Reverse pass, forward pass, trapezoids (PrusaSlicer@30ef591:…/libpgcode/TimeMachine.cpp:40-140). */
@@ -413,20 +420,7 @@ function settings(cur: MoveCursor, r: ResolvedLimits, v: MarlinVariant): Setting
   };
 }
 
-type Point = [number, number, number, number];
-
-/** Circle centre through three XY points, or undefined when they are collinear. */
-function centre(a: Point, b: Point, c: Point): [number, number] | undefined {
-  const d = 2 * (a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1]));
-  if (Math.abs(d) < 1e-9) return undefined;
-  const a2 = sq(a[0]) + sq(a[1]);
-  const b2 = sq(b[0]) + sq(b[1]);
-  const c2 = sq(c[0]) + sq(c[1]);
-  return [
-    (a2 * (b[1] - c[1]) + b2 * (c[1] - a[1]) + c2 * (a[1] - b[1])) / d,
-    (a2 * (c[0] - b[0]) + b2 * (a[0] - c[0]) + c2 * (b[0] - a[0])) / d,
-  ];
-}
+type Point = ArcPoint;
 
 const diff = (a: Point, b: Point) => b.map((x, i) => x - a[i]!);
 
@@ -441,34 +435,20 @@ function planArc(m: Machine, points: Point[], s: Settings, v: MarlinVariant): vo
   const n = chords.length;
   const p0 = points[0]!;
   const pn = points[n]!;
-  const c =
-    n >= 2 ? centre(p0, points[Math.floor(n / 3) || 1]!, points[Math.max(Math.floor((2 * n) / 3), 2)]!) : undefined;
-  if (!c) {
+  const fit = fitArc(points);
+  if (!fit) {
     for (let i = 0; i < n; i++) m.segment(g, diff(points[i]!, points[i + 1]!), s, NO_HINT);
     return;
   }
-  const r = Math.hypot(p0[0] - c[0], p0[1] - c[1]);
-  const angle = points
-    .slice(1)
-    .reduce(
-      (sum, p, i) => sum + 2 * Math.asin(Math.min(1, Math.hypot(p[0] - points[i]![0], p[1] - points[i]![1]) / (2 * r))),
-      0,
-    );
-  const p1 = points[1]!;
-  const dir = Math.sign((p0[0] - c[0]) * (p1[1] - c[1]) - (p0[1] - c[1]) * (p1[0] - c[0])) || 1;
+  const { r, angle } = fit;
   const flat = r * angle;
   const segments = v.arcSegments(flat, r, angle, s.feed);
   const limAccel = Math.min(s.maxAccel[0]!, s.maxAccel[1]!);
   const limSpeedSqr = Math.min(sq(Math.min(s.maxFeed[0]!, s.maxFeed[1]!)), limAccel * r, sq(s.feed));
-  const a0 = Math.atan2(p0[1] - c[1], p0[0] - c[0]);
   let prev = p0;
   for (let i = 1; i <= segments; i++) {
     const f = i / segments;
-    const a = a0 + dir * angle * f;
-    const p: Point =
-      i === segments
-        ? pn
-        : [c[0] + r * Math.cos(a), c[1] + r * Math.sin(a), p0[2] + (pn[2] - p0[2]) * f, p0[3] + (pn[3] - p0[3]) * f];
+    const p: Point = i === segments ? pn : arcPoint(fit, p0, pn, f);
     const hint: Hint =
       v.hints && i < segments
         ? {
@@ -498,7 +478,19 @@ export function marlinFamilyPlanner(variant: MarlinVariant): Planner {
         if (arc) planArc(m, arc.points, arc.s, variant);
         arc = undefined;
       };
+      // G4 synchronizes the planner, then dwells (Marlin@2ef3ee6 Marlin/src/gcode/motion/G4.cpp:31-36).
+      const dwells = new Map<number, number>();
+      for (const k of parsed.markers)
+        if (k.name === 'G4') dwells.set(k.moveIndex, (dwells.get(k.moveIndex) ?? 0) + (k.seconds ?? 0));
+      const dwell = (index: number) => {
+        const seconds = dwells.get(index);
+        if (seconds === undefined) return;
+        flush();
+        m.finish();
+        out.dwell(seconds);
+      };
       while (cur.next()) {
+        dwell(cur.index);
         vl++;
         while (vl * MOVE_STRIDE >= views[vb]!.byteLength) {
           vb++;
@@ -523,6 +515,7 @@ export function marlinFamilyPlanner(variant: MarlinVariant): Planner {
       }
       flush();
       m.finish();
+      dwell(parsed.moveCount);
       return out.finish(this.name, this.estimate, limits);
     },
   };

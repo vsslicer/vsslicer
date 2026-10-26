@@ -11,7 +11,7 @@ import {
 import type { ParsedFile, StateChange } from '@vsslicer/gcode-api';
 import { createKlipperPlanner, klipperPlanner, planSync, resolveLimits } from '../src/index.ts';
 import type { MachineLimits, Planner } from '../src/index.ts';
-import { checkLimitPrecedence, checkPlanner, fixture, sampleFile } from './harness.ts';
+import { checkDwell, checkLimitPrecedence, checkPlanner, fixture, sampleFile } from './harness.ts';
 import type { FixtureMove } from './harness.ts';
 
 /** One-buffer file whose state-change table is `changes` (sorted by move). */
@@ -55,12 +55,25 @@ const corner = (): ParsedFile =>
 describe('klipper planner', () => {
   it('passes the planner harness', () => {
     expect(checkPlanner(klipperPlanner).estimate).toBe(false);
+    checkDwell(klipperPlanner);
   });
 
   it('ranks override > SET_VELOCITY_LIMIT / M204 > config', () => {
     const p = klipperPlanner;
     checkLimitPrecedence(p, { flavour: 'klipper', key: 'maxVelocity', kind: StateKind.MaxVelocity, values: [50, 100] });
     checkLimitPrecedence(p, { flavour: 'klipper', key: 'accel', kind: StateKind.Accel, values: [200, 800] });
+  });
+
+  it('ignores a zero or negative velocity or accel from the file (stays finite)', () => {
+    const base = run(file([{ x: 100, y: 0 }], [feed(0, 100)])).totalTime;
+    for (const [kind, value] of [
+      [StateKind.MaxVelocity, 0],
+      [StateKind.MaxVelocity, -5],
+      [StateKind.Accel, 0],
+    ] as const) {
+      const t = run(file([{ x: 100, y: 0 }], [feed(0, 100), { moveIndex: 0, kind, index: 0, value }])).totalTime;
+      expect(t).toBeCloseTo(base, 9);
+    }
   });
 
   it('times a single move as a constant-accel trapezoid', () => {
@@ -183,5 +196,59 @@ describe('klipper planner', () => {
     expect(run(parsed).totalTime).toBeCloseTo(2.1, 9);
     parsed.markers.push({ name: 'G4', fileOffset: 0, moveIndex: 1 });
     expect(run(parsed).totalTime).toBeCloseTo(2.2, 9);
+  });
+
+  it("adds the file's ESTIMATOR_ADD_TIME and G4 markers, also after the last move", () => {
+    const parsed = file(
+      [
+        { x: 100, y: 0 },
+        { x: 200, y: 0 },
+      ],
+      [feed(0, 100)],
+    );
+    parsed.markers.push(
+      { name: 'ESTIMATOR_ADD_TIME', fileOffset: 0, moveIndex: 1, seconds: 30 },
+      { name: 'G4', fileOffset: 0, moveIndex: 1, seconds: 0.5 },
+      { name: 'ESTIMATOR_ADD_TIME', fileOffset: 0, moveIndex: 2, seconds: 4 },
+    );
+    expect(run(parsed).totalTime).toBeCloseTo(34.5 + 2.2, 9);
+    expect(startTimes(parsed)[1]).toBeCloseTo(31.6, 4);
+  });
+
+  describe('arcs', () => {
+    /** A half circle of radius 10 cut into `n` chords of one arc (shared file offset), printing at F100. */
+    function arc(n: number): ParsedFile {
+      const moves = Array.from({ length: n }, (_, i) => {
+        const a = (Math.PI * (i + 1)) / n;
+        return { x: 10 - 10 * Math.cos(a), y: 10 * Math.sin(a), e: 0.1, flags: MoveFlag.Arc };
+      });
+      const parsed = file(moves, [feed(0, 100)]);
+      const v = new DataView(parsed.moves[0]!);
+      moves.forEach((_, i) => v.setUint32(i * MOVE_STRIDE + MoveOffset.fileOffset, 1234, true));
+      return parsed;
+    }
+
+    it('times the same arc alike at two parser tolerances (re-cut on resolution)', () => {
+      expect(run(arc(60)).totalTime).toBeCloseTo(run(arc(15)).totalTime, 2);
+      const fine = arc(60);
+      checkPlanner(klipperPlanner, fine);
+    });
+
+    it('spreads the arc time over its chords', () => {
+      const parsed = arc(15);
+      const total = run(parsed).totalTime;
+      const t = startTimes(parsed);
+      expect(t[0]).toBe(0);
+      for (let i = 1; i < t.length; i++) expect(t[i]!).toBeGreaterThan(t[i - 1]!);
+      expect(t.at(-1)!).toBeLessThan(total);
+    });
+
+    it('uses KlipperOptions.resolution, default 1 mm', () => {
+      const t = (resolution?: number) =>
+        run(arc(60), {}, createKlipperPlanner(resolution === undefined ? {} : { resolution })).totalTime;
+      expect(t(1)).toBe(t());
+      expect(t(0.2)).not.toBeCloseTo(t(1), 3);
+      expect(() => createKlipperPlanner({ resolution: 0 })).toThrow(RangeError);
+    });
   });
 });
