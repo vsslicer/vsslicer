@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0
 
 - PLT-48: `gl` entry: `createSegmentRenderer(..., { foreign: true })` draws into a context three.js owns: create and `draw` save and restore the GL state they change with the new `saveGlState(gl)`. `draw` now also turns depth writes on and culling and blending off. SwiftShader spec with three.js 0.186.1 (dev dependency only): a textured plane plus segments composite, unchanged GL state and an identical next three.js frame, and the leak seen without foreign mode.
 - PLT-47: SwiftShader spec `test/memory.spec.ts` renders 15 million synthetic moves (generated in 1M-record chunks) and prints GPU bytes per move; it fails above the 28-byte layout (plus 0.2 for the layer table and padding). Takes about 3 minutes.
