@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.10.1
 
 - GCP-18: `pnpm bench` (not part of `pnpm test`) generates seeded synthetic 50, 200 and 500 MB files (`straight`, about 34k moves/MB; `arc-heavy`, about 58k moves/MB) in a temp dir, parses each in its own process and fails on a move record over 28 B, a peak RSS over budget or a throughput under budget (`bench/budget.json`, with the machine it was measured on; `--update` re-records it, `--sizes 50,200` limits the run). Dev tooling only; nothing shipped changes.
 - GCP-79: corpus gains PrusaSlicer 2.9.0-alpha1 `test_arcs_ps2.9.0-alpha1.gcode` (MINI, 10,808 arc-fitted G2/G3 lines, 3.7 MB, upstream), covered by the GCP-10 arc checks. Test fixtures only; nothing shipped changes. The other GCP-79 samples (PrusaSlicer 20 mm cube and MMU, SuperSlicer cube and MMU, Cura MMU, Bambu MMU) still need the slicers or owner GUI exports.

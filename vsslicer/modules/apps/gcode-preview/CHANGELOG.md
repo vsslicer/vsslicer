@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Depends on gcode-parser ^0.10.1 (SP4 re-lock).
+
 ## 0.2.0
 
 - GCP-87: depends on gcode-api ^0.5.0, gcode-parser ^0.10.0, gcode-planner ^0.3.0 and webview-kit ^0.5.0. The webview uses webview-kit's `createWindowChannel` (the local window channel is gone). Files are timed with `plannerFor`: Bambu, Klipper, RepRapFirmware or Marlin.

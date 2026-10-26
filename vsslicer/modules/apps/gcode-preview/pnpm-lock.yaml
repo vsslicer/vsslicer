@@ -15,8 +15,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2
       '@vsslicer/gcode-parser':
-        specifier: ^0.10.0
-        version: 0.10.0
+        specifier: ^0.10.1
+        version: 0.10.1
       '@vsslicer/gcode-planner':
         specifier: ^0.3.0
         version: 0.3.0
@@ -842,8 +842,8 @@ packages:
     resolution: {integrity: sha512-FXp5eytXvHb7y3t8SOHWieMmZ8dBWZpAB7A3hlE7VC1KM62q/kSYYSgaPHO727w4uKEbPoAwvYW4T0/4L3l7Iw==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-parser@0.10.0':
-    resolution: {integrity: sha512-BQts4ypLnSw71wMXe4LhiFVBsBhod5Lcp9PjxEKp+68GDCEGIQcCgSyw2+hQM9KTwMfBxkOa7cdSfdZu4XxnRg==}
+  '@vsslicer/gcode-parser@0.10.1':
+    resolution: {integrity: sha512-fQ/lFn/djKBHkbcct1mfolmtxgZSrVE186yS21bO/AXdFCEkdkoGk40H4P44mvC6AA0Rx8cXRF+3MOb23AOKfA==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-planner@0.3.0':
@@ -3030,7 +3030,7 @@ snapshots:
 
   '@vsslicer/gcode-bgcode@0.4.2': {}
 
-  '@vsslicer/gcode-parser@0.10.0':
+  '@vsslicer/gcode-parser@0.10.1':
     dependencies:
       '@vsslicer/gcode-api': 0.5.0
       '@vsslicer/gcode-bgcode': 0.4.2
