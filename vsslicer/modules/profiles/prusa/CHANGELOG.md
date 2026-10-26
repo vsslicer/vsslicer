@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- PRF-202: a name another kind already holds in one import (a `[printer_model]` and its `[printer]`, a vendor and its model, user print, filament or printer presets) gets the id `<kind>:<name>` instead of being skipped; `native.name` keeps the section name.
+- PRF-206: a printer preset split into a nozzle lists `default_print_profile` and `default_filament_profile` in `native_only`, so its default print and filament are no longer lost.
 - PRF-195, PRF-196: the preset and vendor YAML readers cap their own diagnostics at `MAX_YAML_DIAGNOSTICS` + 1, and each YAML document counts against the parser node cap.
 - PRF-203: removed `wipe_tower_x`, `wipe_tower_y`, `wipe_tower_rotation_angle`, `wiping_volumes_extruders` and `support_points_minimal_distance` (PrusaSlicer's own keys) from `SUPERSLICER_ONLY_KEYS`, so Prusa presets that set them are `prusa`, not `superslicer`; the list has 351 keys.
 - Fixed: a physical printer `host_type` of `constructor`, `toString` or `__proto__` no longer yields a non-string host type with a credential attached (PRF-205). The physical printer reader shares `splitList` with the importer instead of a second copy of `unescape_strings_cstyle` (PRF-207).

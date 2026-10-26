@@ -115,7 +115,9 @@ describe.skipIf(!existsSync(PIN))('golden: PrusaResearch.ini@b028299 (skips with
       expect(resolved(r, n.id), n.id).toEqual(orig.settings);
       expect(modelOf(r, n.id)!.bed).toEqual(orig.bed);
       expect(modelOf(r, n.id)!.toolheads).toEqual(orig.toolheads);
-      expect(r.native[n.id]).toEqual(u.native[n.id]);
+      const un = nat(u, n.id);
+      const defaults = ['default_print_profile', 'default_filament_profile'].filter((k) => Object.hasOwn(un.values, k));
+      expect(r.native[n.id]).toEqual({ ...un, native_only: [...un.native_only, ...defaults] });
     }
     const kept = r.diagnostics.filter((d) => d.message.includes('not split'));
     expect(kept.map((d) => d.severity)).toEqual(Array(17).fill('info'));
@@ -155,9 +157,117 @@ describe('nozzle variants', () => {
 
   test('the native form of each original preset stays attached under the nozzle id', () => {
     for (const id of ids) {
-      expect(r.native[id]).toEqual(u.native[id]);
+      const defaults = ['default_print_profile', 'default_filament_profile'];
+      expect(r.native[id]).toEqual({ ...nat(u, id), native_only: [...nat(u, id).native_only, ...defaults] });
       expect(nat(r, id).values['printer_variant']).toBe(id.split(' ').at(-2));
     }
+  });
+
+  test("a nozzle keeps its preset's default print and filament native (PRF-206)", () => {
+    expect(ids.map((id) => [nat(r, id).values['default_print_profile'], nat(r, id).native_only.slice(-2)])).toEqual([
+      ['0.20mm SPEED @MK4S 0.4', ['default_print_profile', 'default_filament_profile']],
+      ['0.25mm SPEED @MK4S 0.6', ['default_print_profile', 'default_filament_profile']],
+    ]);
+    // the unsplit preset holds them as entity defaults instead, so they are not native there
+    for (const id of ids) expect(nat(u, id).native_only).not.toContain('default_print_profile');
+  });
+
+  test('a nozzle lists only the default keys its preset has (PRF-206)', () => {
+    const bed = 'bed_shape = 0x0,220x0,220x220,0x220\nprinter_model = M\n';
+    const r2 = importPrusaIni([
+      file(
+        'b.ini',
+        VENDOR +
+          '[printer_model:M]\nname = M\nvariants = 0.4; 0.6\n' +
+          `[printer:M 0.4]\n${bed}printer_variant = 0.4\nnozzle_diameter = 0.4\ndefault_print_profile = P\n` +
+          `[printer:M 0.6]\n${bed}printer_variant = 0.6\nnozzle_diameter = 0.6\ndefault_filament_profile = F\n`,
+      ),
+    ]);
+    expect(r2.entities.filter((e) => 'diameter' in e).length).toBe(2);
+    const defaults = (id: string) => nat(r2, id).native_only.filter((k) => k.startsWith('default_'));
+    expect([defaults('M 0.4'), defaults('M 0.6')]).toEqual([['default_print_profile'], ['default_filament_profile']]);
+  });
+
+  describe('one name in several kinds (PRF-202)', () => {
+    const skipped = (r2: ImportResult) => r2.diagnostics.filter((d) => d.message.includes('already imported'));
+
+    test('[printer_model:SV06] and its nozzle [printer:SV06] both survive; the nozzle id is kind-qualified', () => {
+      const r2 = importPrusaIni([
+        file(
+          'b.ini',
+          VENDOR +
+            '[printer_model:SV06]\nname = SV06\nvariants = 0.4\n' +
+            '[printer:SV06]\nbed_shape = 0x0,220x0,220x220,0x220\nprinter_model = SV06\nprinter_variant = 0.4\n' +
+            'nozzle_diameter = 0.4\nretract_length = 0.8\n',
+        ),
+      ]);
+      expect(skipped(r2)).toEqual([]);
+      expect(r2.entities.map((e) => [e.id, nat(r2, e.id).kind, nat(r2, e.id).name])).toEqual([
+        ['Test', 'vendor', ''],
+        ['SV06', 'printer_model', 'SV06'],
+        ['printer:SV06', 'printer', 'SV06'],
+      ]);
+      const m = ent(r2, 'SV06') as unknown as PrinterModel;
+      expect(m.nozzles).toEqual(['printer:SV06']);
+      expect(resolved(r2, 'printer:SV06')!['retraction_length']).toBe(0.8);
+    });
+
+    test('a model named like its vendor (live Jubilee) is qualified and still gets its nozzles', () => {
+      const r2 = importPrusaIni([
+        file(
+          'b.ini',
+          VENDOR +
+            '[printer_model:Test]\nname = Test\nvariants = 0.4\n' +
+            '[printer:Test]\nbed_shape = 0x0,300x0,300x300,0x300\nprinter_model = Test\nprinter_variant = 0.4\n' +
+            'nozzle_diameter = 0.4\n',
+        ),
+      ]);
+      expect(skipped(r2)).toEqual([]);
+      expect(r2.entities.map((e) => e.id)).toEqual(['Test', 'printer_model:Test', 'printer:Test']);
+      expect(ent(r2, 'printer_model:Test')['nozzles']).toEqual(['printer:Test']);
+    });
+
+    test('a model and an unsplit printer of one name keep the printer settings', () => {
+      const r2 = importPrusaIni([
+        file(
+          'b.ini',
+          VENDOR +
+            '[printer_model:Jubilee]\nname = Jubilee\n' +
+            '[printer:Jubilee]\nbed_shape = 0x0,300x0,300x300,0x300\nprinter_model = Jubilee\nnozzle_diameter = 0.4\n',
+        ),
+      ]);
+      expect(skipped(r2)).toEqual([]);
+      expect(r2.entities.map((e) => e.id)).toEqual(['Test', 'Jubilee', 'printer:Jubilee']);
+      expect((ent(r2, 'printer:Jubilee') as unknown as PrinterModel).settings!['printable_area']).toBeDefined();
+    });
+
+    test('user presets print/, filament/ and printer/ "My MK4" give three entities', () => {
+      const r2 = importPrusaIni([
+        file('print/My MK4.ini', 'layer_height = 0.2\n'),
+        file('filament/My MK4.ini', 'filament_type = PLA\nfilament_diameter = 1.75\n'),
+        file('printer/My MK4.ini', 'bed_shape = 0x0,1x0,1x1\nnozzle_diameter = 0.4\n'),
+      ]);
+      expect(skipped(r2)).toEqual([]);
+      expect(r2.entities.map((e) => [e.id, nat(r2, e.id).kind])).toEqual([
+        ['My MK4', 'print'],
+        ['filament:My MK4', 'filament'],
+        ['printer:My MK4', 'printer'],
+      ]);
+    });
+
+    test('hostile: a qualified id another section already holds, a same-kind repeat and __proto__ are skipped, not overwritten', () => {
+      const r2 = importPrusaIni([
+        file('print/__proto__.ini', 'layer_height = 0.2\n'),
+        file('filament/__proto__.ini', 'filament_type = PLA\nfilament_diameter = 1.75\n'),
+        file('b.ini', '[print:filament:X]\nlayer_height = 0.3\n[print:X]\nlayer_height = 0.2\n'),
+        file('filament/X.ini', 'filament_type = PETG\nfilament_diameter = 1.75\n'),
+        file('print/X.ini', 'layer_height = 0.1\n'),
+      ]);
+      expect(r2.entities.map((e) => e.id)).toEqual(['__proto__', 'filament:__proto__', 'filament:X', 'X']);
+      expect(nat(r2, 'filament:X').kind).toBe('print'); // the section of that name came first
+      expect(skipped(r2)).toHaveLength(2); // filament/X.ini as filament:X, print/X.ini as X
+      expect(Object.getPrototypeOf(r2.native)).toBe(Object.prototype);
+    });
   });
 
   const bundle = (presets: string) =>

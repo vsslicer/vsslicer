@@ -425,6 +425,16 @@ export function importPrusaIni(files: readonly SourceFile[], options: { splitVar
         .map((s) => toEntity(own(s), 'printer_model', ctx, printers)),
       ...mapped.flat(),
     ].filter((r) => r !== undefined);
+    // PrusaSlicer keeps models, printers, prints and filaments in separate collections, so one name can be several
+    // kinds (Sovol's [printer_model:SV06] and [printer:SV06]): a name another kind already holds gets `<kind>:<name>`.
+    // Done before the split so a nozzle's id, its override condition and its model's `nozzles` agree.
+    const kinds = new Map<string, string>();
+    for (const r of all) {
+      const id = r.entity.id;
+      const taken = Object.hasOwn(result.native, id) ? (result.native[id] as PrusaNative).kind : kinds.get(id);
+      if (taken !== undefined && taken !== r.native.kind) r.entity.id = `${r.native.kind}:${id}`;
+      else kinds.set(id, r.native.kind);
+    }
     (options.splitVariants === false ? all : splitVariants(all, fileDiag)).forEach(add);
   }
   return result;
