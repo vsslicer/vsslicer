@@ -8,7 +8,7 @@ model: opus
 area: [importers, export]
 story: US18
 milestone: "VSS:M2"
-sprint: "VSS:SP8"
+sprint: "VSS:SP7"
 owner: sp7-prf-123
 depends_on: [122]
 created: 2026-10-25

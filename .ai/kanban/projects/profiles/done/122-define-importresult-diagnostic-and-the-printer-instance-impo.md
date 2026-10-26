@@ -8,7 +8,7 @@ model: sonnet
 area: [importers]
 story: US18
 milestone: "VSS:M2"
-sprint: "VSS:SP8"
+sprint: "VSS:SP7"
 owner: sp7-prf-a
 depends_on: [1, 2]
 created: 2026-10-25

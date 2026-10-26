@@ -10,3 +10,7 @@
 8. [PRF-118: Create the `profiles` module](118-create-the-profiles-module.md)
 9. [PRF-83: Validate printer_instance connections against the static host_type list](083-validate-printer-instance-connections-against-the-static-hos.md)
 10. [PRF-123: Define the Importer, Exporter and ProfileStore read ports](123-define-the-importer-exporter-and-profilestore-read-ports.md)
+11. [PRF-17: Extend the catalogue with Cura keys](017-extend-the-catalogue-with-cura-keys.md)
+12. [PRF-16: Extend the catalogue with PrusaSlicer 2.9, 3.0 and SuperSlicer keys](016-extend-the-catalogue-with-prusaslicer-2-9-3-0-and-superslice.md)
+13. [PRF-104: Model and validate bundle_structure.json](104-model-and-validate-bundle-structure-json.md)
+14. [PRF-41: Create the `profiles-data-orca` module with the Orca and Bambu JSON trees](041-create-the-vsslicer-profiles-data-orca-package-with-the-orca.md)

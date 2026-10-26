@@ -8,7 +8,7 @@ model: sonnet
 area: [schema]
 story: US34
 milestone: "VSS:M2"
-sprint: "VSS:SP9"
+sprint: "VSS:SP7"
 owner: sp7-prf-b
 depends_on: [3]
 created: 2026-10-25
