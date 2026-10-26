@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
 
 - VWR-22: Bambu and Orca objects, parts and instances (`readBambuObjects`, `readModelSettings`): `model_settings.config` object and part metadata, part `subtype` (modifiers, negative volumes, enforcers, blockers), per-object config, one instance per build item; `readModel` keeps raw per-triangle attributes (painting) in `CoreObject.triangleAttributes`, carried to `ModelPart.triangleAttributes`. `createBambuReader` now takes only the dialect.
 - VWR-31: run `openPackage` and `readProject` in a `worker_threads` or Web Worker (`readInNodeWorker`, `readInWebWorker`): input copied when it is a partial view, results transferred, one worker per file, typed `WorkerReadError` on a crash, out of memory or a failed post.

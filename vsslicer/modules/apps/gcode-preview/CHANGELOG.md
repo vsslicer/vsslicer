@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
 
 - GCP-53: tests: Moonraker `file_position` (in the recorded shape) and Bambu layer and percent feeds with expected moves, and a stub extension that follows them through the exports and through the commands in the extension host.
 - GCP-54: the api-extractor report (`etc/gcode-preview.api.md`) and `pnpm api:check`, which fails CI on API drift and on a breaking change without a higher `GCODE_PREVIEW_API_VERSION`; `pnpm api:update` rewrites the report.
