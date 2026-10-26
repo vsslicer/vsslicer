@@ -3,7 +3,7 @@ id: 96
 title: "Add width, flow, fan and temperature colour modes"
 type: feature
 priority: P1
-effort: M
+effort: L
 model: opus
 area: [renderer]
 story: US10

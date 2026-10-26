@@ -27,4 +27,5 @@ Retro for SP5, step 4 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Not started.
+- Retro written: `.ai/retros/SP5-retro.md`. 63 points delivered in 63 min (60/h), 67 of 124 at close (audit and retro cards); done 81 min early, out of work with one busy lane (mean 1.54 agents, 1.6 agent-min a point); the barrier remained but SP4's cost was fixed (stop to review 4.6 min, SP4 43).
+- Rules 11, 17, 19 to 22 amended, rules 23 (capacity is the busiest lane, pull-in list) and 24 (delivered and closed points) added; GCP-96 M to L (rule 13); plan-sprints M1/M2 dry runs: not applied, recommendation in the retro.

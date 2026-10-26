@@ -26,4 +26,5 @@ End-of-sprint audit for SP5, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Not started.
+- Audit `.ai/audits/SP5-audit.md` by a fresh Opus agent (wrote none of SP5): all 11 SP4 findings hold; 9 new findings: 1 must fix, 4 should fix, 4 nice to have, all on the gcode board.
+- Bug cards in SP6: GCP-98 (P0, opus), GCP-99 to GCP-102 (P1), GCP-103 to GCP-106 (P2).

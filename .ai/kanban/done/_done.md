@@ -11,3 +11,5 @@
 9. [VSS-38: Stories and tasks for I10](038-stories-and-tasks-for-i10.md)
 10. [VSS-39: Stories and tasks for I11](039-stories-and-tasks-for-i11.md)
 11. [VSS-40: Sprint plans for M2-M6](040-sprint-plans-for-m2-m6.md)
+12. [VSS-79: SP5: retro](079-sp5-retro.md)
+13. [VSS-44: SP5: audit review and bugfix](044-sp5-audit-review-and-bugfix.md)
