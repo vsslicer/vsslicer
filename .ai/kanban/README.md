@@ -9,9 +9,9 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 | [Ready to start](todo/_todo.md) | 0 |
 | [In progress](doing/_doing.md) | 0 |
 | [In review](review/_review.md) | 0 |
-| [Done](done/_done.md) | 13 |
+| [Done](done/_done.md) | 11 |
 
-44 finished card(s) are archived in [archive/](archive/), by sprint or month.
+46 finished card(s) are archived in [archive/](archive/), by sprint or month.
 
 ## Milestones
 
@@ -25,7 +25,7 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 
 ## Sprints
 
-- [SP10: M2 Open](sprints/SP10.md): planned, 0/50 cards done
+- [SP10: M2 Open](sprints/SP10.md): active, 0/126 cards done
 - [SP11: M2 Open](sprints/SP11.md): planned, 0/35 cards done
 - [SP12: M2 Open](sprints/SP12.md): planned, 0/16 cards done
 - [SP13: M3 Print](sprints/SP13.md): planned, 0/34 cards done
@@ -66,4 +66,3 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 - [SP48: M5 Parity](sprints/SP48.md): planned, 0/2 cards done
 - [SP49: M6 VSSlicer build](sprints/SP49.md): planned, 0/41 cards done
 - [SP50: M6 VSSlicer build](sprints/SP50.md): planned, 0/29 cards done
-- [SP9: M2 Open](sprints/SP9.md): active, 29/105 cards done
