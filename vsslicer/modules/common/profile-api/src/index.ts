@@ -5,3 +5,5 @@ export * from './domain/conditions/parse/index.ts';
 export * from './domain/inheritance/index.ts';
 export * from './domain/conditions/evaluate/evaluate.ts';
 export * from './domain/catalogue/index.ts';
+export * from './domain/catalogue/conversion/index.ts';
+export { orcaCatalogue } from './domain/catalogue/orca.ts';
