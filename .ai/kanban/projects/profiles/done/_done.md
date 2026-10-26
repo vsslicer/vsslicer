@@ -18,3 +18,4 @@
 16. [PRF-28: Decode extruder-variant arrays for H2D and H2C into keyed per-extruder values](028-decode-extruder-variant-arrays-for-h2d-and-h2c-into-keyed-pe.md)
 17. [PRF-67: Contribute jsonValidation and schema completion for profile files](067-contribute-jsonvalidation-and-schema-completion-for-profile-.md)
 18. [PRF-126: Split per-nozzle Orca printer presets into printer_model, nozzle and overrides](126-split-per-nozzle-orca-printer-presets-into-printer-model-noz.md)
+19. [PRF-26: Import SuperSlicer INI with its 356 extra keys](026-import-superslicer-ini-with-its-356-extra-keys.md)
