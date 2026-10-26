@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed: following a print that opens a new preview now lands on the printer's position: a seek that arrives before the move buffers is posted again after the last one (GCP-118, SP9 audit finding 2).
+
 ## 0.5.1
 
 - GCP-42: `pnpm bench` records peak host, worker and webview (SwiftShader) memory on synthetic 50, 200 and 500 MB files and fails when a peak is over `bench/budget.json` (bytes, never time); budgets are per OS (`darwin`, `linux`; a missing OS fails as "no budget for <os>"). PR CI runs `--sizes 50,200` on Linux, the full set on `workflow_dispatch`.
