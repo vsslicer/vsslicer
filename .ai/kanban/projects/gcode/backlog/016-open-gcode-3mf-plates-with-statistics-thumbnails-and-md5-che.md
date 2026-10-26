@@ -8,7 +8,7 @@ model: sonnet
 area: [parser]
 story: US5
 milestone: "VSS:M1"
-sprint: "VSS:SP4"
+sprint: "VSS:SP7"
 depends_on: [15, 8]
 created: 2026-10-25
 ---
@@ -30,4 +30,4 @@ Plate selection and the BBL metadata.
 
 ## Progress
 
-Not started.
+Not started. Moved to SP7 by the SP4 coordinator with GCP-15, which it depends on; GCP-15 waits on VWR-73 (SP6, M2).
