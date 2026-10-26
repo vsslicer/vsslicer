@@ -36,6 +36,7 @@ import {
   stepTime,
   timeOfMove,
 } from './timeline.ts';
+import { nextFollow, type FollowEvent, type FollowState } from '../../domain/follow-state.ts';
 import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
 import type { PanelLabel } from '../../domain/panel.ts';
 import { moveFileOffset, type TextRequest, type TextWindow } from '../../domain/text-window.ts';
@@ -57,6 +58,7 @@ interface SavedView extends Omit<Visibility, 'layer'> {
   // bottom, move, roleMask and hiddenFlags come from Visibility
   colorMode?: ColorMode;
   camera?: CameraState;
+  follow?: FollowState;
 }
 
 declare const acquireVsCodeApi: () => VsCodeApi<SavedView>;
@@ -167,6 +169,26 @@ const patch = (e: ViewEvent) => {
   api.setState(nextView(api.getState()!, e));
   redraw();
 };
+// Follow mode (GCP-55): on until the user takes the view over; a rejoin jumps to the newest fed move.
+// A preview is followed only once the host has fed it a position (`target` set); kept in the saved view for reloads.
+let follow: FollowState = api.getState()?.follow ?? { following: true };
+const isFollowed = () => follow.target !== undefined;
+const setFollow = (f: FollowState) => {
+  follow = f;
+  const s = api.getState();
+  if (s) api.setState({ ...s, follow });
+};
+const followButton = document.createElement('button');
+followButton.hidden = !isFollowed();
+const followStep = (e: FollowEvent) => {
+  const r = nextFollow(follow, e);
+  setFollow(r.state);
+  if (r.seek !== undefined) command({ action: 'seek', move: r.seek }, true);
+  else redraw();
+};
+const breakOut = () => follow.following && followStep({ kind: 'breakOut' });
+followButton.addEventListener('click', () => followStep({ kind: follow.following ? 'breakOut' : 'rejoin' }));
+for (const s of [topLayer, bottomLayer, moveSlider]) s.input.addEventListener('input', breakOut, { capture: true });
 topLayer.input.addEventListener('input', () => patch({ kind: 'top', value: Number(topLayer.input.value) }));
 bottomLayer.input.addEventListener('input', () => patch({ kind: 'bottom', value: Number(bottomLayer.input.value) }));
 moveSlider.input.addEventListener('input', () =>
@@ -176,7 +198,7 @@ panel.append(layerTime, toggles);
 const modes = document.createElement('select');
 modes.ariaLabel = 'Colour by';
 for (const m of COLOR_MODES) modes.append(new Option(m.label, String(m.mode)));
-toolbar.append(modes, ...(['top', 'iso', 'front'] as const).map((p) => button(p)), legend);
+toolbar.append(followButton, modes, ...(['top', 'iso', 'front'] as const).map((p) => button(p)), legend);
 function button(preset: ViewPreset) {
   const b = Object.assign(document.createElement('button'), { textContent: preset });
   b.addEventListener('click', () => setCamera((aspect) => presetCamera(renderer!.bounds, aspect, preset)));
@@ -232,7 +254,12 @@ const redraw = () => {
   const colorMode = s.colorMode ?? ColorMode.Feature;
   const camera = s.camera ?? fit(aspect());
   modes.value = String(colorMode);
-  renderer.draw({ ...s, layer: s.layer, colorMode, camera }, hover === undefined ? undefined : labels[hover]?.ranges);
+  followButton.hidden = !isFollowed();
+  followButton.textContent = follow.following ? 'Following (click to break out)' : 'Rejoin follow';
+  renderer.draw(
+    { ...s, layer: s.layer, colorMode, camera, dimAbove: isFollowed() && follow.following },
+    hover === undefined ? undefined : labels[hover]?.ranges,
+  );
   placeMarker(camera);
   const l = legendFor(colorMode, renderer.ranges());
   legend.replaceChildren();
@@ -462,7 +489,7 @@ const setPlaying = (on: boolean) => {
 };
 // a retained but hidden preview must not keep playing (and redrawing)
 document.addEventListener('visibilitychange', () => document.hidden && clock.state.playing && setPlaying(false));
-const command = (c: TimelineCommand) => {
+const command = (c: TimelineCommand, own = false) => {
   if (c.action === 'play') setPlaying(true);
   else if (c.action === 'pause') setPlaying(false);
   else if (c.action === 'speed') {
@@ -471,15 +498,21 @@ const command = (c: TimelineCommand) => {
     report();
   } else if (c.action === 'step') seekTo(stepTime(info.moves, clock.state.time, c.direction, info.duration));
   else if (c.action === 'seek') {
+    if (!own) {
+      // a fed position: shown while following, otherwise kept for the rejoin
+      const r = nextFollow(follow, { kind: 'feed', move: c.move });
+      setFollow(r.state);
+      if (r.seek === undefined) return redraw();
+    }
     if (clock.state.playing) setPlaying(false);
     seekTo(timeOfMove(info.moves, c.move));
   }
 };
-playButton.addEventListener('click', () => command({ action: clock.state.playing ? 'pause' : 'play' }));
-stepBack.addEventListener('click', () => command({ action: 'step', direction: -1 }));
-stepForward.addEventListener('click', () => command({ action: 'step', direction: 1 }));
+playButton.addEventListener('click', () => (breakOut(), command({ action: clock.state.playing ? 'pause' : 'play' })));
+stepBack.addEventListener('click', () => (breakOut(), command({ action: 'step', direction: -1 })));
+stepForward.addEventListener('click', () => (breakOut(), command({ action: 'step', direction: 1 })));
 speeds.addEventListener('change', () => command({ action: 'speed', value: Number(speeds.value) }));
-clockSlider.addEventListener('input', () => seekTo(Number(clockSlider.value)));
+clockSlider.addEventListener('input', () => (breakOut(), seekTo(Number(clockSlider.value))));
 
 // subscribe before the handshake: the host answers the welcome with the state and the buffers
 receiveBuffers(channel, {

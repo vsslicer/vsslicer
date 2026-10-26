@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Follow mode: the part after the followed position is dimmed; the user can break out (sliders, play, step, time) and rejoin at the newest fed position (GCP-55).
+
 ## 0.6.1
 
 - Re-locked to `@vsslicer/gcode-parser` 0.14.1 and `@vsslicer/3mf` 0.2.0.

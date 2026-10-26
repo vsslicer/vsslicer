@@ -324,3 +324,38 @@ test('a highlight draws the object alone in the highlight colour and the rest no
   assert.strictEqual(uniform(f, 'uMode'), ColorMode.Width, 'the last draw is the highlight');
   r.dispose();
 });
+
+test('dimAbove draws the rest of the print after the visible range, in one flat colour', async () => {
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
+  const f = fakeGl(16384);
+  const r = createPreviewRenderer(
+    new EventTarget() as HTMLCanvasElement,
+    f.gl,
+    concatMoves(parsed.moves),
+    parsed.layers,
+  );
+  r.draw({ layer: 1, move: 5, hiddenFlags: 0 });
+  const shown = instances(f);
+  f.calls.length = 0;
+  r.draw({ layer: 1, move: 5, hiddenFlags: 0, dimAbove: true });
+  assert.ok(instances(f) > shown, 'the moves above the playhead are drawn too');
+  assert.strictEqual(instances(f), parsed.moveCount - 1, 'every move once');
+  assert.strictEqual(uniform(f, 'uMode'), ColorMode.Width, 'the last draw is the dimmed part');
+  r.dispose();
+});
+
+test('dimAbove with a highlight still draws every move once', async () => {
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
+  const f = fakeGl(16384);
+  const r = createPreviewRenderer(
+    new EventTarget() as HTMLCanvasElement,
+    f.gl,
+    concatMoves(parsed.moves),
+    parsed.layers,
+  );
+  f.calls.length = 0;
+  r.draw({ layer: 1, move: 5, hiddenFlags: 0, dimAbove: true }, [[2, 4]]);
+  assert.strictEqual(instances(f), parsed.moveCount - 1, 'every move once');
+  assert.strictEqual(uniform(f, 'uMode'), ColorMode.Width, 'the last draw is the dimmed part');
+  r.dispose();
+});

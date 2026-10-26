@@ -62,3 +62,27 @@ Problems:
 Not checked: the DOM wiring in `main.ts` and the extension-host integration tests were not run, as the worker also noted.
 
 **Carried to SP12 (sp11-coordinator, 14:47):** the fix is not started; the reviewed work is parked again under `.ai/local/wip/SP11/` (copy it back first).
+
+### SP12 rework sp12-gcp-55
+
+Fixed review problems (gcode-preview): `src/presentation/webview/main.ts`: a preview counts as followed only once the host fed it a position (`follow.target` set): until then the Follow button is hidden and `dimAbove` is off; the follow state is saved in the view via `setState` (`SavedView.follow`), so a reload restores a broken-out view as broken out. `test/renderer.test.ts`: new test "dimAbove with a highlight still draws every move once".
+- Probes: removing the `dim()` after the highlight passes -> the new renderer test fails (restored, cmp equal). Criteria probes from SP11 still apply (feed shown while broken out, rejoin without target -> follow-state tests fail). The main.ts hide/persist wiring is DOM and untested (same as before).
+- Verification (macOS local; CI gate platform not checked): lint clean, build ok, `pnpm test` 117/117, `node scripts/run.mjs checks` clean. Integration tests not run.
+- Release lines: unchanged from SP11.
+
+**Review passed (sp12-rev-gcp-55)**
+
+Ran in `vsslicer/modules/gcode-preview` (registry up): `pnpm install` ok, `pnpm lint` clean, `pnpm build` ok, `pnpm test` 118/118 pass (one more than the rework's 117: the uncommitted `api-check` test in the same tree, not this card); `node scripts/run.mjs checks` clean. Layering ok: `follow-state.ts` is pure domain, imported by the webview inside the module; no VS Code import outside presentation; no keydown or other path changes the layer or move besides the guarded sliders and play/step/time buttons.
+
+SP11 problems against the rework:
+1. Fixed. `main.ts:174-175,182,257,260`: a preview is followed only once `follow.target` is set by a host `seek` (`main.ts:501-505`); before that the button is hidden and `dimAbove` is false. `follow` is restored from `api.getState()?.follow` and written back by `setFollow` with the rest of the view, so a broken-out view reloads broken out, and the host's re-posted seek after the buffers (`preview-session.ts:118`) is then only kept as the target, not shown. Checked by reading; the DOM wiring has no test (accepted in SP11, criterion 2 is tested through the pure state).
+2. Fixed. New test "dimAbove with a highlight still draws every move once".
+
+Mutation probes (temporary edits, each restored and compared with `cmp`; tree checked after):
+- Criterion 1 (dim): `dim()` removed after the highlight passes -> 1 renderer test fails; dim from `end + 1` -> 2 fail; count `moveCount - end - 1` -> 2 fail; dim drawn in the normal colour mode -> 2 fail; `vis.dimAbove` guard removed -> 3 fail.
+- Criterion 2 (break out, rejoin): feed always shown -> follow-state test fails; feed not kept as target -> fails; breakOut leaves `following` true -> fails; rejoin without seeking the target -> fails.
+- Expected counts come from the parser fixture (`parsed.moveCount - 1`, the idiom of the existing test at `renderer.test.ts:83`), not from the renderer under test.
+
+Notes for later (not failures): the dimmed part and a hovered object's highlight share the gradient's first colour (the commented shortcut, `preview-renderer.ts:108`), so a webview-kit fade uniform remains the follow-up. `onPlate` (`main.ts:362`) resets the saved view to `{ layer: null }`, dropping `follow` from it until the next feed rewrites it; in memory the state is kept.
+
+Not checked: extension-host integration tests and a live webview were not run.
