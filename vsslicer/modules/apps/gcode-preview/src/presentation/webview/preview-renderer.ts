@@ -13,7 +13,7 @@ import {
   createSegmentRenderer,
   showGlFailure,
   trackContextLoss,
-  type GlContextError,
+  GlContextError,
   type SegmentRenderer,
 } from '@vsslicer/webview-kit/gl';
 
@@ -145,11 +145,7 @@ export const createPreviewRenderer = (
     onLost: () => (renderer = undefined),
     onRestored: (err) =>
       err
-        ? // the kit's GlFailureCause has no 'restore' yet; showGlFailure reads only cause and message
-          showGlFailure(canvas, {
-            cause: 'restore',
-            message: `The 3D view could not be restored after a graphics reset: ${String(err)}`,
-          } as unknown as GlContextError)
+        ? (console.error('Graphics restore failed', err), showGlFailure(canvas, new GlContextError('restore')))
         : last && draw(last, lastHighlight),
   });
   resources.add(() => {

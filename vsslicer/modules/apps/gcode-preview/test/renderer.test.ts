@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // The webview's renderer wiring against a recording fake WebGL2 context: what is uploaded, drawn and freed.
 // Chunking at a 16k MAX_TEXTURE_SIZE and the shader output are webview-kit's tests (move-textures, segment-renderer specs).
-import test from 'node:test';
+import test, { mock } from 'node:test';
 import assert from 'node:assert';
 import { createReadStream } from 'node:fs';
 import { MOVE_STRIDE, MoveFlag, MoveRole } from '@vsslicer/gcode-api';
@@ -143,9 +143,11 @@ test('a restore whose rebuild throws shows the failure message instead of a blan
     throw new Error('driver reset');
   };
   canvas.dispatchEvent(new Event('webglcontextlost', { cancelable: true }));
+  const log = mock.method(console, 'error', () => {});
   canvas.dispatchEvent(new Event('webglcontextrestored'));
+  log.mock.restore();
   assert.strictEqual(shown?.dataset['cause'], 'restore');
-  assert.match(shown?.textContent ?? '', /driver reset/);
+  assert.match(shown?.textContent ?? '', /could not be restored/); // the detail goes to the console
   r.dispose();
 });
 
