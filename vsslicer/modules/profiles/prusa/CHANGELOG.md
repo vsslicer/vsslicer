@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
 - PRF-52: native export to PrusaSlicer INI (`exportPrusaIni`, `prusaIniExporter`): unchanged sections are written back from their stored lines, edited settings in PrusaSlicer's own escaping; bounded by key, line and diagnostic caps.
 - PRF-42: 21 PrusaSlicer and SuperSlicer tuples resolve to hand-checked values, each citing the section and line that sets it (`test/tuples/`), with a seeded merge-order bug the suite catches.
