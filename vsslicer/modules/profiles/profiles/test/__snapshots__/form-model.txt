@@ -18,7 +18,7 @@ layers
     xy_hole_compensation number
     xy_contour_compensation number
     hole_to_polyhole checkbox
-    hole_to_polyhole_threshold text
+    hole_to_polyhole_threshold percent_or_absolute
     hole_to_polyhole_twisted checkbox
     hole_to_polyhole_max_edges number
     bambu.periodic_modifier_skip_layers number hidden
@@ -26,29 +26,29 @@ layers
     bambu.enable_circle_compensation checkbox
     bambu.circle_compensation_manual_offset number
     superslicer.allow_empty_layers checkbox
-    superslicer.bridge_precision text
+    superslicer.bridge_precision percent_or_absolute
     superslicer.model_precision number
     superslicer.print_first_layer_temperature number hidden
     superslicer.resolution_internal number
-    superslicer.slice_merge_dent text
-    superslicer.slice_merge_min_width text
-    cura.wall_line_width number per_extruder
-    cura.skin_line_width number per_extruder
-    cura.skirt_brim_line_width number per_extruder
-    cura.support_interface_line_width number per_extruder
-    cura.support_roof_line_width number per_extruder
-    cura.support_bottom_line_width number per_extruder
-    cura.prime_tower_line_width number per_extruder
-    cura.initial_layer_line_width_factor number per_extruder
+    superslicer.slice_merge_dent percent_or_absolute
+    superslicer.slice_merge_min_width percent_or_absolute
+    cura.wall_line_width per_extruder per_extruder
+    cura.skin_line_width per_extruder per_extruder
+    cura.skirt_brim_line_width per_extruder per_extruder
+    cura.support_interface_line_width per_extruder per_extruder
+    cura.support_roof_line_width per_extruder per_extruder
+    cura.support_bottom_line_width per_extruder per_extruder
+    cura.prime_tower_line_width per_extruder per_extruder
+    cura.initial_layer_line_width_factor per_extruder per_extruder
 walls
   process
     reduce_crossing_wall checkbox
-    max_travel_detour_distance text
+    max_travel_detour_distance percent_or_absolute
     bridge_density number
     internal_bridge_density number
     bridge_flow number
     internal_bridge_flow number
-    top_solid_infill_flow_ratio number per_extruder
+    top_solid_infill_flow_ratio per_extruder per_extruder
     bottom_solid_infill_flow_ratio number
     set_other_flow_ratios checkbox
     first_layer_flow_ratio number
@@ -61,13 +61,13 @@ walls
     support_flow_ratio number
     support_interface_flow_ratio number
     only_one_wall_top checkbox
-    min_width_top_surface text
+    min_width_top_surface percent_or_absolute
     only_one_wall_first_layer checkbox
     extra_perimeters_on_overhangs checkbox
     overhang_reverse checkbox
     overhang_reverse_internal_only checkbox
     counterbore_hole_bridging select
-    overhang_reverse_threshold text
+    overhang_reverse_threshold percent_or_absolute
     thick_bridges checkbox
     thick_internal_bridges checkbox
     enable_extra_bridge_layer select
@@ -88,14 +88,14 @@ walls
     alternate_extra_wall checkbox
     seam_position select
     staggered_inner_seams checkbox
-    seam_gap text
+    seam_gap percent_or_absolute
     seam_slope_type select
     seam_slope_conditional checkbox
     scarf_angle_threshold number
     scarf_overhang_threshold number
-    scarf_joint_speed text
+    scarf_joint_speed percent_or_absolute
     scarf_joint_flow_ratio number
-    seam_slope_start_height text
+    seam_slope_start_height percent_or_absolute
     seam_slope_entire_loop checkbox
     seam_slope_min_length number
     seam_slope_steps number
@@ -103,9 +103,9 @@ walls
     role_based_wipe_speed checkbox
     wipe_on_loops checkbox
     wipe_inward checkbox
-    wipe_inward_distance text
+    wipe_inward_distance percent_or_absolute
     wipe_before_external_loop checkbox
-    wipe_speed text
+    wipe_speed percent_or_absolute
     detect_thin_wall checkbox
     wall_generator select
     wall_transition_length number
@@ -127,7 +127,7 @@ walls
     bambu.embedding_wall_into_infill checkbox
     bambu.seam_placement_away_from_overhangs checkbox
     bambu.override_filament_scarf_seam_setting checkbox
-    bambu.seam_slope_gap text
+    bambu.seam_slope_gap percent_or_absolute
     bambu.role_base_wipe_speed checkbox
     bambu.apply_scarf_seam_on_circles checkbox hidden
     prusa.avoid_crossing_curled_overhangs checkbox
@@ -138,16 +138,16 @@ walls
     prusa.seam_preferred_direction_jitter number hidden
     superslicer.external_perimeters_first_force checkbox
     superslicer.external_perimeters_vase checkbox
-    superslicer.external_perimeters_vase_min_height text
+    superslicer.external_perimeters_vase_min_height percent_or_absolute
     superslicer.external_perimeters_nothole checkbox
     superslicer.external_perimeters_hole checkbox
-    superslicer.extra_perimeters_below_area text
+    superslicer.extra_perimeters_below_area percent_or_absolute
     superslicer.extra_perimeters_count number hidden
-    superslicer.gap_fill_extension text
+    superslicer.gap_fill_extension percent_or_absolute
     superslicer.gap_fill_last checkbox
-    superslicer.gap_fill_max_width text
-    superslicer.gap_fill_min_area text
-    superslicer.gap_fill_min_width text
+    superslicer.gap_fill_max_width percent_or_absolute
+    superslicer.gap_fill_min_area percent_or_absolute
+    superslicer.gap_fill_min_width percent_or_absolute
     superslicer.gap_fill_no_overhang checkbox
     superslicer.gap_fill_perimeter checkbox
     superslicer.only_one_perimeter_top_other_algo checkbox hidden
@@ -160,40 +160,40 @@ walls
     superslicer.perimeter_round_corners checkbox
     superslicer.perimeters_hole number
     superslicer.seam_angle_cost number
-    superslicer.seam_notch_all text
+    superslicer.seam_notch_all percent_or_absolute
     superslicer.seam_notch_angle number
-    superslicer.seam_notch_inner text
-    superslicer.seam_notch_outer text
+    superslicer.seam_notch_inner percent_or_absolute
+    superslicer.seam_notch_outer percent_or_absolute
     superslicer.seam_travel_cost number
     superslicer.seam_visibility checkbox
     superslicer.thin_perimeters number
     superslicer.thin_perimeters_all number
-    superslicer.thin_walls_min_width text
-    superslicer.thin_walls_overlap text
+    superslicer.thin_walls_min_width percent_or_absolute
+    superslicer.thin_walls_overlap percent_or_absolute
     superslicer.thin_walls_merge checkbox
     cura.wall_extruder_nr number
-    cura.wall_0_extruder_nr number
-    cura.wall_x_extruder_nr number
-    cura.wall_thickness number per_extruder
-    cura.wall_transition_filter_distance number per_extruder
-    cura.wall_0_wipe_dist number per_extruder
-    cura.wall_0_inset number per_extruder
-    cura.wall_x_inset number per_extruder
-    cura.optimize_wall_printing_order checkbox per_extruder
-    cura.inset_direction select per_extruder
-    cura.initial_layer_inset_direction select per_extruder
-    cura.alternate_extra_perimeter checkbox per_extruder
-    cura.min_wall_line_width number per_extruder
-    cura.min_even_wall_line_width number per_extruder
-    cura.min_odd_wall_line_width number per_extruder
-    cura.fill_outline_gaps checkbox per_extruder
-    cura.hole_xy_offset_max_diameter number per_extruder
-    cura.z_seam_on_vertex checkbox per_extruder
-    cura.z_seam_position select per_extruder
-    cura.z_seam_x number per_extruder
-    cura.z_seam_y number per_extruder
-    cura.z_seam_corner select per_extruder
-    cura.z_seam_relative checkbox per_extruder
+    cura.wall_0_extruder_nr expr
+    cura.wall_x_extruder_nr expr
+    cura.wall_thickness per_extruder per_extruder
+    cura.wall_transition_filter_distance per_extruder per_extruder
+    cura.wall_0_wipe_dist per_extruder per_extruder
+    cura.wall_0_inset per_extruder per_extruder
+    cura.wall_x_inset per_extruder per_extruder
+    cura.optimize_wall_printing_order per_extruder per_extruder
+    cura.inset_direction per_extruder per_extruder
+    cura.initial_layer_inset_direction per_extruder per_extruder
+    cura.alternate_extra_perimeter per_extruder per_extruder
+    cura.min_wall_line_width per_extruder per_extruder
+    cura.min_even_wall_line_width per_extruder per_extruder
+    cura.min_odd_wall_line_width per_extruder per_extruder
+    cura.fill_outline_gaps per_extruder per_extruder
+    cura.hole_xy_offset_max_diameter per_extruder per_extruder
+    cura.z_seam_on_vertex per_extruder per_extruder
+    cura.z_seam_position per_extruder per_extruder
+    cura.z_seam_x per_extruder per_extruder
+    cura.z_seam_y per_extruder per_extruder
+    cura.z_seam_corner per_extruder per_extruder
+    cura.z_seam_relative per_extruder per_extruder
 shells_infill
   process
     bottom_shell_layers number
@@ -237,19 +237,19 @@ shells_infill
     skin_infill_density number
     skin_infill_depth number
     infill_lock_depth number
-    skin_infill_line_width text
-    skeleton_infill_line_width text
+    skin_infill_line_width percent_or_absolute
+    skeleton_infill_line_width percent_or_absolute
     symmetric_infill_y_axis checkbox
     infill_complete_top checkbox
-    infill_combination_max_layer_height text
+    infill_combination_max_layer_height percent_or_absolute
     lateral_lattice_angle_1 number
     lateral_lattice_angle_2 number
     infill_overhang_angle number
     lightning_overhang_angle number
     lightning_prune_angle number
     lightning_straightening_angle number
-    infill_anchor text
-    infill_anchor_max text
+    infill_anchor percent_or_absolute
+    infill_anchor_max percent_or_absolute
     infill_wall_overlap number
     top_bottom_infill_wall_overlap number
     calib_flowrate_topinfill_special_order checkbox hidden
@@ -290,17 +290,17 @@ shells_infill
     prusa.solid_infill_every_layers number
     prusa.solid_layers number hidden
     prusa.solid_min_thickness number hidden
-    superslicer.bridged_infill_margin text
+    superslicer.bridged_infill_margin percent_or_absolute
     superslicer.bridge_fill_pattern select
     superslicer.solid_fill_pattern select
     superslicer.enforce_full_fill_volume checkbox
     superslicer.enforce_retract_first_layer checkbox
-    superslicer.external_infill_margin text
+    superslicer.external_infill_margin percent_or_absolute
     superslicer.fill_aligned_z checkbox
     superslicer.fill_angle_cross checkbox
     superslicer.fill_angle_follow_model checkbox
     superslicer.fill_angle_increment number
-    superslicer.fill_smooth_width text
+    superslicer.fill_smooth_width percent_or_absolute
     superslicer.fill_smooth_distribution number
     superslicer.infill_connection select
     superslicer.infill_connection_top select
@@ -313,80 +313,80 @@ shells_infill
     superslicer.infill_filled_solid checkbox
     superslicer.infill_filled_top checkbox
     superslicer.internal_bridge_expansion checkbox
-    superslicer.internal_bridge_min_width text
+    superslicer.internal_bridge_min_width percent_or_absolute
     superslicer.solid_infill_below_layer_area number
-    superslicer.solid_infill_below_width text
+    superslicer.solid_infill_below_width percent_or_absolute
     superslicer.solid_over_perimeters number
-    cura.roofing_extruder_nr number
-    cura.roofing_layer_count number per_extruder
-    cura.roofing_line_width number per_extruder
-    cura.roofing_pattern select per_extruder
-    cura.roofing_monotonic checkbox per_extruder
-    cura.roofing_angles number list per_extruder
-    cura.roofing_expansion number per_extruder
-    cura.flooring_extruder_nr number
-    cura.flooring_layer_count number per_extruder
-    cura.flooring_line_width number per_extruder
-    cura.flooring_pattern select per_extruder
-    cura.flooring_monotonic checkbox per_extruder
-    cura.flooring_angles number list per_extruder
+    cura.roofing_extruder_nr expr
+    cura.roofing_layer_count per_extruder per_extruder
+    cura.roofing_line_width per_extruder per_extruder
+    cura.roofing_pattern per_extruder per_extruder
+    cura.roofing_monotonic per_extruder per_extruder
+    cura.roofing_angles per_extruder list per_extruder
+    cura.roofing_expansion per_extruder per_extruder
+    cura.flooring_extruder_nr expr
+    cura.flooring_layer_count per_extruder per_extruder
+    cura.flooring_line_width per_extruder per_extruder
+    cura.flooring_pattern per_extruder per_extruder
+    cura.flooring_monotonic per_extruder per_extruder
+    cura.flooring_angles per_extruder list per_extruder
     cura.top_bottom_extruder_nr number
-    cura.top_bottom_thickness number per_extruder
-    cura.initial_bottom_layers number per_extruder
-    cura.top_bottom_pattern_0 select per_extruder
-    cura.top_bottom_skin_merge_distance number
-    cura.connect_skin_polygons checkbox per_extruder
-    cura.skin_monotonic checkbox per_extruder
-    cura.skin_angles number list per_extruder
-    cura.small_skin_width number per_extruder
-    cura.small_skin_on_surface checkbox per_extruder
-    cura.skin_no_small_gaps_heuristic checkbox per_extruder
-    cura.skin_outline_count number per_extruder
-    cura.ironing_only_highest_layer checkbox per_extruder
-    cura.ironing_monotonic checkbox per_extruder
-    cura.acceleration_ironing number per_extruder
-    cura.jerk_ironing number per_extruder
-    cura.skin_overlap_mm number per_extruder
-    cura.skin_preshrink number per_extruder
-    cura.top_skin_preshrink number per_extruder
-    cura.bottom_skin_preshrink number per_extruder
-    cura.expand_skins_expand_distance number per_extruder
-    cura.top_skin_expand_distance number per_extruder
-    cura.bottom_skin_expand_distance number per_extruder
-    cura.max_skin_angle_for_expansion number per_extruder
-    cura.min_skin_width_for_expansion number per_extruder
+    cura.top_bottom_thickness per_extruder per_extruder
+    cura.initial_bottom_layers per_extruder per_extruder
+    cura.top_bottom_pattern_0 per_extruder per_extruder
+    cura.top_bottom_skin_merge_distance expr
+    cura.connect_skin_polygons per_extruder per_extruder
+    cura.skin_monotonic per_extruder per_extruder
+    cura.skin_angles per_extruder list per_extruder
+    cura.small_skin_width per_extruder per_extruder
+    cura.small_skin_on_surface per_extruder per_extruder
+    cura.skin_no_small_gaps_heuristic per_extruder per_extruder
+    cura.skin_outline_count per_extruder per_extruder
+    cura.ironing_only_highest_layer per_extruder per_extruder
+    cura.ironing_monotonic per_extruder per_extruder
+    cura.acceleration_ironing per_extruder per_extruder
+    cura.jerk_ironing per_extruder per_extruder
+    cura.skin_overlap_mm per_extruder per_extruder
+    cura.skin_preshrink per_extruder per_extruder
+    cura.top_skin_preshrink per_extruder per_extruder
+    cura.bottom_skin_preshrink per_extruder per_extruder
+    cura.expand_skins_expand_distance per_extruder per_extruder
+    cura.top_skin_expand_distance per_extruder per_extruder
+    cura.bottom_skin_expand_distance per_extruder per_extruder
+    cura.max_skin_angle_for_expansion per_extruder per_extruder
+    cura.min_skin_width_for_expansion per_extruder per_extruder
     cura.infill_extruder_nr number
-    cura.infill_line_distance number per_extruder
-    cura.zig_zaggify_infill checkbox per_extruder
-    cura.connect_infill_polygons checkbox per_extruder
-    cura.infill_angles number list per_extruder
-    cura.infill_offset_x number per_extruder
-    cura.infill_offset_y number per_extruder
-    cura.infill_multiplier number per_extruder
-    cura.infill_wall_line_count number per_extruder
-    cura.sub_div_rad_add number per_extruder
-    cura.infill_overlap_mm number per_extruder
-    cura.infill_wipe_dist number per_extruder
-    cura.infill_sparse_thickness number per_extruder
-    cura.gradual_infill_steps number per_extruder
-    cura.gradual_infill_step_height number per_extruder
-    cura.min_infill_area number per_extruder
-    cura.infill_support_enabled checkbox per_extruder
-    cura.infill_support_angle number per_extruder
-    cura.skin_support checkbox per_extruder
-    cura.skin_support_speed number per_extruder
-    cura.skin_support_material_flow number per_extruder
-    cura.skin_support_density number per_extruder
-    cura.skin_support_fan_speed number per_extruder
-    cura.skin_support_interlace_lines checkbox per_extruder
-    cura.lightning_infill_support_angle number per_extruder
-    cura.lightning_infill_overhang_angle number per_extruder
-    cura.lightning_infill_prune_angle number per_extruder
-    cura.lightning_infill_straightening_angle number per_extruder
-    cura.infill_move_inwards_length number per_extruder
-    cura.infill_start_move_inwards_length number per_extruder
-    cura.infill_end_move_inwards_length number per_extruder
-    cura.infill_start_end_preference select per_extruder
+    cura.infill_line_distance per_extruder per_extruder
+    cura.zig_zaggify_infill per_extruder per_extruder
+    cura.connect_infill_polygons per_extruder per_extruder
+    cura.infill_angles per_extruder list per_extruder
+    cura.infill_offset_x per_extruder per_extruder
+    cura.infill_offset_y per_extruder per_extruder
+    cura.infill_multiplier per_extruder per_extruder
+    cura.infill_wall_line_count per_extruder per_extruder
+    cura.sub_div_rad_add per_extruder per_extruder
+    cura.infill_overlap_mm per_extruder per_extruder
+    cura.infill_wipe_dist per_extruder per_extruder
+    cura.infill_sparse_thickness per_extruder per_extruder
+    cura.gradual_infill_steps per_extruder per_extruder
+    cura.gradual_infill_step_height per_extruder per_extruder
+    cura.min_infill_area per_extruder per_extruder
+    cura.infill_support_enabled per_extruder per_extruder
+    cura.infill_support_angle per_extruder per_extruder
+    cura.skin_support per_extruder per_extruder
+    cura.skin_support_speed per_extruder per_extruder
+    cura.skin_support_material_flow per_extruder per_extruder
+    cura.skin_support_density per_extruder per_extruder
+    cura.skin_support_fan_speed per_extruder per_extruder
+    cura.skin_support_interlace_lines per_extruder per_extruder
+    cura.lightning_infill_support_angle per_extruder per_extruder
+    cura.lightning_infill_overhang_angle per_extruder per_extruder
+    cura.lightning_infill_prune_angle per_extruder per_extruder
+    cura.lightning_infill_straightening_angle per_extruder per_extruder
+    cura.infill_move_inwards_length per_extruder per_extruder
+    cura.infill_start_move_inwards_length per_extruder per_extruder
+    cura.infill_end_move_inwards_length per_extruder per_extruder
+    cura.infill_start_end_preference per_extruder per_extruder
 support
   process
     bridge_no_support checkbox
@@ -422,7 +422,7 @@ support
     support_style select
     independent_support_layer_height checkbox
     support_threshold_angle number
-    support_threshold_overlap text
+    support_threshold_overlap percent_or_absolute
     tree_support_branch_angle number
     tree_support_branch_angle_organic number
     tree_support_angle_slow number
@@ -448,122 +448,122 @@ support
     bambu.support_ironing_direction number
     bambu.top_z_overrides_xy_distance checkbox
     prusa.first_layer_acceleration_over_raft number
-    prusa.first_layer_speed_over_raft text
+    prusa.first_layer_speed_over_raft percent_or_absolute
     prusa.support_material_auto checkbox
     prusa.support_material_closing_radius number
     prusa.support_material_synchronize_layers checkbox
     prusa.support_material_with_sheath checkbox
     prusa.support_tree_branch_diameter_double_wall number
-    prusa.first_layer_support_material_speed text hidden
+    prusa.first_layer_support_material_speed percent_or_absolute hidden
     prusa.support_material_first_layer_density number
     prusa.support_material_first_layer_expansion number
     superslicer.raft_contact_distance_type select
-    superslicer.raft_layer_height text
-    superslicer.raft_interface_layer_height text
+    superslicer.raft_layer_height percent_or_absolute
+    superslicer.raft_interface_layer_height percent_or_absolute
     superslicer.support_material_angle_height number hidden
     superslicer.support_material_contact_distance_type select
     superslicer.support_material_interface_angle number
     superslicer.support_material_interface_angle_increment number
-    superslicer.support_material_interface_layer_height text
+    superslicer.support_material_interface_layer_height percent_or_absolute
     superslicer.support_material_bottom_interface_pattern select
-    superslicer.support_material_layer_height text
-    cura.support_extruder_nr number
-    cura.support_infill_extruder_nr number
-    cura.support_extruder_nr_layer_0 number
-    cura.support_interface_extruder_nr number
-    cura.support_roof_extruder_nr number
-    cura.support_bottom_extruder_nr number
-    cura.support_tree_max_diameter number per_extruder
-    cura.support_tree_smooth_layers number per_extruder
-    cura.support_z_seam_away_from_model checkbox per_extruder
-    cura.support_z_seam_min_distance number per_extruder
+    superslicer.support_material_layer_height percent_or_absolute
+    cura.support_extruder_nr expr
+    cura.support_infill_extruder_nr expr
+    cura.support_extruder_nr_layer_0 expr
+    cura.support_interface_extruder_nr expr
+    cura.support_roof_extruder_nr expr
+    cura.support_bottom_extruder_nr expr
+    cura.support_tree_max_diameter per_extruder per_extruder
+    cura.support_tree_smooth_layers per_extruder per_extruder
+    cura.support_z_seam_away_from_model per_extruder per_extruder
+    cura.support_z_seam_min_distance per_extruder per_extruder
     cura.support_type select
-    cura.support_tree_angle_slow number per_extruder
-    cura.support_tree_max_diameter_increase_by_merges_when_support_to_model number per_extruder
-    cura.support_tree_min_height_to_model number per_extruder
-    cura.support_tree_bp_diameter number per_extruder
-    cura.support_tree_top_rate number per_extruder
-    cura.support_tree_limit_branch_reach checkbox per_extruder
-    cura.support_tree_branch_reach_limit number per_extruder
-    cura.support_tree_rest_preference select per_extruder
-    cura.support_wall_count number per_extruder
-    cura.support_wall_thickness number per_extruder
-    cura.support_enlarged_wall_thickness number per_extruder
-    cura.support_wall_thickness_bottom_layers number per_extruder
-    cura.support_wall_thickness_top_layers number per_extruder
-    cura.support_wall_thickness_layer_smooth number per_extruder
-    cura.support_infill_multiplier number per_extruder
-    cura.support_interface_wall_count number per_extruder
-    cura.support_roof_wall_count number per_extruder
-    cura.support_bottom_wall_count number per_extruder
-    cura.support_lightning_angle number per_extruder
-    cura.support_lightning_overhang_angle number per_extruder
-    cura.support_lightning_prune_angle number per_extruder
-    cura.support_lightning_straightening_angle number per_extruder
-    cura.zig_zaggify_support checkbox per_extruder
-    cura.support_connect_zigzags checkbox per_extruder
-    cura.support_infill_rate number per_extruder
-    cura.support_initial_layer_line_distance number per_extruder
-    cura.support_infill_density_multiplier_initial_layer number per_extruder
-    cura.support_infill_angles number list per_extruder
-    cura.support_brim_enable checkbox per_extruder
-    cura.support_outer_brim_enable checkbox per_extruder
-    cura.support_brim_width number per_extruder
-    cura.support_brim_line_count number per_extruder
-    cura.support_brim_minimum_hole_area number per_extruder
-    cura.support_base_height number per_extruder
-    cura.support_inside_base_height number per_extruder
-    cura.support_outside_base_height number per_extruder
-    cura.support_base_width number per_extruder
-    cura.support_base_inside_width number per_extruder
-    cura.support_base_outside_width number per_extruder
-    cura.support_base_curve_magnitude number per_extruder
-    cura.support_inside_base_curve_magnitude number per_extruder
-    cura.support_outside_base_curve_magnitude number per_extruder
-    cura.support_z_distance number per_extruder
-    cura.support_xy_overrides_z select per_extruder
-    cura.support_xy_distance_overhang number per_extruder
-    cura.support_bottom_stair_step_height number per_extruder
-    cura.support_bottom_stair_step_width number per_extruder
-    cura.support_bottom_stair_step_min_slope number per_extruder
-    cura.support_join_distance number per_extruder
-    cura.support_offset number per_extruder
-    cura.support_infill_sparse_thickness number per_extruder
-    cura.gradual_support_infill_steps number per_extruder
-    cura.gradual_support_infill_step_height number per_extruder
-    cura.minimum_support_area number per_extruder
-    cura.support_interface_enable checkbox per_extruder
-    cura.support_roof_enable checkbox per_extruder
-    cura.support_bottom_enable checkbox per_extruder
-    cura.support_interface_height number per_extruder
-    cura.support_roof_height number per_extruder
-    cura.support_bottom_height number per_extruder
-    cura.support_interface_density number per_extruder
-    cura.support_roof_density number per_extruder
-    cura.support_roof_line_distance number per_extruder
-    cura.support_bottom_density number per_extruder
-    cura.support_bottom_line_distance number per_extruder
-    cura.support_roof_pattern select per_extruder
-    cura.support_bottom_pattern select per_extruder
-    cura.minimum_interface_area number per_extruder
-    cura.minimum_roof_area number per_extruder
-    cura.minimum_bottom_area number per_extruder
-    cura.support_interface_offset number per_extruder
-    cura.support_roof_offset number per_extruder
-    cura.support_bottom_offset number per_extruder
+    cura.support_tree_angle_slow per_extruder per_extruder
+    cura.support_tree_max_diameter_increase_by_merges_when_support_to_model per_extruder per_extruder
+    cura.support_tree_min_height_to_model per_extruder per_extruder
+    cura.support_tree_bp_diameter per_extruder per_extruder
+    cura.support_tree_top_rate per_extruder per_extruder
+    cura.support_tree_limit_branch_reach per_extruder per_extruder
+    cura.support_tree_branch_reach_limit per_extruder per_extruder
+    cura.support_tree_rest_preference per_extruder per_extruder
+    cura.support_wall_count per_extruder per_extruder
+    cura.support_wall_thickness per_extruder per_extruder
+    cura.support_enlarged_wall_thickness per_extruder per_extruder
+    cura.support_wall_thickness_bottom_layers per_extruder per_extruder
+    cura.support_wall_thickness_top_layers per_extruder per_extruder
+    cura.support_wall_thickness_layer_smooth per_extruder per_extruder
+    cura.support_infill_multiplier per_extruder per_extruder
+    cura.support_interface_wall_count per_extruder per_extruder
+    cura.support_roof_wall_count per_extruder per_extruder
+    cura.support_bottom_wall_count per_extruder per_extruder
+    cura.support_lightning_angle per_extruder per_extruder
+    cura.support_lightning_overhang_angle per_extruder per_extruder
+    cura.support_lightning_prune_angle per_extruder per_extruder
+    cura.support_lightning_straightening_angle per_extruder per_extruder
+    cura.zig_zaggify_support per_extruder per_extruder
+    cura.support_connect_zigzags per_extruder per_extruder
+    cura.support_infill_rate per_extruder per_extruder
+    cura.support_initial_layer_line_distance per_extruder per_extruder
+    cura.support_infill_density_multiplier_initial_layer per_extruder per_extruder
+    cura.support_infill_angles per_extruder list per_extruder
+    cura.support_brim_enable per_extruder per_extruder
+    cura.support_outer_brim_enable per_extruder per_extruder
+    cura.support_brim_width per_extruder per_extruder
+    cura.support_brim_line_count per_extruder per_extruder
+    cura.support_brim_minimum_hole_area per_extruder per_extruder
+    cura.support_base_height per_extruder per_extruder
+    cura.support_inside_base_height per_extruder per_extruder
+    cura.support_outside_base_height per_extruder per_extruder
+    cura.support_base_width per_extruder per_extruder
+    cura.support_base_inside_width per_extruder per_extruder
+    cura.support_base_outside_width per_extruder per_extruder
+    cura.support_base_curve_magnitude per_extruder per_extruder
+    cura.support_inside_base_curve_magnitude per_extruder per_extruder
+    cura.support_outside_base_curve_magnitude per_extruder per_extruder
+    cura.support_z_distance per_extruder per_extruder
+    cura.support_xy_overrides_z per_extruder per_extruder
+    cura.support_xy_distance_overhang per_extruder per_extruder
+    cura.support_bottom_stair_step_height per_extruder per_extruder
+    cura.support_bottom_stair_step_width per_extruder per_extruder
+    cura.support_bottom_stair_step_min_slope per_extruder per_extruder
+    cura.support_join_distance per_extruder per_extruder
+    cura.support_offset per_extruder per_extruder
+    cura.support_infill_sparse_thickness per_extruder per_extruder
+    cura.gradual_support_infill_steps per_extruder per_extruder
+    cura.gradual_support_infill_step_height per_extruder per_extruder
+    cura.minimum_support_area per_extruder per_extruder
+    cura.support_interface_enable per_extruder per_extruder
+    cura.support_roof_enable per_extruder per_extruder
+    cura.support_bottom_enable per_extruder per_extruder
+    cura.support_interface_height per_extruder per_extruder
+    cura.support_roof_height per_extruder per_extruder
+    cura.support_bottom_height per_extruder per_extruder
+    cura.support_interface_density per_extruder per_extruder
+    cura.support_roof_density per_extruder per_extruder
+    cura.support_roof_line_distance per_extruder per_extruder
+    cura.support_bottom_density per_extruder per_extruder
+    cura.support_bottom_line_distance per_extruder per_extruder
+    cura.support_roof_pattern per_extruder per_extruder
+    cura.support_bottom_pattern per_extruder per_extruder
+    cura.minimum_interface_area per_extruder per_extruder
+    cura.minimum_roof_area per_extruder per_extruder
+    cura.minimum_bottom_area per_extruder per_extruder
+    cura.support_interface_offset per_extruder per_extruder
+    cura.support_roof_offset per_extruder per_extruder
+    cura.support_bottom_offset per_extruder per_extruder
     cura.support_interface_priority select
-    cura.support_interface_angles number list per_extruder
-    cura.support_roof_angles number list per_extruder
-    cura.support_bottom_angles number list per_extruder
-    cura.support_fan_enable checkbox per_extruder
-    cura.support_supported_skin_fan_speed number per_extruder
-    cura.support_use_towers checkbox per_extruder
-    cura.support_tower_diameter number per_extruder
-    cura.support_tower_maximum_supported_diameter number per_extruder
-    cura.support_tower_roof_angle number per_extruder
+    cura.support_interface_angles per_extruder list per_extruder
+    cura.support_roof_angles per_extruder list per_extruder
+    cura.support_bottom_angles per_extruder list per_extruder
+    cura.support_fan_enable per_extruder per_extruder
+    cura.support_supported_skin_fan_speed per_extruder per_extruder
+    cura.support_use_towers per_extruder per_extruder
+    cura.support_tower_diameter per_extruder per_extruder
+    cura.support_tower_maximum_supported_diameter per_extruder per_extruder
+    cura.support_tower_roof_angle per_extruder per_extruder
     cura.support_mesh_drop_down checkbox
     cura.support_meshes_present checkbox
-    cura.support_paint_resolution number per_extruder
+    cura.support_paint_resolution per_extruder per_extruder
 adhesion
   process
     brim_width number
@@ -594,237 +594,237 @@ adhesion
     superslicer.brim_ears_pattern select
     superslicer.skirt_brim number
     superslicer.skirt_distance_from_brim checkbox
-    cura.prime_blob_enable checkbox per_extruder
-    cura.extruder_prime_pos_x number per_extruder
-    cura.extruder_prime_pos_y number per_extruder
+    cura.prime_blob_enable per_extruder per_extruder
+    cura.extruder_prime_pos_x per_extruder per_extruder
+    cura.extruder_prime_pos_y per_extruder per_extruder
     cura.adhesion_type select
-    cura.adhesion_extruder_nr number
-    cura.skirt_brim_extruder_nr number
-    cura.raft_base_extruder_nr number
-    cura.raft_interface_extruder_nr number
-    cura.raft_surface_extruder_nr number
-    cura.skirt_brim_minimal_length number per_extruder
-    cura.brim_line_count number per_extruder
-    cura.brim_replaces_support checkbox per_extruder
-    cura.brim_location select per_extruder
-    cura.brim_inside_margin number per_extruder
-    cura.brim_smart_ordering checkbox per_extruder
-    cura.raft_margin number per_extruder
-    cura.raft_base_margin number per_extruder
-    cura.raft_interface_margin number per_extruder
-    cura.raft_surface_margin number per_extruder
+    cura.adhesion_extruder_nr expr
+    cura.skirt_brim_extruder_nr expr
+    cura.raft_base_extruder_nr expr
+    cura.raft_interface_extruder_nr expr
+    cura.raft_surface_extruder_nr expr
+    cura.skirt_brim_minimal_length per_extruder per_extruder
+    cura.brim_line_count per_extruder per_extruder
+    cura.brim_replaces_support per_extruder per_extruder
+    cura.brim_location per_extruder per_extruder
+    cura.brim_inside_margin per_extruder per_extruder
+    cura.brim_smart_ordering per_extruder per_extruder
+    cura.raft_margin per_extruder per_extruder
+    cura.raft_base_margin per_extruder per_extruder
+    cura.raft_interface_margin per_extruder per_extruder
+    cura.raft_surface_margin per_extruder per_extruder
     cura.raft_remove_inside_corners checkbox
-    cura.raft_base_remove_inside_corners checkbox
-    cura.raft_interface_remove_inside_corners checkbox
-    cura.raft_surface_remove_inside_corners checkbox
+    cura.raft_base_remove_inside_corners expr
+    cura.raft_interface_remove_inside_corners expr
+    cura.raft_surface_remove_inside_corners expr
     cura.raft_smoothing number
-    cura.raft_base_smoothing number
-    cura.raft_interface_smoothing number
-    cura.raft_surface_smoothing number
-    cura.layer_0_z_overlap number per_extruder
-    cura.raft_base_thickness number per_extruder
-    cura.raft_base_line_width number per_extruder
-    cura.raft_base_line_spacing number per_extruder
-    cura.raft_base_infill_overlap number per_extruder
-    cura.raft_base_infill_overlap_mm number per_extruder
-    cura.raft_interface_layers number per_extruder
-    cura.raft_interface_thickness number per_extruder
-    cura.raft_interface_line_width number per_extruder
-    cura.raft_interface_line_spacing number per_extruder
-    cura.raft_interface_z_offset number per_extruder
-    cura.raft_interface_infill_overlap number per_extruder
-    cura.raft_interface_infill_overlap_mm number per_extruder
-    cura.raft_surface_thickness number per_extruder
-    cura.raft_surface_line_width number per_extruder
-    cura.raft_surface_line_spacing number per_extruder
-    cura.raft_surface_z_offset number per_extruder
-    cura.raft_surface_monotonic checkbox per_extruder
-    cura.raft_surface_infill_overlap number per_extruder
-    cura.raft_surface_infill_overlap_mm number per_extruder
-    cura.raft_wall_count number per_extruder
-    cura.raft_base_wall_count number per_extruder
-    cura.raft_interface_wall_count number per_extruder
-    cura.raft_surface_wall_count number per_extruder
-    cura.raft_speed number per_extruder
-    cura.raft_base_speed number per_extruder
-    cura.raft_interface_speed number per_extruder
-    cura.raft_surface_speed number per_extruder
-    cura.raft_acceleration number per_extruder
-    cura.raft_base_acceleration number per_extruder
-    cura.raft_interface_acceleration number per_extruder
-    cura.raft_surface_acceleration number per_extruder
-    cura.raft_jerk number per_extruder
-    cura.raft_base_jerk number per_extruder
-    cura.raft_interface_jerk number per_extruder
-    cura.raft_surface_jerk number per_extruder
-    cura.raft_fan_speed number per_extruder
-    cura.raft_base_fan_speed number per_extruder
-    cura.raft_interface_fan_speed number per_extruder
-    cura.raft_surface_fan_speed number per_extruder
-    cura.raft_flow number per_extruder
-    cura.raft_base_flow number per_extruder
-    cura.raft_interface_flow number per_extruder
-    cura.raft_surface_flow number per_extruder
+    cura.raft_base_smoothing expr
+    cura.raft_interface_smoothing expr
+    cura.raft_surface_smoothing expr
+    cura.layer_0_z_overlap per_extruder per_extruder
+    cura.raft_base_thickness per_extruder per_extruder
+    cura.raft_base_line_width per_extruder per_extruder
+    cura.raft_base_line_spacing per_extruder per_extruder
+    cura.raft_base_infill_overlap per_extruder per_extruder
+    cura.raft_base_infill_overlap_mm per_extruder per_extruder
+    cura.raft_interface_layers per_extruder per_extruder
+    cura.raft_interface_thickness per_extruder per_extruder
+    cura.raft_interface_line_width per_extruder per_extruder
+    cura.raft_interface_line_spacing per_extruder per_extruder
+    cura.raft_interface_z_offset per_extruder per_extruder
+    cura.raft_interface_infill_overlap per_extruder per_extruder
+    cura.raft_interface_infill_overlap_mm per_extruder per_extruder
+    cura.raft_surface_thickness per_extruder per_extruder
+    cura.raft_surface_line_width per_extruder per_extruder
+    cura.raft_surface_line_spacing per_extruder per_extruder
+    cura.raft_surface_z_offset per_extruder per_extruder
+    cura.raft_surface_monotonic per_extruder per_extruder
+    cura.raft_surface_infill_overlap per_extruder per_extruder
+    cura.raft_surface_infill_overlap_mm per_extruder per_extruder
+    cura.raft_wall_count per_extruder per_extruder
+    cura.raft_base_wall_count per_extruder per_extruder
+    cura.raft_interface_wall_count per_extruder per_extruder
+    cura.raft_surface_wall_count per_extruder per_extruder
+    cura.raft_speed per_extruder per_extruder
+    cura.raft_base_speed per_extruder per_extruder
+    cura.raft_interface_speed per_extruder per_extruder
+    cura.raft_surface_speed per_extruder per_extruder
+    cura.raft_acceleration per_extruder per_extruder
+    cura.raft_base_acceleration per_extruder per_extruder
+    cura.raft_interface_acceleration per_extruder per_extruder
+    cura.raft_surface_acceleration per_extruder per_extruder
+    cura.raft_jerk per_extruder per_extruder
+    cura.raft_base_jerk per_extruder per_extruder
+    cura.raft_interface_jerk per_extruder per_extruder
+    cura.raft_surface_jerk per_extruder per_extruder
+    cura.raft_fan_speed per_extruder per_extruder
+    cura.raft_base_fan_speed per_extruder per_extruder
+    cura.raft_interface_fan_speed per_extruder per_extruder
+    cura.raft_surface_fan_speed per_extruder per_extruder
+    cura.raft_flow per_extruder per_extruder
+    cura.raft_base_flow per_extruder per_extruder
+    cura.raft_interface_flow per_extruder per_extruder
+    cura.raft_surface_flow per_extruder per_extruder
     cura.machine_scan_first_layer checkbox
 speed
   process
-    enable_overhang_speed checkbox per_extruder
-    slowdown_for_curled_perimeters checkbox per_extruder
-    overhang_1_4_speed text per_extruder
-    overhang_2_4_speed text per_extruder
-    overhang_3_4_speed text per_extruder
-    overhang_4_4_speed text per_extruder
-    bridge_speed number per_extruder
-    internal_bridge_speed text per_extruder
-    default_acceleration number per_extruder
-    travel_acceleration number per_extruder
-    initial_layer_travel_acceleration text per_extruder
-    bridge_acceleration text per_extruder
-    outer_wall_speed number per_extruder
-    small_perimeter_speed text per_extruder
-    small_perimeter_threshold number per_extruder
-    small_support_perimeter_speed text list
+    enable_overhang_speed per_extruder per_extruder
+    slowdown_for_curled_perimeters per_extruder per_extruder
+    overhang_1_4_speed per_extruder per_extruder
+    overhang_2_4_speed per_extruder per_extruder
+    overhang_3_4_speed per_extruder per_extruder
+    overhang_4_4_speed per_extruder per_extruder
+    bridge_speed per_extruder per_extruder
+    internal_bridge_speed per_extruder per_extruder
+    default_acceleration per_extruder per_extruder
+    travel_acceleration per_extruder per_extruder
+    initial_layer_travel_acceleration per_extruder per_extruder
+    bridge_acceleration per_extruder per_extruder
+    outer_wall_speed per_extruder per_extruder
+    small_perimeter_speed per_extruder per_extruder
+    small_perimeter_threshold per_extruder per_extruder
+    small_support_perimeter_speed percent_or_absolute list
     small_support_perimeter_threshold number list
-    top_surface_acceleration number per_extruder
-    outer_wall_acceleration number per_extruder
-    inner_wall_acceleration number per_extruder
-    sparse_infill_acceleration text per_extruder
-    internal_solid_infill_acceleration text per_extruder
-    initial_layer_acceleration number per_extruder
+    top_surface_acceleration per_extruder per_extruder
+    outer_wall_acceleration per_extruder per_extruder
+    inner_wall_acceleration per_extruder per_extruder
+    sparse_infill_acceleration per_extruder per_extruder
+    internal_solid_infill_acceleration per_extruder per_extruder
+    initial_layer_acceleration per_extruder per_extruder
     accel_to_decel_enable checkbox
     accel_to_decel_factor number
-    default_jerk number per_extruder
-    default_junction_deviation number per_extruder
-    outer_wall_jerk number per_extruder
-    inner_wall_jerk number per_extruder
-    top_surface_jerk number per_extruder
-    infill_jerk number per_extruder
-    initial_layer_jerk number per_extruder
-    travel_jerk number per_extruder
-    initial_layer_travel_jerk text per_extruder
-    initial_layer_speed number per_extruder
-    initial_layer_infill_speed number per_extruder
-    initial_layer_travel_speed text per_extruder
+    default_jerk per_extruder per_extruder
+    default_junction_deviation per_extruder per_extruder
+    outer_wall_jerk per_extruder per_extruder
+    inner_wall_jerk per_extruder per_extruder
+    top_surface_jerk per_extruder per_extruder
+    infill_jerk per_extruder per_extruder
+    initial_layer_jerk per_extruder per_extruder
+    travel_jerk per_extruder per_extruder
+    initial_layer_travel_jerk per_extruder per_extruder
+    initial_layer_speed per_extruder per_extruder
+    initial_layer_infill_speed per_extruder per_extruder
+    initial_layer_travel_speed per_extruder per_extruder
     slow_down_layers number
-    gap_infill_speed number per_extruder
-    sparse_infill_speed number per_extruder
+    gap_infill_speed per_extruder per_extruder
+    sparse_infill_speed per_extruder per_extruder
     ironing_speed number
     max_volumetric_extrusion_rate_slope number
     max_volumetric_extrusion_rate_slope_segment_length number
     extrusion_rate_smoothing_external_perimeter_only checkbox
-    inner_wall_speed number per_extruder
-    internal_solid_infill_speed number per_extruder
-    support_interface_speed number per_extruder
-    support_speed number per_extruder
-    top_surface_speed number per_extruder
-    travel_speed number per_extruder
-    travel_speed_z number per_extruder hidden
-    bambu.overhang_totally_speed number per_extruder
-    bambu.enable_height_slowdown checkbox per_extruder
-    bambu.slowdown_start_height number per_extruder
-    bambu.slowdown_start_speed number per_extruder
-    bambu.slowdown_start_acc number per_extruder
-    bambu.slowdown_end_height number per_extruder
-    bambu.slowdown_end_speed number per_extruder
-    bambu.slowdown_end_acc number per_extruder
-    bambu.travel_short_distance_acceleration number per_extruder
-    bambu.vertical_shell_speed text per_extruder
-    prusa.over_bridge_speed text
+    inner_wall_speed per_extruder per_extruder
+    internal_solid_infill_speed per_extruder per_extruder
+    support_interface_speed per_extruder per_extruder
+    support_speed per_extruder per_extruder
+    top_surface_speed per_extruder per_extruder
+    travel_speed per_extruder per_extruder
+    travel_speed_z per_extruder per_extruder hidden
+    bambu.overhang_totally_speed per_extruder per_extruder
+    bambu.enable_height_slowdown per_extruder per_extruder
+    bambu.slowdown_start_height per_extruder per_extruder
+    bambu.slowdown_start_speed per_extruder per_extruder
+    bambu.slowdown_start_acc per_extruder per_extruder
+    bambu.slowdown_end_height per_extruder per_extruder
+    bambu.slowdown_end_speed per_extruder per_extruder
+    bambu.slowdown_end_acc per_extruder per_extruder
+    bambu.travel_short_distance_acceleration per_extruder per_extruder
+    bambu.vertical_shell_speed per_extruder per_extruder
+    prusa.over_bridge_speed percent_or_absolute
     prusa.travel_short_distance_acceleration number
     prusa.max_print_speed number
     prusa.max_volumetric_speed number
-    prusa.first_layer_solid_infill_speed text
-    prusa.first_layer_perimeter_speed text hidden
-    prusa.first_layer_external_perimeter_speed text hidden
-    prusa.first_layer_top_solid_infill_speed text hidden
-    prusa.first_layer_gap_fill_speed text hidden
-    superslicer.autospeed_min_thin_flow text
-    superslicer.brim_acceleration text
-    superslicer.brim_speed text
-    superslicer.default_speed text
+    prusa.first_layer_solid_infill_speed percent_or_absolute
+    prusa.first_layer_perimeter_speed percent_or_absolute hidden
+    prusa.first_layer_external_perimeter_speed percent_or_absolute hidden
+    prusa.first_layer_top_solid_infill_speed percent_or_absolute hidden
+    prusa.first_layer_gap_fill_speed percent_or_absolute hidden
+    superslicer.autospeed_min_thin_flow percent_or_absolute
+    superslicer.brim_acceleration percent_or_absolute
+    superslicer.brim_speed percent_or_absolute
+    superslicer.default_speed percent_or_absolute
     superslicer.first_layer_min_speed number
-    superslicer.gap_fill_acceleration text
+    superslicer.gap_fill_acceleration percent_or_absolute
     superslicer.gap_fill_flow_match_perimeter number
-    superslicer.internal_bridge_acceleration text
-    superslicer.ironing_acceleration text
-    superslicer.overhangs_acceleration text
+    superslicer.internal_bridge_acceleration percent_or_absolute
+    superslicer.ironing_acceleration percent_or_absolute
+    superslicer.overhangs_acceleration percent_or_absolute
     superslicer.overhangs_dynamic_speed polygon
-    superslicer.overhangs_speed text
+    superslicer.overhangs_speed percent_or_absolute
     superslicer.overhangs_speed_enforce number
-    superslicer.overhangs_width_speed text
-    superslicer.small_perimeter_max_length text
-    superslicer.support_material_acceleration text
-    superslicer.support_material_interface_acceleration text
-    superslicer.thin_walls_acceleration text
-    superslicer.thin_walls_speed text
+    superslicer.overhangs_width_speed percent_or_absolute
+    superslicer.small_perimeter_max_length percent_or_absolute
+    superslicer.support_material_acceleration percent_or_absolute
+    superslicer.support_material_interface_acceleration percent_or_absolute
+    superslicer.thin_walls_acceleration percent_or_absolute
+    superslicer.thin_walls_speed percent_or_absolute
     superslicer.travel_deceleration_use_target checkbox
-    superslicer.wipe_tower_wipe_starting_speed text
-    cura.speed_print number per_extruder
-    cura.speed_wall number per_extruder
-    cura.speed_wall_0_roofing number per_extruder
-    cura.speed_wall_x_roofing number per_extruder
-    cura.speed_wall_0_flooring number per_extruder
-    cura.speed_wall_x_flooring number per_extruder
-    cura.speed_roofing number per_extruder
-    cura.speed_flooring number per_extruder
-    cura.speed_support_infill number per_extruder
-    cura.speed_support_roof number per_extruder
-    cura.speed_support_bottom number per_extruder
-    cura.speed_prime_tower number per_extruder
-    cura.speed_print_layer_0 number per_extruder
-    cura.speed_travel_layer_0 number per_extruder
+    superslicer.wipe_tower_wipe_starting_speed percent_or_absolute
+    cura.speed_print per_extruder per_extruder
+    cura.speed_wall per_extruder per_extruder
+    cura.speed_wall_0_roofing per_extruder per_extruder
+    cura.speed_wall_x_roofing per_extruder per_extruder
+    cura.speed_wall_0_flooring per_extruder per_extruder
+    cura.speed_wall_x_flooring per_extruder per_extruder
+    cura.speed_roofing per_extruder per_extruder
+    cura.speed_flooring per_extruder per_extruder
+    cura.speed_support_infill per_extruder per_extruder
+    cura.speed_support_roof per_extruder per_extruder
+    cura.speed_support_bottom per_extruder per_extruder
+    cura.speed_prime_tower per_extruder per_extruder
+    cura.speed_print_layer_0 per_extruder per_extruder
+    cura.speed_travel_layer_0 per_extruder per_extruder
     cura.speed_slowdown_layers number
-    cura.speed_equalize_flow_width_factor number per_extruder
+    cura.speed_equalize_flow_width_factor per_extruder per_extruder
     cura.acceleration_enabled checkbox
     cura.acceleration_travel_enabled checkbox
-    cura.acceleration_wall number per_extruder
-    cura.acceleration_wall_0_roofing number per_extruder
-    cura.acceleration_wall_x_roofing number per_extruder
-    cura.acceleration_wall_0_flooring number per_extruder
-    cura.acceleration_wall_x_flooring number per_extruder
-    cura.acceleration_roofing number per_extruder
-    cura.acceleration_flooring number per_extruder
-    cura.acceleration_support number per_extruder
-    cura.acceleration_support_infill number per_extruder
-    cura.acceleration_support_interface number per_extruder
-    cura.acceleration_support_roof number per_extruder
-    cura.acceleration_support_bottom number per_extruder
-    cura.acceleration_prime_tower number per_extruder
-    cura.acceleration_print_layer_0 number per_extruder
-    cura.acceleration_travel_layer_0 number per_extruder
-    cura.acceleration_skirt_brim number per_extruder
+    cura.acceleration_wall per_extruder per_extruder
+    cura.acceleration_wall_0_roofing per_extruder per_extruder
+    cura.acceleration_wall_x_roofing per_extruder per_extruder
+    cura.acceleration_wall_0_flooring per_extruder per_extruder
+    cura.acceleration_wall_x_flooring per_extruder per_extruder
+    cura.acceleration_roofing per_extruder per_extruder
+    cura.acceleration_flooring per_extruder per_extruder
+    cura.acceleration_support per_extruder per_extruder
+    cura.acceleration_support_infill per_extruder per_extruder
+    cura.acceleration_support_interface per_extruder per_extruder
+    cura.acceleration_support_roof per_extruder per_extruder
+    cura.acceleration_support_bottom per_extruder per_extruder
+    cura.acceleration_prime_tower per_extruder per_extruder
+    cura.acceleration_print_layer_0 per_extruder per_extruder
+    cura.acceleration_travel_layer_0 per_extruder per_extruder
+    cura.acceleration_skirt_brim per_extruder per_extruder
     cura.jerk_enabled checkbox
     cura.jerk_travel_enabled checkbox
-    cura.jerk_wall number per_extruder
-    cura.jerk_wall_0_roofing number per_extruder
-    cura.jerk_wall_x_roofing number per_extruder
-    cura.jerk_wall_0_flooring number per_extruder
-    cura.jerk_wall_x_flooring number per_extruder
-    cura.jerk_roofing number per_extruder
-    cura.jerk_flooring number per_extruder
-    cura.jerk_support number per_extruder
-    cura.jerk_support_infill number per_extruder
-    cura.jerk_support_interface number per_extruder
-    cura.jerk_support_roof number per_extruder
-    cura.jerk_support_bottom number per_extruder
-    cura.jerk_prime_tower number per_extruder
-    cura.jerk_print_layer_0 number per_extruder
-    cura.jerk_travel_layer_0 number per_extruder
-    cura.jerk_skirt_brim number per_extruder
+    cura.jerk_wall per_extruder per_extruder
+    cura.jerk_wall_0_roofing per_extruder per_extruder
+    cura.jerk_wall_x_roofing per_extruder per_extruder
+    cura.jerk_wall_0_flooring per_extruder per_extruder
+    cura.jerk_wall_x_flooring per_extruder per_extruder
+    cura.jerk_roofing per_extruder per_extruder
+    cura.jerk_flooring per_extruder per_extruder
+    cura.jerk_support per_extruder per_extruder
+    cura.jerk_support_infill per_extruder per_extruder
+    cura.jerk_support_interface per_extruder per_extruder
+    cura.jerk_support_roof per_extruder per_extruder
+    cura.jerk_support_bottom per_extruder per_extruder
+    cura.jerk_prime_tower per_extruder per_extruder
+    cura.jerk_print_layer_0 per_extruder per_extruder
+    cura.jerk_travel_layer_0 per_extruder per_extruder
+    cura.jerk_skirt_brim per_extruder per_extruder
 extrusion
   process
-    bridge_line_width text
-    outer_wall_line_width text
+    bridge_line_width percent_or_absolute
+    outer_wall_line_width percent_or_absolute
     extruder number hidden
-    line_width text
-    initial_layer_line_width text
-    sparse_infill_line_width text
-    inner_wall_line_width text
-    print_extruder_id number per_extruder hidden
-    print_extruder_variant text per_extruder hidden
-    internal_solid_infill_line_width text
-    support_line_width text
-    top_surface_line_width text
+    line_width percent_or_absolute
+    initial_layer_line_width percent_or_absolute
+    sparse_infill_line_width percent_or_absolute
+    inner_wall_line_width percent_or_absolute
+    print_extruder_id per_extruder per_extruder hidden
+    print_extruder_variant per_extruder per_extruder hidden
+    internal_solid_infill_line_width percent_or_absolute
+    support_line_width percent_or_absolute
+    top_surface_line_width percent_or_absolute
     handle_hotend_as_extruder checkbox hidden
     bambu.initial_layer_infill_line_width number
     prusa.automatic_extrusion_widths checkbox
@@ -839,81 +839,81 @@ extrusion
     superslicer.over_bridge_flow_ratio number
     superslicer.bridge_overlap_min number
     superslicer.bridge_overlap number
-    superslicer.external_perimeter_extrusion_spacing text
-    superslicer.external_perimeter_extrusion_change_odd_layers text
+    superslicer.external_perimeter_extrusion_spacing percent_or_absolute
+    superslicer.external_perimeter_extrusion_change_odd_layers percent_or_absolute
     superslicer.external_perimeter_cut_corners number
     superslicer.external_perimeter_overlap number
     superslicer.first_layer_extruder number hidden
-    superslicer.extrusion_spacing text
+    superslicer.extrusion_spacing percent_or_absolute
     superslicer.first_layer_strong_start number
-    superslicer.first_layer_extrusion_spacing text
-    superslicer.first_layer_infill_extrusion_width text
-    superslicer.first_layer_infill_extrusion_spacing text
+    superslicer.first_layer_extrusion_spacing percent_or_absolute
+    superslicer.first_layer_infill_extrusion_width percent_or_absolute
+    superslicer.first_layer_infill_extrusion_spacing percent_or_absolute
     superslicer.gap_fill_overlap number
-    superslicer.infill_extrusion_change_odd_layers text
-    superslicer.infill_extrusion_spacing text
+    superslicer.infill_extrusion_change_odd_layers percent_or_absolute
+    superslicer.infill_extrusion_spacing percent_or_absolute
     superslicer.overhangs_dynamic_flow polygon
-    superslicer.overhangs_extrusion_spacing text
+    superslicer.overhangs_extrusion_spacing percent_or_absolute
     superslicer.overhangs_flow_ratio number
     superslicer.overhangs_type select
-    superslicer.overhangs_width text
-    superslicer.perimeter_extrusion_spacing text
-    superslicer.perimeter_extrusion_change_odd_layers text
+    superslicer.overhangs_width percent_or_absolute
+    superslicer.perimeter_extrusion_spacing percent_or_absolute
+    superslicer.perimeter_extrusion_change_odd_layers percent_or_absolute
     superslicer.perimeter_overlap number
     superslicer.print_retract_length number hidden
     superslicer.print_retract_lift number hidden
-    superslicer.skirt_extrusion_width text
+    superslicer.skirt_extrusion_width percent_or_absolute
     superslicer.solid_infill_overlap number
-    superslicer.solid_infill_extrusion_change_odd_layers text
-    superslicer.solid_infill_extrusion_spacing text
-    superslicer.top_infill_extrusion_spacing text
+    superslicer.solid_infill_extrusion_change_odd_layers percent_or_absolute
+    superslicer.solid_infill_extrusion_spacing percent_or_absolute
+    superslicer.top_infill_extrusion_spacing percent_or_absolute
     superslicer.top_solid_infill_overlap number
     superslicer.wipe_advanced checkbox hidden
     superslicer.wipe_advanced_nozzle_melted_volume number hidden
     superslicer.wipe_advanced_multiplier number hidden
     superslicer.wipe_advanced_algo select hidden
-    cura.retraction_combing select
-    cura.retraction_combing_max_distance number per_extruder
-    cura.retraction_combing_avoid_distance number per_extruder
+    cura.retraction_combing expr
+    cura.retraction_combing_max_distance per_extruder per_extruder
+    cura.retraction_combing_avoid_distance per_extruder per_extruder
     cura.travel_retract_before_outer_wall select
-    cura.travel_avoid_other_parts checkbox per_extruder
-    cura.travel_avoid_supports checkbox per_extruder
-    cura.travel_avoid_distance number per_extruder
-    cura.layer_start_at_z_seam checkbox per_extruder
-    cura.layer_start_x number per_extruder
-    cura.layer_start_y number per_extruder
+    cura.travel_avoid_other_parts per_extruder per_extruder
+    cura.travel_avoid_supports per_extruder per_extruder
+    cura.travel_avoid_distance per_extruder per_extruder
+    cura.layer_start_at_z_seam per_extruder per_extruder
+    cura.layer_start_x per_extruder per_extruder
+    cura.layer_start_y per_extruder per_extruder
 cooling
   material
     enable_overhang_bridge_fan checkbox
     overhang_fan_speed number
     overhang_fan_threshold select
     slow_down_for_layer_cooling checkbox
-    activate_air_filtration checkbox per_extruder
-    activate_air_filtration_during_print checkbox per_extruder
-    activate_air_filtration_on_completion checkbox per_extruder
-    during_print_exhaust_fan_speed number per_extruder
-    complete_print_exhaust_fan_speed number per_extruder
+    activate_air_filtration per_extruder per_extruder
+    activate_air_filtration_during_print per_extruder per_extruder
+    activate_air_filtration_on_completion per_extruder per_extruder
+    during_print_exhaust_fan_speed per_extruder per_extruder
+    complete_print_exhaust_fan_speed per_extruder per_extruder
     close_fan_the_first_x_layers number
     reduce_fan_stop_start_freq checkbox
     dont_slow_down_outer_wall checkbox
     fan_cooling_layer_time number
-    filament_cooling_before_tower number per_extruder hidden
+    filament_cooling_before_tower per_extruder per_extruder hidden
     full_fan_speed_layer number
     initial_layer_fan_speed number
     support_material_interface_fan_speed number
     internal_bridge_fan_speed number
     ironing_fan_speed number
-    fan_max_speed number per_extruder
-    fan_min_speed number per_extruder
-    additional_cooling_fan_speed number per_extruder
+    fan_max_speed per_extruder per_extruder
+    fan_min_speed per_extruder per_extruder
+    additional_cooling_fan_speed per_extruder per_extruder
     close_additional_fan_first_x_layers number hidden
     additional_fan_full_speed_layer number hidden
     first_x_layer_fan_speed number hidden
     slow_down_min_speed number
     slow_down_layer_time number
     filament_dev_drying_cooling_temperature number hidden
-    filament_pre_cooling_temperature number per_extruder hidden
-    filament_pre_cooling_temperature_nc number per_extruder hidden
+    filament_pre_cooling_temperature per_extruder per_extruder hidden
+    filament_pre_cooling_temperature_nc per_extruder per_extruder hidden
     bambu.pre_start_fan_time number
     bambu.overhang_threshold_participating_cooling select
     bambu.no_slow_down_for_cooling_on_outwalls checkbox
@@ -939,16 +939,16 @@ cooling
     superslicer.solid_infill_fan_speed number
     superslicer.support_material_fan_speed number
     superslicer.top_fan_speed number
-    cura.cool_fan_enabled checkbox per_extruder
+    cura.cool_fan_enabled per_extruder per_extruder
     cura.build_fan_full_at_height number
-    cura.build_fan_full_layer number
+    cura.build_fan_full_layer expr
     cura.build_volume_fan_speed_0 number
     cura.build_volume_fan_speed number
-    cura.cool_fan_speed number per_extruder
-    cura.cool_fan_speed_0 number per_extruder
-    cura.cool_fan_full_at_height number per_extruder
-    cura.cool_lift_head checkbox per_extruder
-    cura.cool_min_temperature number per_extruder
+    cura.cool_fan_speed per_extruder per_extruder
+    cura.cool_fan_speed_0 per_extruder per_extruder
+    cura.cool_fan_full_at_height per_extruder per_extruder
+    cura.cool_lift_head per_extruder per_extruder
+    cura.cool_min_temperature per_extruder per_extruder
     cura.cool_during_extruder_switch select
 material
   material
@@ -968,13 +968,13 @@ material
     compatible_printers_condition text
     compatible_prints text list
     compatible_prints_condition text
-    filament_flow_ratio number per_extruder
-    enable_pressure_advance checkbox per_extruder
-    pressure_advance number per_extruder
-    adaptive_pressure_advance checkbox per_extruder
-    adaptive_pressure_advance_model text per_extruder
-    adaptive_pressure_advance_overhangs checkbox per_extruder
-    adaptive_pressure_advance_bridges number per_extruder
+    filament_flow_ratio per_extruder per_extruder
+    enable_pressure_advance per_extruder per_extruder
+    pressure_advance per_extruder per_extruder
+    adaptive_pressure_advance per_extruder per_extruder
+    adaptive_pressure_advance_model per_extruder per_extruder
+    adaptive_pressure_advance_overhangs per_extruder per_extruder
+    adaptive_pressure_advance_bridges per_extruder per_extruder
     default_filament_colour text
     filament_colour text hidden
     filament_notes text
@@ -986,11 +986,11 @@ material
     filament_volume_map number hidden
     filament_map_mode select hidden
     filament_nozzle_map number hidden
-    filament_max_volumetric_speed number per_extruder
+    filament_max_volumetric_speed per_extruder per_extruder
     filament_diameter number
     pellet_flow_coefficient number
-    filament_adaptive_volumetric_speed checkbox per_extruder
-    volumetric_speed_coefficients text per_extruder hidden
+    filament_adaptive_volumetric_speed per_extruder per_extruder
+    volumetric_speed_coefficients per_extruder per_extruder hidden
     filament_shrink number
     filament_shrinkage_compensation_z number
     filament_adhesiveness_category number
@@ -1013,19 +1013,19 @@ material
     filament_settings_id text hidden
     filament_ids text hidden
     filament_vendor text
-    nozzle_temperature_initial_layer number per_extruder
-    filament_ironing_flow number per_extruder
-    filament_ironing_spacing number per_extruder
-    filament_ironing_inset number per_extruder
-    filament_ironing_speed number per_extruder
-    filament_extruder_variant text per_extruder hidden
+    nozzle_temperature_initial_layer per_extruder per_extruder
+    filament_ironing_flow per_extruder per_extruder
+    filament_ironing_spacing per_extruder per_extruder
+    filament_ironing_inset per_extruder per_extruder
+    filament_ironing_speed per_extruder per_extruder
+    filament_extruder_variant per_extruder per_extruder hidden
     filament_self_index number hidden
     activate_chamber_temp_control checkbox
     chamber_temperature number
     chamber_minimal_temperature number
-    nozzle_temperature number per_extruder
-    nozzle_temperature_range_low number per_extruder
-    nozzle_temperature_range_high number per_extruder
+    nozzle_temperature per_extruder per_extruder
+    nozzle_temperature_range_low per_extruder per_extruder
+    nozzle_temperature_range_high per_extruder per_extruder
     idle_temperature number
     filament_dev_ams_drying_ams_limitations text hidden
     filament_dev_ams_drying_temperature number hidden
@@ -1034,34 +1034,34 @@ material
     filament_dev_chamber_drying_bed_temperature number hidden
     filament_dev_chamber_drying_time number hidden
     filament_dev_drying_softening_temperature number hidden
-    filament_retraction_length number per_extruder
-    filament_z_hop number per_extruder
-    filament_z_hop_types select per_extruder
-    filament_retract_lift_above number per_extruder
-    filament_retract_lift_below number per_extruder
-    filament_retract_lift_enforce select per_extruder
-    filament_retraction_speed number per_extruder
-    filament_deretraction_speed number per_extruder
-    filament_retract_restart_extra number per_extruder
-    filament_retraction_minimum_travel number per_extruder
-    filament_retract_length_toolchange number per_extruder
-    filament_retract_restart_extra_toolchange number per_extruder
-    filament_wipe_distance number per_extruder
-    filament_retract_when_changing_layer checkbox per_extruder
-    filament_wipe checkbox per_extruder
-    filament_retract_before_wipe number per_extruder
-    filament_retract_after_wipe number per_extruder
-    filament_long_retractions_when_cut checkbox per_extruder
-    filament_retraction_distances_when_cut number per_extruder
+    filament_retraction_length per_extruder per_extruder
+    filament_z_hop per_extruder per_extruder
+    filament_z_hop_types per_extruder per_extruder
+    filament_retract_lift_above per_extruder per_extruder
+    filament_retract_lift_below per_extruder per_extruder
+    filament_retract_lift_enforce per_extruder per_extruder
+    filament_retraction_speed per_extruder per_extruder
+    filament_deretraction_speed per_extruder per_extruder
+    filament_retract_restart_extra per_extruder per_extruder
+    filament_retraction_minimum_travel per_extruder per_extruder
+    filament_retract_length_toolchange per_extruder per_extruder
+    filament_retract_restart_extra_toolchange per_extruder per_extruder
+    filament_wipe_distance per_extruder per_extruder
+    filament_retract_when_changing_layer per_extruder per_extruder
+    filament_wipe per_extruder per_extruder
+    filament_retract_before_wipe per_extruder per_extruder
+    filament_retract_after_wipe per_extruder per_extruder
+    filament_long_retractions_when_cut per_extruder per_extruder
+    filament_retraction_distances_when_cut per_extruder per_extruder
     filament_max_temperature_drop_when_ec number hidden
     filament_change_length_nc number hidden
-    filament_retract_length_nc number per_extruder hidden
-    filament_preheat_temperature_delta number per_extruder hidden
+    filament_retract_length_nc per_extruder per_extruder hidden
+    filament_preheat_temperature_delta per_extruder per_extruder hidden
     bambu.filament_velocity_adaptation_factor number
     bambu.filament_metal_stickiness select
     bambu.filament_scarf_seam_type select
-    bambu.filament_scarf_height text
-    bambu.filament_scarf_gap text
+    bambu.filament_scarf_height percent_or_absolute
+    bambu.filament_scarf_gap percent_or_absolute
     bambu.filament_scarf_length number
     bambu.impact_strength_z number
     bambu.circle_compensation_speed number hidden
@@ -1076,14 +1076,14 @@ material
     bambu.hole_limit_min number hidden
     bambu.hole_limit_max number hidden
     bambu.diameter_limit number hidden
-    bambu.filament_enable_overhang_speed checkbox per_extruder
-    bambu.filament_bridge_speed number per_extruder
-    bambu.filament_overhang_1_4_speed number per_extruder
-    bambu.filament_overhang_2_4_speed number per_extruder
-    bambu.filament_overhang_3_4_speed number per_extruder
-    bambu.filament_overhang_4_4_speed number per_extruder
-    bambu.filament_overhang_totally_speed number per_extruder
-    bambu.override_process_overhang_speed checkbox per_extruder
+    bambu.filament_enable_overhang_speed per_extruder per_extruder
+    bambu.filament_bridge_speed per_extruder per_extruder
+    bambu.filament_overhang_1_4_speed per_extruder per_extruder
+    bambu.filament_overhang_2_4_speed per_extruder per_extruder
+    bambu.filament_overhang_3_4_speed per_extruder per_extruder
+    bambu.filament_overhang_4_4_speed per_extruder per_extruder
+    bambu.filament_overhang_totally_speed per_extruder per_extruder
+    bambu.override_process_overhang_speed per_extruder per_extruder
     prusa.filament_infill_max_speed number
     prusa.filament_infill_max_crossing_speed number
     prusa.filament_abrasive checkbox
@@ -1093,96 +1093,96 @@ material
     prusa.filament_travel_lift_before_obstacle checkbox
     prusa.filament_travel_ramping_lift checkbox
     prusa.filament_travel_slope number
-    prusa.filament_seam_gap_distance text
+    prusa.filament_seam_gap_distance percent_or_absolute
     superslicer.filament_custom_variables text
     superslicer.filament_fill_top_flow_ratio number
     superslicer.filament_first_layer_flow_ratio number
     superslicer.filament_max_speed number
-    superslicer.filament_bridge_pa text
-    superslicer.filament_bridge_internal_pa text
-    superslicer.filament_brim_pa text
-    superslicer.filament_external_perimeter_pa text
-    superslicer.filament_first_layer_pa text
-    superslicer.filament_first_layer_pa_over_raft text
-    superslicer.filament_gap_fill_pa text
-    superslicer.filament_infill_pa text
-    superslicer.filament_ironing_pa text
-    superslicer.filament_overhangs_pa text
-    superslicer.filament_perimeter_pa text
-    superslicer.filament_solid_infill_pa text
-    superslicer.filament_support_material_pa text
-    superslicer.filament_support_material_interface_pa text
-    superslicer.filament_thin_walls_pa text
-    superslicer.filament_top_solid_infill_pa text
-    superslicer.filament_travel_pa text
+    superslicer.filament_bridge_pa percent_or_absolute
+    superslicer.filament_bridge_internal_pa percent_or_absolute
+    superslicer.filament_brim_pa percent_or_absolute
+    superslicer.filament_external_perimeter_pa percent_or_absolute
+    superslicer.filament_first_layer_pa percent_or_absolute
+    superslicer.filament_first_layer_pa_over_raft percent_or_absolute
+    superslicer.filament_gap_fill_pa percent_or_absolute
+    superslicer.filament_infill_pa percent_or_absolute
+    superslicer.filament_ironing_pa percent_or_absolute
+    superslicer.filament_overhangs_pa percent_or_absolute
+    superslicer.filament_perimeter_pa percent_or_absolute
+    superslicer.filament_solid_infill_pa percent_or_absolute
+    superslicer.filament_support_material_pa percent_or_absolute
+    superslicer.filament_support_material_interface_pa percent_or_absolute
+    superslicer.filament_thin_walls_pa percent_or_absolute
+    superslicer.filament_top_solid_infill_pa percent_or_absolute
+    superslicer.filament_travel_pa percent_or_absolute
     superslicer.filament_max_overlap number
     superslicer.filament_settings_modified checkbox hidden
     superslicer.filament_retract_lift_before_travel number
-    superslicer.filament_seam_gap text
+    superslicer.filament_seam_gap percent_or_absolute
     superslicer.filament_wipe_extra_perimeter number
     superslicer.filament_wipe_inside_depth number
     superslicer.filament_wipe_inside_end checkbox
     superslicer.filament_wipe_inside_start checkbox
-    superslicer.filament_wipe_lift text
-    superslicer.filament_wipe_lift_length text hidden
-    superslicer.filament_wipe_min text hidden
+    superslicer.filament_wipe_lift percent_or_absolute
+    superslicer.filament_wipe_lift_length percent_or_absolute hidden
+    superslicer.filament_wipe_min percent_or_absolute hidden
     superslicer.filament_wipe_only_crossing checkbox
     superslicer.filament_wipe_return checkbox
     superslicer.filament_wipe_speed number
-    cura.default_material_print_temperature number per_extruder
-    cura.material_initial_print_temperature number per_extruder
-    cura.material_final_print_temperature number per_extruder
-    cura.material_extrusion_cool_down_speed number per_extruder
+    cura.default_material_print_temperature per_extruder per_extruder
+    cura.material_initial_print_temperature per_extruder per_extruder
+    cura.material_final_print_temperature per_extruder per_extruder
+    cura.material_extrusion_cool_down_speed per_extruder per_extruder
     cura.default_material_bed_temperature number
-    cura.material_adhesion_tendency number per_extruder
-    cura.material_surface_energy number per_extruder
+    cura.material_adhesion_tendency per_extruder per_extruder
+    cura.material_surface_energy per_extruder per_extruder
     cura.material_shrinkage_percentage number
-    cura.material_shrinkage_percentage_xy number
-    cura.material_shrinkage_percentage_z number
-    cura.material_crystallinity checkbox per_extruder
-    cura.material_anti_ooze_retracted_position number per_extruder
-    cura.material_anti_ooze_retraction_speed number per_extruder
-    cura.material_break_preparation_retracted_position number per_extruder
-    cura.material_break_preparation_speed number per_extruder
-    cura.material_break_preparation_temperature number per_extruder
-    cura.material_break_retracted_position number per_extruder
-    cura.material_break_speed number per_extruder
-    cura.material_break_temperature number per_extruder
-    cura.material_flush_purge_speed number per_extruder
-    cura.material_flush_purge_length number per_extruder
-    cura.material_end_of_filament_purge_speed number per_extruder
-    cura.material_end_of_filament_purge_length number per_extruder
-    cura.material_maximum_park_duration number per_extruder
-    cura.material_no_load_move_factor number per_extruder
-    cura.wall_material_flow number per_extruder
-    cura.wall_0_material_flow number per_extruder
-    cura.wall_x_material_flow number per_extruder
-    cura.wall_0_material_flow_roofing number per_extruder
-    cura.wall_x_material_flow_roofing number per_extruder
-    cura.wall_0_material_flow_flooring number per_extruder
-    cura.wall_x_material_flow_flooring number per_extruder
-    cura.skin_material_flow number per_extruder
-    cura.roofing_material_flow number per_extruder
-    cura.flooring_material_flow number per_extruder
-    cura.infill_material_flow number per_extruder
-    cura.skirt_brim_material_flow number per_extruder
-    cura.support_material_flow number per_extruder
-    cura.support_interface_material_flow number per_extruder
-    cura.support_roof_material_flow number per_extruder
-    cura.support_bottom_material_flow number per_extruder
-    cura.prime_tower_flow number per_extruder
-    cura.material_flow_layer_0 number per_extruder
-    cura.wall_x_material_flow_layer_0 number per_extruder
-    cura.wall_0_material_flow_layer_0 number per_extruder
-    cura.skin_material_flow_layer_0 number per_extruder
-    cura.material_standby_temperature number per_extruder
-    cura.material_is_support_material checkbox per_extruder
-    cura.gradual_flow_enabled checkbox per_extruder
-    cura.max_flow_acceleration number per_extruder
-    cura.layer_0_max_flow_acceleration number per_extruder
-    cura.gradual_flow_discretisation_step_size number per_extruder
-    cura.material_pressure_advance_factor number per_extruder
-    cura.material_max_flowrate number per_extruder
+    cura.material_shrinkage_percentage_xy expr
+    cura.material_shrinkage_percentage_z expr
+    cura.material_crystallinity per_extruder per_extruder
+    cura.material_anti_ooze_retracted_position per_extruder per_extruder
+    cura.material_anti_ooze_retraction_speed per_extruder per_extruder
+    cura.material_break_preparation_retracted_position per_extruder per_extruder
+    cura.material_break_preparation_speed per_extruder per_extruder
+    cura.material_break_preparation_temperature per_extruder per_extruder
+    cura.material_break_retracted_position per_extruder per_extruder
+    cura.material_break_speed per_extruder per_extruder
+    cura.material_break_temperature per_extruder per_extruder
+    cura.material_flush_purge_speed per_extruder per_extruder
+    cura.material_flush_purge_length per_extruder per_extruder
+    cura.material_end_of_filament_purge_speed per_extruder per_extruder
+    cura.material_end_of_filament_purge_length per_extruder per_extruder
+    cura.material_maximum_park_duration per_extruder per_extruder
+    cura.material_no_load_move_factor per_extruder per_extruder
+    cura.wall_material_flow per_extruder per_extruder
+    cura.wall_0_material_flow per_extruder per_extruder
+    cura.wall_x_material_flow per_extruder per_extruder
+    cura.wall_0_material_flow_roofing per_extruder per_extruder
+    cura.wall_x_material_flow_roofing per_extruder per_extruder
+    cura.wall_0_material_flow_flooring per_extruder per_extruder
+    cura.wall_x_material_flow_flooring per_extruder per_extruder
+    cura.skin_material_flow per_extruder per_extruder
+    cura.roofing_material_flow per_extruder per_extruder
+    cura.flooring_material_flow per_extruder per_extruder
+    cura.infill_material_flow per_extruder per_extruder
+    cura.skirt_brim_material_flow per_extruder per_extruder
+    cura.support_material_flow per_extruder per_extruder
+    cura.support_interface_material_flow per_extruder per_extruder
+    cura.support_roof_material_flow per_extruder per_extruder
+    cura.support_bottom_material_flow per_extruder per_extruder
+    cura.prime_tower_flow per_extruder per_extruder
+    cura.material_flow_layer_0 per_extruder per_extruder
+    cura.wall_x_material_flow_layer_0 per_extruder per_extruder
+    cura.wall_0_material_flow_layer_0 per_extruder per_extruder
+    cura.skin_material_flow_layer_0 per_extruder per_extruder
+    cura.material_standby_temperature per_extruder per_extruder
+    cura.material_is_support_material per_extruder per_extruder
+    cura.gradual_flow_enabled per_extruder per_extruder
+    cura.max_flow_acceleration per_extruder per_extruder
+    cura.layer_0_max_flow_acceleration per_extruder per_extruder
+    cura.gradual_flow_discretisation_step_size per_extruder per_extruder
+    cura.material_pressure_advance_factor per_extruder per_extruder
+    cura.material_max_flowrate per_extruder per_extruder
 multi_material
   process
     sparse_infill_filament_id number
@@ -1254,32 +1254,32 @@ multi_material
     superslicer.print_bed_temperature number
     superslicer.print_first_layer_bed_temperature number
     superslicer.time_toolchange number hidden
-    superslicer.wipe_tower_extrusion_width text
+    superslicer.wipe_tower_extrusion_width percent_or_absolute
     cura.prime_tower_mode select
-    cura.prime_tower_min_volume number per_extruder
-    cura.prime_tower_max_bridging_distance number per_extruder
+    cura.prime_tower_min_volume per_extruder per_extruder
+    cura.prime_tower_max_bridging_distance per_extruder per_extruder
     cura.prime_tower_min_shell_thickness number
-    cura.prime_tower_wipe_enabled checkbox per_extruder
-    cura.prime_tower_brim_enable checkbox
-    cura.prime_tower_base_size number
-    cura.prime_tower_base_height number
+    cura.prime_tower_wipe_enabled per_extruder per_extruder
+    cura.prime_tower_brim_enable expr
+    cura.prime_tower_base_size expr
+    cura.prime_tower_base_height expr
     cura.prime_tower_base_curve_magnitude number
-    cura.prime_tower_raft_base_line_spacing number per_extruder
+    cura.prime_tower_raft_base_line_spacing per_extruder per_extruder
     cura.ooze_shield_enabled checkbox
     cura.ooze_shield_angle number
     cura.ooze_shield_dist number
-    cura.switch_extruder_retraction_amount number per_extruder
-    cura.switch_extruder_retraction_speeds number per_extruder
-    cura.switch_extruder_retraction_speed number per_extruder
-    cura.switch_extruder_prime_speed number per_extruder
-    cura.switch_extruder_extra_prime_amount number per_extruder
+    cura.switch_extruder_retraction_amount per_extruder per_extruder
+    cura.switch_extruder_retraction_speeds per_extruder per_extruder
+    cura.switch_extruder_retraction_speed per_extruder per_extruder
+    cura.switch_extruder_prime_speed per_extruder per_extruder
+    cura.switch_extruder_extra_prime_amount per_extruder per_extruder
     cura.interlocking_enable checkbox
-    cura.multi_material_paint_resolution number per_extruder
-    cura.multi_material_paint_depth number per_extruder
+    cura.multi_material_paint_resolution per_extruder per_extruder
+    cura.multi_material_paint_depth per_extruder per_extruder
   material
-    filament_flush_temp number per_extruder hidden
+    filament_flush_temp per_extruder per_extruder hidden
     filament_flush_temp_fast number hidden
-    filament_flush_volumetric_speed number per_extruder hidden
+    filament_flush_volumetric_speed per_extruder per_extruder hidden
     filament_loading_speed number
     filament_loading_speed_start number
     filament_unloading_speed number
@@ -1289,7 +1289,7 @@ multi_material
     filament_stamping_loading_speed number
     filament_stamping_distance number
     filament_cooling_initial_speed number
-    filament_minimal_purge_on_wipe_tower number per_extruder
+    filament_minimal_purge_on_wipe_tower per_extruder per_extruder
     filament_tower_interface_pre_extrusion_dist number
     filament_tower_interface_pre_extrusion_length number
     filament_tower_ironing_area number
@@ -1297,15 +1297,15 @@ multi_material
     filament_tower_interface_print_temp number
     filament_cooling_final_speed number
     filament_ramming_parameters text
-    filament_multitool_ramming checkbox per_extruder
-    filament_multitool_ramming_volume number per_extruder
-    filament_multitool_ramming_flow number per_extruder
-    long_retractions_when_ec checkbox per_extruder
-    retraction_distances_when_ec number per_extruder
-    filament_ramming_travel_time number per_extruder hidden
-    filament_ramming_volumetric_speed number per_extruder hidden
-    filament_ramming_travel_time_nc number per_extruder hidden
-    filament_ramming_volumetric_speed_nc number per_extruder hidden
+    filament_multitool_ramming per_extruder per_extruder
+    filament_multitool_ramming_volume per_extruder per_extruder
+    filament_multitool_ramming_flow per_extruder per_extruder
+    long_retractions_when_ec per_extruder per_extruder
+    retraction_distances_when_ec per_extruder per_extruder
+    filament_ramming_travel_time per_extruder per_extruder hidden
+    filament_ramming_volumetric_speed per_extruder per_extruder hidden
+    filament_ramming_travel_time_nc per_extruder per_extruder hidden
+    filament_ramming_volumetric_speed_nc per_extruder per_extruder hidden
     filament_prime_volume number hidden
     filament_prime_volume_nc number hidden
     prusa.filament_purge_multiplier number
@@ -1372,7 +1372,7 @@ machine
     bed_custom_texture text hidden
     bed_custom_model text hidden
     printable_height number
-    extruder_printable_height number per_extruder
+    extruder_printable_height per_extruder per_extruder
     preferred_orientation number
     bbl_use_printhost checkbox
     use_3mf checkbox
@@ -1380,7 +1380,7 @@ machine
     flashforge_serial_number text hidden
     default_bed_type text hidden
     upward_compatible_machine text list hidden
-    default_filament_profile text per_extruder hidden
+    default_filament_profile per_extruder per_extruder hidden
     default_print_profile text hidden
     extruder_clearance_dist_to_rod number
     extruder_clearance_height_to_rod number
@@ -1391,8 +1391,8 @@ machine
     bed_mesh_probe_distance point
     adaptive_bed_mesh_margin number
     grab_length number list hidden
-    extruder_colour text per_extruder hidden
-    extruder_offset point per_extruder
+    extruder_colour per_extruder per_extruder hidden
+    extruder_offset per_extruder per_extruder
     physical_extruder_map number list hidden
     support_object_skip_flush checkbox hidden
     scan_first_layer checkbox
@@ -1447,41 +1447,41 @@ machine
     input_shaping_freq_y number
     input_shaping_damp_x number
     input_shaping_damp_y number
-    max_layer_height number per_extruder
-    min_layer_height number per_extruder
+    max_layer_height per_extruder per_extruder
+    min_layer_height per_extruder per_extruder
     printer_model text hidden
     printer_notes text
     printer_variant text hidden
     printer_settings_id text hidden
-    retraction_minimum_travel number per_extruder
-    retract_before_wipe number per_extruder
-    retract_after_wipe number per_extruder
-    retract_when_changing_layer checkbox per_extruder
-    retraction_length number per_extruder
+    retraction_minimum_travel per_extruder per_extruder
+    retract_before_wipe per_extruder per_extruder
+    retract_after_wipe per_extruder per_extruder
+    retract_when_changing_layer per_extruder per_extruder
+    retraction_length per_extruder per_extruder
     enable_long_retraction_when_cut number hidden
-    long_retractions_when_cut checkbox per_extruder
-    retraction_distances_when_cut number per_extruder
-    retract_length_toolchange number per_extruder
-    z_hop number per_extruder
-    retract_lift_above number per_extruder
-    retract_lift_below number per_extruder
-    z_hop_types select per_extruder
-    travel_slope number per_extruder
-    retract_lift_enforce select per_extruder
-    extruder_type select per_extruder hidden
-    default_nozzle_volume_type select per_extruder hidden
+    long_retractions_when_cut per_extruder per_extruder
+    retraction_distances_when_cut per_extruder per_extruder
+    retract_length_toolchange per_extruder per_extruder
+    z_hop per_extruder per_extruder
+    retract_lift_above per_extruder per_extruder
+    retract_lift_below per_extruder per_extruder
+    z_hop_types per_extruder per_extruder
+    travel_slope per_extruder per_extruder
+    retract_lift_enforce per_extruder per_extruder
+    extruder_type per_extruder per_extruder hidden
+    default_nozzle_volume_type per_extruder per_extruder hidden
     extruder_variant_list text list hidden
     extruder_ams_count text list hidden
     extruder_nozzle_stats text list hidden
     extruder_nozzle_count number list hidden
     extruder_nozzle_volume_type select list hidden
-    printer_extruder_id number per_extruder hidden
-    printer_extruder_variant text per_extruder hidden
+    printer_extruder_id per_extruder per_extruder hidden
+    printer_extruder_variant per_extruder per_extruder hidden
     master_extruder_id number hidden
-    retract_restart_extra number per_extruder
-    retract_restart_extra_toolchange number per_extruder
-    retraction_speed number per_extruder
-    deretraction_speed number per_extruder
+    retract_restart_extra per_extruder per_extruder
+    retract_restart_extra_toolchange per_extruder per_extruder
+    retraction_speed per_extruder per_extruder
+    deretraction_speed per_extruder per_extruder
     deretract_speed_extruder_change number list hidden
     use_firmware_retraction checkbox
     disable_m73 checkbox
@@ -1500,16 +1500,16 @@ machine
     gcode_remap_z select
     belt_support_floor_offset number
     head_wrap_detect_zone polygon hidden
-    wipe checkbox per_extruder
-    wipe_distance number per_extruder
+    wipe per_extruder per_extruder
+    wipe_distance per_extruder per_extruder
     thumbnails text
     use_relative_e_distances checkbox
     machine_hotend_change_time number hidden
     group_algo_with_time checkbox hidden
     machine_prepare_compensation_time number hidden
     enable_pre_heating checkbox hidden
-    hotend_cooling_rate number per_extruder hidden
-    hotend_heating_rate number per_extruder hidden
+    hotend_cooling_rate per_extruder per_extruder hidden
+    hotend_heating_rate per_extruder per_extruder hidden
     extruder_max_nozzle_count number list hidden
     bambu.bed_heat_soak_area polygon hidden
     bambu.ams_filament_load_time_ams number hidden
@@ -1525,9 +1525,9 @@ machine
     prusa.silent_mode checkbox
     prusa.machine_limits_usage select
     prusa.printer_vendor text
-    prusa.travel_ramping_lift checkbox per_extruder
-    prusa.travel_max_lift number per_extruder
-    prusa.travel_lift_before_obstacle checkbox per_extruder
+    prusa.travel_ramping_lift per_extruder per_extruder
+    prusa.travel_max_lift per_extruder per_extruder
+    prusa.travel_lift_before_obstacle per_extruder per_extruder
     prusa.autoemit_temperature_commands checkbox
     prusa.custom_parameters_printer text
     prusa.use_volumetric_e checkbox
@@ -1567,13 +1567,13 @@ machine
     superslicer.thumbnails_with_bed checkbox
     superslicer.thumbnails_tag_format checkbox
     superslicer.arc_fitting_ignore_holes checkbox
-    superslicer.arc_fitting_resolution text
-    superslicer.arc_fitting_tolerance text
+    superslicer.arc_fitting_resolution percent_or_absolute
+    superslicer.arc_fitting_tolerance percent_or_absolute
     superslicer.extruder_extrusion_multiplier_speed polygon list
-    superslicer.extruder_temperature_offset number per_extruder
-    superslicer.extruder_fan_offset number per_extruder
+    superslicer.extruder_temperature_offset per_extruder per_extruder
+    superslicer.extruder_fan_offset per_extruder per_extruder
     superslicer.gcode_ascii checkbox
-    superslicer.gcode_filename_illegal_char text
+    superslicer.gcode_filename_illegal_char gcode
     superslicer.gcode_precision_xyz number
     superslicer.gcode_precision_e number
     superslicer.remaining_times_type select
@@ -1583,27 +1583,27 @@ machine
     superslicer.printer_custom_variables text
     superslicer.fan_printer_min_speed number
     superslicer.printer_settings_modified checkbox hidden
-    superslicer.gcode_min_length text
-    superslicer.gcode_min_resolution text
-    superslicer.retract_lift_before_travel number per_extruder
-    superslicer.retract_lift_first_layer checkbox per_extruder
-    superslicer.retract_lift_top text per_extruder
-    superslicer.seam_gap_external text per_extruder
-    superslicer.tool_name text per_extruder
-    superslicer.wipe_extra_perimeter number per_extruder
-    superslicer.wipe_inside_start checkbox per_extruder
-    superslicer.wipe_inside_end checkbox per_extruder
-    superslicer.wipe_inside_depth number per_extruder
-    superslicer.wipe_lift text per_extruder
-    superslicer.wipe_lift_length text per_extruder
-    superslicer.wipe_min text per_extruder
-    superslicer.wipe_only_crossing checkbox per_extruder
-    superslicer.wipe_return checkbox per_extruder
+    superslicer.gcode_min_length percent_or_absolute
+    superslicer.gcode_min_resolution percent_or_absolute
+    superslicer.retract_lift_before_travel per_extruder per_extruder
+    superslicer.retract_lift_first_layer per_extruder per_extruder
+    superslicer.retract_lift_top per_extruder per_extruder
+    superslicer.seam_gap_external per_extruder per_extruder
+    superslicer.tool_name per_extruder per_extruder
+    superslicer.wipe_extra_perimeter per_extruder per_extruder
+    superslicer.wipe_inside_start per_extruder per_extruder
+    superslicer.wipe_inside_end per_extruder per_extruder
+    superslicer.wipe_inside_depth per_extruder per_extruder
+    superslicer.wipe_lift per_extruder per_extruder
+    superslicer.wipe_lift_length per_extruder per_extruder
+    superslicer.wipe_min per_extruder per_extruder
+    superslicer.wipe_only_crossing per_extruder per_extruder
+    superslicer.wipe_return per_extruder per_extruder
     superslicer.z_step number
     cura.build_volume_fan_nr number
     cura.machine_name text
     cura.machine_show_variants checkbox
-    cura.material_guid text per_extruder
+    cura.material_guid per_extruder per_extruder
     cura.material_bed_temp_wait checkbox
     cura.material_print_temp_wait checkbox
     cura.material_print_temp_prepend checkbox
@@ -1615,67 +1615,67 @@ machine
     cura.machine_always_write_active_tool checkbox
     cura.machine_center_is_zero checkbox
     cura.machine_extruder_count number
-    cura.extruders_enabled_count number
-    cura.machine_heat_zone_length number per_extruder
-    cura.machine_min_cool_heat_time_window number per_extruder
+    cura.extruders_enabled_count expr
+    cura.machine_heat_zone_length per_extruder per_extruder
+    cura.machine_min_cool_heat_time_window per_extruder per_extruder
     cura.machine_extruders_share_heater checkbox
     cura.machine_extruders_share_nozzle checkbox
-    cura.machine_extruders_shared_nozzle_initial_retraction number per_extruder
+    cura.machine_extruders_shared_nozzle_initial_retraction per_extruder per_extruder
     cura.machine_disallowed_areas polygon list
     cura.nozzle_disallowed_areas polygon list
     cura.machine_head_with_fans_polygon polygon
     cura.machine_time_estimation_factor number
     cura.machine_use_extruder_offset_to_offset_coords checkbox
-    cura.extruder_prime_pos_z number per_extruder
-    cura.extruder_prime_pos_abs checkbox per_extruder
+    cura.extruder_prime_pos_z per_extruder per_extruder
+    cura.extruder_prime_pos_abs per_extruder per_extruder
     cura.machine_acceleration number
     cura.machine_max_jerk_xy number
-    cura.machine_steps_per_mm_x number per_extruder
-    cura.machine_steps_per_mm_y number per_extruder
-    cura.machine_steps_per_mm_z number per_extruder
-    cura.machine_steps_per_mm_e number per_extruder
-    cura.machine_endstop_positive_direction_x checkbox per_extruder
-    cura.machine_endstop_positive_direction_y checkbox per_extruder
-    cura.machine_endstop_positive_direction_z checkbox per_extruder
+    cura.machine_steps_per_mm_x per_extruder per_extruder
+    cura.machine_steps_per_mm_y per_extruder per_extruder
+    cura.machine_steps_per_mm_z per_extruder per_extruder
+    cura.machine_steps_per_mm_e per_extruder per_extruder
+    cura.machine_endstop_positive_direction_x per_extruder per_extruder
+    cura.machine_endstop_positive_direction_y per_extruder per_extruder
+    cura.machine_endstop_positive_direction_z per_extruder per_extruder
     cura.machine_minimum_feedrate number
-    cura.machine_feeder_wheel_diameter number per_extruder
+    cura.machine_feeder_wheel_diameter per_extruder per_extruder
     cura.machine_scale_fan_speed_zero_to_one checkbox
-    cura.reset_flow_duration number per_extruder
-    cura.retraction_enable checkbox per_extruder
-    cura.retraction_retract_speed number per_extruder
-    cura.retraction_count_max number per_extruder
-    cura.retraction_extrusion_window number per_extruder
-    cura.retraction_hop_enabled checkbox per_extruder
-    cura.retraction_hop_only_when_collides checkbox per_extruder
-    cura.retraction_hop_after_extruder_switch checkbox per_extruder
-    cura.retraction_hop_after_extruder_switch_height number per_extruder
-    cura.extruder_nr number per_extruder
-    cura.machine_extruder_change_duration number per_extruder
-    cura.machine_extruder_cooling_fan_number number per_extruder
-    cura.machine_extruder_end_code_duration number per_extruder
-    cura.machine_extruder_end_pos_abs checkbox per_extruder
-    cura.machine_extruder_end_pos_x number per_extruder
-    cura.machine_extruder_end_pos_y number per_extruder
-    cura.machine_extruder_start_code_duration number per_extruder
-    cura.machine_extruder_start_pos_abs checkbox per_extruder
-    cura.machine_extruder_start_pos_x number per_extruder
-    cura.machine_extruder_start_pos_y number per_extruder
+    cura.reset_flow_duration per_extruder per_extruder
+    cura.retraction_enable per_extruder per_extruder
+    cura.retraction_retract_speed per_extruder per_extruder
+    cura.retraction_count_max per_extruder per_extruder
+    cura.retraction_extrusion_window per_extruder per_extruder
+    cura.retraction_hop_enabled per_extruder per_extruder
+    cura.retraction_hop_only_when_collides per_extruder per_extruder
+    cura.retraction_hop_after_extruder_switch per_extruder per_extruder
+    cura.retraction_hop_after_extruder_switch_height per_extruder per_extruder
+    cura.extruder_nr per_extruder per_extruder
+    cura.machine_extruder_change_duration per_extruder per_extruder
+    cura.machine_extruder_cooling_fan_number per_extruder per_extruder
+    cura.machine_extruder_end_code_duration per_extruder per_extruder
+    cura.machine_extruder_end_pos_abs per_extruder per_extruder
+    cura.machine_extruder_end_pos_x per_extruder per_extruder
+    cura.machine_extruder_end_pos_y per_extruder per_extruder
+    cura.machine_extruder_start_code_duration per_extruder per_extruder
+    cura.machine_extruder_start_pos_abs per_extruder per_extruder
+    cura.machine_extruder_start_pos_x per_extruder per_extruder
+    cura.machine_extruder_start_pos_y per_extruder per_extruder
   nozzle
     nozzle_height number hidden
-    nozzle_flush_dataset number per_extruder hidden
-    nozzle_type select per_extruder
+    nozzle_flush_dataset per_extruder per_extruder hidden
+    nozzle_type per_extruder per_extruder
     nozzle_hrc number
-    nozzle_diameter number per_extruder
-    nozzle_volume number per_extruder
+    nozzle_diameter per_extruder per_extruder
+    nozzle_volume per_extruder per_extruder
     nozzle_volume_type select list hidden
-    prusa.nozzle_high_flow checkbox per_extruder
-    cura.machine_nozzle_tip_outer_diameter number per_extruder
+    prusa.nozzle_high_flow per_extruder per_extruder
+    cura.machine_nozzle_tip_outer_diameter per_extruder per_extruder
     cura.machine_nozzle_expansion_angle number
-    cura.machine_nozzle_temp_enabled checkbox per_extruder
-    cura.machine_nozzle_heat_up_speed number per_extruder
-    cura.machine_nozzle_cool_down_speed number per_extruder
-    cura.machine_nozzle_id text per_extruder
-    cura.machine_nozzle_head_distance number per_extruder
+    cura.machine_nozzle_temp_enabled per_extruder per_extruder
+    cura.machine_nozzle_heat_up_speed per_extruder per_extruder
+    cura.machine_nozzle_cool_down_speed per_extruder per_extruder
+    cura.machine_nozzle_id per_extruder per_extruder
+    cura.machine_nozzle_head_distance per_extruder per_extruder
   surface
     prusa.hw_sheet_cold checkbox hidden
     prusa.hw_sheet_type text hidden
@@ -1695,39 +1695,39 @@ gcode
     printhost_ssl_ignore_revoke checkbox hidden
     printhost_authorization_type select hidden
     printer_plugin_config_overrides text
-    before_layer_change_gcode text
-    machine_end_gcode text
-    printing_by_object_gcode text
-    layer_change_gcode text
-    time_lapse_gcode text
-    wrapping_detection_gcode text
-    machine_pause_gcode text
-    template_custom_gcode text
+    before_layer_change_gcode gcode
+    machine_end_gcode gcode
+    printing_by_object_gcode gcode
+    layer_change_gcode gcode
+    time_lapse_gcode gcode
+    wrapping_detection_gcode gcode
+    machine_pause_gcode gcode
+    template_custom_gcode gcode
     host_type select hidden
     farthest_point_timelapse checkbox hidden
-    file_start_gcode text
-    machine_start_gcode text
-    imex_mode_gcodes text list hidden
-    change_filament_gcode text
-    change_extrusion_role_gcode text
+    file_start_gcode gcode
+    machine_start_gcode gcode
+    imex_mode_gcodes gcode list hidden
+    change_filament_gcode gcode
+    change_extrusion_role_gcode gcode
     thumbnails_format select hidden
     prusa.remaining_times checkbox
     prusa.binary_gcode checkbox
-    prusa.color_change_gcode text
+    prusa.color_change_gcode gcode
     superslicer.thumbnails_with_support checkbox hidden
     superslicer.printhost_client_cert text hidden
     superslicer.printhost_client_cert_password text hidden
     superslicer.between_objects_gcode_before_move checkbox
-    superslicer.feature_gcode text
+    superslicer.feature_gcode gcode
     superslicer.start_gcode_manual checkbox
     cura.machine_start_gcode_first checkbox
-    cura.machine_extruder_end_code text per_extruder
-    cura.machine_extruder_prestart_code text per_extruder
+    cura.machine_extruder_end_code per_extruder per_extruder
+    cura.machine_extruder_prestart_code per_extruder per_extruder
   material
     filament_plugin_config_overrides text
-    filament_end_gcode text
-    filament_start_gcode text
-    filament_change_extrusion_role_gcode text
+    filament_end_gcode gcode
+    filament_start_gcode gcode
+    filament_change_extrusion_role_gcode gcode
   process
     print_plugin_config_overrides text
     gcode_add_line_number checkbox
@@ -1738,35 +1738,35 @@ gcode
     reduce_infill_retraction checkbox
     filename_format text
     post_process text list
-    process_change_extrusion_role_gcode text
+    process_change_extrusion_role_gcode gcode
     slicing_pipeline_plugin text list
     bambu.reduce_infill_retraction_mode select
-    prusa.gcode_substitutions text list
+    prusa.gcode_substitutions gcode list
     prusa.gcode_resolution number
     superslicer.parallel_objects_step number
     superslicer.parallel_objects_step_max_z number
     superslicer.complete_objects_one_skirt checkbox
     superslicer.complete_objects_sort select
-    superslicer.object_gcode text hidden
-    superslicer.region_gcode text hidden
+    superslicer.object_gcode gcode hidden
+    superslicer.region_gcode gcode hidden
     superslicer.gcode_command_buffer number hidden
     superslicer.time_start_gcode number hidden
     cura.ppr_enable checkbox
-    cura.flow_warn_limit number per_extruder
-    cura.flow_anomaly_limit number per_extruder
-    cura.print_temp_warn_limit number per_extruder
-    cura.print_temp_anomaly_limit number per_extruder
+    cura.flow_warn_limit per_extruder per_extruder
+    cura.flow_anomaly_limit per_extruder per_extruder
+    cura.print_temp_warn_limit per_extruder per_extruder
+    cura.print_temp_anomaly_limit per_extruder per_extruder
     cura.bv_temp_warn_limit number
     cura.bv_temp_anomaly_limit number
-    cura.center_object checkbox per_extruder hidden
-    cura.mesh_position_x number per_extruder hidden
-    cura.mesh_position_y number per_extruder hidden
-    cura.mesh_position_z number per_extruder hidden
-    cura.mesh_rotation_matrix text per_extruder hidden
-    cura.material_id text per_extruder hidden
-    cura.material_name text per_extruder hidden
-    cura.material_spool_cost number per_extruder hidden
-    cura.material_spool_weight number per_extruder hidden
+    cura.center_object per_extruder per_extruder hidden
+    cura.mesh_position_x per_extruder per_extruder hidden
+    cura.mesh_position_y per_extruder per_extruder hidden
+    cura.mesh_position_z per_extruder per_extruder hidden
+    cura.mesh_rotation_matrix per_extruder per_extruder hidden
+    cura.material_id per_extruder per_extruder hidden
+    cura.material_name per_extruder per_extruder hidden
+    cura.material_spool_cost per_extruder per_extruder hidden
+    cura.material_spool_weight per_extruder per_extruder hidden
 special
   process
     preset_names text list hidden
@@ -1801,7 +1801,7 @@ special
     bbl_calib_mark_logo checkbox hidden
     spiral_mode checkbox
     spiral_mode_smooth checkbox
-    spiral_mode_max_xy_smoothing text
+    spiral_mode_max_xy_smoothing percent_or_absolute
     spiral_starting_flow_ratio number
     spiral_finishing_flow_ratio number
     timelapse_type select
@@ -1831,130 +1831,130 @@ special
     superslicer.print_custom_variables text
     superslicer.overhangs_bridge_threshold number
     superslicer.overhangs_bridge_upper_layers number
-    superslicer.overhangs_max_slope text
+    superslicer.overhangs_max_slope percent_or_absolute
     superslicer.print_temperature number hidden
     superslicer.print_settings_modified checkbox hidden
     superslicer.time_estimation_compensation number hidden
     superslicer.hole_size_compensation number
     superslicer.hole_size_threshold number
-    cura.meshfix_union_all checkbox per_extruder
-    cura.meshfix_union_all_remove_holes checkbox per_extruder
-    cura.meshfix_extensive_stitching checkbox per_extruder
-    cura.meshfix_keep_open_polygons checkbox per_extruder
-    cura.multiple_mesh_overlap number per_extruder
-    cura.carve_multiple_volumes checkbox
+    cura.meshfix_union_all per_extruder per_extruder
+    cura.meshfix_union_all_remove_holes per_extruder per_extruder
+    cura.meshfix_extensive_stitching per_extruder per_extruder
+    cura.meshfix_keep_open_polygons per_extruder per_extruder
+    cura.multiple_mesh_overlap per_extruder per_extruder
+    cura.carve_multiple_volumes expr
     cura.alternate_carve_order checkbox
     cura.remove_empty_first_layers checkbox
-    cura.meshfix_maximum_travel_resolution number per_extruder
-    cura.meshfix_maximum_deviation number per_extruder
-    cura.meshfix_maximum_extrusion_area_deviation number per_extruder
-    cura.meshfix_fluid_motion_enabled checkbox per_extruder
-    cura.meshfix_fluid_motion_shift_distance number per_extruder
-    cura.meshfix_fluid_motion_small_distance number per_extruder
-    cura.meshfix_fluid_motion_angle number per_extruder
+    cura.meshfix_maximum_travel_resolution per_extruder per_extruder
+    cura.meshfix_maximum_deviation per_extruder per_extruder
+    cura.meshfix_maximum_extrusion_area_deviation per_extruder per_extruder
+    cura.meshfix_fluid_motion_enabled per_extruder per_extruder
+    cura.meshfix_fluid_motion_shift_distance per_extruder per_extruder
+    cura.meshfix_fluid_motion_small_distance per_extruder per_extruder
+    cura.meshfix_fluid_motion_angle per_extruder per_extruder
     cura.user_defined_print_order_enabled checkbox
     cura.infill_mesh checkbox
-    cura.infill_mesh_order number
+    cura.infill_mesh_order expr
     cura.cutting_mesh checkbox
-    cura.mold_enabled checkbox per_extruder
-    cura.mold_width number per_extruder
-    cura.mold_roof_height number per_extruder
-    cura.mold_angle number per_extruder
+    cura.mold_enabled per_extruder per_extruder
+    cura.mold_width per_extruder per_extruder
+    cura.mold_roof_height per_extruder per_extruder
+    cura.mold_angle per_extruder per_extruder
     cura.support_mesh checkbox
     cura.anti_overhang_mesh checkbox
-    cura.magic_mesh_surface_mode select per_extruder
-    cura.slicing_tolerance select per_extruder
-    cura.infill_enable_travel_optimization checkbox per_extruder
-    cura.material_flow_temp_graph text per_extruder
+    cura.magic_mesh_surface_mode per_extruder per_extruder
+    cura.slicing_tolerance per_extruder per_extruder
+    cura.infill_enable_travel_optimization per_extruder per_extruder
+    cura.material_flow_temp_graph per_extruder per_extruder
     cura.minimum_polygon_circumference number
-    cura.support_skip_some_zags checkbox per_extruder
-    cura.support_skip_zag_per_mm number per_extruder
-    cura.support_zag_skip_count number per_extruder
+    cura.support_skip_some_zags per_extruder per_extruder
+    cura.support_skip_zag_per_mm per_extruder per_extruder
+    cura.support_zag_skip_count per_extruder per_extruder
     cura.draft_shield_enabled checkbox
     cura.draft_shield_dist number
     cura.draft_shield_height_limitation select
-    cura.draft_shield_height number
-    cura.conical_overhang_enabled checkbox per_extruder
-    cura.conical_overhang_angle number per_extruder
-    cura.conical_overhang_hole_size number per_extruder
-    cura.coasting_enable checkbox per_extruder
-    cura.coasting_volume number per_extruder
-    cura.coasting_min_volume number per_extruder
-    cura.coasting_speed number per_extruder
-    cura.cross_infill_pocket_size number per_extruder
-    cura.cross_infill_density_image text per_extruder
-    cura.cross_support_density_image text per_extruder
-    cura.support_conical_enabled checkbox per_extruder
-    cura.support_conical_angle number per_extruder
-    cura.support_conical_min_width number per_extruder
-    cura.magic_fuzzy_skin_outside_only checkbox per_extruder
-    cura.magic_fuzzy_skin_point_density number per_extruder
+    cura.draft_shield_height expr
+    cura.conical_overhang_enabled per_extruder per_extruder
+    cura.conical_overhang_angle per_extruder per_extruder
+    cura.conical_overhang_hole_size per_extruder per_extruder
+    cura.coasting_enable per_extruder per_extruder
+    cura.coasting_volume per_extruder per_extruder
+    cura.coasting_min_volume per_extruder per_extruder
+    cura.coasting_speed per_extruder per_extruder
+    cura.cross_infill_pocket_size per_extruder per_extruder
+    cura.cross_infill_density_image per_extruder per_extruder
+    cura.cross_support_density_image per_extruder per_extruder
+    cura.support_conical_enabled per_extruder per_extruder
+    cura.support_conical_angle per_extruder per_extruder
+    cura.support_conical_min_width per_extruder per_extruder
+    cura.magic_fuzzy_skin_outside_only per_extruder per_extruder
+    cura.magic_fuzzy_skin_point_density per_extruder per_extruder
     cura.flow_rate_max_extrusion_offset number
     cura.flow_rate_extrusion_offset_factor number
     cura.adaptive_layer_height_enabled checkbox
     cura.adaptive_layer_height_variation number
     cura.adaptive_layer_height_variation_step number
     cura.adaptive_layer_height_threshold number
-    cura.wall_overhang_angle number per_extruder
-    cura.cool_min_layer_time_overhang number per_extruder
-    cura.cool_min_layer_time_overhang_min_segment_length number per_extruder
-    cura.seam_overhang_angle number per_extruder
-    cura.wall_overhang_speed_factors number list per_extruder
+    cura.wall_overhang_angle per_extruder per_extruder
+    cura.cool_min_layer_time_overhang per_extruder per_extruder
+    cura.cool_min_layer_time_overhang_min_segment_length per_extruder per_extruder
+    cura.seam_overhang_angle per_extruder per_extruder
+    cura.wall_overhang_speed_factors per_extruder list per_extruder
     cura.bridge_settings_enabled checkbox
-    cura.bridge_wall_max_deviation number per_extruder
-    cura.bridge_wall_min_length number per_extruder
-    cura.bridge_skin_support_threshold number per_extruder
-    cura.bridge_wall_coast number per_extruder
-    cura.bridge_wall_speed number per_extruder
-    cura.bridge_wall_material_flow number per_extruder
-    cura.bridge_skin_speed number per_extruder
-    cura.bridge_skin_material_flow number per_extruder
-    cura.bridge_skin_density number per_extruder
-    cura.bridge_fan_speed number per_extruder
-    cura.bridge_interlace_lines checkbox per_extruder
-    cura.bridge_enable_more_layers checkbox per_extruder
-    cura.bridge_skin_speed_2 number per_extruder
-    cura.bridge_skin_material_flow_2 number per_extruder
-    cura.bridge_skin_density_2 number per_extruder
-    cura.bridge_fan_speed_2 number per_extruder
-    cura.bridge_skin_speed_3 number per_extruder
-    cura.bridge_skin_material_flow_3 number per_extruder
-    cura.bridge_skin_density_3 number per_extruder
-    cura.bridge_fan_speed_3 number per_extruder
-    cura.clean_between_layers checkbox per_extruder
-    cura.max_extrusion_before_wipe number per_extruder
-    cura.wipe_retraction_enable checkbox per_extruder
-    cura.wipe_retraction_amount number per_extruder
-    cura.wipe_retraction_extra_prime_amount number per_extruder
-    cura.wipe_retraction_speed number per_extruder
-    cura.wipe_retraction_retract_speed number per_extruder
-    cura.wipe_retraction_prime_speed number per_extruder
-    cura.wipe_pause number per_extruder
-    cura.wipe_hop_enable checkbox per_extruder
-    cura.wipe_hop_amount number per_extruder
-    cura.wipe_hop_speed number per_extruder
-    cura.wipe_brush_pos_x number per_extruder
-    cura.wipe_repeat_count number per_extruder
-    cura.wipe_move_distance number per_extruder
-    cura.small_hole_max_size number per_extruder
-    cura.small_feature_max_length number per_extruder
-    cura.small_feature_speed_factor number per_extruder
-    cura.small_feature_speed_factor_0 number per_extruder
-    cura.material_alternate_walls checkbox per_extruder
-    cura.group_outer_walls checkbox per_extruder
-    cura.retraction_during_travel_ratio number per_extruder
-    cura.keep_retracting_during_travel checkbox per_extruder
-    cura.prime_during_travel_ratio number per_extruder
-    cura.scarf_joint_seam_length number per_extruder
-    cura.scarf_joint_seam_start_height_ratio number per_extruder
-    cura.scarf_split_distance number per_extruder
-    cura.wall_0_start_speed_ratio number per_extruder
-    cura.wall_0_acceleration number per_extruder
-    cura.wall_0_end_speed_ratio number per_extruder
-    cura.wall_0_deceleration number per_extruder
-    cura.wall_0_speed_split_distance number per_extruder
-    cura.minimum_infill_line_length number per_extruder
-    cura.material_delta_temperature_roofing number per_extruder
+    cura.bridge_wall_max_deviation per_extruder per_extruder
+    cura.bridge_wall_min_length per_extruder per_extruder
+    cura.bridge_skin_support_threshold per_extruder per_extruder
+    cura.bridge_wall_coast per_extruder per_extruder
+    cura.bridge_wall_speed per_extruder per_extruder
+    cura.bridge_wall_material_flow per_extruder per_extruder
+    cura.bridge_skin_speed per_extruder per_extruder
+    cura.bridge_skin_material_flow per_extruder per_extruder
+    cura.bridge_skin_density per_extruder per_extruder
+    cura.bridge_fan_speed per_extruder per_extruder
+    cura.bridge_interlace_lines per_extruder per_extruder
+    cura.bridge_enable_more_layers per_extruder per_extruder
+    cura.bridge_skin_speed_2 per_extruder per_extruder
+    cura.bridge_skin_material_flow_2 per_extruder per_extruder
+    cura.bridge_skin_density_2 per_extruder per_extruder
+    cura.bridge_fan_speed_2 per_extruder per_extruder
+    cura.bridge_skin_speed_3 per_extruder per_extruder
+    cura.bridge_skin_material_flow_3 per_extruder per_extruder
+    cura.bridge_skin_density_3 per_extruder per_extruder
+    cura.bridge_fan_speed_3 per_extruder per_extruder
+    cura.clean_between_layers per_extruder per_extruder
+    cura.max_extrusion_before_wipe per_extruder per_extruder
+    cura.wipe_retraction_enable per_extruder per_extruder
+    cura.wipe_retraction_amount per_extruder per_extruder
+    cura.wipe_retraction_extra_prime_amount per_extruder per_extruder
+    cura.wipe_retraction_speed per_extruder per_extruder
+    cura.wipe_retraction_retract_speed per_extruder per_extruder
+    cura.wipe_retraction_prime_speed per_extruder per_extruder
+    cura.wipe_pause per_extruder per_extruder
+    cura.wipe_hop_enable per_extruder per_extruder
+    cura.wipe_hop_amount per_extruder per_extruder
+    cura.wipe_hop_speed per_extruder per_extruder
+    cura.wipe_brush_pos_x per_extruder per_extruder
+    cura.wipe_repeat_count per_extruder per_extruder
+    cura.wipe_move_distance per_extruder per_extruder
+    cura.small_hole_max_size per_extruder per_extruder
+    cura.small_feature_max_length per_extruder per_extruder
+    cura.small_feature_speed_factor per_extruder per_extruder
+    cura.small_feature_speed_factor_0 per_extruder per_extruder
+    cura.material_alternate_walls per_extruder per_extruder
+    cura.group_outer_walls per_extruder per_extruder
+    cura.retraction_during_travel_ratio per_extruder per_extruder
+    cura.keep_retracting_during_travel per_extruder per_extruder
+    cura.prime_during_travel_ratio per_extruder per_extruder
+    cura.scarf_joint_seam_length per_extruder per_extruder
+    cura.scarf_joint_seam_start_height_ratio per_extruder per_extruder
+    cura.scarf_split_distance per_extruder per_extruder
+    cura.wall_0_start_speed_ratio per_extruder per_extruder
+    cura.wall_0_acceleration per_extruder per_extruder
+    cura.wall_0_end_speed_ratio per_extruder per_extruder
+    cura.wall_0_deceleration per_extruder per_extruder
+    cura.wall_0_speed_split_distance per_extruder per_extruder
+    cura.minimum_infill_line_length per_extruder per_extruder
+    cura.material_delta_temperature_roofing per_extruder per_extruder
 plate
   plate
     curr_bed_type select

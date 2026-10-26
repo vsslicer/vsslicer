@@ -9,8 +9,21 @@ import {
   type SettingType,
 } from '@vsslicer/profile-api';
 
-/** Base widget kinds. PRF-181 adds percent-or-absolute, per-extruder, gcode and `{expr}` kinds. */
-export type WidgetKind = 'checkbox' | 'number' | 'text' | 'select' | 'point' | 'polygon';
+/**
+ * Widget kinds. `per_extruder` (stored as a keyed map; the view edits the inner value by `entry.type`) and `expr`
+ * (the default is a Cura `{expr}` formula) come from entry metadata and beat the type's kind, `per_extruder` first.
+ */
+export type WidgetKind =
+  | 'checkbox'
+  | 'number'
+  | 'text'
+  | 'select'
+  | 'point'
+  | 'polygon'
+  | 'percent_or_absolute'
+  | 'gcode'
+  | 'per_extruder'
+  | 'expr';
 
 // `Record<SettingType, ...>` fails to compile when a type is added to the catalogue without a widget kind.
 export const WIDGET_KINDS: Record<SettingType, WidgetKind> = {
@@ -18,9 +31,9 @@ export const WIDGET_KINDS: Record<SettingType, WidgetKind> = {
   int: 'number',
   float: 'number',
   percent: 'number',
-  float_or_percent: 'text',
+  float_or_percent: 'percent_or_absolute',
   string: 'text',
-  gcode: 'text',
+  gcode: 'gcode',
   enum: 'select',
   point: 'point',
   polygon: 'polygon',
@@ -54,6 +67,13 @@ export class FormModelError extends Error {
   override name = 'FormModelError';
 }
 
+function refine(base: WidgetKind, entry: CatalogueEntry): WidgetKind {
+  if (entry.per_extruder) return 'per_extruder';
+  const d = entry.default;
+  if (d !== null && typeof d === 'object' && !Array.isArray(d) && typeof d['expr'] === 'string') return 'expr';
+  return base;
+}
+
 /**
  * Groups in E11's order, each with one subgroup per home entity (in the group's `homes` order) that has keys,
  * fields in catalogue order. Hidden keys are kept; hiding them is the view's toggle. Throws on a key whose
@@ -73,7 +93,7 @@ export function buildFormModel(catalogue: Catalogue): FormModel {
     if (!widget) throw new FormModelError(`${key}: type ${entry.type} has no widget kind`);
     const sub = model.find((g) => g.id === entry.group)?.subgroups.find((s) => s.home === entry.home);
     if (!sub) throw new FormModelError(`${key}: home ${entry.home} is not in group ${entry.group}`);
-    sub.fields.push({ key, label: entry.label ?? key, widget, entry });
+    sub.fields.push({ key, label: entry.label ?? key, widget: refine(widget, entry), entry });
   }
   for (const g of model) g.subgroups = g.subgroups.filter((s) => s.fields.length > 0);
   return model;

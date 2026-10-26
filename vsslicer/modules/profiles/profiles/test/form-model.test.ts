@@ -85,6 +85,27 @@ test('orders groups by schema, subgroups by home, fields by catalogue; drops emp
   expect(mm.subgroups[0]!.fields[1]!.label).toBe('c'); // a hidden key without a label shows its key
 });
 
+test.each([
+  ['percent_or_absolute', { type: 'float_or_percent' }],
+  ['gcode', { type: 'gcode', group: 'gcode' }],
+  ['per_extruder', { type: 'float', per_extruder: true }],
+  ['expr', { type: 'int', default: { expr: 'extruders_count' } }],
+  ['number', { type: 'int', default: { x: 1 } }], // an object default that is not `{expr}`
+] as const)('widget kind %s from catalogue metadata', (widget, over) => {
+  const home = over.type === 'gcode' ? 'printer_model' : 'process';
+  const fields = buildFormModel({ k: entry({ ...over, home } as Partial<CatalogueEntry>) }).flatMap((g) =>
+    g.subgroups.flatMap((s) => s.fields),
+  );
+  expect(fields.map((f) => f.widget)).toEqual([widget]);
+});
+
+test('real catalogue keys get the special kinds', () => {
+  const kind = (k: string) =>
+    buildFormModel({ [k]: full[k]! }).flatMap((g) => g.subgroups.flatMap((s) => s.fields))[0]!.widget;
+  expect(kind('cura.extruders_enabled_count')).toBe('expr');
+  expect(kind('cura.machine_nozzle_temp_enabled')).toBe('per_extruder');
+});
+
 test.each(['matrix', 'constructor', 'toString', '__proto__'])('a type %s with no widget kind fails', (type) => {
   const bad = entry({ type: type as CatalogueEntry['type'] });
   expect(() => buildFormModel({ ...full, bad })).toThrow(new FormModelError(`bad: type ${type} has no widget kind`));
