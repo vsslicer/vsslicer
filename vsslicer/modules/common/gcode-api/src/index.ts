@@ -26,3 +26,5 @@ export {
   writeStateChange,
 } from './domain/state-change.ts';
 export type { StateChange } from './domain/state-change.ts';
+export { flavourFromName } from './domain/flavour.ts';
+export type { Flavour } from './domain/flavour.ts';
