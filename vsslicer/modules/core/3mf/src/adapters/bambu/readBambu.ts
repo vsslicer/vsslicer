@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { DialectReader } from '../../application/readProject.ts';
-import type { Package } from '../../domain/package.ts';
-import type { Dialect, Project } from '../../domain/project/project.ts';
+import { createProject, type Dialect } from '../../domain/project/project.ts';
+import { readBambuObjects } from './readObjects.ts';
 
 /*
  * Ported from OrcaSlicer@09aa0114:src/libslic3r/Format/bbs_3mf.cpp:230 and :246-249 (the config part names), :2042-2081
@@ -55,19 +55,18 @@ export function parsePrintableArea(value: unknown): readonly Point[] | string | 
 }
 
 /**
- * The `bambu` / `orca` dialect reader. Objects and instances come from the core read of the model. The project config
+ * The `bambu` / `orca` dialect reader. Objects, parts and instances come from `readBambuObjects`. The project config
  * (`Metadata/project_settings.config`) and every embedded preset (`Metadata/{print_setting,process_settings,
  * filament_settings,machine_settings}_*`) are returned raw in `rawConfig` by part name; every other non-model part is
  * preserved. `printable_area` of the project config becomes `printableArea`; a config that is not JSON or holds an
  * unusable area leaves it absent with a notice.
  */
 export const createBambuReader =
-  (readCore: (pkg: Package) => Project, dialect: Extract<Dialect, 'bambu' | 'orca'>): DialectReader =>
+  (dialect: Extract<Dialect, 'bambu' | 'orca'>): DialectReader =>
   (pkg) => {
-    const core = readCore(pkg);
+    const { objects, instances, notices } = readBambuObjects(pkg);
     const configs = pkg.parts.filter((p) => isConfigPart(p.name));
     const preserved = pkg.parts.filter((p) => !isConfigPart(p.name) && !lower(p.name).endsWith('.model'));
-    const notices = [...(core.notices ?? [])];
     let printableArea: readonly Point[] | undefined;
     const project = configs.find((p) => lower(p.name) === lower(PROJECT_CONFIG));
     if (project && project.bytes.length > MAX_CONFIG_BYTES)
@@ -86,12 +85,13 @@ export const createBambuReader =
       if (typeof area === 'string') notices.push(`${area}: the printable area was not read.`);
       else printableArea = area;
     }
-    return {
-      ...core,
+    return createProject({
       dialect,
-      rawConfig: new Map([...core.rawConfig, ...configs.map((p) => [p.name, p.bytes] as const)]),
-      preserved: [...core.preserved, ...preserved],
+      objects,
+      instances,
+      rawConfig: new Map(configs.map((p) => [p.name, p.bytes] as const)),
+      preserved,
       ...(printableArea ? { printableArea } : {}),
       ...(notices.length ? { notices } : {}),
-    };
+    });
   };

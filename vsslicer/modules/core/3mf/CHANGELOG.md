@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-22: Bambu and Orca objects, parts and instances (`readBambuObjects`, `readModelSettings`): `model_settings.config` object and part metadata, part `subtype` (modifiers, negative volumes, enforcers, blockers), per-object config, one instance per build item; `readModel` keeps raw per-triangle attributes (painting) in `CoreObject.triangleAttributes`, carried to `ModelPart.triangleAttributes`. `createBambuReader` now takes only the dialect.
 - VWR-31: run `openPackage` and `readProject` in a `worker_threads` or Web Worker (`readInNodeWorker`, `readInWebWorker`): input copied when it is a partial view, results transferred, one worker per file, typed `WorkerReadError` on a crash, out of memory or a failed post.
 - VWR-25: read PrusaSlicer 2.x projects (`readPrusa2`, registered as `prusa2` in `readProject`): objects, volumes (parts, modifiers, negative volumes, blockers) and per-object and per-volume config from `Slic3r_PE_model.config`, and `Slic3r_PE.config` as a raw blob.
 - VWR-21: `bambu` and `orca` dialect readers (`createBambuReader`, registered in `readProject`): `project_settings.config` and the embedded presets kept byte for byte in `rawConfig`; `Project.printableArea` from `printable_area`.

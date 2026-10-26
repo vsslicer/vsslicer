@@ -24,8 +24,8 @@ const readProject = createReadProject({
   readMetadata: (pkg) =>
     readModel(pkg.parts.find((p) => p.name === pkg.rootModel)?.bytes ?? new Uint8Array(), pkg.rootModel).metadata,
   readers: new Map([
-    ['bambu', createBambuReader(readCore, 'bambu')],
-    ['orca', createBambuReader(readCore, 'orca')],
+    ['bambu', createBambuReader('bambu')],
+    ['orca', createBambuReader('orca')],
   ]),
 });
 
@@ -101,18 +101,11 @@ describe('bambu/orca reader', () => {
     const pkg: Package = {
       rootModel: '3D/3dmodel.model',
       parts: [
+        { name: '3D/3dmodel.model', contentType: 'x', relationships: [], bytes: enc.encode(triangleModel) },
         { name: 'Metadata/project_settings.config', contentType: 'x', relationships: [], bytes: enc.encode(big) },
       ],
     };
-    const empty = {
-      dialect: 'core' as const,
-      plates: [],
-      objects: [],
-      instances: [],
-      rawConfig: new Map(),
-      preserved: [],
-    };
-    const p = createBambuReader(() => empty, 'bambu')(pkg);
+    const p = createBambuReader('bambu')(pkg);
     expect(p.printableArea).toBeUndefined();
     expect(p.notices?.[0]).toMatch(/larger than/);
   });

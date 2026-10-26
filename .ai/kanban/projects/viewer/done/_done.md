@@ -10,3 +10,4 @@
 8. [VWR-75: Release mesh@0.1.0: parsers, stats, BVH and workers](075-release-mesh-0-1-0-parsers-stats-bvh-and-workers.md)
 9. [VWR-76: Release mesh@0.1.0: benchmark numbers (with VWR-75)](076-release-mesh-0-2-0-benchmark-numbers.md)
 10. [VWR-31: Run openPackage and readProject in a worker](031-run-openpackage-and-readproject-in-a-worker.md)
+11. [VWR-22: Read Bambu and Orca objects, parts and instances](022-read-bambu-and-orca-objects-parts-and-instances.md)

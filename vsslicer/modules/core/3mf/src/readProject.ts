@@ -10,8 +10,8 @@ import { readPrusa2 } from './adapters/prusa/readPrusa2.ts';
 export const readProject = createReadProject({
   readCore,
   readers: new Map([
-    ['bambu', createBambuReader(readCore, 'bambu')],
-    ['orca', createBambuReader(readCore, 'orca')],
+    ['bambu', createBambuReader('bambu')],
+    ['orca', createBambuReader('orca')],
     ['cura', createCuraReader(readCore)],
     ['prusa2', readPrusa2],
   ]),

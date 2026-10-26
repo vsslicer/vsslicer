@@ -54,6 +54,10 @@ export interface ModelPart {
   readonly mesh: Mesh;
   readonly transform: Transform;
   readonly material?: Material;
+  /** Volume kind as the dialect wrote it (Bambu/Orca `subtype`: normal_part, modifier_part, negative_part, ...). */
+  readonly subtype?: string;
+  /** Raw per-triangle attributes of `mesh` (painting and the like) by name, '' where unset. Absent when none. */
+  readonly triangleAttributes?: ReadonlyMap<string, readonly string[]>;
   /** Per-part settings, key to value as the dialect wrote them. */
   readonly config: ReadonlyMap<string, string>;
 }

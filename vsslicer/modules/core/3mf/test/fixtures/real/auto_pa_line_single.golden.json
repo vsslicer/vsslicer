@@ -1,0 +1,192 @@
+{
+  "dialect": "bambu",
+  "objects": [
+    {
+      "id": 3,
+      "name": "立方体",
+      "config": {
+        "extruder": "1"
+      },
+      "parts": [
+        {
+          "id": 0,
+          "name": "立方体",
+          "subtype": "normal_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [3.12499995, 0, 0, 0, 0.0156249998, 0, 0, 0, 0.00781249988, 0, 0, 0],
+          "config": {
+            "matrix": "931.32248623187502 0 0 0 0 1.455191408020389e-11 0 0 0 0 2.2737365459280277e-13 0 0 0 0 1",
+            "source_file": "C:\\Users\\zhimin.zeng\\Downloads\\自动流量校准展示模型.3mf",
+            "source_object_id": "0",
+            "source_volume_id": "0",
+            "source_offset_x": "0",
+            "source_offset_y": "0",
+            "source_offset_z": "0"
+          }
+        },
+        {
+          "id": 1,
+          "name": "通用-立方体",
+          "subtype": "modifier_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [1.17187498, 0, 0, 0, 0.390624994, 0, 0, 0, 0.390624994, 0, 0, 0],
+          "config": {
+            "matrix": "2.5899280122454242 0 0 0 0 0.0035527133530125436 0 0 0 0 0.0035527133530125444 0 0 0 0 1",
+            "inner_wall_speed": "80",
+            "internal_solid_infill_speed": "80",
+            "outer_wall_speed": "80",
+            "sparse_infill_speed": "80",
+            "top_surface_speed": "80"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "立方体",
+      "config": {
+        "extruder": "2"
+      },
+      "parts": [
+        {
+          "id": 0,
+          "name": "立方体",
+          "subtype": "normal_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [3.12499995, 0, 0, 0, 0.0156249998, 0, 0, 0, 0.00781249988, 0, 0, 0],
+          "config": {
+            "matrix": "931.32248623187502 0 0 0 0 1.455191408020389e-11 0 0 0 0 2.2737365459280277e-13 0 0 0 0 1",
+            "source_file": "C:\\Users\\zhimin.zeng\\Downloads\\自动流量校准展示模型.3mf",
+            "source_object_id": "1",
+            "source_volume_id": "0",
+            "source_offset_x": "0",
+            "source_offset_y": "0",
+            "source_offset_z": "0",
+            "extruder": "2"
+          }
+        },
+        {
+          "id": 1,
+          "name": "通用-立方体",
+          "subtype": "modifier_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [1.17187498, 0, 0, 0, 0.390624994, 0, 0, 0, 0.390624994, 0, 0, 0],
+          "config": {
+            "matrix": "2.5899280122454242 0 0 0 0 0.0035527133530125436 0 0 0 0 0.0035527133530125444 0 0 0 0 1",
+            "inner_wall_speed": "80",
+            "internal_solid_infill_speed": "80",
+            "outer_wall_speed": "80",
+            "sparse_infill_speed": "80",
+            "top_surface_speed": "80"
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "立方体",
+      "config": {
+        "extruder": "3"
+      },
+      "parts": [
+        {
+          "id": 0,
+          "name": "立方体",
+          "subtype": "normal_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [3.12499995, 0, 0, 0, 0.0156249998, 0, 0, 0, 0.00781249988, 0, 0, 0],
+          "config": {
+            "matrix": "931.32248623187502 0 0 0 0 1.455191408020389e-11 0 0 0 0 2.2737365459280277e-13 0 0 0 0 1",
+            "source_file": "C:\\Users\\zhimin.zeng\\Downloads\\自动流量校准展示模型.3mf",
+            "source_object_id": "2",
+            "source_volume_id": "0",
+            "source_offset_x": "0",
+            "source_offset_y": "0",
+            "source_offset_z": "0"
+          }
+        },
+        {
+          "id": 1,
+          "name": "通用-立方体",
+          "subtype": "modifier_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [1.17187498, 0, 0, 0, 0.390624994, 0, 0, 0, 0.390624994, 0, 0, 0],
+          "config": {
+            "matrix": "2.5899280122454242 0 0 0 0 0.0035527133530125436 0 0 0 0 0.0035527133530125444 0 0 0 0 1",
+            "inner_wall_speed": "80",
+            "internal_solid_infill_speed": "80",
+            "outer_wall_speed": "80",
+            "sparse_infill_speed": "80",
+            "top_surface_speed": "80"
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "立方体",
+      "config": {
+        "extruder": "4"
+      },
+      "parts": [
+        {
+          "id": 0,
+          "name": "立方体",
+          "subtype": "normal_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [3.12499995, 0, 0, 0, 0.0156249998, 0, 0, 0, 0.00781249988, 0, 0, 0],
+          "config": {
+            "matrix": "931.32248623187502 0 0 0 0 1.455191408020389e-11 0 0 0 0 2.2737365459280277e-13 0 0 0 0 1",
+            "source_file": "C:\\Users\\zhimin.zeng\\Downloads\\自动流量校准展示模型.3mf",
+            "source_object_id": "3",
+            "source_volume_id": "0",
+            "source_offset_x": "0",
+            "source_offset_y": "0",
+            "source_offset_z": "0"
+          }
+        },
+        {
+          "id": 1,
+          "name": "通用-立方体",
+          "subtype": "modifier_part",
+          "vertices": 8,
+          "triangles": 12,
+          "transform": [1.17187498, 0, 0, 0, 0.390624994, 0, 0, 0, 0.390624994, 0, 0, 0],
+          "config": {
+            "matrix": "2.5899280122454242 0 0 0 0 0.0035527133530125436 0 0 0 0 0.0035527133530125444 0 0 0 0 1",
+            "inner_wall_speed": "80",
+            "internal_solid_infill_speed": "80",
+            "outer_wall_speed": "80",
+            "sparse_infill_speed": "80",
+            "top_surface_speed": "80"
+          }
+        }
+      ]
+    }
+  ],
+  "instances": [
+    {
+      "objectId": 3,
+      "transform": [1.22222222, 0, 0, 0, 1, 0, 0, 0, 1, 127.99999, 98, 0.1]
+    },
+    {
+      "objectId": 4,
+      "transform": [1.22222222, 0, 0, 0, 1, 0, 0, 0, 1, 127.99999, 117.99999, 0.1]
+    },
+    {
+      "objectId": 5,
+      "transform": [1.22222222, 0, 0, 0, 1, 0, 0, 0, 1, 127.99999, 137.99999, 0.1]
+    },
+    {
+      "objectId": 6,
+      "transform": [1.22222222, 0, 0, 0, 1, 0, 0, 0, 1, 127.99999, 157.99999, 0.1]
+    }
+  ]
+}
