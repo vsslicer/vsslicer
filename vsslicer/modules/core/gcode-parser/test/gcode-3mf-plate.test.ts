@@ -89,13 +89,12 @@ describe('gcode.3mf plates (H2C fixture, Bambu Studio 02.08.02.61)', () => {
     const cfg = (xml: string) => writeZip(h2c, new Map([['Metadata/slice_info.config', enc(xml)]]));
     const gt = readGcode3mfPlate(cfg('<plate><metadata key="index" value="1"/><object name="a>b"/></plate>'), 1);
     expect(gt.statistics?.objects).toEqual(['a>b']);
-    const t = Date.now();
     const bad = readGcode3mfPlate(cfg('<plate>'.repeat(100000)), 1);
-    expect(Date.now() - t).toBeLessThan(200);
     expect(bad.statistics).toBeUndefined();
     const big = readGcode3mfPlate(cfg(`<!--${'x'.repeat(5 * 1024 * 1024)}-->`), 1);
     expect(big.diagnostics.map((d) => d.code)).toContain('gcode-3mf-slice-info-size');
-  });
+    // hang guard only; the linearity of the 100000-<plate> case is counted in the scanner matrix below
+  }, 60_000);
 });
 
 describe('slice_info.config declared size', () => {
@@ -137,18 +136,39 @@ describe('slice_info.config scanner is linear on hostile input', () => {
   const shapes: [string, (n: number) => string][] = [
     ['unclosed <object name=', (n) => P('<object name='.repeat(n / 13))],
     ['unclosed quotes', (n) => P('<object name="'.repeat(n / 14))],
-    ['unclosed <plate>', (n) => '<plate>'.repeat(Math.min(100000, n / 7))],
+    ['unclosed <plate>', (n) => '<plate>'.repeat(n / 7)],
     ['nested tags', (n) => `${'<plate><filament id="1"/>'.repeat(n / 25)}</plate>`],
   ];
-  for (const size of [64 * 1024, 1024 * 1024, 4 * 1024 * 1024 - 64]) {
-    for (const [name, make] of shapes) {
-      it(`${name} at ${size} bytes`, () => {
-        const zip = cfg(make(size));
-        const t = Date.now();
-        const p = readGcode3mfPlate(zip, 1);
-        expect(Date.now() - t).toBeLessThan(500);
-        expect(p.diagnostics).toEqual([]);
-      });
+  /** Work of one read: native string searches (calls plus characters they scan), the only non-constant step of the scanner. */
+  function work(zip: Uint8Array): number {
+    const orig = String.prototype.indexOf;
+    let n = 0;
+    const spy = vi.spyOn(String.prototype, 'indexOf').mockImplementation(function (
+      this: string,
+      s: string,
+      from?: number,
+    ) {
+      const r = orig.call(this, s, from);
+      n += 1 + (r >= 0 ? r : this.length) - (from ?? 0);
+      // step budget: a quadratic scan aborts here instead of running for minutes (linear needs about 1e8)
+      if (n > 1e9) throw new Error('scanner work budget exceeded');
+      return r;
+    });
+    try {
+      expect(readGcode3mfPlate(zip, 1).diagnostics).toEqual([]);
+    } finally {
+      spy.mockRestore();
     }
+    return n;
+  }
+  const small = 64 * 1024;
+  const large = 4 * 1024 * 1024 - 64;
+  for (const [name, make] of shapes) {
+    // 64x the input: linear work grows about 64x, a quadratic scan (a search per tag) about 4096x.
+    // The timeout is a hang guard only.
+    it(`${name}: work grows linearly from ${small} to ${large} bytes`, { timeout: 60_000 }, () => {
+      const ratio = work(cfg(make(large))) / work(cfg(make(small)));
+      expect(ratio).toBeLessThan(200);
+    });
   }
 });

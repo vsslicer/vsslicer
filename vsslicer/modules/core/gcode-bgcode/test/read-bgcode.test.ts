@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { readFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   BlockType,
   Compression,
@@ -127,7 +127,7 @@ describe('truncation at every offset', () => {
     }
   });
 
-  it('reads a 20 MB block in 4 KB chunks quickly', async () => {
+  it('reads a 20 MB block in 4 KB chunks', async () => {
     const le = (n: number, size: number) => Array.from({ length: size }, (_, i) => (n >>> (8 * i)) & 0xff);
     const size = 20 * 1024 * 1024;
     const blk = new Uint8Array(8 + 2 + size);
@@ -137,12 +137,24 @@ describe('truncation at every offset', () => {
     all.set(bytes);
     all.set(blk, bytes.length);
     all.set(le(crc32(blk), 4), bytes.length + blk.length);
-    const t = Date.now();
-    const ev = await collect(all, [deflateCodec], 4096);
+    // Bytes copied by Uint8Array.set: linear reassembly copies each byte about once; re-joining the
+    // buffer on every chunk would copy about size^2 / 8 KiB.
+    const orig = Uint8Array.prototype.set;
+    let copied = 0;
+    const spy = vi.spyOn(Uint8Array.prototype, 'set').mockImplementation(function (this: Uint8Array, a, off) {
+      copied += (a as ArrayLike<number>).length;
+      return orig.call(this, a, off);
+    });
+    let ev: BgcodeEvent[];
+    try {
+      ev = await collect(all, [deflateCodec], 4096);
+    } finally {
+      spy.mockRestore();
+    }
     expect(codes(ev)).toEqual([]);
     expect(blocks(ev)[0]?.data?.length).toBe(size);
-    expect(Date.now() - t).toBeLessThan(3000);
-  });
+    expect(copied).toBeLessThan(3 * size);
+  }, 60_000); // hang guard only
 });
 
 describe('block size bounds (GCP-76)', () => {

@@ -1,11 +1,31 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { open } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { fileSource, readSummary, readSummaryFile } from '../src/index.ts';
 import { fixturesDir, loadManifest, lineScannable, readGolden } from './support/golden.ts';
 import { encode, pieces } from './support/run.ts';
+
+/** Runs `readSummaryFile` and returns its result with the bytes read through `FileHandle.read`. */
+async function readCounted(path: string) {
+  const probe = await open(path);
+  const proto = Object.getPrototypeOf(probe) as { read: (...a: unknown[]) => Promise<{ bytesRead: number }> };
+  await probe.close();
+  const orig = proto.read;
+  let bytes = 0;
+  const spy = vi.spyOn(proto, 'read').mockImplementation(async function (this: unknown, ...a: unknown[]) {
+    const r = await orig.apply(this, a);
+    bytes += r.bytesRead;
+    return r;
+  });
+  try {
+    return { summary: await readSummaryFile(path), bytes };
+  } finally {
+    spy.mockRestore();
+  }
+}
 
 const sum = (text: string, size = 1 << 20) => readSummary(pieces(encode(text), size));
 const numbers = (v: string | undefined): number[] => (v ?? '').split(',').map(Number);
@@ -129,7 +149,7 @@ describe('unknown extruder slots are empty objects, never holes', () => {
   }, 60_000);
 });
 
-describe('no move buffers, fast', () => {
+describe('no move buffers', () => {
   it('scans 100 MB of moves allocating almost no array buffers', async () => {
     const block = encode('G1 X10.123 Y20.456 E0.01234 F1800\n; layer comment\nG1 X11.5 E.01\n'.repeat(1000));
     async function* source(): AsyncGenerator<Uint8Array> {
@@ -139,46 +159,46 @@ describe('no move buffers, fast', () => {
     }
     gc();
     const base = process.memoryUsage().arrayBuffers;
-    const t0 = performance.now();
     const s = await readSummary(source());
-    const ms = performance.now() - t0;
     gc();
     expect(s.extruders).toEqual([{ lengthMm: 7, weightG: 3 }]);
     // a parse would hold chunk buffers of tens of MB; here only line fragments
     expect(process.memoryUsage().arrayBuffers - base).toBeLessThan(2 << 20);
-    // Time is a regression guard only (memory is the point): a real slowdown is minutes, while a
-    // loaded CI box can be several times slower. Test timeout stays above the bound.
-    expect(ms).toBeLessThan(30_000);
+    // no wall-time assertion: the 60 s test timeout is only a hang guard
   }, 60_000);
 
-  it('readSummaryFile reads the head and tail regions of a big file and agrees with the full scan', async () => {
-    const dir = mkdtempSync(join(tmpdir(), 'summary-'));
-    try {
-      const path = join(dir, 'big.gcode');
-      const filler = 'G1 X10.123 Y20.456 E0.01234 F1800\n'.repeat(40_000); // ~1.4 MB
-      writeFileSync(
-        path,
-        `; model printing time: 1m 0s; total estimated time: 2m 0s\n${filler}${filler}; filament used [mm] = 12\n`,
-      );
-      const t0 = performance.now();
-      const s = await readSummaryFile(path);
-      expect(performance.now() - t0).toBeLessThan(500);
-      expect(s).toEqual(await readSummary(fileSource(path)));
-      expect(s).toEqual({ extruders: [{ lengthMm: 12 }], estimateSeconds: { model: 60, total: 120 } });
-    } finally {
-      rmSync(dir, { recursive: true, force: true });
-    }
-  });
+  it(
+    'readSummaryFile reads the head and tail regions of a big file and agrees with the full scan',
+    { timeout: 60_000 },
+    async () => {
+      const dir = mkdtempSync(join(tmpdir(), 'summary-'));
+      try {
+        const path = join(dir, 'big.gcode');
+        const filler = 'G1 X10.123 Y20.456 E0.01234 F1800\n'.repeat(40_000); // ~1.4 MB
+        writeFileSync(
+          path,
+          `; model printing time: 1m 0s; total estimated time: 2m 0s\n${filler}${filler}; filament used [mm] = 12\n`,
+        );
+        const { summary: s, bytes } = await readCounted(path);
+        expect(bytes).toBe(2 * 512 * 1024); // the counted path ran, head and tail only, not the 2.8 MB file
+        expect(s).toEqual(await readSummary(fileSource(path)));
+        expect(s).toEqual({ extruders: [{ lengthMm: 12 }], estimateSeconds: { model: 60, total: 120 } });
+      } finally {
+        rmSync(dir, { recursive: true, force: true });
+      }
+    },
+  );
 
-  it('readSummaryFile equals the full scan on every corpus file and is quick', async () => {
+  it('readSummaryFile equals the full scan on every corpus file', async () => {
     const files = loadManifest().files.filter((f) => f.format === 'gcode');
-    const t0 = performance.now();
     for (const f of files) {
       const path = join(fixturesDir, f.path);
-      expect(await readSummaryFile(path), f.path).toEqual(await readSummary(fileSource(path)));
+      const { summary, bytes } = await readCounted(path);
+      expect(bytes, f.path).toBeGreaterThan(0); // the counted read path was used
+      expect(bytes, f.path).toBeLessThanOrEqual(Math.min(statSync(path).size, 1024 * 1024));
+      expect(summary, f.path).toEqual(await readSummary(fileSource(path)));
     }
-    expect(performance.now() - t0).toBeLessThan(1000);
-  });
+  }, 60_000);
 
   it('rejects for a missing file', async () => {
     await expect(readSummaryFile(join(fixturesDir, 'nope.gcode'))).rejects.toThrow(/ENOENT/);
