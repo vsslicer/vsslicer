@@ -9,6 +9,8 @@ export const MAX_LINE_LENGTH = 64 * 1024;
 export const MAX_SECTIONS = 50_000;
 /** Keys kept per section; extra keys are dropped with one diagnostic. */
 export const MAX_KEYS_PER_SECTION = 10_000;
+/** Entries read over the whole file; the pinned bundle has about 100 000. Reaching the cap stops the parse. */
+export const MAX_ENTRIES = 500_000;
 /** Diagnostics kept, so a hostile file cannot make the report itself unbounded. */
 export const MAX_DIAGNOSTICS = 1_000;
 
@@ -96,6 +98,7 @@ export function parseIni(input: string | Uint8Array, file: string): IniDocument 
   const headers = new Map<string, IniSection>();
   let keys = new Set<string>();
   let lineNo = 0;
+  let total = 0;
   for (let pos = 0; pos <= text.length;) {
     let end = text.indexOf('\n', pos);
     if (end < 0) end = text.length;
@@ -164,6 +167,18 @@ export function parseIni(input: string | Uint8Array, file: string): IniDocument 
       keyCapReported = true;
       continue;
     }
+    if (total >= MAX_ENTRIES) {
+      // pushed past the diagnostics cap so a flood of duplicate-key warnings cannot hide why the parse stopped
+      diagnostics.push({
+        severity: 'error',
+        code: 'malformed-line',
+        file,
+        line: lineNo,
+        message: `more than ${MAX_ENTRIES} entries; rest of the file not read`,
+      });
+      break;
+    }
+    total++;
     if (keys.has(key)) {
       diag(
         'warning',

@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
   MAX_DIAGNOSTICS,
+  MAX_ENTRIES,
   MAX_INI_BYTES,
   MAX_KEYS_PER_SECTION,
   MAX_LINE_LENGTH,
@@ -141,6 +142,16 @@ describe('hostile input', () => {
     expect(doc.sections).toHaveLength(MAX_SECTIONS);
     expect(doc.diagnostics).toHaveLength(1);
     expect(doc.diagnostics[0]!.line).toBe(MAX_SECTIONS + 1);
+  });
+
+  test('60 sections x 9 999 keys stop at the total entry cap with the cap diagnostic last', () => {
+    const body = 'a=1\n'.repeat(MAX_KEYS_PER_SECTION - 1);
+    const doc = parseIni(Array.from({ length: 60 }, (_, i) => `[print:s${i}]\n${body}`).join(''), 'e.ini');
+    const entries = doc.sections.reduce((n, s) => n + s.entries.length, 0);
+    expect(entries).toBe(MAX_ENTRIES);
+    expect(doc.diagnostics.length).toBeLessThanOrEqual(MAX_DIAGNOSTICS + 2);
+    expect(doc.diagnostics.filter((d) => d.message.includes('entries')).length).toBe(1);
+    expect(doc.diagnostics.at(-1)!.message).toContain(String(MAX_ENTRIES));
   });
 
   test('too many keys in one section: extras dropped, one diagnostic, next section unaffected', () => {
