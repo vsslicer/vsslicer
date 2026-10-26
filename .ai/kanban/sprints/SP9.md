@@ -1,6 +1,6 @@
 ---
 id: SP9
-title: Open 4
+title: M2 Open
 status: active
 milestone: M2
 start: "2026-10-26T09:11+00:00"
