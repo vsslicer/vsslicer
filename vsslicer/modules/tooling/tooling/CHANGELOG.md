@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.8.4
 
 - PLT-195: `third-party-notices` copies NOTICE, NOTICE.md and PROVENANCE.md of bundled `@vsslicer/*` packages (1 MiB cap).
 - PLT-196: optional `vsslicer.extensionName` override for the VSIX id.

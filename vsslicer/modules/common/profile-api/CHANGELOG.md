@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2
 
 - PRF-186: the catalogue and mapping tests guard against hangs in a child process instead of asserting wall time.
 - PRF-187: PROVENANCE.md is published with the package.

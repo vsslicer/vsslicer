@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2
 
 - VWR-394: `[Content_Types].xml`, `.rels` parts and the model scan refuse XML nested deeper than 64 (`MAX_XML_DEPTH`).
 - VWR-395: tests no longer assert wall time.
