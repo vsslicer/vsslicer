@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/gcode-parser",
-  "version": "0.8.5",
+  "version": "0.10.0",
   "description": "Streaming G-code text parser: implements the gcode-api Parse contract (moves, roles, layers, extrusion, state-change table, markers, thumbnails, object labels, config) and carries the golden corpus.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
@@ -30,10 +30,12 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write .",
+    "bench": "node bench/run.ts",
     "golden:update": "node scripts/update-golden.ts"
   },
   "dependencies": {
-    "@vsslicer/gcode-api": "^0.4.1"
+    "@vsslicer/gcode-api": "^0.5.0",
+    "@vsslicer/gcode-bgcode": "^0.4.2"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

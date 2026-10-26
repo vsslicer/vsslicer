@@ -1,0 +1,78 @@
+{
+  "machine": {
+    "cpu": "Apple M1 Pro",
+    "cores": 8,
+    "memGB": 16,
+    "os": "darwin 27.2.0",
+    "node": "v26.12.1"
+  },
+  "parser": "@vsslicer/gcode-parser@0.10.0 (source)",
+  "cases": {
+    "straight-50MB": {
+      "maxRssMB": 175,
+      "minMBps": 62.3,
+      "measured": {
+        "moves": 1700743,
+        "bytesPerMove": 28,
+        "totalBytesPerMove": 32,
+        "maxRssMB": 140,
+        "MBps": 103.9
+      }
+    },
+    "arc-heavy-50MB": {
+      "maxRssMB": 224,
+      "minMBps": 48.2,
+      "measured": {
+        "moves": 2883439,
+        "bytesPerMove": 28,
+        "totalBytesPerMove": 32,
+        "maxRssMB": 179,
+        "MBps": 80.4
+      }
+    },
+    "straight-200MB": {
+      "maxRssMB": 374,
+      "minMBps": 69.8,
+      "measured": {
+        "moves": 6805907,
+        "bytesPerMove": 28,
+        "totalBytesPerMove": 32,
+        "maxRssMB": 299,
+        "MBps": 116.5
+      }
+    },
+    "straight-500MB": {
+      "maxRssMB": 764,
+      "minMBps": 65.5,
+      "measured": {
+        "moves": 17018067,
+        "bytesPerMove": 28,
+        "totalBytesPerMove": 32,
+        "maxRssMB": 611,
+        "MBps": 109.3
+      }
+    },
+    "arc-heavy-200MB": {
+      "maxRssMB": 558,
+      "minMBps": 51.9,
+      "measured": {
+        "moves": 11534006,
+        "bytesPerMove": 28,
+        "totalBytesPerMove": 32,
+        "maxRssMB": 446,
+        "MBps": 86.5
+      }
+    },
+    "arc-heavy-500MB": {
+      "maxRssMB": 1238,
+      "minMBps": 51.4,
+      "measured": {
+        "moves": 28831718,
+        "bytesPerMove": 28,
+        "totalBytesPerMove": 32,
+        "maxRssMB": 990,
+        "MBps": 85.7
+      }
+    }
+  }
+}
