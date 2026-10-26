@@ -82,6 +82,12 @@ jobs:
           path: ${{ runner.temp }}/vscode-test
           key: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-${{ hashFiles('vsslicer/modules/*/package.json') }}
           restore-keys: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-
+      # VWR-45: admesh is the oracle for the mesh module's MeshStats; with VSS_REQUIRE_ADMESH the test fails instead of skipping when it is missing
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'mesh')
+        run: |
+          sudo apt-get update && sudo apt-get install -y admesh
+          admesh --version
+          echo "VSS_REQUIRE_ADMESH=1" >> "$GITHUB_ENV"
       - run: scripts/registry.sh start
       - run: node scripts/run.mjs ci --changed "$BASE"
         env:

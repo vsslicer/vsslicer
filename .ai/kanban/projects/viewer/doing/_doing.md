@@ -1,3 +1,4 @@
 # In progress
 
-1. [VWR-45: Run admesh as the oracle in CI](045-run-admesh-as-the-oracle-in-ci.md)
+1. [VWR-25: Read PrusaSlicer 2.x config and objects](025-read-prusaslicer-2-x-config-and-objects.md)
+2. [VWR-50: Record parse, dedup and BVH time and memory in CI](050-record-parse-dedup-and-bvh-time-and-memory-in-ci.md)

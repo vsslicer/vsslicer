@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-45: admesh oracle test for `MeshStats` (triangles, bounds, open edges, closed-mesh volume) with a meta-test; CI installs admesh on Linux and requires it.
 - VWR-397: `fetchBytes` preallocates from `Content-Length` only for identity bodies; a content-encoded (gzip) body is read through the capped chunk list.
 - VWR-397: `parseUrl` refuses with `PoolQueueFullError` before downloading when running, queued and downloading requests fill the pool limits.
 - VWR-49: Web Worker pool for the webview (`createWebModelWorkerPool`, `blobWorkerSpawner`, `fetchBytes`): blob: workers (D19), fetch streaming with a byte cap (D18), pool size 1..16, in-flight and queue caps, crash isolation, abort.
