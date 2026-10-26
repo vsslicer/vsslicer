@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/profile-api",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared profile model: entity types, settings values, schema, catalogue, pure condition and merge code, and ports. Depends on nothing.",
   "license": "AGPL-3.0-or-later",
   "type": "module",

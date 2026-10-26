@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
 - PRF-20: native <-> unified conversions for the 56 keys of profiles.md section 6 (Prusa, Orca, Bambu, Cura), with lossy notes and bounded parsing.
 - PRF-19: catalogue coverage test over the pinned key lists of every dialect (committed fixtures).

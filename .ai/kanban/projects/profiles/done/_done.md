@@ -17,3 +17,4 @@
 15. [PRF-18: Assign groups, home entities, hidden keys and override scopes](018-assign-groups-home-entities-hidden-keys-and-override-scopes.md)
 16. [PRF-19: Add the catalogue coverage test over the pinned key lists](019-add-the-catalogue-coverage-test-over-the-pinned-key-lists.md)
 17. [PRF-20: Fill the 56 mapped keys of profiles.md section 6 with conversions and tests](020-fill-the-56-mapped-keys-of-profiles-md-section-6-with-conver.md)
+18. [PRF-135: Release `profile-api@0.1.0`: entities, JSON Schema, catalogue, merge and condition evaluator](135-release-profile-api-0-1-0-entities-json-schema-catalogue-mer.md)
