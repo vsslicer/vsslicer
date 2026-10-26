@@ -15,6 +15,7 @@
   "files": [
     "dist",
     "LICENSE",
+    "PROVENANCE.md",
     "README.md"
   ],
   "engines": {
