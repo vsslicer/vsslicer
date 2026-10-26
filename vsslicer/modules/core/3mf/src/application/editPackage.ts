@@ -60,6 +60,9 @@ export function makeEditable(
   const bad = (name: string, why: string): never => {
     throw new InvalidPartEditError(name, why);
   };
+  const writable = (name: string): void => {
+    if (opened.readOnly !== undefined) bad(name, 'the file is read-only');
+  };
   const plain = (name: string): void => {
     if (!name || name.startsWith('/') || name.endsWith('/') || name === CONTENT_TYPES || RELS.test(name)) {
       bad(name, 'not a plain part name');
@@ -70,6 +73,7 @@ export function makeEditable(
     ...opened,
     save: () => (changes.size === 0 ? original : deps.writeZip(original, changes)),
     replacePart(name, bytes) {
+      writable(name);
       if (!names.has(name)) bad(name, 'no such part');
       return next(
         opened.parts.map((p) => (p.name === name ? { ...p, bytes } : p)),
@@ -77,6 +81,7 @@ export function makeEditable(
       );
     },
     addPart(name, contentType, bytes) {
+      writable(name);
       plain(name);
       if (names.has(name)) bad(name, 'the part already exists');
       const types = dec.decode(current(CONTENT_TYPES));
@@ -87,6 +92,7 @@ export function makeEditable(
       return next([...opened.parts, { name, contentType, relationships: [], bytes }], more);
     },
     removePart(name) {
+      writable(name);
       if (!names.has(name)) bad(name, 'no such part');
       if (name === opened.rootModel) bad(name, 'it is the root model');
       const more = new Map<string, Uint8Array | null>([

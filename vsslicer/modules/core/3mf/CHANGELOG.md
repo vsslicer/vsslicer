@@ -9,3 +9,5 @@
 - VWR-6: read `[Content_Types].xml` and relationships into the `Package` (OPC adapter).
 - VWR-8: `writeZip` saves a zip by copying untouched entries raw and deflating replaced or added ones (ZIP64, archive comment kept).
 - VWR-7: `openPackage(bytes)` returns parts, thumbnails, with the required-extension and production-part checks.
+- VWR-16: `resolveProject`: components, build items, transforms, base materials and colour groups resolved into a `Project`; Production ids are per part.
+- VWR-17: `readProject(pkg)` resolves Production sub-models (`p:path` in components and build items); `openPackage` checks every reachable sub-model for missing parts and required extensions, and opens packages requiring Slice, Beam Lattice, Volumetric, Boolean, Displacement or Secure Content read-only with a `readOnly` notice naming them (`DETECTED_EXTENSIONS`).

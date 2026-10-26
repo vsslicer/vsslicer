@@ -22,3 +22,7 @@
 20. [VWR-40: Parse ASCII STL](040-parse-ascii-stl.md)
 21. [VWR-41: Parse OBJ with groups](041-parse-obj-with-groups.md)
 22. [VWR-8: Write a zip by copying original entries raw](008-write-a-zip-by-copying-original-entries-raw.md)
+23. [VWR-16: Read components, build items, transforms and materials](016-read-components-build-items-transforms-and-materials.md)
+24. [VWR-17: Resolve Production sub-models and required extensions](017-resolve-production-sub-models-and-required-extensions.md)
+25. [VWR-37: Spike: parse, dedup and BVH time and memory at 1, 5 and 20 M](037-spike-parse-dedup-and-bvh-time-and-memory-at-1-5-and-20-m.md)
+26. [VWR-47: Add parseModel with the triangle cap](047-add-parsemodel-with-the-triangle-cap.md)
