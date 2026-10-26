@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.12.0
 
 - GCP-16: `gcode3mfPlates` and `readGcode3mfPlate`: plate enumeration, `slice_info.config` statistics (linear quote-aware scanner, 4 MiB cap), the plate thumbnail and the `plate_N.gcode.md5` check for `.gcode.3mf`.
 - GCP-15: `gcode3mfSource` and `gcode3mfEntries` read `.gcode.3mf` entries through @vsslicer/3mf ^0.1.0 (stored, deflated, data descriptors, zip64; typed `CorruptZipError` and `SizeCapExceededError`); the archive and entry are held in memory for now.
