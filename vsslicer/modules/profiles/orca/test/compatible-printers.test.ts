@@ -2,6 +2,7 @@
 import { evaluate, parseCondition } from '@vsslicer/profile-api';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 import { MAX_PRINTER_NAMES, convertCompatiblePrinters } from '../src/adapters/conditions/compatible-printers.ts';
 
@@ -48,9 +49,18 @@ describe('convertCompatiblePrinters', () => {
     const long = convertCompatiblePrinters(['x'.repeat(10_000), 42, null], (n) => n);
     expect(long.diagnostics).toHaveLength(3);
   });
+
+  test('length cap pushes one diagnostic, not one per remaining entry', () => {
+    const names = Array.from({ length: 1000 }, (_, i) => `${i}`.padEnd(200, 'x'));
+    const r = convertCompatiblePrinters(names, (n) => n);
+    expect(r.diagnostics.filter((d) => d.includes('too long'))).toHaveLength(1);
+    expect(parseCondition(r.condition!)).toBeTruthy();
+  });
 });
 
-const orca = '/Users/jkiraly/Workspace/VSSlicer/.reference/repos/OrcaSlicer/resources/profiles/BBL/process';
+const orca = fileURLToPath(
+  new URL('../../../../.reference/repos/OrcaSlicer/resources/profiles/BBL/process', import.meta.url),
+);
 describe.skipIf(!existsSync(orca))('real OrcaSlicer@09aa0114 BBL process profiles', () => {
   test('compatible_printers of a real profile converts', () => {
     const j = JSON.parse(readFileSync(join(orca, '0.06mm High Quality @BBL A1M 0.2 nozzle.json'), 'utf8'));
