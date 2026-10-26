@@ -6,3 +6,4 @@
 4. [PRF-217: Delete the second test-only readBounded copy in profile-catalogue-data](217-delete-the-second-test-only-readbounded-copy-in-profile-cata.md)
 5. [PRF-212: Decode quote_plus'd Cura machine instance file names](212-decode-quote-plus-d-cura-machine-instance-file-names.md)
 6. [PRF-213: Write Cura booleans as Python literals in exported .inst.cfg](213-write-cura-booleans-as-python-literals-in-exported-inst-cfg.md)
+7. [PRF-69: Spike: usability of percent-or-absolute and Cura formula widgets](069-spike-usability-of-percent-or-absolute-and-cura-formula-widg.md)
