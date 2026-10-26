@@ -112,13 +112,15 @@ describe('readProject on fixtures', () => {
       expect(p.objects.length).toBeGreaterThan(0);
       const kept = new Set(p.preserved.map((x) => x.name));
       for (const part of pk.parts)
-        if (!part.name.toLowerCase().endsWith('.model')) expect(kept.has(part.name)).toBe(true);
+        if (!part.name.toLowerCase().endsWith('.model'))
+          expect(kept.has(part.name) || p.rawConfig.has(part.name)).toBe(true);
     },
   );
 
-  test('a Bambu file falls back with a notice while no reader exists', () => {
+  test('a Bambu file is read by the bambu reader, with its project config kept raw', () => {
     const p = readProject(openPackage(readFileSync(join(__dirname, 'fixtures/real/pa_pattern.3mf'))));
-    expect(p.notices?.[0]).toMatch(/no reader/);
-    expect(p.preserved.length).toBeGreaterThan(0);
+    expect(p.dialect).toBe('bambu');
+    expect(p.notices ?? []).toEqual([]);
+    expect(p.rawConfig.has('Metadata/project_settings.config')).toBe(true);
   });
 });

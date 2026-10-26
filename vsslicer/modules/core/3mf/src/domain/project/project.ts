@@ -87,6 +87,8 @@ export interface Project {
   readonly instances: readonly Instance[];
   /** Raw project config exactly as stored (text or JSON), by part name. Empty when absent. */
   readonly rawConfig: ReadonlyMap<string, Uint8Array>;
+  /** Printable area (bed shape) as x,y polygon vertices in mm, from the project config. Absent when not stored. */
+  readonly printableArea?: readonly (readonly [x: number, y: number])[];
   /** Parts the model does not interpret, kept byte for byte so a save can write them back. */
   readonly preserved: readonly Part[];
   /** User-facing notes about the read, e.g. that a dialect reader was skipped. Absent when there are none. */

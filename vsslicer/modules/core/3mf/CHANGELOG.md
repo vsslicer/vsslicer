@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-21: `bambu` and `orca` dialect readers (`createBambuReader`, registered in `readProject`): `project_settings.config` and the embedded presets kept byte for byte in `rawConfig`; `Project.printableArea` from `printable_area`.
 - VWR-27: `cura` dialect reader (`createCuraReader`, registered in `readProject`): `Cura/*.cfg` containers raw in `rawConfig`, objects from the core model.
 - VWR-20: `readProject(pkg)` dispatches on the detected dialect; a disabled, missing or failing dialect reader falls back to core plus preserved parts with `Project.notices`; a core package keeps its non-model parts in `preserved`. `createReadProject(deps)` builds one with dialect readers.
 - VWR-398: `detectDialect` matches part names case-insensitively and with a leading `/`.
