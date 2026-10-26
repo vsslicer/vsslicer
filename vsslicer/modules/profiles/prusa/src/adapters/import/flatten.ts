@@ -26,6 +26,19 @@ export interface Budget {
 export type Diag = (severity: Diagnostic['severity'], code: Diagnostic['code'], line: number, message: string) => void;
 
 /**
+ * A `coString` value as PrusaSlicer reads it (`unescape_string_cstyle`, PrusaSlicer@b028299:src/libslic3r/Config.cpp:128-150):
+ * `\n` and `\r` unescape, `\x` -> `x`; undefined for a trailing lone backslash, which upstream rejects.
+ */
+export function unescapeString(s: string): string | undefined {
+  let bad = false;
+  const out = s.replace(/\\(.?)/gs, (_, c: string) => {
+    if (c === '') bad = true;
+    return c === 'n' ? '\n' : c === 'r' ? '\r' : c;
+  });
+  return bad ? undefined : out;
+}
+
+/**
  * `a; "b;c"; d` -> [`a`, `b;c`, `d`], or undefined when malformed. As upstream, leading blanks are skipped, an
  * unquoted word runs to the next `;` (trailing blanks kept) and a quoted one unescapes `\n`, `\r` and `\x` -> `x`.
  */

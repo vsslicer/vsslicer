@@ -17,7 +17,8 @@ import {
 } from '@vsslicer/profile-api';
 import { convertPrusaCondition } from '../conditions/index.ts';
 import { MAX_DIAGNOSTICS, parseIni, type IniSection, type IniSectionKind } from '../ini/index.ts';
-import { flattenKind, splitList, type Budget, type Diag, type Flattened } from './flatten.ts';
+import { OPTION_TYPES } from '../export/prusa/types.ts';
+import { flattenKind, splitList, unescapeString, type Budget, type Diag, type Flattened } from './flatten.ts';
 import { noteTags } from './notes.ts';
 import { SUPERSLICER_ONLY_KEYS } from './superslicer-keys.ts';
 import { splitVariants, type Mapped } from './split.ts';
@@ -92,7 +93,20 @@ function toSettings(values: Map<string, string>, line: (key: string) => number, 
       const natives = nativeKeys('prusa', key);
       if (!natives.every((n) => values.get(n))) continue; // an empty value is unset; it stays native
       try {
-        const r = nativeToUnified('prusa', key, Object.fromEntries(natives.map((n) => [n, values.get(n)!])));
+        // unified strings hold decoded text, as the Orca, Bambu and Cura importers give it; the INI holds it escaped
+        const r = nativeToUnified(
+          'prusa',
+          key,
+          Object.fromEntries(
+            natives.map((n) => {
+              const v = values.get(n)!;
+              if (OPTION_TYPES.get(n) !== 'coString') return [n, v];
+              const d = unescapeString(v);
+              if (d === undefined) throw new Error('trailing lone backslash');
+              return [n, d];
+            }),
+          ),
+        );
         // per-extruder values are keyed maps in the schema; the mapping returns a single point as an array
         settings[key] = orcaCatalogue.entries[key]?.per_extruder && Array.isArray(r.value) ? { '0': r.value } : r.value;
         for (const n of natives) used.add(n);

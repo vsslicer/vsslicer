@@ -55,7 +55,7 @@ const each = (parts: string[], f: (s: string) => string | undefined, sep: string
   return out.join(sep);
 };
 
-const unescape = (s: string) => s.replace(/\\(.)/gs, (_, c: string) => (c === 'n' ? '\n' : c === 'r' ? '\r' : c));
+/** `escape_string_cstyle` (Config.cpp:54-75): unified strings hold decoded text (the importer unescapes them). */
 const escape = (s: string) => s.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
 
 const escapeStrings = (a: string[]) =>
@@ -95,7 +95,7 @@ export function canon(type: OptionType, raw: string): string | undefined {
     case 'coEnums':
       return raw; // 0/1 and enum names, written as stored
     case 'coString':
-      return escape(unescape(raw));
+      return escape(raw);
     case 'coStrings': {
       const a = splitList(raw);
       return a && escapeStrings(a);

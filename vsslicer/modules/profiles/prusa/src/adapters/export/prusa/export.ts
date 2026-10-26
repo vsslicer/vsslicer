@@ -196,7 +196,9 @@ export function exportPrusaIni(input: Pick<ImportResult, 'entities' | 'native'>)
     }
     const path = `${kind}/${name}.ini`;
     const diag: Diag = (severity, code, message) => push({ severity, code, file: path, message });
-    if (paths.has(path)) {
+    // case and Unicode aliases: macOS and Windows file systems treat these as one file
+    const alias = path.normalize('NFC').toLowerCase();
+    if (paths.has(alias)) {
       diag('warning', 'malformed-line', `${id}: ${path} already written; this one skipped`);
       continue;
     }
@@ -243,7 +245,7 @@ export function exportPrusaIni(input: Pick<ImportResult, 'entities' | 'native'>)
       diag('error', 'malformed-line', `export over ${MAX_EXPORT_BYTES} bytes; this and later entities not written`);
       break;
     }
-    paths.add(path);
+    paths.add(alias);
     result.files.push({ path, bytes: encoded } satisfies SourceFile);
   }
   return result;

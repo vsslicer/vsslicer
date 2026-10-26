@@ -1,4 +1,4 @@
 # In progress
 
-1. [PRF-130: Download Cura resources from upstream when Cura is not installed](130-download-cura-resources-from-upstream-when-cura-is-not-insta.md)
-2. [PRF-214: Keep single backslashes when writing converted G-code to Prusa INI](214-keep-single-backslashes-when-writing-converted-g-code-to-pru.md)
+1. [PRF-106: Import .orca_printer, .orca_filament and .orca_bundle](106-import-orca-printer-orca-filament-and-orca-bundle.md)
+2. [PRF-108: Import .bbscfg and .bbsflmt](108-import-bbscfg-and-bbsflmt.md)
