@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added: the file-system store: one JSON file per entity, temp-file-and-rename writes, a lock and a `meta.updated` check that turn a second window's save into a conflict carrying both versions (PRF-45).
 - Added: `runImportInWorker` runs an import in a worker thread with a time budget, cancel and a host heartbeat; crashes become diagnostics (PRF-39).
 - Added: `readInstalledFolder` and `importInstalledFolder`: a read-only, sorted walk of an installed configuration folder into importers, bounded (optional `FolderLimits`), links skipped (PRF-36).
 - Added: the in-memory profile store (get, list, query, ProfileFiles port) with user-layer precedence on duplicate ids (PRF-44).
