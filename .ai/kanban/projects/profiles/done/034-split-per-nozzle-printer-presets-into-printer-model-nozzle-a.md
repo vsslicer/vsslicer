@@ -1,0 +1,2 @@
+
+**Review passed (sp10-coordinator, re-review of the fix round; the coordinator wrote none of this code)**: profiles-prusa `pnpm test` 236 passed. Probe: bed half of the guard removed (`split.ts:38`) fails 1 of 23 import tests, restored (`cmp` clean); the fix worker's diameter probe (`if (false)` at `:49`) also fails 1. The first review's other findings stand. Nit left: the two "not split" diagnostics use `malformed-line`.

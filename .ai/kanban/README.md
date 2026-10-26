@@ -15,8 +15,8 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 
 ## Milestones
 
-- [M1: Preview](milestones/M1-preview.md): draft, 138/146 cards done
-- [M2: Open](milestones/M2-open.md): draft, 185/351 cards done
+- [M1: Preview](milestones/M1-preview.md): draft, 139/146 cards done
+- [M2: Open](milestones/M2-open.md): draft, 194/354 cards done
 - [M3: Print](milestones/M3-print.md): draft, 31/436 cards done
 - [M4: Daily use](milestones/M4-daily-use.md): draft, 0/511 cards done
 - [M5: Parity](milestones/M5-parity.md): draft, 0/480 cards done
@@ -25,8 +25,8 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 
 ## Sprints
 
-- [SP10: M2 Open](sprints/SP10.md): active, 17/38 cards done
-- [SP11: M2 Open](sprints/SP11.md): planned, 0/38 cards done
+- [SP10: M2 Open](sprints/SP10.md): active, 26/39 cards done
+- [SP11: M2 Open](sprints/SP11.md): planned, 0/40 cards done
 - [SP12: M2 Open](sprints/SP12.md): planned, 0/35 cards done
 - [SP13: M3 Print](sprints/SP13.md): planned, 0/35 cards done
 - [SP14: M3 Print](sprints/SP14.md): planned, 0/37 cards done

@@ -36,3 +36,25 @@ Reads `user/<id>/` presets and their `.info` sidecars and the shared OrcaFilamen
 - Not done: mapping to unified entities (composing importer card).
 - Mutation probes (each restored): base_id dropped, parent link off, file-size cap, total cap, count cap, duplicate check, safePath, nil mapping: all FAIL a test (nil scalar probe survived first, test tightened).
 - Verification: `pnpm test` 6 files, 80 tests pass; `pnpm lint` fails only on PRF-28's unformatted `src/adapters/variants/variants.ts` (not mine); my files eslint/prettier clean; `pnpm build` ran; `node scripts/run.mjs checks` exit 0.
+
+**Review failed (sp10-rev-prf-28-29, 2026-10-26)**
+
+- Ran in `profiles-orca`: `pnpm install` ok; `pnpm lint` pass (PRF-28's file is now formatted); `pnpm build` pass; `pnpm test` 7 files, 89 tests pass; `node scripts/run.mjs checks` exit 0. `load_info` quote (OrcaSlicer@09aa0114:src/libslic3r/Preset.cpp:670-700) matches, including `"null"` -> empty for `setting_id` and `base_id`. Layering ok; AGPL header present.
+- Mutation probes (temp copy): base_id dropped, vendor link off, user link off, safePath off, NFC/case fold off, folder-type check off, `"null"` id mapping off, sidecar setting_id ignored, file-size cap off, nil in arrays: all FAIL a test.
+- Hostile probes: `../` path refused; non-string `type: 7` accepted as the folder type (fine); `__proto__` keys land in a null-prototype object.
+
+Problems:
+
+1. `src/adapters/user/read-user-presets.ts:93`: presets in `user/<id>/<type>/base/` are skipped silently. Orca loads that folder first as "custom roots" (OrcaSlicer@09aa0114:src/libslic3r/Preset.cpp:2007-2010; detached presets are saved there, `path_from_name` :4487-4488), and other user presets inherit them. Probe: `user/42/filament/base/My Root.json` plus `user/42/filament/Child.json` with `inherits: "My Root"` gives presets `[Child]` and an `unknown-parent` warning; `My Root` is gone without a diagnostic. Fix: read the `base/` subfolder of each type folder as user presets (same bounds), so their children link; a file the reader does not recognise under `user/` should not vanish silently.
+2. `src/adapters/user/read-user-presets.ts:120-121`: the preset name comes from the JSON `name` key, falling back to the file stem, while the comment on :120 says the file name is Orca's identity. Orca names a user preset by its file stem (Preset.cpp:2038-2043, `canonical_preset_name`), so a file `N.json` with `name: "Different"` imports here as `Different` and links differently from Orca. Fix: use the file stem as the name (as the comment says), and warn when the inner `name` disagrees; add a test with a mismatched `name`.
+
+Note, not blocking: Orca skips a user preset whose name equals an already loaded system preset (Preset.cpp:2044-2048, "Preset already present, not loading"); this reader imports it. Decide in the composing importer or here, and say which.
+
+**sp10-prf-28-29-fix (2026-10-26):** review problems 1 and 2 fixed; the note decided here.
+
+- `src/adapters/user/read-user-presets.ts`: `user/<id>/<type>/base/` presets (and their `.info`) are read, sorted before the rest so a `base/` custom root wins a name clash, as Orca loads it first (OrcaSlicer@09aa0114:src/libslic3r/Preset.cpp:2007-2010). Any other file under `user/` (including `_local/` bundles) now gives an `unknown-type` warning instead of vanishing; files outside `user/` are still ignored silently (not ours).
+- Name is the file stem (Preset.cpp:2038-2043); an inner `name` that differs gives a new `name-mismatch` warning (`TreeDiagnosticCode` in `src/adapters/tree/read-tree.ts` gained the code).
+- Note decided here: a user preset named like a vendor preset of the same type is skipped with a `duplicate` warning, as Orca does (Preset.cpp:2044-2048).
+- Tests (`test/read-user-presets.test.ts`, 4 new): base/ roots first and children link; unrecognised files under user/ warn; stem name with mismatch warning and linking by stem; vendor-named user preset skipped.
+- Mutation probes (each in place, restored, `vitest run` on the two test files): `base/` dropped from the regex; base-first sort removed; unknown-file warning removed; name from inner `name` again; mismatch warning removed; vendor-name skip off: all FAIL a test.
+- Verification: `pnpm install`, `pnpm lint` (eslint, prettier, tsc), `pnpm build` pass; `pnpm test` 8 files, 97 tests pass; `node scripts/run.mjs checks` exit 0. CHANGELOG Unreleased PRF-29 line extended.
