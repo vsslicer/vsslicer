@@ -1,6 +1,6 @@
 # In review
 
-1. [PRF-22: Spike: VSIX size of the Orca and Bambu data package](022-spike-vsix-size-of-the-orca-and-bambu-data-package.md)
-2. [PRF-21: Spike: can the upstream CLIs print a resolved config to use as an oracle](021-spike-can-the-upstream-clis-print-a-resolved-config-to-use-a.md)
-3. [PRF-17: Extend the catalogue with Cura keys](017-extend-the-catalogue-with-cura-keys.md)
-4. [PRF-16: Extend the catalogue with PrusaSlicer 2.9, 3.0 and SuperSlicer keys](016-extend-the-catalogue-with-prusaslicer-2-9-3-0-and-superslice.md)
+1. [PRF-118: Create the `profiles` module](118-create-the-profiles-module.md)
+2. [PRF-104: Model and validate bundle_structure.json](104-model-and-validate-bundle-structure-json.md)
+3. [PRF-83: Validate printer_instance connections against the static host_type list](083-validate-printer-instance-connections-against-the-static-hos.md)
+4. [PRF-123: Define the Importer, Exporter and ProfileStore read ports](123-define-the-importer-exporter-and-profilestore-read-ports.md)
