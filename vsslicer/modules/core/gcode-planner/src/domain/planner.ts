@@ -4,13 +4,17 @@ import type { ParsedFile } from '@vsslicer/gcode-api';
 import type { ResolvedLimits } from './limits.ts';
 import { MoveCursor } from './move-cursor.ts';
 import { TimingBuilder } from './timing.ts';
-import type { Timing } from './timing.ts';
+import type { Checkpoint, Timing } from './timing.ts';
 
 /**
  * One planner per firmware. `plan` is a generator so a host can run it in slices: it yields the
  * number of moves done (at least once per move buffer) and returns the {@link Timing}. It writes
  * start times into `parsed.moves` in place. Run it with `runPlanner` (cancellable, progress) or
  * `planSync`.
+ *
+ * A planner that can resume snapshots its state into checkpoints (`TimingBuilder.snapshot`) and,
+ * given a `replay`, restores `replay.from.state` and reports into `replay.out` instead of planning
+ * from move 0; `trapezoidsFor` drives that. It yields as soon as `replay.out.stop` is set.
  *
  * Limit precedence, per field: user override > the file's own limit command (M201/M203/M204/M205,
  * SET_VELOCITY_LIMIT, whichever the firmware honours) > config block > flavour default. The last
@@ -23,7 +27,13 @@ export interface Planner {
   readonly name: string;
   /** True when the result approximates rather than models the firmware's motion. */
   readonly estimate: boolean;
-  plan(parsed: ParsedFile, limits: ResolvedLimits): Generator<number, Timing, void>;
+  plan(parsed: ParsedFile, limits: ResolvedLimits, replay?: Replay): Generator<number, Timing, void>;
+}
+
+/** `trapezoidsFor`'s request: resume from the checkpoint's snapshot and report moves into `out`. */
+export interface Replay {
+  from: Checkpoint;
+  out: TimingBuilder;
 }
 
 /** Feedrate before the file's first F word. shortcut: a guess at firmware boot feedrates; real planners set their own. */

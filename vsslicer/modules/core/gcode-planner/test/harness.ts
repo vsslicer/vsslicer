@@ -143,9 +143,16 @@ export function checkPlanner(planner: Planner, parsed = sampleFile()): Timing {
   const layers = timing.layerTimes.reduce((a, b) => a + b, 0);
   expect(preamble + layers).toBeCloseTo(timing.totalTime, 4);
 
-  expect(timing.checkpoints.length).toBe(Math.ceil(parsed.moveCount / timing.checkpointInterval));
-  timing.checkpoints.forEach((c, i) => {
-    expect(c.move).toBe(i * timing.checkpointInterval);
+  // At each multiple of the interval; a planner that snapshots, at the first move it can resume at.
+  const cps = timing.checkpoints;
+  const slot = (m: number): number => Math.floor(m / timing.checkpointInterval);
+  const resumable = cps.some((c) => c.state !== undefined);
+  if (!resumable) expect(cps.length).toBe(Math.ceil(parsed.moveCount / timing.checkpointInterval));
+  if (parsed.moveCount) expect(cps[0]?.move).toBe(0);
+  cps.forEach((c, i) => {
+    if (resumable) expect(c.state).toBeDefined();
+    else expect(c.move).toBe(i * timing.checkpointInterval);
+    if (i) expect(slot(c.move)).toBeGreaterThan(slot(cps[i - 1]!.move));
     expect(Math.fround(c.time)).toBe(t[c.move]);
     expect(c.speed).toBeGreaterThanOrEqual(0);
   });
@@ -184,4 +191,30 @@ export function checkLimitPrecedence(
   expect(time('config', a)).not.toBeCloseTo(time('config', b), 6);
   expect(time('config', a, b)).toBeCloseTo(time('config', b), 9);
   expect(time('override', a, b)).toBeCloseTo(time('override', a), 9);
+}
+
+/**
+ * G4 dwell, which Marlin, RRF and Klipper all add: before the first move (it joins that move), mid-file
+ * and after the last move. Each adds its `seconds` to the total and shifts the later moves.
+ */
+export function checkDwell(planner: Planner): void {
+  const withDwells = (s: [number, number, number]): ParsedFile => {
+    const parsed = sampleFile();
+    parsed.markers = [0, 2, parsed.moveCount].map((moveIndex, i) => ({
+      name: 'G4',
+      fileOffset: 0,
+      moveIndex,
+      seconds: s[i],
+    }));
+    return parsed;
+  };
+  const a = withDwells([0, 0, 0]);
+  const b = withDwells([1, 5, 2]);
+  const ta = checkPlanner(planner, a);
+  const tb = checkPlanner(planner, b);
+  expect(tb.totalTime).toBeCloseTo(ta.totalTime + 8, 5);
+  const [sa, sb] = [startTimes(a), startTimes(b)];
+  expect(sb[1]! - sa[1]!).toBeCloseTo(1, 5);
+  expect(sb[2]! - sa[2]!).toBeCloseTo(6, 5);
+  expect(sb.at(-1)! - sa.at(-1)!).toBeCloseTo(6, 5);
 }
