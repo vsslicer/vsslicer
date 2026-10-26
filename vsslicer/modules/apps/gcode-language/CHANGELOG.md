@@ -1,7 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
 
+- GCP-103: files over 4 MB are scanned for unknown commands on open and save, not after every edit.
+- GCP-106: README and PROVENANCE describe the shipped features, the setting and the catalogue's sources and licences.
+- GCP-104: the catalogue lint rejects unknown flavours, leading-zero codes and duplicates across files (M104 is no longer listed for klipper in reprap.json).
 - GCP-99: the base firmware comes from gcode-api's `flavourFromName` (depends on ^0.7.0), so Cura's `RepRap` uses the RepRapFirmware catalogue, falling back to Marlin entries it lacks.
 - GCP-100: the flavour is read from the last 64 KiB too (head wins), so PrusaSlicer, SuperSlicer and Orca files with the config block at the end are no longer generic; Klipper G21 and the Prusa-Firmware codes G80, M403, M702, M862.1 and M862.3 (for Marlin) added.
 - GCP-98: Bambu Lab files (Bambu Studio, Orca) use the Bambu catalogue, and Prusa Buddy printers the Buddy one, both falling back to Marlin, so standard and Bambu codes no longer warn as unknown; added G17, M105, M114, M117, M220, M400, T1 and 12 Bambu codes; `bambu` and `prusa-buddy` can be chosen in `flavourOverrides`.

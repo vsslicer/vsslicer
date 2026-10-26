@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
 
 - GCP-40: WebGL2 failure messages name `disable-hardware-acceleration` and software rendering.
 - PLT-192: `ColorMode.Width` and `ColorMode.Flow` in the segment renderer; `ranges` gains `width` and `flow` (the default colour range of those modes).
