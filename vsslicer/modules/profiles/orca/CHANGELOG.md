@@ -6,7 +6,6 @@
 
 - PRF-28: `decodeVariants` and `encodeVariants` turn the per-extruder-variant arrays of machine and process presets (H2D, H2C) into values keyed by 0-based extruder then variant name (machine limits as `[normal, silent]` pairs; per-extruder options by extruder) and back to the original array order; a wrong-length array or malformed slot list stays as it is with a warning.
 
-
 - PRF-27: `readOrcaTree` reads an Orca or Bambu Studio `resources/profiles` tree (vendor indices, `machine_model`, `machine`, `process`, `filament`) and flattens each preset: parent, then each `include` in order, then own keys; `nil` becomes `null`; `setting_id` and `filament_id` become `external_ids`. `loadProfileTree` reads the tree from disk without following symlinks. Both cap file size, file count, total bytes, chain depth, includes and merge work (keys every index entry carries plus keys copied while flattening, default 8M) per call (`TREE_LIMITS`).
 - PRF-189: the bundle reader no longer reads the dead host byte.
 - PRF-183: the bundle reader refuses colons, NFC duplicates, Windows-trimmed names, symlinks on any host carrying Unix modes, CRC mismatches and a non-final end-of-central-directory record.
