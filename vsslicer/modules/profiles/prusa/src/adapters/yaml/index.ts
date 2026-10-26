@@ -23,3 +23,12 @@ export type {
 } from './parse.ts';
 export { readVendorYaml } from './vendor.ts';
 export type { VendorYamlDocument, VendorYamlKind, VendorYamlOptions, VendorYamlRecord } from './vendor.ts';
+export { MAX_PRESET_VARIANT_DEPTH, MAX_PRESET_VARIANTS, readPresetStream, readPresetYaml } from './preset.ts';
+export type {
+  PresetMatchMode,
+  PresetYamlDocument,
+  PresetYamlKind,
+  PresetYamlNode,
+  PresetYamlOptions,
+  PresetYamlRoot,
+} from './preset.ts';

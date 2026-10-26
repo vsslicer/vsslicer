@@ -38,7 +38,9 @@ export type YamlReason =
   /** vendor reader: the experimental flag is off. */
   | 'experimental-off'
   /** vendor reader: a document without a known `kind`, without an id, or a duplicate. */
-  | 'bad-record';
+  | 'bad-record'
+  /** preset reader: more variants in one file than MAX_PRESET_VARIANTS. */
+  | 'too-many-variants';
 
 export interface YamlDiagnostic extends Diagnostic {
   reason: YamlReason;
