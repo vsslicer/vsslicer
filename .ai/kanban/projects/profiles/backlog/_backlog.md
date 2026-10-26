@@ -120,5 +120,4 @@
 118. [PRF-200: Fold case fully and test O_NOFOLLOW in the Orca tree loader](200-fold-case-fully-and-test-o-nofollow-in-the-orca-tree-loader.md)
 119. [PRF-201: Merge only own keys in profile-api so __proto__ keys stay data](201-merge-only-own-keys-in-profile-api-so-proto-keys-stay-data.md)
 120. [PRF-203: Remove the five PrusaSlicer keys from the SuperSlicer-only key list](203-remove-the-five-prusaslicer-keys-from-the-superslicer-only-k.md)
-121. [PRF-204: Cap the diagnostics of the Orca tree reader and folder loader](204-cap-the-diagnostics-of-the-orca-tree-reader-and-folder-loade.md)
-122. [PRF-208: Lower the Orca inherited-keys cap to the measured need](208-lower-the-orca-inherited-keys-cap-to-the-measured-need.md)
+121. [PRF-208: Lower the Orca inherited-keys cap to the measured need](208-lower-the-orca-inherited-keys-cap-to-the-measured-need.md)

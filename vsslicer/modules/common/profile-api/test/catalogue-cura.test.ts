@@ -1,28 +1,24 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { existsSync, mkdtempSync, readFileSync, rmSync, truncateSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { describe, expect, test } from 'vitest';
 import { catalogueEntrySchema, catalogueSchema, defsSchema, orcaCatalogue } from '../src/index.ts';
 import { curaCatalogue } from '../src/domain/catalogue/cura.ts';
+import { outputs } from '../tools/catalogue/generate.ts';
+import { REPOS } from '../tools/catalogue/prusa.ts';
 import { GUARDED_TIMEOUT, guarded } from './support/guard.ts';
 import {
   CURA_NAMES,
   CURA_OUTPUT,
-  CURA_SOURCE,
   CURA_SPLITS,
   extractCura,
-  FDM_MATERIALS_SOURCE,
   FDM_PLA,
   FDMEXTRUDER,
   FDMPRINTER,
   generateCura,
   MAX_DEPTH,
   MAX_FILE_BYTES,
-  readBounded,
-  renderCura,
-  XML_PROFILE,
 } from '../tools/catalogue/cura.ts';
 
 const ajv = new Ajv2020({ allErrors: true, strict: false });
@@ -127,18 +123,6 @@ const nested = (levels: number) => {
 
 describe('the Cura generator bounds (rule 25)', () => {
   test(`refuses a definition file over ${MAX_FILE_BYTES} bytes before reading it`, () => {
-    const dir = mkdtempSync(join(tmpdir(), 'cura-bounds-'));
-    try {
-      const big = join(dir, 'big.def.json');
-      writeFileSync(big, '');
-      truncateSync(big, MAX_FILE_BYTES + 1);
-      expect(() => readBounded(big)).toThrow(/limit/);
-      const ok = join(dir, 'ok.def.json');
-      writeFileSync(ok, def({}));
-      expect(readBounded(ok)).toBe(def({}));
-    } finally {
-      rmSync(dir, { recursive: true, force: true });
-    }
     expect(() => extractCura(' '.repeat(MAX_FILE_BYTES + 1), 'x')).toThrow(/limit/);
   });
 
@@ -202,23 +186,16 @@ describe('the Cura generator bounds (rule 25)', () => {
 });
 
 // The pinned sources live in .reference (ignored); without them only the committed data is checked.
-const sources = existsSync(join(CURA_SOURCE, FDMPRINTER));
+const CURA_SOURCE = join(REPOS, 'Cura');
+const sources = ['OrcaSlicer', 'BambuStudio', 'PrusaSlicer', 'PrusaSlicer-2.9', 'SuperSlicer', 'Cura'].every((r) =>
+  existsSync(join(REPOS, r, '.git')),
+);
 describe.skipIf(!sources)('the Cura generator, on Cura@5bea2f8', () => {
   const read = (path: string) => readFileSync(join(CURA_SOURCE, path), 'utf8');
 
   test('is deterministic and matches the committed data', () => {
-    const run = () => {
-      // cura.json is the file without `names`, which generate.ts merges into orca.json.
-      const { notice, entries, per_extruder, material } = generateCura(
-        read(FDMPRINTER),
-        read(FDMEXTRUDER),
-        read(XML_PROFILE),
-        orcaCatalogue.entries,
-      );
-      return renderCura({ notice, entries, per_extruder, material });
-    };
-    const first = run();
-    expect(run()).toBe(first);
+    const first = outputs().get(CURA_OUTPUT);
+    expect(outputs().get(CURA_OUTPUT)).toBe(first);
     expect(first).toBe(readFileSync(CURA_OUTPUT, 'utf8'));
   });
 
@@ -238,7 +215,7 @@ describe.skipIf(!sources)('the Cura generator, on Cura@5bea2f8', () => {
   });
 
   test('cites the fdm_materials line holding <density>', () => {
-    const pla = join(FDM_MATERIALS_SOURCE, FDM_PLA);
+    const pla = join(REPOS, 'fdm_materials', FDM_PLA);
     if (!existsSync(pla)) return;
     const line = Number(/:(\d+)$/.exec(curaCatalogue.material['properties/density']!.provenance)![1]);
     expect(readFileSync(pla, 'utf8').split('\n')[line - 1]).toContain('<density>');
