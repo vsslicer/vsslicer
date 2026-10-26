@@ -27,6 +27,9 @@ export function composeTransforms(a: Transform, b: Transform): Transform {
 }
 
 const MAX_DEPTH = 64;
+// Rule 25: component fan-out is a billion-laughs vector, so one budget covers a whole resolveProject call.
+const MAX_PARTS = 100_000;
+const MAX_TRIANGLES = 10_000_000;
 
 /**
  * Resolves a root `CoreModel` into a `Project` (dialect `core`): every build item becomes an `Instance`, the
@@ -61,6 +64,14 @@ export function resolveProject(
     return group[p];
   };
 
+  let visits = 0;
+  let leaves = 0;
+  let leafTris = 0;
+  const spend = (): void => {
+    if (visits > MAX_PARTS || leaves > MAX_PARTS || leafTris > MAX_TRIANGLES)
+      fail(`components expand to more than ${MAX_PARTS} parts or ${MAX_TRIANGLES} triangles`);
+  };
+
   /** Leaf parts of `obj` (in part `file`, '' for the root) and everything below it, transforms relative to `obj`. */
   const flatten = (
     model: CoreModel,
@@ -74,8 +85,12 @@ export function resolveProject(
     const key = `${file}|${obj.id}`;
     if (trail.includes(key) || trail.length > MAX_DEPTH)
       fail(`component cycle or nesting too deep at object ${obj.id}`);
+    visits++;
+    spend();
     const base = obj.name ?? `object ${obj.id}`;
     const add = (name: string, mesh: NonNullable<CoreObject['mesh']>, color?: string): void => {
+      leaves++;
+      spend();
       out.push({
         id: out.length,
         name,
@@ -87,6 +102,8 @@ export function resolveProject(
     };
     const mesh = obj.mesh;
     if (mesh) {
+      leafTris += mesh.triangles.length / 3;
+      spend();
       const tp = obj.triangleProps;
       if (!tp) add(base, mesh, colorOf(model, obj.pid, obj.pindex));
       else {

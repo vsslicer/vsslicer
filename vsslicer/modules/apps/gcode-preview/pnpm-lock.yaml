@@ -12,15 +12,18 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@vsslicer/gcode-parser':
-        specifier: ^0.13.0
-        version: 0.13.0
+        specifier: ^0.14.0
+        version: 0.14.0
       '@vsslicer/gcode-planner':
         specifier: ^0.5.0
         version: 0.5.0
       '@vsslicer/webview-kit':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.7.0
+        version: 0.7.0
     devDependencies:
+      '@playwright/test':
+        specifier: 1.64.1
+        version: 1.64.1
       '@types/mocha':
         specifier: 10.0.10
         version: 10.0.10
@@ -34,8 +37,8 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3(supports-color@8.1.1)
       '@vsslicer/tooling':
-        specifier: ^0.8.2
-        version: 0.8.2(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: ^0.8.3
+        version: 0.8.3(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
       esbuild:
         specifier: 0.28.2
         version: 0.28.2
@@ -378,6 +381,11 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@playwright/test@1.64.1':
+    resolution: {integrity: sha512-IaYGml/nSOiZWROfPtuIL7neuu9qDOZ3TNvNljUIrhDMxiGTgPjzj/g9p9RxpS2tSepPDRY+UwAaEeiKtUvIAg==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   '@secretlint/config-creator@10.2.2':
     resolution: {integrity: sha512-BynOBe7Hn3LJjb3CqCHZjeNB09s/vgf0baBaHVw67w7gHF0d25c3ZsZ5+vv8TgwSchRdUCRrbbcq5i2B1fJ2QQ==}
@@ -831,8 +839,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/3mf@0.1.0':
-    resolution: {integrity: sha512-Utup/kJmwzh7ncG8mtaTywMb7IyADq0r1YslqmaBdY8fwWbmwuhaoaqAdFlePmt31gLKUDt3SO59z386kwEg2A==}
+  '@vsslicer/3mf@0.1.1':
+    resolution: {integrity: sha512-AcPbJJei2yIV1WFvzWcjVpj8N0ATDt4pQBKJ5eVP8kTxxXPVWbYFVIsNNIVCydzLJKawvpnDCCSBxXTxuBJxEA==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-api@0.7.0':
@@ -843,8 +851,8 @@ packages:
     resolution: {integrity: sha512-PigT/jVQ9DONuiOTNJL048q9jsrc+ISSFM9OcaoR9KZj6JW9iKOlDkBD67uuv0M9L1HEapkF69Z3mTwQf/6jgQ==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-parser@0.13.0':
-    resolution: {integrity: sha512-Wo5FsVM96e67EDWu5qZ5u7/+vyO22LaoDeoDhbx4vKKOXm5+bpAnnz7A7I6apfU5VBv7vKriVxiuHpPb9DlXiQ==}
+  '@vsslicer/gcode-parser@0.14.0':
+    resolution: {integrity: sha512-hnSg9RuHrmdqtyGOETPHjOTwiucdJFqEVrqdXUFqOUOIAiDZbewZZVskHjy+HOrryeq09ml2J86PrkLZuX1vrA==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-planner@0.5.0':
@@ -856,13 +864,13 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/tooling@0.8.2':
-    resolution: {integrity: sha512-EyT+lV5QJLDDFWyxL4whBJwvsVhBze7Yx0rPPzGDYx1nGeha5hG/MkV9F7ttwqVF49/1F5VBI0iYMJdqc2/Jcw==}
+  '@vsslicer/tooling@0.8.3':
+    resolution: {integrity: sha512-zX3z002vJow2a6TK57/5xzTnbCfoIKtP9SacjO8yfPX9r0D0HSt/jsj06GLp6hZ++cc1Fo9iMkQBx6U0cY2pFQ==}
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.6.0':
-    resolution: {integrity: sha512-RfK3kUZhFUHwRVyxybxYZ/qJ+mvNRsw1uu39jC26241JnQQUR+J0BiHIW8wGZOZzKqmpIeH0rQx8ApIXY8qg2w==}
+  '@vsslicer/webview-kit@0.7.0':
+    resolution: {integrity: sha512-xVbC6MDFLNcULZEZ9TIzG52Wbqd2K4CX9dDtpJ0HBWjn/+NliHNikHjX+P08/IATdeSguwP3c0Z1qZsWpxSltg==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -1821,6 +1829,16 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
+  playwright-core@1.64.1:
+    resolution: {integrity: sha512-BC4s8y6SEVA6Q1rSxZTto8hI1KUI3xXlHGZgvGqP4IqPdI/a6FX9H29IDNz7vKo9l21b6LfYosScPL6M3xxyDQ==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  playwright@1.64.1:
+    resolution: {integrity: sha512-HCrVhHr5QQuwYoswEUGTb7gGp522yflbv/ST8nF4sFWGuLjQCt17Q/EubpGGSNKYn1tsTCPZxqHhHCfVURu7UA==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   pluralize@2.0.0:
     resolution: {integrity: sha512-TqNZzQCD4S42De9IfnnBvILN7HAW7riLqsCyp8lgjXeysyPlX5HhqKAcJHHHb9XskE4/a+7VGC9zzx8Ls0jOAw==}
 
@@ -2553,6 +2571,10 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.3
 
+  '@playwright/test@1.64.1':
+    dependencies:
+      playwright: 1.64.1
+
   '@secretlint/config-creator@10.2.2':
     dependencies:
       '@secretlint/types': 10.2.2
@@ -3037,7 +3059,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/3mf@0.1.0':
+  '@vsslicer/3mf@0.1.1':
     dependencies:
       fflate: 0.8.3
       saxes: 6.0.0
@@ -3046,9 +3068,9 @@ snapshots:
 
   '@vsslicer/gcode-bgcode@0.4.3': {}
 
-  '@vsslicer/gcode-parser@0.13.0':
+  '@vsslicer/gcode-parser@0.14.0':
     dependencies:
-      '@vsslicer/3mf': 0.1.0
+      '@vsslicer/3mf': 0.1.1
       '@vsslicer/gcode-api': 0.7.0
       '@vsslicer/gcode-bgcode': 0.4.3
 
@@ -3063,7 +3085,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/tooling@0.8.2(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@vsslicer/tooling@0.8.3(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.13.0(supports-color@8.1.1))
       '@vscode/vsce': 3.9.2(supports-color@8.1.1)
@@ -3084,7 +3106,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.6.0': {}
+  '@vsslicer/webview-kit@0.7.0': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
@@ -4096,6 +4118,12 @@ snapshots:
   picomatch@2.3.2: {}
 
   picomatch@4.0.7: {}
+
+  playwright-core@1.64.1: {}
+
+  playwright@1.64.1:
+    dependencies:
+      playwright-core: 1.64.1
 
   pluralize@2.0.0: {}
 

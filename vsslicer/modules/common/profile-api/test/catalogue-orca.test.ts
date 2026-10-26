@@ -10,7 +10,6 @@ import {
   DEFAULT_SOURCE,
   generate,
   generateBambu,
-  OUTPUT,
   PRESET,
   PRINT_CONFIG,
   render,
@@ -72,10 +71,8 @@ describe.skipIf(!source)('the generator, on OrcaSlicer@09aa0114', () => {
     expect(run()).toBe(run());
   });
 
-  // The committed file carries Bambu names, so it can only be compared when Bambu's source is present.
-  test.skipIf(!bambu)('matches the committed data', () => {
-    expect(run()).toBe(readFileSync(OUTPUT, 'utf8'));
-  });
+  // The committed file also carries every other dialect's names and PRF-18's groups: `outputs()` is compared with it
+  // in catalogue-prusa.test.ts and catalogue-groups.test.ts.
 
   test('cites the line that defines each key', () => {
     const lines = read(PRINT_CONFIG).split('\n');

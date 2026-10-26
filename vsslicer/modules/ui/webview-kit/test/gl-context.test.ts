@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // @vitest-environment jsdom
 import { afterEach, expect, test, vi } from 'vitest';
-import { createGl2Context, showGlFailure } from '../src/gl/index.ts';
+import { createGl2Context, GlContextError, showGlFailure } from '../src/gl/index.ts';
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -56,4 +56,13 @@ test('showGlFailure replaces the canvas with an alert naming the cause', () => {
   expect(el.getAttribute('role')).toBe('alert');
   expect(el.dataset['cause']).toBe('no-webgl2');
   expect(el.textContent).toBe(r.error.message);
+});
+
+test('restore failure has its own message and shows through showGlFailure', () => {
+  const canvas = document.createElement('canvas');
+  document.body.append(canvas);
+  const error = new GlContextError('restore');
+  const el = showGlFailure(canvas, error);
+  expect(el.dataset['cause']).toBe('restore');
+  expect(el.textContent).toContain('could not be restored');
 });

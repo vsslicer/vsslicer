@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Depends on webview-kit ^0.7.0 (re-lock only).
+
 ## 0.2.1
 
 - Depends on webview-kit ^0.6.0 (re-lock only).

@@ -204,3 +204,39 @@ describe('real files', () => {
     }
   });
 });
+
+describe('component fan-out bounds (rule 25)', () => {
+  // Object 0 is the mesh; object n has 10 components of object n-1, so 10^levels leaves.
+  const fanOut = (levels: number, mesh = quad()): string => {
+    let body = `<object id="0">${mesh}</object>`;
+    for (let i = 1; i <= levels; i++)
+      body += `<object id="${i}"><components>${`<component objectid="${i - 1}"/>`.repeat(10)}</components></object>`;
+    return model(`<resources>${body}</resources><build><item objectid="${levels}"/></build>`);
+  };
+
+  test('the 8-level fan-out is refused fast and without a heap blow-up', () => {
+    const xml = fanOut(8);
+    expect(xml.length).toBeLessThan(4000);
+    const heap = process.memoryUsage().heapUsed;
+    const t0 = performance.now();
+    expect(() => resolveProject(parse(xml))).toThrow(MalformedXmlError);
+    expect(() => resolveProject(parse(xml))).toThrow(/components expand to more than 100000 parts/);
+    expect(performance.now() - t0).toBeLessThan(1000);
+    expect(process.memoryUsage().heapUsed - heap).toBeLessThan(100 * 1024 * 1024);
+  });
+
+  test('a fan-out under the caps still resolves', () => {
+    expect(resolveProject(parse(fanOut(3))).objects[0]!.parts).toHaveLength(1000);
+  });
+
+  test('the triangle cap is hit before the part cap', () => {
+    // 1000 leaves of 20,000 triangles = 20 M triangles, with only 1000 parts.
+    const n = 20_000;
+    const mesh =
+      '<mesh><vertices><vertex x="0" y="0" z="0"/><vertex x="1" y="0" z="0"/><vertex x="0" y="1" z="0"/></vertices><triangles>' +
+      '<triangle v1="0" v2="1" v3="2"/>'.repeat(n) +
+      '</triangles></mesh>';
+    expect(() => resolveProject(parse(fanOut(3, mesh)))).toThrow(/more than 100000 parts or 10000000 triangles/);
+    expect(resolveProject(parse(fanOut(2, mesh))).objects[0]!.parts).toHaveLength(100);
+  });
+});

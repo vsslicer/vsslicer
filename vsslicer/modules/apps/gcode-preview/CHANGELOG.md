@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+- GCP-39: diagnostics (up to 10,000, with go-to-offset) and flags (assumed limits and flavour, estimate, invisible macros) in the side panel; lazy G-code text pane for plain local .gcode (64 KiB, 400 lines, 4 KiB per line per read, one read in flight).
+- GCP-110: Playwright snapshots of a Bambu and a PrusaSlicer corpus file through the preview renderer on SwiftShader (`pnpm test:browser`).
+- GCP-113: a failed context restore shows webview-kit 0.7.0's `'restore'` failure (no cast); the error detail is logged.
+- GCP-36: side panel with thumbnails, object labels (hover highlights the object), summary with the slicer estimate beside ours, and a plate picker; `.gcode.3mf` files now open (first plate, then by picker) instead of "not supported yet". Untrusted plate data is capped (256 plates, 10,000 labels, 4 MiB PNG thumbnails dropped in the worker, 256-character strings, text only).
+
 ## 0.4.1
 
 - GCP-111: depends on gcode-api ^0.7.0 and gcode-parser ^0.13.0, so the preview parses with the one flavour table (GCP-99): a Cura `;FLAVOR:RepRap` file is parsed and timed as RepRapFirmware.

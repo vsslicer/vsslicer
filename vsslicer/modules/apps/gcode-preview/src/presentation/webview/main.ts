@@ -12,10 +12,11 @@ import {
   type VsCodeApi,
 } from '@vsslicer/webview-kit/webview';
 import { ColorMode, createGl2Context, showGlFailure } from '@vsslicer/webview-kit/gl';
-import { MoveFlag, type Layer } from '@vsslicer/gcode-api';
+import { MOVE_STRIDE, MoveFlag, MoveOffset, type Layer } from '@vsslicer/gcode-api';
 import {
   Method,
   moveStream,
+  type PlateRequest,
   type PreviewSummary,
   type Progress,
   type Received,
@@ -27,6 +28,9 @@ import {
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
 import { SPEEDS, createClock, createMarker, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
 import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
+import type { PanelLabel } from '../../domain/panel.ts';
+import { moveFileOffset, type TextRequest, type TextWindow } from '../../domain/text-window.ts';
+import { renderPanel, type SidePanel } from './side-panel.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
 import {
   concatMoves,
@@ -80,6 +84,19 @@ const marker = document.createElement('div');
 marker.style.cssText =
   'position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;border:2px solid #f00;pointer-events:none;display:none';
 stage.append(canvas, marker);
+// the view on the left, the job information (side panel) next to it
+const layout = document.createElement('div');
+layout.style.cssText = 'display:flex;gap:16px;align-items:flex-start';
+const column = document.createElement('div');
+column.style.cssText = 'flex:1 1 0;min-width:0';
+const aside = document.createElement('div');
+aside.style.cssText =
+  'flex:0 0 18em;max-width:30%;font-family:var(--vscode-font-family);color:var(--vscode-foreground)';
+layout.append(column, aside);
+let sidePanel: SidePanel | undefined;
+/** Labels of the shown file and the one hovered in the side panel (its moves are highlighted). */
+let labels: PanelLabel[] = [];
+let hover: number | undefined;
 const toolbar = document.createElement('div');
 const legend = document.createElement('span');
 const bar = document.createElement('span');
@@ -194,7 +211,8 @@ const show = (title: string, lines: string[] = [], view = false) => {
   h.textContent = title;
   const list = document.createElement('ul');
   for (const l of lines) list.append(Object.assign(document.createElement('li'), { textContent: l }));
-  root.replaceChildren(h, list, ...(view ? [toolbar, panel, stage] : []));
+  column.replaceChildren(toolbar, panel, stage);
+  root.replaceChildren(h, list, ...(view ? [layout] : []));
 };
 
 const redraw = () => {
@@ -205,7 +223,7 @@ const redraw = () => {
   const colorMode = s.colorMode ?? ColorMode.Feature;
   const camera = s.camera ?? fit(aspect());
   modes.value = String(colorMode);
-  renderer.draw({ ...s, layer: s.layer, colorMode, camera });
+  renderer.draw({ ...s, layer: s.layer, colorMode, camera }, hover === undefined ? undefined : labels[hover]?.ranges);
   placeMarker(camera);
   const l = legendFor(colorMode, renderer.ranges());
   legend.replaceChildren();
@@ -265,6 +283,11 @@ const time = (s: number) => `${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 
 const render = (state: ViewState) => {
   renderer?.dispose();
   renderer = undefined;
+  sidePanel?.dispose();
+  sidePanel = undefined;
+  aside.replaceChildren();
+  labels = [];
+  hover = undefined;
   head = undefined;
   cancelAnimationFrame(frame);
   if (state.status === 'loading') return show('Loading G-code...');
@@ -285,13 +308,53 @@ const render = (state: ViewState) => {
     `${s.kind} from ${s.slicer}`,
     [
       `${s.moveCount} moves in ${s.moveBuffers.length} buffers, ${s.layers.length} layers`,
-      `Print time ${time(s.totalTime)} (${s.planner}${s.estimate ? ', estimate' : ''}, ${s.flavour}${s.flavourAssumed ? ' assumed' : ''})`,
-      `${s.objects.length} objects, ${s.thumbnails} thumbnails, ${s.diagnosticCount} diagnostics`,
+      `${s.planner}${s.estimate ? ' estimate' : ''}, ${s.flavour}${s.flavourAssumed ? ' assumed' : ''}, ${s.diagnosticCount} diagnostics`,
     ],
     true,
   );
+  labels = s.panel.labels;
+  sidePanel = renderPanel(
+    document,
+    s.panel,
+    { seconds: s.totalTime, planner: s.planner },
+    {
+      onHover(i) {
+        hover = i;
+        redraw();
+      },
+      onPlate(plate) {
+        api.setState({ layer: null }); // another plate has other layers: start from its whole print
+        channel.post({
+          tag: PROTOCOL_TAG,
+          v: TRANSPORT_SCHEMA_VERSION,
+          kind: 'notification',
+          method: Method.plate,
+          payload: { plate } satisfies PlateRequest,
+        });
+      },
+      onGoTo: requestText,
+      onCurrent() {
+        const at = moveFileOffset(buffers, headMove, MOVE_STRIDE, MoveOffset.fileOffset);
+        if (at !== undefined) requestText(at);
+      },
+      imageUrl: (data) => URL.createObjectURL(new Blob([data as BlobPart], { type: 'image/png' })),
+      releaseUrl: (url) => URL.revokeObjectURL(url),
+    },
+    { ...s, text: s.kind === 'gcode' },
+  );
+  aside.replaceChildren(sidePanel.element);
   done();
 };
+
+let textSeq = 0;
+const requestText = (offset: number) =>
+  channel.post({
+    tag: PROTOCOL_TAG,
+    v: TRANSPORT_SCHEMA_VERSION,
+    kind: 'notification',
+    method: Method.text,
+    payload: { seq: ++textSeq, offset } satisfies TextRequest,
+  });
 
 const done = () => {
   if (!summary || buffers.some((b) => !b)) return;
@@ -425,7 +488,10 @@ channel.onMessage((m) => {
   const r = parseEnvelope(m);
   if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.state)
     render(r.envelope.payload as ViewState);
-  else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.command)
+  else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.textWindow) {
+    const w = r.envelope.payload as TextWindow;
+    if (w.seq === textSeq) sidePanel?.showText(w); // an older answer is dropped
+  } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.command)
     command(r.envelope.payload as TimelineCommand);
 });
 handshake(channel, session).catch((e: Error) => show('Could not connect to VS Code', [e.message]));

@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { changed, fetchRetry, localDeps, order, withDeps } from './lib.mjs';
+import { changed, fetchRetry, isUnreleased, unreleasedDepProblems, localDeps, order, withDeps } from './lib.mjs';
 import { changelogSection, integrityProblems, stalePinProblems, lockfileIntegrities, prepackProblems, registryProblems, releaseTag, versionProblems } from './versioning.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -107,6 +107,11 @@ if (args.includes('--list')) (console.log(JSON.stringify(names)), process.exit(0
 const selected = new Set(names);
 if (cmd === 'ci') names = order(modules).filter((n) => withDeps(modules, selected).has(n));
 
+if (cmd === 'ci') {
+  const bad = unreleasedDepProblems(modules.filter((m) => names.includes(m.name)));
+  if (bad.length) (bad.forEach((p) => console.error(`ci: ${p}`)), process.exit(1));
+}
+
 const sh = (m, argv, e = env) => {
   console.log(`\n[${m.name}] pnpm ${argv.join(' ')}`);
   const r = spawnSync('pnpm', argv, { cwd: join(root, 'modules', m.dir), stdio: 'inherit', env: e, shell: process.platform === 'win32' });
@@ -121,6 +126,7 @@ const published = async (m) => {
 };
 
 const publish = async (m) => {
+  if (isUnreleased(m)) return console.log(`\n[${m.name}] 0.0.0 is unreleased, skipping publish`);
   if (await published(m)) return console.log(`\n[${m.name}] ${m.version} already published, skipping`);
   sh(m, ['publish', '--no-git-checks'], publishEnv);
 };

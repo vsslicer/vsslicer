@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- VWR-392: `openZip` refuses a package whose declared inflated sizes sum above `maxTotalBytes` (default 1 GiB, `DEFAULT_MAX_TOTAL_BYTES`), before any inflation.
+- VWR-390: `resolveProject` refuses component fan-out above 100,000 parts or 10,000,000 triangles (`MalformedXmlError`).
+- VWR-391: the real-file tests use committed fixtures (`test/fixtures/real`, with PROVENANCE); only the large OrcaBadge sample still skips without `.reference`.
+
 ## 0.1.0
 
 - VWR-73: first release: the container API (`openPackage`, parts, thumbnails, `save`, `replacePart`, `addPart`, `removePart`, raw-copy writer), core model reading (`readModel`, `resolveProject`, `readProject`) and typed errors.

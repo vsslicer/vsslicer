@@ -5,7 +5,6 @@ import { Ajv2020 } from 'ajv/dist/2020.js';
 import { describe, expect, test } from 'vitest';
 import { bambuCatalogue, catalogueEntrySchema, catalogueSchema, defsSchema, orcaCatalogue } from '../src/index.ts';
 import {
-  BAMBU_OUTPUT,
   BAMBU_RENAMES,
   BAMBU_SOURCE,
   CONSTANTS,
@@ -29,15 +28,16 @@ describe('the generated Bambu catalogue', () => {
     expect(valid(bambuCatalogue), JSON.stringify(valid.errors?.slice(0, 5))).toBe(true);
   });
 
-  test("assigns Bambu's 608 FFF keys: 512 Orca entries with a Bambu name, 96 bambu. entries", () => {
+  // 615 matches E11's count; PRF-16's tokenizer also reads Bambu's filament overrides of the overhang speeds.
+  test("assigns Bambu's 615 FFF keys: 512 Orca entries with a Bambu name, 103 bambu. entries", () => {
     expect(named).toHaveLength(512);
-    expect(prefixed).toHaveLength(96);
+    expect(prefixed).toHaveLength(103);
     for (const [key, e] of prefixed)
       expect(e, key).toMatchObject({ native_only: 'bambu', native: { bambu: { key: key.slice(6) } } });
   });
 
   test('maps chamber_temperatures onto chamber_temperature, with both native names', () => {
-    expect(orcaCatalogue.entries.chamber_temperature?.native).toEqual({
+    expect(orcaCatalogue.entries.chamber_temperature?.native).toMatchObject({
       orca: { key: 'chamber_temperature' },
       bambu: { key: 'chamber_temperatures' },
     });
@@ -59,7 +59,8 @@ describe.skipIf(!sources)('the Bambu generator, on BambuStudio@79df7ae', () => {
   const bambu = (path: string) => readFileSync(join(BAMBU_SOURCE, path), 'utf8');
   const orca = (path: string) => readFileSync(join(DEFAULT_SOURCE, path), 'utf8');
 
-  test('is deterministic and matches the committed data', () => {
+  // bambu.json as committed is outputs()'s (PRF-18 regroups it by Bambu's pages), compared in catalogue-prusa.test.ts.
+  test('is deterministic', () => {
     const run = () =>
       render(
         generateBambu(generate(orca(PRINT_CONFIG), orca(PRESET), orca(CONSTANTS)), bambu(PRINT_CONFIG), bambu(PRESET))
@@ -67,7 +68,6 @@ describe.skipIf(!sources)('the Bambu generator, on BambuStudio@79df7ae', () => {
       );
     const first = run();
     expect(run()).toBe(first);
-    expect(first).toBe(readFileSync(BAMBU_OUTPUT, 'utf8'));
   });
 
   test('cites the line that defines each bambu. key', () => {

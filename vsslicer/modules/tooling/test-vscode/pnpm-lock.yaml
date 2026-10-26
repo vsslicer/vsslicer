@@ -23,7 +23,7 @@ importers:
         version: 5.0.5(vitest@5.0.5)
       '@vsslicer/tooling':
         specifier: ^0.8.1
-        version: 0.8.2(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
+        version: 0.8.3(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
       eslint:
         specifier: 10.13.0
         version: 10.13.0(supports-color@8.1.1)
@@ -979,8 +979,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/tooling@0.8.2':
-    resolution: {integrity: sha512-EyT+lV5QJLDDFWyxL4whBJwvsVhBze7Yx0rPPzGDYx1nGeha5hG/MkV9F7ttwqVF49/1F5VBI0iYMJdqc2/Jcw==}
+  '@vsslicer/tooling@0.8.3':
+    resolution: {integrity: sha512-zX3z002vJow2a6TK57/5xzTnbCfoIKtP9SacjO8yfPX9r0D0HSt/jsj06GLp6hZ++cc1Fo9iMkQBx6U0cY2pFQ==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -3484,7 +3484,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/tooling@0.8.2(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@vsslicer/tooling@0.8.3(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.13.0(supports-color@8.1.1))
       '@vscode/vsce': 3.9.2(supports-color@8.1.1)

@@ -176,9 +176,13 @@ describe('native names', () => {
     expect(validEntry(entry({ native: { prusa: { key } } }))).toBe(true);
     expect(validEntry(entry({ native: { prusa: { conversion: { kind: 'split', keys: [key, 'b'] } } } }))).toBe(true);
   });
-  test('a name with a space or a dot is rejected', () => {
+  test('a name with a space, or starting with a dot or dash, is rejected', () => {
     expect(validEntry(entry({ native: { orca: { key: 'layer height' } } }))).toBe(false);
-    expect(validEntry(entry({ native: { orca: { key: 'prusa.x' } } }))).toBe(false);
+    expect(validEntry(entry({ native: { orca: { key: '.x' } } }))).toBe(false);
+    expect(validEntry(entry({ native: { orca: { key: '-x' } } }))).toBe(false);
+  });
+  test("a dotted name is valid (PrusaSlicer 3.0's printer.tool_count)", () => {
+    expect(validEntry(entry({ native: { prusa3: { key: 'printer.tool_count' } } }))).toBe(true);
   });
   test('legacy and pinned flags (PRF-16)', () => {
     const prusa3 = { key: 'host_type', legacy: true, pinned: 'PrusaSlicer@30ef591' };

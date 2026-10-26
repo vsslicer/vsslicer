@@ -33,12 +33,19 @@ export interface Gcode3mfPlate {
   statistics?: PlateStatistics;
   /** `Metadata/plate_N.png` (PNG bytes). */
   thumbnail?: Uint8Array;
+  /** Every `Metadata/*.png` of this plate (`_N` in the name) within the size and count limits, by entry name. */
+  thumbnails: Map<string, Uint8Array>;
   /** Empty when the MD5 matches or there is no `.md5` entry. */
   diagnostics: Diagnostic[];
 }
 
 /** `slice_info.config` above this is not parsed (a diagnostic is added instead). */
 const MAX_SLICE_INFO_BYTES = 4 * 1024 * 1024;
+
+/** A plate thumbnail declaring more than this uncompressed is never inflated (a diagnostic is added instead). */
+export const MAX_THUMBNAIL_BYTES = 4 * 1024 * 1024;
+/** At most this many thumbnails of one plate are read. */
+const MAX_THUMBNAILS = 16;
 
 const unescape = (s: string): string =>
   s
@@ -175,13 +182,16 @@ export function readGcode3mfPlate(
   const text = (name: string): string | undefined =>
     names.has(name) ? new TextDecoder().decode(zip.inflated(name)) : undefined;
 
-  const info = text('Metadata/slice_info.config');
-  if (info !== undefined && info.length > MAX_SLICE_INFO_BYTES) {
+  // The declared size decides before anything is inflated. A lying (too small) declared size cannot get past it:
+  // `inflated` stops the stream as soon as it outgrows the declared size and throws CorruptZipError.
+  const declared = zip.entries.find((e) => e.name === 'Metadata/slice_info.config')?.size ?? 0;
+  const info = declared > MAX_SLICE_INFO_BYTES ? undefined : text('Metadata/slice_info.config');
+  if (declared > MAX_SLICE_INFO_BYTES || (info !== undefined && info.length > MAX_SLICE_INFO_BYTES)) {
     diagnostics.push({
       code: 'gcode-3mf-slice-info-size',
       severity: 'error',
       fileOffset: 0,
-      message: `Metadata/slice_info.config is ${info.length} bytes, over the ${MAX_SLICE_INFO_BYTES} limit: statistics skipped`,
+      message: `Metadata/slice_info.config is ${info?.length ?? declared} bytes, over the ${MAX_SLICE_INFO_BYTES} limit: statistics skipped`,
     });
   }
   const parsed = info === undefined || info.length > MAX_SLICE_INFO_BYTES ? undefined : readSliceInfo(info);
@@ -198,12 +208,36 @@ export function readGcode3mfPlate(
     }
   }
   const png = `Metadata/plate_${n}.png`;
+  const token = new RegExp(`(?:^|_)${n}(?:_|\\.png$)`);
+  const pngs = zip.entries.filter(
+    (e) => e.name.startsWith('Metadata/') && e.name.endsWith('.png') && token.test(e.name.slice(9)),
+  );
+  const thumbnails = new Map<string, Uint8Array>();
+  for (const e of pngs.slice(0, MAX_THUMBNAILS)) {
+    if (e.size > MAX_THUMBNAIL_BYTES) {
+      diagnostics.push({
+        code: 'gcode-3mf-thumbnail-size',
+        severity: 'error',
+        fileOffset: 0,
+        message: `${e.name} is ${e.size} bytes, over the ${MAX_THUMBNAIL_BYTES} limit: thumbnail skipped`,
+      });
+    } else thumbnails.set(e.name, zip.inflated(e.name));
+  }
+  if (pngs.length > MAX_THUMBNAILS) {
+    diagnostics.push({
+      code: 'gcode-3mf-thumbnail-count',
+      severity: 'error',
+      fileOffset: 0,
+      message: `${pngs.length} thumbnails for plate ${n}: only the first ${MAX_THUMBNAILS} were read`,
+    });
+  }
   return {
     plate: n,
     entry,
     slicerVersion: parsed?.version,
     statistics: parsed?.plates.find((p) => p.index === n),
-    thumbnail: names.has(png) ? zip.inflated(png) : undefined,
+    thumbnail: thumbnails.get(png),
+    thumbnails,
     diagnostics,
   };
 }

@@ -1,16 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { weld } from '../../domain/build-mesh.ts';
-import { MalformedMeshError } from '../../domain/errors.ts';
+import { MalformedMeshError, TooManyTrianglesError } from '../../domain/errors.ts';
 import type { IndexedMesh } from '../../domain/indexed-mesh.ts';
 import { FloatBuffer, parseNumber, textLines } from '../text.ts';
 
 /**
  * Parse an ASCII STL fed as chunks of any size, then weld it. Only `vertex` lines matter; normals,
  * loops and facet words are skipped, so CRLF, tabs, indents and trailing blanks all work.
- * Throws `MalformedMeshError` (not a `solid` file, bad number, vertex count not a multiple of three)
+ * Throws `TooManyTrianglesError` as soon as the triangle count passes `hardTriangleCap`, `MalformedMeshError` (not a `solid` file, bad number, vertex count not a multiple of three)
  * and `NonFiniteCoordinateError`.
  */
-export async function parseAsciiStl(chunks: AsyncIterable<Uint8Array> | Iterable<Uint8Array>): Promise<IndexedMesh> {
+export async function parseAsciiStl(
+  chunks: AsyncIterable<Uint8Array> | Iterable<Uint8Array>,
+  hardTriangleCap = Infinity,
+): Promise<IndexedMesh> {
   const soup = new FloatBuffer();
   let started = false;
   let lastLine = 0;
@@ -28,6 +31,8 @@ export async function parseAsciiStl(chunks: AsyncIterable<Uint8Array> | Iterable
     } else if (word === 'vertex') {
       if (t.length !== 4) throw new MalformedMeshError(no, 'a vertex needs exactly three numbers');
       soup.push(parseNumber(t[1], no), parseNumber(t[2], no), parseNumber(t[3], no));
+      if (soup.length % 9 === 0 && soup.length / 9 > hardTriangleCap)
+        throw new TooManyTrianglesError(soup.length / 9, hardTriangleCap);
     }
   }
   if (!started) throw new MalformedMeshError(1, 'the file is empty, it should start with "solid"');

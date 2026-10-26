@@ -14,6 +14,7 @@ import {
   Method,
   moveStream,
   summarise,
+  type PlateRequest,
   type Progress,
   type Received,
   windowStream,
@@ -22,13 +23,17 @@ import {
   type WindowRequest,
 } from '../domain/summary.ts';
 import { packWindow } from '../domain/window.ts';
+import { readTextWindow, type ReadAt } from './read-text.ts';
 import type { Loaded } from './load-preview.ts';
 
 /** Parses and plans `path` off the calling thread (the worker adapter). Rejects with an Error that may carry a `code`. */
-export type LoadPort = (path: string, kind: 'gcode' | 'bgcode', signal: AbortSignal) => Promise<Loaded>;
-
-export const UNSUPPORTED_3MF =
-  'Previewing .gcode.3mf files is not supported yet; it is planned for a later release. Use "Open With..." to pick another editor.';
+export type LoadPort = (
+  path: string,
+  kind: 'gcode' | 'bgcode' | 'gcode.3mf',
+  signal: AbortSignal,
+  /** Plate of a `.gcode.3mf` (default: the first). */
+  plate?: number,
+) => Promise<Loaded>;
 
 export interface ServeHandlers {
   /** The webview reported every move buffer of a `ready` state as received. */
@@ -48,6 +53,8 @@ export interface PreviewSession {
   command(channel: Channel, command: TimelineCommand): void;
   /** Loads again after an error and resolves with the new state; any other state is returned as is. */
   retry(): Promise<ViewState>;
+  /** Loads another plate of a `.gcode.3mf` and resolves with the new state; a plate the file does not list is ignored. */
+  selectPlate(plate: number): Promise<ViewState>;
   /** Stops a running load (terminates the worker) and drops the buffers. */
   dispose(): void;
 }
@@ -66,21 +73,29 @@ const failure = (e: unknown): ViewState => ({
   message: e instanceof Error ? e.message : String(e),
 });
 
-export const openPreview = (path: string, load: LoadPort): PreviewSession => {
+/** `readAt` reads the file itself, for the text pane; only plain `.gcode` has one (other kinds' offsets are not file offsets). */
+export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): PreviewSession => {
   const abort = new AbortController();
   const kind = fileKind(path);
   // The parse stays here so a reloaded webview can be served again and can ask for toolhead windows.
   let loaded: Loaded | undefined;
-  const start = (): Promise<ViewState> =>
-    kind === 'gcode' || kind === 'bgcode'
-      ? load(path, kind, abort.signal).then(({ parsed, timing }) => {
-          loaded = { parsed, timing };
-          return { status: 'ready', summary: summarise(kind, parsed, timing) };
-        }, failure)
-      : Promise.resolve({
-          status: 'unsupported',
-          message: kind === 'gcode.3mf' ? UNSUPPORTED_3MF : `Not a G-code file: ${path}`,
-        });
+  let generation = 0;
+  let running: AbortController | undefined;
+  let chosen: number | undefined;
+  const start = (plate?: number): Promise<ViewState> => {
+    if (!kind) return Promise.resolve({ status: 'unsupported', message: `Not a G-code file: ${path}` });
+    const mine = ++generation;
+    chosen = plate;
+    // each load has its own controller, so a superseded one (and its worker) is stopped, not left running
+    running?.abort(new Error('superseded by another plate'));
+    const own = (running = new AbortController());
+    abort.signal.addEventListener('abort', () => own.abort(abort.signal.reason), { once: true });
+    return load(path, kind, own.signal, plate).then((l) => {
+      // a slower, superseded load must not replace the parse of the plate now shown
+      if (mine === generation) loaded = l;
+      return { status: 'ready', summary: summarise(kind, l.parsed, l.timing, l) };
+    }, failure);
+  };
   let state = start();
 
   const deliver = async (channel: Channel, session: string): Promise<void> => {
@@ -105,11 +120,31 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
     },
     async retry() {
       const failed = state;
-      if ((await failed).status === 'error' && state === failed && !abort.signal.aborted) state = start();
+      if ((await failed).status === 'error' && state === failed && !abort.signal.aborted) state = start(chosen);
       return state;
+    },
+    selectPlate(plate) {
+      const shown = loaded?.plates;
+      if (!shown?.numbers.includes(plate) || abort.signal.aborted) return state;
+      return (state = start(plate));
     },
     serve(channel, { onReceived, onProgress, onMismatch }) {
       let current = '';
+      // one text read in flight; later requests replace the one waiting (the webview ignores stale seqs)
+      let reading = false;
+      let waiting: { payload: unknown } | undefined;
+      const readText = (payload: unknown): void => {
+        reading = true;
+        void readTextWindow(readAt!, payload)
+          .then((w) => w && channel.post(notify(Method.textWindow, w)))
+          .catch(() => {}) // an invalid request or a read error (file gone) is dropped: the pane keeps what it showed
+          .then(() => {
+            reading = false;
+            const next = waiting;
+            waiting = undefined;
+            if (next) readText(next.payload);
+          });
+      };
       const stops = [
         serveHandshake(channel, {
           // a send cut short by a reload or a closed editor is superseded by the next handshake, or by nothing
@@ -125,10 +160,18 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
               .retry()
               .then(() => deliver(channel, current))
               .catch(() => {});
-          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.window && current)
+          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.plate && current) {
+            // `loading` goes out before the load is awaited; a superseded load delivers nothing
+            channel.post(notify(Method.state, { status: 'loading' } satisfies ViewState));
+            const p = self.selectPlate((r.envelope.payload as PlateRequest).plate);
+            void p.then(() => (self.state === p ? deliver(channel, current) : undefined)).catch(() => {});
+          } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.window && current)
             // a bad range (the file changed under a stale webview) or a closed panel is dropped: the marker falls back
             void sendWindow(channel, current, r.envelope.payload as WindowRequest).catch(() => {});
-          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.progress)
+          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.text && readAt) {
+            if (reading) waiting = { payload: r.envelope.payload };
+            else readText(r.envelope.payload);
+          } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.progress)
             onProgress?.(r.envelope.payload as Progress);
         }),
       ];

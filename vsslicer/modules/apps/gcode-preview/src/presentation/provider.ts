@@ -2,6 +2,8 @@
 // Presentation layer. Type-only import of the VS Code API, so tests run in plain Node.
 import type * as vscode from 'vscode';
 import { createPanelChannel, createWebviewHtml, localResourceRoots } from '@vsslicer/webview-kit/host';
+import { fileReadAt } from '../adapters/file-read.ts';
+import { fileKind } from '../domain/file-kind.ts';
 import { openPreview, type LoadPort, type PreviewSession } from '../application/preview-session.ts';
 import { GCODE_VIEW_TYPE, OPEN_GCODE_SETTING, PREVIEW_VIEW_TYPE, nextAssociations } from '../domain/associations.ts';
 import type { Progress, Received, TimelineCommand, ViewState } from '../domain/summary.ts';
@@ -46,7 +48,11 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
   const provider: vscode.CustomReadonlyEditorProvider<GcodeDocument> = {
     openCustomDocument(uri) {
       // fsPath is read by the worker with Node fs; other schemes need workspace.fs (later)
-      const session = openPreview(uri.fsPath, uri.scheme === 'file' ? load : notLocal);
+      const session = openPreview(
+        uri.fsPath,
+        uri.scheme === 'file' ? load : notLocal,
+        uri.scheme === 'file' && fileKind(uri.fsPath) === 'gcode' ? fileReadAt(uri.fsPath) : undefined,
+      );
       const key = uri.toString();
       states.set(key, session);
       const dispose = () => {

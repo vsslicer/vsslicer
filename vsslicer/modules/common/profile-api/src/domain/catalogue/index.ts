@@ -23,3 +23,6 @@ export type {
   ValueConversion,
 } from './entry.ts';
 export { catalogueEntrySchema, catalogueSchema } from './schema.ts';
+export { prusaCatalogue } from './prusa.ts';
+export { superslicerCatalogue } from './superslicer.ts';
+export type { CuraCatalogueFile, CuraMaterialKey } from './cura.ts';

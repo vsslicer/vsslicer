@@ -22,7 +22,12 @@ export const GROUPS = [
     label: 'Multi-material, wipe or prime tower, tool change',
     homes: ['process', 'material', 'printer_model'],
   },
-  { id: 'machine', label: 'Printer definition and machine limits', homes: ['printer_model', 'nozzle'] },
+  // PrusaSlicer 3.0 hardware features of the bed sheet and the filament feeder live in those entities.
+  {
+    id: 'machine',
+    label: 'Printer definition and machine limits',
+    homes: ['printer_model', 'nozzle', 'surface', 'feeder'],
+  },
   {
     id: 'gcode',
     label: 'Custom G-code, output options, post-processing',
@@ -139,11 +144,11 @@ export interface CatalogueEntry {
   native: { [D in Dialect]?: NativeKey };
   /** Other entities that may override it, as the native slicer allows (a material overriding retraction). */
   overridable_in?: HomeEntity[];
-  /** Where in a project it may be overridden; absent means nowhere (global only). */
+  /** Where in a project it may be overridden; empty means nowhere (global only). Every generated entry has it (PRF-18). */
   override_scope?: OverrideScope[];
   /** On no GUI page of the native slicer. */
   hidden?: boolean;
-  /** Exists in this dialect only; a prefixed key must name its prefix's dialect. */
+  /** The dialect that owns a prefixed key (its prefix's dialect); other dialects may still name it (a `prusa.` key SuperSlicer shares). */
   native_only?: Dialect;
   /** Source of the label and tooltip text and of the metadata (`OrcaSlicer@09aa0114:src/libslic3r/PrintConfig.cpp:1134`, D2). */
   provenance?: string;

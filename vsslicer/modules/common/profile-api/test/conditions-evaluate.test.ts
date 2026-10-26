@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, test } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { compileRegex } from '../src/domain/conditions/evaluate/regex.ts';
 import { MAX_REGEX_STATES, MAX_SUBJECT_LENGTH, evaluate, type ConditionContext } from '../src/index.ts';
 
 const ctx: ConditionContext = {
@@ -81,6 +82,13 @@ describe('regex engine', () => {
   const a512 = 'a'.repeat(MAX_SUBJECT_LENGTH);
   const alt = (x: string, k: number) => `(?:${Array(k).fill(x).join('|')})`;
   const match = (p: string, s: string) => evaluate(`material.name =~ /${p}/`, { material: { name: s } });
+  // Machine-independent bound: every NFA state is visited at most once per position, each visit costs a constant
+  // number of steps (pops of the closure stack, at most two pushes per split, plus the char-state loop): 4 is generous.
+  const expectLinear = (p: string, s: string) => {
+    const stats = { states: 0, steps: 0 };
+    compileRegex(p)(s, stats);
+    expect(stats.steps).toBeLessThanOrEqual(4 * stats.states * (s.length + 1));
+  };
   // Patterns that backtrack catastrophically in RegExp, plus the reviewers' probes; expected values worked by hand.
   test.each([
     ['(a+)+$', 'a'.repeat(60) + '!', false],
@@ -107,9 +115,8 @@ describe('regex engine', () => {
     ['(?:a{0,512}){2}', a512, true],
     [alt('(?:a|a){11}a*b', 1), a512, false],
   ])('%s runs in linear time with the right answer', (p, s, want) => {
-    const t = performance.now();
     expect(match(p, s)).toEqual({ compatible: want });
-    expect(performance.now() - t).toBeLessThan(100);
+    expectLinear(p, s);
   });
   test('multi-line printer_notes match as PrusaSlicer (Boost) does', () => {
     const notes = "Don't remove the following keywords!\nPRINTER_VENDOR_PRUSA3D\nPRINTER_MODEL_MK4S\n";
@@ -130,9 +137,7 @@ describe('regex engine', () => {
   test.each(['(a)\\1', '(?=a)a', '(?<n>a)', '\\p{L}', '(?:(?:a){1000}){1000}', '(){999999999}b', '.{5001}'])(
     'rejects %s instantly with a diagnostic',
     (p) => {
-      const t = performance.now();
       const r = match(p, 'a');
-      expect(performance.now() - t).toBeLessThan(100);
       expect(r.compatible).toBe(true);
       expect(r.diagnostic).toMatch(/Regex rejected/);
     },
@@ -142,10 +147,9 @@ describe('regex engine', () => {
   test.each([
     `(?:.?){${Math.floor(MAX_REGEX_STATES / 3)}}`,
     `(?:[a-z]|\\w|.|a)*(?:.?){${Math.floor(MAX_REGEX_STATES / 3) - 6}}`,
-  ])('the largest NFA admitted stays under 100 ms on a max-length subject: %s', (p) => {
-    const t = performance.now();
+  ])('the largest NFA admitted does linear work on a max-length subject: %s', (p) => {
     expect(match(p, a512).diagnostic).toBeUndefined();
-    expect(performance.now() - t).toBeLessThan(100);
+    expectLinear(p, a512);
   });
 
   // Boost's full match as RegExp, for subjects whose only line break is \n: `s` and `m` (Boost's defaults), sticky

@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import type { Diagnostic, Layer, ParsedFile, Slicer } from '@vsslicer/gcode-api';
+import type { Diagnostic, JobSummary, Layer, ParsedFile, Slicer } from '@vsslicer/gcode-api';
 import type { Flavour, Timing } from '@vsslicer/gcode-planner';
 import type { FileKind } from './file-kind.ts';
+import { flagsOf, type Flag } from './flags.ts';
+import { clip, panelOf, type PanelModel, type PlateInfo } from './panel.ts';
 
 /** Most diagnostics sent to the webview; `diagnosticCount` has the total. */
-export const MAX_DIAGNOSTICS = 200;
+export const MAX_DIAGNOSTICS = 10_000;
 
 /** What the webview gets as JSON next to the move buffers (sent one stream per buffer, `moveBuffers[i]` bytes each). */
 export interface PreviewSummary {
@@ -21,13 +23,20 @@ export interface PreviewSummary {
   estimate: boolean;
   flavour: Flavour;
   flavourAssumed: boolean;
-  objects: string[];
-  thumbnails: number;
+  /** Thumbnails, object labels, slicer estimates and the plate picker. */
+  panel: PanelModel;
   diagnostics: Diagnostic[];
   diagnosticCount: number;
+  /** What the timing assumes or cannot see. */
+  flags: Flag[];
 }
 
-export const summarise = (kind: FileKind, parsed: ParsedFile, timing: Timing): PreviewSummary => ({
+export const summarise = (
+  kind: FileKind,
+  parsed: ParsedFile,
+  timing: Timing,
+  extra: { job?: JobSummary; plates?: PlateInfo } = {},
+): PreviewSummary => ({
   kind,
   slicer: parsed.slicer,
   moveCount: parsed.moveCount,
@@ -39,10 +48,10 @@ export const summarise = (kind: FileKind, parsed: ParsedFile, timing: Timing): P
   estimate: timing.estimate,
   flavour: timing.limits.flavour,
   flavourAssumed: timing.limits.flavourAssumed,
-  objects: parsed.objects.map((o) => o.name),
-  thumbnails: parsed.thumbnails.length,
-  diagnostics: parsed.diagnostics.slice(0, MAX_DIAGNOSTICS),
+  panel: panelOf(parsed, extra),
+  diagnostics: parsed.diagnostics.slice(0, MAX_DIAGNOSTICS).map((d) => ({ ...d, message: clip(d.message) })),
   diagnosticCount: parsed.diagnostics.length,
+  flags: flagsOf(parsed, timing),
 });
 
 /** The state the host tells the webview after every handshake. */
@@ -66,6 +75,12 @@ export const Method = {
   retry: 'gcode-preview/retry',
   /** Webview to host: `WindowRequest`; the host answers with the packed window on `windowStream`. */
   window: 'gcode-preview/window',
+  /** Webview to host: `TextRequest`; the host answers with a `textWindow` notification. */
+  text: 'gcode-preview/text',
+  /** Host to webview: `TextWindow`. */
+  textWindow: 'gcode-preview/text-window',
+  /** Webview to host: `PlateRequest`; the host loads that plate of a `.gcode.3mf` and answers with a new state. */
+  plate: 'gcode-preview/plate',
 } as const;
 
 /** The webview wants the toolhead window over moves `from` to `to` (exclusive), as request number `seq`. */
@@ -73,6 +88,11 @@ export interface WindowRequest {
   seq: number;
   from: number;
   to: number;
+}
+
+/** The picker chose plate `plate` (one of `PanelModel.plates`). */
+export interface PlateRequest {
+  plate: number;
 }
 
 /** Stream id of the window answering request `seq`. */
