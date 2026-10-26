@@ -27,7 +27,7 @@ export const MAX_IMPORT_BYTES = 256 * 1024 * 1024;
 /** Sections over all files of one call; the pinned bundle has 6 976. Files past the cap are not read. */
 export const MAX_IMPORT_SECTIONS = 100_000;
 /** Keys copied from parents over one call; the pinned bundle needs 476 151. */
-export const MAX_INHERITED_KEYS = 4_000_000;
+export const MAX_INHERITED_KEYS = 1_000_000;
 
 /** The native form kept beside each entity in `ImportResult.native`, for round trips. */
 export interface PrusaNative {

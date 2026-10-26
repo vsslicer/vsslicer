@@ -491,6 +491,11 @@ describe('bounds (rule 25)', () => {
     expect(r.entities.length).toBeLessThan(2 * half);
   });
 
+  test('the inherited-keys cap stays near the measured need: at most 1M, at least 2x the pinned bundle (476 151)', () => {
+    expect(MAX_INHERITED_KEYS).toBeLessThanOrEqual(1_000_000);
+    expect(MAX_INHERITED_KEYS).toBeGreaterThanOrEqual(2 * 476_151);
+  });
+
   test(`sections are capped over the whole call (${MAX_IMPORT_SECTIONS})`, () => {
     // sections of no preset kind: counted, but never flattened or mapped, so nothing else reports on them
     const many = (p: string) => Array.from({ length: MAX_SECTIONS - 1 }, (_, i) => `[${p}${i}]\n`).join('');
