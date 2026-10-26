@@ -11,6 +11,3 @@
 9. [VSS-38: Stories and tasks for I10](038-stories-and-tasks-for-i10.md)
 10. [VSS-39: Stories and tasks for I11](039-stories-and-tasks-for-i11.md)
 11. [VSS-40: Sprint plans for M2-M6](040-sprint-plans-for-m2-m6.md)
-12. [VSS-471: Skip publishing unreleased 0.0.0 modules in run.mjs](471-skip-publishing-unreleased-0-0-0-modules-in-run-mjs.md)
-13. [VSS-46: SP7: audit review and bugfix](046-sp7-audit-review-and-bugfix.md)
-14. [VSS-81: SP7: retro](081-sp7-retro.md)

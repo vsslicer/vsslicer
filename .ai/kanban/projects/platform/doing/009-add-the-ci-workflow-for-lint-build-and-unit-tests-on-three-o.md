@@ -8,7 +8,7 @@ model: sonnet
 area: [ci]
 story: US2
 milestone: "VSS:M1"
-sprint: "VSS:SP7"
+sprint: "VSS:SP8"
 owner: PLT-9-worker
 depends_on: [8, 4, 1]
 created: 2026-10-25

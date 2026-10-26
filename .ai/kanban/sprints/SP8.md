@@ -1,9 +1,9 @@
 ---
 id: SP8
 title: Open 3
-status: planned
+status: active
 milestone: M2
-start: "2026-10-26T07:30+00:00"
+start: "2026-10-26T07:20+00:00"
 end: "2026-10-26T09:30+00:00"
 capacity: 92
 ---
