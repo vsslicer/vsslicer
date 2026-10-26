@@ -18,8 +18,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0
       '@vsslicer/webview-kit':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.7.0
+        version: 0.7.0
     devDependencies:
       '@types/mocha':
         specifier: 10.0.10
@@ -861,8 +861,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.6.0':
-    resolution: {integrity: sha512-RfK3kUZhFUHwRVyxybxYZ/qJ+mvNRsw1uu39jC26241JnQQUR+J0BiHIW8wGZOZzKqmpIeH0rQx8ApIXY8qg2w==}
+  '@vsslicer/webview-kit@0.7.0':
+    resolution: {integrity: sha512-xVbC6MDFLNcULZEZ9TIzG52Wbqd2K4CX9dDtpJ0HBWjn/+NliHNikHjX+P08/IATdeSguwP3c0Z1qZsWpxSltg==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -3084,7 +3084,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.6.0': {}
+  '@vsslicer/webview-kit@0.7.0': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
