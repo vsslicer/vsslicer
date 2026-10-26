@@ -4,3 +4,6 @@ export * from './adapters/conditions/compatible-printers.ts';
 export * from './adapters/archive/bundle-archive.ts';
 export * from './adapters/tree/read-tree.ts';
 export * from './adapters/tree/load-tree.ts';
+export * from './adapters/variants/variants.ts';
+export * from './adapters/user/read-user-presets.ts';
+export * from './adapters/split/split.ts';

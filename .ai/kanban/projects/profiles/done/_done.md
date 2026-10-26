@@ -15,3 +15,4 @@
 13. [PRF-31: Read Cura quality, quality_changes and definition_changes](031-read-cura-quality-quality-changes-and-definition-changes.md)
 14. [PRF-60: Create the fixture workspace and per-OS slicer configuration folders](060-create-the-fixture-workspace-and-per-os-slicer-configuration.md)
 15. [PRF-34: Split per-nozzle Prusa printer presets into printer_model, nozzle and overrides](034-split-per-nozzle-printer-presets-into-printer-model-nozzle-a.md)
+16. [PRF-28: Decode extruder-variant arrays for H2D and H2C into keyed per-extruder values](028-decode-extruder-variant-arrays-for-h2d-and-h2c-into-keyed-pe.md)

@@ -60,3 +60,9 @@ Problems:
 - Test `test/variants.test.ts` "a per-extruder array of the wrong length stays an array with a warning": `nozzle_diameter: ['0.4']` on the `h2c` slots gives one `variant-length` diagnostic, keeps the array, and `encodeVariants` round-trips it. No code change.
 - Mutation probe: `value.length !== extruders` replaced by `false` in `variants.ts` (restored): the new test FAILS.
 - Verification (with PRF-29's fix): `pnpm install`, `pnpm lint` (eslint, prettier, tsc), `pnpm build` pass; `pnpm test` 8 files, 97 tests pass; `node scripts/run.mjs checks` exit 0.
+
+**Review passed (sp10-rerev-prf-28-29, 2026-10-26)**
+
+- Ran in `profiles-orca`: `pnpm install` ok; `pnpm lint` (eslint, prettier, tsc) pass; `pnpm build` pass; `pnpm test` 8 files, 97 tests pass. `node scripts/run.mjs checks` exits 1, but only on 39 registry lines "lockfile pins @vsslicer/tooling@0.8.4, current is 0.8.5" for every module (tooling@0.8.5 released in 4d0d89a4 minutes earlier); its node tests pass. Not caused by this card.
+- Problem 1 of the last review is fixed: the new test "a per-extruder array of the wrong length stays an array with a warning" (`test/variants.test.ts:73`) asserts the `variant-length` diagnostic, the kept array, and the round-trip. Mutation probe: `value.length !== extruders` (`variants.ts:256`) replaced by `false`: the test fails (killed). Restored.
+- No other code changed since the last review; its passing probes, upstream check and layering findings stand.
