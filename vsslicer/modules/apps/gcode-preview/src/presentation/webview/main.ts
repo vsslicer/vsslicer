@@ -11,14 +11,18 @@ import {
   receiveBuffers,
   type VsCodeApi,
 } from '@vsslicer/webview-kit/webview';
-import { createGl2Context, showGlFailure } from '@vsslicer/webview-kit/gl';
+import { ColorMode, createGl2Context, showGlFailure } from '@vsslicer/webview-kit/gl';
 import { Method, moveStream, type PreviewSummary, type Received, type ViewState } from '../../domain/summary.ts';
+import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
+import { COLOR_MODES, legendFor } from './legend.ts';
 import { concatMoves, createPreviewRenderer, type PreviewRenderer, type Visibility } from './preview-renderer.ts';
 
-/** Saved with `setState`, so it survives the webview being hidden or reloaded. Camera and colour mode join it later. */
+/** Saved with `setState`, so it survives the webview being hidden or reloaded.  */
 interface SavedView extends Omit<Visibility, 'layer'> {
   /** Top visible layer; `null` until a file is shown (then the last layer). */
   layer: number | null;
+  colorMode?: ColorMode;
+  camera?: CameraState;
 }
 
 declare const acquireVsCodeApi: () => VsCodeApi<SavedView>;
@@ -35,12 +39,56 @@ const canvas = document.createElement('canvas');
 canvas.style.width = '100%';
 canvas.style.height = '80vh';
 
+const toolbar = document.createElement('div');
+const legend = document.createElement('span');
+const modes = document.createElement('select');
+modes.ariaLabel = 'Colour by';
+for (const m of COLOR_MODES) modes.append(new Option(m.label, String(m.mode)));
+toolbar.append(modes, ...(['top', 'iso', 'front'] as const).map((p) => button(p)), legend);
+function button(preset: ViewPreset) {
+  const b = Object.assign(document.createElement('button'), { textContent: preset });
+  b.addEventListener('click', () => setCamera((aspect) => presetCamera(renderer!.bounds, aspect, preset)));
+  return b;
+}
+const aspect = () => canvas.clientWidth / Math.max(1, canvas.clientHeight);
+/** Replaces the saved camera (the argument is the current one, absent until the first draw) and redraws. */
+const setCamera = (f: (aspect: number, current: CameraState | undefined) => CameraState) => {
+  if (!renderer) return;
+  api.setState({ ...api.getState()!, camera: f(aspect(), api.getState()?.camera) });
+  redraw();
+};
+modes.addEventListener('change', () => {
+  api.setState({ ...api.getState()!, colorMode: Number(modes.value) as ColorMode });
+  redraw();
+});
+canvas.addEventListener('pointerdown', (e) => canvas.setPointerCapture(e.pointerId));
+canvas.addEventListener('pointermove', (e) => {
+  if (!canvas.hasPointerCapture(e.pointerId)) return;
+  // left drag orbits, right or shift drag pans
+  const panning = e.buttons & 2 || e.shiftKey;
+  setCamera((a, c) =>
+    panning
+      ? pan(c ?? fit(a), e.movementX, e.movementY, canvas.clientHeight)
+      : orbit(c ?? fit(a), e.movementX * 0.01, e.movementY * 0.01),
+  );
+});
+canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+canvas.addEventListener(
+  'wheel',
+  (e) => {
+    e.preventDefault();
+    setCamera((a, c) => zoom(c ?? fit(a), Math.exp(e.deltaY * 0.001)));
+  },
+  { passive: false },
+);
+const fit = (a: number) => presetCamera(renderer!.bounds, a);
+
 const show = (title: string, lines: string[] = [], view = false) => {
   const h = document.createElement('h2');
   h.textContent = title;
   const list = document.createElement('ul');
   for (const l of lines) list.append(Object.assign(document.createElement('li'), { textContent: l }));
-  root.replaceChildren(h, list, ...(view ? [canvas] : []));
+  root.replaceChildren(h, list, ...(view ? [toolbar, canvas] : []));
 };
 
 const redraw = () => {
@@ -48,7 +96,12 @@ const redraw = () => {
   if (!renderer || s?.layer == null) return;
   canvas.width = Math.round(canvas.clientWidth * devicePixelRatio);
   canvas.height = Math.round(canvas.clientHeight * devicePixelRatio);
-  renderer.draw({ ...s, layer: s.layer });
+  const colorMode = s.colorMode ?? ColorMode.Feature;
+  const camera = s.camera ?? fit(aspect());
+  modes.value = String(colorMode);
+  renderer.draw({ ...s, layer: s.layer, colorMode, camera });
+  const l = legendFor(colorMode, renderer.ranges());
+  legend.textContent = l.range ? ` ${l.range.map((x) => x.toFixed(1)).join(' to ')} ${l.unit}` : '';
 };
 window.addEventListener('resize', redraw);
 

@@ -6,6 +6,7 @@
  * Copyright (c) Prusa Research 2023 Enrico Turri, Pavel Mikuš, Vojtěch Bubník, Oleksandra Iushchenko,
  * and OrcaSlicer contributors. */
 import { MOVE_STRIDE, MoveFlag, type Layer } from '@vsslicer/gcode-api';
+import { cameraMatrices, presetCamera, type CameraState } from './camera.ts';
 import { ColorMode, createSegmentRenderer, trackContextLoss, type SegmentRenderer } from '@vsslicer/webview-kit/gl';
 
 /** What is visible; kept in the webview state. */
@@ -16,9 +17,16 @@ export interface Visibility {
   roleMask?: number;
   /** `MoveFlag` bits to hide; default travels. */
   hiddenFlags?: number;
+  /** Default `Feature`. Changing it sets a uniform; nothing is uploaded again. */
+  colorMode?: ColorMode;
+  /** Default: the iso view fitting the print. */
+  camera?: CameraState;
 }
 
 export interface PreviewRenderer {
+  /** Bounding box of the print and the data ranges of the gradient modes (undefined while the context is lost). */
+  readonly bounds: [number[], number[]];
+  readonly ranges: () => SegmentRenderer['ranges'] | undefined;
   draw(visibility: Visibility): void;
   /** Frees every GPU object and stops listening for context loss. */
   dispose(): void;
@@ -72,36 +80,9 @@ export const printBounds = (moves: ArrayBuffer): [number[], number[]] => {
       ];
 };
 
-const FOV = Math.PI / 4;
-
-/** Column-major view and projection looking at the box from the front, above (Z up), fitting its bounding sphere. */
-export const frameCamera = ([lo, hi]: [number[], number[]], aspect: number) => {
-  const c = [0, 1, 2].map((i) => (lo[i]! + hi[i]!) / 2);
-  const r = Math.max(1, Math.hypot(hi[0]! - lo[0]!, hi[1]! - lo[1]!, hi[2]! - lo[2]!) / 2);
-  const dist = r / Math.sin(Math.min(FOV, FOV * aspect) / 2);
-  // forward f points from the eye at the centre: from (0, -1, 1) direction
-  const f = [0, Math.SQRT1_2, -Math.SQRT1_2];
-  const eye = c.map((x, i) => x - dist * f[i]!);
-  const s = [1, 0, 0]; // f x up(0,0,1), normalised
-  const u = [0, Math.SQRT1_2, Math.SQRT1_2]; // s x f
-  const dot = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
-  const view = new Float32Array([
-    s[0]!, u[0]!, -f[0]!, 0,
-    s[1]!, u[1]!, -f[1]!, 0,
-    s[2]!, u[2]!, -f[2]!, 0,
-    -dot(s, eye), -dot(u, eye), dot(f, eye), 1,
-  ]); // prettier-ignore
-  const near = Math.max(0.1, dist - 2 * r);
-  const far = dist + 2 * r;
-  const t = 1 / Math.tan(FOV / 2);
-  const projection = new Float32Array([
-    t / aspect, 0, 0, 0,
-    0, t, 0, 0,
-    0, 0, (far + near) / (near - far), -1,
-    0, 0, (2 * far * near) / (near - far), 0,
-  ]); // prettier-ignore
-  return { view, projection };
-};
+/** Column-major view and projection of a camera (the iso preset fitting the box by default). */
+export const frameCamera = (bounds: [number[], number[]], aspect: number, camera = presetCamera(bounds, aspect)) =>
+  cameraMatrices(camera, aspect);
 
 /** Uploads `moves` once (rebuilt after a context loss) and draws the visible part on `draw`. */
 export const createPreviewRenderer = (
@@ -124,9 +105,9 @@ export const createPreviewRenderer = (
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     renderer.draw({
-      ...frameCamera(bounds, w / Math.max(1, h)),
+      ...frameCamera(bounds, w / Math.max(1, h), vis.camera),
       ...visibleRange(layers, moveCount, vis.layer),
-      colorMode: ColorMode.Feature,
+      colorMode: vis.colorMode ?? ColorMode.Feature,
       roleMask: vis.roleMask,
       hiddenFlags: vis.hiddenFlags ?? MoveFlag.Travel,
     });
@@ -144,6 +125,8 @@ export const createPreviewRenderer = (
     return () => r.dispose();
   });
   return {
+    bounds,
+    ranges: () => renderer?.ranges,
     draw,
     dispose() {
       resources.dispose();

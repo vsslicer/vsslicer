@@ -2,7 +2,10 @@
 
 ## Unreleased
 
+- GCP-32: colour modes feature, speed, tool and layer time, switched with a uniform (no geometry re-upload, counted), legend data, the mode kept in the webview state. Width, flow, fan and temperature: GCP-96.
+- GCP-33: orbit (drag), pan (right or shift drag) and zoom (wheel), top/iso/front view buttons; the camera (pure, unit-tested `camera.ts`) is kept in the webview state across hide and show.
 - GCP-31: the preview draws the moves with webview-kit's instanced segment renderer (libvgcode port, AGPL-3.0): moves up to the saved layer, role and flag masks in the webview state (travels hidden by default), a camera that frames the print, GPU resources freed on dispose and rebuilt after a context loss. Per-chunk move buffers are joined once in the webview.
+
 ## 0.2.1
 
 - Depends on gcode-parser ^0.10.1 (SP4 re-lock).

@@ -5,7 +5,6 @@ import test from 'node:test';
 import assert from 'node:assert';
 import { createReadStream } from 'node:fs';
 import { MOVE_STRIDE, MoveFlag, MoveRole } from '@vsslicer/gcode-api';
-import { deflateCodec, heatshrink11Codec, heatshrink12Codec } from '@vsslicer/gcode-bgcode';
 import { loadPreview } from '../src/application/load-preview.ts';
 import {
   concatMoves,
@@ -14,6 +13,10 @@ import {
   printBounds,
   visibleRange,
 } from '../src/presentation/webview/preview-renderer.ts';
+import { ColorMode } from '@vsslicer/webview-kit/gl';
+import { spyGlUploads } from '@vsslicer/webview-kit/testing';
+import { COLOR_MODES, legendFor } from '../src/presentation/webview/legend.ts';
+import { presetCamera } from '../src/presentation/webview/camera.ts';
 import { fileURLToPath } from 'node:url';
 
 // the corpus of load.test.ts (not imported: that would run its tests here too)
@@ -56,7 +59,6 @@ const fakeGl = (maxTextureSize: number) => {
   return { gl, calls, count, named };
 };
 
-const codecs = [deflateCodec, heatshrink11Codec, heatshrink12Codec];
 const instances = (f: ReturnType<typeof fakeGl>) =>
   f.named('drawElementsInstanced').reduce((n, c) => n + Number(c[5]), 0);
 const uniform = (f: ReturnType<typeof fakeGl>, name: string) =>
@@ -64,7 +66,7 @@ const uniform = (f: ReturnType<typeof fakeGl>, name: string) =>
 
 for (const file of FIVE_SLICERS)
   test(`renders ${file}: every texture chunk uploaded and drawn, everything freed on dispose`, async () => {
-    const { parsed } = await loadPreview('gcode', createReadStream(fixture(file)), { codecs });
+    const { parsed } = await loadPreview('gcode', createReadStream(fixture(file)));
     const moves = concatMoves(parsed.moves);
     assert.strictEqual(moves.byteLength, parsed.moveCount * MOVE_STRIDE);
     // 64² texels hold 585 records, so every corpus file spans several textures
@@ -87,7 +89,7 @@ for (const file of FIVE_SLICERS)
   });
 
 test('the visibility state sets the range and the masks; travels are hidden by default', async () => {
-  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')), { codecs });
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
   const f = fakeGl(16384);
   const r = createPreviewRenderer(
     new EventTarget() as HTMLCanvasElement,
@@ -163,4 +165,55 @@ test('the camera frames the extruded part of the print', () => {
   const clipZ = projection[10]! * e[2]! + projection[14]!;
   const clipW = -e[2]!;
   assert.ok(Math.abs(clipZ / clipW) < 1);
+});
+
+test('every colour mode draws the corpus; switching modes sets a uniform and uploads nothing', async () => {
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
+  const f = fakeGl(64);
+  const spy = spyGlUploads(f.gl);
+  const r = createPreviewRenderer(
+    new EventTarget() as HTMLCanvasElement,
+    spy.gl,
+    concatMoves(parsed.moves),
+    parsed.layers,
+    { maxTextureSize: 64 },
+  );
+  const last = parsed.layers.length - 1;
+  r.draw({ layer: last });
+  const afterFirst = JSON.stringify(spy.uploads);
+  const creates = f.count('createTexture') + f.count('createBuffer');
+  for (const { mode } of COLOR_MODES) {
+    const before = f.count('drawElementsInstanced');
+    r.draw({ layer: last, colorMode: mode });
+    assert.strictEqual(uniform(f, 'uMode'), mode);
+    assert.ok(f.count('drawElementsInstanced') > before);
+  }
+  assert.strictEqual(JSON.stringify(spy.uploads), afterFirst, 'no upload after the first draw');
+  assert.strictEqual(f.count('createTexture') + f.count('createBuffer'), creates, 'no new GPU object either');
+  r.dispose();
+});
+
+test('legend data: gradients carry their range, feature and tool are categories', () => {
+  const ranges = { speed: [10, 200], layerTime: [3, 40] } as const;
+  assert.deepStrictEqual(legendFor(ColorMode.Speed, ranges), {
+    label: 'Speed',
+    kind: 'gradient',
+    unit: 'mm/s',
+    range: [10, 200],
+  });
+  assert.deepStrictEqual(legendFor(ColorMode.LayerTime, ranges).range, [3, 40]);
+  assert.strictEqual(legendFor(ColorMode.Tool, ranges).kind, 'categories');
+  assert.strictEqual(legendFor(ColorMode.Feature, undefined).kind, 'categories');
+});
+
+test('a saved camera is drawn instead of the fitted one', () => {
+  const moves = new ArrayBuffer(3 * MOVE_STRIDE);
+  const f = fakeGl(16384);
+  const r = createPreviewRenderer(new EventTarget() as HTMLCanvasElement, f.gl, moves, []);
+  r.draw({ layer: 0 });
+  const fitted = f.named('uniformMatrix4fv').at(-2)![3] as Float32Array;
+  r.draw({ layer: 0, camera: presetCamera(r.bounds, 1, 'top') });
+  const top = f.named('uniformMatrix4fv').at(-2)![3] as Float32Array;
+  assert.notDeepStrictEqual([...top], [...fitted]);
+  r.dispose();
 });
