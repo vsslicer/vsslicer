@@ -23,3 +23,4 @@
 21. [PRF-45: Implement the file-system store with atomic writes and concurrent-edit protection](045-implement-the-file-system-store-with-atomic-writes-and-concu.md)
 22. [PRF-113: Export .curaprofile](113-export-curaprofile.md)
 23. [PRF-107: Export .orca_printer, .orca_filament and .orca_bundle](107-export-orca-printer-orca-filament-and-orca-bundle.md)
+24. [PRF-46: Re-index files edited outside VSSlicer within one second](046-re-index-files-edited-outside-vsslicer-within-one-second.md)

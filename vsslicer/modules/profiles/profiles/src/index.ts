@@ -6,3 +6,12 @@ export type { DirectoryLister } from './application/file-system-port.ts';
 export * from './adapters/installed/installed.ts';
 export * from './adapters/worker/index.ts';
 export * from './adapters/fs-store/fs-store.ts';
+export {
+  createWatchedProfileStore,
+  DEBOUNCE_MS,
+  MAX_WAIT_MS,
+  type ChangeEvent,
+  type WatchFn,
+  type WatchOptions,
+  type WatchedProfileStore,
+} from './adapters/fs-store/watch/watch.ts';
