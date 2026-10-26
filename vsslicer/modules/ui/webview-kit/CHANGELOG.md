@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.1
 
 - PLT-189: `trackContextLoss` keeps rebuilding when one entry throws, drops that entry's stale free function, and passes the first error to `onRestored(error?)`.
 - PLT-190: `uploadMoveTextures` and `createSegmentRenderer` throw a TypeError for a typed-array view instead of uploading scrambled data.
