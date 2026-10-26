@@ -32,3 +32,5 @@ Publishes `profile-api@0.2.0` to the local registry so dependent modules can con
 ## Progress
 
 Not started.
+
+- SP8 (sp8-coordinator, 08:00): the increment this card named (import result types, ports, bundle structure, instance validation: PRF-122, 123, 104, 83) already shipped in `profile-api@0.1.0` (PRF-135, `862368d`, SP7). The only change since is PRF-180, a fix with no API change, so this release is the patch **0.1.1** (rule 13), not 0.2.0. Published to the local registry; a scratch project installed `@vsslicer/profile-api@0.1.1` and imported 44 exports including `parseBundleStructure`. Dependents profiles, profiles-prusa, profiles-orca and profiles-cura re-locked to `^0.1.1` once; `node scripts/run.mjs checks` passes. Module `pnpm test` 709 passed.

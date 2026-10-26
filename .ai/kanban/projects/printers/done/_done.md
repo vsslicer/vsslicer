@@ -8,3 +8,6 @@
 6. [PRN-120: Create the `printer-discovery` module](120-create-the-printer-discovery-module.md)
 7. [PRN-130: Create the `printer-folder` module](130-create-the-printer-folder-module.md)
 8. [PRN-15: Create the `printers-extension` module](015-create-the-printers-extension-module.md)
+9. [PRN-3: Define PrinterError kinds and the auth scheme declarations](003-define-printererror-kinds-and-the-auth-scheme-declarations.md)
+10. [PRN-131: Sanitise file names for FAT 8.3 and long-name targets](131-sanitise-file-names-for-fat-8-3-and-long-name-targets.md)
+11. [PRN-5: Define the capability flags with readOnly and requiresMode annotations](005-define-the-capability-flags-with-readonly-and-requiresmode-a.md)

@@ -1,3 +1,16 @@
 # Done
 
-No cards.
+1. [PRF-124: Convert Orca and Bambu compatible_printers constructs to unified conditions](124-convert-orca-and-bambu-compatible-printers-constructs-to-uni.md)
+2. [PRF-35: Locate installed slicer configuration folders on macOS, Windows and Linux](035-locate-installed-slicer-configuration-folders-on-macos-windo.md)
+3. [PRF-70: Generate the form model from the catalogue](070-generate-the-form-model-from-the-catalogue.md)
+4. [PRF-180: Encode bundle manifest only near the byte limit](180-encode-bundle-manifest-only-near-the-byte-limit.md)
+5. [PRF-182: Tidy convertCompatiblePrinters: one length diagnostic, relative .reference path, upstream rules in the doc comment](182-tidy-convertcompatibleprinters-one-length-diagnostic-relativ.md)
+6. [PRF-10: Convert Prusa compatibility constructs to unified conditions](010-convert-prusa-orca-bambu-and-cura-compatibility-constructs-t.md)
+7. [PRF-136: Release `profile-api@0.2.0`: import result types, importer/exporter/store ports, bundle structure and instance validation](136-release-profile-api-0-2-0-import-result-types-importer-expor.md)
+8. [PRF-181: Add the special widget kinds to the form model: percent-or-absolute, per-extruder, gcode and expr](181-add-the-special-widget-kinds-to-the-form-model-percent-or-ab.md)
+9. [PRF-125: Convert Cura quality metadata and exclude_materials to unified conditions](125-convert-cura-quality-metadata-and-exclude-materials-to-unifi.md)
+10. [PRF-103: Add the Orca and Bambu bundle archive reader and writer with safety limits](103-add-the-archive-reader-and-writer-with-safety-limits.md)
+11. [PRF-183: Harden the bundle archive reader: colons, NFC duplicates, host-19 symlinks, CRC and EOCD position](183-harden-the-bundle-archive-reader-colons-nfc-duplicates-host-.md)
+12. [PRF-24: Read PrusaSlicer INI bundles and user presets](024-read-prusaslicer-ini-bundles-and-user-presets.md)
+13. [PRF-71: Implement settings search over keys, labels, tooltips and native names](071-implement-settings-search-over-keys-labels-tooltips-and-nati.md)
+14. [PRF-11: Check the evaluator against 50 hand-computed Prusa compatibility conditions](011-check-the-evaluator-against-50-hand-computed-prusa-compatibi.md)

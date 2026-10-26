@@ -7,3 +7,8 @@
 5. [SLC-55: Create the `cura-settings` module](055-create-the-cura-settings-module.md)
 6. [SLC-65: Create the `slicer-cura` module](065-create-the-slicer-cura-module.md)
 7. [SLC-100: Create the `slicer-extension` module](100-create-the-slicer-extension-module.md)
+8. [SLC-4: Define the typed engine errors and their user messages](004-define-the-typed-engine-errors-and-their-user-messages.md)
+9. [SLC-101: Contribute the engine settings](101-contribute-the-engine-settings.md)
+10. [SLC-9: Run an engine process: argv without shell, line streams, timeout, exit and signal result](009-run-an-engine-process-argv-without-shell-line-streams-timeou.md)
+11. [SLC-5: Define engine discovery, install and the pinned-release manifest schema](005-define-engine-discovery-install-and-the-pinned-release-manif.md)
+12. [SLC-115: Define the `vsslicer` task type and its definition schema](115-define-the-vsslicer-task-type-and-its-definition-schema.md)
