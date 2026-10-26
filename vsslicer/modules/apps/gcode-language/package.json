@@ -1,0 +1,78 @@
+{
+  "name": "@vsslicer/gcode-language",
+  "displayName": "VSSlicer G-code Language",
+  "version": "0.1.0",
+  "description": "G-code language support: language contribution, TextMate grammar (G/M/T codes, parameters, comments, Klipper and RepRapFirmware extensions, placeholders).",
+  "publisher": "vsslicer",
+  "license": "AGPL-3.0-or-later",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-language@0.1.0/vsslicer/modules/gcode-language",
+  "vsslicer": {
+    "sizeBudgetKB": 200
+  },
+  "files": [
+    "syntaxes",
+    "language-configuration.json",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24",
+    "vscode": "^1.100.0"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "gcode",
+        "aliases": [
+          "G-code",
+          "gcode"
+        ],
+        "extensions": [
+          ".gcode",
+          ".g",
+          ".gco",
+          ".nc"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "gcode",
+        "scopeName": "source.gcode",
+        "path": "./syntaxes/gcode.tmLanguage.json"
+      }
+    ],
+    "configurationDefaults": {
+      "[gcode]": {
+        "editor.largeFileOptimizations": true,
+        "editor.maxTokenizationLineLength": 20000
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check . && tsc",
+    "build": "tsc",
+    "test": "node --test test/*.test.ts && pnpm test:grammar",
+    "test:grammar": "vscode-tmgrammar-snap --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode 'test/fixtures/*.gcode'",
+    "test:grammar:update": "vscode-tmgrammar-snap --updateSnapshot --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode 'test/fixtures/*.gcode'",
+    "bench": "node bench/tokenise.mjs",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@vsslicer/tooling": "^0.8.2",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.3.2",
+    "vscode-tmgrammar-test": "0.1.3"
+  },
+  "prettier": "@vsslicer/tooling/prettier"
+}

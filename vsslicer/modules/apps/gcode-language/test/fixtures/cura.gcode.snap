@@ -1,0 +1,522 @@
+>;FLAVOR:RepRap
+#^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;TIME:451
+#^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;Filament used: 0.27387m
+#^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;Layer height: 0.2
+#^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;MINX:135.416
+#^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;MINY:135.4
+#^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; ---- excerpt: first commands (line 13) ----
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M82 ;absolute extrusion mode
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>PRINT_START BED=110 EXTRUDER=235 CHAMBER=40
+#^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+#           ^ source.gcode
+#            ^^^ source.gcode variable.parameter.gcode
+#               ^ source.gcode keyword.operator.assignment.gcode
+#                ^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^^^^^^^^ source.gcode variable.parameter.gcode
+#                            ^ source.gcode keyword.operator.assignment.gcode
+#                             ^^^ source.gcode constant.numeric.gcode
+#                                ^ source.gcode
+#                                 ^^^^^^^ source.gcode variable.parameter.gcode
+#                                        ^ source.gcode keyword.operator.assignment.gcode
+#                                         ^^ source.gcode constant.numeric.gcode
+>M141 S36
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^^ source.gcode constant.numeric.gcode
+>M83 ;relative extrusion mode
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 F4800 E-6.5
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+#        ^ source.gcode
+#         ^ source.gcode variable.parameter.gcode
+#          ^^^^ source.gcode constant.numeric.gcode
+>;LAYER_COUNT:25
+#^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;LAYER:0
+#^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M107
+#^^^^ source.gcode entity.name.function.gcode
+>G1 F600 Z0.4
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^ source.gcode constant.numeric.gcode
+#       ^ source.gcode
+#        ^ source.gcode variable.parameter.gcode
+#         ^^^ source.gcode constant.numeric.gcode
+>G0 F7200 X137.863 Y137.702 Z0.4
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+#        ^ source.gcode
+#         ^ source.gcode variable.parameter.gcode
+#          ^^^^^^^ source.gcode constant.numeric.gcode
+#                 ^ source.gcode
+#                  ^ source.gcode variable.parameter.gcode
+#                   ^^^^^^^ source.gcode constant.numeric.gcode
+#                          ^ source.gcode
+#                           ^ source.gcode variable.parameter.gcode
+#                            ^^^ source.gcode constant.numeric.gcode
+>;TYPE:SKIRT
+#^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 F600 Z0.2
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^ source.gcode constant.numeric.gcode
+#       ^ source.gcode
+#        ^ source.gcode variable.parameter.gcode
+#         ^^^ source.gcode constant.numeric.gcode
+>G1 F1920 E6.5
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+#        ^ source.gcode
+#         ^ source.gcode variable.parameter.gcode
+#          ^^^ source.gcode constant.numeric.gcode
+>G1 F3600 X138.06 Y137.518 E0.00825
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+#        ^ source.gcode
+#         ^ source.gcode variable.parameter.gcode
+#          ^^^^^^ source.gcode constant.numeric.gcode
+#                ^ source.gcode
+#                 ^ source.gcode variable.parameter.gcode
+#                  ^^^^^^^ source.gcode constant.numeric.gcode
+#                         ^ source.gcode
+#                          ^ source.gcode variable.parameter.gcode
+#                           ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X138.437 Y137.196 E0.01517
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X138.651 Y137.029 E0.00831
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X139.126 Y136.697 E0.01773
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X139.313 Y136.58 E0.00675
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X139.814 Y136.301 E0.01755
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X140.04 Y136.19 E0.0077
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^ source.gcode constant.numeric.gcode
+#          ^ source.gcode
+#           ^ source.gcode variable.parameter.gcode
+#            ^^^^^^ source.gcode constant.numeric.gcode
+#                  ^ source.gcode
+#                   ^ source.gcode variable.parameter.gcode
+#                    ^^^^^^ source.gcode constant.numeric.gcode
+>G1 X140.552 Y135.969 E0.01706
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X140.788 Y135.881 E0.00771
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X141.493 Y135.67 E0.02252
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X141.907 Y135.575 E0.013
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^ source.gcode constant.numeric.gcode
+>G1 X142.607 Y135.46 E0.02171
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X142.809 Y135.44 E0.00621
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.166 Y135.416 E0.01095
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.281 Y135.412 E0.00352
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.556 Y135.41 E0.00842
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.043 Y135.417 E0.0149
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^ source.gcode constant.numeric.gcode
+>; ---- excerpt: line 7373 ----
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 X144.197 Y143.439 E0.00102
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.199 Y143.487 E0.00147
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.193 Y143.593 E0.00325
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.181 Y143.657 E0.00199
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.146 Y143.767 E0.00353
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.112 Y143.839 E0.00244
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.06 Y143.918 E0.00289
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^ source.gcode constant.numeric.gcode
+#          ^ source.gcode
+#           ^ source.gcode variable.parameter.gcode
+#            ^^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X144.002 Y143.986 E0.00273
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.93 Y144.049 E0.00293
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^ source.gcode constant.numeric.gcode
+#          ^ source.gcode
+#           ^ source.gcode variable.parameter.gcode
+#            ^^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.883 Y144.083 E0.00178
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.789 Y144.136 E0.0033
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.7 Y144.169 E0.0029
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^ source.gcode constant.numeric.gcode
+#         ^ source.gcode
+#          ^ source.gcode variable.parameter.gcode
+#           ^^^^^^^ source.gcode constant.numeric.gcode
+#                  ^ source.gcode
+#                   ^ source.gcode variable.parameter.gcode
+#                    ^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.592 Y144.194 E0.00339
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.519 Y144.198 E0.00224
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G0 F18000 X143.516 Y144.598
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^ source.gcode constant.numeric.gcode
+#         ^ source.gcode
+#          ^ source.gcode variable.parameter.gcode
+#           ^^^^^^^ source.gcode constant.numeric.gcode
+#                  ^ source.gcode
+#                   ^ source.gcode variable.parameter.gcode
+#                    ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 F1451.7 X143.374 Y144.593 E0.00435
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^ source.gcode constant.numeric.gcode
+#          ^ source.gcode
+#           ^ source.gcode variable.parameter.gcode
+#            ^^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+#                            ^ source.gcode
+#                             ^ source.gcode variable.parameter.gcode
+#                              ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.317 Y144.584 E0.00177
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.207 Y144.56 E0.00345
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^ source.gcode constant.numeric.gcode
+#                   ^ source.gcode
+#                    ^ source.gcode variable.parameter.gcode
+#                     ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.159 Y144.545 E0.00154
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X143.1 Y144.523 E0.00193
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^ source.gcode constant.numeric.gcode
+#         ^ source.gcode
+#          ^ source.gcode variable.parameter.gcode
+#           ^^^^^^^ source.gcode constant.numeric.gcode
+#                  ^ source.gcode
+#                   ^ source.gcode variable.parameter.gcode
+#                    ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X142.999 Y144.479 E0.00337
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>

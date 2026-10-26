@@ -1,0 +1,10 @@
+{
+  "extends": "@vsslicer/tooling/tsconfig.base.json",
+  "compilerOptions": {
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["test", "bench"]
+}

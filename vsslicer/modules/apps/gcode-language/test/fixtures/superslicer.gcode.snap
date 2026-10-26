@@ -1,0 +1,330 @@
+>; Postprocessed by [ArcWelder](https://github.com/FormerLurker/ArcWelderLib)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; Copyright(C) 2020 - Brad Hochgesang
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; resolution=0.05mm
+#^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; path_tolerance=5%
+#^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; max_radius=1000000.00mm
+#^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; default_xyz_precision=3
+#^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; ---- excerpt: first commands (line 623) ----
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M107
+#^^^^ source.gcode entity.name.function.gcode
+>G21 ; set units to millimeters
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G90 ; use absolute coordinates
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M83 ; use relative distances for extrusion
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M104 S240 ; set temperature
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^^^ source.gcode constant.numeric.gcode
+#         ^ source.gcode
+#          ^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M109 S240 ; set temperature and wait for it to be reached
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^^^ source.gcode constant.numeric.gcode
+#         ^ source.gcode
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M190 S110 ; set bed temperature and wait for it to be reached
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^^^ source.gcode constant.numeric.gcode
+#         ^ source.gcode
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>M107
+#^^^^ source.gcode entity.name.function.gcode
+>;LAYER_CHANGE
+#^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;Z:0.2
+#^^^^^^ source.gcode comment.line.semicolon.gcode
+>;HEIGHT:0.2
+#^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;BEFORE_LAYER_CHANGE
+#^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;0.2
+#^^^^ source.gcode comment.line.semicolon.gcode
+>
+>G1 Z0.200000 F18000
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^^ source.gcode constant.numeric.gcode
+#            ^ source.gcode
+#             ^ source.gcode variable.parameter.gcode
+#              ^^^^^ source.gcode constant.numeric.gcode
+>;AFTER_LAYER_CHANGE
+#^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;0.2
+#^^^^ source.gcode comment.line.semicolon.gcode
+>
+>TIMELAPSE_TAKE_FRAME
+#^^^^^^^^^^^^^^^^^^^^ source.gcode entity.name.function.extended.gcode
+>G1 E-0.75000 F3000
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^^ source.gcode constant.numeric.gcode
+#            ^ source.gcode
+#             ^ source.gcode variable.parameter.gcode
+#              ^^^^ source.gcode constant.numeric.gcode
+>G1 Z1.000000 F18000
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^^ source.gcode constant.numeric.gcode
+#            ^ source.gcode
+#             ^ source.gcode variable.parameter.gcode
+#              ^^^^^ source.gcode constant.numeric.gcode
+>G1 X133.479 Y138.198
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 Z0.200000
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^^ source.gcode constant.numeric.gcode
+>G1 E0.75000 F1800
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^ source.gcode constant.numeric.gcode
+>;TYPE:Skirt
+#^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;WIDTH:0.56
+#^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 F1500
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+>M204 S1000
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^^^^ source.gcode constant.numeric.gcode
+>G1 X134.372 Y137.528 E0.04509
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X135.384 Y137.059 E0.04509
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>; ---- excerpt: line 2854 ----
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 F1124
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+>G1 X137.215 Y157.790 E0.13499
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X137.215 Y153.210 E0.13499
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X141.795 Y153.210 E0.13499
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X141.795 Y157.730 E0.13322
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X141.449 Y157.590 F18000
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^ source.gcode constant.numeric.gcode
+>G1 X138.317 Y156.568
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+>;TYPE:Internal infill
+#^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>;WIDTH:0.44
+#^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 F1124
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+>G1 X139.620 Y154.312 E0.08086
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X139.391 Y154.312 E0.00710
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X140.694 Y156.568 E0.08086
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X140.694 Y156.688 E0.00373
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X138.317 Y156.688 E0.07375
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X138.317 Y156.568 E0.00373
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X138.317 Y155.995 E0.01779
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>G1 X140.694 Y155.995 E0.07375
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^ source.gcode constant.numeric.gcode
+#           ^ source.gcode
+#            ^ source.gcode variable.parameter.gcode
+#             ^^^^^^^ source.gcode constant.numeric.gcode
+#                    ^ source.gcode
+#                     ^ source.gcode variable.parameter.gcode
+#                      ^^^^^^^ source.gcode constant.numeric.gcode
+>; INIT stop printing object cube_1 id:0 copy 1
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>; INIT printing object union_3 id:2 copy 0
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>G1 E-0.75000 F3000
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^^^^^ source.gcode constant.numeric.gcode
+#            ^ source.gcode
+#             ^ source.gcode variable.parameter.gcode
+#              ^^^^ source.gcode constant.numeric.gcode
+>

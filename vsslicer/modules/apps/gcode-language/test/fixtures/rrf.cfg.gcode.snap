@@ -1,0 +1,143 @@
+>; hand-written RepRapFirmware macro
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>(parenthesis comment) G28 (inline) X0
+#^ source.gcode comment.block.parenthesis.gcode
+# ^^^^^^^^^^^^^^^^^^^ source.gcode comment.block.parenthesis.gcode
+#                    ^ source.gcode comment.block.parenthesis.gcode
+#                     ^ source.gcode
+#                      ^^^ source.gcode entity.name.function.gcode
+#                         ^ source.gcode
+#                          ^ source.gcode comment.block.parenthesis.gcode
+#                           ^^^^^^ source.gcode comment.block.parenthesis.gcode
+#                                 ^ source.gcode comment.block.parenthesis.gcode
+#                                  ^ source.gcode
+#                                   ^ source.gcode variable.parameter.gcode
+#                                    ^ source.gcode constant.numeric.gcode
+>M98 P"0:/macros/start.g"
+#^^^ source.gcode entity.name.function.gcode
+#   ^ source.gcode
+#    ^ source.gcode variable.parameter.gcode
+#     ^ source.gcode string.quoted.double.gcode
+#      ^^^^^^^^^^^^^^^^^ source.gcode string.quoted.double.gcode
+#                       ^ source.gcode string.quoted.double.gcode
+>M117 Printing layer 1 ; message text
+#^^^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^^^^^^^^^^^^^^^^^ source.gcode string.unquoted.message.gcode
+#                      ^^^^^^^^^^^^^^ source.gcode comment.line.semicolon.gcode
+>if heat.heaters[1].current > 50
+#^^ source.gcode keyword.control.meta.gcode
+#  ^^^^^^^^^^^^^ source.gcode
+#               ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                ^ source.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                 ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                  ^^^^^^^^^^^ source.gcode
+#                             ^^ source.gcode constant.numeric.gcode
+>  echo "hot: " ^ heat.heaters[1].current
+#^^ source.gcode
+#  ^^^^ source.gcode keyword.control.meta.gcode
+#      ^ source.gcode
+#       ^ source.gcode string.quoted.double.gcode
+#        ^^^^^ source.gcode string.quoted.double.gcode
+#             ^ source.gcode string.quoted.double.gcode
+#              ^^^^^^^^^^^^^^^ source.gcode
+#                             ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                              ^ source.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                               ^ source.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                                ^^^^^^^^^ source.gcode
+>  G1 X{move.axes[0].max - 10} F6000
+#^^ source.gcode
+#  ^^ source.gcode entity.name.function.gcode
+#    ^ source.gcode
+#     ^ source.gcode variable.parameter.gcode
+#      ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.begin.gcode
+#       ^^^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                ^ source.gcode meta.embedded.expression.braces.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.begin.gcode
+#                 ^ source.gcode meta.embedded.expression.braces.gcode meta.embedded.expression.brackets.gcode constant.numeric.gcode
+#                  ^ source.gcode meta.embedded.expression.braces.gcode meta.embedded.expression.brackets.gcode punctuation.section.embedded.end.gcode
+#                   ^ source.gcode meta.embedded.expression.braces.gcode
+#                    ^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                       ^ source.gcode meta.embedded.expression.braces.gcode
+#                        ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                         ^ source.gcode meta.embedded.expression.braces.gcode
+#                          ^^ source.gcode meta.embedded.expression.braces.gcode constant.numeric.gcode
+#                            ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.end.gcode
+#                             ^ source.gcode
+#                              ^ source.gcode variable.parameter.gcode
+#                               ^^^^ source.gcode constant.numeric.gcode
+>elif state.status == "idle"
+#^^^^ source.gcode keyword.control.meta.gcode
+#    ^^^^^^^^^^^^^^^^^ source.gcode
+#                     ^ source.gcode string.quoted.double.gcode
+#                      ^^^^ source.gcode string.quoted.double.gcode
+#                          ^ source.gcode string.quoted.double.gcode
+>  M291 P"idle" R"Info" S1
+#^^ source.gcode
+#  ^^^^ source.gcode entity.name.function.gcode
+#      ^ source.gcode
+#       ^ source.gcode variable.parameter.gcode
+#        ^ source.gcode string.quoted.double.gcode
+#         ^^^^ source.gcode string.quoted.double.gcode
+#             ^ source.gcode string.quoted.double.gcode
+#              ^ source.gcode
+#               ^ source.gcode variable.parameter.gcode
+#                ^ source.gcode string.quoted.double.gcode
+#                 ^^^^ source.gcode string.quoted.double.gcode
+#                     ^ source.gcode string.quoted.double.gcode
+#                      ^ source.gcode
+#                       ^ source.gcode variable.parameter.gcode
+#                        ^ source.gcode constant.numeric.gcode
+>else
+#^^^^ source.gcode keyword.control.meta.gcode
+>  abort "no heater"
+#^^ source.gcode
+#  ^^^^^ source.gcode keyword.control.meta.gcode
+#       ^ source.gcode
+#        ^ source.gcode string.quoted.double.gcode
+#         ^^^^^^^^^ source.gcode string.quoted.double.gcode
+#                  ^ source.gcode string.quoted.double.gcode
+>var speed = 100
+#^^^ source.gcode keyword.control.meta.gcode
+#   ^^^^^^^^^ source.gcode
+#            ^^^ source.gcode constant.numeric.gcode
+>set var.speed = var.speed + 1
+#^^^ source.gcode keyword.control.meta.gcode
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^ source.gcode
+#                            ^ source.gcode constant.numeric.gcode
+>G1 X10.5 Y-3 Z.2 E-0.8 F{var.speed * 60}
+#^^ source.gcode entity.name.function.gcode
+#  ^ source.gcode
+#   ^ source.gcode variable.parameter.gcode
+#    ^^^^ source.gcode constant.numeric.gcode
+#        ^ source.gcode
+#         ^ source.gcode variable.parameter.gcode
+#          ^^ source.gcode constant.numeric.gcode
+#            ^ source.gcode
+#             ^ source.gcode variable.parameter.gcode
+#              ^^ source.gcode constant.numeric.gcode
+#                ^ source.gcode
+#                 ^ source.gcode variable.parameter.gcode
+#                  ^^^^ source.gcode constant.numeric.gcode
+#                      ^ source.gcode
+#                       ^ source.gcode variable.parameter.gcode
+#                        ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.begin.gcode
+#                         ^^^^^^^^^ source.gcode meta.embedded.expression.braces.gcode variable.other.gcode
+#                                  ^ source.gcode meta.embedded.expression.braces.gcode
+#                                   ^ source.gcode meta.embedded.expression.braces.gcode keyword.operator.gcode
+#                                    ^ source.gcode meta.embedded.expression.braces.gcode
+#                                     ^^ source.gcode meta.embedded.expression.braces.gcode constant.numeric.gcode
+#                                       ^ source.gcode meta.embedded.expression.braces.gcode punctuation.section.embedded.end.gcode
+>N120 G1 X10*57
+#^^^^ source.gcode constant.numeric.line-number.gcode
+#    ^ source.gcode
+#     ^^ source.gcode entity.name.function.gcode
+#       ^ source.gcode
+#        ^ source.gcode variable.parameter.gcode
+#         ^^ source.gcode constant.numeric.gcode
+#           ^^^ source.gcode keyword.other.checksum.gcode
+>G28 XY
+#^^^ source.gcode entity.name.function.gcode
+#   ^^^^ source.gcode
+>T1
+#^^ source.gcode entity.name.function.tool.gcode
+>
