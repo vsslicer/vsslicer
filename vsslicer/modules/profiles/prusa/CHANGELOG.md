@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-89: `readPhysicalPrinterIni` (2.9) and `readPhysicalPrinterJson` (3.0) read PrusaSlicer physical printers into an instance (model, host, `host_type`) plus a separate credential; malformed `preset_names` skips the printer as upstream does; bounds: 1 MiB JSON, depth 16, 2,048-character host.
 - PRF-185: the INI reader caps total entries at 500,000 (`MAX_ENTRIES`) with one diagnostic.
 - PRF-184: `PRINTER_VENDOR_PRUSA3D` converts to a tag test like every other keyword.
 - PRF-33: bounded YAML subset reader and `readVendorYaml` for the PrusaSlicer 3.0 preset tree (experimental flag, pinned to PrusaSlicer@30ef591).

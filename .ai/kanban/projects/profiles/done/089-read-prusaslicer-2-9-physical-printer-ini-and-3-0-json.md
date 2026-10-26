@@ -77,3 +77,19 @@ Previous points 1, 3 and 4 fixed. Point 2 is fixed only on the success path:
 Card re-checked: all other ACs hold as in the first review.
 
 **Carried to SP10 (sp9-coordinator, 10:41):** its second review failed at 10:39 (unescape error cases, see above) and SP9 stopped building. The unreviewed work is parked, untracked, under `.ai/local/wip/SP9/` at the same paths (vsslicer/modules/profiles-prusa/src/adapters/physical/, test/adapters/physical.test.ts, test/fixtures/physical/); move it back with `mv` before continuing. Nothing of it is committed.
+
+**Fix round 2 (sp10-prf-89-fix)**
+
+`unescapeStrings` now returns `undefined` where `unescape_strings_cstyle` returns false (Config.cpp:151-215: backslash at end, unterminated quote, text after a closing quote); `readPhysicalPrinterIni` then returns no instance and an error `malformed-line` diagnostic that does not quote the value (upstream: Config.cpp:500 throws, Preset.cpp:1996-2021 skips the printer). Comment updated. Test `malformed preset_names` for `A;"B`, `"A" x`, `"A`, `"A\` asserts no instance, the diagnostic, and neither the credential nor the value in diagnostics. Mutation probe (failure check disabled): the 4 cases fail. `src/index.ts` exports `./adapters/physical/index.ts`; CHANGELOG line added.
+
+Verified: `pnpm lint`, `pnpm build` clean, `pnpm test` 186 passed, `node scripts/run.mjs checks` exit 0.
+
+**Review passed (sp10-rev-prf-89-194)**
+
+Ran in `profiles-prusa`: `pnpm install` ok, `pnpm lint` clean, `pnpm build` clean, `pnpm test` 186 passed (8 files), `vitest run test/adapters/physical.test.ts` alone 14 passed, `cd vsslicer && node scripts/run.mjs checks` exit 0. No PRF-25 files were dirty in the module at review time; nothing failed.
+
+Earlier points: sp9-rev 1-4 still hold (size/depth tests, `unescapeStrings`, `printhost_authorization_type`, JSON `none`, stray `Shop` gone). sp9-rerev point 1 fixed: `read.ts:84-109` returns `undefined` exactly where PrusaSlicer-2.9@b028299 `Config.cpp:151-215` returns false (backslash at end :180-181, unterminated quote :189-190, non-`;` after an item :207-208), checked line by line; `read.ts:130-137` then returns no instance and an error `malformed-line` that does not quote the value, matching the printer being skipped (`Preset.cpp:1996-2021`).
+
+Mutations in a mktemp copy, one at a time, each makes physical.test.ts fail: backslash-at-end returns partial (1 failed), unterminated returns partial (2), text-after-quote returns partial (1), refusal branch disabled (4), credential kept without a connection (1). Equivalent/untested, not blocking: dropping the trailing-`;` empty item (filtered by `filter(Boolean)` anyway) and the `\r`/`\n` escapes inside quoted names.
+
+Hostile probes (absolute-path import of `src/`): `preset_names` of 10 MB (`a;` x5e6, quoted escapes, unterminated quote, blanks) is cut by the INI 65,536-character line cap with one diagnostic, 1-4 ms; 60 KB unterminated quote refused with the malformed diagnostic; a `SEKRIT` api key never appears in diagnostics in any case. `src/index.ts` export and CHANGELOG line present.
