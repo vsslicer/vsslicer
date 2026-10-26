@@ -11,3 +11,4 @@
 9. [PRF-215: Refuse Prusa export file names that differ only in case](215-refuse-prusa-export-file-names-that-differ-only-in-case.md)
 10. [PRF-38: Implement the import use cases over registered importers](038-define-importresult-and-the-import-use-cases-with-diagnostic.md)
 11. [PRF-214: Keep single backslashes when writing converted G-code to Prusa INI](214-keep-single-backslashes-when-writing-converted-g-code-to-pru.md)
+12. [PRF-58: Spike: which workspace folder holds user profiles](058-spike-which-workspace-folder-holds-user-profiles.md)
