@@ -27,3 +27,5 @@
 25. [GCP-120: Move PrintPosition and the follow command ids into gcode-api](120-move-printposition-and-the-follow-command-ids-into-gcode-api.md)
 26. [GCP-121: Cut G-code preview memory at 500 MB to the budget](121-cut-g-code-preview-memory-at-500-mb-to-the-budget.md)
 27. [GCP-122: Count move and state-change reads in the planner's linear-time test](122-count-move-and-state-change-reads-in-the-planner-s-linear-ti.md)
+28. [GCP-123: Capture a real Moonraker file_position feed for the follow tests](123-capture-a-real-moonraker-file-position-feed-for-the-follow-t.md)
+29. [GCP-124: Fix the timeline integration test that fails on both VS Code versions](124-fix-the-timeline-integration-test-that-fails-on-both-vs-code.md)
