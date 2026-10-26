@@ -2,6 +2,10 @@
 
 The grammar and language configuration are original work written for VSSlicer; no grammar is copied or adapted from other projects. The slicer fixtures below are excerpts of generated G-code, licensed as the gcode-parser corpus (AGPL-3.0 slicer profiles; see its per-folder PROVENANCE.md) and used under AGPL-3.0-or-later. Licence: AGPL-3.0-or-later (see `LICENSE`).
 
+## Catalogue
+
+`catalogue/*.json` (hover and completion text) is original wording written for VSSlicer; each entry's `source` field links the page that documents the behaviour, and the lint only allows these: the RepRap wiki (`reprap.org/wiki/G-code`), Marlin docs (`marlinfw.org/docs/gcode`), Duet docs (`docs.duet3d.com`), Klipper docs (`www.klipper3d.org/G-Codes.html`) and source (`github.com/Klipper3d/klipper`, GPL-3.0), Prusa Firmware Buddy (`github.com/prusa3d/Prusa-Firmware-Buddy`) and the Prusa Knowledge Base (`help.prusa3d.com`), and OrcaSlicer (`github.com/SoftFever/OrcaSlicer`). No Klipper `G-Codes.md` or `Config_Reference.md` text is copied (a 7-word overlap probe found none). The Bambu entries marked UNDOCUMENTED quote comments from OrcaSlicer@09aa0114 machine templates (`resources/profiles/BBL/machine/`, AGPL-3.0, compatible with this module's AGPL-3.0-or-later), with the file and line cited in each entry.
+
 Test fixtures in `test/fixtures/`:
 
 - `prusaslicer.gcode`, `orca.gcode`, `bambu-studio.gcode`, `cura.gcode`, `superslicer.gcode`: excerpts (first lines, first commands, and a block of moves) of the gcode-parser corpus, in `vsslicer/modules/gcode-parser/test/fixtures/`: `prusaslicer/mini_cube_ps2.8.1.gcode`, `orca/cube-marlin.gcode`, `bambu-studio/cube.gcode`, `cura/cube-cylinder-4.10.0.gcode`, `superslicer/superslicer-2.3.56-arcwelder.gcode`. Each folder's `PROVENANCE.md` there names the generator, version, settings and licence.
