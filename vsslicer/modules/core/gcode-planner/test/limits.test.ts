@@ -85,6 +85,15 @@ describe('resolveLimits', () => {
     expect(resolveLimits({ flavour: 'reprapfirmware', config: prusaConfig }).flavour).toBe('reprapfirmware');
   });
 
+  it("maps Cura's ;FLAVOR: names, keeping RepRapFirmware apart from RepRap", () => {
+    const f = (flavour: string) => resolveLimits({ flavour });
+    for (const n of ['Marlin', 'Marlin(Volumetric)', 'Griffin', 'Cheetah'])
+      expect([n, f(n).flavour, f(n).flavourAssumed]).toEqual([n, 'marlin', false]);
+    for (const n of ['RepRap', 'RepRapFirmware'])
+      expect([n, f(n).flavour, f(n).flavourAssumed]).toEqual([n, 'reprapfirmware', false]);
+    expect(f('UltiGCode')).toMatchObject({ flavour: 'marlin', flavourAssumed: true });
+  });
+
   it('falls back to Marlin for an unknown flavour and says so', () => {
     const r = resolveLimits({ flavour: 'smoothie' });
     expect(r).toMatchObject({ flavour: 'marlin', flavourAssumed: true, flavourName: 'smoothie' });

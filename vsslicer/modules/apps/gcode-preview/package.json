@@ -78,9 +78,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@vsslicer/gcode-api": "^0.5.0",
-    "@vsslicer/gcode-bgcode": "^0.4.2",
-    "@vsslicer/gcode-parser": "^0.10.1",
+    "@vsslicer/gcode-api": "^0.6.0",
+    "@vsslicer/gcode-parser": "^0.11.0",
     "@vsslicer/gcode-planner": "^0.3.0",
     "@vsslicer/webview-kit": "^0.5.0"
   },

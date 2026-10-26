@@ -9,14 +9,11 @@ importers:
   .:
     dependencies:
       '@vsslicer/gcode-api':
-        specifier: ^0.5.0
-        version: 0.5.0
-      '@vsslicer/gcode-bgcode':
-        specifier: ^0.4.2
-        version: 0.4.2
+        specifier: ^0.6.0
+        version: 0.6.0
       '@vsslicer/gcode-parser':
-        specifier: ^0.10.1
-        version: 0.10.1
+        specifier: ^0.11.0
+        version: 0.11.0
       '@vsslicer/gcode-planner':
         specifier: ^0.3.0
         version: 0.3.0
@@ -838,12 +835,16 @@ packages:
     resolution: {integrity: sha512-WkGGjf6MgUDN6ZBmxayOii1vU5A78x+yqh2H+6MrkoIzMj6bLRzQyIkyOIw+B4yKi26zGA/pZIdZWqBirNj0LQ==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-bgcode@0.4.2':
-    resolution: {integrity: sha512-FXp5eytXvHb7y3t8SOHWieMmZ8dBWZpAB7A3hlE7VC1KM62q/kSYYSgaPHO727w4uKEbPoAwvYW4T0/4L3l7Iw==}
+  '@vsslicer/gcode-api@0.6.0':
+    resolution: {integrity: sha512-ygp8MSafvYTx/N7spTrMllK+7eTk3QCbU9wEp4/DMTQYiHA8DohxkwjxoB3mBwdqfGEJXi2uxRZ5/taAlRJd+A==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-parser@0.10.1':
-    resolution: {integrity: sha512-fQ/lFn/djKBHkbcct1mfolmtxgZSrVE186yS21bO/AXdFCEkdkoGk40H4P44mvC6AA0Rx8cXRF+3MOb23AOKfA==}
+  '@vsslicer/gcode-bgcode@0.4.3':
+    resolution: {integrity: sha512-PigT/jVQ9DONuiOTNJL048q9jsrc+ISSFM9OcaoR9KZj6JW9iKOlDkBD67uuv0M9L1HEapkF69Z3mTwQf/6jgQ==}
+    engines: {node: '>=24'}
+
+  '@vsslicer/gcode-parser@0.11.0':
+    resolution: {integrity: sha512-vvAPQl1vWFXGhL3lI18n7tEUgiYtU1tQnybo56+CqvQeX45VZqVdPvhg25znnC3in8tyyGYKO2zvMS+xbV8UTg==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-planner@0.3.0':
@@ -3028,12 +3029,14 @@ snapshots:
 
   '@vsslicer/gcode-api@0.5.0': {}
 
-  '@vsslicer/gcode-bgcode@0.4.2': {}
+  '@vsslicer/gcode-api@0.6.0': {}
 
-  '@vsslicer/gcode-parser@0.10.1':
+  '@vsslicer/gcode-bgcode@0.4.3': {}
+
+  '@vsslicer/gcode-parser@0.11.0':
     dependencies:
-      '@vsslicer/gcode-api': 0.5.0
-      '@vsslicer/gcode-bgcode': 0.4.2
+      '@vsslicer/gcode-api': 0.6.0
+      '@vsslicer/gcode-bgcode': 0.4.3
 
   '@vsslicer/gcode-planner@0.3.0':
     dependencies:

@@ -2,7 +2,6 @@
 // The preview's worker thread (bundled to dist/worker.js): reads the file, parses and plans it, and moves the result to the host.
 import { createReadStream } from 'node:fs';
 import { parentPort, workerData } from 'node:worker_threads';
-import { deflateCodec, heatshrink11Codec, heatshrink12Codec } from '@vsslicer/gcode-bgcode';
 import { loadPreview } from '../application/load-preview.ts';
 
 export interface WorkerJob {
@@ -18,9 +17,7 @@ if (!port) throw new Error('worker-entry must run in a worker thread');
 const job = workerData as WorkerJob;
 
 // no top-level await: the bundle is CommonJS
-loadPreview(job.kind, createReadStream(job.path, { highWaterMark: 1 << 20 }), {
-  codecs: [deflateCodec, heatshrink11Codec, heatshrink12Codec],
-}).then(
+loadPreview(job.kind, createReadStream(job.path, { highWaterMark: 1 << 20 })).then(
   (loaded) => {
     const { moves, extrusion, stateChanges } = loaded.parsed;
     port.postMessage({ type: 'done', loaded } satisfies WorkerReply, [...moves, ...extrusion, ...stateChanges]);
