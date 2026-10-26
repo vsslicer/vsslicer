@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-102: the webview's slider, toggle and saved-view rules are one pure, tested function (`nextView` in controls.ts).
 - GCP-101: a failed GPU context restore shows the failure message instead of a blank preview.
 
 ## 0.3.0

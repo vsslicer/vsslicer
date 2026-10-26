@@ -24,7 +24,7 @@ import {
 } from '../../domain/summary.ts';
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
 import { SPEEDS, createClock, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
-import { presentRoles, roleName } from './controls.ts';
+import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
 import {
   concatMoves,
@@ -134,23 +134,15 @@ const toggle = (label: string, checked: boolean, onChange: (on: boolean) => void
 };
 let roleBoxes: [number, HTMLInputElement][] = [];
 let travelBox: HTMLInputElement | undefined;
-const patch = (p: Partial<SavedView>) => {
-  api.setState({ ...api.getState()!, ...p });
+const patch = (e: ViewEvent) => {
+  api.setState(nextView(api.getState()!, e));
   redraw();
 };
-topLayer.input.addEventListener('input', () => {
-  const layer = Number(topLayer.input.value);
-  patch({ layer, move: undefined, bottom: Math.min(api.getState()?.bottom ?? 0, layer) });
-});
-bottomLayer.input.addEventListener('input', () => {
-  const bottom = Number(bottomLayer.input.value);
-  const layer = Math.max(bottom, api.getState()?.layer ?? 0);
-  patch({ bottom, layer, move: layer === api.getState()?.layer ? api.getState()?.move : undefined });
-});
-moveSlider.input.addEventListener('input', () => {
-  const n = Number(moveSlider.input.value);
-  patch({ move: n >= Number(moveSlider.input.max) ? undefined : n });
-});
+topLayer.input.addEventListener('input', () => patch({ kind: 'top', value: Number(topLayer.input.value) }));
+bottomLayer.input.addEventListener('input', () => patch({ kind: 'bottom', value: Number(bottomLayer.input.value) }));
+moveSlider.input.addEventListener('input', () =>
+  patch({ kind: 'move', value: Number(moveSlider.input.value), max: Number(moveSlider.input.max) }),
+);
 panel.append(layerTime, toggles);
 const modes = document.createElement('select');
 modes.ariaLabel = 'Colour by';
@@ -252,13 +244,8 @@ const syncControls = (s: SavedView) => {
 
 const buildToggles = () => {
   toggles.replaceChildren();
-  roleBoxes = info.roles.map((r) => [
-    r,
-    toggle(roleName(r), true, () => patch({ roleMask: ((api.getState()?.roleMask ?? 0xffffffff) ^ (1 << r)) >>> 0 })),
-  ]);
-  travelBox = toggle('Travel moves', false, () =>
-    patch({ hiddenFlags: (api.getState()?.hiddenFlags ?? MoveFlag.Travel) ^ MoveFlag.Travel }),
-  );
+  roleBoxes = info.roles.map((r) => [r, toggle(roleName(r), true, () => patch({ kind: 'role', value: r }))]);
+  travelBox = toggle('Travel moves', false, () => patch({ kind: 'travel' }));
 };
 window.addEventListener('resize', redraw);
 
@@ -297,8 +284,7 @@ const render = (state: ViewState) => {
 
 const done = () => {
   if (!summary || buffers.some((b) => !b)) return;
-  const saved = api.getState();
-  api.setState({ ...saved, layer: saved?.layer ?? Math.max(0, summary.layers.length - 1) });
+  api.setState(nextView(api.getState(), { kind: 'load', layerCount: summary.layers.length }));
   const received: Received = {
     buffers: buffers.map((b) => ({ byteLength: b!.byteLength, arrayBuffer: b instanceof ArrayBuffer })),
     stateSaved: api.getState() !== undefined,
@@ -353,11 +339,10 @@ const apply = (setView = true) => {
   headMove = positionAt(info.moves, clock.state.time, info.duration, xyz);
   head = xyz;
   const { layer, move } = layerOfMove(info.layers, headMove);
-  const bottom = Math.min(api.getState()?.bottom ?? 0, layer);
   clockSlider.value = String(clock.state.time);
   clockOut.textContent = `${time(clock.state.time)} / ${time(info.duration)}`;
   playButton.textContent = clock.state.playing ? 'Pause' : 'Play';
-  if (setView) patch({ layer, move, bottom });
+  if (setView) patch({ kind: 'play', layer, move });
   else redraw();
 };
 const seekTo = (t: number) => {
