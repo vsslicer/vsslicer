@@ -1,0 +1,25 @@
+{
+  "comment": "VWR-32: opening the 500 MB 3MF (generate.ts --size 500 --seed 1) through readInNodeWorker. capMB caps the whole process's peak RSS (host thread, worker heap and the off-heap file and result buffers) on every OS; run.ts gates it, plus host-thread CPU between two event-loop turns under 50 ms, counted through the turn after the worker returns. measured is written by run.ts --update, per OS. Wall event-loop delay is recorded, never gated. Blind spot: CPU time cannot see the host blocked while waiting off-CPU (Atomics.wait, sync I/O, lock waits); only wall delay shows that.",
+  "capMB": 1536,
+  "triangles": 7644348,
+  "platforms": {
+    "darwin": {
+      "machine": {
+        "cpu": "Apple M1 Pro",
+        "cores": 8,
+        "memGB": 16,
+        "os": "27.2.0",
+        "node": "v26.12.1"
+      },
+      "measured": {
+        "fileMB": 500,
+        "triangles": 7644348,
+        "maxDelayMs": 199.75,
+        "p99DelayMs": 27.36,
+        "turns": 1706921,
+        "maxTurnCpuMs": 3.93,
+        "peakRssMB": 1159
+      }
+    }
+  }
+}

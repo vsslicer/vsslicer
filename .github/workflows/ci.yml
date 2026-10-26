@@ -131,6 +131,27 @@ jobs:
         with:
           name: mesh-bench-budget
           path: vsslicer/modules/mesh/test/bench/budget.json
+      # VWR-32: open the 500 MB 3MF through the worker; host CPU between turns < 50 ms, peak RSS <= test/large/budget.json capMB.
+      # capMB gates every OS; --update also records the linux measurement, uploaded to be committed.
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, '3mf')
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: vsslicer/modules/3mf/.cache/large-fixtures
+          key: 3mf-large-${{ hashFiles('vsslicer/modules/3mf/test/large/generate.ts', 'vsslicer/modules/3mf/test/support/zipBuilder.ts', 'vsslicer/modules/3mf/test/support/minimalPackage.ts') }}
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, '3mf')
+        id: threemf-large
+        working-directory: vsslicer/modules/3mf
+        run: |
+          if node -e "process.exit(require('./test/large/budget.json').platforms.linux ? 0 : 1)"; then
+            node --no-warnings test/large/run.ts
+          else
+            node --no-warnings test/large/run.ts --update
+          fi
+      - if: always() && steps.threemf-large.outcome != 'skipped'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: 3mf-large-budget
+          path: vsslicer/modules/3mf/test/large/budget.json
       # GCP-54: the api-extractor report must match the source, and a breaking change needs a higher GCODE_PREVIEW_API_VERSION
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'gcode-preview')
         working-directory: vsslicer/modules/gcode-preview

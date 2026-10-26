@@ -30,6 +30,7 @@
     "prepack": "pnpm build",
     "test": "tsc --noEmit -p tsconfig.test.json && vitest run",
     "test:coverage": "vitest run --coverage",
+    "bench:large": "node --no-warnings test/large/run.ts",
     "format": "prettier --write ."
   },
   "devDependencies": {
