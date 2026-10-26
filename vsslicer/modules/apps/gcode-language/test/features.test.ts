@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { loadCatalogue } from '../src/adapters/catalogue.ts';
 import { completionsAt, hoverAt, unknownCommands } from '../src/application/features.ts';
 import { buildIndex, commandWord, lookup, resolveFlavour } from '../src/domain/lookup.ts';
-import { featuresAvailable, MAX_FEATURE_BYTES } from '../src/domain/size.ts';
+import { featuresAvailable, MAX_FEATURE_BYTES, MAX_SCAN_ON_EDIT_CHARS, scansOnEdit } from '../src/domain/size.ts';
 
 const entries = loadCatalogue(fileURLToPath(new URL('../catalogue', import.meta.url)));
 const index = buildIndex(entries);
@@ -93,4 +93,9 @@ test('unknown commands are found only when the flavour is known, and only G, M a
 test('the size gate switches features off above 50 MB', () => {
   assert.ok(featuresAvailable(MAX_FEATURE_BYTES));
   assert.ok(!featuresAvailable(MAX_FEATURE_BYTES + 1));
+});
+
+test('files above a few MB are scanned on open and save only', () => {
+  assert.equal(scansOnEdit(MAX_SCAN_ON_EDIT_CHARS), true);
+  assert.equal(scansOnEdit(MAX_SCAN_ON_EDIT_CHARS + 1), false);
 });
