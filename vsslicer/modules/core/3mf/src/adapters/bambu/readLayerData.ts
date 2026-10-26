@@ -38,15 +38,15 @@ export interface LayerData {
   notices: string[];
 }
 
-type Attrs = Record<string, string>;
-interface Handlers {
+export type Attrs = Record<string, string>;
+export interface Handlers {
   open(name: string, attrs: Attrs): void;
   text(text: string): void;
   close(name: string): void;
 }
 
 /** Plain SAX walk: throws on malformed XML, nesting over the depth cap or `MAX_LAYER_ENTRIES` elements. */
-function walk(bytes: Uint8Array, h: Handlers): void {
+export function walk(bytes: Uint8Array, h: Handlers): void {
   const parser = new SaxesParser();
   let depth = 0;
   let elements = 0;

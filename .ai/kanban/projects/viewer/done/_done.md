@@ -8,3 +8,4 @@
 6. [VWR-401: Parse the 3MF root model once in readProject](401-parse-the-3mf-root-model-once-in-readproject.md)
 7. [VWR-402: Test that the public readProject reaches the PrusaSlicer 2.x reader](402-test-that-the-public-readproject-reaches-the-prusaslicer-2-x.md)
 8. [VWR-403: Test the p:path refusal on a PrusaSlicer 2.x build item](403-test-the-p-path-refusal-on-a-prusaslicer-2-x-build-item.md)
+9. [VWR-23: Read Bambu and Orca plates and slice info](023-read-bambu-and-orca-plates-and-slice-info.md)

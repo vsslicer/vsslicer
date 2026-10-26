@@ -3,6 +3,7 @@ import type { DialectReader } from '../../application/readProject.ts';
 import { createProject, type Dialect } from '../../domain/project/project.ts';
 import { readLayerData } from './readLayerData.ts';
 import { readBambuObjects } from './readObjects.ts';
+import { readPlates } from './readPlates.ts';
 
 /*
  * Ported from OrcaSlicer@09aa0114:src/libslic3r/Format/bbs_3mf.cpp:230 and :246-249 (the config part names), :2042-2081
@@ -68,6 +69,19 @@ export const createBambuReader =
     const { objects, instances, notices } = readBambuObjects(pkg);
     const { notices: layerNotices, ...layerData } = readLayerData(pkg);
     notices.push(...layerNotices);
+    const { plates, notices: plateNotices } = readPlates(pkg);
+    notices.push(...plateNotices);
+    // Instance k of an object is the k-th build item that names it; a plate lists (object, k).
+    // shortcut: ids are matched as written, so an object renamed by readBambuObjects (clashing ids across parts) is missed.
+    const plateOf = new Map<string, number>();
+    for (const p of plates) for (const i of p.instances ?? []) plateOf.set(`${i.objectId}|${i.instanceId}`, p.id);
+    const seen = new Map<number, number>();
+    const placed = instances.map((inst) => {
+      const k = seen.get(inst.objectId) ?? 0;
+      seen.set(inst.objectId, k + 1);
+      const plateId = plateOf.get(`${inst.objectId}|${k}`);
+      return plateId === undefined ? inst : { ...inst, plateId };
+    });
     const configs = pkg.parts.filter((p) => isConfigPart(p.name));
     const preserved = pkg.parts.filter((p) => !isConfigPart(p.name) && !lower(p.name).endsWith('.model'));
     let printableArea: readonly Point[] | undefined;
@@ -91,7 +105,8 @@ export const createBambuReader =
     return createProject({
       dialect,
       objects,
-      instances,
+      instances: placed,
+      plates,
       ...layerData,
       rawConfig: new Map(configs.map((p) => [p.name, p.bytes] as const)),
       preserved,

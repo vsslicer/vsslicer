@@ -30,6 +30,12 @@ export type {
   LayerHeightProfile,
   CutConnector,
   CutInfo,
+  PlateInstance,
+  PlateLayout,
+  PlateObjectBox,
+  SliceFilament,
+  SliceInfo,
+  SliceWarning,
 } from './domain/project/project.ts';
 export type { ZipArchive, ZipEntry } from './application/zipArchive.ts';
 export { DEFAULT_MAX_ENTRY_BYTES, DEFAULT_MAX_TOTAL_BYTES, openZip } from './adapters/zip/fflateZip.ts';
