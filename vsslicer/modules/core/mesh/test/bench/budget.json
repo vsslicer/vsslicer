@@ -1,0 +1,192 @@
+{
+  "comment": "VWR-50. Per OS, per size (M triangles), per host (node: worker_threads process RSS; chromium: browser process-tree RSS, baseline included) and per stage: budgetMB = ceil(measured peak RSS x 1.25), gated by test/bench/run.ts. ms is wall time, cpuMs the worker thread's CPU time (Node only); neither is gated. startMB is the RSS when the stage began, so a stage's own growth is peakMB - startMB. A budget is valid only on the OS it was measured on.",
+  "platforms": {
+    "darwin": {
+      "machine": {
+        "cpu": "Apple M1 Pro",
+        "cores": 8,
+        "memGB": 16,
+        "os": "darwin 27.2.0",
+        "node": "v26.12.1"
+      },
+      "budgetMB": {
+        "1M": {
+          "node": {
+            "parse": 252,
+            "dedup": 317,
+            "bvh": 493
+          },
+          "chromium": {
+            "parse": 558,
+            "dedup": 590,
+            "bvh": 652
+          }
+        },
+        "5M": {
+          "node": {
+            "parse": 893,
+            "dedup": 1145,
+            "bvh": 1932
+          },
+          "chromium": {
+            "parse": 1155,
+            "dedup": 1269,
+            "bvh": 1302
+          }
+        },
+        "20M": {
+          "node": {
+            "parse": 3279,
+            "dedup": 3839,
+            "bvh": 5007
+          },
+          "chromium": {
+            "parse": 1235,
+            "dedup": 1223,
+            "bvh": 1427
+          }
+        }
+      },
+      "measured": {
+        "1M": {
+          "node": {
+            "triangles": 999996,
+            "vertices": 500000,
+            "ms": {
+              "parse": 192,
+              "dedup": 189,
+              "bvh": 579
+            },
+            "cpuMs": {
+              "parse": 170,
+              "dedup": 151,
+              "bvh": 331
+            },
+            "startMB": {
+              "parse": 125,
+              "dedup": 235,
+              "bvh": 253
+            },
+            "peakMB": {
+              "parse": 201,
+              "dedup": 253,
+              "bvh": 394
+            }
+          },
+          "chromium": {
+            "triangles": 999996,
+            "vertices": 500000,
+            "ms": {
+              "parse": 157,
+              "dedup": 118,
+              "bvh": 298
+            },
+            "baselineMB": 255,
+            "startMB": {
+              "parse": 371,
+              "dedup": 436,
+              "bvh": 472
+            },
+            "peakMB": {
+              "parse": 446,
+              "dedup": 472,
+              "bvh": 521
+            }
+          }
+        },
+        "5M": {
+          "node": {
+            "triangles": 4999692,
+            "vertices": 2499848,
+            "ms": {
+              "parse": 902,
+              "dedup": 930,
+              "bvh": 2017
+            },
+            "cpuMs": {
+              "parse": 883,
+              "dedup": 835,
+              "bvh": 1615
+            },
+            "startMB": {
+              "parse": 316,
+              "dedup": 719,
+              "bvh": 916
+            },
+            "peakMB": {
+              "parse": 714,
+              "dedup": 916,
+              "bvh": 1545
+            }
+          },
+          "chromium": {
+            "triangles": 4999692,
+            "vertices": 2499848,
+            "ms": {
+              "parse": 907,
+              "dedup": 794,
+              "bvh": 1619
+            },
+            "baselineMB": 255,
+            "startMB": {
+              "parse": 712,
+              "dedup": 815,
+              "bvh": 990
+            },
+            "peakMB": {
+              "parse": 924,
+              "dedup": 1015,
+              "bvh": 1041
+            }
+          }
+        },
+        "20M": {
+          "node": {
+            "triangles": 19998780,
+            "vertices": 9999392,
+            "ms": {
+              "parse": 5819,
+              "dedup": 3998,
+              "bvh": 10226
+            },
+            "cpuMs": {
+              "parse": 4662,
+              "dedup": 3700,
+              "bvh": 7711
+            },
+            "startMB": {
+              "parse": 1031,
+              "dedup": 2207,
+              "bvh": 3071
+            },
+            "peakMB": {
+              "parse": 2623,
+              "dedup": 3071,
+              "bvh": 4005
+            }
+          },
+          "chromium": {
+            "triangles": 19998780,
+            "vertices": 9999392,
+            "ms": {
+              "parse": 6863,
+              "dedup": 4286,
+              "bvh": 8283
+            },
+            "baselineMB": 255,
+            "startMB": {
+              "parse": 901,
+              "dedup": 978,
+              "bvh": 740
+            },
+            "peakMB": {
+              "parse": 988,
+              "dedup": 978,
+              "bvh": 1141
+            }
+          }
+        }
+      }
+    }
+  }
+}

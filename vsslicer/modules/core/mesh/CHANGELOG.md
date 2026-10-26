@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-50: benchmark of parse, dedup and BVH time and peak memory at 1, 5 and 20 M triangles in a Node worker and in Chromium (`test/bench/`), with per-OS memory budgets in `test/bench/budget.json` (stage boundaries are handshakes); CI records on Linux until a Linux budget exists.
 - VWR-45: admesh oracle test for `MeshStats` (triangles, bounds, open edges, closed-mesh volume) with a meta-test; CI installs admesh on Linux and requires it.
 - VWR-397: `fetchBytes` preallocates from `Content-Length` only for identity bodies; a content-encoded (gzip) body is read through the capped chunk list.
 - VWR-397: `parseUrl` refuses with `PoolQueueFullError` before downloading when running, queued and downloading requests fill the pool limits.
