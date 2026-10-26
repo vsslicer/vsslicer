@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fixed: Cura export writes boolean setting values as `True` and `False`, which Uranium can read (PRF-213).
 - Fixed: Cura machine instance file names are decoded as quote_plus, so a machine id with a space finds its nozzle size (PRF-212).
 - PRF-129: 22 Cura tuples (definition, extruder, variant, quality, user) checked against a hand merge of Cura@5bea2f8 resources (`test/tuples/`); `src/index.ts` formatted.
 - PRF-127: `readCuraMachineInstances` reads `machine_instances/*.global.cfg` into printer-instance entities (model, nozzle, OctoPrint host, connection checked with `validateConnection`) with the API key returned apart.

@@ -39,7 +39,8 @@ const goodKey = (k: string) => /^[^=\n\r\t ![<>][^=\n\r\t !]*$/.test(k);
 const text = (v: string) => v.replaceAll('\r', '').replaceAll('\n', '\n\t');
 
 function valueText(v: unknown): string | undefined {
-  if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') return String(v);
+  if (typeof v === 'boolean') return v ? 'True' : 'False'; // Uranium reads bools with ast.literal_eval
+  if (typeof v === 'string' || typeof v === 'number') return String(v);
   if (isObj(v) && 'expr' in v && typeof v['expr'] === 'string') return `=${v['expr']}`;
   if (v === null || v === undefined) return undefined;
   return JSON.stringify(v);
