@@ -8,7 +8,7 @@ model: sonnet
 area: [prusalink]
 story: US21
 milestone: "VSS:M3"
-sprint: "VSS:SP18"
+sprint: "VSS:SP8"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---

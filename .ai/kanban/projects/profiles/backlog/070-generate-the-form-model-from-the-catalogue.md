@@ -3,12 +3,12 @@ id: 70
 title: Generate the form model from the catalogue
 type: feature
 priority: P0
-effort: L
+effort: M
 model: opus
 area: [form]
 story: US29
 milestone: "VSS:M2"
-sprint: "VSS:SP9"
+sprint: "VSS:SP8"
 depends_on: [135, 118]
 created: 2026-10-25
 ---
