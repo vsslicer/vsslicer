@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-129: 22 Cura tuples (definition, extruder, variant, quality, user) checked against a hand merge of Cura@5bea2f8 resources (`test/tuples/`); `src/index.ts` formatted.
 - PRF-127: `readCuraMachineInstances` reads `machine_instances/*.global.cfg` into printer-instance entities (model, nozzle, OctoPrint host, connection checked with `validateConnection`) with the API key returned apart.
 - PRF-54: write user quality_changes and definition_changes as `.inst.cfg` (`setting_version` 27 for new files, `{expr}` back as `=formula`, metadata in the source order, keys Cura cannot read refused with a diagnostic): `writeCuraUserChanges`, `curaExporter`.
 - Fixed: a Cura container or fdm_materials setting named `__proto__` keeps its metadata in `native` (PRF-209).

@@ -1,0 +1,4245 @@
+{
+  "source": "Cura@5bea2f8 resources, hand merge by test/tuples/cura_oracle.py",
+  "tuples": [
+    {
+      "machine": "ultimaker_s5",
+      "extruder": "ultimaker_s5_extruder_left",
+      "variant": "ultimaker_s5_aa04",
+      "quality": "um_s5_aa0.4_pla_0.1mm",
+      "global_quality": "um_s5_global_Normal_Quality",
+      "user": {
+        "global": {
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {
+          "speed_print": "31"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 330,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:110",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 240,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:86",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:101",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:99",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "Griffin",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:89",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.1",
+          "slot": "global.quality",
+          "source": "quality/ultimaker_s5/um_s5_global_Normal_Quality.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s5_aa04.inst.cfg:15",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "AA 0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s5_aa04.inst.cfg:14",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s5_extruder_left.def.json:27",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "31",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.ceil(speed_print * 30 / 70)"
+          },
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s5_aa04.inst.cfg:20",
+          "set_in": [
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:132",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "min(30, layer_height / layer_height_0 * speed_wall_0)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker.def.json:203",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": -3,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s5_extruder_left.def.json:17",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ultimaker_s5",
+      "extruder": "ultimaker_s5_extruder_left",
+      "variant": "ultimaker_s5_aa0.8",
+      "quality": "um_s5_aa0.8_pla_0.2mm",
+      "global_quality": "um_s5_global_Draft_Quality",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {
+          "speed_wall": "=speed_print / 2"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 330,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:110",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 240,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:86",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:101",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:99",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "Griffin",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:89",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.8",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s5_aa0.8.inst.cfg:23",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "AA 0.8",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s5_aa0.8.inst.cfg:22",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s5_extruder_left.def.json:27",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "45",
+          "slot": "extruder.quality",
+          "source": "quality/ultimaker_s5/um_s5_aa0.8_pla_0.2mm.inst.cfg:19",
+          "set_in": [
+            "extruder.quality",
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:132",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "min(30, layer_height / layer_height_0 * speed_wall_0)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker.def.json:203",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": -3,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s5_extruder_left.def.json:17",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ultimaker_s5",
+      "extruder": "ultimaker_s5_extruder_left",
+      "variant": "ultimaker_s5_bb04",
+      "quality": "um_s5_bb0.4_pva_0.15mm",
+      "global_quality": "um_s5_global_Fast_Quality",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "33",
+          "machine_nozzle_size": "0.42"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 330,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:110",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 240,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:86",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:101",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:99",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "Griffin",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:89",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.quality",
+          "source": "quality/ultimaker_s5/um_s5_global_Fast_Quality.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.42",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "BB 0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s5_bb04.inst.cfg:17",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s5_extruder_left.def.json:27",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "33",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.ceil(speed_print * 30 / 35)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:137",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s5.def.json:132",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "min(30, layer_height / layer_height_0 * speed_wall_0)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker.def.json:203",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": -3,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s5_extruder_left.def.json:17",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ultimaker_s3",
+      "extruder": "ultimaker_s3_extruder_left",
+      "variant": "ultimaker_s3_aa04",
+      "quality": "um_s3_aa0.4_pla_0.15mm",
+      "global_quality": "um_s3_global_Fast_Quality",
+      "user": {
+        "global": {
+          "layer_height": "0.15",
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {}
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 230,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s3.def.json:100",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 190,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s3.def.json:77",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 200,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s3.def.json:91",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s3.def.json:90",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "Griffin",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s3.def.json:80",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s3_aa04.inst.cfg:15",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "AA 0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_s3_aa04.inst.cfg:14",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s3_extruder_left.def.json:27",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "70",
+          "slot": "extruder.quality",
+          "source": "quality/ultimaker_s3/um_s3_aa0.4_pla_0.15mm.inst.cfg:19",
+          "set_in": [
+            "extruder.quality",
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.ceil(speed_print * 45 / 70)"
+          },
+          "slot": "extruder.quality",
+          "source": "quality/ultimaker_s3/um_s3_aa0.4_pla_0.15mm.inst.cfg:21",
+          "set_in": [
+            "extruder.quality",
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_s3.def.json:120",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "min(30, layer_height / layer_height_0 * speed_wall_0)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker.def.json:203",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": -3,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_s3_extruder_left.def.json:17",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ultimaker3",
+      "extruder": "ultimaker3_extruder_left",
+      "variant": "ultimaker3_aa04",
+      "quality": "um3_aa0.4_PLA_Normal_Quality",
+      "global_quality": "um3_global_Normal_Quality",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "35"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 233,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker3.def.json:141",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 215,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker3.def.json:77",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 200,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker3.def.json:132",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker3.def.json:131",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "Griffin",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker3.def.json:121",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.1",
+          "slot": "global.quality",
+          "source": "quality/ultimaker3/um3_global_Normal_Quality.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": 0.4,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:311",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "AA 0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker3_aa04.inst.cfg:14",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker3_extruder_left.def.json:28",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "35",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.ceil(speed_print * 30 / 70)"
+          },
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker3_aa04.inst.cfg:22",
+          "set_in": [
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "250"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker3.def.json:166",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "min(30, layer_height / layer_height_0 * speed_wall_0)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker.def.json:203",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 9,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker3_extruder_left.def.json:18",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ultimaker2_plus",
+      "extruder": "ultimaker2_plus_extruder_0",
+      "variant": "ultimaker2_plus_0.4",
+      "quality": "pla_0.4_normal",
+      "global_quality": "um2p_global_Normal_Quality",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {
+          "speed_wall": "=speed_print / 2"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 223,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker2.def.json:103",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 223,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker2.def.json:53",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 205,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker2_plus.def.json:84",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker2.def.json:94",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker2.def.json:52",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "UltiGCode",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker2.def.json:84",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker2_plus_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "50",
+          "slot": "extruder.quality",
+          "source": "quality/ultimaker2_plus/pla_0.4_normal.inst.cfg:19",
+          "set_in": [
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print if magic_spiralize else 120"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3836",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "round(speed_print * 30 / 50)"
+          },
+          "slot": "extruder.quality",
+          "source": "quality/ultimaker2_plus/pla_0.4_normal.inst.cfg:18",
+          "set_in": [
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ultimaker_factor4",
+      "extruder": "ultimaker_factor4_extruder_left",
+      "variant": "ultimaker_factor4_aa04",
+      "quality": "um_f4_aa0.4_pla_0.1mm",
+      "global_quality": "um_f4_global_Normal_Quality",
+      "user": {
+        "global": {
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {
+          "speed_print": "37"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 330,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:136",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 240,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:110",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:125",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:123",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "Griffin",
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:113",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": {
+            "expr": "round(0.1 * material_shrinkage_percentage_z / 100, 5)"
+          },
+          "slot": "global.quality",
+          "source": "quality/ultimaker_factor4/um_f4_global_Normal_Quality.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_factor4_aa04.inst.cfg:13",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "AA 0.4",
+          "slot": "extruder.variant",
+          "source": "variants/ultimaker_factor4_aa04.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_factor4_extruder_left.def.json:27",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "37",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "30"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:275",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "125"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:269",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "30"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ultimaker_factor4.def.json:229",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": -3,
+          "slot": "extruder.definition",
+          "source": "extruders/ultimaker_factor4_extruder_left.def.json:17",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "creality_ender3",
+      "extruder": "creality_base_extruder_0",
+      "variant": "creality_ender3_0.4",
+      "quality": "base_0.4_PLA_standard",
+      "global_quality": "base_global_standard",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {
+          "machine_nozzle_size": "0.42"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/creality_ender3.def.json:44",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/creality_ender3.def.json:14",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 250,
+          "slot": "global.definition",
+          "source": "definitions/creality_ender3.def.json:41",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:51",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.42",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": {
+            "expr": "50"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:99",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 2.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:103",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "20"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:97",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "creality_ender3",
+      "extruder": "creality_base_extruder_0",
+      "variant": "creality_ender3_0.6",
+      "quality": "base_0.6_PLA_draft",
+      "global_quality": "base_global_draft",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "39"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/creality_ender3.def.json:44",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/creality_ender3.def.json:14",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 250,
+          "slot": "global.definition",
+          "source": "definitions/creality_ender3.def.json:41",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:51",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.32",
+          "slot": "global.quality",
+          "source": "quality/creality/base/base_global_draft.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.6",
+          "slot": "extruder.variant",
+          "source": "variants/creality/creality_ender3_0.6.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "39",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 2.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:103",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "20"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:97",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "creality_cr10s",
+      "extruder": "creality_base_extruder_0",
+      "variant": "creality_cr10s_0.4",
+      "quality": "base_0.4_PETG_standard",
+      "global_quality": "base_global_standard",
+      "user": {
+        "global": {
+          "layer_height": "0.15",
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {
+          "speed_wall": "=speed_print / 2"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/creality_cr10.def.json:25",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/creality_cr10.def.json:13",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 400,
+          "slot": "global.definition",
+          "source": "definitions/creality_cr10.def.json:23",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:51",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/creality/creality_cr10s_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": {
+            "expr": "50"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:99",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 2.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/creality_base.def.json:103",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": "15",
+          "slot": "extruder.quality",
+          "source": "quality/creality/base/base_0.4_PETG_standard.inst.cfg:14",
+          "set_in": [
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "artillery_sidewinder_x1",
+      "extruder": "artillery_base_extruder_0",
+      "variant": "artillery_sidewinder_x1_0.4",
+      "quality": "artillery_0.4_PLA_standard",
+      "global_quality": "artillery_global_standard",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "41"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/artillery_sidewinder_x1.def.json:22",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 300,
+          "slot": "global.definition",
+          "source": "definitions/artillery_sidewinder_x1.def.json:19",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 400,
+          "slot": "global.definition",
+          "source": "definitions/artillery_sidewinder_x1.def.json:20",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/artillery_base.def.json:52",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.2",
+          "slot": "global.quality",
+          "source": "quality/artillery/artillery_global_standard.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/artillery/artillery_sidewinder_x1_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "41",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 2.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/artillery_base.def.json:105",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "20"
+          },
+          "slot": "global.definition",
+          "source": "definitions/artillery_base.def.json:100",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "voron2_250",
+      "extruder": "voron2_extruder_0",
+      "variant": "voron2_250_v6_0.40",
+      "quality": "voron2_v6_0.40_PLA_normal",
+      "global_quality": "voron2_global_normal_quality",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {}
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 250,
+          "slot": "global.definition",
+          "source": "definitions/voron2_250.def.json:16",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 250,
+          "slot": "global.definition",
+          "source": "definitions/voron2_250.def.json:13",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 250,
+          "slot": "global.definition",
+          "source": "definitions/voron2_250.def.json:14",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/voron2_base.def.json:69",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/voron2_base.def.json:59",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/voron/voron2_250_v6_0.40.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": {
+            "expr": "round(6.4 / layer_height / machine_nozzle_size, -1)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/voron2_base.def.json:108",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print if magic_spiralize else max(speed_print, round((machine_max_feedrate_x + machine_max_feedrate_y) / 2, -2))"
+          },
+          "slot": "global.definition",
+          "source": "definitions/voron2_base.def.json:110",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print * 3 / 8"
+          },
+          "slot": "global.definition",
+          "source": "definitions/voron2_base.def.json:107",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "ratrig_vcore3_200",
+      "extruder": "ratrig_base_extruder_0",
+      "variant": "ratrig_vcore3_200_0.4",
+      "quality": "ratrig_base_0.4_PLA_standard",
+      "global_quality": "ratrig_base_global_standard",
+      "user": {
+        "global": {
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {
+          "speed_print": "43",
+          "machine_nozzle_size": "0.42"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 200,
+          "slot": "global.definition",
+          "source": "definitions/ratrig_vcore3_200.def.json:21",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 200,
+          "slot": "global.definition",
+          "source": "definitions/ratrig_vcore3_200.def.json:18",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 200,
+          "slot": "global.definition",
+          "source": "definitions/ratrig_vcore3_200.def.json:19",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/ratrig_vcore3_base.def.json:49",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.2",
+          "slot": "global.quality",
+          "source": "quality/ratrig_base/ratrig_base_global_standard.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.42",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "43",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "250"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ratrig_vcore3_base.def.json:90",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.floor(speed_print * 3 / 10)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/ratrig_vcore3_base.def.json:84",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "sovol_sv06",
+      "extruder": "sovol_planetary_extruder_0",
+      "variant": "sovol_sv06_0.4",
+      "quality": "sovol_planetary_0.4_PLA_standard",
+      "global_quality": "sovol_planetary_global_standard",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {
+          "speed_wall": "=speed_print / 2"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 220,
+          "slot": "global.definition",
+          "source": "definitions/sovol_sv06.def.json:29",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 220,
+          "slot": "global.definition",
+          "source": "definitions/sovol_sv06.def.json:15",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 250,
+          "slot": "global.definition",
+          "source": "definitions/sovol_sv06.def.json:26",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/sovol_base.def.json:47",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/sovol/sovol_sv06_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": {
+            "expr": "60"
+          },
+          "slot": "global.definition",
+          "source": "definitions/sovol_sv06.def.json:34",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "200"
+          },
+          "slot": "global.definition",
+          "source": "definitions/sovol_sv06.def.json:35",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "20"
+          },
+          "slot": "global.definition",
+          "source": "definitions/sovol_base.def.json:66",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "elegoo_neptune_4",
+      "extruder": "elegoo_extruder_0",
+      "variant": "elegoo_neptune_4_0.40",
+      "quality": "elegoo_n4_pla_nozzle_0.40_layer_0.20",
+      "global_quality": "elegoo_n4_layer_0.20",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "45"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:45",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 230,
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:24",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 270,
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:37",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:36",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:26",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.20",
+          "slot": "global.quality",
+          "source": "quality/elegoo/neptune_4/elegoo_n4_layer_0.20.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/elegoo/elegoo_neptune_4/elegoo_neptune_4_0.40.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "45",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:88",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print"
+          },
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:78",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "60"
+          },
+          "slot": "global.definition",
+          "source": "definitions/elegoo_neptune_4.def.json:55",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "flashforge_adventurer3",
+      "extruder": "flashforge_adventurer_extruder_0",
+      "variant": "flashforge_adventurer3_0.4",
+      "quality": "flashforge_adventurer3_pla_0.4_normal",
+      "global_quality": "flashforge_adventurer3_normal",
+      "user": {
+        "global": {
+          "layer_height": "0.15",
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {}
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 150,
+          "slot": "global.definition",
+          "source": "definitions/flashforge_adventurer3c.def.json:30",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 150,
+          "slot": "global.definition",
+          "source": "definitions/flashforge_adventurer3c.def.json:16",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 150,
+          "slot": "global.definition",
+          "source": "definitions/flashforge_adventurer3c.def.json:27",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/flashforge_adventurer_base.def.json:32",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/flashforge_adventurer3c.def.json:15",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/flashforge_adventurer_base.def.json:31",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/flashforge/flashforge_adventurer3_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "60",
+          "slot": "extruder.quality",
+          "source": "quality/flashforge/pla/flashforge_adventurer3_pla_0.4_normal.inst.cfg:15",
+          "set_in": [
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": "80",
+          "slot": "extruder.quality",
+          "source": "quality/flashforge/pla/flashforge_adventurer3_pla_0.4_normal.inst.cfg:16",
+          "set_in": [
+            "extruder.quality",
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": "10",
+          "slot": "global.quality",
+          "source": "quality/flashforge/flashforge_adventurer3_normal.inst.cfg:19",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "kingroon_kp3s",
+      "extruder": "kingroon_base_extruder_0",
+      "variant": "kingroon_kp3s_0.4",
+      "quality": "kingroon_0.4_PLA_standard",
+      "global_quality": "kingroon_global_standard",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "47"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 180,
+          "slot": "global.definition",
+          "source": "definitions/kingroon_base.def.json:82",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 180,
+          "slot": "global.definition",
+          "source": "definitions/kingroon_base.def.json:65",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 180,
+          "slot": "global.definition",
+          "source": "definitions/kingroon_base.def.json:68",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/kingroon_base.def.json:67",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.2",
+          "slot": "global.quality",
+          "source": "quality/kingroon/kingroon_global_standard.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/kingroon/kingroon_kp3s_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "47",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 2.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/kingroon_base.def.json:124",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "20"
+          },
+          "slot": "global.definition",
+          "source": "definitions/kingroon_base.def.json:118",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "mingda_d2",
+      "extruder": "mingda_base_extruder_0",
+      "variant": "mingda_d2_0.4",
+      "quality": "mingda_0.4_PLA_standard",
+      "global_quality": "mingda_global_standard",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {
+          "speed_wall": "=speed_print / 2",
+          "machine_nozzle_size": "0.42"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 230,
+          "slot": "global.definition",
+          "source": "definitions/mingda_d2.def.json:22",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 230,
+          "slot": "global.definition",
+          "source": "definitions/mingda_d2.def.json:19",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 260,
+          "slot": "global.definition",
+          "source": "definitions/mingda_d2.def.json:20",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/mingda_base.def.json:53",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.42",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "60",
+          "slot": "global.quality",
+          "source": "quality/mingda/mingda_global_standard.inst.cfg:25",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "80.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 1.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/mingda_base.def.json:110",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": "10",
+          "slot": "global.quality",
+          "source": "quality/mingda/mingda_global_standard.inst.cfg:24",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": {
+            "expr": "True"
+          },
+          "slot": "global.definition",
+          "source": "definitions/mingda_base.def.json:79",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "two_trees_bluer",
+      "extruder": "two_trees_base_extruder_0",
+      "variant": "two_trees_bluer_0.6",
+      "quality": "two_trees_0.6_PLA_standard",
+      "global_quality": "two_trees_global_standard",
+      "user": {
+        "global": {
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {
+          "speed_print": "49"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 230,
+          "slot": "global.definition",
+          "source": "definitions/two_trees_bluer.def.json:29",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 230,
+          "slot": "global.definition",
+          "source": "definitions/two_trees_bluer.def.json:16",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 280,
+          "slot": "global.definition",
+          "source": "definitions/two_trees_bluer.def.json:26",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/two_trees_base.def.json:35",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.2",
+          "slot": "global.quality",
+          "source": "quality/twotrees/two_trees_global_standard.inst.cfg:14",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.6",
+          "slot": "extruder.variant",
+          "source": "variants/two_trees/two_trees_bluer_0.6.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "49",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "180"
+          },
+          "slot": "global.definition",
+          "source": "definitions/two_trees_bluer.def.json:35",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "20"
+          },
+          "slot": "global.definition",
+          "source": "definitions/two_trees_base.def.json:56",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "vzbot_235",
+      "extruder": "vzbot_extruder_0",
+      "variant": "vzbot_235_0.4",
+      "quality": "vzbot_0.4_PLA_standard",
+      "global_quality": "vzbot_global_standard",
+      "user": {
+        "global": {
+          "layer_height": "0.15"
+        },
+        "extruder": {}
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/vzbot_235.def.json:16",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 235,
+          "slot": "global.definition",
+          "source": "definitions/vzbot_235.def.json:13",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 240,
+          "slot": "global.definition",
+          "source": "definitions/vzbot_235.def.json:14",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/vzbot_base.def.json:111",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/vzbot_base.def.json:101",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/vzbot/vzbot_235_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": {
+            "expr": "300"
+          },
+          "slot": "global.definition",
+          "source": "definitions/vzbot_base.def.json:155",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.ceil(speed_print * 0.5)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/vzbot_base.def.json:180",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "300"
+          },
+          "slot": "global.definition",
+          "source": "definitions/vzbot_base.def.json:170",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "math.ceil(speed_print * 0.25)"
+          },
+          "slot": "global.definition",
+          "source": "definitions/vzbot_base.def.json:150",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "flyingbear_ghost_5",
+      "extruder": "flyingbear_base_extruder_0",
+      "variant": "flyingbear_ghost_5_0.40",
+      "quality": "flyingbear_0.40_pla_adaptive",
+      "global_quality": "flyingbear_global_0.16_adaptive",
+      "user": {
+        "global": {},
+        "extruder": {
+          "speed_print": "51"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 255,
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_ghost_5.def.json:44",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 210,
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_ghost_5.def.json:26",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 200,
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_ghost_5.def.json:27",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_base.def.json:49",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_base.def.json:47",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.16",
+          "slot": "global.quality",
+          "source": "quality/flyingbear/flyingbear_global_0.16_adaptive.inst.cfg:15",
+          "set_in": [
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "all_at_once",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8640",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/flyingbear/flyingbear_ghost_5_0.40.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": "51",
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:3586",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "150.0 if speed_print < 60 else 250.0 if speed_print > 100 else speed_print * 2.5"
+          },
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_base.def.json:82",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "global.definition",
+          "source": "definitions/flyingbear_base.def.json:76",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    },
+    {
+      "machine": "tronxy_x5sa",
+      "extruder": "tronxy_base_extruder_0",
+      "variant": "tronxy_x5sa_0.4",
+      "quality": "tronxy_0.4_PLA_extra",
+      "global_quality": "tronxy_global_extra",
+      "user": {
+        "global": {
+          "layer_height": "0.15",
+          "print_sequence": "one_at_a_time"
+        },
+        "extruder": {
+          "speed_wall": "=speed_print / 2"
+        }
+      },
+      "values": {
+        "machine_width": {
+          "scope": "global",
+          "value": 330,
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x5sa.def.json:29",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_depth": {
+          "scope": "global",
+          "value": 330,
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x5sa.def.json:15",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_height": {
+          "scope": "global",
+          "value": 400,
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x5sa.def.json:26",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_heated_bed": {
+          "scope": "global",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x.def.json:48",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_center_is_zero": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:260",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_gcode_flavor": {
+          "scope": "global",
+          "value": "RepRap (Marlin/Sprinter)",
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:375",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "layer_height": {
+          "scope": "global",
+          "value": "0.15",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.quality",
+            "global.definition"
+          ]
+        },
+        "print_sequence": {
+          "scope": "global",
+          "value": "one_at_a_time",
+          "slot": "global.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "global.user",
+            "global.definition"
+          ]
+        },
+        "magic_spiralize": {
+          "scope": "global",
+          "value": false,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:8784",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_size": {
+          "scope": "extruder",
+          "value": "0.4",
+          "slot": "extruder.variant",
+          "source": "variants/tronxy/tronxy_x5sa_0.4.inst.cfg:12",
+          "set_in": [
+            "extruder.variant",
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_id": {
+          "scope": "extruder",
+          "value": "unknown",
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:278",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        },
+        "machine_nozzle_offset_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:287",
+          "set_in": [
+            "extruder.definition"
+          ]
+        },
+        "speed_print": {
+          "scope": "extruder",
+          "value": {
+            "expr": "60"
+          },
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x.def.json:91",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_wall": {
+          "scope": "extruder",
+          "value": {
+            "expr": "speed_print / 2"
+          },
+          "slot": "extruder.user",
+          "source": "synthetic user container",
+          "set_in": [
+            "extruder.user",
+            "global.definition"
+          ]
+        },
+        "speed_travel": {
+          "scope": "extruder",
+          "value": {
+            "expr": "60.0 if speed_print < 50 else 120.0 if speed_print > 80 else speed_print * 1.25"
+          },
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x.def.json:96",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "speed_layer_0": {
+          "scope": "extruder",
+          "value": {
+            "expr": "30"
+          },
+          "slot": "global.definition",
+          "source": "definitions/tronxy_x.def.json:89",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "retraction_enable": {
+          "scope": "extruder",
+          "value": true,
+          "slot": "global.definition",
+          "source": "definitions/fdmprinter.def.json:4694",
+          "set_in": [
+            "global.definition"
+          ]
+        },
+        "extruder_prime_pos_x": {
+          "scope": "extruder",
+          "value": 0,
+          "slot": "extruder.definition",
+          "source": "definitions/fdmextruder.def.json:356",
+          "set_in": [
+            "extruder.definition",
+            "global.definition"
+          ]
+        }
+      }
+    }
+  ]
+}
