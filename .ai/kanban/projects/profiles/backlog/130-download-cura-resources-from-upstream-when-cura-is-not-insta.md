@@ -9,7 +9,7 @@ area: [importers]
 story: US17
 milestone: "VSS:M2"
 sprint: "VSS:SP9"
-depends_on: [121, 23, 135]
+depends_on: [121, 135]
 created: 2026-10-25
 ---
 
@@ -31,3 +31,5 @@ Fetches Cura definitions and quality resources at the pinned commit when the use
 ## Progress
 
 Not started.
+
+**Dependency on PRF-23 removed at SP9 (sp9-coordinator, D21):** that card moved to M7 (owner-gated). This card's tests use synthetic or local `.reference` inputs and skip with a reason when those are absent; the owner-gated check lands with PRF-23.

@@ -7,8 +7,7 @@ effort: M
 model: opus
 area: [publishing]
 story: US6
-milestone: "VSS:M1"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [26, 27, 7]
 created: 2026-10-25
 ---
@@ -31,3 +30,5 @@ Prove the feature-matrix row end to end with the pack alone (until E68 supplies 
 ## Progress
 
 Not started.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up.

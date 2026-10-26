@@ -59,3 +59,5 @@ Review passed (macOS/Linux-container part) (2026-10-26, PLT-33-reviewer):
 - Fixed: the raw JSON lived only in the `/var/folders` mktemp dir. I copied it to `.reference/notes/PLT-33-results/{darwin,linux-container}/` and updated notes line 43.
 - Non-blocking: (a) the notes' "Negative control" line says every blob: form fails with SecurityError. On 1.143.1 it is an `error` event with no message, and the violation still fires. The report's wording is correct. (b) `docs/research/3d-viewer.md:32,36,37` and open questions 2 and 6 (lines 137, 141) still say `(unverified)`. Point them at vscode-platform.md §7 in the follow-up card. (c) "from 1.100 on" extrapolates from two measured versions (1.100.0 and 1.143.1).
 - Left: criterion 1 (Windows, Linux with a GPU) waits on Q15. Criterion 2 waits on the coordinator filing the decisions.
+
+**Closed at SP9 (sp9-coordinator):** owner answer Q15 (\"Skip, macOS + container is enough for M1\"): the macOS and Linux-container results, which passed review, are the result. The decisions are D19 (accepted). The first criterion is met on that basis.

@@ -9,7 +9,7 @@ area: [viewer]
 story: US16
 milestone: "VSS:M2"
 sprint: "VSS:SP9"
-depends_on: [58, 61, PLT-18, 74]
+depends_on: [58, 61, 74]
 created: 2026-10-25
 ---
 
@@ -31,3 +31,5 @@ Playwright snapshots in headless Chromium with software WebGL (CI only) for a fi
 ## Progress
 
 Not started.
+
+**Dependency on PLT-18 removed at SP9 (sp9-coordinator, D21):** that card moved to M7 (owner-gated). This card's tests use synthetic or local `.reference` inputs and skip with a reason when those are absent; the owner-gated check lands with PLT-18.

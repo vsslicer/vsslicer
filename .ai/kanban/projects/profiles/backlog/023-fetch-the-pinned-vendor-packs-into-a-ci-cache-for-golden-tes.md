@@ -7,8 +7,7 @@ effort: S
 model: sonnet
 area: [importers]
 story: US11
-milestone: "VSS:M2"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [1, PLT-9, PLT-13]
 created: 2026-10-25
 ---
@@ -32,3 +31,5 @@ Golden tests need PrusaResearch.ini@b028299, the Orca and Bambu trees, Cura reso
 ## Progress
 
 Not started.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up.

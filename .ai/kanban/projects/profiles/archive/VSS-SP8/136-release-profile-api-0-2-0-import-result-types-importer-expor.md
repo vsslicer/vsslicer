@@ -1,6 +1,6 @@
 ---
 id: 136
-title: "Release `profile-api@0.2.0`: import result types, importer/exporter/store ports, bundle structure and instance validation"
+title: "Release `profile-api@0.1.1`: import result types, importer/exporter/store ports, bundle structure and instance validation"
 type: chore
 priority: P0
 effort: XS

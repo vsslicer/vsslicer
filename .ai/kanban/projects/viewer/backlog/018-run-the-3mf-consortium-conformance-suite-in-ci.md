@@ -7,8 +7,7 @@ effort: M
 model: sonnet
 area: [3mf]
 story: US3
-milestone: "VSS:M2"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [17, PLT-9]
 created: 2026-10-25
 ---
@@ -32,3 +31,5 @@ Runs the `test_suites` core and Production cases (BSD-2-Clause) fetched at CI ti
 ## Progress
 
 Not started.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up.

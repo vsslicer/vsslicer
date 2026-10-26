@@ -9,7 +9,7 @@ area: [importers]
 story: US12
 milestone: "VSS:M2"
 sprint: "VSS:SP9"
-depends_on: [120, 135, 23, 124, 136]
+depends_on: [120, 135, 124, 136]
 created: 2026-10-25
 ---
 
@@ -34,3 +34,5 @@ Reads the vendor index, `machine_model`, `machine`, `process`, `filament`, `incl
 ## Progress
 
 Not started.
+
+**Dependency on PRF-23 removed at SP9 (sp9-coordinator, D21):** that card moved to M7 (owner-gated). This card's tests use synthetic or local `.reference` inputs and skip with a reason when those are absent; the owner-gated check lands with PRF-23.

@@ -9,7 +9,7 @@ area: [3mf]
 story: US4
 milestone: "VSS:M2"
 sprint: "VSS:SP9"
-depends_on: [3, 10, 11, 12]
+depends_on: [3]
 created: 2026-10-25
 ---
 
@@ -31,3 +31,5 @@ A pure function over core metadata and the part list that returns the dialect, m
 ## Progress
 
 Not started.
+
+**Dependency on VWR-10, VWR-11, VWR-12 removed at SP9 (sp9-coordinator, D21):** that card moved to M7 (owner-gated). This card's tests use synthetic or local `.reference` inputs and skip with a reason when those are absent; the owner-gated check lands with VWR-10, VWR-11, VWR-12.

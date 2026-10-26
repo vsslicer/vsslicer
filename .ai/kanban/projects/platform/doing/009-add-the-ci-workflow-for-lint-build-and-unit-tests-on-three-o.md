@@ -7,8 +7,7 @@ effort: M
 model: sonnet
 area: [ci]
 story: US2
-milestone: "VSS:M1"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 owner: PLT-9-worker
 depends_on: [8, 4, 1]
 created: 2026-10-25
@@ -42,3 +41,5 @@ Verified locally: `node --test scripts/test/lib.test.mjs` (7 pass); actionlint 1
 Not verified / left: criterion 1 and the task "Verify on a test branch": push and observe runs on ubuntu/macos/windows (especially Windows: registry.sh under Git Bash, pnpm shell spawn, pnpm/action-setup `package_json_file` with pnpm 11, setup-node pnpm cache glob). Changing only the workflow file selects no modules (it lives outside `vsslicer/`). The subset `ci` path (dependency-only build/publish) was not run end to end.
 
 Files: `.github/workflows/ci.yml`, `vsslicer/scripts/run.mjs`, `vsslicer/scripts/lib.mjs`, `vsslicer/scripts/test/lib.test.mjs`, `.reference/notes/PLT-9-ci.md`.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up.

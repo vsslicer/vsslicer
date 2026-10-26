@@ -7,8 +7,7 @@ effort: M
 model: sonnet
 area: [webview-kit]
 story: US10
-milestone: "VSS:M1"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [44, 18]
 created: 2026-10-25
 ---
@@ -29,3 +28,5 @@ Playwright snapshots of a fixed synthetic move set in four colour modes, light a
 ## Progress
 
 Not started.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up.

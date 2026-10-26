@@ -3,7 +3,7 @@ id: M1
 title: Preview
 status: draft
 start: "2026-10-25T23:30+00:00"
-due: "2026-10-26T03:30+00:00"
+due: "2026-10-26T05:30+00:00"
 initiatives: I1
 ---
 
@@ -46,3 +46,8 @@ Nothing has shipped to a marketplace: every release step waits on the owner (Q7,
 
 The due date (03:30) has passed; the SP5 retro's dry run puts the remaining 52 workable points in SP6.
 Proposed: move M1's due to SP6's end and treat the owner-blocked release cards as M1's last gate.
+
+## Due date moved (SP9, 2026-10-26)
+
+Owner answer Q18 ("Move to SP6 end"): M1's due date is SP6's end, 2026-10-26 05:30. Its remaining
+remote and marketplace cards (Q7, Q8, Q13) moved to M7 (Owner setup) in SP9.

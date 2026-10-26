@@ -9,7 +9,7 @@ area: [3mf]
 story: US5
 milestone: "VSS:M2"
 sprint: "VSS:SP9"
-depends_on: [20, 10]
+depends_on: [20]
 created: 2026-10-25
 ---
 
@@ -35,3 +35,5 @@ Ported from `OrcaSlicer@09aa0114:src/libslic3r/Format/bbs_3mf.cpp` and `BambuStu
 ## Progress
 
 Not started.
+
+**Dependency on VWR-10 removed at SP9 (sp9-coordinator, D21):** that card moved to M7 (owner-gated). This card's tests use synthetic or local `.reference` inputs and skip with a reason when those are absent; the owner-gated check lands with VWR-10.
