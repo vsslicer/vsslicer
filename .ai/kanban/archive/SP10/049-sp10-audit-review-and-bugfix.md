@@ -26,4 +26,4 @@ End-of-sprint audit for SP10, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Not started.
+Audit `.ai/audits/SP10-audit.md` (fresh Opus agent, 12:44 to 13:00): 1 must fix, 6 should fix, 7 nice to have; SP9's fixes hold except SLC-279's symlink case. Bugfix cards in SP11: PRF-202 (P0, opus); PRF-203, PRN-446 (opus), PRF-204, PRF-205, PRF-206, PRF-207 (P1); PRF-208, PRF-209, PRF-210, PRN-447, SLC-281, VWR-398, PLT-203 (P2). SP9 bugs GCP-118, PRF-195, PRF-196, PRF-198 moved back to SP11.

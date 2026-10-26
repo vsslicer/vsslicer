@@ -6,7 +6,7 @@ priority: P1
 effort: S
 model: opus
 milestone: "VSS:M2"
-sprint: "VSS:SP11"
+sprint: "VSS:SP12"
 docs: [.ai/audits/SP9-audit.md]
 created: 2026-10-26
 ---

@@ -357,3 +357,4 @@
 355. [VWR-386: Test that auto-orient never touches locked plates under random commands](386-test-that-auto-orient-never-touches-locked-plates-under-rand.md)
 356. [VWR-387: Add Auto-orient to the object and plate menus with progress, cancel and the arrange offer](387-add-auto-orient-to-the-object-and-plate-menus-with-progress-.md)
 357. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
+358. [VWR-398: Match 3MF part names with a leading slash or other case in detectDialect](398-match-3mf-part-names-with-a-leading-slash-or-other-case-in-d.md)

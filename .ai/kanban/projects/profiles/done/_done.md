@@ -1,21 +1,3 @@
 # Done
 
-1. [PRF-192: Move profile-api's catalogue data into its own AGPL-3.0-only package](192-move-profile-api-s-catalogue-data-into-its-own-agpl-3-0-only.md)
-2. [PRF-197: Swap generated data into place by rename in profiles-data-orca generate.mjs](197-swap-generated-data-into-place-by-rename-in-profiles-data-or.md)
-3. [PRF-89: Read PrusaSlicer 2.9 physical_printer INI and 3.0 JSON](089-read-prusaslicer-2-9-physical-printer-ini-and-3-0-json.md)
-4. [PRF-194: Accept Cura profile names with a colon or a trailing dot or space in .curaprofile archives](194-accept-cura-profile-names-with-a-colon-or-a-trailing-dot-or-.md)
-5. [PRF-179: State profile-api's licence for the AGPL-3.0-only Orca and Bambu data and add PROVENANCE](179-state-profile-api-s-licence-for-the-agpl-3-0-only-orca-and-b.md)
-6. [PRF-57: Create the `profiles-extension` module (vsslicer.profiles)](057-create-the-vsslicer-profiles-extension-skeleton.md)
-7. [PRF-25: Flatten Prusa sections into unified entities and golden counts](025-flatten-prusa-sections-into-unified-entities-and-golden-coun.md)
-8. [PRF-30: Read Cura definitions, extruders and variants](030-read-cura-definitions-extruders-and-variants.md)
-9. [PRF-27: Read Orca and Bambu JSON trees and flatten include and inherits](027-read-orca-and-bambu-json-trees-and-flatten-include-and-inher.md)
-10. [PRF-43: Spike: confirm the flattened Prusa export is byte-equivalent on 10 presets](043-spike-confirm-the-flattened-prusa-export-is-byte-equivalent-.md)
-11. [PRF-40: Download Prusa vendor bundles from upstream at a pinned commit](040-download-prusa-vendor-bundles-from-upstream-at-a-pinned-comm.md)
-12. [PRF-32: Import fdm_materials XML as material entities](032-import-fdm-materials-xml-as-material-entities.md)
-13. [PRF-31: Read Cura quality, quality_changes and definition_changes](031-read-cura-quality-quality-changes-and-definition-changes.md)
-14. [PRF-60: Create the fixture workspace and per-OS slicer configuration folders](060-create-the-fixture-workspace-and-per-os-slicer-configuration.md)
-15. [PRF-34: Split per-nozzle Prusa printer presets into printer_model, nozzle and overrides](034-split-per-nozzle-printer-presets-into-printer-model-nozzle-a.md)
-16. [PRF-28: Decode extruder-variant arrays for H2D and H2C into keyed per-extruder values](028-decode-extruder-variant-arrays-for-h2d-and-h2c-into-keyed-pe.md)
-17. [PRF-67: Contribute jsonValidation and schema completion for profile files](067-contribute-jsonvalidation-and-schema-completion-for-profile-.md)
-18. [PRF-126: Split per-nozzle Orca printer presets into printer_model, nozzle and overrides](126-split-per-nozzle-orca-printer-presets-into-printer-model-noz.md)
-19. [PRF-26: Import SuperSlicer INI with its 356 extra keys](026-import-superslicer-ini-with-its-356-extra-keys.md)
+No cards.

@@ -8,7 +8,7 @@ model: opus
 area: [calibration]
 story: US45
 milestone: "VSS:M5"
-sprint: "VSS:SP37"
+sprint: "VSS:SP38"
 depends_on: [131]
 created: 2026-10-25
 ---

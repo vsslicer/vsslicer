@@ -430,3 +430,5 @@
 428. [PRN-442: Write vendor contributor checklists and ToS review notes](442-write-vendor-contributor-checklists-and-tos-review-notes.md)
 429. [PRN-444: Refuse null vendorState and duplicate patch keys in mergeStatus, and pin the caps in tests](444-refuse-null-vendorstate-and-duplicate-patch-keys-in-mergesta.md)
 430. [PRN-445: Bound zero-byte writes and close the safe-write test gaps](445-bound-zero-byte-writes-and-close-the-safe-write-test-gaps.md)
+431. [PRN-446: Let a status push name a heater or tray whose id was cut](446-let-a-status-push-name-a-heater-or-tray-whose-id-was-cut.md)
+432. [PRN-447: Refuse a null list item in a status push with InvalidStatusError](447-refuse-a-null-list-item-in-a-status-push-with-invalidstatuse.md)

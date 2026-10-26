@@ -2,11 +2,10 @@
 id: 121
 title: Cut G-code preview memory at 500 MB to the budget
 type: feature
-priority: P1
+priority: P3
 effort: L
 model: opus
 milestone: "VSS:M2"
-sprint: "VSS:SP11"
 depends_on: [42]
 created: 2026-10-26
 ---
@@ -23,3 +22,5 @@ From GCP-42 (SP10): at 500 MB the preview peaks at host 656 MB, worker 561 MB, w
 ## Progress
 
 Not started.
+
+**Descoped (sp10-coordinator, at SP10 close):** owner answered Q25 "Raise the budget to the measured peaks"; GCP-42's `bench/budget.json` already gates at the measured peaks plus 25% per OS, so no reduction work is planned. Reopen only if the owner sets a lower budget.

@@ -27,4 +27,5 @@ Retro for SP10, step 4 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Not started.
+- sp10-retro: `.ai/retros/SP10-retro.md` written: 86 points delivered (69 built in SP10) in 63.4 min, 81.4/h; per-lane dispatch took idle to 0.1%, but features failed first review 12 of 14 and the sprint stopped 62 min early with 21 workable points.
+- `.ai/plans/estimation.md`: "After SP10" calibration; rules 11, 17, 19, 22, 23, 24, 25 amended, 28 confirmed, new rule 29 (classifier refusals and coordinator reviews); no card re-sized.

@@ -8,7 +8,7 @@ model: opus
 area: [wizard]
 story: US39
 milestone: "VSS:M2"
-sprint: "VSS:SP12"
+sprint: "VSS:SP13"
 depends_on: [50, 91, 49, 135]
 created: 2026-10-25
 ---

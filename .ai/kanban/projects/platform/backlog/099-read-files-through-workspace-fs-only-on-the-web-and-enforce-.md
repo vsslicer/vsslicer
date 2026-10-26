@@ -8,7 +8,7 @@ model: sonnet
 area: [web]
 story: US53
 milestone: "VSS:M5"
-sprint: "VSS:SP36"
+sprint: "VSS:SP37"
 depends_on: [98, 86]
 created: 2026-10-25
 ---

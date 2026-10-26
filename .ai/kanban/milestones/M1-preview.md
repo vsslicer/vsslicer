@@ -3,7 +3,7 @@ id: M1
 title: Preview
 status: draft
 start: "2026-10-25T23:30+00:00"
-due: "2026-10-26T15:30+00:00"
+due: "2026-10-26T17:30+00:00"
 initiatives: I1
 ---
 
