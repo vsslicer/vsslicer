@@ -3,7 +3,7 @@ id: 31
 title: "Spike: postMessage transferables versus fetch(asWebviewUri) for 50 to 500 MB"
 type: spike
 priority: P0
-effort: L
+effort: S
 model: opus
 area: [webview-kit]
 story: US7

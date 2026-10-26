@@ -3,7 +3,7 @@ id: 33
 title: "Spike: WebGPU probe and workers under the kit CSP"
 type: spike
 priority: P1
-effort: M
+effort: S
 model: opus
 area: [webview-kit]
 story: US7

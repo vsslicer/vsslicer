@@ -3,7 +3,7 @@ id: 18
 title: "Benchmark memory and throughput on synthetic 50, 200 and 500 MB files in CI"
 type: feature
 priority: P0
-effort: M
+effort: S
 model: sonnet
 area: [parser]
 story: US6

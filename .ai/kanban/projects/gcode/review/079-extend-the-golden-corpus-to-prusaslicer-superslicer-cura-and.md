@@ -3,7 +3,7 @@ id: 79
 title: "Extend the golden corpus to PrusaSlicer, SuperSlicer, Cura and Bambu multi-material"
 type: chore
 priority: P2
-effort: M
+effort: S
 model: sonnet
 area: [parser]
 story: US1
