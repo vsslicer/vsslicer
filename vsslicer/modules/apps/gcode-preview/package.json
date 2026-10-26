@@ -7,7 +7,10 @@
   "license": "AGPL-3.0-or-later",
   "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-preview@0.4.1/vsslicer/modules/gcode-preview",
   "vsslicer": {
-    "sizeBudgetKB": 200
+    "sizeBudgetKB": 200,
+    "licenceTexts": {
+      "saxes@6.0.0": "licences/saxes-ISC.txt"
+    }
   },
   "main": "dist/extension.js",
   "files": [
@@ -80,7 +83,7 @@
   },
   "dependencies": {
     "@vsslicer/gcode-api": "^0.7.0",
-    "@vsslicer/gcode-parser": "^0.13.0",
+    "@vsslicer/gcode-parser": "^0.14.0",
     "@vsslicer/gcode-planner": "^0.5.0",
     "@vsslicer/webview-kit": "^0.7.0"
   },
@@ -90,7 +93,7 @@
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
     "@vsslicer/test-vscode": "^0.2.3",
-    "@vsslicer/tooling": "^0.8.2",
+    "@vsslicer/tooling": "^0.9.0",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",
     "prettier": "3.9.10",

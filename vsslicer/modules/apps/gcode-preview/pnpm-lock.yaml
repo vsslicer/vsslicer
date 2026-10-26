@@ -12,8 +12,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@vsslicer/gcode-parser':
-        specifier: ^0.13.0
-        version: 0.13.0
+        specifier: ^0.14.0
+        version: 0.14.0
       '@vsslicer/gcode-planner':
         specifier: ^0.5.0
         version: 0.5.0
@@ -37,8 +37,8 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3(supports-color@8.1.1)
       '@vsslicer/tooling':
-        specifier: ^0.8.2
-        version: 0.8.2(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: ^0.9.0
+        version: 0.9.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
       esbuild:
         specifier: 0.28.2
         version: 0.28.2
@@ -851,8 +851,8 @@ packages:
     resolution: {integrity: sha512-PigT/jVQ9DONuiOTNJL048q9jsrc+ISSFM9OcaoR9KZj6JW9iKOlDkBD67uuv0M9L1HEapkF69Z3mTwQf/6jgQ==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-parser@0.13.0':
-    resolution: {integrity: sha512-Wo5FsVM96e67EDWu5qZ5u7/+vyO22LaoDeoDhbx4vKKOXm5+bpAnnz7A7I6apfU5VBv7vKriVxiuHpPb9DlXiQ==}
+  '@vsslicer/gcode-parser@0.14.0':
+    resolution: {integrity: sha512-hnSg9RuHrmdqtyGOETPHjOTwiucdJFqEVrqdXUFqOUOIAiDZbewZZVskHjy+HOrryeq09ml2J86PrkLZuX1vrA==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-planner@0.5.0':
@@ -864,8 +864,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/tooling@0.8.2':
-    resolution: {integrity: sha512-EyT+lV5QJLDDFWyxL4whBJwvsVhBze7Yx0rPPzGDYx1nGeha5hG/MkV9F7ttwqVF49/1F5VBI0iYMJdqc2/Jcw==}
+  '@vsslicer/tooling@0.9.0':
+    resolution: {integrity: sha512-u2qQAKh7A6Qrr4kBAfiBJnNhopNDt3zynD2DOCRmo5anCRFDFbUXNSMu84Mka4xp+0neFmdJlZEKbEj2QobUtQ==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -3068,7 +3068,7 @@ snapshots:
 
   '@vsslicer/gcode-bgcode@0.4.3': {}
 
-  '@vsslicer/gcode-parser@0.13.0':
+  '@vsslicer/gcode-parser@0.14.0':
     dependencies:
       '@vsslicer/3mf': 0.1.0
       '@vsslicer/gcode-api': 0.7.0
@@ -3085,7 +3085,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/tooling@0.8.2(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@vsslicer/tooling@0.9.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.13.0(supports-color@8.1.1))
       '@vscode/vsce': 3.9.2(supports-color@8.1.1)
