@@ -248,9 +248,9 @@ describe('hostile input', () => {
   });
   test('pathological dot/space runs and combining-mark floods stay valid', () => {
     expect(sanitiseName('. '.repeat(100_000))).toBe('FILE');
-    expect(sanitiseName(`a${'́'.repeat(100_000)}.gcode`)).toBe('A'); // cut at MAX_INPUT_LENGTH before the extension
+    expect(sanitiseName(`a${'́'.repeat(100_000)}.gcode`)).toBe('A.GCO'); // the stem is cut at MAX_INPUT_LENGTH, the extension survives
     expect(sanitiseName(`a${'́'.repeat(100_000)}.gcode`, long).length).toBeLessThanOrEqual(MAX_LONG_NAME);
-    expect(sanitiseName('.'.repeat(100_000) + 'x')).toBe('FILE'); // the x is past the input bound
+    expect(sanitiseName('.'.repeat(100_000) + 'x')).toBe('X'); // the extension survives the cut
     expect(sanitiseName('.'.repeat(100) + 'x')).toBe('X');
   });
   test('lone surrogates become underscores, pairs survive in long mode', () => {
@@ -311,5 +311,23 @@ describe('hostile input', () => {
     const { out, calls } = counted([...stems, ...stems], { longFilenames: true });
     expect(distinct(out)).toBe(4096);
     expect(calls).toBeLessThanOrEqual(4 * 4096);
+  });
+});
+
+describe('over-long input keeps its extension', () => {
+  test('long filenames', () => {
+    const out = sanitiseName('x'.repeat(2000) + '.gcode', { longFilenames: true });
+    expect(out.endsWith('.gcode')).toBe(true);
+    expect(out.length).toBeLessThanOrEqual(MAX_LONG_NAME);
+  });
+  test('FAT', () => {
+    expect(sanitiseName('x'.repeat(2000) + '.gco')).toBe('XXXXXXXX.GCO');
+  });
+  test('extension-only and 1 MB names stay within the caps', () => {
+    for (const o of [{}, { longFilenames: true }]) {
+      expect(sanitiseName('.' + 'a'.repeat(2000), o).length).toBeLessThanOrEqual(MAX_LONG_NAME);
+      expect(sanitiseName('a'.repeat(1 << 20) + '.' + 'b'.repeat(100), o).length).toBeLessThanOrEqual(MAX_LONG_NAME);
+      expect(sanitiseName('a'.repeat(1 << 20), o).length).toBeLessThanOrEqual(MAX_LONG_NAME);
+    }
   });
 });
