@@ -152,3 +152,60 @@ test('a missing metafile prints one line and exits 1, no stack', () => {
   assert.strictEqual(r.stderr.trim().split('\n').length, 1, r.stderr);
   assert.match(r.stderr, /^third-party-notices: /);
 });
+
+test('vendored licence text covers a package that ships none; stale, missing and wrong texts fail', async () => {
+  const d = await project([dep('nolic', 'ISC', { files: {} })]);
+  const pkg = (texts) => write(join(d, 'package.json'), JSON.stringify({ vsslicer: { licenceTexts: texts } }));
+  assert.match(run(d).problems[0], /nolic@1\.0\.0: no LICENSE/);
+  write(join(d, 'licences/nolic.txt'), 'ISC License\n\nCopyright (c) Someone\n');
+  pkg({ 'nolic@1.0.0': 'licences/nolic.txt' });
+  const ok = run(d);
+  assert.deepStrictEqual(ok.problems, []);
+  assert.match(ok.markdown, /### licences\/nolic\.txt \(vendored\)\n\n```text\nISC License/);
+  pkg({ 'nolic@1.0.0': 'licences/nolic.txt', 'nolic@0.9.0': 'licences/nolic.txt' });
+  assert.match(run(d).problems[0], /nolic@0\.9\.0: stale/);
+  pkg({ 'nolic@1.0.0': 'licences/missing.txt' });
+  assert.match(run(d).problems[0], /not found/);
+  write(join(d, 'licences/mit.txt'), 'MIT License\n');
+  pkg({ 'nolic@1.0.0': 'licences/mit.txt' });
+  assert.match(run(d).problems[0], /does not name the licence "ISC"/);
+  // substrings are not names: "isc" is inside "Disclaimer", "mit" inside "permitted"
+  write(join(d, 'licences/apache.txt'), 'Apache License\nVersion 2.0\n\n7. Disclaimer of Warranty. Not permitted.\n');
+  pkg({ 'nolic@1.0.0': 'licences/apache.txt' });
+  assert.match(run(d).problems[0], /does not name the licence "ISC"/);
+  write(
+    join(d, 'licences/isc.txt'),
+    'Permission to use, copy, modify, and/or distribute this software for any purpose\n',
+  );
+  pkg({ 'nolic@1.0.0': 'licences/isc.txt' });
+  assert.deepStrictEqual(run(d).problems, []);
+});
+
+test('BSD-2 and BSD-3 texts are told apart by the no-endorsement clause', async () => {
+  const bsd2 =
+    'Redistribution and use of this software in source and binary forms, with or without modification, are permitted.\n';
+  const bsd3 = `${bsd2}Neither the name of the copyright holder nor its contributors may be used to endorse.\n`;
+  for (const [id, text, ok] of [
+    ['BSD-3-Clause', bsd3, true],
+    ['BSD-3-Clause', bsd2, false],
+    ['BSD-2-Clause', bsd2, true],
+    ['BSD-2-Clause', bsd3, false],
+  ]) {
+    const d = await project([dep('nolic', id, { files: {} })]);
+    write(join(d, 'licences/t.txt'), text);
+    write(join(d, 'package.json'), JSON.stringify({ vsslicer: { licenceTexts: { 'nolic@1.0.0': 'licences/t.txt' } } }));
+    const p = run(d).problems;
+    if (ok) assert.deepStrictEqual(p, [], `${id} own text`);
+    else assert.match(p[0], /does not name the licence/, `${id} wrong text`);
+  }
+});
+
+test('a licenceTexts path outside the module directory is refused', async () => {
+  const d = await project([dep('nolic', 'ISC', { files: {} })]);
+  write(join(d, '../outside-isc.txt'), 'ISC License\n');
+  write(
+    join(d, 'package.json'),
+    JSON.stringify({ vsslicer: { licenceTexts: { 'nolic@1.0.0': '../outside-isc.txt' } } }),
+  );
+  assert.match(run(d).problems[0], /outside the module directory/);
+});
