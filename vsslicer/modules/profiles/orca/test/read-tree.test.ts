@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 import { loadProfileTree, MAX_TREE_DIRS_DEEP } from '../src/adapters/tree/load-tree.ts';
-import { readOrcaTree, TREE_LIMITS, type TreeLimits } from '../src/adapters/tree/read-tree.ts';
+import { MAX_TREE_DIAGNOSTICS, readOrcaTree, TREE_LIMITS, type TreeLimits } from '../src/adapters/tree/read-tree.ts';
 
 const enc = new TextEncoder();
 const files = (m: Record<string, unknown>) =>
@@ -293,7 +293,43 @@ describe('readOrcaTree: bounds', () => {
   });
 });
 
+describe('diagnostic cap', () => {
+  test('many missing includes give at most MAX_TREE_DIAGNOSTICS + 1 diagnostics', () => {
+    const includes = Array.from({ length: 64 }, (_, i) => `gone${i}`);
+    const presets = Object.fromEntries(
+      Array.from({ length: 30 }, (_, i) => [`a${i}`, fil(`a${i}`, { include: includes })]),
+    );
+    const t = read(vendor(presets));
+    expect(t.diagnostics).toHaveLength(MAX_TREE_DIAGNOSTICS + 1);
+    expect(t.diagnostics.at(-1)!.message).toBe('further diagnostics suppressed');
+  });
+});
+
 describe('loadProfileTree', () => {
+  test('counts every folder entry against maxFiles: exactly maxFiles diagnostics plus the cap line', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'prf204-'));
+    try {
+      for (let i = 0; i < 30; i++) await symlink(dir, join(dir, `l${i}`));
+      const r = await loadProfileTree(dir, { maxFiles: 10 });
+      expect(r.diagnostics).toHaveLength(11);
+      expect(r.diagnostics.slice(0, 10).every((d) => d.code === 'unsafe-path')).toBe(true);
+      expect(r.diagnostics.at(-1)!.message).toMatch(/folder entries/);
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
+  });
+  test('stray files count too: no files are read past the cap', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'prf204-'));
+    try {
+      for (let i = 0; i < 30; i++) await writeFile(join(dir, `n${i}.txt`), '');
+      const r = await loadProfileTree(dir, { maxFiles: 10 });
+      expect(r.files).toEqual([]);
+      expect(r.diagnostics).toHaveLength(1);
+      expect(r.diagnostics[0]!.message).toMatch(/folder entries/);
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
+  });
   test('never follows symlinks and caps size, count and depth', async () => {
     const dir = await mkdtemp(join(tmpdir(), 'prf27-'));
     try {
