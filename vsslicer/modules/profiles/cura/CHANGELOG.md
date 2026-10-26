@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-54: write user quality_changes and definition_changes as `.inst.cfg` (`setting_version` 27 for new files, `{expr}` back as `=formula`, metadata in the source order, keys Cura cannot read refused with a diagnostic): `writeCuraUserChanges`, `curaExporter`.
 - Fixed: a Cura container or fdm_materials setting named `__proto__` keeps its metadata in `native` (PRF-209).
 - PRF-31: read Cura `quality/` (`readCuraQualities`, 6 011 files) as `process` entities whose `when` is the definition/variant/material clauses; `quality_type` and the rest of `[metadata]` go to `native`. User `quality_changes` and `definition_changes` (`readCuraUserChanges`) import as a process and a `printer_instance` diff. Ids follow Uranium's `inst.cfg` suffix rule (including its lost last character on `h0.6inst.cfg`). `layer_height` falls back to the global quality, then the definition, then a 0.1 mm stand-in flagged in `native`. `readCuraResourceFolder` takes an optional folder list. Same per-call caps as PRF-30.
 - PRF-32: read fdm_materials `*.xml.fdm_material` (v1.3) to `material` entities (`readFdmMaterials`, `readFdmMaterialFolder`) through profile-api's XML key table; GUID in `external_ids.cura_guid`; unmapped settings kept in `native`; `<machine>` overrides not read yet. The XML parser (saxes, as in `3mf`) refuses any DOCTYPE and caps depth, element count, text length, file count and bytes. `readCapped` is now exported from the folder reader. New dependency: saxes 6.0.0.

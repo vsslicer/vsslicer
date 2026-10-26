@@ -243,7 +243,7 @@ export function readCuraUserChanges(
   for (const c of readCfgs(files, ['quality_changes', 'definition_changes'], lim, diag)) {
     if (c.kind === 'definition_changes') {
       entities.push({ id: c.id, model: c.definition, toolheads: [], settings: c.settings });
-      native[c.id] = { definition: c.definition, ...c.metadata };
+      native[c.id] = { definition: c.definition, name: c.name, ...c.metadata };
       continue;
     }
     const type = c.metadata['quality_type'];
