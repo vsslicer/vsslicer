@@ -11,3 +11,4 @@
 9. [PLT-47: Memory test with 15 million synthetic moves](047-memory-test-with-15-million-synthetic-moves.md)
 10. [PLT-45: Test that colour and range changes cause no texture or buffer uploads](045-test-that-colour-and-range-changes-cause-no-texture-or-buffe.md)
 11. [PLT-43: Handle webglcontextlost and restored by rebuilding GPU resources](043-handle-webglcontextlost-and-restored-by-rebuilding-gpu-resou.md)
+12. [PLT-38: Provide the Playwright webview stub from the kit](038-provide-the-playwright-webview-stub-from-the-kit.md)

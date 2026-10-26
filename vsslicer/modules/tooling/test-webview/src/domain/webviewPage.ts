@@ -1,25 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { webviewStubScript } from '@vsslicer/webview-kit/testing';
 
-/**
- * Browser-side stub of the VS Code webview host API, run before the webview bundle.
- * Records every posted message in `window.__vscode.messages` and keeps state in `window.__vscode.state`.
- * Like the real host, `acquireVsCodeApi` may be called once per page.
- */
-export const stubScript = `(() => {
-  const messages = [];
-  let state;
-  Object.defineProperty(window, '__vscode', { value: { messages, get state() { return state; } } });
-  let acquired = false;
-  window.acquireVsCodeApi = () => {
-    if (acquired) throw new Error('An instance of the VS Code API has already been acquired');
-    acquired = true;
-    return Object.freeze({
-      postMessage: (message) => { messages.push(structuredClone(message)); },
-      getState: () => state,
-      setState: (next) => { state = next; return next; },
-    });
-  };
-})();`;
+/** Browser-side stub of the VS Code webview host API, from the kit (PLT-38). Kept under this name for existing callers. */
+export const stubScript = webviewStubScript;
 
 /** The CSP an extension would normally set: nothing loads except nonce-carrying scripts and same-origin styles/images/fonts. */
 export const webviewCsp = (origin: string, nonce: string): string =>

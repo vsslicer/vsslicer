@@ -20,12 +20,12 @@ Fake `acquireVsCodeApi` and a fake host end of the transport so every project ca
 
 - [x] The sample webview exchanges a typed message with the fake host in Playwright
 - [x] Stub exported as `@vsslicer/webview-kit/testing`; documented with an example
-- [ ] Harness loader from E1 uses it instead of its own stub
+- [x] Harness loader from E1 uses it instead of its own stub
 
 ## Tasks
 
 - [x] Write the stub and fake host
-- [ ] Replace the harness stub
+- [x] Replace the harness stub
 - [x] Document
 
 ## Progress
@@ -35,3 +35,5 @@ Done except the harness swap. New `@vsslicer/webview-kit/testing` entry: `attach
 Files: vsslicer/modules/webview-kit/src/adapters/webview-stub.ts, src/testing/index.ts, tsconfig.testing.json, test/webview-stub.spec.ts, test/entries.test.ts, package.json (exports ./testing, build step), README.md, CHANGELOG.md.
 
 Review passed; harness swap waits on the kit release
+
+Harness swap done: test-webview 0.2.0 (published) depends on @vsslicer/webview-kit ^0.5.0; `stubScript` in src/domain/webviewPage.ts is now `webviewStubScript` from `@vsslicer/webview-kit/testing` (public API unchanged; the import is a plain package string, no Playwright-bound adapter in domain). Verified: lint, test (4), build, `playwright test` (example-extension webview bundle loads under the kit stub and posts ready), clean-store `pnpm install --frozen-lockfile` then tests again. example-extension has no webview tests of its own; test/webview.spec.ts in test-webview is its consumer. Files: vsslicer/modules/test-webview/{package.json,pnpm-lock.yaml,CHANGELOG.md,src/domain/webviewPage.ts}.
