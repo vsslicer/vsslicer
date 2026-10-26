@@ -35,7 +35,53 @@
         "command": "vsslicer.slicer.about",
         "title": "VSSlicer: About Slicer Extension"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "VSSlicer Slicer",
+      "properties": {
+        "vsslicer.slicer.engine": {
+          "type": "string",
+          "enum": [
+            "orca",
+            "prusa",
+            "cura"
+          ],
+          "default": "orca",
+          "scope": "window",
+          "description": "Slicing engine used to slice projects.",
+          "enumDescriptions": [
+            "OrcaSlicer CLI",
+            "PrusaSlicer CLI",
+            "CuraEngine"
+          ]
+        },
+        "vsslicer.slicer.orca.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Path to the OrcaSlicer executable. Empty means find it automatically."
+        },
+        "vsslicer.slicer.cura.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Path to the CuraEngine executable. Empty means find it automatically."
+        },
+        "vsslicer.slicer.timeout": {
+          "type": "number",
+          "default": 600,
+          "minimum": 1,
+          "scope": "window",
+          "description": "Seconds to wait for the slicing engine before giving up."
+        },
+        "vsslicer.slicer.outputFolder": {
+          "type": "string",
+          "default": ".vsslicer/sliced",
+          "scope": "window",
+          "description": "Folder, relative to the workspace, where sliced G-code is written."
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc",
