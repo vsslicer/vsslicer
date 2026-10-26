@@ -74,6 +74,31 @@ describe('rrfPlanner', () => {
     expect(time(file(print, [set(StateKind.Accel, 500), set(StateKind.AccelPrint, 2000)]))).toBeCloseTo(1.1, 9);
   });
 
+  it('clamps M204 P0, T0 and S0 to 0.1 mm/s^2 so the total stays finite (GCP-90)', () => {
+    const print = [{ x: 10, y: 0, e: 1 }];
+    const travel = [{ x: 10, y: 0, flags: T }];
+    const tiny = time(file(print, [set(StateKind.AccelPrint, 0.1)]));
+    expect(time(file(print, [set(StateKind.AccelPrint, 0)]))).toBeCloseTo(tiny, 5);
+    expect(Number.isFinite(tiny)).toBe(true);
+    expect(time(file(travel, [set(StateKind.AccelTravel, 0)]))).toBeCloseTo(
+      time(file(travel, [set(StateKind.AccelTravel, 0.1)])),
+      5,
+    );
+    expect(time(file(print, [set(StateKind.Accel, 0)]))).toBeCloseTo(tiny, 5);
+  });
+
+  it('lets a later M204 S override an earlier P or T, and a later P override S (GCP-91)', () => {
+    const print = [{ x: 100, y: 0, e: 1 }];
+    const travel = [{ x: 100, y: 0, flags: T }];
+    const at = (kind: StateKind, value: number): StateChange => ({ moveIndex: 0, kind, index: 0, value });
+    expect(time(file(print, [at(StateKind.AccelPrint, 500), at(StateKind.Accel, 2000)]))).toBeCloseTo(1.1, 9);
+    expect(time(file(travel, [at(StateKind.AccelTravel, 500), at(StateKind.Accel, 2000)]))).toBeCloseTo(1.1, 9);
+    // S then P: travel keeps S, print takes P.
+    const sp = [at(StateKind.Accel, 500), at(StateKind.AccelPrint, 2000)];
+    expect(time(file(print, sp))).toBeCloseTo(1.1, 9);
+    expect(time(file(travel, sp))).toBeCloseTo(1.2, 9);
+  });
+
   it('raises a feedrate below the minimum to minFeedrate', () => {
     const a = 1000;
     const v = 0.5;
