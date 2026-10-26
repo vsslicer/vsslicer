@@ -160,3 +160,9 @@ test('stats: scaled cube volume, open cube, degenerate triangles', () => {
   expect(deg.degenerateTriangles).toBe(2);
   expect(deg.openEdges).toBe(3);
 });
+
+test('stats: three triangles on one edge are one non-manifold edge', () => {
+  const fin = (x: number, y: number, z: number): number[] => [0, 0, 0, 1, 0, 0, x, y, z];
+  const s = computeStats(weld(Float32Array.from([...fin(0, 1, 0), ...fin(0, 0, 1), ...fin(0, -1, 0)])));
+  expect(s).toMatchObject({ nonManifoldEdges: 1, openEdges: 6 });
+});
