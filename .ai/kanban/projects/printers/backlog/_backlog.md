@@ -428,3 +428,4 @@
 426. [PRN-440: Release `printer-unofficial-snapmaker@0.1.0`: SACP discovery, status, upload and start for Snapmaker](440-release-printer-unofficial-snapmaker-0-1-0-sacp-discovery-st.md)
 427. [PRN-441: Register the Snapmaker (reverse engineered) adapter with vsslicer.printers](441-register-the-snapmaker-reverse-engineered-adapter-with-vssli.md)
 428. [PRN-442: Write vendor contributor checklists and ToS review notes](442-write-vendor-contributor-checklists-and-tos-review-notes.md)
+429. [PRN-444: Refuse null vendorState and duplicate patch keys in mergeStatus, and pin the caps in tests](444-refuse-null-vendorstate-and-duplicate-patch-keys-in-mergesta.md)
