@@ -29,15 +29,16 @@ describe('the generated Bambu catalogue', () => {
     expect(valid(bambuCatalogue), JSON.stringify(valid.errors?.slice(0, 5))).toBe(true);
   });
 
-  test("assigns Bambu's 608 FFF keys: 512 Orca entries with a Bambu name, 96 bambu. entries", () => {
+  // 615 matches E11's count; PRF-16's tokenizer also reads Bambu's filament overrides of the overhang speeds.
+  test("assigns Bambu's 615 FFF keys: 512 Orca entries with a Bambu name, 103 bambu. entries", () => {
     expect(named).toHaveLength(512);
-    expect(prefixed).toHaveLength(96);
+    expect(prefixed).toHaveLength(103);
     for (const [key, e] of prefixed)
       expect(e, key).toMatchObject({ native_only: 'bambu', native: { bambu: { key: key.slice(6) } } });
   });
 
   test('maps chamber_temperatures onto chamber_temperature, with both native names', () => {
-    expect(orcaCatalogue.entries.chamber_temperature?.native).toEqual({
+    expect(orcaCatalogue.entries.chamber_temperature?.native).toMatchObject({
       orca: { key: 'chamber_temperature' },
       bambu: { key: 'chamber_temperatures' },
     });

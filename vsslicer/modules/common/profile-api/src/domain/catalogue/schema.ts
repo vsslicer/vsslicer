@@ -42,7 +42,8 @@ const kind = (k: string, properties: { [key: string]: JsonSchema } = {}, require
   closed({ kind: { const: k }, ...properties }, ['kind', ...required]);
 const stringMap = { type: 'object', additionalProperties: str };
 // Every name in the pinned key lists of Orca, Bambu, Prusa 2.9/3.0, SuperSlicer and Cura matches (test/catalogue.test.ts).
-const nativeName = { type: 'string', pattern: '^[A-Za-z0-9_-]+$' };
+// `.` for PrusaSlicer 3.0's namespaced hardware names (`printer.tool_count`).
+const nativeName = { type: 'string', pattern: '^[A-Za-z0-9_][A-Za-z0-9_.-]*$' };
 
 const valueConversion = {
   oneOf: [

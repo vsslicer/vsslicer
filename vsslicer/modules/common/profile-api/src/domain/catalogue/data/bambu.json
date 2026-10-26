@@ -1180,6 +1180,7 @@
       "max": 200,
       "default": 0,
       "label": "Center region radius",
+      "tooltip": "Radius of the center region that uses ordinary rectilinear infill; outside this circle the infill stays radial. 0 chooses the radius automatically. A positive value is in millimeters.",
       "native": {
         "bambu": {
           "key": "conformal_hub_radius"
@@ -1885,6 +1886,126 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6479",
+      "native_only": "bambu"
+    },
+    "bambu.filament_enable_overhang_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "bool",
+      "per_extruder": true,
+      "default": true,
+      "label": "Slow down for overhang",
+      "tooltip": "Enable this option to slow printing down for different overhang degree",
+      "native": {
+        "bambu": {
+          "key": "filament_enable_overhang_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
+      "native_only": "bambu"
+    },
+    "bambu.filament_bridge_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "float",
+      "per_extruder": true,
+      "unit": "mm/s",
+      "min": 0,
+      "default": 25,
+      "label": "Bridge",
+      "tooltip": "Speed of bridge and completely overhang wall",
+      "native": {
+        "bambu": {
+          "key": "filament_bridge_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
+      "native_only": "bambu"
+    },
+    "bambu.filament_overhang_1_4_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "float",
+      "per_extruder": true,
+      "unit": "mm/s",
+      "min": 0,
+      "default": 0,
+      "label": "10%",
+      "native": {
+        "bambu": {
+          "key": "filament_overhang_1_4_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
+      "native_only": "bambu"
+    },
+    "bambu.filament_overhang_2_4_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "float",
+      "per_extruder": true,
+      "unit": "mm/s",
+      "min": 0,
+      "default": 0,
+      "label": "25%",
+      "native": {
+        "bambu": {
+          "key": "filament_overhang_2_4_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
+      "native_only": "bambu"
+    },
+    "bambu.filament_overhang_3_4_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "float",
+      "per_extruder": true,
+      "unit": "mm/s",
+      "min": 0,
+      "default": 0,
+      "label": "50%",
+      "native": {
+        "bambu": {
+          "key": "filament_overhang_3_4_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
+      "native_only": "bambu"
+    },
+    "bambu.filament_overhang_4_4_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "float",
+      "per_extruder": true,
+      "unit": "mm/s",
+      "min": 0,
+      "default": 0,
+      "label": "75%",
+      "native": {
+        "bambu": {
+          "key": "filament_overhang_4_4_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
+      "native_only": "bambu"
+    },
+    "bambu.filament_overhang_totally_speed": {
+      "group": "material",
+      "home": "material",
+      "type": "float",
+      "per_extruder": true,
+      "unit": "mm/s",
+      "min": 0,
+      "default": 10,
+      "label": "100%",
+      "tooltip": "Speed of 100% overhang wall which has 0 overlap with the lower layer.",
+      "native": {
+        "bambu": {
+          "key": "filament_overhang_totally_speed"
+        }
+      },
+      "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
       "native_only": "bambu"
     },
     "bambu.override_process_overhang_speed": {

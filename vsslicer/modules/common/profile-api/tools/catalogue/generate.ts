@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Generates src/domain/catalogue/data/orca.json from OrcaSlicer's option definitions (PRF-14).
-// Reads PrintConfig.cpp and Preset.cpp as text; nothing upstream is built or run.
-// Run from the module: node tools/catalogue/generate.ts [<OrcaSlicer checkout> [<BambuStudio checkout>]]
-import { readFileSync, writeFileSync } from 'node:fs';
+// Reads PrintConfig.cpp and Preset.cpp as text through the linear tokenizer in cpp.ts; nothing upstream is built or run.
+// Run from the module: node tools/catalogue/generate.ts (sources: the pinned checkouts in .reference/repos).
+import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { CatalogueEntry, CatalogueFile, EnumOption, Group, HomeEntity, SettingType } from '../../src/index.ts';
+import type { CatalogueEntry, CatalogueFile } from '../../src/index.ts';
+import { defines, enumMaps, extractDefs, readSource, stringList, substitute, tokenize } from './cpp.ts';
+import { toEntry } from './entry.ts';
+import { generatePrusa, headCommit, readPinned, REPOS } from './prusa.ts';
 
 export const ORCA_COMMIT = '09aa0114';
 export const PRINT_CONFIG = 'src/libslic3r/PrintConfig.cpp';
@@ -20,451 +23,38 @@ export const NOTICE =
   "Orca material stays under AGPL-3.0; VSSlicer's own additions are AGPL-3.0-or-later. The port is allowed by " +
   'decision D2. Do not edit; regenerate.';
 
-/** One `def = this->add(...)` block, before it becomes a catalogue entry. */
-interface RawDef {
-  key: string;
-  co: string;
-  nullable: boolean;
-  line: number;
-  label?: string;
-  fullLabel?: string;
-  tooltip?: string;
-  sidetext?: string;
-  min?: number;
-  max?: number;
-  mode?: string;
-  enumValues?: string[];
-  enumLabels?: string[];
-  enumType?: string;
-  defaultText?: string;
-}
-
-const STR = String.raw`"(?:[^"\\]|\\.)*"`;
-const unescape = (lit: string): string => JSON.parse(lit.replace(/\\'/g, "'").replace(/\\\?/g, '?')) as string;
-/** Concatenated C++ string literals at the start of `s` (`"a" "b"`, `L("a")`), or undefined. */
-const literals = (s: string): string | undefined => {
-  const m = new RegExp(String.raw`^\s*(?:L\(|_L\(|_u8L\()?\s*((?:${STR}\s*)+)`).exec(s);
-  return m ? [...m[1]!.matchAll(new RegExp(STR, 'g'))].map((x) => unescape(x[0])).join('') : undefined;
-};
-const num = (s: string): number | undefined => {
-  const m = /^\s*([-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?)f?\s*$/i.exec(s);
-  return m ? Number(m[1]) : undefined;
-};
-/** The text between the bracket at `open` and its match. */
-const balanced = (s: string, open: number): string => {
-  const pairs: { [c: string]: string } = { '(': ')', '{': '}' };
-  const stack: string[] = [];
-  for (let i = open; i < s.length; i++) {
-    const c = s[i]!;
-    if (c === '"') {
-      i = s.indexOf('"', i + 1);
-      while (s[i - 1] === '\\' && s[i - 2] !== '\\') i = s.indexOf('"', i + 1);
-    } else if (pairs[c]) stack.push(pairs[c]);
-    else if (c === stack.at(-1)) {
-      stack.pop();
-      if (stack.length === 0) return s.slice(open + 1, i);
-    }
-  }
-  return s.slice(open + 1);
-};
-const list = (s: string): string[] => [...s.matchAll(new RegExp(STR, 'g'))].map((m) => unescape(m[0]));
-/** `std::vector<std::string> name = { ... }` (or a set) anywhere in `src`. */
-const stringList = (src: string, name: string): string[] => {
-  const at = src.search(new RegExp(String.raw`\b${name}\s*(?:=\s*)?\{`));
-  if (at < 0) throw new Error(`list ${name} not found`);
-  return list(
-    balanced(src, src.indexOf('{', at))
-      .replace(/\/\/.*$/gm, '')
-      .replace(/\/\*[\s\S]*?\*\//g, ''),
-  );
-};
-
-/** `s_keys_map_<Enum>`: C++ enumerator to the string Orca stores. */
-export const enumMaps = (src: string): Map<string, Map<string, string>> => {
-  const maps = new Map<string, Map<string, string>>();
-  for (const m of src.matchAll(/s_keys_map_(\w+)\s*=?\s*\{/g)) {
-    const body = balanced(src, m.index + m[0].length - 1);
-    const map = new Map<string, string>();
-    for (const p of body.matchAll(
-      new RegExp(String.raw`\{\s*(${STR})\s*,\s*(?:int\s*\(|\(int\)\s*)?\s*([\w:]+)\s*\)?\s*\}`, 'g'),
-    ))
-      map.set(p[2]!.split('::').at(-1)!, unescape(p[1]!));
-    maps.set(m[1]!, map);
-  }
-  return maps;
-};
-
-/** Reads the assignments of one definition block into `d` (a later block for the same key overrides). */
-const readBlock = (d: RawDef, block: string): void => {
-  block = block.replace(/^\s*\/\/.*$/gm, '').replace(/;\s*\/\/.*$/gm, ';');
-  const assign = (field: string): string[] =>
-    [...block.matchAll(new RegExp(String.raw`def->${field}\s*=\s*([^;]*);`, 'g'))].map((m) => m[1]!);
-  const last = <T>(xs: (T | undefined)[]): T | undefined => xs.filter((x) => x !== undefined).at(-1);
-  d.label = last(assign('label').map(literals)) ?? d.label;
-  d.fullLabel = last(assign('full_label').map(literals)) ?? d.fullLabel;
-  d.tooltip = last(assign('tooltip').map(literals)) ?? d.tooltip;
-  d.sidetext = last(assign('sidetext').map(literals)) ?? d.sidetext;
-  d.min = last(assign('min').map(num)) ?? d.min;
-  d.max = last(assign('max').map(num)) ?? d.max;
-  d.mode = last(assign('mode').map((s) => /com\w+/.exec(s)?.[0])) ?? d.mode;
-  d.enumType =
-    /(?:ConfigOptionEnum<(\w+)>::get_enum_values|&s_keys_map_(\w+))/.exec(block)?.slice(1).find(Boolean) ?? d.enumType;
-  const values = /def->enum_values\s*=\s*\{/.exec(block);
-  if (values) d.enumValues = list(balanced(block, values.index + values[0].length - 1));
-  const pushedValues = [...block.matchAll(new RegExp(String.raw`enum_values\.(?:push|emplace)_back\((${STR})\)`, 'g'))];
-  if (pushedValues.length) d.enumValues = pushedValues.map((m) => unescape(m[1]!));
-  const labels = /def->enum_labels\s*=\s*\{/.exec(block);
-  if (labels)
-    d.enumLabels = balanced(block, labels.index + labels[0].length - 1)
-      .split(/,(?=\s*(?:L|_L)?\(?\s*")/)
-      .map((s) => literals(s) ?? '');
-  const pushedLabels = [...block.matchAll(/enum_labels\.(?:push|emplace)_back\(([^;]*)\);/g)];
-  if (pushedLabels.length) d.enumLabels = pushedLabels.map((m) => literals(m[1]!) ?? '');
-  const dv = /set_default_value\s*\(/.exec(block);
-  if (dv) d.defaultText = balanced(block, dv.index + dv[0].length - 1).trim();
-};
-
-const blocksOf = (src: string, from: number, to: number) => {
-  const re = /(?:def|auto def)\s*=\s*this->add(_nullable)?\(\s*([^,]+?)\s*,\s*(co\w+)\s*\)/g;
-  re.lastIndex = from;
-  const hits: { at: number; nullable: boolean; keyExpr: string; co: string }[] = [];
-  for (let m = re.exec(src); m && m.index < to; m = re.exec(src))
-    hits.push({ at: m.index, nullable: !!m[1], keyExpr: m[2]!, co: m[3]! });
-  return hits.map((h, i) => ({ ...h, block: src.slice(h.at, hits[i + 1]?.at ?? to) }));
-};
-
-const lineAt = (src: string, at: number): number => src.slice(0, at).split('\n').length;
-
-/** Every FFF definition in init_common_params and init_fff_params, in source order. */
-export const extract = (src: string): Map<string, RawDef> => {
-  // Drop commented-out code, keeping line numbers.
-  src = src.replace(/\/\*[\s\S]*?\*\//g, (c) => c.replace(/[^\n]/g, ' ')).replace(/^[ \t]*\/\/.*$/gm, '');
-  const from = src.indexOf('void PrintConfigDef::init_common_params()');
-  const to = src.indexOf('void PrintConfigDef::init_extruder_option_keys()');
-  if (from < 0 || to < 0) throw new Error('PrintConfigDef::init_* not found');
-  const defs = new Map<string, RawDef>();
-  const define = (key: string, co: string, nullable: boolean, at: number, block: string): RawDef => {
-    const d = defs.get(key) ?? { key, co, nullable, line: lineAt(src, at) };
-    d.co = co;
-    readBlock(d, block);
-    defs.set(key, d);
-    return d;
-  };
-  const axes = (() => {
-    const at = src.indexOf('std::vector<AxisDefault> axes', from);
-    return [
-      ...balanced(src, src.indexOf('{', at)).matchAll(
-        /\{\s*"(\w)"\s*,\s*(\{[^}]*\})\s*,\s*(\{[^}]*\})\s*,\s*(\{[^}]*\})/g,
-      ),
-    ];
-  })();
-  for (const h of blocksOf(src, from, to)) {
-    const literal = /^"(\w+)"$/.exec(h.keyExpr);
-    if (literal) define(literal[1]!, h.co, h.nullable, h.at, h.block);
-    else if (/^"machine_max_\w+_"\s*\+\s*axis\.name$/.test(h.keyExpr)) {
-      const prefix = /"(\w+)"/.exec(h.keyExpr)![1]!;
-      const column = { machine_max_speed_: 2, machine_max_acceleration_: 3, machine_max_jerk_: 4 }[prefix]!;
-      for (const a of axes) {
-        const d = define(prefix + a[1]!, h.co, h.nullable, h.at, h.block);
-        const fmt = (expr: string) => /boost::format\((".*?")\)/.exec(expr)?.[1];
-        const up = a[1]!.toUpperCase();
-        const full = fmt(/def->full_label\s*=\s*([^;]*);/.exec(h.block)?.[1] ?? '');
-        const tip = fmt(/def->tooltip\s*=\s*([^;]*);/.exec(h.block)?.[1] ?? '');
-        if (full) d.fullLabel = unescape(full).replace('%1%', up);
-        if (tip) d.tooltip = unescape(tip).replace('%1%', up);
-        d.defaultText = `new ConfigOptionFloats${a[column]!}`;
-      }
-    } else if (h.keyExpr === 'key') {
-      const loop = src.lastIndexOf('for (const char* key : {', h.at);
-      if (loop < 0 || h.at - loop > 200) continue; // add_belt_remap's lambda, expanded below
-      for (const key of list(balanced(src, src.indexOf('{', loop)))) define(key, h.co, h.nullable, h.at, h.block);
-    }
-  }
-  // add_belt_remap(key, label, tooltip, default, mode): one lambda, three keys.
-  const lambda = blocksOf(src, from, to).find(
-    (h) => h.keyExpr === 'key' && /add_belt_remap/.test(src.slice(h.at - 200, h.at)),
-  );
-  if (lambda) {
-    const body = lambda.block.slice(0, lambda.block.indexOf('};'));
-    for (const c of src.slice(from, to).matchAll(/add_belt_remap\(\s*"(\w+)"\s*,([\s\S]*?)\);/g)) {
-      const args = c[2]!.split(/,\s*(?=L\(|RemapAxis::|com\w+\s*$)/);
-      const d = define(c[1]!, lambda.co, false, from + c.index, body);
-      d.label = literals(args[0]!);
-      d.tooltip = literals(args[1]!);
-      d.defaultText = `new ConfigOptionEnum<RemapAxis>(${args[2]!.trim()})`;
-      d.mode = args[3]!.trim();
-    }
-  }
-  // filament_* retraction overrides copy their extruder key (`for (auto& opt_key : filament_extruder_override_keys)`).
-  const loop = src.indexOf('for (auto& opt_key : filament_extruder_override_keys)', from);
-  for (const key of stringList(src, 'filament_extruder_override_keys')) {
-    const base = defs.get(key.slice('filament_'.length));
-    if (!base) throw new Error(`${key}: no extruder key to copy`);
-    const simple = [
-      'filament_retraction_length',
-      'filament_z_hop',
-      'filament_long_retractions_when_cut',
-      'filament_retraction_distances_when_cut',
-    ];
-    defs.set(key, {
-      ...base,
-      key,
-      nullable: true,
-      line: lineAt(src, loop),
-      mode: simple.includes(key) ? 'comSimple' : 'comAdvanced',
-    });
-  }
-  return defs;
-};
-
-const PLATE_KEYS = new Set([
-  'curr_bed_type',
-  'first_layer_print_sequence',
-  'first_layer_sequence_choice',
-  'other_layers_print_sequence',
-  'other_layers_print_sequence_nums',
-  'other_layers_sequence_choice',
-]);
-
-// shortcut: groups and homes come from key-name patterns and Orca's preset lists, not from Tab.cpp pages;
-// refine per key when a page-accurate grouping matters (E11 review).
-const PROCESS_GROUPS: [RegExp, Group][] = [
-  [/gcode|post_process|filename_format|label_object|exclude_object|comments|thumbnail|binary|line_number/, 'gcode'],
-  [/support|raft/, 'support'],
-  [/skirt|brim|draft_shield|elefant|elephant/, 'adhesion'],
-  [
-    /prime_tower|wipe_tower|flush|ooze|wiping|single_extruder|purge|_filament$|tool_?change|nozzle_change|prime_volume/,
-    'multi_material',
-  ],
-  [/speed|accel|jerk|junction|velocity|slowdown|slow_down/, 'speed'],
-  [/infill|^top_|^bottom_|ironing|shell|solid/, 'shells_infill'],
-  [/wall|perimeter|seam|bridge|overhang|hole|contour|outer|scarf|loop|role_based/, 'walls'],
-  [/line_width|flow|extru|retract|travel|wipe|z_hop|crossing/, 'extrusion'],
-  [/layer|slic|resolution|precision|xy_|z_offset|spiral|vase|print_sequence|adaptive/, 'layers'],
-];
-const MATERIAL_GROUPS: [RegExp, Group][] = [
-  [/gcode/, 'gcode'],
-  [
-    /ramming|toolchange|loading|cooling_moves|cooling_initial|cooling_final|tube|wipe|flush|purge|prime|multitool|nozzle_change/,
-    'multi_material',
-  ],
-  [/fan|cool|slow_down|layer_time|exhaust|aux/, 'cooling'],
-];
-const PRINTER_GROUPS: [RegExp, Group][] = [
-  [/gcode|thumbnail|host|binary|relative_e|time_lapse|timelapse|change_filament|print_host|printhost|api_key/, 'gcode'],
-  [/retract|z_hop|^wipe|deretract|lift|travel_slope/, 'extrusion'],
-  [
-    /prime|purge|wipe_tower|single_extruder_multi|cooling_tube|parking|extra_loading|high_current|tool_?change|nozzle_change|ramming|manual_filament/,
-    'multi_material',
-  ],
-];
-const pick = (key: string, rules: [RegExp, Group][], fallback: Group): Group =>
-  rules.find(([re]) => re.test(key))?.[1] ?? fallback;
-
-const placeOf = (key: string, lists: { print: Set<string>; filament: Set<string>; printer: Set<string> }) => {
-  const listed = lists.print.has(key) || lists.filament.has(key) || lists.printer.has(key);
-  if (PLATE_KEYS.has(key)) return { group: 'plate' as Group, home: 'plate' as HomeEntity, listed: true };
-  const home: HomeEntity = lists.print.has(key)
-    ? 'process'
-    : lists.filament.has(key) || (!listed && key.startsWith('filament_'))
-      ? 'material'
-      : lists.printer.has(key) ||
-          (!listed &&
-            /^(machine_|printer_|printable_|bed_|extruder_|nozzle_|print_host|printhost|host_|thumbnails)/.test(key))
-        ? /^nozzle_/.test(key)
-          ? 'nozzle'
-          : 'printer_model'
-        : 'process';
-  const group =
-    home === 'process'
-      ? pick(key, PROCESS_GROUPS, 'special')
-      : home === 'material'
-        ? pick(key, MATERIAL_GROUPS, 'material')
-        : home === 'nozzle'
-          ? 'machine'
-          : pick(key, PRINTER_GROUPS, 'machine');
-  return { group, home, listed };
-};
-
-const TYPES: { [co: string]: SettingType } = {
-  Bool: 'bool',
-  Int: 'int',
-  Float: 'float',
-  Percent: 'percent',
-  FloatOrPercent: 'float_or_percent',
-  FloatsOrPercents: 'float_or_percent',
-  String: 'string',
-  Enum: 'enum',
-  Point: 'point',
-  Point3: 'point',
-  Points: 'polygon',
-  PointsGroups: 'polygon',
-};
-
-type Parsed = string | number | boolean | null | Parsed[];
-/** A C++ initialiser as a JSON value: numbers, bools, string literals, `{...}` lists, `Vec2d(x, y)`. */
-const parseValue = (s: string, enumMap?: Map<string, string>): Parsed | undefined => {
-  // Casts: `(int)X`, `int(X)`, `(int)(X)`.
-  s = s
-    .trim()
-    .replace(/^\(int\)\s*/, '')
-    .replace(/^int\s*\((.*)\)$/s, '$1')
-    .replace(/^\(([^()]*)\)$/, '$1')
-    .trim();
-  s = s.replace(/\s*::\s*/g, '::');
-  if (/::nil_value\(\)$/.test(s)) return null;
-  if (s === 'true' || s === 'false') return s === 'true';
-  const n = num(s);
-  if (n !== undefined) return n;
-  if (/^(?:L\()?"/.test(s)) return literals(s);
-  const vec = /^(?:Vec\dd|Vec\d|Pointf3?|Point3?)\s*\(([^)]*)\)$/.exec(s);
-  if (vec) {
-    const xs = vec[1]!.split(',').map(num);
-    return xs.every((x) => x !== undefined) ? (xs as number[]) : undefined;
-  }
-  if (s.startsWith('{') || /^\w+(?:<[^>]*>)?\s*\{/.test(s)) {
-    const inner = balanced(s, s.indexOf('{')).trim();
-    if (inner === '') return [];
-    const parts: string[] = [];
-    let depth = 0;
-    let cur = '';
-    for (let i = 0; i < inner.length; i++) {
-      const c = inner[i]!;
-      if (c === '"') {
-        const lit = new RegExp(STR).exec(inner.slice(i))![0];
-        cur += lit;
-        i += lit.length - 1;
-        continue;
-      }
-      if ('({'.includes(c)) depth++;
-      if (')}'.includes(c)) depth--;
-      if (c === ',' && depth === 0) {
-        parts.push(cur);
-        cur = '';
-      } else cur += c;
-    }
-    if (cur.trim()) parts.push(cur);
-    const xs = parts.map((p) => parseValue(p, enumMap));
-    return xs.every((x) => x !== undefined) ? (xs as Parsed[]) : undefined;
-  }
-  const ident = /^(?:[\w]+::)*(\w+)$/.exec(s)?.[1];
-  if (ident && enumMap?.has(ident)) return enumMap.get(ident);
-  return undefined;
-};
-
-/** `new ConfigOptionFloats{ 0.4 }` -> [0.4]; `new ConfigOptionFloatOrPercent(50, true)` -> "50%". */
-export const parseDefault = (
-  text: string,
-  co: string,
-  maps: Map<string, Map<string, string>>,
-  enumType?: string,
-): Parsed | undefined => {
-  const m = /^new\s+ConfigOption(\w+?)(?:Nullable)?(?:<(\w+)>)?\s*([({])/.exec(text);
-  if (!m) return undefined;
-  const map = maps.get(m[2] ?? enumType ?? '');
-  const args = balanced(text, m[0].length - 1).trim();
-  if (args === '') return /s$|Groups$|Generic$/.test(m[1]!) ? [] : m[1] === 'String' ? '' : undefined;
-  if (co === 'coFloatOrPercent') {
-    const [v, pct] = args.split(',').map((x) => x.trim());
-    const n = num(v!);
-    return n === undefined ? undefined : pct === 'true' ? `${n}%` : n;
-  }
-  if (co === 'coFloatsOrPercents') {
-    const pairs = [...args.matchAll(/FloatOrPercent\s*\(?\{?\s*([-\d.]+)\s*,\s*(true|false)/g)];
-    return pairs.length ? pairs.map((p) => (p[2] === 'true' ? `${num(p[1]!)}%` : num(p[1]!)!)) : undefined;
-  }
-  const v = m[3] === '{' ? parseValue(`{${args}}`, map) : parseValue(args, map);
-  if (v === undefined && m[3] === '(' && /^\{/.test(args)) return parseValue(args, map);
-  if (v === undefined && /^Points?(?:Groups)?$/.test(m[1]!)) return parseValue(`{${args}}`, map);
-  return v;
-};
-
-const humanize = (key: string) => key.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
-
 export const generate = (printConfig: string, preset: string, constants: string): CatalogueFile => {
   // `#define INITIAL_LAYER_HEIGHT 0.2`: inline the few named defaults.
-  for (const m of constants.matchAll(/^#define\s+(\w+)\s+(.+)$/gm))
-    printConfig = printConfig.replaceAll(new RegExp(String.raw`\b${m[1]!}\b`, 'g'), m[2]!.trim());
-  const defs = extract(printConfig);
-  const maps = enumMaps(printConfig);
+  const t = substitute(tokenize(printConfig), defines(constants));
+  const p = tokenize(preset);
+  const defs = extractDefs(t);
+  const maps = enumMaps(t);
   const lists = {
-    print: new Set(stringList(preset, 's_Preset_print_options')),
-    filament: new Set(stringList(preset, 's_Preset_filament_options')),
+    print: new Set(stringList(p, 's_Preset_print_options')),
+    filament: new Set(stringList(p, 's_Preset_filament_options')),
     printer: new Set([
-      ...stringList(preset, 's_Preset_machine_limits_options'),
-      ...stringList(preset, 's_Preset_printer_options'),
-      ...stringList(printConfig, 'm_extruder_option_keys'),
+      ...stringList(p, 's_Preset_machine_limits_options'),
+      ...stringList(p, 's_Preset_printer_options'),
+      ...stringList(t, 'm_extruder_option_keys'),
       // Added to the machine-limits page by a loop over the axes.
       ...[...defs.keys()].filter((k) => /^machine_max_(speed|acceleration|jerk)_[xyze]$/.test(k)),
     ]),
   };
   const perExtruder = new Set([
-    ...stringList(printConfig, 'm_extruder_option_keys'),
-    ...stringList(printConfig, 'print_options_with_variant'),
-    ...stringList(printConfig, 'printer_options_with_variant_1'),
-    ...stringList(printConfig, 'printer_options_with_variant_2'),
-    ...stringList(printConfig, 'filament_options_with_variant'),
+    ...stringList(t, 'm_extruder_option_keys'),
+    ...stringList(t, 'print_options_with_variant'),
+    ...stringList(t, 'printer_options_with_variant_1'),
+    ...stringList(t, 'printer_options_with_variant_2'),
+    ...stringList(t, 'filament_options_with_variant'),
   ]);
   const entries: { [key: string]: CatalogueEntry } = {};
-  for (const d of defs.values()) {
-    const co = d.co.slice(2);
-    const plural = /s$|Groups$/.test(co) && co !== 'FloatOrPercent';
-    const scalarCo =
-      co === 'FloatsOrPercents'
-        ? co
-        : co
-            .replace(/Groups$/, '')
-            .replace(/s$/, '')
-            .replace(/^Point$/, plural ? 'Points' : 'Point');
-    const { group, home, listed } = placeOf(d.key, lists);
-    let type: SettingType = TYPES[co === 'PointsGroups' ? co : scalarCo] ?? TYPES[co]!;
-    const values = d.enumValues ?? [...(maps.get(d.enumType ?? '')?.values() ?? [])];
-    const enumOptions: EnumOption[] = values.map((value, i) => {
-      const label = d.enumLabels?.[i];
-      return label ? { value, label } : { value };
-    });
-    if (type === 'string' && /gcode/.test(d.key)) type = 'gcode';
-    if (type === 'enum' && enumOptions.length === 0) type = 'string';
-    // Plural keys: one value per extruder (extruder and variant keys), one per material (a material entity is one
-    // filament), or a plain list.
-    // Machine limits hold [normal, silent] values, not one per extruder.
-    const isPerExtruder =
-      plural && perExtruder.has(d.key) && co !== 'PointsGroups' && !/^machine_(max|min)_/.test(d.key);
-    const isMaterialScalar = plural && !isPerExtruder && home === 'material' && !/^compatible_/.test(d.key);
-    if (isPerExtruder && co === 'Points') type = 'point';
-    const isList = plural && !isPerExtruder && !isMaterialScalar && !(co === 'Points' && !isPerExtruder);
-    let value = d.defaultText ? parseDefault(d.defaultText, d.co, maps, d.enumType) : undefined;
-    // `ConfigOptionBool(0)`
-    const asBool = (v: Parsed | undefined): Parsed | undefined =>
-      Array.isArray(v) ? v.map((x) => asBool(x) as Parsed) : typeof v === 'number' ? v !== 0 : v;
-    if (type === 'bool') value = asBool(value);
-    // A scalar written as `ConfigOptionBool{ false }`, or one value per extruder or material.
-    if (
-      Array.isArray(value) &&
-      (isPerExtruder || isMaterialScalar || (!plural && !['point', 'polygon'].includes(type)))
-    )
-      value = value[0];
-    const hidden = d.mode === 'comDevelop' || !listed;
-    const label = d.fullLabel ?? d.label;
-    const entry: CatalogueEntry = {
-      group,
-      home,
-      type,
-      ...(isList ? { list: true } : {}),
-      ...(isPerExtruder ? { per_extruder: true } : {}),
-      ...(d.sidetext ? { unit: d.sidetext } : {}),
-      ...(type === 'enum' ? { enum: enumOptions } : {}),
-      ...(d.min !== undefined ? { min: d.min } : {}),
-      ...(d.max !== undefined ? { max: d.max } : {}),
-      ...(value !== undefined ? { default: value } : {}),
-      label: label || humanize(d.key),
-      ...(d.tooltip ? { tooltip: d.tooltip } : {}),
-      native: { orca: { key: d.key } },
-      ...(hidden ? { hidden: true } : {}),
-      provenance: `Ported from OrcaSlicer@${ORCA_COMMIT}:${PRINT_CONFIG}:${d.line}${label ? '' : ' (label generated from the key)'}`,
-    };
-    entries[d.key] = entry;
-  }
+  for (const d of defs.values())
+    entries[d.key] = toEntry(
+      d,
+      { ...lists, perExtruder },
+      maps,
+      `Ported from OrcaSlicer@${ORCA_COMMIT}:${PRINT_CONFIG}`,
+    );
   return { notice: NOTICE, entries };
 };
 
@@ -545,27 +135,44 @@ export const generateBambu = (
   return { orca: merged, bambu: { notice: BAMBU_NOTICE, entries } };
 };
 
-export const BAMBU_OUTPUT = join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/catalogue/data/bambu.json');
-export const BAMBU_SOURCE =
-  process.env.BAMBU_SOURCE ??
-  join(dirname(fileURLToPath(import.meta.url)), '../../../../../.reference/repos/BambuStudio');
+const DATA = join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/catalogue/data');
+export const BAMBU_OUTPUT = join(DATA, 'bambu.json');
+export const OUTPUT = join(DATA, 'orca.json');
+export const PRUSA_OUTPUT = join(DATA, 'prusa.json');
+export const SUPERSLICER_OUTPUT = join(DATA, 'superslicer.json');
+export const BAMBU_SOURCE = join(REPOS, 'BambuStudio');
+export const DEFAULT_SOURCE = join(REPOS, 'OrcaSlicer');
 
 export const render = (file: CatalogueFile): string => `${JSON.stringify(file, null, 2)}\n`;
 
-export const OUTPUT = join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/catalogue/data/orca.json');
-export const DEFAULT_SOURCE = join(
-  dirname(fileURLToPath(import.meta.url)),
-  '../../../../../.reference/repos/OrcaSlicer',
-);
-
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const root = process.argv[2] ?? DEFAULT_SOURCE;
-  const read = (path: string) => readFileSync(join(root, path), 'utf8');
+/**
+ * Every generated data file, by output path, from the pinned checkouts under .reference only. A checkout at another
+ * commit is refused; so is a source file over 16 MiB. This is the only code that writes orca.json: it holds the
+ * Bambu, Prusa 2.9, Prusa 3.0 and SuperSlicer names of Orca's keys.
+ */
+export const outputs = (repos = REPOS): Map<string, string> => {
+  const pinned = (name: string, commit: string) => {
+    const root = join(repos, name);
+    const head = headCommit(root);
+    if (!head.startsWith(commit)) throw new Error(`${name} is at ${head}, not the pinned ${commit}`);
+    return (path: string) => readSource(root, join(root, path));
+  };
+  const read = pinned('OrcaSlicer', ORCA_COMMIT);
+  const bambuRead = pinned('BambuStudio', BAMBU_COMMIT);
   const orca = generate(read(PRINT_CONFIG), read(PRESET), read(CONSTANTS));
-  const bambuRead = (path: string) => readFileSync(join(process.argv[3] ?? BAMBU_SOURCE, path), 'utf8');
-  const { orca: file, bambu } = generateBambu(orca, bambuRead(PRINT_CONFIG), bambuRead(PRESET));
-  writeFileSync(OUTPUT, render(file));
-  writeFileSync(BAMBU_OUTPUT, render(bambu));
-  console.log(`${Object.keys(file.entries).length} entries -> ${OUTPUT}`);
-  console.log(`${Object.keys(bambu.entries).length} entries -> ${BAMBU_OUTPUT}`);
-}
+  const { orca: withBambu, bambu } = generateBambu(orca, bambuRead(PRINT_CONFIG), bambuRead(PRESET));
+  const { orca: file, prusa, superslicer } = generatePrusa(withBambu, readPinned(repos));
+  return new Map([
+    [OUTPUT, render(file)],
+    [BAMBU_OUTPUT, render(bambu)],
+    [PRUSA_OUTPUT, render(prusa)],
+    [SUPERSLICER_OUTPUT, render(superslicer)],
+  ]);
+};
+
+// Run from the module: node tools/catalogue/generate.ts
+if (process.argv[1] === fileURLToPath(import.meta.url))
+  for (const [path, text] of outputs()) {
+    writeFileSync(path, text);
+    console.log(`${Object.keys((JSON.parse(text) as CatalogueFile).entries).length} entries -> ${path}`);
+  }

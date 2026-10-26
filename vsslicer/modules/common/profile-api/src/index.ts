@@ -10,5 +10,11 @@ export { orcaCatalogue } from './domain/catalogue/orca.ts';
 export { bambuCatalogue } from './domain/catalogue/bambu.ts';
 export type * from './domain/import-result/index.ts';
 export * from './application/ports/index.ts';
-export { HOST_TYPES, MAX_CONNECTION_STRING, resolveToolheads, validateConnection } from './domain/entities/printer-instance/index.ts';
+export {
+  HOST_TYPES,
+  MAX_CONNECTION_STRING,
+  resolveToolheads,
+  validateConnection,
+} from './domain/entities/printer-instance/index.ts';
 export type { ConnectionIssue, HostType, ResolvedToolhead } from './domain/entities/printer-instance/index.ts';
+export { curaCatalogue } from './domain/catalogue/cura.ts';
