@@ -31,3 +31,4 @@
 29. [GCP-120: Move PrintPosition and the follow command ids into gcode-api](120-move-printposition-and-the-follow-command-ids-into-gcode-api.md)
 30. [GCP-118: Apply a follow position that arrives before the preview has loaded its moves](118-apply-a-follow-position-that-arrives-before-the-preview-has-.md)
 31. [GCP-121: Cut G-code preview memory at 500 MB to the budget](121-cut-g-code-preview-memory-at-500-mb-to-the-budget.md)
+32. [GCP-122: Count move and state-change reads in the planner's linear-time test](122-count-move-and-state-change-reads-in-the-planner-s-linear-ti.md)

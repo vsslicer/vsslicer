@@ -429,3 +429,4 @@
 427. [PRN-441: Register the Snapmaker (reverse engineered) adapter with vsslicer.printers](441-register-the-snapmaker-reverse-engineered-adapter-with-vssli.md)
 428. [PRN-442: Write vendor contributor checklists and ToS review notes](442-write-vendor-contributor-checklists-and-tos-review-notes.md)
 429. [PRN-444: Refuse null vendorState and duplicate patch keys in mergeStatus, and pin the caps in tests](444-refuse-null-vendorstate-and-duplicate-patch-keys-in-mergesta.md)
+430. [PRN-445: Bound zero-byte writes and close the safe-write test gaps](445-bound-zero-byte-writes-and-close-the-safe-write-test-gaps.md)

@@ -23,6 +23,7 @@ The status every adapter maps into, designed with the hardest case (Bambu AMS an
 - [x] Types accommodate an H2C dual-nozzle shape (several toolheads and extruders) in a fixture, checked by a type test
 - [x] Immutable value objects with a `merge` helper for partial pushes (property test: merging full over full is identity)
 - [x] **Bounds:** `merge` and the constructors cap arrays (heaters 64, toolheads 16, materials 256, notifications 256) and strings (vendor state 256, messages 4,096), refusing or truncating with a named reason; numeric fields validated finite (temperatures -50..1000, percent 0..100, byteOffset non-negative integer)
+- [x] **Truncation rule (settled by the SP10 coordinator, rule 28; reviews check against this, not a new derivation):** `mergeStatus(base, patch).truncations` = the cuts `createPrinterStatus` makes on the merged value, plus each base cut that the patch did not replace, deduped on field and reason. A base cut is replaced when: (a) for a replaced field (`vendorState`, `notifications`, `position`, `job` without a sub-path): the patch value is `null`, or is present and `!==` the base value (string compare for strings, reference compare for lists and objects); an equal value keeps the cut; (b) for `job.<sub>`: the patch's `job` sets that sub-field to a value `!==` the base's, or `job` is `null`; (c) for keyed lists (`heaters`, `toolheads[i].extruders`, `materials`): a list-level cut (`tooMany`) is kept; an item cut is replaced only when the patch has the item with the same key and sets that item's cut field to a new value. Tests: `merge(s, s)` deep-equals `s` for seeds with cuts (300-char `vendorState`, 5,000-char `job.file`, 5,000-char notification message, more than 256 notifications, more than 64 heaters, a 300-char heater id); `merge(s, {vendorState:'ok'})` and `merge(s, {notifications:[...s.notifications]})` clear their cut; a key-field cut survives a push to another heater. Patching an item whose key was cut, by its raw over-long key, is refused (`duplicate`); record it under Not done, no fix.
 
 ## Tasks
 
@@ -229,3 +230,54 @@ The rest of the card still holds (types, H2C fixture, bounds, duplicate refusal,
 Coordinator note unchanged: `src/domain/index.ts` must export `status.ts`.
 
 **Carried to SP10 (sp9-coordinator, 10:41):** its third review failed at 10:39 (truncation identity, see above) and SP9 stopped building. The unreviewed work is parked, untracked, under `.ai/local/wip/SP9/` at the same paths (vsslicer/modules/printer-api/src/domain/status.ts, test/status.test.ts); move it back with `mv` before continuing. Nothing of it is committed.
+
+sp10-prn-4-fix (2026-10-26), the settled truncation rule (rule 28):
+
+- `status.ts` `replaces()`: a replaced field (`vendorState`, `notifications`, `position`, `job` without a sub-path)
+  drops its base cut only on `null` or a value `!==` the base's; `job.<sub>` recurses (job `null`, or that sub-field
+  `!==` the base's); keyed lists unchanged (`tooMany` kept; an item cut goes only when the same-key patch item sets
+  the cut field to a new value). The `name === key` clause (the `:301` survivor) is deleted, not tested: under the
+  `!==` rule a key-field cut can only match an equal key, so it was dead; the `key` parameter went with it.
+- Tests: the `vendorState` test now keeps the cut on an equal `vendorState`; new `merge(s, s) is identity for
+  statuses with cuts (rule 28)`: seeds with a 300-char `vendorState`, 5,000-char `job.file`, 5,000-char notification
+  message, 300 notifications, 70 heaters, a 300-char heater id, each `mergeStatus(s, s)` deep-equals `s`;
+  `notifications: [...s.notifications]` clears the cut; the heater-id cut survives a push to `nozzle0`.
+  `vendorState: 'ok'` clearing is in the existing test.
+- `src/domain/index.ts` exports `./status.ts`; CHANGELOG `## Unreleased` has the PRN-4 line.
+- Mutation probes (scratch copy): equal value replaces (`v !== b` -> `true`): 2 tests fail; no `job` recursion:
+  1 fails; any key match clears an item cut: 2 fail (identity seed with the long heater id, and routine pushes).
+- Verified: `pnpm lint` clean, `pnpm build` ok, `pnpm test` 41/41 (5 files), `node scripts/run.mjs checks`
+  exit 0 (82 pass, 0 fail).
+- Not done: patching an item whose key was cut, by its raw over-long key, is refused: `mergeStatus(s, {heaters:
+  [{id: <300-char id>, current: 5}]})` throws `heaters[1].id: duplicate` (probe confirmed), because `byKey` compares
+  the raw key with the cut one and appends. No fix, per the card.
+
+**Review passed (sp10-rev-prn-4)** (2026-10-26)
+
+Ran: `pnpm install` up to date, `pnpm lint` clean (eslint, prettier, tsc on tests), `pnpm build` ok, `pnpm test`
+41/41 (5 files; status.test.ts 22), `node scripts/run.mjs checks` exit 0 (84 pass, 0 fail). `status.ts` imports only
+`./errors.ts`, no I/O; `src/domain/index.ts` exports it; CHANGELOG has the PRN-4 line. No wall-time asserts.
+
+Rule 28, checked clause by clause against `status.ts:299-316` (`replaces`) and `:338-349`: (a) a replaced field
+(`vendorState`, `notifications`, `position`, `job` without a sub-path) drops its cut on `null` or `v !== b`, so an
+equal string or the same list reference keeps it; (b) `job.<sub>` recurses into `job`, `job: null` clears; (c) keyed
+lists keep `tooMany` (`:309`), and an item cut goes only through the same-key patch item setting that field to a new
+value (`:313`), recursing into `toolheads[i].extruders`. Result = fresh cuts + kept base cuts, deduped on field and
+reason. Every listed test is present: identity seeds (300-char `vendorState`, 5,000-char `job.file`, 5,000-char
+message, 300 notifications, 70 heaters, 300-char heater id), `vendorState:'ok'` and a new notifications array clear,
+a key-field cut survives a push to `nozzle0`; the raw-long-key refusal is under Not done.
+
+Mutation probes (`mktemp -d` copy, against `test/status.test.ts`), each fails 1-5 tests: equal value replaces, no
+`job` recursion, `null` does not replace, any key match clears an item cut, list `tooMany` dropped, all base cuts
+kept, all dropped, dedupe removed, patch scan limit 0, heaters cap 65, materials cap 257, message cap 4,097,
+temperature min -51 or max 1001, `fileOffset` integer check off, `unique` no-op.
+
+Survivors (test gaps, the code is right; follow-up, not a FAIL): vendorState cap 257, notifications cap 257,
+toolheads cap 17 and `position.percent` max 101 all pass every test. The caps and hostile tests compare against
+`STATUS_LIMITS.*` instead of literals, and no test covers toolheads or percent > 100. Direct probes confirm the code
+enforces 16 toolheads, 256 vendorState chars and percent 100 (`100.5` gives `outOfRange`). Fix: assert literal
+256/16/256 and add a toolheads > 16 and a percent 100.5 case.
+
+Edge, minor: a patch with the same key twice (`materials:[{tray:'0-0'},{tray:'0-0',type:'PLA'}]`) sets `type` to
+`PLA` but keeps the `materials[0].type` cut, because `replaces` only looks at the first same-key patch item (`:313`).
+That is a stale cut on a malformed push, not data loss.
