@@ -4,3 +4,5 @@
 2. [PRF-105: Create Orca and Bambu Studio bundle fixtures](105-create-fixture-bundles-from-orca-bambu-studio-and-prusaslice.md)
 3. [PRF-216: Give the slow profiles-orca read-tree tests their own hang-guard timeouts](216-give-the-slow-profiles-orca-read-tree-tests-their-own-hang-g.md)
 4. [PRF-217: Delete the second test-only readBounded copy in profile-catalogue-data](217-delete-the-second-test-only-readbounded-copy-in-profile-cata.md)
+5. [PRF-212: Decode quote_plus'd Cura machine instance file names](212-decode-quote-plus-d-cura-machine-instance-file-names.md)
+6. [PRF-213: Write Cura booleans as Python literals in exported .inst.cfg](213-write-cura-booleans-as-python-literals-in-exported-inst-cfg.md)
