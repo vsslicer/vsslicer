@@ -2,11 +2,11 @@
 
 Opens sliced G-code from any slicer in a read-only custom editor, without slicing anything and without loading the text into an editor.
 
-| Files         | Editor                         | Priority                                                |
-| ------------- | ------------------------------ | ------------------------------------------------------- |
-| `*.bgcode`    | `vsslicer.gcode.preview`       | default                                                 |
-| `*.gcode.3mf` | `vsslicer.gcode.preview`       | default (shows "not supported yet" until GCP-15/16)     |
-| `*.gcode`     | `vsslicer.gcode.preview.gcode` | option ("Open With..."); default with the setting below |
+| Files         | Editor                         | Priority                                                                         |
+| ------------- | ------------------------------ | -------------------------------------------------------------------------------- |
+| `*.bgcode`    | `vsslicer.gcode.preview`       | default                                                                          |
+| `*.gcode.3mf` | `vsslicer.gcode.preview`       | default: side panel with thumbnails, labels, summary and a plate picker (GCP-36) |
+| `*.gcode`     | `vsslicer.gcode.preview.gcode` | option ("Open With..."); default with the setting below                          |
 
 Setting `vsslicer.gcode.preview.openGcodeByDefault` (default `false`): when on, the extension adds `"*.gcode": "vsslicer.gcode.preview.gcode"` to `workbench.editorAssociations` in user settings; turning it off removes that entry (and no other).
 

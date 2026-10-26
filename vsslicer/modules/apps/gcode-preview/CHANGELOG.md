@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-36: side panel with thumbnails, object labels (hover highlights the object), summary with the slicer estimate beside ours, and a plate picker; `.gcode.3mf` files now open (first plate, then by picker) instead of "not supported yet". Untrusted plate data is capped (256 plates, 10,000 labels, 4 MiB PNG thumbnails dropped in the worker, 256-character strings, text only).
+
 ## 0.4.1
 
 - GCP-111: depends on gcode-api ^0.7.0 and gcode-parser ^0.13.0, so the preview parses with the one flavour table (GCP-99): a Cura `;FLAVOR:RepRap` file is parsed and timed as RepRapFirmware.

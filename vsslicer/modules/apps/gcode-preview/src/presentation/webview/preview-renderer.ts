@@ -6,6 +6,7 @@
  * Copyright (c) Prusa Research 2023 Enrico Turri, Pavel Mikuš, Vojtěch Bubník, Oleksandra Iushchenko,
  * and OrcaSlicer contributors. */
 import { MOVE_STRIDE, MoveFlag, type Layer } from '@vsslicer/gcode-api';
+import { splitRange } from '../../domain/panel.ts';
 import { cameraMatrices, presetCamera, type CameraState } from './camera.ts';
 import {
   ColorMode,
@@ -38,7 +39,8 @@ export interface PreviewRenderer {
   /** Bounding box of the print and the data ranges of the gradient modes (undefined while the context is lost). */
   readonly bounds: [number[], number[]];
   readonly ranges: () => SegmentRenderer['ranges'] | undefined;
-  draw(visibility: Visibility): void;
+  /** `highlight`: global move ranges `[first, end)` drawn in the highlight colour (an object hovered in the side panel). */
+  draw(visibility: Visibility, highlight?: readonly [number, number][]): void;
   /** Frees every GPU object and stops listening for context loss. */
   dispose(): void;
 }
@@ -100,6 +102,8 @@ export const printBounds = (moves: ArrayBuffer): [number[], number[]] => {
 export const frameCamera = (bounds: [number[], number[]], aspect: number, camera = presetCamera(bounds, aspect)) =>
   cameraMatrices(camera, aspect);
 
+const HIGHLIGHT_RANGE = [1e9, 2e9] as const;
+
 /** Uploads `moves` once (rebuilt after a context loss) and draws the visible part on `draw`. */
 export const createPreviewRenderer = (
   canvas: HTMLCanvasElement,
@@ -112,21 +116,30 @@ export const createPreviewRenderer = (
   const bounds = printBounds(moves);
   let renderer: SegmentRenderer | undefined;
   let last: Visibility | undefined;
-  const draw = (vis: Visibility) => {
+  let lastHighlight: readonly [number, number][] | undefined;
+  const draw = (vis: Visibility, highlight?: readonly [number, number][]) => {
     last = vis;
+    lastHighlight = highlight;
     if (!renderer || gl.isContextLost()) return;
     const w = gl.drawingBufferWidth;
     const h = gl.drawingBufferHeight;
     gl.viewport(0, 0, w, h);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    renderer.draw({
+    const base = {
       ...frameCamera(bounds, w / Math.max(1, h), vis.camera),
-      ...visibleRange(layers, moveCount, vis.layer, vis.move, vis.bottom),
       colorMode: vis.colorMode ?? ColorMode.Feature,
       roleMask: vis.roleMask,
       hiddenFlags: vis.hiddenFlags ?? MoveFlag.Travel,
-    });
+    };
+    const visible = visibleRange(layers, moveCount, vis.layer, vis.move, vis.bottom);
+    if (!highlight?.length) return renderer.draw({ ...base, ...visible });
+    // The object's moves are left out of the normal draw and drawn again alone, so equal depths never fight.
+    // Width mode with a range far above any width paints them with the gradient's first colour.
+    const { hit, rest } = splitRange(visible, highlight);
+    for (const [a, b] of rest) renderer.draw({ ...base, first: a, count: b - a });
+    for (const [a, b] of hit)
+      renderer.draw({ ...base, first: a, count: b - a, colorMode: ColorMode.Width, colorRange: HIGHLIGHT_RANGE });
   };
   const resources = trackContextLoss(canvas, {
     onLost: () => (renderer = undefined),
@@ -137,7 +150,7 @@ export const createPreviewRenderer = (
             cause: 'restore',
             message: `The 3D view could not be restored after a graphics reset: ${String(err)}`,
           } as unknown as GlContextError)
-        : last && draw(last),
+        : last && draw(last, lastHighlight),
   });
   resources.add(() => {
     const r = createSegmentRenderer(gl, moves, {

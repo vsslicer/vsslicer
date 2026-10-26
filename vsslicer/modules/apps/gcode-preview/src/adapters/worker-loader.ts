@@ -15,11 +15,11 @@ const coded = (code: string, message: string, cause?: unknown) =>
  */
 export const workerLoader =
   (script: string | URL, { memoryCapBytes = 1024 * MB }: { memoryCapBytes?: number } = {}): LoadPort =>
-  (path, kind, signal) =>
+  (path, kind, signal, plate) =>
     new Promise((resolve, reject) => {
       signal.throwIfAborted();
       const worker = new Worker(script, {
-        workerData: { path, kind } satisfies WorkerJob,
+        workerData: { path, kind, plate } satisfies WorkerJob,
         resourceLimits: { maxOldGenerationSizeMb: Math.ceil(memoryCapBytes / MB) },
       });
       // the first settle wins; the later 'exit' of a worker that answered is a no-op

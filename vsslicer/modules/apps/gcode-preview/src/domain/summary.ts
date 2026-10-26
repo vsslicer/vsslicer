@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import type { Diagnostic, Layer, ParsedFile, Slicer } from '@vsslicer/gcode-api';
+import type { Diagnostic, JobSummary, Layer, ParsedFile, Slicer } from '@vsslicer/gcode-api';
 import type { Flavour, Timing } from '@vsslicer/gcode-planner';
 import type { FileKind } from './file-kind.ts';
+import { panelOf, type PanelModel, type PlateInfo } from './panel.ts';
 
 /** Most diagnostics sent to the webview; `diagnosticCount` has the total. */
 export const MAX_DIAGNOSTICS = 200;
@@ -21,13 +22,18 @@ export interface PreviewSummary {
   estimate: boolean;
   flavour: Flavour;
   flavourAssumed: boolean;
-  objects: string[];
-  thumbnails: number;
+  /** Thumbnails, object labels, slicer estimates and the plate picker. */
+  panel: PanelModel;
   diagnostics: Diagnostic[];
   diagnosticCount: number;
 }
 
-export const summarise = (kind: FileKind, parsed: ParsedFile, timing: Timing): PreviewSummary => ({
+export const summarise = (
+  kind: FileKind,
+  parsed: ParsedFile,
+  timing: Timing,
+  extra: { job?: JobSummary; plates?: PlateInfo } = {},
+): PreviewSummary => ({
   kind,
   slicer: parsed.slicer,
   moveCount: parsed.moveCount,
@@ -39,8 +45,7 @@ export const summarise = (kind: FileKind, parsed: ParsedFile, timing: Timing): P
   estimate: timing.estimate,
   flavour: timing.limits.flavour,
   flavourAssumed: timing.limits.flavourAssumed,
-  objects: parsed.objects.map((o) => o.name),
-  thumbnails: parsed.thumbnails.length,
+  panel: panelOf(parsed, extra),
   diagnostics: parsed.diagnostics.slice(0, MAX_DIAGNOSTICS),
   diagnosticCount: parsed.diagnostics.length,
 });
@@ -66,6 +71,8 @@ export const Method = {
   retry: 'gcode-preview/retry',
   /** Webview to host: `WindowRequest`; the host answers with the packed window on `windowStream`. */
   window: 'gcode-preview/window',
+  /** Webview to host: `PlateRequest`; the host loads that plate of a `.gcode.3mf` and answers with a new state. */
+  plate: 'gcode-preview/plate',
 } as const;
 
 /** The webview wants the toolhead window over moves `from` to `to` (exclusive), as request number `seq`. */
@@ -73,6 +80,11 @@ export interface WindowRequest {
   seq: number;
   from: number;
   to: number;
+}
+
+/** The picker chose plate `plate` (one of `PanelModel.plates`). */
+export interface PlateRequest {
+  plate: number;
 }
 
 /** Stream id of the window answering request `seq`. */

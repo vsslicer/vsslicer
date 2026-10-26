@@ -299,3 +299,26 @@ test('scrubbing layers, moves and toggles over the corpus uploads nothing and na
   assert.strictEqual(f.count('createTexture') + f.count('createBuffer'), creates);
   r.dispose();
 });
+
+test('a highlight draws the object alone in the highlight colour and the rest normally', async () => {
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
+  const f = fakeGl(16384);
+  const r = createPreviewRenderer(
+    new EventTarget() as HTMLCanvasElement,
+    f.gl,
+    concatMoves(parsed.moves),
+    parsed.layers,
+  );
+  const top = parsed.layers.length - 1;
+  r.draw({ layer: top, hiddenFlags: 0 });
+  const whole = instances(f);
+  f.calls.length = 0;
+  r.draw({ layer: top, hiddenFlags: 0 }, [[100, 200]]);
+  assert.strictEqual(
+    instances(f),
+    whole,
+    'every move is drawn once: the object moves out of the normal draw into their own',
+  );
+  assert.strictEqual(uniform(f, 'uMode'), ColorMode.Width, 'the last draw is the highlight');
+  r.dispose();
+});

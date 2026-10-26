@@ -1,12 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Parse and plan one file: the work the preview's worker does. Pure Node/ES, no VS Code, no I/O of its own.
-import type { Diagnostic, ParsedFile } from '@vsslicer/gcode-api';
+import type { Diagnostic, JobSummary, ParsedFile } from '@vsslicer/gcode-api';
 import { bgcodeSource, collect, parse } from '@vsslicer/gcode-parser';
+import { usableThumbnail, type PlateInfo } from '../domain/panel.ts';
 import { plannerFor, resolveLimits, runPlanner, type Timing } from '@vsslicer/gcode-planner';
 
 export interface Loaded {
   parsed: ParsedFile;
   timing: Timing;
+  /** The slicer's own statistics (time estimates, filament use), when the worker read them. */
+  job?: JobSummary;
+  /** Set for a `.gcode.3mf`: its plates and the shown one. */
+  plates?: PlateInfo;
 }
 
 export interface LoadOptions {
@@ -38,4 +43,11 @@ export const loadPreview = async (
     signal,
   });
   return { parsed, timing };
+};
+
+/** Drops every thumbnail the panel would not show (over 4 MiB, or not a PNG), so none crosses to the host. */
+export const dropUnusableThumbnails = (l: Loaded): Loaded => {
+  l.parsed.thumbnails = l.parsed.thumbnails.filter((t) => t.format === 'png' && usableThumbnail(t.data));
+  if (l.plates?.thumbnail && !usableThumbnail(l.plates.thumbnail)) delete l.plates.thumbnail;
+  return l;
 };

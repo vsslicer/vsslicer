@@ -108,11 +108,11 @@ describe('G-code preview custom editor', () => {
     assert.strictEqual((await expectDelivered(uri))?.kind, 'bgcode');
   });
 
-  it('opens a .gcode.3mf by default with the "not supported yet" state', async () => {
+  it('opens a .gcode.3mf by default and loads its first plate', async () => {
     const uri = fixture('bambu-studio/h2c-cube.gcode.3mf');
     await vscode.commands.executeCommand('vscode.open', uri);
     assert.strictEqual((await until(() => customTab(uri), 'the custom editor tab')).viewType, PREVIEW_VIEW_TYPE);
-    assert.strictEqual((await probe.state(uri.toString())).status, 'unsupported');
+    assert.strictEqual((await expectDelivered(uri))?.panel.plate, 1);
   });
 
   it('opens *.gcode in the preview by default only with the setting on', async () => {
