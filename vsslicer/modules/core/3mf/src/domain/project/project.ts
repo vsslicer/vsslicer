@@ -89,6 +89,8 @@ export interface Project {
   readonly rawConfig: ReadonlyMap<string, Uint8Array>;
   /** Parts the model does not interpret, kept byte for byte so a save can write them back. */
   readonly preserved: readonly Part[];
+  /** User-facing notes about the read, e.g. that a dialect reader was skipped. Absent when there are none. */
+  readonly notices?: readonly string[];
 }
 
 export function createProject(init: Partial<Project> & Pick<Project, 'dialect'>): Project {

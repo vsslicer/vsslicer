@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- VWR-20: `readProject(pkg)` dispatches on the detected dialect; a disabled, missing or failing dialect reader falls back to core plus preserved parts with `Project.notices`; a core package keeps its non-model parts in `preserved`. `createReadProject(deps)` builds one with dialect readers.
 - VWR-398: `detectDialect` matches part names case-insensitively and with a leading `/`.
 
 ## 0.1.3

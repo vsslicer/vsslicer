@@ -41,6 +41,9 @@ export type { EditablePackage, EditPackageDeps } from './application/editPackage
 export { CORE_NS, readModel } from './adapters/model/readModel.ts';
 export { detectDialect } from './domain/detectDialect.ts';
 export type { DialectGuess } from './domain/detectDialect.ts';
-export { composeTransforms, readProject, resolveProject } from './adapters/model/resolveProject.ts';
+export { composeTransforms, resolveProject } from './adapters/model/resolveProject.ts';
+export { readProject } from './readProject.ts';
+export { createReadProject } from './application/readProject.ts';
+export type { DialectReader, ReadProjectDeps } from './application/readProject.ts';
 export type { BuildItem, Component, CoreModel, CoreObject } from './domain/coreModel.ts';
 export { addContentType, dropRelationshipsTo, removeContentType } from './adapters/opc/opcEdit.ts';
