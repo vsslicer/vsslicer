@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-108: `ToolheadWindow.toTransfer()` and `ToolheadWindow.fromTransfer()` (exact round trip), and the `@vsslicer/gcode-planner/window` entry, which does not load the planners.
 - GCP-99: `Flavour` and `flavourFromName` come from gcode-api 0.7.0 (depends on ^0.7.0) and are still re-exported; no behaviour change.
 
 ## 0.4.0
