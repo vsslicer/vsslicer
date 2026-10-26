@@ -146,3 +146,4 @@
 144. [PRF-175: Prove no network request happens when updates are off](175-prove-no-network-request-happens-when-updates-are-off.md)
 145. [PRF-176: Add Edit in template editor to G-code fields](176-add-edit-in-template-editor-to-g-code-fields.md)
 146. [PRF-57: Create the `profiles-extension` module (vsslicer.profiles)](057-create-the-vsslicer-profiles-extension-skeleton.md)
+147. [PRF-180: Encode bundle manifest only near the byte limit](180-encode-bundle-manifest-only-near-the-byte-limit.md)
