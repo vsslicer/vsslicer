@@ -1,0 +1,51 @@
+kind: vendor
+id: Acme
+name: Acme FFF
+version: 1.0.0
+features:
+  printer:
+    input_shaper:
+      default: false
+      user_editable: false
+---
+kind: printer
+technology: FFF
+name: Acme One
+id: one
+model:
+  base_model: ONE
+  model: ONE
+legacy_printer_model: [ONE, 'ONE IS']
+tool_count: 1
+---
+# a comment-only document, as vendor.yaml has
+---
+kind: tool
+technology: FFF
+id: '0.4'
+name: '0.4'
+condition: printer.base_model=~/ONE/ #and tool.nozzle_diameter == 0.4
+features:
+  nozzle_diameter:
+    default: 0.4
+---
+kind: sheet
+id: satin
+name: Satin
+type: satin
+---
+# leading comment
+kind: printer_config
+id: one-1t
+name: One 1T
+printer: one
+tools:
+  - tool: '0.4'
+sheet: satin
+start_gcode: |-
+  M115 ; first
+    indented
+  # not a comment
+
+end_gcode: |
+  M84

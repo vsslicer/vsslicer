@@ -6,3 +6,4 @@
 4. [PRF-187: Ship PROVENANCE.md in the profile-api package](187-ship-provenance-md-in-the-profile-api-package.md)
 5. [PRF-188: Check exporter output paths in the profile-api port contract](188-check-exporter-output-paths-in-the-profile-api-port-contract.md)
 6. [PRF-186: Replace the wall-clock assert in profile-api catalogue-prusa test](186-replace-the-wall-clock-assert-in-profile-api-catalogue-prusa.md)
+7. [PRF-33: Read the PrusaSlicer 3.0 YAML tree behind the experimental flag](033-read-the-prusaslicer-3-0-yaml-tree-behind-the-experimental-f.md)
