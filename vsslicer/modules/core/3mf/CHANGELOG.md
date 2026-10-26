@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - VWR-392: `openZip` refuses a package whose declared inflated sizes sum above `maxTotalBytes` (default 1 GiB, `DEFAULT_MAX_TOTAL_BYTES`), before any inflation.
 - VWR-390: `resolveProject` refuses component fan-out above 100,000 parts or 10,000,000 triangles (`MalformedXmlError`).

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.14.0
 
 - GCP-114: `.gcode.3mf` plate thumbnails declared over 4 MiB (`MAX_THUMBNAIL_BYTES`) are never inflated; at most 16 per plate; new `thumbnails` map on `Gcode3mfPlate`.
 - GCP-112: `.gcode.3mf` checks `slice_info.config`'s declared size against 4 MiB before inflating it.
