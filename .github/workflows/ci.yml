@@ -82,6 +82,11 @@ jobs:
           path: ${{ runner.temp }}/vscode-test
           key: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-${{ hashFiles('vsslicer/modules/*/package.json') }}
           restore-keys: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-
+      # PRF-130: profiles-cura's live test downloads Cura's resources at the pinned commit once, then reads the cache
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/cura-fetch
+          key: cura-fetch-5bea2f86153faed3a1c2d9081b8d6b753684678a
       # VWR-45: admesh is the oracle for the mesh module's MeshStats; with VSS_REQUIRE_ADMESH the test fails instead of skipping when it is missing
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'mesh')
         run: |
@@ -92,6 +97,7 @@ jobs:
       - run: node scripts/run.mjs ci --changed "$BASE"
         env:
           VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
+          CURA_FETCH_CACHE: ${{ runner.temp }}/cura-fetch
           BASE: ${{ needs.select.outputs.base }}
       # modules with a test:integration script (VS Code extension host); Linux needs a virtual display
       - if: runner.os == 'Linux'
