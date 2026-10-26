@@ -81,7 +81,60 @@
           "description": "Folder, relative to the workspace, where sliced G-code is written."
         }
       }
-    }
+    },
+    "taskDefinitions": [
+      {
+        "type": "vsslicer",
+        "required": [
+          "task"
+        ],
+        "properties": {
+          "task": {
+            "type": "string",
+            "enum": [
+              "slice",
+              "upload",
+              "print"
+            ],
+            "description": "What the task does."
+          },
+          "engine": {
+            "type": "string",
+            "enum": [
+              "orca",
+              "prusa",
+              "cura"
+            ],
+            "description": "Slicing engine (slice). Defaults to the vsslicer.slicer.engine setting."
+          },
+          "plate": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Plate number to slice (slice)."
+          },
+          "printerProfile": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Printer profile id (slice)."
+          },
+          "filamentProfile": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Filament profile id (slice)."
+          },
+          "processProfile": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Process profile id (slice)."
+          },
+          "printer": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Printer id (upload, print)."
+          }
+        }
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc",
