@@ -5,5 +5,4 @@
 3. [PRF-43: Spike: confirm the flattened Prusa export is byte-equivalent on 10 presets](043-spike-confirm-the-flattened-prusa-export-is-byte-equivalent-.md)
 4. [PRF-60: Create the fixture workspace and per-OS slicer configuration folders](060-create-the-fixture-workspace-and-per-os-slicer-configuration.md)
 5. [PRF-67: Contribute jsonValidation and schema completion for profile files](067-contribute-jsonvalidation-and-schema-completion-for-profile-.md)
-6. [PRF-30: Read Cura definitions, extruders and variants](030-read-cura-definitions-extruders-and-variants.md)
-7. [PRF-27: Read Orca and Bambu JSON trees and flatten include and inherits](027-read-orca-and-bambu-json-trees-and-flatten-include-and-inher.md)
+6. [PRF-27: Read Orca and Bambu JSON trees and flatten include and inherits](027-read-orca-and-bambu-json-trees-and-flatten-include-and-inher.md)

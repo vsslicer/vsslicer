@@ -110,3 +110,28 @@ Minor (not blocking, coordinator's call):
 - `readCuraResourceFolder` opens files with `O_RDONLY` and no `O_NONBLOCK`; a regular file swapped for a FIFO after
   listing blocks `open`. Same TOCTOU class as problem 1.
 
+
+**sp10-prf-30-fix (2026-10-26):** review problem 1 fixed in `src/adapters/definitions/folder.ts`: every folder
+(top and sub) is `lstat`ed before `opendir`; a link gets the `symbolic link not followed` warning and is skipped. After
+listing it is `lstat`ed again and a link or changed `(dev, ino)` is refused (`changed to another folder while read`).
+Residual, commented as a shortcut: a swap to a link and back between the two `lstat`s; closing it needs an fd-based
+readdir Node lacks.
+- New test `a top folder that is a symbolic link is not followed` (`root/definitions -> outside`): failed on the old
+  code (returned `definitions/secret.def.json`), passes now. Mutation probe: removing the before-`lstat` check is the
+  old code, which fails the test. The after-`lstat` mismatch branch has no test (needs a mid-read swap).
+- Minor items (nested `.def.json`, decoded ids `..`/`a/b`/NUL, FIFO swap blocking `open`) not changed: coordinator's call.
+- Verify: `pnpm install`, `pnpm lint` clean, `pnpm build` clean, `pnpm test` 5 files / 71 tests passed;
+  `node scripts/run.mjs checks` exit 0.
+
+**Review passed (sp10-rerev-prf-30)** (2026-10-26)
+
+Scope: review problem 1 (top/sub folder symbolic link followed); minor items are on PRF-199.
+- Ran in `vsslicer/modules/profiles-cura`: `pnpm install` ok, `pnpm lint` clean, `pnpm build` clean, `pnpm test`
+  5 files / 71 tests passed; `node scripts/run.mjs checks` exit 0.
+- `src/adapters/definitions/folder.ts:40-59`: every folder is `lstat`ed before `opendir` (a link is skipped with
+  `symbolic link not followed`) and re-`lstat`ed after listing (link or changed `(dev, ino)` refused). Subfolder links
+  are also caught at listing by the `Dirent` kind (`:52`, `:68`). The residual swap-and-back window is commented as a
+  shortcut; acceptable, Node has no fd-based readdir.
+- Mutation probe (in place, restored, `cmp` clean): both `lstat` checks disabled, which is the previous behaviour ->
+  `a top folder that is a symbolic link is not followed` fails (1 failed / 20 passed). With the code as is it passes.
+- The after-listing mismatch branch has no test (needs a mid-read swap); acceptable.

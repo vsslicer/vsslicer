@@ -7,3 +7,4 @@
 5. [PRF-179: State profile-api's licence for the AGPL-3.0-only Orca and Bambu data and add PROVENANCE](179-state-profile-api-s-licence-for-the-agpl-3-0-only-orca-and-b.md)
 6. [PRF-57: Create the `profiles-extension` module (vsslicer.profiles)](057-create-the-vsslicer-profiles-extension-skeleton.md)
 7. [PRF-25: Flatten Prusa sections into unified entities and golden counts](025-flatten-prusa-sections-into-unified-entities-and-golden-coun.md)
+8. [PRF-30: Read Cura definitions, extruders and variants](030-read-cura-definitions-extruders-and-variants.md)

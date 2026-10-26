@@ -128,3 +128,4 @@
 126. [PRF-195: Cap the Prusa YAML preset and vendor readers' own diagnostics](195-cap-the-prusa-yaml-preset-and-vendor-readers-own-diagnostics.md)
 127. [PRF-196: Count YAML documents against the parser node cap](196-count-yaml-documents-against-the-parser-node-cap.md)
 128. [PRF-198: Delete the test-only readBounded from the Cura catalogue tool](198-delete-the-test-only-readbounded-from-the-cura-catalogue-too.md)
+129. [PRF-199: Open Cura resource files non-blocking, read nested definitions and flag path-like ids](199-open-cura-resource-files-non-blocking-read-nested-definition.md)
