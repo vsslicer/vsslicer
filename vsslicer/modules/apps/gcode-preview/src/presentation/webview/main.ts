@@ -13,13 +13,23 @@ import {
 } from '@vsslicer/webview-kit/webview';
 import { ColorMode, createGl2Context, showGlFailure } from '@vsslicer/webview-kit/gl';
 import { MoveFlag, type Layer } from '@vsslicer/gcode-api';
-import { Method, moveStream, type PreviewSummary, type Received, type ViewState } from '../../domain/summary.ts';
+import {
+  Method,
+  moveStream,
+  type PreviewSummary,
+  type Progress,
+  type Received,
+  type TimelineCommand,
+  type ViewState,
+} from '../../domain/summary.ts';
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
+import { SPEEDS, createClock, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
 import { presentRoles, roleName } from './controls.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
 import {
   concatMoves,
   createPreviewRenderer,
+  frameCamera,
   visibleRange,
   type PreviewRenderer,
   type Visibility,
@@ -49,7 +59,24 @@ canvas.style.width = '100%';
 canvas.style.height = '80vh';
 
 /** The layers of the open file and what the controls need beside them (kept after the summary is released). */
-let info = { layers: [] as Layer[], layerTimes: [] as number[], moveCount: 0, roles: [] as number[] };
+let info = {
+  layers: [] as Layer[],
+  layerTimes: [] as number[],
+  moveCount: 0,
+  roles: [] as number[],
+  moves: new ArrayBuffer(0),
+  duration: 0,
+};
+let clock = createClock(0);
+/** Marker position in world coordinates; undefined before the first sample. */
+let head: number[] | undefined;
+let headMove = 0;
+const stage = document.createElement('div');
+stage.style.position = 'relative';
+const marker = document.createElement('div');
+marker.style.cssText =
+  'position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;border:2px solid #f00;pointer-events:none;display:none';
+stage.append(canvas, marker);
 const toolbar = document.createElement('div');
 const legend = document.createElement('span');
 const bar = document.createElement('span');
@@ -75,6 +102,23 @@ const slider = (label: string) => {
 const topLayer = slider('Top layer');
 const bottomLayer = slider('Bottom layer');
 const moveSlider = slider('Moves in the top layer');
+const timeline = document.createElement('div');
+timeline.style.cssText = 'display:flex;gap:8px;align-items:center';
+const playButton = Object.assign(document.createElement('button'), { textContent: 'Play' });
+const stepBack = Object.assign(document.createElement('button'), { textContent: 'Step back', ariaLabel: 'Step back' });
+const stepForward = Object.assign(document.createElement('button'), { textContent: 'Step', ariaLabel: 'Step' });
+const speeds = Object.assign(document.createElement('select'), { ariaLabel: 'Speed' });
+for (const x of SPEEDS) speeds.append(new Option(`${x}x`, String(x)));
+speeds.value = '1';
+const clockSlider = Object.assign(document.createElement('input'), {
+  type: 'range',
+  min: '0',
+  step: 'any',
+  ariaLabel: 'Time',
+});
+const clockOut = document.createElement('output');
+timeline.append(playButton, stepBack, stepForward, speeds, clockSlider, clockOut);
+panel.prepend(timeline);
 const layerTime = document.createElement('div');
 const toggles = document.createElement('fieldset');
 toggles.style.border = 'none';
@@ -155,7 +199,7 @@ const show = (title: string, lines: string[] = [], view = false) => {
   h.textContent = title;
   const list = document.createElement('ul');
   for (const l of lines) list.append(Object.assign(document.createElement('li'), { textContent: l }));
-  root.replaceChildren(h, list, ...(view ? [toolbar, panel, canvas] : []));
+  root.replaceChildren(h, list, ...(view ? [toolbar, panel, stage] : []));
 };
 
 const redraw = () => {
@@ -167,12 +211,20 @@ const redraw = () => {
   const camera = s.camera ?? fit(aspect());
   modes.value = String(colorMode);
   renderer.draw({ ...s, layer: s.layer, colorMode, camera });
+  placeMarker(camera);
   const l = legendFor(colorMode, renderer.ranges());
   legend.replaceChildren();
   if (l.kind === 'gradient' && l.range)
     legend.append(' ', bar, ` ${l.range.map((x) => x.toFixed(1)).join(' to ')} ${l.unit}`);
   else legend.append(` ${l.label}: see the feature toggles`);
   syncControls(s);
+};
+
+const placeMarker = (camera: CameraState) => {
+  const { view, projection } = frameCamera(renderer?.bounds ?? [[0], [0]], aspect(), camera);
+  const p = head && renderer ? project(view, projection, head) : undefined;
+  marker.style.display = p ? 'block' : 'none';
+  if (p) [marker.style.left, marker.style.top] = [`${p[0] * 100}%`, `${p[1] * 100}%`];
 };
 
 /** Puts the saved state on the sliders, labels and toggles (the state is the source of truth). */
@@ -223,6 +275,8 @@ const time = (s: number) => `${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 
 const render = (state: ViewState) => {
   renderer?.dispose();
   renderer = undefined;
+  head = undefined;
+  cancelAnimationFrame(frame);
   if (state.status === 'loading') return show('Loading G-code...');
   if (state.status === 'unsupported') return show('Not supported yet', [state.message]);
   if (state.status === 'error') return show('Could not open this file', [`${state.message} (${state.code})`]);
@@ -258,12 +312,93 @@ const done = () => {
   });
   const s = summary;
   const moves = concatMoves(buffers as ArrayBuffer[]);
-  info = { layers: s.layers, layerTimes: s.layerTimes, moveCount: s.moveCount, roles: presentRoles(moves) };
+  info = {
+    layers: s.layers,
+    layerTimes: s.layerTimes,
+    moveCount: s.moveCount,
+    roles: presentRoles(moves),
+    moves,
+    duration: s.totalTime,
+  };
+  clock = createClock(s.totalTime);
+  speeds.value = '1';
+  clockSlider.max = String(s.totalTime);
   buildToggles();
   buffers = []; // the concatenated copy is the only one kept
   summary = undefined; // report once per load
   mount(s, moves);
+  apply(false); // place the marker only: the saved view (or GCP-35's whole print) stays
+  report(); // tells the host the timeline is ready
 };
+
+// Timeline: the clock drives the visibility range (layer and move count, so scrubbing never uploads) and the marker.
+let frame = 0;
+let lastTick = 0;
+let lastReport = 0;
+const report = () => {
+  const c = clock.state;
+  const progress: Progress = { time: c.time, move: headMove, playing: c.playing, speed: c.speed };
+  channel.post({
+    tag: PROTOCOL_TAG,
+    v: TRANSPORT_SCHEMA_VERSION,
+    kind: 'notification',
+    method: Method.progress,
+    payload: progress,
+  });
+  lastReport = performance.now();
+};
+const apply = (setView = true) => {
+  if (!renderer || !info.moveCount) return;
+  const xyz = [0, 0, 0];
+  headMove = positionAt(info.moves, clock.state.time, info.duration, xyz);
+  head = xyz;
+  const { layer, move } = layerOfMove(info.layers, headMove);
+  const bottom = Math.min(api.getState()?.bottom ?? 0, layer);
+  clockSlider.value = String(clock.state.time);
+  clockOut.textContent = `${time(clock.state.time)} / ${time(info.duration)}`;
+  playButton.textContent = clock.state.playing ? 'Pause' : 'Play';
+  if (setView) patch({ layer, move, bottom });
+  else redraw();
+};
+const seekTo = (t: number) => {
+  clock.seek(t);
+  apply();
+  report();
+};
+const setPlaying = (on: boolean) => {
+  cancelAnimationFrame(frame);
+  if (on) {
+    clock.play();
+    lastTick = performance.now();
+    const step = (now: number) => {
+      clock.tick(Math.max(0, now - lastTick) / 1000);
+      lastTick = now;
+      apply();
+      if (!clock.state.playing) return void report();
+      if (now - lastReport > 250) report();
+      frame = requestAnimationFrame(step);
+    };
+    frame = requestAnimationFrame(step);
+  } else clock.pause();
+  apply();
+  report();
+};
+// a retained but hidden preview must not keep playing (and redrawing)
+document.addEventListener('visibilitychange', () => document.hidden && clock.state.playing && setPlaying(false));
+const command = (c: TimelineCommand) => {
+  if (c.action === 'play') setPlaying(true);
+  else if (c.action === 'pause') setPlaying(false);
+  else if (c.action === 'speed') {
+    clock.setSpeed(c.value);
+    speeds.value = String(clock.state.speed);
+    report();
+  } else if (c.action === 'step') seekTo(stepTime(info.moves, clock.state.time, c.direction, info.duration));
+};
+playButton.addEventListener('click', () => command({ action: clock.state.playing ? 'pause' : 'play' }));
+stepBack.addEventListener('click', () => command({ action: 'step', direction: -1 }));
+stepForward.addEventListener('click', () => command({ action: 'step', direction: 1 }));
+speeds.addEventListener('change', () => command({ action: 'speed', value: Number(speeds.value) }));
+clockSlider.addEventListener('input', () => seekTo(Number(clockSlider.value)));
 
 // subscribe before the handshake: the host answers the welcome with the state and the buffers
 receiveBuffers(channel, {
@@ -279,5 +414,7 @@ channel.onMessage((m) => {
   const r = parseEnvelope(m);
   if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.state)
     render(r.envelope.payload as ViewState);
+  else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.command)
+    command(r.envelope.payload as TimelineCommand);
 });
 handshake(channel, session).catch((e: Error) => show('Could not connect to VS Code', [e.message]));

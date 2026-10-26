@@ -58,6 +58,10 @@ export const Method = {
   state: 'gcode-preview/state',
   /** Webview to host: `Received`, once every move buffer of a `ready` state has arrived. */
   received: 'gcode-preview/received',
+  /** Webview to host: `Progress`, when the timeline changes state and about four times a second while it plays. */
+  progress: 'gcode-preview/progress',
+  /** Host to webview: `TimelineCommand` (the integration tests drive the timeline with it). */
+  command: 'gcode-preview/command',
 } as const;
 
 /** Stream id of move buffer `index` for one webview load. */
@@ -69,3 +73,14 @@ export interface Received {
   /** The webview stored its view state with `setState`. */
   stateSaved: boolean;
 }
+
+/** Where the timeline stands; `time` is seconds into the print, `move` the global index of the move running. */
+export interface Progress {
+  time: number;
+  move: number;
+  playing: boolean;
+  speed: number;
+}
+
+export type TimelineCommand =
+  { action: 'play' | 'pause' } | { action: 'step'; direction: 1 | -1 } | { action: 'speed'; value: number };
