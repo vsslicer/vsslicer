@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added: `readInstalledFolder` and `importInstalledFolder`: a read-only, sorted walk of an installed configuration folder into importers, bounded (optional `FolderLimits`), links skipped (PRF-36).
 - Added: the in-memory profile store (get, list, query, ProfileFiles port) with user-layer precedence on duplicate ids (PRF-44).
 - Added: importer registry (`createImporterRegistry`), a composite Importer that routes files to the first claiming importer and turns a failing importer into a diagnostic, and the `importProfiles` use case over a `ProfileSource` with an `EntityValidator` port; at most 50000 files per import (PRF-38).
 - PRF-71: `buildSearchIndex` searches settings over keys, labels, native names and tooltips; name hits rank above tooltip hits; query and per-query work are bounded (`lastCost`).
