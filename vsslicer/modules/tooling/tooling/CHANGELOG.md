@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.9.0
+## 0.8.3
 
 - PLT-194: `third-party-notices` takes a pinned vendored licence text (`vsslicer.licenceTexts`) for a package that ships none; the text must name its licence as a whole word or standard phrase, and stay inside the module.
 
