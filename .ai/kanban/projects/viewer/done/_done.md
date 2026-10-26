@@ -10,3 +10,4 @@
 8. [VWR-403: Test the p:path refusal on a PrusaSlicer 2.x build item](403-test-the-p-path-refusal-on-a-prusaslicer-2-x-build-item.md)
 9. [VWR-23: Read Bambu and Orca plates and slice info](023-read-bambu-and-orca-plates-and-slice-info.md)
 10. [VWR-405: Cap the Bambu reader's notices](405-cap-the-bambu-reader-s-notices.md)
+11. [VWR-29: Test untouched open and save for every dialect](029-test-untouched-open-and-save-for-every-dialect.md)
