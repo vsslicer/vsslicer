@@ -20,3 +20,10 @@ test('domain importing application fails the layer lint', async () => {
 test('application importing domain passes', async () => {
   expect(await rules(`${header}export * from '../domain/index.ts';\n`, 'src/application/ok.ts')).toEqual([]);
 });
+
+test('a Node or VS Code import in src fails the lint', async () => {
+  for (const mod of ['node:fs', 'fs', 'vscode'])
+    expect(await rules(`${header}export * from '${mod}';\n`, 'src/application/violation.ts')).toEqual([
+      'no-restricted-imports',
+    ]);
+});

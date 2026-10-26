@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-123: Importer, Exporter and ProfileStore read ports, and the runImporterContract / runExporterContract suites; src/ may not import Node built-ins (lint).
 - PRF-122: ImportResult, Diagnostic (closed code union) and InstanceImport types, credential kept outside the entity.
 - PRF-178: the regex linearity tests assert an NFA step bound (`RegexStats` hook) instead of wall-clock time.
 - PRF-14: `orcaCatalogue`: 804 entries generated from OrcaSlicer@09aa0114 PrintConfig.cpp (`tools/catalogue/generate.ts`), with an AGPL-3.0 notice and per-entry provenance; the per-extruder key list in the schema now comes from it.
