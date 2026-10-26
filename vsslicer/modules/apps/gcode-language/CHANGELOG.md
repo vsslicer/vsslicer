@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-100: the flavour is read from the last 64 KiB too (head wins), so PrusaSlicer, SuperSlicer and Orca files with the config block at the end are no longer generic; Klipper G21 and the Prusa-Firmware codes G80, M403, M702, M862.1 and M862.3 (for Marlin) added.
 - GCP-98: Bambu Lab files (Bambu Studio, Orca) use the Bambu catalogue, and Prusa Buddy printers the Buddy one, both falling back to Marlin, so standard and Bambu codes no longer warn as unknown; added G17, M105, M114, M117, M220, M400, T1 and 12 Bambu codes; `bambu` and `prusa-buddy` can be chosen in `flavourOverrides`.
 
 ## 0.1.0

@@ -14,6 +14,8 @@ test('resolves flavour names to catalogue flavours, unknown ones to undefined', 
   assert.equal(resolveFlavour(index, 'Marlin'), 'marlin');
   assert.equal(resolveFlavour(index, 'Marlin Legacy'), 'marlin');
   assert.equal(resolveFlavour(index, 'klipper'), 'klipper');
+  assert.equal(resolveFlavour(index, 'RepRap'), 'reprapfirmware'); // Cura's `;FLAVOR:RepRap`
+  assert.equal(lookup(index, resolveFlavour(index, 'RepRap'), 'M550')?.flavours[0], 'reprapfirmware');
   assert.equal(resolveFlavour(index, 'UltiGCode'), undefined);
   assert.equal(resolveFlavour(index, undefined), undefined);
 });
@@ -21,7 +23,7 @@ test('resolves flavour names to catalogue flavours, unknown ones to undefined', 
 test('bambu and prusa-buddy fall back to marlin for codes their own catalogue lacks', () => {
   assert.equal(lookup(index, 'bambu', 'G28')?.code, 'G28');
   assert.equal(lookup(index, 'prusa-buddy', 'M400')?.code, 'M400');
-  assert.equal(lookup(index, 'bambu', 'M862.1'), undefined); // Buddy-only
+  assert.equal(lookup(index, 'bambu', 'M862.5'), undefined); // Buddy-only
   assert.equal(resolveFlavour(index, 'bambu'), 'bambu');
 });
 

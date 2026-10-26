@@ -45,6 +45,8 @@ test('new allowed sources pass, lookalikes fail', () => {
   assert.deepEqual(src('https://github.com/SoftFever/OrcaSlicer/blob/main/x'), []);
   assert.deepEqual(src('https://github.com/prusa3d/Prusa-Firmware-Buddy'), []);
   assert.equal(src('https://github.com/prusa3d/Prusa-Firmware-Buddy-evil/x').length, 1);
+  assert.deepEqual(src('https://github.com/Klipper3d/klipper/blob/abc/klippy/extras/gcode_move.py#L166'), []);
+  assert.deepEqual(src('https://help.prusa3d.com/article/prusa-firmware-specific-g-code-commands_112173'), []);
   assert.equal(src('http://docs.duet3d.com/x').length, 1);
 });
 

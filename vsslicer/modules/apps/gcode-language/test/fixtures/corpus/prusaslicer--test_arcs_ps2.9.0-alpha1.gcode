@@ -24,3 +24,5 @@ G2 X91.199 Y90.709 I3.273 J2.268 E.02979
 M106 S38.25
 G4 ; wait
 M84 ; disable motors
+; gcode_flavor = marlin2
+; printer_model = MINI

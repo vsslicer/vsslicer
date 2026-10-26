@@ -11,3 +11,5 @@ G3 X153.908 Y137.164 I-0.010 J5.348 E0.08261
 M140 S105 ; set bed temperature
 G2 X159.423 Y149.078 I0.954 J0.010 E0.01821
 M106 S73.95
+; gcode_flavor = klipper
+; printer_model = Voron_v2_300_aferburner

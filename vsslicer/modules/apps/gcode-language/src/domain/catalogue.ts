@@ -14,12 +14,14 @@ export interface CatalogueEntry {
   readonly source: string;
 }
 
-/** Pages an entry may cite: RepRap wiki, Marlin, Prusa Buddy, Klipper, RepRapFirmware (Duet) and OrcaSlicer (Bambu templates). */
+/** Pages an entry may cite: RepRap wiki, Marlin, Prusa Buddy and its Prusa-Firmware command list, Klipper (docs and source), RepRapFirmware (Duet) and OrcaSlicer (Bambu templates). */
 const SOURCES: readonly { host: string; path: string }[] = [
   { host: 'reprap.org', path: '/wiki/G-code' },
   { host: 'marlinfw.org', path: '/docs/gcode' },
   { host: 'github.com', path: '/prusa3d/Prusa-Firmware-Buddy' },
   { host: 'github.com', path: '/SoftFever/OrcaSlicer' },
+  { host: 'github.com', path: '/Klipper3d/klipper' },
+  { host: 'help.prusa3d.com', path: '/article/prusa-firmware-specific-g-code-commands_112173' },
   { host: 'www.klipper3d.org', path: '/G-Codes.html' },
   { host: 'docs.duet3d.com', path: '' },
 ];
@@ -42,7 +44,7 @@ const sourceProblem = (source: unknown): string | undefined => {
     SOURCES.some((s) => url.hostname === s.host && (url.pathname === s.path || url.pathname.startsWith(`${s.path}/`)));
   return ok
     ? undefined
-    : `source is not an allowed reference (reprap.org/wiki/G-code, marlinfw.org/docs/gcode, docs.duet3d.com, www.klipper3d.org/G-Codes.html, github.com/prusa3d/Prusa-Firmware-Buddy or github.com/SoftFever/OrcaSlicer): ${source}`;
+    : `source is not an allowed reference (reprap.org/wiki/G-code, marlinfw.org/docs/gcode, docs.duet3d.com, www.klipper3d.org/G-Codes.html, github.com/prusa3d/Prusa-Firmware-Buddy, github.com/SoftFever/OrcaSlicer, github.com/Klipper3d/klipper or help.prusa3d.com/article/prusa-firmware-specific-g-code-commands_112173): ${source}`;
 };
 
 /** Every problem with one raw entry; empty when it is valid. */

@@ -26,6 +26,18 @@ test('detects the flavour in real slicer files, Buddy from the printer model whe
   assert.equal(detectFlavour(fixture('prusaslicer.gcode')), 'prusa-buddy'); // MK4S, gcode_flavor only at the end
 });
 
+test('detects the flavour from the config block at the end of a long file, the head winning', () => {
+  const text = readFileSync(new URL('fixtures/tail-config.gcode', import.meta.url), 'utf8').replace(
+    '; padding\n',
+    'G1 X1 Y1 E1\n'.repeat(12000),
+  );
+  assert.ok(text.length > 2 * 65536);
+  assert.equal(detectFlavour(text.slice(0, 65536)), undefined);
+  assert.equal(detectFlavour(text.slice(0, 65536), text.slice(-65536)), 'klipper');
+  assert.equal(detectFlavour(';FLAVOR:Marlin\n', text.slice(-65536)), 'Marlin');
+  assert.equal(detectFlavour('; printer_model = MK4S\n', text.slice(-65536)), 'klipper');
+});
+
 test('the label is the override, else the detected name, else generic', () => {
   assert.equal(flavourLabel('marlin', 'klipper'), 'klipper');
   assert.equal(flavourLabel('marlin', undefined), 'marlin');

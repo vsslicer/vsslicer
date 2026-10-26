@@ -22,3 +22,4 @@ M107
 M106 S124.95
 G4
 M84
+; gcode_flavor = marlin2

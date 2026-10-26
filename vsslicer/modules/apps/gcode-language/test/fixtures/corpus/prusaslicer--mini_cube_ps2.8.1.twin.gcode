@@ -37,3 +37,4 @@ M74 W0.0366307
 G2 X119.822 Y99.822 I-.059 J.017 E.01322
 G4
 M593 X T2 F0
+; gcode_flavor = marlin2

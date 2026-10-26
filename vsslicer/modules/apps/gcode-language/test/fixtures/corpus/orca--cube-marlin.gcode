@@ -17,3 +17,5 @@ G21
 G4 ; wait
 M107 ; turn off fan
 M84 ; disable motors
+; gcode_flavor = marlin
+; printer_model = Generic Marlin Printer

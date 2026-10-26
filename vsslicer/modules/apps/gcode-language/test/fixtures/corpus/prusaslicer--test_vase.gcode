@@ -27,3 +27,5 @@ M106 S38.25
 M702 C
 G4 ; wait
 M84 ; disable motors
+; gcode_flavor = marlin
+; printer_model = MK3MMU2
