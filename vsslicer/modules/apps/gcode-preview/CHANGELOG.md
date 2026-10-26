@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-53: tests: Moonraker `file_position` (in the recorded shape) and Bambu layer and percent feeds with expected moves, and a stub extension that follows them through the exports and through the commands in the extension host.
 - GCP-54: the api-extractor report (`etc/gcode-preview.api.md`) and `pnpm api:check`, which fails CI on API drift and on a breaking change without a higher `GCODE_PREVIEW_API_VERSION`; `pnpm api:update` rewrites the report.
 - GCP-51, GCP-52: `Revealed.warning` when a `fileOffset` is past the last move; `fileOffset` is documented as decoded-stream space for `.bgcode`; tests for offset, layer and percent mapping.
 - Fixed: following a print that opens a new preview now lands on the printer's position: a seek that arrives before the move buffers is posted again after the last one (GCP-118, SP9 audit finding 2).

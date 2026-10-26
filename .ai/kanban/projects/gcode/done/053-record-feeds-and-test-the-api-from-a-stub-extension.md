@@ -62,3 +62,27 @@ Judgement on the stub running in the test's host: acceptable. It uses only the p
 For the coordinator: the timeline integration test ("plays, pauses, steps and changes speed") fails on both VS Code versions without this card, so `pnpm test:integration` is red for the module. It needs its own bugfix card.
 
 **Coordinator (sp11-coordinator):** criterion 1 reworded after review 1, problem 2: the feed is in Moonraker's recorded shape (`file_position` at line starts, klipper@ee2c6fb:klippy/extras/virtual_sdcard.py:283-300); a real capture is its own card. Problem 1 (expected position taken from `session.reveal`) still needs the fix.
+
+### SP11 rework (sp11-gcp-53-fix)
+
+Review problem 1 fixed. The expected move no longer comes from `session.reveal`: each feed fixture now carries `expectedMoves` (move per message, from the pure `resolvePosition` on the fixture file), and `follow-feeds.test.ts` waits for `probe.progress(key).move` to equal `expectedMoves[i]` with no side effect on the session. (Bundling `loadPreview` into the extension-host test crashed at load, so the table is stored with the fixture; new unit test `test/feeds.test.ts` re-derives it with `loadPreview` + `resolvePosition` and fails on drift. PROVENANCE.md notes this.) Problem 2 was handled by the coordinator's rewording.
+
+- Mutation probe (the review's): in `commands.ts` `follow`, push only the first position -> all 4 integration tests fail on both 1.100.0 and stable (restored; `git diff` of commands.ts empty). Feeds table probe is covered by the unit test (a wrong table fails `deepStrictEqual`).
+- Verification: lint clean, build ok, `pnpm test` 113/113, `checks` clean (check-licence, check-fixtures). `pnpm test:integration`: new tests 4/4 pass on both versions every run; the known timeline flake ("plays, pauses, steps...") failed once per version in one run and passed in the next two runs; not this card's.
+- Release lines: unchanged (CHANGELOG line above still applies; no export lines).
+
+**Review passed (sp11-rev2-gcp-53)**
+
+Ran in `vsslicer/modules/gcode-preview`: `pnpm install` ok, `pnpm lint` (eslint, prettier, tsc) clean, `pnpm build` ok, `pnpm test` 113/113 (`test/feeds.test.ts` 2/2), `node scripts/run.mjs checks` clean (check-licence, check-fixtures). `pnpm test:integration`: the 4 new tests pass on 1.100.0 (15/15) and stable 1.143.1 (14/15; the failure is the known timeline flake "plays, pauses, steps...", not this card's).
+
+Review 1 problem 1 is fixed: the oracle is the fixture's `expectedMoves`, and the test no longer calls `session.reveal`. Problem 2 is settled by the coordinator's rewording; the PROVENANCE.md wording matches it.
+
+Mutation probes (each in `src/presentation/commands.ts` `follow`, rebuilt, run on both versions, restored; `git diff src/` empty afterwards):
+- push only the first position: all 4 new tests fail on both versions.
+- Moonraker `fileOffset + 3000` before `reveal`: both Moonraker tests fail ("timed out waiting for the marker on move 168"), on both versions.
+- Bambu `layer - 1` before `reveal`: both Bambu tests fail, on both versions. (A `percent + 3` probe passes, which is correct: layer wins over percent, `src/domain/print-position.ts:89-103`, D20.)
+- `expectedMoves[3] += 1` in a `mktemp -d` copy of the Bambu feed: `test/feeds.test.ts` fails 1/2.
+
+Layering: test code only; imports stay inside the module, the VS Code API only in `test/integration/`. No wall-time asserts (the `until` timeouts only bound waiting). Hostile probes: not applicable, `positionOf` reads only checked-in fixtures, and the production parsing (`parsePosition`) is not changed by this card.
+
+Note, no fix needed: the first Moonraker expected move is 0, which the marker may already show before the first push. That step's check is therefore weak, but later steps (168 ... 1662) cover it, and probe 1 shows it.
