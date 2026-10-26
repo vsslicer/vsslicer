@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  // Declarations of the public contract only (GCP-50), the input of api-extractor.
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "sourceMap": false,
+    "outDir": ".cache/api-dts",
+    "rootDir": "src"
+  },
+  "include": ["src/presentation/commands.ts"]
+}

@@ -111,6 +111,12 @@ jobs:
           pnpm exec playwright install --with-deps chromium
           # PRs gate 50 and 200 MB; the 500 MB set (minutes, GBs) only on a manual run
           if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then pnpm bench; else pnpm bench --sizes 50,200; fi
+      # GCP-54: the api-extractor report must match the source, and a breaking change needs a higher GCODE_PREVIEW_API_VERSION
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'gcode-preview')
+        working-directory: vsslicer/modules/gcode-preview
+        run: pnpm api:check --base "$BASE"
+        env:
+          BASE: ${{ needs.select.outputs.base }}
       - if: always()
         run: scripts/registry.sh stop
 
