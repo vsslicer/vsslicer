@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `resolveTuple(reader, printerInstance, materials, process)`: resolves a tuple to unified settings with a provenance trail (the entity and override block that set each key), per-toolhead keys as `{"<slot>": value}`, and diagnostics for unknown parents, cycles and missing entities (PRF-49).
 - Added: `createWatchedProfileStore` re-indexes profile folders on disk changes within one second (100 ms debounce, 500 ms cap), coalesces bursts and keeps the last valid version of a file that breaks (PRF-46).
 - Added: the file-system store: one JSON file per entity, temp-file-and-rename writes, a lock and a `meta.updated` check that turn a second window's save into a conflict carrying both versions (PRF-45).
 - Added: `runImportInWorker` runs an import in a worker thread with a time budget, cancel and a host heartbeat; crashes become diagnostics (PRF-39).

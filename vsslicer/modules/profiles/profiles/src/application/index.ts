@@ -2,3 +2,4 @@
 export * from './form-model/index.ts';
 export * from './import/index.ts';
 export * from './store/index.ts';
+export * from './resolve/index.ts';

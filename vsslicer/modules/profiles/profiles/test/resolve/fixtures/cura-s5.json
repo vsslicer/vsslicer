@@ -1,0 +1,91 @@
+[
+  {
+    "kind": "printer_model",
+    "entity": {
+      "id": "fdmprinter",
+      "abstract": true,
+      "settings": { "max_height": 100, "gcode_flavor": "RepRap (Marlin/Sprinter)", "nozzle_diameter": 0.4 }
+    }
+  },
+  { "kind": "printer_model", "entity": { "id": "ultimaker", "abstract": true, "inherits": ["fdmprinter"] } },
+  {
+    "kind": "printer_model",
+    "entity": {
+      "id": "ultimaker_s5",
+      "vendor": "Ultimaker B.V.",
+      "name": "UltiMaker S5",
+      "technology": "fff",
+      "bed": {
+        "shape": [
+          [0, 0],
+          [330, 0],
+          [330, 240],
+          [0, 240]
+        ],
+        "max_height": 300
+      },
+      "toolheads": { "count": 2, "kinematics": "cartesian" },
+      "inherits": ["ultimaker"],
+      "settings": { "max_height": 300, "gcode_flavor": "Griffin" }
+    }
+  },
+  { "kind": "nozzle", "entity": { "id": "AA 0.4", "diameter": 0.4, "settings": { "nozzle_diameter": 0.4 } } },
+  {
+    "kind": "nozzle",
+    "entity": { "id": "BB 0.4", "diameter": 0.4, "settings": { "nozzle_diameter": 0.4, "retract_length": 4.5 } }
+  },
+  {
+    "kind": "printer_instance",
+    "entity": {
+      "id": "my-s5",
+      "model": "ultimaker_s5",
+      "toolheads": [
+        { "slot": 1, "nozzle": "BB 0.4" },
+        { "slot": 0, "nozzle": "AA 0.4" }
+      ],
+      "settings": {}
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "generic_pla",
+      "vendor": "Generic",
+      "name": "PLA",
+      "type": "PLA",
+      "diameter": 2.85,
+      "settings": { "nozzle_temp": 200, "bed_temp": 60, "filament_density": 1.24 }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "generic_pva",
+      "vendor": "Generic",
+      "name": "PVA",
+      "type": "PVA",
+      "diameter": 2.85,
+      "settings": { "nozzle_temp": 215, "bed_temp": 60, "filament_density": 1.23 }
+    }
+  },
+  {
+    "kind": "process",
+    "entity": {
+      "id": "normal",
+      "name": "Fine",
+      "layer_height": 0.1,
+      "when": "printer.model == 'ultimaker_s5'",
+      "settings": { "layer_height": 0.1, "speed_infill": 70 },
+      "overrides": [
+        {
+          "when": "printer.model == 'ultimaker_s5' and nozzle.id == 'AA 0.4' and material.base == 'generic_pla'",
+          "settings": { "speed_infill": { "expr": "=math.ceil(speed_print * 50 / 60)" }, "speed_travel": 150 }
+        },
+        {
+          "when": "printer.model == 'ultimaker_s5' and nozzle.id == 'AA 0.4' and material.base == 'generic_petg'",
+          "settings": { "speed_infill": 45 }
+        }
+      ]
+    }
+  }
+]

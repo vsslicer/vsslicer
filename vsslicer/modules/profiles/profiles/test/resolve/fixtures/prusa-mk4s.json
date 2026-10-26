@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "printer_model",
+    "entity": {
+      "id": "*common*",
+      "abstract": true,
+      "settings": { "gcode_flavor": "marlin2", "retract_length": 0.8, "max_height": 210 }
+    }
+  },
+  {
+    "kind": "printer_model",
+    "entity": {
+      "id": "MK4S",
+      "vendor": "PrusaResearch",
+      "name": "Original Prusa MK4S",
+      "technology": "fff",
+      "family": "MK4",
+      "bed": {
+        "shape": [
+          [0, 0],
+          [250, 0],
+          [250, 210],
+          [0, 210]
+        ],
+        "max_height": 220
+      },
+      "toolheads": { "count": 1, "kinematics": "cartesian" },
+      "inherits": ["*common*"],
+      "nozzles": ["MK4S 0.4", "MK4S 0.6"],
+      "settings": { "tags": ["PRINTER_VENDOR_PRUSA3D", "PRINTER_MODEL_MK4S"], "max_height": 220 },
+      "overrides": [
+        { "when": "nozzle.diameter == 0.4", "settings": { "nozzle_diameter": 0.4 } },
+        { "when": "nozzle.diameter == 0.6", "settings": { "nozzle_diameter": 0.6, "retract_length": 0.7 } }
+      ]
+    }
+  },
+  { "kind": "nozzle", "entity": { "id": "MK4S 0.4", "diameter": 0.4 } },
+  { "kind": "nozzle", "entity": { "id": "MK4S 0.6", "diameter": 0.6 } },
+  {
+    "kind": "printer_instance",
+    "entity": {
+      "id": "my-mk4s",
+      "model": "MK4S",
+      "toolheads": [{ "slot": 0, "nozzle": "MK4S 0.6" }],
+      "settings": { "z_hop": 0.2 }
+    }
+  },
+  {
+    "kind": "process",
+    "entity": {
+      "id": "0.20mm SPEED @MK4IS 0.4",
+      "abstract": true,
+      "settings": { "layer_height": 0.2, "wall_loops": 2, "support_angle": 45, "speed_first_layer": 20 }
+    }
+  },
+  {
+    "kind": "process",
+    "entity": {
+      "id": "*MK4S_04*",
+      "abstract": true,
+      "settings": { "support_angle": 40, "speed_travel": 340 },
+      "overrides": [{ "when": "'PRINTER_MODEL_MK4S' in printer.tags", "settings": { "speed_first_layer": 30 } }]
+    }
+  },
+  {
+    "kind": "process",
+    "entity": {
+      "id": "0.20mm SPEED @MK4S 0.4",
+      "name": "0.20mm SPEED @MK4S 0.4",
+      "layer_height": 0.2,
+      "inherits": ["0.20mm SPEED @MK4IS 0.4", "*MK4S_04*"],
+      "settings": { "support_angle": 35 }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "*PLA*",
+      "abstract": true,
+      "settings": { "filament_type": "PLA", "nozzle_temp": 210, "bed_temp": 60 }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "Prusament PLA",
+      "vendor": "PrusaResearch",
+      "name": "Prusament PLA",
+      "type": "PLA",
+      "diameter": 1.75,
+      "inherits": ["*PLA*"],
+      "when": "nozzle.diameter != 0.8 and 'PRINTER_VENDOR_PRUSA3D' in printer.tags",
+      "settings": {
+        "filament_vendor": "Prusa Polymers",
+        "nozzle_temp": 215,
+        "filament_cost": 27.99,
+        "filament_density": 1.24
+      },
+      "overrides": [{ "when": "nozzle.diameter == 0.6", "settings": { "max_volumetric_speed": 15.5 } }]
+    }
+  }
+]

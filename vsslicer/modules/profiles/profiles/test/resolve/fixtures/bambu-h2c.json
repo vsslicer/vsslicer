@@ -1,0 +1,172 @@
+[
+  {
+    "kind": "printer_model",
+    "entity": { "id": "fdm_machine_common", "abstract": true, "settings": { "max_height": 250, "retract_length": 5 } }
+  },
+  {
+    "kind": "printer_model",
+    "entity": {
+      "id": "fdm_bbl_3dp_002_common",
+      "abstract": true,
+      "inherits": ["fdm_machine_common"],
+      "settings": { "max_height": 325 }
+    }
+  },
+  {
+    "kind": "printer_model",
+    "entity": {
+      "id": "Bambu Lab H2C",
+      "vendor": "BBL",
+      "name": "Bambu Lab H2C",
+      "technology": "fff",
+      "family": "BBL-3DP",
+      "bed": {
+        "shape": [
+          [0, 0],
+          [325, 0],
+          [325, 320],
+          [0, 320]
+        ],
+        "max_height": 325
+      },
+      "toolheads": { "count": 2, "kinematics": "corexy" },
+      "inherits": ["fdm_bbl_3dp_002_common"],
+      "nozzles": ["Bambu Lab H2C 0.4 nozzle", "Bambu Lab H2C 0.4 nozzle high flow"],
+      "settings": { "gcode_flavor": "marlin" },
+      "overrides": [
+        {
+          "when": "nozzle.id == 'Bambu Lab H2C 0.4 nozzle'",
+          "settings": {
+            "nozzle_diameter": 0.4,
+            "nozzle_volume_type": "Standard",
+            "extruder_clearance_height_to_lid": 201
+          }
+        },
+        {
+          "when": "nozzle.id == 'Bambu Lab H2C 0.4 nozzle high flow'",
+          "settings": {
+            "nozzle_diameter": 0.4,
+            "nozzle_volume_type": "High Flow",
+            "extruder_clearance_height_to_lid": 201
+          }
+        }
+      ]
+    }
+  },
+  { "kind": "nozzle", "entity": { "id": "Bambu Lab H2C 0.4 nozzle", "diameter": 0.4, "flow": "standard" } },
+  { "kind": "nozzle", "entity": { "id": "Bambu Lab H2C 0.4 nozzle high flow", "diameter": 0.4, "flow": "high_flow" } },
+  {
+    "kind": "printer_instance",
+    "entity": {
+      "id": "my-h2c",
+      "model": "Bambu Lab H2C",
+      "toolheads": [
+        { "slot": 1, "nozzle": "Bambu Lab H2C 0.4 nozzle" },
+        { "slot": 0, "nozzle": "Bambu Lab H2C 0.4 nozzle" }
+      ]
+    }
+  },
+  {
+    "kind": "printer_instance",
+    "entity": {
+      "id": "my-h2c-mixed",
+      "model": "Bambu Lab H2C",
+      "toolheads": [
+        { "slot": 0, "nozzle": "Bambu Lab H2C 0.4 nozzle" },
+        { "slot": 1, "nozzle": "Bambu Lab H2C 0.4 nozzle high flow" }
+      ],
+      "settings": { "max_height": 320 }
+    }
+  },
+  {
+    "kind": "process",
+    "entity": {
+      "id": "fdm_process_common",
+      "abstract": true,
+      "settings": {
+        "layer_height": 0.2,
+        "first_layer_height": 0.2,
+        "infill_density": "15%",
+        "top_layers": 3,
+        "wall_loops": 2
+      }
+    }
+  },
+  {
+    "kind": "process",
+    "entity": { "id": "fdm_process_dual_common", "abstract": true, "inherits": ["fdm_process_common"] }
+  },
+  {
+    "kind": "process",
+    "entity": { "id": "fdm_process_dual_0.20_nozzle_0.4", "abstract": true, "inherits": ["fdm_process_dual_common"] }
+  },
+  {
+    "kind": "process",
+    "entity": {
+      "id": "0.20mm Standard @BBL H2C",
+      "name": "0.20mm Standard @BBL H2C",
+      "layer_height": 0.2,
+      "inherits": ["fdm_process_dual_0.20_nozzle_0.4"],
+      "when": "printer.id in ['Bambu Lab H2C']",
+      "settings": { "speed_outer_wall": 200, "speed_inner_wall": 300, "speed_travel": 1000 }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "fdm_filament_common",
+      "abstract": true,
+      "settings": {
+        "filament_type": "PLA",
+        "nozzle_temp": 200,
+        "bed_temp": 60,
+        "max_volumetric_speed": 0,
+        "filament_density": 0
+      }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "fdm_filament_pla",
+      "abstract": true,
+      "inherits": ["fdm_filament_common"],
+      "settings": { "filament_density": 1.24, "max_volumetric_speed": 12, "bed_temp": 55, "nozzle_temp": 220 }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "Bambu PLA Basic @base",
+      "abstract": true,
+      "inherits": ["fdm_filament_pla"],
+      "settings": { "flow_ratio": 0.98, "filament_vendor": "Bambu Lab" }
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "Bambu PLA Basic @BBL H2C",
+      "vendor": "BBL",
+      "name": "Bambu PLA Basic",
+      "type": "PLA",
+      "diameter": 1.75,
+      "inherits": ["Bambu PLA Basic @base"],
+      "settings": { "flow_ratio": 0.99, "max_volumetric_speed": 25 },
+      "overrides": [{ "when": "nozzle.flow == 'high_flow'", "settings": { "max_volumetric_speed": 40 } }]
+    }
+  },
+  {
+    "kind": "material",
+    "entity": {
+      "id": "Bambu PLA Matte @BBL H2C",
+      "vendor": "BBL",
+      "name": "Bambu PLA Matte",
+      "type": "PLA",
+      "diameter": 1.75,
+      "inherits": ["fdm_filament_pla"],
+      "settings": { "flow_ratio": 0.98, "max_volumetric_speed": 22 },
+      "overrides": [{ "when": "nozzle.flow == 'high_flow'", "settings": { "max_volumetric_speed": 35 } }]
+    }
+  }
+]
