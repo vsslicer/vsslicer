@@ -1,0 +1,8 @@
+{
+  "id": "fixture-standard",
+  "name": "Fixture standard",
+  "layer_height": 0.2,
+  "settings": {
+    "wall_loops": 2
+  }
+}

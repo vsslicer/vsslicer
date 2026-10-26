@@ -1,0 +1,8 @@
+{
+  "type": "process",
+  "name": "0.16mm User",
+  "from": "User",
+  "inherits": "0.20mm Standard @Fixture",
+  "layer_height": "0.16",
+  "version": "1.0.0.0"
+}

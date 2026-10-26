@@ -8,6 +8,6 @@ export default [
   {
     files: ['test/integration/**'],
     rules: { 'no-restricted-imports': 'off' },
-    languageOptions: { globals: { describe: 'readonly', it: 'readonly', before: 'readonly' } },
+    languageOptions: { globals: { describe: 'readonly', it: 'readonly', before: 'readonly', after: 'readonly' } },
   },
 ];

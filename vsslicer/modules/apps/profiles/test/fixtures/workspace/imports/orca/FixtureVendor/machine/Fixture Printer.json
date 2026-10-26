@@ -1,0 +1,10 @@
+{
+  "type": "machine_model",
+  "name": "Fixture Printer",
+  "model_id": "FX1",
+  "nozzle_diameter": "0.4",
+  "machine_tech": "FFF",
+  "family": "Fixture",
+  "bed_model": "",
+  "default_materials": "Fixture PLA"
+}

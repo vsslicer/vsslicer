@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./printer-instance.json",
+  "title": "printer-instance",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./defs.json#/$defs/id"
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/id"
+      }
+    },
+    "abstract": {
+      "type": "boolean"
+    },
+    "when": {
+      "$ref": "./defs.json#/$defs/condition"
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "./defs.json#/$defs/override"
+      }
+    },
+    "settings": {
+      "$ref": "./defs.json#/$defs/settings"
+    },
+    "renamed_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "$ref": "./defs.json#/$defs/meta"
+    },
+    "model": {
+      "type": "string"
+    },
+    "toolheads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slot": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "nozzle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "slot",
+          "nozzle"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "surface": {
+      "type": "string"
+    },
+    "feeder": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "mmu",
+            "ams",
+            "toolchanger"
+          ]
+        },
+        "slots": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "type",
+        "slots"
+      ],
+      "additionalProperties": false
+    },
+    "connection": {
+      "type": "object",
+      "properties": {
+        "host_type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "secret_ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_type",
+        "url",
+        "secret_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "model",
+    "toolheads"
+  ],
+  "additionalProperties": false
+}

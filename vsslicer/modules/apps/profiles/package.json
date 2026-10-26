@@ -17,6 +17,7 @@
   "files": [
     "dist",
     "!dist/*.meta.json",
+    "schemas",
     "THIRD-PARTY-NOTICES.md",
     "LICENSE",
     "README.md",
@@ -40,6 +41,40 @@
         "command": "vsslicer.profiles.about",
         "title": "VSSlicer: About Profiles Extension"
       }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "**/.vsslicer/profiles/vendor/**/*.json",
+        "url": "./schemas/vendor.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/printer-model/**/*.json",
+        "url": "./schemas/printer-model.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/nozzle/**/*.json",
+        "url": "./schemas/nozzle.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/surface/**/*.json",
+        "url": "./schemas/surface.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/feeder/**/*.json",
+        "url": "./schemas/feeder.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/material/**/*.json",
+        "url": "./schemas/material.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/process/**/*.json",
+        "url": "./schemas/process.json"
+      },
+      {
+        "fileMatch": "**/.vsslicer/profiles/printer-instance/**/*.json",
+        "url": "./schemas/printer-instance.json"
+      }
     ]
   },
   "scripts": {
@@ -49,12 +84,14 @@
     "package": "vsslicer-package",
     "test": "node --test test/*.test.ts",
     "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sync-schemas": "node scripts/sync-schemas.ts"
   },
   "devDependencies": {
     "@types/mocha": "10.0.10",
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
+    "@vsslicer/profile-api": "^0.1.2",
     "@vsslicer/test-vscode": "^0.2.3",
     "@vsslicer/tooling": "^0.8.4",
     "esbuild": "0.28.2",

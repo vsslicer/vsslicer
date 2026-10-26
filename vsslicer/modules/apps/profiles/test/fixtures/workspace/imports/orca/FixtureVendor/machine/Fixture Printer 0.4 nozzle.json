@@ -1,0 +1,17 @@
+{
+  "type": "machine",
+  "name": "Fixture Printer 0.4 nozzle",
+  "from": "system",
+  "instantiation": "true",
+  "inherits": "fdm_machine_common",
+  "printer_model": "Fixture Printer",
+  "nozzle_diameter": [
+    "0.4"
+  ],
+  "printable_area": [
+    "0x0",
+    "220x0",
+    "220x220",
+    "0x220"
+  ]
+}

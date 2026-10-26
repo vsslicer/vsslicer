@@ -5,3 +5,5 @@ THIRD-PARTY-NOTICES.md
 test-results
 .vscode-test
 dist-test
+test/fixtures
+schemas

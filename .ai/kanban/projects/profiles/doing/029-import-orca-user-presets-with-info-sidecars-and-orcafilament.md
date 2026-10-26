@@ -58,3 +58,15 @@ Note, not blocking: Orca skips a user preset whose name equals an already loaded
 - Tests (`test/read-user-presets.test.ts`, 4 new): base/ roots first and children link; unrecognised files under user/ warn; stem name with mismatch warning and linking by stem; vendor-named user preset skipped.
 - Mutation probes (each in place, restored, `vitest run` on the two test files): `base/` dropped from the regex; base-first sort removed; unknown-file warning removed; name from inner `name` again; mismatch warning removed; vendor-name skip off: all FAIL a test.
 - Verification: `pnpm install`, `pnpm lint` (eslint, prettier, tsc), `pnpm build` pass; `pnpm test` 8 files, 97 tests pass; `node scripts/run.mjs checks` exit 0. CHANGELOG Unreleased PRF-29 line extended.
+
+**Review failed (sp10-rerev-prf-28-29, 2026-10-26)**
+
+- Ran in `profiles-orca`: `pnpm install` ok; `pnpm lint` (eslint, prettier, tsc) pass; `pnpm build` pass; `pnpm test` 8 files, 97 tests pass. `node scripts/run.mjs checks` exits 1, only on the repo-wide registry lines for tooling@0.8.5 (every module's lockfile pins 0.8.4); not caused by this card.
+- Last review's problems 1 (`base/` roots read first, unknown `user/` files warn) and 2 (name is the file stem, `name-mismatch` warning) are fixed, and the vendor-name note is decided (skip with `duplicate`, Preset.cpp:2044-2048). Mutation probes, each in place and restored, run on `test/variants.test.ts` + `test/read-user-presets.test.ts`: `(base\/)?` dropped from the regex; base-first sort off; unknown-file warning off; name from the inner `name`; mismatch warning off; vendor-name skip off: all killed.
+- Hostile probes (temporary test, removed): `user/42/filament/base/sub/X.json` gives `unknown-type` (ok); a type folder named `constructor`, `toString`, `hasOwnProperty` or `__proto__` does not.
+
+Problems:
+
+1. `src/adapters/user/read-user-presets.ts:100` (with `DIRS` at :29): `DIRS[m[2]!]` looks the folder name up on a plain object, so inherited keys pass the type check. Probe: `user/42/constructor/X.json` with `{"inherits":"Nope"}` imports as a preset named `X` whose `type` is the `Object` function (`toString` and `hasOwnProperty` give functions, `__proto__` gives `Object.prototype`), with only an `unknown-parent` warning. A `PresetType` that is not one of the three strings then reaches every consumer. Fix: input-derived keys are looked up as own keys only (`Object.hasOwn(DIRS, m[2])`, or a `Map`/null-prototype object), the same rule `variants.ts` already follows; add a test with a `constructor` (or `__proto__`) folder expecting `unknown-type` and no preset.
+
+For the coordinator: `vsslicer/modules/profiles-orca/pnpm-lock.yaml` changed at 12:20 to tooling@0.8.5 while I reviewed (not by me: my `pnpm install` said "Already up to date"); some other re-lock is touching this module.

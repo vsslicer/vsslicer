@@ -1,0 +1,10 @@
+{
+  "type": "filament",
+  "name": "User PLA",
+  "from": "User",
+  "inherits": "Fixture PLA",
+  "nozzle_temperature": [
+    "205"
+  ],
+  "version": "1.0.0.0"
+}
