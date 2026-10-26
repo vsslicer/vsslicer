@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-115: tests count bytes copied instead of asserting wall time or throughput.
+
 ## 0.4.3
 
 - GCP-94: `latin1ToBytes` returns bytes backed by an exact-size ArrayBuffer instead of a view into Node's shared pool. The README notes the Node requirement.

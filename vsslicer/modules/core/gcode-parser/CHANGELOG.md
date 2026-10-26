@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-115: tests count reads and scanner work instead of asserting wall time.
+
 ## 0.14.0
 
 - GCP-114: `.gcode.3mf` plate thumbnails declared over 4 MiB (`MAX_THUMBNAIL_BYTES`) are never inflated; at most 16 per plate; new `thumbnails` map on `Gcode3mfPlate`.

@@ -28,3 +28,7 @@ export { parseModel } from './adapters/parse-model.ts';
 export type { MeshParsers, ParseModelOptions, ParseModelResult } from './application/parse-model.ts';
 export type { ModelWorker, SerialisedBvh, WorkerParseResult } from './application/model-worker.ts';
 export { nodeModelWorker } from './adapters/worker-node/node-model-worker.ts';
+export { createWebModelWorkerPool, blobWorkerSpawner, MAX_POOL_SIZE } from './adapters/worker-web/pool.ts';
+export type { PoolWorker, WebPoolOptions, WebModelWorkerPool } from './adapters/worker-web/pool.ts';
+export { fetchBytes } from './adapters/worker-web/fetch-bytes.ts';
+export { PoolQueueFullError, PoolDisposedError } from './adapters/worker-web/errors.ts';

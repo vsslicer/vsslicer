@@ -67,6 +67,35 @@
           "markdownDescription": "Open `*.gcode` files in the G-code Preview instead of the text editor. Sets a `workbench.editorAssociations` entry in your user settings; turning it off removes that entry again. `*.bgcode` and `*.gcode.3mf` always open in the preview."
         }
       }
+    },
+    "commands": [
+      {
+        "command": "vsslicer.gcode.open",
+        "title": "Open G-code Preview",
+        "category": "VSSlicer"
+      },
+      {
+        "command": "vsslicer.gcode.follow",
+        "title": "Follow Print Position",
+        "category": "VSSlicer"
+      },
+      {
+        "command": "vsslicer.gcode.stopFollow",
+        "title": "Stop Following Print",
+        "category": "VSSlicer"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "vsslicer.gcode.follow",
+          "when": "false"
+        },
+        {
+          "command": "vsslicer.gcode.stopFollow",
+          "when": "false"
+        }
+      ]
     }
   },
   "scripts": {

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- PRF-186: the catalogue and mapping tests guard against hangs in a child process instead of asserting wall time.
+- PRF-187: PROVENANCE.md is published with the package.
+- PRF-188: the exporter contract refuses output paths that are absolute, contain `..`, a backslash, a drive letter or NUL, or exceed 512 characters.
+
 ## 0.1.1
 
 - PRF-180: parseBundleStructure refuses a manifest longer than the byte limit in UTF-16 units without copying it, and UTF-8 encodes it only when its length times 3 exceeds the limit.
