@@ -83,3 +83,20 @@ test('abort terminates the worker and rejects with the reason', async () => {
   ctl.abort(new Error('closed'));
   await assert.rejects(p, /closed/);
 });
+
+const inline = (flavour: string) =>
+  async function* () {
+    yield Buffer.from(
+      `; x_config = begin\n; gcode_flavor = ${flavour}\n; x_config = end\nG28\nG1 Z0.2 F600\n` +
+        Array.from({ length: 200 }, (_, i) => `G1 X${(i % 2) * 0.3} Y${i * 0.2} E${i * 0.01} F9000`).join('\n'),
+    );
+  };
+
+test('planner choice goes through plannerFor: Bambu files get their planner, RRF differs from Marlin', async () => {
+  const bambu = await loadPreview('gcode', createReadStream(fixture('bambu-studio/cube.gcode')), { codecs });
+  assert.ok('conditionalBlocks' in bambu.timing, 'Bambu planner output');
+  const marlin = await loadPreview('gcode', inline('marlin')(), { codecs });
+  const rrf = await loadPreview('gcode', inline('reprapfirmware')(), { codecs });
+  assert.ok(!('conditionalBlocks' in marlin.timing));
+  assert.notStrictEqual(rrf.timing.totalTime, marlin.timing.totalTime);
+});

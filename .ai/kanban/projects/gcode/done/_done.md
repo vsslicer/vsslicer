@@ -10,3 +10,4 @@
 8. [GCP-22: Unit-test each Klipper planner rule](022-unit-test-each-klipper-planner-rule.md)
 9. [GCP-23: Spike and build planner checkpoints and trapezoidsFor with a property test](023-spike-and-build-planner-checkpoints-and-trapezoidsfor-with-a.md)
 10. [GCP-82: Re-segment arcs at Klipper's gcode_arcs resolution](082-re-segment-arcs-at-klipper-s-gcode-arcs-resolution.md)
+11. [GCP-87: Move gcode-preview to webview-kit 0.5.0's channel and gcode-planner 0.3.0's plannerFor](087-move-gcode-preview-to-webview-kit-0-5-0-s-channel-and-gcode-.md)

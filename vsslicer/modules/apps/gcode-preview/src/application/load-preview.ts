@@ -3,7 +3,7 @@
 import type { Diagnostic, ParsedFile } from '@vsslicer/gcode-api';
 import { bgcodeToGcode, decodeGcodeBlocks, readBgcode, type Codec } from '@vsslicer/gcode-bgcode';
 import { collect, parse } from '@vsslicer/gcode-parser';
-import { klipperPlanner, marlinPlanner, resolveLimits, runPlanner, type Timing } from '@vsslicer/gcode-planner';
+import { plannerFor, resolveLimits, runPlanner, type Timing } from '@vsslicer/gcode-planner';
 
 export interface Loaded {
   parsed: ParsedFile;
@@ -37,7 +37,6 @@ async function* bgcodeText(
 /**
  * Parses `bytes` (a `.gcode` file, or a `.bgcode` decoded to its text) and times it with the
  * planner of its flavour. Start times are written into the move buffers.
- * shortcut: RepRapFirmware and Bambu files use the Marlin planner until gcode-planner publishes RRF and `plannerFor`.
  */
 export const loadPreview = async (
   kind: 'gcode' | 'bgcode',
@@ -49,7 +48,7 @@ export const loadPreview = async (
   const parsed = await collect(parse(text, { signal }));
   for (const d of container) parsed.diagnostics.push(d);
   const limits = resolveLimits({ config: parsed.config });
-  const timing = await runPlanner(limits.flavour === 'klipper' ? klipperPlanner : marlinPlanner, parsed, limits, {
+  const timing = await runPlanner(plannerFor(parsed, limits), parsed, limits, {
     signal,
   });
   return { parsed, timing };
