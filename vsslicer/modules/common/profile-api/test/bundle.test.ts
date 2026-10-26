@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { BUNDLE_LIMITS, buildBundleStructure, parseBundleStructure } from '../src/domain/bundle/index.ts';
 
 // Shape of OrcaSlicer@09aa0114b4e1 ExportPresetBundleDialog.cpp:374-425 and PresetBundle.cpp:2349.
@@ -106,6 +106,29 @@ test('hostile __proto__ keys stay plain data and do not replace the prototype', 
   const inner = Object.getOwnPropertyDescriptor(r.bundle.printerAsset, '__proto__')?.value;
   expect(Object.getPrototypeOf(inner)).toBeNull();
   expect(Object.keys(inner)).toEqual(['__proto__', 'x']);
+});
+
+test('byte limit is exact for 3-byte characters, whatever the UTF-16 length', () => {
+  const max = BUNDLE_LIMITS.maxBytes;
+  const base = new TextEncoder().encode(manifest({ pad: '' })).length;
+  const fit = Math.floor((max - base) / 3); // about max/3 characters, at most max bytes
+  const ok = manifest({ pad: '€'.repeat(fit) });
+  expect(new TextEncoder().encode(ok).length).toBeLessThanOrEqual(max);
+  expect(code(ok)).toBe('ok');
+  const over = manifest({ pad: '€'.repeat(fit + 1) });
+  expect(over.length).toBeLessThan(max);
+  expect(new TextEncoder().encode(over).length).toBeGreaterThan(max);
+  expect(code(over)).toBe('too-large');
+});
+
+test('a string longer than maxBytes UTF-16 units is refused without encoding it', () => {
+  const spy = vi.spyOn(TextEncoder.prototype, 'encode');
+  try {
+    expect(code('x'.repeat(BUNDLE_LIMITS.maxBytes + 1))).toBe('too-large');
+    expect(spy).not.toHaveBeenCalled();
+  } finally {
+    spy.mockRestore();
+  }
 });
 
 test.each(['', '.', ' ', '..', '.. ', '...', 'a/', 'a//b', 'a/. /b', '. '])('unsafe bundle_id %j is refused', (id) => {

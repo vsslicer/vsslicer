@@ -103,8 +103,10 @@ const isObject = (v: unknown): v is Record<string, unknown> => typeof v === 'obj
  * @param entries zip entry names; when given, every listed file must be among them.
  */
 export function parseBundleStructure(text: string, entries?: ReadonlySet<string>): ParseBundleResult {
-  // UTF-16 length undercounts bytes by at most 3x; the exact byte count is checked only when near the limit.
-  if (text.length > BUNDLE_LIMITS.maxBytes || new TextEncoder().encode(text).length > BUNDLE_LIMITS.maxBytes)
+  // UTF-16 length undercounts bytes by at most 3x: over the limit in units is refused without a copy; the exact
+  // byte count is checked only when near the limit.
+  const max = BUNDLE_LIMITS.maxBytes;
+  if (text.length > max || (text.length * 3 > max && new TextEncoder().encode(text).length > max))
     return fail('too-large', `bundle_structure.json is over ${BUNDLE_LIMITS.maxBytes} bytes`);
   if (jsonDepth(text) > BUNDLE_LIMITS.maxDepth)
     return fail('too-deep', `bundle_structure.json nests deeper than ${BUNDLE_LIMITS.maxDepth}`);
