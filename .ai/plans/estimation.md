@@ -13,6 +13,15 @@ After SP2 (first implementation sprint, retro `.ai/retros/SP2-retro.md`):
 - Implementation velocity is **33 points per hour** of sprint (SP2: 97 points, 19:15 to 22:10), not
   the 61 measured on research and planning. The gap was parallelism and sequencing, not card size.
 
+After SP4 (retro `.ai/retros/SP4-retro.md`):
+
+- **Plan at 46 points an hour** (92 per 2-hour sprint). SP4 measured 46.5 (72 points, 23:16 to 00:49)
+  and ran out of workable cards 41 minutes early, so 46 is a floor, not a ceiling. SP3's 81 was over
+  46 minutes with no long cards.
+- Agent time is **3.2 agent-minutes per done point** (SP3 1.5): Opus about 2.6 a point on built cards,
+  Sonnet about 1.3, and measuring spikes 40 minutes or more. Rule 10's divisor of 1.5 over-states
+  capacity by about two times when Opus spikes and long cards are in the sprint; use 46 an hour.
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -88,3 +97,47 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Evidence: SP3 all 22 done cards moved at 23:04:15 to 23:04:17 and starts were stamped at wave
     commits, so the facts table's Minutes column (13 to 41) again measures nothing; rule 9 was not
     followed. Since SP3.
+17. **Never mix long and short agents in one dispatch message** while the harness returns a message's
+    Agent calls only when all of them stop. Agents expected to run over 10 minutes (Opus spikes, an L
+    that creates a module) go out alone or in the sprint's last message; short lanes get two cards in
+    sequence per agent. Testable from `activity.jsonl`: the median time from a worker's stop to its
+    review's start stays under 10 minutes. Evidence: SP4 wave 1 (23:22) sent seven agents with a
+    median run of 1.3 min with GCP-30 (32.9) and PLT-31 (41.6); the short cards waited 39 to 44 min in
+    review and were done 45 to 47 min after dispatch; later waves without long agents turned over in 9
+    to 13 min. Since SP4.
+18. **A card that creates a module with VS Code integration tests, or a spike that measures with
+    repeated runs, is XL or is split into build and measure**, and every OS a spike must run on other
+    than the coordinator's is its own owner-blocked card at planning (rule 6). Testable: no card ends a
+    sprint partial for a reason its acceptance criteria named at planning. Evidence: SP4 GCP-30 (L)
+    ran 32.9 agent-min, three to five times the other L cards (6.3 to 8.6); PLT-31 (L) ran 41.6 and,
+    with PLT-33, GCP-79 and GCP-18, ended partial on owner input (Q15, Q16, slicer exports, Q7): 14
+    points. Since SP4.
+19. **Reviewers fix in place only what changes no behaviour** (docs, comments, attribution, licence
+    headers, CHANGELOG, ignore files) and record it in Progress; a behaviour change, however small, is a
+    fix round. With that, budget one fix round per 6 new-code cards (replacing rule 12's one per 2),
+    and about 15 minutes of wall time each under wave dispatch. Evidence: SP4 3 of 20 new-code cards
+    failed review (GCP-82, PLT-31, PLT-43), each fix 0.6 to 1.6 agent-min but 12 to 24 min of wall
+    time across two barriers; six more findings were fixed in place, one of them a behaviour change
+    (GCP-27's fallback feedrate 25 to 50 mm/s). Since SP4.
+20. **Commit each card when its review passes**, before another card that touches its files is
+    dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
+    `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
+    lines in Progress. Testable: each card's Done in `board.py retro` (read from git) is within 5
+    minutes of its reviewer's move to done. Evidence: SP4 reviewers moved cards to done from 00:06:59
+    to 00:49:26, but all were committed 00:43:30 to 00:44:47 (22 commits), split by file with "also
+    carries" notes because PLT-39 changed PLT-187's and PLT-188's files, GCP-27 GCP-28's `bambu.ts`,
+    and GCP-83, GCP-23 and GCP-82 all `klipper.ts`; the facts table's Done column read 00:43 for every
+    card. Since SP4.
+21. **Workers never publish.** The coordinator publishes each module once per sprint, after the last
+    card that changes it has passed review, then runs one clean-registry `run.mjs ci` (extends rule
+    13 to every module). Testable: one version per module per sprint in `git log`. Evidence: SP4
+    gcode-parser shipped 0.9.0 (GCP-83), 0.10.0 (GCP-84) and 0.10.1, because GCP-79 and GCP-18 changed
+    its `package.json` after 0.10.0; the clean-registry ci failed lockfile integrity once and needed
+    gcode-preview 0.2.1 too (`39a31c1`). Since SP4.
+22. **Every agent prompt names a `mktemp -d` scratch directory**; agents delete only files they
+    created there and use `command ls -1` (not the aliased `ls`) in scripts. The coordinator runs
+    `git status --short` after each wave and restores any change outside the dispatched cards' files.
+    Testable: zero stray-file incidents in the next retro. Evidence: SP4 had four in 55 agents: files
+    named after `ls` output in a board folder (twice), a reviewer deleting another's note, `rm -rf
+    /tmp/x` on a directory the reviewer did not create, and the GCP-82 fix worker overwriting its
+    card. Since SP4.

@@ -8,11 +8,12 @@ import { tessellateArc } from '../src/domain/arc.ts';
 import { fixturesDir } from './support/golden.ts';
 import { run } from './support/run.ts';
 
-/** Arc-fitted slicer output (GCP-10). No PrusaSlicer arc fixture exists yet (owner question Q11). */
+/** Arc-fitted slicer output (GCP-10, PrusaSlicer added by GCP-79). */
 const FIXTURES = [
   'orca/cylinder-arcs-on-x1c.gcode',
   'bambu-studio/cylinder-arcs-on.gcode',
   'superslicer/superslicer-2.3.56-arcwelder.gcode',
+  'prusaslicer/test_arcs_ps2.9.0-alpha1.gcode',
 ];
 const TOL = 0.05;
 const F32 = 2e-4; // coordinates are float32 (about 1e-5 at 150 mm) and the G-code has 3 decimals

@@ -28,19 +28,32 @@ export function webviewApi<S>(): ReturnType<typeof createWebviewApi<S>> {
 }
 
 export interface WindowLike {
-  /** The VS Code host frame; only messages whose `source` is this are accepted. */
+  /** The VS Code host frame. Inside a real webview VS Code sets it to the window itself (see `createWindowChannel`). */
   readonly parent: unknown;
-  addEventListener(type: 'message', l: (e: { data: unknown; source: unknown }) => void): void;
-  removeEventListener(type: 'message', l: (e: { data: unknown; source: unknown }) => void): void;
+  readonly location: { readonly origin: string };
+  addEventListener(type: 'message', l: (e: WindowMessage) => void): void;
+  removeEventListener(type: 'message', l: (e: WindowMessage) => void): void;
 }
 
-/** Webview side `Channel`: posts through the API, hears only `window` messages sent by the host frame. */
+export interface WindowMessage {
+  data: unknown;
+  source: unknown;
+  origin: string;
+}
+
+/**
+ * Webview side `Channel`: posts through the API, hears only host messages. VS Code's outer frame posts with the
+ * webview's own origin, but the frame is not reliably `window.parent`: VS Code 1.143 sets `window.parent = window`
+ * (pre/index.html:252-254) and 1.100 leaves a parent that is not the sender. So a message is the host's when its
+ * `event.origin === location.origin`, or (a plain iframe, as in tests) when `event.source === window.parent`.
+ */
 export function createWindowChannel(post: (m: unknown) => void, win: WindowLike): Channel {
   return {
     post,
     onMessage(listener) {
-      const l = (e: { data: unknown; source: unknown }) => {
-        if (e.source === win.parent) listener(e.data);
+      const l = (e: WindowMessage) => {
+        const fromHost = e.origin === win.location.origin || e.source === win.parent;
+        if (fromHost) listener(e.data);
       };
       win.addEventListener('message', l);
       return () => win.removeEventListener('message', l);

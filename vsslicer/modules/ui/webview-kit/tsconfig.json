@@ -4,7 +4,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "lib": ["ES2023", "DOM"],
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "noEmit": true
   },
   "include": ["src"]

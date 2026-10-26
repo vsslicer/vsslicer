@@ -8,6 +8,7 @@ import {
   handshake,
   type ThemeHost,
   type WindowLike,
+  type WindowMessage,
 } from '../src/webview/index.ts';
 
 test('state round trip is typed and acquire is called once', () => {
@@ -24,15 +25,20 @@ test('state round trip is typed and acquire is called once', () => {
   expect(acquire).toHaveBeenCalledTimes(1);
 });
 
-function fakeWindow(parent: object): WindowLike & { emit(data: unknown, source: unknown): void; count(): number } {
-  const ls = new Set<(e: { data: unknown; source: unknown }) => void>();
-  return {
-    parent,
+const ORIGIN = 'vscode-webview://abc';
+type FakeWindow = WindowLike & { emit(data: unknown, source: unknown, origin?: string): void; count(): number };
+function fakeWindow(parent: object | 'self'): FakeWindow {
+  const ls = new Set<(e: WindowMessage) => void>();
+  const win: FakeWindow = {
+    parent: parent === 'self' ? undefined : parent,
+    location: { origin: ORIGIN },
     addEventListener: (_t, l) => void ls.add(l),
     removeEventListener: (_t, l) => void ls.delete(l),
-    emit: (data, source) => ls.forEach((l) => l({ data, source })),
+    emit: (data, source, origin = ORIGIN) => ls.forEach((l) => l({ data, source, origin })),
     count: () => ls.size,
   };
+  if (parent === 'self') (win as { parent: unknown }).parent = win;
+  return win;
 }
 
 test('window channel accepts only the host frame and unsubscribes', () => {
@@ -42,11 +48,29 @@ test('window channel accepts only the host frame and unsubscribes', () => {
   const got: unknown[] = [];
   const off = ch.onMessage((m) => got.push(m));
   win.emit('from-host', host);
-  win.emit('from-other-frame', {});
-  win.emit('from-self', null);
+  win.emit('from-other-frame', {}, 'https://evil.example');
+  win.emit('from-self', null, 'https://evil.example');
   expect(got).toEqual(['from-host']);
   off();
   expect(win.count()).toBe(0);
+});
+
+test('window channel accepts the webview origin from a source that is not window.parent (VS Code 1.100)', () => {
+  const win = fakeWindow({});
+  const got: unknown[] = [];
+  createWindowChannel(() => {}, win).onMessage((m) => got.push(m));
+  win.emit('from-host', {});
+  win.emit('foreign', {}, 'https://evil.example');
+  expect(got).toEqual(['from-host']);
+});
+
+test('window channel with parent === window checks the origin, not the source', () => {
+  const win = fakeWindow('self');
+  const got: unknown[] = [];
+  createWindowChannel(() => {}, win).onMessage((m) => got.push(m));
+  win.emit('from-host', {}); // VS Code's real outer frame is no longer reachable: source is foreign
+  win.emit('foreign', {}, 'https://evil.example');
+  expect(got).toEqual(['from-host']);
 });
 
 test('window channel completes a handshake only with the host answering', async () => {

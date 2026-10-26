@@ -24,8 +24,12 @@ const timing = await runPlanner(constantSpeedPlanner, parsed, limits, { signal, 
   limits through `MoveCursor.limit`, and `test/harness.ts` `checkLimitPrecedence` checks it.
   `sources` and `assumed` describe the starting values only; they do not see in-file commands.
 - `Timing`: `totalTime`, `layerTimes` (per `parsed.layers` row), `roleTimes` (per `MoveRole`,
-  non-travel moves) and `travelTime`, all f64; `checkpoints` (`{ move, time, speed }` every
-  `checkpointInterval` moves) so a window can be recomputed later without per-move speeds.
+  non-travel moves) and `travelTime`, all f64; `checkpoints` (`{ move, time, speed, state? }`
+  about every `checkpointInterval` = 4096 moves) so a window can be recomputed later without
+  per-move speeds.
+- `trapezoidsFor(planner, parsed, timing, start, end)`: entry, cruise, exit and accel of moves
+  `start` to `end`, recomputed from the nearest checkpoint's planner snapshot; equal to the full
+  pass. Klipper snapshots; the other planners throw for now.
 - `runPlanner(planner, parsed, limits, { signal, onProgress })`: one move buffer per slice, a
   macrotask between slices so an abort reaches it; `planSync` runs it in one go.
 - `MoveCursor` and `TimingBuilder`: the move walk (positions across chunks, E, state changes in

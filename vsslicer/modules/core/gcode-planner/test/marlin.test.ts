@@ -18,7 +18,7 @@ import {
   resolveLimits,
 } from '../src/index.ts';
 import type { MachineLimits, Planner } from '../src/index.ts';
-import { checkLimitPrecedence, checkPlanner, fixture, sampleFile } from './harness.ts';
+import { checkDwell, checkLimitPrecedence, checkPlanner, fixture, sampleFile } from './harness.ts';
 import type { FixtureMove } from './harness.ts';
 
 /** One-buffer file with the state-change table `changes`; moves with the same `arc` id share a fileOffset. */
@@ -62,6 +62,8 @@ describe('marlin planner', () => {
   it('passes the planner harness, both variants', () => {
     expect(checkPlanner(marlinPlanner).estimate).toBe(false);
     expect(checkPlanner(buddyPlanner).planner).toBe('prusa-buddy');
+    checkDwell(marlinPlanner);
+    checkDwell(buddyPlanner);
   });
 
   it('ranks override > M201/M203/M204 > config, both variants', () => {
@@ -105,6 +107,14 @@ describe('marlin planner', () => {
 
     it('runs a straight continuation without slowing', () => {
       expect(run(two(200, 0)).totalTime).toBeCloseTo(2.1, 6);
+    });
+
+    it('stops at a G4 and dwells for its seconds', () => {
+      const parsed = two(200, 0);
+      parsed.markers.push({ name: 'G4', fileOffset: 0, moveIndex: 1, seconds: 0 });
+      expect(run(parsed).totalTime).toBeCloseTo(2.2, 6);
+      parsed.markers[0]!.seconds = 3;
+      expect(run(parsed).totalTime).toBeCloseTo(5.2, 6);
     });
 
     it('stops at a reversal', () => {

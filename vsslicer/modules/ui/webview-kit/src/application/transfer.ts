@@ -58,8 +58,9 @@ export function sendBuffer(
     };
     const pump = () => {
       for (; sent < count && sent - acked < window; sent++) {
-        // slice copies, so each chunk owns a buffer of exactly its bytes and can be transferred.
-        const part = bytes.slice(sent * size, (sent + 1) * size).buffer as ArrayBuffer;
+        // A copy, so each chunk owns a buffer of exactly its bytes and can be transferred. Not `bytes.slice`:
+        // on a Node Buffer that is a view, and its `.buffer` is the whole payload.
+        const part = new Uint8Array(bytes.subarray(sent * size, (sent + 1) * size)).buffer;
         channel.post(chunk(stream, sent, count, part));
       }
     };
@@ -101,7 +102,7 @@ interface Incoming {
 
 /**
  * Receives every stream on `channel`: buffers chunks by `seq` (any arrival order, duplicates ignored), acks
- * cumulatively after each one, and reports each stream once, complete or failed. Returns the unsubscribe
+ * cumulatively after each one, and reports each stream once, complete or failed (a `hello` from the peer forgets finished ids, so a reloaded peer may reuse them). Returns the unsubscribe
  * function, which also drops unfinished streams. Messages from another version are ignored here; the
  * handshake owns version mismatch.
  * shortcut: no cap on a stream's declared size; add one if a peer is ever untrusted beyond our own webview.
@@ -132,6 +133,8 @@ export function receiveBuffers(
 
   const stop = channel.onMessage((message) => {
     const r = parseEnvelope(message);
+    // A new handshake is a reloaded sender whose stream ids restart, so finished ids may be reused.
+    if (r.ok && r.envelope.kind === 'hello') closed.clear();
     const c = r.ok ? asChunk(r.envelope) : undefined;
     if (!c || closed.has(c.stream)) return;
     let s = streams.get(c.stream);

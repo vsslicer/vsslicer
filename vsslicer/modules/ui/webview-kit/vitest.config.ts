@@ -2,4 +2,5 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
 import base from '@vsslicer/tooling/vitest';
 
-export default mergeConfig(base, defineConfig({}));
+// test/integration runs inside VS Code (pnpm test:integration), not in vitest.
+export default mergeConfig(base, defineConfig({ test: { exclude: ['node_modules', 'test/integration/**'] } }));

@@ -1,0 +1,91 @@
+{
+  "file": {
+    "bytes": 3887810,
+    "sha256": "ba62478d06d0c666e1aaee1038993b0fb2941481c4365a2fc4982ea381f5b1ad"
+  },
+  "slicer": "prusaslicer",
+  "flavour": "marlin",
+  "moveCount": 125951,
+  "stateChanges": 34207,
+  "markers": 378,
+  "layerCount": 240,
+  "arcs": {
+    "commands": 10808,
+    "segments": 33380
+  },
+  "roleHistogram": {
+    "Perimeter": 36213,
+    "ExternalPerimeter": 25455,
+    "OverhangPerimeter": 253,
+    "InternalInfill": 8894,
+    "SolidInfill": 18031,
+    "TopSolidInfill": 773,
+    "BridgeInfill": 1125,
+    "Skirt": 60,
+    "Custom": 2
+  },
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "qoi",
+      "width": 16,
+      "height": 16,
+      "bytes": 438,
+      "sha256": "a6da1650c92075c68115924b1bc2a3c633226d33d1d5f27f2953ccb069424663"
+    },
+    {
+      "format": "qoi",
+      "width": 220,
+      "height": 124,
+      "bytes": 17686,
+      "sha256": "f1fbe209d104d9c798aae96ec73cceee85acb28dac333e0a54abf539cbbfbab3"
+    },
+    {
+      "format": "qoi",
+      "width": 200,
+      "height": 240,
+      "bytes": 22378,
+      "sha256": "5d797f6f597f84471545c89bbb4c8d7de974ee1af697f9d3018d023d1dfce1b3"
+    },
+    {
+      "format": "png",
+      "width": 640,
+      "height": 480,
+      "bytes": 71640,
+      "sha256": "c7899c8cb1d9dac2ec698709f7cb81624af9ef62c12be5c4238022eb10298b22"
+    }
+  ],
+  "objects": [
+    {
+      "name": "3DBenchy.stl",
+      "id": "0",
+      "ranges": 3,
+      "moves": 125699
+    }
+  ],
+  "config": {
+    "keys": 353,
+    "sha256": "d59530a1e931763a845b2c8edf80983c15b9e0425ea9f6369371bad25cc60dd8",
+    "sample": {
+      "layer_height": "0.2",
+      "nozzle_diameter": "0.4",
+      "filament_type": "ABS",
+      "printer_model": "MINI",
+      "gcode_flavor": "marlin2"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 4069.4,
+        "volumeCm3": 9.79,
+        "weightG": 10.18,
+        "cost": 0.28
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 4843,
+      "silent": 4843
+    }
+  }
+}

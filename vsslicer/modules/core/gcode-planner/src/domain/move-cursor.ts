@@ -3,6 +3,19 @@ import { MOVE_STRIDE, MoveOffset, STATE_CHANGE_STRIDE, StateChangeOffset } from 
 import type { MoveRole, ParsedFile, StateKind } from '@vsslicer/gcode-api';
 import type { LimitKey, ResolvedLimits } from './limits.ts';
 
+/** `MoveCursor.save`'s snapshot. */
+export interface CursorState {
+  index: number;
+  x: number;
+  y: number;
+  z: number;
+  b: number;
+  local: number;
+  sb: number;
+  si: number;
+  values: [number, number][];
+}
+
 /**
  * Walks a parsed file's moves in order across its chunk buffers, carrying the start position over
  * buffer boundaries and folding the state-change table so `state()` is the value in force for the
@@ -58,6 +71,23 @@ export class MoveCursor {
    */
   limit(r: ResolvedLimits, key: LimitKey, kind: StateKind, index = 0, fallback = r.limits[key]): number {
     return r.sources[key] === 'override' ? r.limits[key] : this.state(kind, index, fallback);
+  }
+
+  /** The walk's position, structured-cloneable, for a planner's checkpoint snapshot. */
+  save(): CursorState {
+    const { index, x, y, z, b, local, sb, si } = this;
+    return { index, x, y, z, b, local, sb, si, values: [...this.values] };
+  }
+
+  /** Puts the walk back where `save` was called (on a cursor over the same file). */
+  restore(s: CursorState): void {
+    const { values, ...at } = s;
+    Object.assign(this, at);
+    this.view = s.local < 0 ? undefined : new DataView(this.parsed.moves[s.b]!);
+    this.ext = s.local < 0 ? undefined : new DataView(this.parsed.extrusion[s.b]!);
+    this.table = undefined;
+    this.values.clear();
+    for (const [k, v] of values) this.values.set(k, v);
   }
 
   /** Steps to the next move; false at the end. */

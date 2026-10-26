@@ -19,6 +19,7 @@ export {
   watchVisibility,
   type VsCodeApi,
   type WindowLike,
+  type WindowMessage,
   type ThemeHost,
   type ThemeTokens,
 } from '../adapters/webview-window.ts';

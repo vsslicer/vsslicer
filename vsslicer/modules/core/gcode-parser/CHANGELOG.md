@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.10.1
+
+- GCP-18: `pnpm bench` (not part of `pnpm test`) generates seeded synthetic 50, 200 and 500 MB files (`straight`, about 34k moves/MB; `arc-heavy`, about 58k moves/MB) in a temp dir, parses each in its own process and fails on a move record over 28 B, a peak RSS over budget or a throughput under budget (`bench/budget.json`, with the machine it was measured on; `--update` re-records it, `--sizes 50,200` limits the run). Dev tooling only; nothing shipped changes.
+- GCP-79: corpus gains PrusaSlicer 2.9.0-alpha1 `test_arcs_ps2.9.0-alpha1.gcode` (MINI, 10,808 arc-fitted G2/G3 lines, 3.7 MB, upstream), covered by the GCP-10 arc checks. Test fixtures only; nothing shipped changes. The other GCP-79 samples (PrusaSlicer 20 mm cube and MMU, SuperSlicer cube and MMU, Cura MMU, Bambu MMU) still need the slicers or owner GUI exports.
+
+## 0.10.0
+
+- GCP-84: `bgcodeSource(bytes, { onMetadata, onDiagnostic })` turns a `.bgcode` byte stream into its `.gcode` twin's text for `parse`, so a `.bgcode` gives the same `ParsedFile` as the twin. Metadata blocks (and the Slicer3 JSON one) come through `onMetadata`. New dependency `@vsslicer/gcode-bgcode` ^0.4.2. Corpus: the `.bgcode` goldens carry every metadata block; second twin pair `mini_cube_b` (PrusaSlicer 2.6.0) and the converter-written twin of the 2.8.1 file.
+
+## 0.9.0
+
+- GCP-83: `G4` markers carry `seconds`, the dwell as the flavour reads it (Marlin and RRF: `S` seconds over `P` ms; Klipper: `P` only; none or negative: 0). A whole-line `; ESTIMATOR_ADD_TIME <seconds> [label]` comment becomes an `ESTIMATOR_ADD_TIME` marker with `seconds` (finite and >= 0, else ignored). Needs `@vsslicer/gcode-api` ^0.5.0.
+
 ## 0.8.5
 
 - Re-lock to gcode-api 0.4.1 (PLT-180 follow-up).

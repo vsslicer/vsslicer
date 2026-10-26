@@ -67,6 +67,9 @@ describe('resolveLimits', () => {
   it('rejects an invalid override', () => {
     expect(() => resolveLimits({ override: { accel: -1 } })).toThrow(RangeError);
     expect(() => resolveLimits({ override: { accel: NaN } })).toThrow(RangeError);
+    expect(() => resolveLimits({ override: { accel: 0 } })).toThrow(RangeError);
+    expect(() => resolveLimits({ override: { maxVelocity: 0 } })).toThrow(RangeError);
+    expect(resolveLimits({ override: { jerkX: 0 } }).limits.jerkX).toBe(0);
   });
 
   it('judges assumed on the fields the flavour reads', () => {

@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/gcode-planner",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Motion planner contract for G-code timing: MachineLimits resolution with sources, the Planner interface, Timing (start times, per-layer and per-role tables, checkpoints), a cancellable runner and a constant-speed reference planner.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
@@ -33,7 +33,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@vsslicer/gcode-api": "^0.4.1"
+    "@vsslicer/gcode-api": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

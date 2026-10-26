@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+- The webview host stub is now the kit's (`@vsslicer/webview-kit/testing`, new dependency ^0.5.0): adds `window.parent/top === window`, `frameElement` null, same-origin host messages and `__vscode.deliver`. `stubScript` is still exported. (PLT-38)
+
 ## 0.1.2
 
 - Build in `prepack` (PLT-180); dev: `@vsslicer/example-extension` ^0.7.3.

@@ -1,0 +1,216 @@
+{
+  "file": {
+    "bytes": 149258,
+    "sha256": "84a942615e644430c8b47f02422ceb5682ad2a1f2860100bb6a8fe18ec22f6ec"
+  },
+  "bgcode": {
+    "file": [
+      [
+        "Producer",
+        "PrusaSlicer 2.6.0"
+      ]
+    ],
+    "printer": [
+      [
+        "printer_model",
+        "MINI"
+      ],
+      [
+        "filament_type",
+        "PETG"
+      ],
+      [
+        "nozzle_diameter",
+        "0.4"
+      ],
+      [
+        "bed_temperature",
+        "90"
+      ],
+      [
+        "brim_width",
+        "0"
+      ],
+      [
+        "fill_density",
+        "15%"
+      ],
+      [
+        "layer_height",
+        "0.15"
+      ],
+      [
+        "temperature",
+        "240"
+      ],
+      [
+        "ironing",
+        "0"
+      ],
+      [
+        "support_material",
+        "0"
+      ],
+      [
+        "max_layer_z",
+        "18.05"
+      ],
+      [
+        "extruder_colour",
+        "\"\""
+      ],
+      [
+        "filament used [mm]",
+        "986.61"
+      ],
+      [
+        "filament used [cm3]",
+        "2.37"
+      ],
+      [
+        "filament used [g]",
+        "3.01"
+      ],
+      [
+        "filament cost",
+        "0.08"
+      ],
+      [
+        "estimated printing time (normal mode)",
+        "32m 6s"
+      ]
+    ],
+    "print": [
+      [
+        "filament used [mm]",
+        "986.61"
+      ],
+      [
+        "filament used [cm3]",
+        "2.37"
+      ],
+      [
+        "filament used [g]",
+        "3.01"
+      ],
+      [
+        "filament cost",
+        "0.08"
+      ],
+      [
+        "total filament used [g]",
+        "3.01"
+      ],
+      [
+        "total filament cost",
+        "0.08"
+      ],
+      [
+        "estimated printing time (normal mode)",
+        "32m 6s"
+      ],
+      [
+        "estimated first layer printing time (normal mode)",
+        "1m 8s"
+      ]
+    ],
+    "slicer": {
+      "keys": 302,
+      "sha256": "3f6e9af4f8a471db2fd21b7adad113b1de933e63d9620607d4844a10d0fe7456",
+      "sample": {
+        "layer_height": "0.15",
+        "nozzle_diameter": "0.4",
+        "filament_type": "PETG",
+        "printer_model": "MINI",
+        "gcode_flavor": "marlin2"
+      }
+    },
+    "slicerJson": null,
+    "thumbnails": [
+      {
+        "format": 0,
+        "width": 16,
+        "height": 16,
+        "bytes": 461,
+        "sha256": "516a51596b7b562b269441980036cd0298dfd5eba523790bfbcc7acd058b65f7"
+      },
+      {
+        "format": 0,
+        "width": 220,
+        "height": 124,
+        "bytes": 4836,
+        "sha256": "a542fd29aeb3f6b3dafcec1383eb9a8bd3e747d24a54a32b6e78224a53e817dc"
+      }
+    ]
+  },
+  "slicer": "prusaslicer",
+  "flavour": "marlin",
+  "moveCount": 21703,
+  "stateChanges": 3176,
+  "markers": 138,
+  "layerCount": 120,
+  "arcs": {
+    "commands": 0,
+    "segments": 0
+  },
+  "roleHistogram": {
+    "Perimeter": 480,
+    "ExternalPerimeter": 1432,
+    "InternalInfill": 16318,
+    "SolidInfill": 1141,
+    "TopSolidInfill": 60,
+    "BridgeInfill": 96,
+    "Skirt": 101,
+    "Custom": 2
+  },
+  "diagnostics": [],
+  "thumbnails": [
+    {
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "bytes": 461,
+      "sha256": "516a51596b7b562b269441980036cd0298dfd5eba523790bfbcc7acd058b65f7"
+    },
+    {
+      "format": "png",
+      "width": 220,
+      "height": 124,
+      "bytes": 4836,
+      "sha256": "a542fd29aeb3f6b3dafcec1383eb9a8bd3e747d24a54a32b6e78224a53e817dc"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Shape-Box",
+      "id": "0",
+      "copy": 0,
+      "ranges": 120,
+      "moves": 20988
+    }
+  ],
+  "config": {
+    "keys": 302,
+    "sha256": "67ae2a2a617ea7dc5411161734d4e5b8db8371b757af4e3f602220295c4a60fd",
+    "sample": {
+      "layer_height": "0.15",
+      "nozzle_diameter": "0.4",
+      "filament_type": "PETG",
+      "printer_model": "MINI",
+      "gcode_flavor": "marlin2"
+    }
+  },
+  "summary": {
+    "extruders": [
+      {
+        "lengthMm": 986.61,
+        "volumeCm3": 2.37,
+        "weightG": 3.01,
+        "cost": 0.08
+      }
+    ],
+    "estimateSeconds": {
+      "normal": 1926
+    }
+  }
+}

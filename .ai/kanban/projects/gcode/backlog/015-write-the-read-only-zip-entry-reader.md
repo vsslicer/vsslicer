@@ -8,7 +8,7 @@ model: sonnet
 area: [parser]
 story: US5
 milestone: "VSS:M1"
-sprint: "VSS:SP4"
+sprint: "VSS:SP7"
 depends_on: [5, VWR-73]
 created: 2026-10-25
 ---
@@ -30,4 +30,4 @@ Needs the PLT monorepo, vitest and CI (PLT:E1) before it can start; those cards 
 
 ## Progress
 
-Not started.
+Not started. Moved to SP7 by the SP4 coordinator: this card depends on VWR-73 (planned in SP6, M2), so it cannot start before SP7.

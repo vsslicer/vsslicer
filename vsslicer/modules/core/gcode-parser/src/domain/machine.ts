@@ -85,6 +85,8 @@ export class Machine implements ModalState {
           case 2:
           case 3:
             return this.move(t, fileOffset, n === 2 ? 'cw' : 'ccw');
+          case 4:
+            return this.out.marker(t.commandName(), fileOffset, this.dwell(t));
           case 10:
           case 11:
             if (t.hasParam('P') || t.hasParam('L')) return this.out.marker(t.commandName(), fileOffset); // RRF tool offsets
@@ -121,6 +123,16 @@ export class Machine implements ModalState {
         break;
     }
     this.out.marker(t.commandName(), fileOffset);
+  }
+
+  /**
+   * G4 dwell in seconds. Marlin and RRF read `S` (s) over `P` (ms) (Marlin@2ef3ee6
+   * G4.cpp:33-34, RepRapFirmware@aebf629 GCodes.cpp:3728); Klipper reads only `P` (klipper@ee2c6fb
+   * toolhead.py:567). None stated, negative or infinite: 0.
+   */
+  private dwell(t: Tokens): number {
+    const s = this.flavour !== 'klipper' && t.hasParam('S') ? t.param('S') : t.hasParam('P') ? t.param('P') / 1000 : 0;
+    return Number.isFinite(s) && s > 0 ? s : 0;
   }
 
   private move(t: Tokens, fileOffset: number, arcDirection: 'cw' | 'ccw' | null): void {

@@ -1,0 +1,87 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import { chromium, expect, test, type Browser, type Page } from '@playwright/test';
+import { build } from 'esbuild';
+
+// The config starts Chromium without WebGL for gl.spec.ts; these tests need SwiftShader WebGL2.
+let browser: Browser;
+let page: Page;
+test.beforeAll(async () => {
+  browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+  const { outputFiles } = await build({
+    entryPoints: [import.meta.dirname + '/segment-renderer.page.ts'],
+    bundle: true,
+    write: false,
+    format: 'iife',
+    platform: 'browser',
+  });
+  page = await browser.newPage();
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.setContent('<body></body>');
+  await page.addScriptTag({ content: outputFiles[0]!.text });
+  expect(errors).toEqual([]);
+});
+test.afterAll(() => browser.close());
+
+type Px = [number, number, number];
+type Result = { px: number[]; left: Px; right: Px; ranges: { speed: number[]; layerTime: number[] }; error: number };
+const render = (o: object = {}) =>
+  page.evaluate((o) => (globalThis as unknown as { render: (o: object) => Result }).render(o), o);
+const [FEATURE, SPEED, TOOL, LAYER_TIME] = [0, 1, 2, 3];
+const LAYER1 = 17; // first record of layer 1 (the right half)
+const lit = (p: Px) => p.some((v) => v > 0);
+
+test('draws the move set at two visible ranges', async () => {
+  const all = await render();
+  const layer0 = await render({ first: 1, count: LAYER1 - 1 });
+  expect([all.error, layer0.error]).toEqual([0, 0]);
+  expect([lit(all.left), lit(all.right)]).toEqual([true, true]);
+  expect([lit(layer0.left), lit(layer0.right)]).toEqual([true, false]);
+  // A range ending at record k draws exactly what the buffer cut after record k draws.
+  expect(layer0.px).toEqual((await render({ records: LAYER1 })).px);
+});
+
+test('a range across many small textures draws as one texture does, in every mode', async () => {
+  for (const colorMode of [FEATURE, SPEED, TOOL, LAYER_TIME]) {
+    const range = { first: 5, count: 20, colorMode };
+    const one = await render(range);
+    const many = await render({ ...range, maxTextureSize: 4 }); // 2 records, so 1 segment, per texture
+    expect(one.px.some((v, i) => i % 4 !== 3 && v > 0)).toBe(true);
+    expect(many.px).toEqual(one.px);
+  }
+});
+
+test('role and flag masks hide moves', async () => {
+  const noExternal = await render({ roleMask: ~(1 << 2) });
+  const noArcs = await render({ hiddenFlags: 16 });
+  const noPerimeter = await render({ roleMask: ~(1 << 1) });
+  expect([lit(noExternal.left), lit(noExternal.right)]).toEqual([true, false]);
+  expect([lit(noArcs.left), lit(noArcs.right)]).toEqual([true, false]);
+  expect([lit(noPerimeter.left), lit(noPerimeter.right)]).toEqual([false, true]);
+});
+
+test('colour modes feature, speed, tool and layer time are chosen by uniform', async () => {
+  const feature = await render({ colorMode: FEATURE });
+  const speed = await render({ colorMode: SPEED });
+  const tool = await render({ colorMode: TOOL });
+  const layerTime = await render({ colorMode: LAYER_TIME });
+  for (const r of [feature, speed, tool, layerTime]) expect(r.error).toBe(0);
+  // Perimeter yellow (255,230,77) left, external perimeter orange (255,125,56) right.
+  expect(feature.left[1]).toBeGreaterThan(feature.right[1] + 40);
+  // Tool 0 orange, tool 1 blue.
+  expect(tool.left[0]).toBeGreaterThan(tool.left[2]);
+  expect(tool.right[2]).toBeGreaterThan(tool.right[0]);
+  // Speed: 28 mm/s left is the low end (blue), 280 mm/s right the high end (red).
+  expect(speed.ranges.speed[0]).toBeCloseTo(28, 3);
+  expect(speed.ranges.speed[1]).toBeCloseTo(280, 2);
+  expect(speed.left[2]).toBeGreaterThan(speed.left[0]);
+  expect(speed.right[0]).toBeGreaterThan(speed.right[2]);
+  // Layer time: layer 0 (left, 8.08 s) is the high end, layer 1 (right, 0.88 s) the low end.
+  expect(layerTime.ranges.layerTime[0]).toBeCloseTo(0.88, 4);
+  expect(layerTime.ranges.layerTime[1]).toBeCloseTo(8.08, 4);
+  expect(layerTime.left[0]).toBeGreaterThan(layerTime.left[2]);
+  expect(layerTime.right[2]).toBeGreaterThan(layerTime.right[0]);
+  // A wider colour range maps both speeds to the low end.
+  const wide = await render({ colorMode: SPEED, colorRange: [0, 1e4] });
+  expect(wide.right[2]).toBeGreaterThan(wide.right[0]);
+});

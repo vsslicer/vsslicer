@@ -30,14 +30,21 @@ export interface Layer {
 /**
  * A command the parser keeps by name but does not interpret (unknown or out-of-scope commands,
  * pauses such as M600). Interpreted modal commands go to the state-change table instead.
+ * The one comment kept as a marker is `; ESTIMATOR_ADD_TIME <seconds> [label]` (klipper_estimator's
+ * macro time), named `ESTIMATOR_ADD_TIME`.
  */
 export interface Marker {
-  /** Command word as written, upper-cased: `M486`, `M620`, `EXCLUDE_OBJECT_START`. */
+  /** Command word as written, upper-cased: `M486`, `M620`, `EXCLUDE_OBJECT_START`, `G4`. */
   name: string;
   /** Offset of the line in the decoded text. */
   fileOffset: number;
   /** Global index of the next move after the marker (`moveCount` if none follows). */
   moveIndex: number;
+  /**
+   * Seconds the command takes by itself, >= 0, on `G4` (the dwell as the file's flavour reads it,
+   * 0 when it states none) and `ESTIMATOR_ADD_TIME` markers; absent on every other marker.
+   */
+  seconds?: number;
 }
 
 /** Image formats of an embedded thumbnail; `data` holds the file's bytes (checked against the format's magic). */

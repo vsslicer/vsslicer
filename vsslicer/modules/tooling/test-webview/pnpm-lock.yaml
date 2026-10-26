@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@vsslicer/webview-kit':
+        specifier: ^0.5.0
+        version: 0.5.0
     devDependencies:
       '@playwright/test':
         specifier: 1.64.1
@@ -991,6 +995,10 @@ packages:
     resolution: {integrity: sha512-EyT+lV5QJLDDFWyxL4whBJwvsVhBze7Yx0rPPzGDYx1nGeha5hG/MkV9F7ttwqVF49/1F5VBI0iYMJdqc2/Jcw==}
     engines: {node: '>=24'}
     hasBin: true
+
+  '@vsslicer/webview-kit@0.5.0':
+    resolution: {integrity: sha512-yIrQRDLStzuUY/+phv11cl92cAnamhTOhAHjT1dEEpwNp4noPXzmI3E0RVaOKM4dz0ZWB741xNV4Mhe3SWqe4g==}
+    engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3376,6 +3384,8 @@ snapshots:
       - eslint-import-resolver-webpack
       - jiti
       - supports-color
+
+  '@vsslicer/webview-kit@0.5.0': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
