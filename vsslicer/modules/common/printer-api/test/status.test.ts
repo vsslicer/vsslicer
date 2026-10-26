@@ -277,6 +277,60 @@ describe('PrinterStatus', () => {
     expect(cuts({ materials: [{ tray: '0-0', type: 'PLA' }] })).not.toContainEqual(typeCut);
   });
 
+  test('a heater or tray id cut to the cap still merges when the next push sends it in full (PRN-446)', () => {
+    const long = 'h'.repeat(STATUS_LIMITS.id + 44);
+    const base = createPrinterStatus({
+      ...h2c,
+      heaters: [{ id: long, kind: 'nozzle', current: 20 }],
+      materials: [{ tray: long }],
+    });
+    expect(base.truncations).toContainEqual({ field: 'heaters[0].id', reason: 'tooLong' });
+    let s = base;
+    for (const current of [200, 210])
+      s = mergeStatus(s, { heaters: [{ id: long, current }], materials: [{ tray: long, remain: current / 10 }] });
+    expect(s.heaters).toEqual([{ id: long.slice(0, STATUS_LIMITS.id), kind: 'nozzle', current: 210 }]);
+    expect(s.materials).toEqual([{ tray: long.slice(0, STATUS_LIMITS.id), remain: 21 }]);
+    expect(s.truncations).toContainEqual({ field: 'heaters[0].id', reason: 'tooLong' });
+    expect(s.truncations).toContainEqual({ field: 'materials[0].tray', reason: 'tooLong' });
+    // bounds: a 10^6-character key costs one cut, and the result keeps the cap
+    const huge = 'h'.repeat(1_000_000);
+    const h = mergeStatus(createPrinterStatus({ ...h2c, heaters: [{ id: huge, kind: 'bed', current: 20 }] }), {
+      heaters: [{ id: huge, current: 30 }],
+    });
+    expect(h.heaters).toHaveLength(1);
+    expect(h.heaters[0]?.id).toHaveLength(STATUS_LIMITS.id);
+  });
+
+  test('a null or non-object list item is refused with InvalidStatusError, in create and merge (PRN-447)', () => {
+    const refused = (f: () => unknown, field: string) => {
+      const err = (() => {
+        try {
+          f();
+        } catch (e) {
+          return e;
+        }
+      })();
+      expect(err).toBeInstanceOf(InvalidStatusError);
+      expect(err).toMatchObject({ field, reason: 'invalidValue' });
+    };
+    const base = createPrinterStatus(h2c);
+    for (const bad of [null, 7, 'x']) {
+      for (const list of ['heaters', 'materials', 'notifications', 'toolheads'] as const)
+        refused(() => createPrinterStatus({ ...h2c, [list]: [bad] } as never), `${list}[0]`);
+      refused(
+        () => createPrinterStatus({ ...h2c, toolheads: [{ index: 0, extruders: [bad] }] } as never),
+        'toolheads[0].extruders[0]',
+      );
+      for (const list of ['heaters', 'materials', 'toolheads'] as const)
+        refused(() => mergeStatus(base, { [list]: [bad] } as never), `${list}[0]`);
+      refused(() => mergeStatus(base, { notifications: [bad] } as never), 'notifications[0]');
+      refused(
+        () => mergeStatus(base, { toolheads: [{ index: 0, extruders: [{ index: 0 }, bad] }] } as never),
+        'toolheads[0].extruders[1]',
+      );
+    }
+  });
+
   test('hostile input: a 10^7-element array costs reads bounded by the cap', () => {
     let reads = 0;
     const huge = new Proxy(new Array<unknown>(10_000_000), {

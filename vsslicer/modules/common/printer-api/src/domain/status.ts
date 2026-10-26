@@ -124,6 +124,12 @@ export class InvalidStatusError extends PrinterError {
   }
 }
 
+/** Refuses a list item that is not an object, so `[null]` throws InvalidStatusError, not a TypeError. */
+function item<T>(field: string, v: T): T {
+  if (typeof v !== 'object' || v === null) throw new InvalidStatusError(field, 'invalidValue');
+  return v;
+}
+
 class Builder {
   readonly truncations: Truncation[] = [];
 
@@ -134,7 +140,7 @@ class Builder {
     const n = v.length;
     if (n > max) this.truncations.push({ field, reason: 'tooMany' });
     const out: R[] = [];
-    for (let i = 0; i < Math.min(n, max); i++) out.push(each(v[i] as T, `${field}[${i}]`));
+    for (let i = 0; i < Math.min(n, max); i++) out.push(each(item(`${field}[${i}]`, v[i]), `${field}[${i}]`));
     return Object.freeze(out);
   }
 
@@ -269,13 +275,17 @@ function byKey<T, K extends keyof T>(
   patch: readonly Partial<T>[] | undefined,
   key: K,
   max: number,
+  field: string,
 ): T[] {
   const out = [...base];
   if (patch === undefined) return out;
-  if (!Array.isArray(patch)) throw new InvalidStatusError(String(key), 'invalidValue');
+  if (!Array.isArray(patch)) throw new InvalidStatusError(field, 'invalidValue');
   for (let i = 0; i < Math.min(patch.length, max); i++) {
-    const p = patch[i] as Partial<T>;
-    const at = out.findIndex((x) => x[key] === p[key]);
+    const p = item(`${field}[${i}]`, patch[i] as Partial<T>);
+    const k = p[key];
+    // a key the base holds cut (tooLong) matches the full key the next push sends
+    const cut = typeof k === 'string' ? k.slice(0, STATUS_LIMITS.id) : k;
+    const at = out.findIndex((x) => x[key] === cut);
     if (at === -1) out.push(p as T);
     else out[at] = { ...out[at], ...p } as T;
   }
@@ -318,20 +328,22 @@ function replaces(base: unknown, patch: unknown, path: readonly string[]): boole
 /** Applies a partial push to a status and returns a new validated status; the base is not changed. */
 export function mergeStatus(base: PrinterStatus, patch: StatusPatch): PrinterStatus {
   const L = STATUS_LIMITS;
-  const toolheads = byKey(base.toolheads, patch.toolheads, 'index', L.toolheads + 1).map((t) => {
+  const toolheads = byKey(base.toolheads, patch.toolheads, 'index', L.toolheads + 1, 'toolheads').map((t, i) => {
     const old = base.toolheads.find((o) => o.index === t.index);
     const extruders =
-      old && t.extruders !== old.extruders ? byKey(old.extruders, t.extruders, 'index', L.extruders + 1) : t.extruders;
+      old && t.extruders !== old.extruders
+        ? byKey(old.extruders, t.extruders, 'index', L.extruders + 1, `toolheads[${i}].extruders`)
+        : t.extruders;
     return { ...t, extruders };
   });
   const merged = {
     state: patch.state ?? base.state,
     vendorState: patch.vendorState ?? base.vendorState,
-    heaters: byKey(base.heaters, patch.heaters, 'id', L.heaters + 1),
+    heaters: byKey(base.heaters, patch.heaters, 'id', L.heaters + 1, 'heaters'),
     toolheads,
     job: patch.job === null ? undefined : patch.job === undefined ? base.job : ({ ...base.job, ...patch.job } as Job),
     position: patch.position === null ? undefined : (patch.position ?? base.position),
-    materials: byKey(base.materials, patch.materials, 'tray', L.materials + 1),
+    materials: byKey(base.materials, patch.materials, 'tray', L.materials + 1, 'materials'),
     notifications: patch.notifications ?? base.notifications,
   };
   const fresh = createPrinterStatus(merged);
