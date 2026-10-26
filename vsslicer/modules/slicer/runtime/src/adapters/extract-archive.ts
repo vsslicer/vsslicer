@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { createReadStream } from 'node:fs';
+import { createHash } from 'node:crypto';
 import {
   chmod,
   lstat,
@@ -46,6 +46,11 @@ export interface ExtractResult {
   bytes: number;
 }
 
+export interface ExtractOptions {
+  /** Hex sha256 of the archive file, checked before anything is extracted. Required for tar.gz. */
+  sha256?: string;
+}
+
 export class ArchiveError extends Error {
   override name = 'ArchiveError';
 }
@@ -57,44 +62,58 @@ const CHUNK = 16 * 1024; // inflate input per push: at most ~16 MiB of output pe
  * Writes into a sibling staging directory and renames it to `dest` only on success; any failure removes it.
  * Rejects `..`, absolute and drive paths, symlinks resolving outside `dest`, hard links, device files,
  * duplicate paths, encrypted or zip64 zips, bad tar checksums and anything past `limits`.
+ * A tar.gz needs `opts.sha256` (its inflated size is bounded only by the ratio, so an unverified one is refused);
+ * a given sha256 is verified for a zip too.
  */
 export async function extractArchive(
   archive: string,
   dest: string,
   limits: Partial<ExtractLimits> = {},
+  opts: ExtractOptions = {},
 ): Promise<ExtractResult> {
   const lim = checkLimits(limits);
+  if (opts.sha256 !== undefined && !/^[0-9a-f]{64}$/i.test(opts.sha256))
+    throw new RangeError('sha256: 64 hex digits required');
   if (await exists(dest)) throw new ArchiveError(`destination already exists: ${dest}`);
   const fh = await open(archive, 'r');
-  let format: ExtractResult['format'];
+  // Everything after `open` sits inside this try, so every path closes the handle.
   try {
+    let format: ExtractResult['format'];
     const magic = Buffer.alloc(4);
     await fh.read(magic, 0, 4, 0);
     if (magic.readUInt32LE(0) === 0x04034b50) format = 'zip';
     else if (magic[0] === 0x1f && magic[1] === 0x8b) format = 'tar.gz';
     else throw new ArchiveError('not a zip or gzip archive');
-  } catch (e) {
-    await fh.close();
-    throw e;
-  }
-  await mkdir(dirname(dest), { recursive: true });
-  const staging = await mkdtemp(join(dirname(dest), `.${basename(dest)}.partial-`));
-  const out = new Output(staging, lim);
-  try {
-    if (format === 'zip') await readZip(fh, out, lim);
-    else {
-      await fh.close();
-      await readTarGz(archive, out, lim);
+    if (format === 'tar.gz' && opts.sha256 === undefined)
+      throw new ArchiveError('a tar.gz needs a sha256 to be checked before extraction');
+    if (opts.sha256 !== undefined) {
+      const got = await sha256Of(fh);
+      if (got !== opts.sha256.toLowerCase())
+        throw new ArchiveError(`archive sha256 ${got} does not match the expected ${opts.sha256.toLowerCase()}`);
     }
-    await out.finish();
-    await rename(staging, dest);
-    return { format, entries: out.entries, bytes: out.bytes };
-  } catch (e) {
-    await rm(staging, { recursive: true, force: true });
-    throw e;
+    await mkdir(dirname(dest), { recursive: true });
+    const staging = await mkdtemp(join(dirname(dest), `.${basename(dest)}.partial-`));
+    const out = new Output(staging, lim);
+    try {
+      if (format === 'zip') await readZip(fh, out, lim);
+      else await readTarGz(fh, out, lim);
+      await out.finish();
+      await rename(staging, dest);
+      return { format, entries: out.entries, bytes: out.bytes };
+    } catch (e) {
+      await rm(staging, { recursive: true, force: true });
+      throw e;
+    }
   } finally {
     await fh.close().catch(() => undefined);
   }
+}
+
+// Hash, zip read and tar.gz read all use the one descriptor, so the verified bytes are the extracted bytes.
+async function sha256Of(fh: FileHandle): Promise<string> {
+  const h = createHash('sha256');
+  for await (const c of fh.createReadStream({ start: 0, autoClose: false })) h.update(c as Buffer);
+  return h.digest('hex');
 }
 
 function checkLimits(over: Partial<ExtractLimits>): ExtractLimits {
@@ -192,7 +211,15 @@ class Output {
   async file(name: string, mode: number): Promise<FileSink> {
     const path = this.claim(name, 'file');
     if (dirname(path) !== this.root) await this.mkdirs(dirname(path));
-    const fh = await open(path, 'wx', 0o600);
+    let fh: FileHandle;
+    try {
+      fh = await open(path, 'wx', 0o600);
+    } catch (e) {
+      // names aliased by Unicode normalisation or case reach the same file
+      if ((e as NodeJS.ErrnoException).code === 'EEXIST')
+        throw new ArchiveError(`${name}: collides with another entry`);
+      throw e;
+    }
     let size = 0;
     return {
       write: async (b: Uint8Array) => {
@@ -427,7 +454,9 @@ class Reader {
   /** Up to `max` bytes (at least one), or null at end of stream. */
   async some(max: number): Promise<Buffer | null> {
     if (this.buf.length === 0) {
-      const r = await this.it.next();
+      const r = await this.it.next().catch((e: Error) => {
+        throw new ArchiveError(`gzip: ${e.message}`); // only errors raised by gunzip or the file read get this label
+      });
       if (r.done) return null;
       this.buf = r.value;
       this.out += r.value.length;
@@ -490,22 +519,21 @@ function parsePax(b: Buffer): Record<string, string> {
   return rec;
 }
 
-async function readTarGz(archive: string, out: Output, lim: ExtractLimits): Promise<void> {
-  const file = createReadStream(archive, { highWaterMark: CHUNK });
+async function readTarGz(fh: FileHandle, out: Output, lim: ExtractLimits): Promise<void> {
+  const size = (await fh.stat()).size;
+  const file = fh.createReadStream({ start: 0, autoClose: false, highWaterMark: CHUNK });
   const gunzip = createGunzip({ chunkSize: CHUNK });
   file.on('error', (e) => gunzip.destroy(e));
   file.pipe(gunzip);
   const r = new Reader(gunzip[Symbol.asyncIterator]());
-  const ratio = () => checkRatio(r.out, file.bytesRead, lim, 'gzip');
+  const ratio = () => checkRatio(r.out, size, lim, 'gzip');
   try {
     let headers = 0;
     let longName: string | undefined;
     let longLink: string | undefined;
     let pax: Record<string, string> = {};
     for (;;) {
-      const h = await r.exact(512).catch((e: Error) => {
-        throw e instanceof ArchiveError ? e : new ArchiveError(`gzip: ${e.message}`);
-      });
+      const h = await r.exact(512);
       ratio();
       if (h.every((v) => v === 0)) return; // end-of-archive marker; trailing data is not read
       if (++headers > lim.maxEntries * 2) throw new ArchiveError(`more than ${lim.maxEntries} entries`);
@@ -556,8 +584,6 @@ async function readTarGz(archive: string, out: Output, lim: ExtractLimits): Prom
         throw new ArchiveError(`${name}: device files and fifos are refused`);
       else throw new ArchiveError(`${name}: tar entry type ${JSON.stringify(type)} not supported`);
     }
-  } catch (e) {
-    throw e instanceof ArchiveError ? e : new ArchiveError(`gzip: ${(e as Error).message}`);
   } finally {
     file.destroy();
     gunzip.destroy();

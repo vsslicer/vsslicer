@@ -1,21 +1,42 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import {
+  chmodSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
   readlinkSync,
   readdirSync,
+  renameSync,
   rmSync,
   statSync,
   writeFileSync,
 } from 'node:fs';
-import { randomBytes } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { zipSync, type Zippable } from 'fflate';
-import { afterAll, describe, expect, test } from 'vitest';
+import { afterAll, describe, expect, test, vi } from 'vitest';
 import { ArchiveError, extractArchive, safeParts } from '../src/adapters/extract-archive.ts';
+
+// A hook run when a sha256 digest is taken, to swap the archive between the check and the extraction.
+const digestHook: { run?: () => void } = {};
+vi.mock('node:crypto', async (orig) => {
+  const m = await orig<typeof import('node:crypto')>();
+  return {
+    ...m,
+    createHash: (alg: string) => {
+      const h = m.createHash(alg);
+      const digest = h.digest.bind(h) as (enc?: never) => unknown;
+      (h as unknown as { digest: unknown }).digest = (enc?: never) => {
+        const r = digest(enc);
+        digestHook.run?.();
+        return r;
+      };
+      return h;
+    },
+  };
+});
 
 const tmp = mkdtempSync(join(tmpdir(), 'slc13-'));
 afterAll(() => rmSync(tmp, { recursive: true, force: true }));
@@ -77,10 +98,14 @@ function zip(files: Zippable): string {
   return p;
 }
 
+const sha = (p: string) => createHash('sha256').update(readFileSync(p)).digest('hex');
+/** extractArchive with the archive's own sha256, as a caller holding a manifest would pass. */
+const extract = (a: string, dest: string, limits = {}) => extractArchive(a, dest, limits, { sha256: sha(a) });
+
 async function rejects(archive: string, match: RegExp, limits = {}) {
   const parent = fresh();
   const dest = join(parent, 'out');
-  await expect(extractArchive(archive, dest, limits)).rejects.toThrow(match);
+  await expect(extract(archive, dest, limits)).rejects.toThrow(match);
   expect(readdirSync(parent)).toEqual([]); // all-or-nothing: no dest, no staging dir left
 }
 
@@ -93,7 +118,7 @@ describe('extractArchive: zip', () => {
       'share/readme.txt': [Buffer.from('hi'), ZIP_FILE(0o644)],
       'bin/readme': [Buffer.from('../share/readme.txt'), ZIP_LINK],
     });
-    const r = await extractArchive(a, dest);
+    const r = await extract(a, dest);
     expect(r).toEqual({ format: 'zip', entries: 4, bytes: 12 });
     expect(readFileSync(join(dest, 'bin/readme'), 'utf8')).toBe('hi');
     if (posix) {
@@ -157,14 +182,14 @@ describe('extractArchive: zip', () => {
     await rejects(a, /ratio over 10:1/, { maxRatio: 10 });
     // at the 1 MiB floor any ratio passes; one byte more is refused
     const floor = zip({ f: new Uint8Array(1024 ** 2) });
-    expect((await extractArchive(floor, join(fresh(), 'out'))).bytes).toBe(1024 ** 2);
+    expect((await extract(floor, join(fresh(), 'out'))).bytes).toBe(1024 ** 2);
     await rejects(zip({ f: new Uint8Array(1024 ** 2 + 1) }), /ratio/);
   });
 
   test('entry, file, total and path bounds', async () => {
     const four = zip({ a: Buffer.from('1'), b: Buffer.from('2'), c: Buffer.from('3'), d: Buffer.from('4') });
     await rejects(four, /more than 3 entries/, { maxEntries: 3 });
-    expect((await extractArchive(four, join(fresh(), 'out'), { maxEntries: 4 })).entries).toBe(4);
+    expect((await extract(four, join(fresh(), 'out'), { maxEntries: 4 })).entries).toBe(4);
     await rejects(zip({ f: Buffer.alloc(11) }), /larger than 10/, { maxFileBytes: 10 });
     await rejects(zip({ f: Buffer.alloc(6), g: Buffer.alloc(6) }), /11 bytes in total/, { maxTotalBytes: 11 });
     await rejects(zip({ ['x'.repeat(65)]: Buffer.from('') }), /longer than 64/, { maxPathBytes: 64 });
@@ -180,7 +205,7 @@ describe('extractArchive: tar.gz', () => {
       { name: 'pkg/lib.so', data: 'lib', mode: 0o644 },
       { name: 'pkg/bin/lib', type: '2', link: '../lib.so' },
     ]);
-    expect(await extractArchive(a, dest)).toEqual({ format: 'tar.gz', entries: 4, bytes: 13 });
+    expect(await extract(a, dest)).toEqual({ format: 'tar.gz', entries: 4, bytes: 13 });
     expect(readFileSync(join(dest, 'pkg/bin/lib'), 'utf8')).toBe('lib');
     if (posix) expect(statSync(join(dest, 'pkg/bin/engine')).mode & 0o777).toBe(0o755);
   });
@@ -194,7 +219,7 @@ describe('extractArchive: tar.gz', () => {
       return `${len}${body}`;
     };
     const dest = join(fresh(), 'out');
-    await extractArchive(
+    await extract(
       tarGz([
         { name: 'PaxHeader', type: 'x', data: rec('path', long) },
         { name: 'short', data: 'x' },
@@ -284,6 +309,112 @@ describe('extractArchive: tar.gz', () => {
     const files = Array.from({ length: 5 }, (_, i) => ({ name: `f${i}`, data: 'x' }));
     await rejects(tarGz(files), /more than 4 entries/, { maxEntries: 4 });
     await rejects(tarGz([{ name: 'f', data: Buffer.alloc(11) }]), /larger than 10/, { maxFileBytes: 10 });
+  });
+});
+
+describe('extractArchive: tar.gz sha256 and size bound', () => {
+  const bomb = () => tarGz([{ name: 'bomb', data: Buffer.alloc(4 * 1024 ** 2) }]);
+
+  test('refuses a tar.gz without a sha256, and leaves nothing', async () => {
+    const parent = fresh();
+    await expect(extractArchive(bomb(), join(parent, 'out'))).rejects.toThrow(/needs a sha256/);
+    expect(readdirSync(parent)).toEqual([]);
+  });
+
+  test('refuses a wrong sha256 for tar.gz and zip before extracting', async () => {
+    for (const a of [tarGz([{ name: 'f', data: 'x' }]), zip({ f: Buffer.from('x') })]) {
+      const parent = fresh();
+      await expect(extractArchive(a, join(parent, 'out'), {}, { sha256: '0'.repeat(64) })).rejects.toThrow(
+        /does not match/,
+      );
+      expect(readdirSync(parent)).toEqual([]);
+    }
+    await expect(extractArchive('x', join(fresh(), 'out'), {}, { sha256: 'zz' })).rejects.toThrow(RangeError);
+  });
+
+  test('a tar.gz bomb over the ratio is refused even with a matching sha256', async () => {
+    await rejects(bomb(), /ratio over 10:1/, { maxRatio: 10 });
+  });
+});
+
+// Needs a volume where NFC and NFD names are one file (APFS, HFS+; NTFS does not normalise): probe it.
+const aliasing = (() => {
+  const d = mkdtempSync(join(tmp, 'alias-'));
+  writeFileSync(join(d, '\u00e9'), '');
+  return readdirSync(d).length === 1 && statSync(join(d, 'e\u0301'), { throwIfNoEntry: false }) !== undefined;
+})();
+describe.skipIf(!aliasing)('extractArchive: aliased names', () => {
+  test('a normalisation collision is an ArchiveError, in zip and tar.gz, without the gzip label', async () => {
+    const nfc = '\u00e9';
+    const nfd = 'e\u0301';
+    await rejects(zip({ [nfc]: Buffer.from('1'), [nfd]: Buffer.from('2') }), /collides/);
+    const err = await extract(
+      tarGz([
+        { name: nfc, data: '1' },
+        { name: nfd, data: '2' },
+      ]),
+      join(fresh(), 'out'),
+    ).catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(ArchiveError);
+    expect((err as Error).message).toMatch(/collides/);
+    expect((err as Error).message).not.toMatch(/gzip/);
+  });
+});
+
+// Case aliasing: NTFS and default APFS fold case, ext4 does not: probe it.
+const caseFolds = (() => {
+  const d = mkdtempSync(join(tmp, 'case-'));
+  writeFileSync(join(d, 'A'), '');
+  return statSync(join(d, 'a'), { throwIfNoEntry: false }) !== undefined;
+})();
+describe.skipIf(!caseFolds)('extractArchive: case-aliased names', () => {
+  test('A and a are an ArchiveError, in zip and tar.gz, without the gzip label', async () => {
+    await rejects(zip({ A: Buffer.from('1'), a: Buffer.from('2') }), /collides/);
+    const err = await extract(
+      tarGz([
+        { name: 'A', data: '1' },
+        { name: 'a', data: '2' },
+      ]),
+      join(fresh(), 'out'),
+    ).catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(ArchiveError);
+    expect((err as Error).message).toMatch(/collides/);
+    expect((err as Error).message).not.toMatch(/gzip/);
+  });
+});
+
+describe.skipIf(!posix)('extractArchive: the verified bytes are the extracted bytes', () => {
+  test.each([
+    ['tar.gz', () => tarGz([{ name: 'good', data: 'g' }]), () => tarGz([{ name: 'evil', data: 'e' }])],
+    ['zip', () => zip({ good: Buffer.from('g') }), () => zip({ evil: Buffer.from('e') })],
+  ])('%s swapped on disk after the digest is still extracted from the checked file', async (_f, mk, mkEvil) => {
+    const good = mk();
+    const evil = mkEvil();
+    const sum = sha(good);
+    digestHook.run = () => renameSync(evil, good);
+    const parent = fresh();
+    try {
+      await extractArchive(good, join(parent, 'out'), {}, { sha256: sum });
+    } finally {
+      digestHook.run = undefined;
+    }
+    expect(readdirSync(join(parent, 'out'))).toEqual(['good']);
+  });
+});
+
+describe.skipIf(!posix || process.getuid?.() === 0)('extractArchive: the handle is closed when staging fails', () => {
+  test('a parent that cannot be written leaves no open descriptor', async () => {
+    const parent = fresh();
+    chmodSync(parent, 0o500);
+    const fds = () => readdirSync('/dev/fd').length;
+    const archive = zip({ f: Buffer.from('x') });
+    const before = fds();
+    try {
+      await expect(extractArchive(archive, join(parent, 'out'))).rejects.toThrow(/EACCES/);
+    } finally {
+      chmodSync(parent, 0o700);
+    }
+    expect(fds()).toBe(before);
   });
 });
 
