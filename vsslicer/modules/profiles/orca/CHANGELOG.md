@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-128: 20 Orca and Bambu tuples (printer, filament, process) checked against OrcaSlicer CLI exports and hand-checked values (`test/tuples/`, upstream fixtures with PROVENANCE).
 - PRF-204: the Orca tree reader and folder loader cap diagnostics at 1,000 (plus one suppressed line) and count every folder entry against `maxFiles`.
 - PRF-53: native export to Orca and Bambu Studio preset JSON: `readOrcaJson` keeps each member's source text; `writeOrcaJson` and `writeOrcaUserPreset` write `inherits`, `from`, `"nil"` and keyed extruder-variant values back to arrays; unchanged presets export byte for byte.
 - PRF-29: `readOrcaUserPresets` reads `user/<id>/{machine,process,filament}` presets with their `.info` sidecars, links `inherits` to vendor (or other user) presets, sets `meta.base_version` from the sidecar `base_id`, and keeps a preset with a missing parent as standalone with a warning. `loadProfileTree` takes optional file suffixes (to read `.info`). The `base/` custom roots of each type folder are read first; a preset is named by its file stem (an inner `name` that differs warns `name-mismatch`); one named like a vendor preset of its type is skipped as in Orca; other files under `user/` warn instead of vanishing.

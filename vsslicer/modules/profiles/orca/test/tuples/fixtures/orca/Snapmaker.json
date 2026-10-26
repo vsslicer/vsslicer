@@ -1,0 +1,58 @@
+{
+    "name": "Snapmaker",
+    "version": "02.04.00.19",
+    "force_update": "0",
+    "description": "Snapmaker configurations",
+    "machine_model_list": [
+        {
+            "name": "Snapmaker J1",
+            "sub_path": "machine/Snapmaker J1.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "fdm_process_idex",
+            "sub_path": "process/fdm_process_idex.json"
+        },
+        {
+            "name": "0.20 Standard @Snapmaker J1 (0.4 nozzle)",
+            "sub_path": "process/0.20 Standard @Snapmaker J1 (0.4 nozzle).json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/fdm_filament_pla.json"
+        },
+        {
+            "name": "Snapmaker J1 PLA @base",
+            "sub_path": "filament/Snapmaker J1 PLA @base.json"
+        },
+        {
+            "name": "Snapmaker J1 PLA",
+            "sub_path": "filament/Snapmaker J1 PLA.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_common",
+            "sub_path": "machine/fdm_common.json"
+        },
+        {
+            "name": "fdm_idex",
+            "sub_path": "machine/fdm_idex.json"
+        },
+        {
+            "name": "Snapmaker J1 (0.4 nozzle)",
+            "sub_path": "machine/Snapmaker J1 (0.4 nozzle).json"
+        }
+    ]
+}

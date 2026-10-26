@@ -1,0 +1,46 @@
+{
+    "name": "RatRig",
+    "version": "02.04.00.07",
+    "force_update": "0",
+    "description": "RatRig configurations",
+    "machine_model_list": [
+        {
+            "name": "RatRig V-Core 3 200",
+            "sub_path": "machine/RatRig V-Core 3 200.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "fdm_process_ratrig_common",
+            "sub_path": "process/fdm_process_ratrig_common.json"
+        },
+        {
+            "name": "0.20mm Standard @RatRig",
+            "sub_path": "process/0.20mm Standard @RatRig.json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "Generic PLA @RatRig",
+            "sub_path": "filament/Generic PLA @RatRig.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_machine_common",
+            "sub_path": "machine/fdm_machine_common.json"
+        },
+        {
+            "name": "fdm_klipper_common",
+            "sub_path": "machine/fdm_klipper_common.json"
+        },
+        {
+            "name": "RatRig V-Core 3 200 0.4 nozzle",
+            "sub_path": "machine/RatRig V-Core 3 200 0.4 nozzle.json"
+        }
+    ]
+}

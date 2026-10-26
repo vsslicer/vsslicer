@@ -1,0 +1,23 @@
+{
+    "name": "OrcaFilamentLibrary",
+    "version": "02.04.00.16",
+    "force_update": "0",
+    "description": "Orca Filament Library",
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/base/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/base/fdm_filament_pla.json"
+        },
+        {
+            "name": "Generic PLA @System",
+            "sub_path": "filament/Generic PLA @System.json"
+        }
+    ],
+    "process_list": [],
+    "machine_model_list": [],
+    "machine_list": []
+}

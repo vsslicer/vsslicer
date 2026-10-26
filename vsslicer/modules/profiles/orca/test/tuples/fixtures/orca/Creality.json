@@ -1,0 +1,70 @@
+{
+    "name": "Creality",
+    "version": "02.03.02.87",
+    "force_update": "0",
+    "description": "Creality configurations",
+    "machine_model_list": [
+        {
+            "name": "Creality CR-10",
+            "sub_path": "machine/Creality CR-10.json"
+        },
+        {
+            "name": "Creality CR-10 Max",
+            "sub_path": "machine/Creality CR-10 Max.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "fdm_process_creality_common",
+            "sub_path": "process/fdm_process_creality_common.json"
+        },
+        {
+            "name": "0.20mm Standard @Creality CR-10 0.4 nozzle",
+            "sub_path": "process/0.20mm Standard @Creality CR-10 0.4 nozzle.json"
+        },
+        {
+            "name": "0.20mm Standard @Creality CR10Max",
+            "sub_path": "process/0.20mm Standard @Creality CR10Max.json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/fdm_filament_pla.json"
+        },
+        {
+            "name": "CR-PLA @CR-10-all",
+            "sub_path": "filament/CR-PLA @CR-10-all.json"
+        },
+        {
+            "name": "Generic PLA @Creality",
+            "sub_path": "filament/Generic PLA @Creality.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_machine_common",
+            "sub_path": "machine/fdm_machine_common.json"
+        },
+        {
+            "name": "fdm_creality_common",
+            "sub_path": "machine/fdm_creality_common.json"
+        },
+        {
+            "name": "Creality CR-10 0.4 nozzle",
+            "sub_path": "machine/Creality CR-10 0.4 nozzle.json"
+        },
+        {
+            "name": "Creality CR-10 Max 0.4 nozzle",
+            "sub_path": "machine/Creality CR-10 Max 0.4 nozzle.json"
+        }
+    ]
+}

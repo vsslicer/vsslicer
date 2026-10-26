@@ -1,0 +1,59 @@
+{
+    "name": "Flashforge",
+    "url": "",
+    "version": "02.04.00.12",
+    "force_update": "0",
+    "description": "Flashforge configurations",
+    "machine_model_list": [
+        {
+            "name": "Flashforge Adventurer 3 Series",
+            "sub_path": "machine/Flashforge Adventurer 3 Series.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "fdm_process_common",
+            "sub_path": "process/fdm_process_common.json"
+        },
+        {
+            "name": "fdm_process_flashforge_common",
+            "sub_path": "process/fdm_process_flashforge_common.json"
+        },
+        {
+            "name": "0.20mm Standard @Flashforge AD3 0.4 Nozzle",
+            "sub_path": "process/0.20mm Standard @Flashforge AD3 0.4 Nozzle.json"
+        }
+    ],
+    "filament_list": [
+        {
+            "name": "fdm_filament_common",
+            "sub_path": "filament/fdm_filament_common.json"
+        },
+        {
+            "name": "fdm_filament_pla",
+            "sub_path": "filament/fdm_filament_pla.json"
+        },
+        {
+            "name": "Flashforge PLA",
+            "sub_path": "filament/Flashforge/Flashforge PLA @FF AD3.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "fdm_machine_common",
+            "sub_path": "machine/fdm_machine_common.json"
+        },
+        {
+            "name": "fdm_flashforge_common",
+            "sub_path": "machine/fdm_flashforge_common.json"
+        },
+        {
+            "name": "fdm_adventurer3_common",
+            "sub_path": "machine/fdm_adventurer3_common.json"
+        },
+        {
+            "name": "Flashforge Adventurer 3 Series 0.4 Nozzle",
+            "sub_path": "machine/Flashforge Adventurer 3 Series 0.4 nozzle.json"
+        }
+    ]
+}
