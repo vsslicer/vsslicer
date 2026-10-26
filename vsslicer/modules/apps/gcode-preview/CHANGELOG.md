@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0
 
 - GCP-39: diagnostics (up to 10,000, with go-to-offset) and flags (assumed limits and flavour, estimate, invisible macros) in the side panel; lazy G-code text pane for plain local .gcode (64 KiB, 400 lines, 4 KiB per line per read, one read in flight).
 - GCP-110: Playwright snapshots of a Bambu and a PrusaSlicer corpus file through the preview renderer on SwiftShader (`pnpm test:browser`).
