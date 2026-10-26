@@ -2,6 +2,7 @@
 
 ## 0.1.0
 
+- GCP-48: hover, completion and unknown-command warnings from the catalogue (filtered by the status-bar flavour, warnings only when it is known), slicer tag hovers, and for files over 50 MB (which VS Code does not give extensions) a message with "Open in preview"; activates on startup finished to see them. Integration tests per flavour on VS Code 1.100.0 and stable.
 - GCP-47: catalogue entries for Klipper (55, extended commands included), RepRapFirmware (14) and Bambu (24, undocumented and unverified, cited from OrcaSlicer@09aa0114 BBL templates).
 - GCP-46: catalogue entries for Marlin 2 and Prusa Buddy (46: every G/M code the corpus uses, Buddy-only codes marked unverified where unsure).
 - GCP-45: the command catalogue: entry schema (code, parameters, flavours, our own description, source link), validator (sources: reprap.org G-code wiki, marlinfw.org, docs.duet3d.com, the Prusa Buddy and OrcaSlicer repositories, the Klipper reference; G/M/T or Klipper extended-command codes; no duplicate code per flavour), a loader over `catalogue/*.json`, and a lint test over the shipped catalogue.

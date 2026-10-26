@@ -12,6 +12,7 @@
   "files": [
     "dist",
     "!dist/*.meta.json",
+    "catalogue",
     "syntaxes",
     "language-configuration.json",
     "LICENSE",
@@ -82,11 +83,14 @@
     "test:grammar": "vscode-tmgrammar-snap --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode 'test/fixtures/*.gcode'",
     "test:grammar:update": "vscode-tmgrammar-snap --updateSnapshot --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode 'test/fixtures/*.gcode'",
     "bench": "node bench/tokenise.mjs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode"
   },
   "devDependencies": {
+    "@types/mocha": "10.0.10",
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
+    "@vsslicer/test-vscode": "^0.2.3",
     "@vsslicer/tooling": "^0.8.2",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",
@@ -99,6 +103,7 @@
   "prettier": "@vsslicer/tooling/prettier",
   "main": "dist/extension.js",
   "activationEvents": [
-    "onLanguage:gcode"
+    "onLanguage:gcode",
+    "onStartupFinished"
   ]
 }

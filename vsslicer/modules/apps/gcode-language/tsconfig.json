@@ -4,7 +4,7 @@
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["node"]
+    "types": ["node", "mocha"]
   },
   "include": ["src", "test", "bench"]
 }
