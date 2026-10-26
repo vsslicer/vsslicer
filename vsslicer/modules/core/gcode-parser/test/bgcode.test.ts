@@ -56,4 +56,25 @@ describe('bgcodeSource', () => {
     expect(meta?.slicerJson).toBe('{"a":1}');
     expect(parsed.moveCount).toBe(2);
   });
+
+  it('reports the decoded-text offset with each diagnostic (truncated file)', async () => {
+    const body = 'G90\nG1 X1 Y1 E1\n';
+    const head = Buffer.from([0x47, 0x43, 0x44, 0x45, 1, 0, 0, 0, 0, 0]);
+    const b = Buffer.alloc(10 + body.length);
+    b.writeUInt32LE(body.length, 4);
+    b.write(body, 10);
+    b.writeUInt16LE(1, 0);
+    const second = Buffer.from(b);
+    // a whole block, then a second one cut off after 4 bytes of its body
+    const file = new Uint8Array(Buffer.concat([head, b, second.subarray(0, 14)]));
+    const seen: [string, number, number][] = [];
+    let total = 0;
+    for await (const t of bgcodeSource(pieces(file, 7), { onDiagnostic: (d, at) => seen.push([d.code, at, total]) }))
+      total += t.byteLength;
+    // the offset is the text yielded when the problem was reported (the block's own text)
+    expect(seen).toHaveLength(1);
+    expect(seen[0]?.[0]).toBe('truncated');
+    expect(seen[0]?.[1]).toBe(seen[0]?.[2]);
+    expect(seen[0]?.[1]).toBeGreaterThanOrEqual(body.length);
+  });
 });

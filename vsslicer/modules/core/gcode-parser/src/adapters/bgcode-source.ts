@@ -12,8 +12,11 @@ import type { BgcodeDiagnostic, BgcodeMetadata } from '@vsslicer/gcode-bgcode';
 export interface BgcodeSourceOptions {
   /** Called once at the end with every metadata block and the thumbnails. */
   onMetadata?: (metadata: BgcodeMetadata) => void;
-  /** Called for each container problem (bad CRC, undecodable block, truncation); decoding goes on where it can. */
-  onDiagnostic?: (diagnostic: BgcodeDiagnostic) => void;
+  /**
+   * Called for each container problem (bad CRC, undecodable block, truncation); decoding goes on where it can.
+   * `textOffset` is the number of decoded text bytes yielded before the problem.
+   */
+  onDiagnostic?: (diagnostic: BgcodeDiagnostic, textOffset: number) => void;
 }
 
 const codecs = [deflateCodec, heatshrink11Codec, heatshrink12Codec];
@@ -26,9 +29,12 @@ export async function* bgcodeSource(
   source: AsyncIterable<Uint8Array>,
   opts: BgcodeSourceOptions = {},
 ): AsyncGenerator<Uint8Array> {
+  let at = 0;
   for await (const e of bgcodeToGcode(decodeGcodeBlocks(readBgcode(source, codecs)))) {
-    if (e.kind === 'text') yield e.text;
-    else if (e.kind === 'metadata') opts.onMetadata?.(e.metadata);
-    else opts.onDiagnostic?.(e.diagnostic);
+    if (e.kind === 'text') {
+      at += e.text.byteLength;
+      yield e.text;
+    } else if (e.kind === 'metadata') opts.onMetadata?.(e.metadata);
+    else opts.onDiagnostic?.(e.diagnostic, at);
   }
 }

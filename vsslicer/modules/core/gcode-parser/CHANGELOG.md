@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-95: `bgcodeSource` passes the decoded-text offset reached as a second argument to `onDiagnostic`.
 - GCP-89: the parser fills `flavourName` on chunks and on `collect`'s `ParsedFile` with the last flavour name the file states (`;FLAVOR:` or `; gcode_flavor =`); the `flavour` option does not change it.
 
 ## 0.10.1
