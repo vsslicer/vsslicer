@@ -11,3 +11,5 @@
 9. [GCP-106: Describe what gcode-language ships in its README and PROVENANCE](106-describe-what-gcode-language-ships-in-its-readme-and-provena.md)
 10. [GCP-103: Rescan only the edited lines for unknown-command warnings](103-rescan-only-the-edited-lines-for-unknown-command-warnings.md)
 11. [GCP-97: Drive the timeline marker from ToolheadWindow trapezoids and dwells](097-drive-the-timeline-marker-from-toolheadwindow-trapezoids-and.md)
+12. [GCP-108: Give ToolheadWindow a public transfer form and a planner-free sampler entry](108-give-toolheadwindow-a-public-transfer-form-and-a-planner-fre.md)
+13. [GCP-96: Add width, flow, fan and temperature colour modes](096-add-width-flow-fan-and-temperature-colour-modes.md)

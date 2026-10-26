@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-96: Width (mm) and Flow (mm³/s) colour modes with their legends (depends on webview-kit ^0.6.0).
 - GCP-97: the timeline marker follows the planner's acceleration trapezoids and holds still through G4 dwells (`ToolheadWindow` windows built in the host on demand).
 - GCP-40: the error panel has a Retry button that reloads the file after a failed load or worker crash.
 - GCP-102: the webview's slider, toggle and saved-view rules are one pure, tested function (`nextView` in controls.ts).

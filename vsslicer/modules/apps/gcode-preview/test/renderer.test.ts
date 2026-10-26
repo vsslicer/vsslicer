@@ -218,7 +218,7 @@ test('every colour mode draws the corpus; switching modes sets a uniform and upl
 });
 
 test('legend data: gradients carry their range, feature and tool are categories', () => {
-  const ranges = { speed: [10, 200], layerTime: [3, 40] } as const;
+  const ranges = { speed: [10, 200], layerTime: [3, 40], width: [0.2, 0.6], flow: [1, 12] } as const;
   assert.deepStrictEqual(legendFor(ColorMode.Speed, ranges), {
     label: 'Speed',
     kind: 'gradient',
@@ -226,6 +226,18 @@ test('legend data: gradients carry their range, feature and tool are categories'
     range: [10, 200],
   });
   assert.deepStrictEqual(legendFor(ColorMode.LayerTime, ranges).range, [3, 40]);
+  assert.deepStrictEqual(legendFor(ColorMode.Width, ranges), {
+    label: 'Width',
+    kind: 'gradient',
+    unit: 'mm',
+    range: [0.2, 0.6],
+  });
+  assert.deepStrictEqual(legendFor(ColorMode.Flow, ranges), {
+    label: 'Flow',
+    kind: 'gradient',
+    unit: 'mm³/s',
+    range: [1, 12],
+  });
   assert.strictEqual(legendFor(ColorMode.Tool, ranges).kind, 'categories');
   assert.strictEqual(legendFor(ColorMode.Feature, undefined).kind, 'categories');
 });
