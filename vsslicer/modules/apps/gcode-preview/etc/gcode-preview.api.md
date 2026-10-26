@@ -19,14 +19,21 @@ export const Command: {
 };
 
 // @public (undocumented)
-export type CommandsApi = Pick<typeof vscode, 'commands' | 'Uri'>;
+export type CommandsApi = Pick<typeof vscode, 'commands' | 'Uri' | 'window' | 'workspace'>;
+
+// @public
+export interface FileCheck {
+    md5?: string;
+    // (undocumented)
+    size?: number;
+}
 
 // @public (undocumented)
 export const GCODE_PREVIEW_API_VERSION = 1;
 
 // @public
 export interface GcodePreviewApi {
-    follow(uri: UriArg, position: PrintPosition): void;
+    follow(uri: UriArg, position: PrintPosition, file?: FileCheck): void;
     open(uri: UriArg, options?: OpenOptions): Promise<void>;
     stopFollow(uri: UriArg): void;
     // (undocumented)
@@ -50,7 +57,10 @@ export interface PrintPosition {
 // Warning: (ae-forgotten-export) The symbol "PreviewProbe" needs to be exported by the entry point commands.d.ts
 //
 // @public (undocumented)
-export const registerCommands: (context: Context, api: CommandsApi, probe: PreviewProbe) => GcodePreviewApi;
+export const registerCommands: (context: Context, api: CommandsApi, probe: PreviewProbe, input?: {
+    staleMs?: number;
+    timers?: Timers;
+}) => GcodePreviewApi;
 
 // @public
 export type ResolvedBy = keyof PrintPosition;
@@ -64,7 +74,14 @@ export interface Revealed {
 }
 
 // @public
+export const STALE_MS = 60000;
+
+// @public
 export type UriArg = string | vscode.Uri;
+
+// Warnings were encountered during analysis:
+//
+// .cache/api-dts/presentation/commands.d.ts:39:5 - (ae-forgotten-export) The symbol "Timers" needs to be exported by the entry point commands.d.ts
 
 // (No @packageDocumentation comment for this package)
 

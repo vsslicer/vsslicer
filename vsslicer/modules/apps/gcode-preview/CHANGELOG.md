@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Follow ends with a message when no position arrives for 60 s or the printer's file (size, MD5, optional third argument of follow) differs from the open one; a position outside the file shows a message (GCP-56).
 - Fixed: `api:check --base` now counts a new required member of `PrintPosition` or `OpenOptions` (types other extensions build) as a breaking change (GCP-125).
 - Follow mode: the part after the followed position is dimmed; the user can break out (sliders, play, step, time) and rejoin at the newest fed position (GCP-55).
 
