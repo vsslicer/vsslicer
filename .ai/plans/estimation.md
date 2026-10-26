@@ -22,6 +22,16 @@ After SP4 (retro `.ai/retros/SP4-retro.md`):
   Sonnet about 1.3, and measuring spikes 40 minutes or more. Rule 10's divisor of 1.5 over-states
   capacity by about two times when Opus spikes and long cards are in the sprint; use 46 an hour.
 
+After SP5 (retro `.ai/retros/SP5-retro.md`):
+
+- **Plan at 60 points an hour, bounded by lanes** (rule 23). SP5 measured 60.0 (63 delivered points,
+  01:06 to 02:09) and again ran out of workable cards, 81 minutes early, with one lane busy; 60 is a floor.
+  A module lane does about 20 points an hour (gcode-preview 18, gcode-language 25), so a 2-hour sprint
+  holds about 40 points per lane that has work, and the busiest lane sets its length.
+- Agent time is **1.6 agent-minutes per done point** (SP4 3.2): Opus about 1.9 a point, Sonnet 0.9, with
+  no long spike in the sprint. Rule 10's formula held: 65 minutes x 1.54 agents / 1.5 = 67 against 63.
+- close-sprint records 4 more points than delivered: the audit and retro cards (rule 24; SP5 67).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -72,6 +82,15 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Evidence: SP3 had no agent running for 17.5 of 47 minutes (37%); wave 1 dispatched 22:25, its
     Sonnet workers were done by 22:28, but wave 2 started at 22:35 after GCP-19 (22:33). Peak was 8
     agents, mean 2.0. Since SP3.
+    **Amended SP5:** per-lane dispatch is not available while a message's Agent calls return together:
+    the coordinator is blocked until they do, so its commits, releases and moves all fall between waves.
+    Keep the gap from a wave's last stop to the next wave's start under 2 minutes, prepare the next
+    prompts and the sprint's trim ahead (trim at the previous close), and try sending a gap's commits
+    in the same message as the next wave's Agent calls (untried). Testable: idle time without the first
+    dispatch and the final release stays under 15%. Evidence: SP5 every agent sent with
+    `run_in_background: true` still returned per message; no agent ran for 26.1 of 65.1 minutes (40%):
+    7.2 for the trim at the start, 3.0 for the release, 15.9 in ten gaps (median 1.2), 29% without the
+    first two; all 25 card and release commits (`913e9b5` to `2c12e29`) fall in those gaps.
 12. **Budget fix rounds by kind:** one per 9 bugfix cards, one per 2 cards of new code (ports of
     upstream algorithms, protocols, contracts, research decisions). Each fix round costs a review
     wave, about 5 minutes wall, even when the fix takes under a minute. Evidence: SP3 8 of 22 failed
@@ -105,6 +124,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     median run of 1.3 min with GCP-30 (32.9) and PLT-31 (41.6); the short cards waited 39 to 44 min in
     review and were done 45 to 47 min after dispatch; later waves without long agents turned over in 9
     to 13 min. Since SP4.
+    **Confirmed SP5:** with no long agent mixed in except where unavoidable, two cards in sequence per
+    lane agent and reviews in the next message, the median stop to review was 4.6 minutes (SP4 43),
+    finished agents waited 98 agent-minutes (SP4 594) and doing to done was 10.3 (SP4 45). The longest
+    agent still sets its wave: keep agents expected over 5 minutes (Opus spikes and contract cards, an L
+    in the preview) together, or with lanes whose next card is also long. Evidence: SP5 the GCP-49
+    spike (6.3) held wave 1's 0.6-minute fixes 22 agent-minutes, GCP-37 (5.4) wave 4's 25, GCP-38
+    (10.4) wave 8's 15.
 18. **A card that creates a module with VS Code integration tests, or a spike that measures with
     repeated runs, is XL or is split into build and measure**, and every OS a spike must run on other
     than the coordinator's is its own owner-blocked card at planning (rule 6). Testable: no card ends a
@@ -119,6 +145,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     failed review (GCP-82, PLT-31, PLT-43), each fix 0.6 to 1.6 agent-min but 12 to 24 min of wall
     time across two barriers; six more findings were fixed in place, one of them a behaviour change
     (GCP-27's fallback feedrate 25 to 50 mm/s). Since SP4.
+    **Amended SP5:** budget one fix round per 5 reviewed cards of any kind (replacing this rule's 1 per 6
+    and rule 12's 1 per 9 bugs), about 8 minutes of wall each, and start cards that consume a schema,
+    validator or contract only after that card passes review. Evidence: SP5 5 rounds in 24 done cards,
+    bugs 2 of 11 (PLT-189, GCP-93), new code 3 of 13 (GCP-45, GCP-38, and GCP-47 reworked after GCP-45's
+    validator changed: GCP-46 and 47 were dispatched at 01:41 while GCP-45 was in review); wall 3.6 to
+    12.3 minutes, median 7.2, for 0.5 to 1.4 agent-minutes each.
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -128,12 +160,23 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     carries" notes because PLT-39 changed PLT-187's and PLT-188's files, GCP-27 GCP-28's `bambu.ts`,
     and GCP-83, GCP-23 and GCP-82 all `klipper.ts`; the facts table's Done column read 00:43 for every
     card. Since SP4.
+    **Amended SP5:** two cards that change the same hunks go to one lane agent in sequence and one commit
+    with both tickets in the subject (`GCP-90, GCP-91: ...`). Evidence: SP5 18 of 24 cards committed
+    within 5 minutes of the reviewer's done; GCP-90+91, PLT-190+191, GCP-32+33, GCP-92+93 and the GCP-89
+    and GCP-95 preview parts each went in one commit, with two "also carries" notes left (SP4: 22 commits
+    split by file).
 21. **Workers never publish.** The coordinator publishes each module once per sprint, after the last
     card that changes it has passed review, then runs one clean-registry `run.mjs ci` (extends rule
     13 to every module). Testable: one version per module per sprint in `git log`. Evidence: SP4
     gcode-parser shipped 0.9.0 (GCP-83), 0.10.0 (GCP-84) and 0.10.1, because GCP-79 and GCP-18 changed
     its `package.json` after 0.10.0; the clean-registry ci failed lockfile integrity once and needed
     gcode-preview 0.2.1 too (`39a31c1`). Since SP4.
+    **Amended SP5:** a card that creates a module copies the `prepack` build script from an existing
+    module's `package.json`, and the coordinator commits each release before the clean-registry ci.
+    Testable: the ci passes on its first run. Evidence: SP5 held one version per module (gcode-bgcode
+    0.4.3, gcode-api 0.6.0, gcode-parser 0.11.0, webview-kit 0.5.1, gcode-planner 0.4.0, gcode-preview
+    0.3.0, gcode-language 0.1.0), but the ci passed on the third run: gcode-language (GCP-43) had no
+    `prepack`, then the version check wanted the change committed.
 22. **Every agent prompt names a `mktemp -d` scratch directory**; agents delete only files they
     created there and use `command ls -1` (not the aliased `ls`) in scripts. The coordinator runs
     `git status --short` after each wave and restores any change outside the dispatched cards' files.
@@ -141,3 +184,24 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     named after `ls` output in a board folder (twice), a reviewer deleting another's note, `rm -rf
     /tmp/x` on a directory the reviewer did not create, and the GCP-82 fix worker overwriting its
     card. Since SP4.
+    **Amended SP5:** reviewers write the review into the card before moving it, at the one path that
+    `command ls -1 <board>/*/<n>-*.md` prints (stop if it prints none or two), and probe tests live only in
+    the scratch directory, importing the module by absolute path. Evidence: SP5 four incidents in 51
+    agents: review lines written to a literal `review/088-*.md` (unmatched glob) and to a stale
+    `review/189-*.md` after the move, and probe tests left in gcode-planner's and gcode-preview's `test/`.
+23. **Capacity is the busiest lane.** A sprint lasts as long as its longest single-module chain: plan
+    about 20 points an hour per lane with work (40 in a 2-hour sprint), give a hot module a second card
+    on disjoint files (rule 14) where one exists, and keep an ordered pull-in list of next-sprint cards
+    that are not owner- or dependency-blocked, pulled in as each lane frees. Testable: no sprint ends
+    more than 15 minutes early while a workable card sits in the next sprint. Evidence: SP5 ended 81
+    minutes early at 60 points an hour with a mean of 1.54 agents; after 01:52 only gcode-preview had
+    work (GCP-31, 32+33, 35, 38 and the GCP-89 and GCP-95 preview parts, 01:13 to 02:09, 18 points an
+    hour), while GCP-40, GCP-50 and GCP-97 were workable in SP6; only GCP-48 was pulled back. The trim
+    used rule 5's estimate of 69 minutes for that chain; it took 56. Since SP5.
+24. **Report delivered and closed points.** close-sprint counts every card whose `sprint` is the sprint
+    at close, done or not, including the audit and retro cards and cards pulled in, and its committed
+    figure moves with any re-sizing of carried cards before the close. Retros give both figures and
+    calibrate on delivered points to the last card done. Testable: the retro's close figure equals the
+    sprint doc's `completed`. Evidence: SP4 closed at 76 of 133 against the retro's 72 of 139 (VSS-43
+    and VSS-78; four carried cards re-sized); SP5's retro expects 67 of 124 (63 plus VSS-44 and VSS-79).
+    Since SP5.
