@@ -4,7 +4,12 @@ import { MOVE_STRIDE, MoveOffset, type Layer } from '@vsslicer/gcode-api';
 
 /** Where a printer says the print is. At least one field set; serialisable (crosses extension hosts). */
 export interface PrintPosition {
-  /** Byte offset in the decoded G-code text (Move.fileOffset space). Klipper/Moonraker. */
+  /**
+   * Byte offset in the decoded G-code text (Move.fileOffset space). Klipper/Moonraker.
+   * For `.bgcode` that is the decoded stream, not the binary container: a connector whose printer counts container
+   * bytes must convert first (the block table is not exposed, so it cannot be mapped here), or send layer/percent.
+   * PrusaLink, the `.bgcode` firmware, reports no byte offset at all, only progress and Z (D20).
+   */
   fileOffset?: number;
   /** 1-based layer number as the printer reports it; 0 is before the first layer. */
   layer?: number;
@@ -21,6 +26,8 @@ export interface Revealed {
   by: ResolvedBy;
   /** Global index of the move shown. */
   move: number;
+  /** Set when the position was clamped: it named a place beyond the file's last move. */
+  warning?: string;
 }
 
 const U32_MAX = 0xffffffff;
@@ -85,8 +92,13 @@ export interface Track {
  */
 export const resolvePosition = ({ moves, moveCount, layers, totalTime }: Track, p: PrintPosition): Revealed => {
   if (!moveCount) throw new RangeError('the file has no moves');
-  if (p.fileOffset !== undefined)
-    return { by: 'fileOffset', move: lastAtOrBefore(moves, moveCount, MoveOffset.fileOffset, false, p.fileOffset) };
+  if (p.fileOffset !== undefined) {
+    const move = lastAtOrBefore(moves, moveCount, MoveOffset.fileOffset, false, p.fileOffset);
+    // shortcut: the file's length is unknown here, so "past the end" means past the last move's start; upgrade with a size
+    return p.fileOffset > field(moves, moveCount - 1, MoveOffset.fileOffset, false)
+      ? { by: 'fileOffset', move, warning: `fileOffset ${p.fileOffset} is past the last move; showing the last move` }
+      : { by: 'fileOffset', move };
+  }
   if (p.layer !== undefined) {
     if (p.layer > layers.length) throw new RangeError(`layer ${p.layer} is past the last layer (${layers.length})`);
     return { by: 'layer', move: p.layer ? layers[p.layer - 1]!.firstMove : 0 };

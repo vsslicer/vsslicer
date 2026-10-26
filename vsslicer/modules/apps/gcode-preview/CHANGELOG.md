@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- GCP-51, GCP-52: `Revealed.warning` when a `fileOffset` is past the last move; `fileOffset` is documented as decoded-stream space for `.bgcode`; tests for offset, layer and percent mapping.
 - Fixed: following a print that opens a new preview now lands on the printer's position: a seek that arrives before the move buffers is posted again after the last one (GCP-118, SP9 audit finding 2).
 
 ## 0.5.1
