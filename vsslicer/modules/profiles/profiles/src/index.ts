@@ -3,3 +3,5 @@ export * from './domain/index.ts';
 export * from './application/index.ts';
 export * from './adapters/locate/locate.ts';
 export type { DirectoryLister } from './application/file-system-port.ts';
+export * from './adapters/installed/installed.ts';
+export * from './adapters/worker/index.ts';
