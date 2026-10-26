@@ -43,3 +43,5 @@ Cura: copied setting labels, descriptions, defaults, formulas, bounds, units and
 `test/fixtures/*/PROVENANCE.md` covers each fixture set.
 
 PRF-18 also read key names and page titles only (nothing copied) from OrcaSlicer `src/slic3r/GUI/Tab.cpp`, `src/libslic3r/PublishSettings.cpp`, `src/libslic3r/PrintConfig.hpp`; Bambu Studio `src/slic3r/GUI/Tab.cpp`, `src/libslic3r/PrintConfig.hpp`; PrusaSlicer 2.9 and SuperSlicer `src/libslic3r/PrintConfig.hpp`, at the commits above.
+
+Test fixtures `test/fixtures/catalogue-keys/*.json` (PRF-19): key names only, extracted by `tools/catalogue/keys.ts` from OrcaSlicer@09aa0114, BambuStudio@79df7ae, PrusaSlicer@b028299 (2.9) and @30ef591 (3.0), SuperSlicer@1f3d287 (AGPL-3.0), Cura@5bea2f8 (LGPL-3.0).
