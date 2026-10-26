@@ -43,6 +43,7 @@
   },
   "prettier": "@vsslicer/tooling/prettier",
   "dependencies": {
-    "@vsslicer/profile-api": "^0.1.1"
+    "@vsslicer/profile-api": "^0.1.1",
+    "fflate": "0.8.3"
   }
 }
