@@ -9,3 +9,4 @@ export * from './adapters/user/read-user-presets.ts';
 export * from './adapters/split/split.ts';
 export * from './adapters/export/orca/write-json.ts';
 export * from './adapters/bundles/orca/import-orca-bundle.ts';
+export * from './adapters/bundles/bambu/import-bambu-bundle.ts';

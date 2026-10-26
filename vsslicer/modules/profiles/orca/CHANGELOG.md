@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added: `importBambuBundle` reads Bambu Studio `.bbscfg` and `.bbsflmt` bundles into an ImportResult; ajv is a devDependency for the schema test (PRF-108).
 - Added: `importOrcaBundle` reads `.orca_printer`, `.orca_filament` and `.orca_bundle` into printer, material and process entities; `readBundleArchive` takes `{ lenient }` and returns `missing` (PRF-106).
 - PRF-128: 20 Orca and Bambu tuples (printer, filament, process) checked against OrcaSlicer CLI exports and hand-checked values (`test/tuples/`, upstream fixtures with PROVENANCE).
 - PRF-204: the Orca tree reader and folder loader cap diagnostics at 1,000 (plus one suppressed line) and count every folder entry against `maxFiles`.
