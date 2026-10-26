@@ -12,15 +12,24 @@ import {
   type VsCodeApi,
 } from '@vsslicer/webview-kit/webview';
 import { ColorMode, createGl2Context, showGlFailure } from '@vsslicer/webview-kit/gl';
+import { MoveFlag, type Layer } from '@vsslicer/gcode-api';
 import { Method, moveStream, type PreviewSummary, type Received, type ViewState } from '../../domain/summary.ts';
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
+import { presentRoles, roleName } from './controls.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
-import { concatMoves, createPreviewRenderer, type PreviewRenderer, type Visibility } from './preview-renderer.ts';
+import {
+  concatMoves,
+  createPreviewRenderer,
+  visibleRange,
+  type PreviewRenderer,
+  type Visibility,
+} from './preview-renderer.ts';
 
 /** Saved with `setState`, so it survives the webview being hidden or reloaded.  */
 interface SavedView extends Omit<Visibility, 'layer'> {
   /** Top visible layer; `null` until a file is shown (then the last layer). */
   layer: number | null;
+  // bottom, move, roleMask and hiddenFlags come from Visibility
   colorMode?: ColorMode;
   camera?: CameraState;
 }
@@ -39,8 +48,66 @@ const canvas = document.createElement('canvas');
 canvas.style.width = '100%';
 canvas.style.height = '80vh';
 
+/** The layers of the open file and what the controls need beside them (kept after the summary is released). */
+let info = { layers: [] as Layer[], layerTimes: [] as number[], moveCount: 0, roles: [] as number[] };
 const toolbar = document.createElement('div');
 const legend = document.createElement('span');
+const bar = document.createElement('span');
+const panel = document.createElement('div');
+panel.style.cssText =
+  'display:flex;flex-direction:column;gap:4px;margin:8px 0;font-family:var(--vscode-font-family);color:var(--vscode-foreground)';
+bar.style.cssText =
+  'display:inline-block;width:8em;height:0.8em;vertical-align:middle;background:linear-gradient(to right,blue,cyan,lime,yellow,red)'; // the kit's range palette, blue low to red high
+const slider = (label: string) => {
+  const input = Object.assign(document.createElement('input'), {
+    type: 'range',
+    min: '0',
+    step: '1',
+    ariaLabel: label,
+  });
+  const out = document.createElement('output');
+  const row = document.createElement('label');
+  row.style.cssText = 'display:flex;gap:8px;align-items:center';
+  row.append(label, input, out);
+  panel.append(row);
+  return { input, out };
+};
+const topLayer = slider('Top layer');
+const bottomLayer = slider('Bottom layer');
+const moveSlider = slider('Moves in the top layer');
+const layerTime = document.createElement('div');
+const toggles = document.createElement('fieldset');
+toggles.style.border = 'none';
+toggles.style.padding = '0';
+const toggle = (label: string, checked: boolean, onChange: (on: boolean) => void) => {
+  const box = Object.assign(document.createElement('input'), { type: 'checkbox', checked });
+  box.addEventListener('change', () => onChange(box.checked));
+  const l = document.createElement('label');
+  l.style.marginRight = '12px';
+  l.append(box, ` ${label}`);
+  toggles.append(l);
+  return box;
+};
+let roleBoxes: [number, HTMLInputElement][] = [];
+let travelBox: HTMLInputElement | undefined;
+const patch = (p: Partial<SavedView>) => {
+  api.setState({ ...api.getState()!, ...p });
+  redraw();
+};
+topLayer.input.addEventListener('input', () => {
+  const layer = Number(topLayer.input.value);
+  patch({ layer, move: undefined, bottom: Math.min(api.getState()?.bottom ?? 0, layer) });
+});
+bottomLayer.input.addEventListener('input', () => {
+  const bottom = Number(bottomLayer.input.value);
+  const layer = Math.max(bottom, api.getState()?.layer ?? 0);
+  patch({ bottom, layer, move: layer === api.getState()?.layer ? api.getState()?.move : undefined });
+});
+moveSlider.input.addEventListener('input', () => {
+  const n = Number(moveSlider.input.value);
+  patch({ move: n >= Number(moveSlider.input.max) ? undefined : n });
+});
+panel.append(layerTime, toggles);
 const modes = document.createElement('select');
 modes.ariaLabel = 'Colour by';
 for (const m of COLOR_MODES) modes.append(new Option(m.label, String(m.mode)));
@@ -88,7 +155,7 @@ const show = (title: string, lines: string[] = [], view = false) => {
   h.textContent = title;
   const list = document.createElement('ul');
   for (const l of lines) list.append(Object.assign(document.createElement('li'), { textContent: l }));
-  root.replaceChildren(h, list, ...(view ? [toolbar, canvas] : []));
+  root.replaceChildren(h, list, ...(view ? [toolbar, panel, canvas] : []));
 };
 
 const redraw = () => {
@@ -101,7 +168,45 @@ const redraw = () => {
   modes.value = String(colorMode);
   renderer.draw({ ...s, layer: s.layer, colorMode, camera });
   const l = legendFor(colorMode, renderer.ranges());
-  legend.textContent = l.range ? ` ${l.range.map((x) => x.toFixed(1)).join(' to ')} ${l.unit}` : '';
+  legend.replaceChildren();
+  if (l.kind === 'gradient' && l.range)
+    legend.append(' ', bar, ` ${l.range.map((x) => x.toFixed(1)).join(' to ')} ${l.unit}`);
+  else legend.append(` ${l.label}: see the feature toggles`);
+  syncControls(s);
+};
+
+/** Puts the saved state on the sliders, labels and toggles (the state is the source of truth). */
+const syncControls = (s: SavedView) => {
+  const { layers, layerTimes, moveCount } = info;
+  const top = s.layer ?? 0;
+  const bottom = s.bottom ?? 0;
+  const set = (c: typeof topLayer, max: number, value: number, text: string) => {
+    c.input.max = String(max);
+    c.input.value = String(value);
+    c.input.ariaValueText = text;
+    c.out.textContent = text;
+  };
+  const z = (i: number) => (layers[i] ? `${i + 1} (z ${layers[i]!.z.toFixed(2)})` : '-');
+  set(topLayer, Math.max(0, layers.length - 1), top, z(top));
+  set(bottomLayer, Math.max(0, layers.length - 1), bottom, z(bottom));
+  const full = visibleRange(layers, moveCount, top).count - (layers[top]?.firstMove ?? 0);
+  const move = s.move ?? full;
+  set(moveSlider, full, move, `${move} of ${full}`);
+  layerTime.textContent = `Layer ${top + 1} time ${time(layerTimes[top] ?? 0)}; layers ${bottom + 1} to ${top + 1} ${time(layerTimes.slice(bottom, top + 1).reduce((a, b) => a + b, 0))}`;
+  const mask = s.roleMask ?? 0xffffffff;
+  for (const [r, box] of roleBoxes) box.checked = ((mask >>> r) & 1) === 1;
+  if (travelBox) travelBox.checked = ((s.hiddenFlags ?? MoveFlag.Travel) & MoveFlag.Travel) === 0;
+};
+
+const buildToggles = () => {
+  toggles.replaceChildren();
+  roleBoxes = info.roles.map((r) => [
+    r,
+    toggle(roleName(r), true, () => patch({ roleMask: ((api.getState()?.roleMask ?? 0xffffffff) ^ (1 << r)) >>> 0 })),
+  ]);
+  travelBox = toggle('Travel moves', false, () =>
+    patch({ hiddenFlags: (api.getState()?.hiddenFlags ?? MoveFlag.Travel) ^ MoveFlag.Travel }),
+  );
 };
 window.addEventListener('resize', redraw);
 
@@ -153,6 +258,8 @@ const done = () => {
   });
   const s = summary;
   const moves = concatMoves(buffers as ArrayBuffer[]);
+  info = { layers: s.layers, layerTimes: s.layerTimes, moveCount: s.moveCount, roles: presentRoles(moves) };
+  buildToggles();
   buffers = []; // the concatenated copy is the only one kept
   summary = undefined; // report once per load
   mount(s, moves);

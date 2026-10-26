@@ -13,6 +13,10 @@ import { ColorMode, createSegmentRenderer, trackContextLoss, type SegmentRendere
 export interface Visibility {
   /** Top visible layer: moves from the start up to the end of this layer are drawn. */
   layer: number;
+  /** Lowest visible layer (default 0): the range is `bottom` to `layer`. */
+  bottom?: number;
+  /** Moves of the top layer shown (default all): the move slider. */
+  move?: number;
   /** Bit per `MoveRole`; default all. */
   roleMask?: number;
   /** `MoveFlag` bits to hide; default travels. */
@@ -47,11 +51,16 @@ export const concatMoves = (buffers: readonly ArrayBuffer[]): ArrayBuffer => {
   return out.buffer;
 };
 
-/** Global move range `first .. first + count - 1` up to the end of `layer` (all moves without layers). */
-export const visibleRange = (layers: readonly Layer[], moveCount: number, layer: number) => ({
-  first: 0,
-  count: layer + 1 < layers.length ? layers[layer + 1]!.firstMove : moveCount,
-});
+/**
+ * Global move range `first .. first + count - 1`: from the start of layer `bottom` to the end of `layer`, or to
+ * `move` moves into it (all moves without layers).
+ */
+export const visibleRange = (layers: readonly Layer[], moveCount: number, layer: number, move?: number, bottom = 0) => {
+  const first = bottom > 0 ? (layers[bottom]?.firstMove ?? 0) : 0; // layer 0 keeps the moves before it
+  const layerEnd = layer + 1 < layers.length ? layers[layer + 1]!.firstMove : moveCount;
+  const end = move == null ? layerEnd : Math.min(layerEnd, (layers[layer]?.firstMove ?? 0) + move);
+  return { first, count: Math.max(0, end - first) };
+};
 
 /** Min and max corner of the extruding moves' end points (all moves if none extrudes). */
 export const printBounds = (moves: ArrayBuffer): [number[], number[]] => {
@@ -106,7 +115,7 @@ export const createPreviewRenderer = (
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     renderer.draw({
       ...frameCamera(bounds, w / Math.max(1, h), vis.camera),
-      ...visibleRange(layers, moveCount, vis.layer),
+      ...visibleRange(layers, moveCount, vis.layer, vis.move, vis.bottom),
       colorMode: vis.colorMode ?? ColorMode.Feature,
       roleMask: vis.roleMask,
       hiddenFlags: vis.hiddenFlags ?? MoveFlag.Travel,

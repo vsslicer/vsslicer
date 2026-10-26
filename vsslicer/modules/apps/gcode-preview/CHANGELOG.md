@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- GCP-35: layer range (bottom and top) and move sliders, feature and travel toggles, per-layer and range time, and the legend in the preview; scrubbing changes only the draw range (no upload, counted).
+- GCP-89: the planner follows the file's `;FLAVOR:` header (`ParsedFile.flavourName`), e.g. a Klipper file without a config block. Depends on gcode-api ^0.6.0 and gcode-parser ^0.11.0.
+- GCP-95: `.bgcode` files open through gcode-parser's `bgcodeSource` (same diagnostics and offsets); `LoadOptions.codecs` is gone and the preview no longer depends on gcode-bgcode.
 - GCP-32: colour modes feature, speed, tool and layer time, switched with a uniform (no geometry re-upload, counted), legend data, the mode kept in the webview state. Width, flow, fan and temperature: GCP-96.
 - GCP-33: orbit (drag), pan (right or shift drag) and zoom (wheel), top/iso/front view buttons; the camera (pure, unit-tested `camera.ts`) is kept in the webview state across hide and show.
 - GCP-31: the preview draws the moves with webview-kit's instanced segment renderer (libvgcode port, AGPL-3.0): moves up to the saved layer, role and flag masks in the webview state (travels hidden by default), a camera that frames the print, GPU resources freed on dispose and rebuilt after a context loss. Per-chunk move buffers are joined once in the webview.

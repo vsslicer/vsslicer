@@ -16,6 +16,7 @@ import {
 import { ColorMode } from '@vsslicer/webview-kit/gl';
 import { spyGlUploads } from '@vsslicer/webview-kit/testing';
 import { COLOR_MODES, legendFor } from '../src/presentation/webview/legend.ts';
+import { presentRoles, roleName } from '../src/presentation/webview/controls.ts';
 import { presetCamera } from '../src/presentation/webview/camera.ts';
 import { fileURLToPath } from 'node:url';
 
@@ -215,5 +216,51 @@ test('a saved camera is drawn instead of the fitted one', () => {
   r.draw({ layer: 0, camera: presetCamera(r.bounds, 1, 'top') });
   const top = f.named('uniformMatrix4fv').at(-2)![3] as Float32Array;
   assert.notDeepStrictEqual([...top], [...fitted]);
+  r.dispose();
+});
+
+test('visibleRange: bottom layer starts the range, move cuts the top layer', () => {
+  const layers = [
+    { z: 0.2, firstMove: 0 },
+    { z: 0.4, firstMove: 10 },
+    { z: 0.6, firstMove: 20 },
+  ];
+  assert.deepStrictEqual(visibleRange(layers, 30, 1, undefined, 1), { first: 10, count: 10 });
+  assert.deepStrictEqual(visibleRange(layers, 30, 2, 5), { first: 0, count: 25 });
+  assert.deepStrictEqual(visibleRange(layers, 30, 1, 99), { first: 0, count: 20 }, 'move is clamped to the layer');
+  assert.deepStrictEqual(visibleRange(layers, 30, 1, 0, 1), { first: 10, count: 0 });
+});
+
+test('role names and the roles present in the corpus', async () => {
+  assert.strictEqual(roleName(MoveRole.ExternalPerimeter), 'External perimeter');
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
+  const roles = presentRoles(concatMoves(parsed.moves));
+  assert.ok(roles.includes(MoveRole.ExternalPerimeter) && roles.length < 21);
+});
+
+test('scrubbing layers, moves and toggles over the corpus uploads nothing and narrows the draw', async () => {
+  const { parsed } = await loadPreview('gcode', createReadStream(fixture('orca/cube-marlin.gcode')));
+  const f = fakeGl(64);
+  const spy = spyGlUploads(f.gl);
+  const r = createPreviewRenderer(
+    new EventTarget() as HTMLCanvasElement,
+    spy.gl,
+    concatMoves(parsed.moves),
+    parsed.layers,
+    { maxTextureSize: 64 },
+  );
+  const top = parsed.layers.length - 1;
+  r.draw({ layer: top });
+  const afterFirst = JSON.stringify(spy.uploads);
+  const creates = f.count('createTexture') + f.count('createBuffer');
+  const before0 = instances(f);
+  r.draw({ layer: top });
+  const full = instances(f) - before0;
+  for (let move = 0; move < 200; move += 7) r.draw({ layer: top, move, bottom: 1, roleMask: 0b110, hiddenFlags: 0 });
+  const b = instances(f);
+  r.draw({ layer: top, move: 3 });
+  assert.ok(instances(f) - b < full, 'a short move range draws fewer instances');
+  assert.strictEqual(JSON.stringify(spy.uploads), afterFirst, 'no upload while scrubbing');
+  assert.strictEqual(f.count('createTexture') + f.count('createBuffer'), creates);
   r.dispose();
 });
