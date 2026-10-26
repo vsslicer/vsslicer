@@ -839,8 +839,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/3mf@0.1.1':
-    resolution: {integrity: sha512-fl+XfW4cog8Ugr+9Cst6hda2SjklKeIf4V/BLo9NWSuYDdolyEOHgT0wZfPNi1hyKbbs01rGtmbEpUk/hFDFUA==}
+  '@vsslicer/3mf@0.1.2':
+    resolution: {integrity: sha512-SY/dcZPa46oIwl5Gk0twInKgPcsj/z+i/w59BEsvjEF8C/94kYrdiL3bMsV6/O/r2GCK1GY0WnZNtb2A/jWC/A==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-api@0.7.0':
@@ -3059,7 +3059,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/3mf@0.1.1':
+  '@vsslicer/3mf@0.1.2':
     dependencies:
       fflate: 0.8.3
       saxes: 6.0.0
@@ -3070,7 +3070,7 @@ snapshots:
 
   '@vsslicer/gcode-parser@0.14.0':
     dependencies:
-      '@vsslicer/3mf': 0.1.1
+      '@vsslicer/3mf': 0.1.2
       '@vsslicer/gcode-api': 0.7.0
       '@vsslicer/gcode-bgcode': 0.4.3
 
