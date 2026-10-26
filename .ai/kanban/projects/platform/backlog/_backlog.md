@@ -138,3 +138,4 @@
 136. [PLT-175: Release signed macOS and Windows installers](175-release-signed-macos-and-windows-installers.md)
 137. [PLT-193: Add gcode-language to the extension pack](193-add-gcode-language-to-the-extension-pack.md)
 138. [PLT-199: Give the three extensions short ids with the extensionName override](199-give-the-three-extensions-short-ids-with-the-extensionname-o.md)
+139. [PLT-201: Open a fixture workspace in test-vscode so suites can test workspaceContains activation](201-open-a-fixture-workspace-in-test-vscode-so-suites-can-test-w.md)

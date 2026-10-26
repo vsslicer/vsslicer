@@ -1,23 +1,96 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Pure logic for run.mjs: no git, no registry, no file system.
 
-/** modules: [{ name, deps: [module names] }] -> names, dependencies first. Throws on a cycle. */
-export function order(modules) {
+/**
+ * modules: [{ name, deps: [module names], devDeps?: [names only a devDependency] }] -> names, dependencies first.
+ * A devDependency resolves from the registry, so a dev edge inside a cycle is dropped (one note via `note`);
+ * a cycle through runtime dependencies throws. Linear and iterative (no recursion): Tarjan SCCs, then one DFS. The note goes to stderr: stdout carries machine-readable output.
+ */
+export function order(modules, note = console.error) {
   const byName = new Map(modules.map((m) => [m.name, m]));
-  const done = new Set();
-  const stack = [];
-  const out = [];
-  const visit = (name) => {
-    if (done.has(name)) return;
-    const at = stack.indexOf(name);
-    if (at >= 0) throw new Error(`dependency cycle: ${[...stack.slice(at), name].join(' -> ')}`);
-    stack.push(name);
-    for (const d of [...byName.get(name).deps].sort()) if (byName.has(d)) visit(d);
-    stack.pop();
-    done.add(name);
-    out.push(name);
+  const names = [...byName.keys()].sort();
+  const edgeCache = new Map();
+  const edges = (n) => {
+    if (!edgeCache.has(n)) edgeCache.set(n, [...byName.get(n).deps].filter((d) => byName.has(d)).sort());
+    return edgeCache.get(n);
   };
-  for (const name of [...byName.keys()].sort()) visit(name);
+  // Tarjan (iterative): scc id per module
+  const idx = new Map(),
+    low = new Map(),
+    scc = new Map(),
+    st = [];
+  let counter = 0,
+    sccs = 0;
+  for (const root of names) {
+    if (idx.has(root)) continue;
+    const work = [[root, 0]];
+    (idx.set(root, counter), low.set(root, counter++), st.push(root));
+    while (work.length) {
+      const top = work[work.length - 1];
+      const [n] = top;
+      const es = edges(n);
+      if (top[1] < es.length) {
+        const d = es[top[1]++];
+        if (!idx.has(d)) {
+          (idx.set(d, counter), low.set(d, counter++), st.push(d));
+          work.push([d, 0]);
+        } else if (!scc.has(d)) low.set(n, Math.min(low.get(n), idx.get(d)));
+      } else {
+        work.pop();
+        if (low.get(n) === idx.get(n)) {
+          for (let x; x !== n;) scc.set((x = st.pop()), sccs);
+          sccs++;
+        }
+        if (work.length) {
+          const p = work[work.length - 1][0];
+          low.set(p, Math.min(low.get(p), low.get(n)));
+        }
+      }
+    }
+  }
+  const dropped = [];
+  const keepCache = new Map();
+  const keep = (n) => {
+    if (!keepCache.has(n))
+      keepCache.set(
+        n,
+        edges(n).filter((d) => {
+          const drop = byName.get(n).devDeps?.includes(d) && scc.get(n) === scc.get(d);
+          if (drop) dropped.push(`${n} -> ${d}`);
+          return !drop;
+        })
+      );
+    return keepCache.get(n);
+  };
+  // DFS (iterative) with an on-path set, so cycle detection is O(1) per edge
+  const done = new Set();
+  const onPath = new Set();
+  const out = [];
+  for (const root of names) {
+    if (done.has(root)) continue;
+    const path = [[root, 0]];
+    onPath.add(root);
+    while (path.length) {
+      const top = path[path.length - 1];
+      const es = keep(top[0]);
+      if (top[1] < es.length) {
+        const d = es[top[1]++];
+        if (done.has(d)) continue;
+        if (onPath.has(d)) {
+          const names = path.map((p) => p[0]);
+          throw new Error(`dependency cycle: ${[...names.slice(names.indexOf(d)), d].join(' -> ')}`);
+        }
+        onPath.add(d);
+        path.push([d, 0]);
+      } else {
+        path.pop();
+        onPath.delete(top[0]);
+        done.add(top[0]);
+        out.push(top[0]);
+      }
+    }
+  }
+  if (dropped.length) note(`note: ordering ignores devDependency edge(s) closing a cycle: ${dropped.join(', ')}`);
   return out;
 }
 
