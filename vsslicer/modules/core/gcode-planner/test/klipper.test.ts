@@ -52,6 +52,15 @@ const corner = (): ParsedFile =>
     [feed(0, 100)],
   );
 
+describe('createKlipperPlanner checkpointInterval', () => {
+  it('must be a positive integer', () => {
+    for (const bad of [0, -1, 0.5, 1.5, NaN, Infinity]) {
+      expect(() => createKlipperPlanner({ checkpointInterval: bad })).toThrow(RangeError);
+    }
+    expect(() => createKlipperPlanner({ checkpointInterval: 1 })).not.toThrow();
+  });
+});
+
 describe('klipper planner', () => {
   it('passes the planner harness', () => {
     expect(checkPlanner(klipperPlanner).estimate).toBe(false);

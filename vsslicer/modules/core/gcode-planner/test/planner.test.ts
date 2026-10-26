@@ -1,7 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
 import { MoveRole } from '@vsslicer/gcode-api';
-import { constantSpeedPlanner, planSync, resolveLimits, runPlanner, TimingBuilder } from '../src/index.ts';
+import {
+  bambuPlanner,
+  buddyPlanner,
+  constantSpeedPlanner,
+  klipperPlanner,
+  marlinPlanner,
+  planSync,
+  rrfPlanner,
+  resolveLimits,
+  runPlanner,
+  TimingBuilder,
+} from '../src/index.ts';
 import type { PlanProgress } from '../src/index.ts';
 import { checkPlanner, fixture, sampleFile } from './harness.ts';
 
@@ -74,5 +85,37 @@ describe('runPlanner', () => {
     await expect(
       runPlanner(constantSpeedPlanner, many(), resolveLimits({}), { signal: AbortSignal.abort() }),
     ).rejects.toThrow();
+  });
+});
+
+describe('G4 in a file with no moves', () => {
+  it('counts in totalTime for every planner', () => {
+    const parsed = fixture([], [], []);
+    parsed.markers = [{ name: 'G4', fileOffset: 0, moveIndex: 0, seconds: 30 }];
+    const planners = [klipperPlanner, marlinPlanner, rrfPlanner, buddyPlanner, constantSpeedPlanner, bambuPlanner];
+    for (const p of planners)
+      expect([p.name, planSync(p, parsed, resolveLimits({ flavour: 'marlin' })).totalTime]).toEqual([p.name, 30]);
+  });
+});
+
+describe('constant-speed G4 lookup', () => {
+  it('stays linear in moves plus markers (300k moves, 20k dwells)', () => {
+    const n = 300_000;
+    const parsed = fixture(
+      Array.from({ length: n }, (_, i) => ({ x: i % 100, y: 0 })),
+      [],
+      [],
+      1000,
+    );
+    parsed.markers = Array.from({ length: 20_000 }, (_, i) => ({
+      name: 'G4',
+      fileOffset: i,
+      moveIndex: i * 15,
+      seconds: 1,
+    }));
+    const t0 = performance.now();
+    const timing = planSync(constantSpeedPlanner, parsed, resolveLimits({ flavour: 'marlin' }));
+    expect(performance.now() - t0).toBeLessThan(2000); // the per-move marker scan took ~11 s
+    expect(timing.totalTime).toBeGreaterThan(20_000);
   });
 });

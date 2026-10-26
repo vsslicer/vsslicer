@@ -49,12 +49,21 @@ export const constantSpeedPlanner: Planner = {
   *plan(parsed, limits) {
     const cur = new MoveCursor(parsed);
     const out = new TimingBuilder(parsed);
+    const dwells = new Map<number, number>();
+    for (const k of parsed.markers)
+      if (k.name === 'G4') dwells.set(k.moveIndex, (dwells.get(k.moveIndex) ?? 0) + (k.seconds ?? 0));
+    const dwell = (index: number): void => {
+      const seconds = dwells.get(index);
+      if (seconds !== undefined) out.dwell(seconds);
+    };
     while (cur.next()) {
+      dwell(cur.index);
       const f = cur.state(StateKind.Feedrate, 0, START_FEEDRATE);
       const len = cur.length || Math.abs(cur.e);
       out.add(f > 0 ? len / f : 0, f);
       if (cur.bufferEnd) yield out.count;
     }
+    dwell(parsed.moveCount);
     return out.finish(this.name, this.estimate, limits);
   },
 };

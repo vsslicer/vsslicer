@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- GCP-92: `createKlipperPlanner` throws RangeError unless `checkpointInterval` is a positive integer.
+- GCP-93: a G4 dwell in a file with no moves counts in `totalTime` in every planner (`TimingBuilder.finish` adds the leftover lead; Klipper dwells it when no move was held); the constant-speed planner now honours G4 (one map of dwells per move).
 - GCP-37: `ToolheadWindow(planner, parsed, timing, start, end).positionAt(t, out?)` gives the toolhead XYZ, the move's fed E and the tool at time t inside a window of moves (binary search, no allocation with `out`): Klipper moves follow their `trapezoidsFor` trapezoid and hold through G4 dwells; other planners run each move at constant speed between start times, holding G4 dwells. `moveAtTime(parsed, t)` finds the move running at t.
 - GCP-90: the RRF planner clamps M204 P/T/S to 0.1 mm/s² as RepRapFirmware does (Configuration.h:56), so M204 P0 or S0 no longer makes the total NaN.
 - GCP-91: the RRF planner honours the latest of M204 S, P and T (S sets print and travel), so M204 S after M204 P changes the print acceleration (RepRapFirmware@aebf629 GCodes5.cpp:344-354).
