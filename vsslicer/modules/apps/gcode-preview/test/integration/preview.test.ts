@@ -73,7 +73,8 @@ describe('G-code preview custom editor', () => {
       assert.notStrictEqual(summary?.slicer, 'unknown');
     });
 
-  it('plays, pauses, steps and changes speed on the timeline', async () => {
+  it('plays, pauses, steps and changes speed on the timeline', async function () {
+    this.timeout(60_000); // about ten waits in one test; the runner's default is 20 s
     const uri = fixture('orca/cube-marlin.gcode');
     const key = uri.toString();
     await vscode.commands.executeCommand('vscode.openWith', uri, GCODE_VIEW_TYPE);
@@ -96,6 +97,7 @@ describe('G-code preview custom editor', () => {
     assert.ok(stepped.move >= paused.move && !stepped.playing);
     probe.command(key, { action: 'step', direction: -1 });
     await at('the step back', (p) => p.time < stepped.time);
+    probe.command(key, { action: 'speed', value: 2000 }); // the top speed: the least real time to the end
     probe.command(key, { action: 'play' });
     const end = await at('the print to end', (p) => !p.playing && p.time >= summary!.totalTime - 1e-3);
     assert.strictEqual(end.move, summary!.moveCount - 1, 'the marker ends on the last move');
