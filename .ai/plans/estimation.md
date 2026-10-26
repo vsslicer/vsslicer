@@ -44,6 +44,20 @@ After SP6 (retro `.ai/retros/SP6-retro.md`):
   long agents (rule 17).
 - close-sprint records 159 of 223 (155 plus the audit and retro cards).
 
+After SP7 (retro `.ai/retros/SP7-retro.md`):
+
+- **Plan only workable points, at 20 an hour per lane that has them** (rule 23 held again: the profiles
+  lane did 44 points in 128 minutes, 20.6 an hour). SP7 delivered 75 points in 138 minutes (32.6 an hour)
+  against a plan of 87 an hour that counted 154 owner-blocked points; the gcode, viewer and platform lanes
+  ran dry (9, 6 and 2 points an hour).
+- Agent time is **3.3 agent-minutes per done point** (SP6 1.76) when Opus catalogue cards are in the
+  sprint: Opus workers 4.6 a point (PRF-16 30.7 min, PRF-18 23.1), Sonnet 0.9; reviews and fixes 46%.
+  Use rule 10's divisor of 1.75 only for sprints without long Opus agents (rule 17).
+- Idle 15.9% from the first wave to the last review (SP6 22%); finished agents waited 393 agent-minutes
+  (SP6 449), 253 of them behind PRF-16 and PRF-18.
+- First-review failures 1 in 3.9 (rule 19), median 23.7 minutes of wall each.
+- close-sprint records 79 of 235 (75 plus the audit and retro cards).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -122,6 +136,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     least L, or split per module. Evidence: SP3 every tooling or gcode-api release made dependents
     stale under PLT-179's check (PLT-180's pins after gcode-api 0.4.1); holding tooling 0.8.2 to the
     end and re-locking 10 modules once passed a clean-registry ci in 70 s (`35dc269`). Since SP3.
+    **Amended SP7:** a `tooling` release is a patch unless it breaks consumers' config; a minor
+    (0.x to 0.x+1) leaves every module's `^0.x` range unsatisfied, so it is its own card that re-ranges
+    every module. Testable: one published tooling version per sprint. Evidence: SP7 tooling 0.9.0
+    (`e5ef902`) failed the clean-registry lockfile integrity check in every `^0.8` module and was
+    re-versioned as 0.8.3 (`03873c5`).
 14. **A module lane may take two cards at once** when they change disjoint files and neither
     publishes; the coordinator releases the module once after both pass. Evidence: SP3 GCP-20
     (Klipper) and GCP-24 (Marlin) ran in parallel in `gcode-planner` (22:35 to 22:44), both
@@ -157,6 +176,14 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     agent-minutes waiting; PRF-7's and VWR-5+6's fixes held 16 to 18 min); the VWR-37 spike (15.2) and
     PRF-14 (9.7) went with five short agents (64.5); 449 in all (SP5 98). The median stop to review was
     still 5.3 min.
+    **Amended SP7:** split, before dispatch, any card whose agent is expected over 15 minutes (an Opus L,
+    or a catalogue or generator card over more than one slicer's keys) per slicer or per input, and never
+    put reviews in a message with a long worker: the message blocks the coordinator, so the reviewed
+    cards cannot be committed until the long agent stops. Testable: no agent over 15 minutes in the next
+    sprint, and finished agents wait under 150 agent-minutes. Evidence: SP7 PRF-16 (L, Opus, three
+    slicers' keys) ran 30.7 min with four workers and three reviews (180 agent-minutes waiting; the
+    reviewed cards' commits waited about 25 min), PRF-18 (M, Opus, four slicers) 23.1 with four short
+    agents (72.8); 393 in all.
 18. **A card that creates a module with VS Code integration tests, or a spike that measures with
     repeated runs, is XL or is split into build and measure**, and every OS a spike must run on other
     than the coordinator's is its own owner-blocked card at planning (rule 6). Testable: no card ends a
@@ -185,6 +212,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     for a card that parses hostile input (rule 25). Evidence: SP6 13 of 62 done cards failed first review
     (1 in 4.8), all new code (bugs 0 of 12); 14 fix agents; wall 2.7 to 28.4 min, median 14.8; PRF-8 and
     GCP-16 took two rounds each.
+    **Amended SP7:** budget one fix round per 4 new-code cards (bugs still about none) and 25 minutes of
+    wall each; a fix worker appends its Progress below the reviewer's FAIL text and never rewrites it.
+    Evidence: SP7 8 of 31 done cards failed first review (1 in 3.9), all new code or chores, bugs 0 of 8;
+    wall 7.2 to 50.6 min, median 23.7 (PLT-194 two rounds); fix workers twice overwrote the reviewer's
+    FAIL text (coordinator).
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -235,6 +267,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     `board.py move`. Evidence: SP6 workers ran `prettier --write` over whole modules, the VWR-2 worker
     truncated and rewrote its card, and the VWR-8 and GCP-34 reviewers passed without moving (the
     coordinator moved them, 03:42:37 and 04:05:34).
+    **Amended SP7:** every prompt for a project-board card gives the `board.py --board <project>` form,
+    workers report only in their final message (never by messaging another session), and every worker
+    runs `node scripts/run.mjs checks` (licence headers, ported-copyright, package licence) before moving
+    its card to review. Testable: the clean-registry ci fails on no finding that `checks` reports.
+    Evidence: SP7 VSS-471 created on the VSS board for want of `--board`; the PRF-16 worker messaged the
+    main session; ci run 4 failed on check-licence for PRF-16's test ("Ported from" without Copyright)
+    and PRF-41's missing `license`, the same rule that failed SP6's third run (`8453720`).
 23. **Capacity is the busiest lane.** A sprint lasts as long as its longest single-module chain: plan
     about 20 points an hour per lane with work (40 in a 2-hour sprint), give a hot module a second card
     on disjoint files (rule 14) where one exists, and keep an ordered pull-in list of next-sprint cards
@@ -263,3 +302,16 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     (zip bomb), PRF-8 (regex backtracking: a denylist and a step budget failed review, then an own
     Thompson NFA), VWR-8 (overlapping entries), VWR-15 (index wrap, XML depth), GCP-16 (quadratic regexes,
     two rounds), and VWR-389 from the VWR-37 spike at 20 M triangles. Since SP6.
+    **Amended SP7:** the bounds cover every loop and copy in the card's code, not only the parser it
+    names: generators and their tokenizers and line lookups, data copied across a process, worker or
+    webview boundary (cap before inflating or copying), and concurrent requests (an in-flight cap, with
+    later requests coalesced or refused). Testable unchanged: at most one resource-bound fix round in a
+    sprint. Evidence: SP7 bounds were in the criteria before start (coordinator), yet four first reviews
+    failed on resource bounds in paths they did not name: PRF-16 (quadratic and unbounded C++ tokenizer
+    paths), PRF-17 (quadratic line lookup), GCP-36 (thumbnails inflated before the cap and copied to the
+    host; unbounded plate loads), GCP-39 (unbounded request flood).
+26. **Tests do not assert wall time.** A performance test asserts operation counts, a step budget or a
+    ratio between two input sizes; a timeout exists only as a hang guard of at least 30 s. Testable: no
+    timing flake in the next sprint's ci runs. Evidence: SP7 at machine load about 76, the 3mf fan-out
+    (1 s), gcode-parser (500 ms) and a profile-api 5 s timeout flaked (coordinator), in the sprint in
+    which PRF-178 made profile-api's regex timing tests load-independent. Since SP7.
