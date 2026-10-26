@@ -6,9 +6,10 @@ description: How a VSSlicer sprint runs from start to close, ending with an auto
 # Sprint cycle
 
 One coordinator (Opus) runs one sprint. The board is the taskboard skill
-(`~/.claude/skills/taskboard/SKILL.md`); pass `--agent <name>` to every `board.py` call.
+(the taskboard plugin's skill). Work it through the plugin's MCP tools, or the `taskboard` command in a
+shell (the same commands `board.py` had); pass your agent name to every write.
 
-0. **Read the owner's answers first.** Run `board.py inbox` and check every decision's `status`
+0. **Read the owner's answers first.** Run `taskboard inbox` and check every decision's `status`
    before treating anything as owner-blocked. Apply each answer to its cards (unblock, move,
    descope). A blocked list in a brief or a previous report is not evidence: SP3 to SP8 carried
    cards for questions the owner had already answered.
@@ -29,7 +30,7 @@ One coordinator (Opus) runs one sprint. The board is the taskboard skill
    - nice to have: `priority=P2`
    Record the card tickets in the report under a closing "Cards" section, and in the
    "SP<n>: audit review and bugfix" card's Progress, then move that card to Done.
-4. **Hold the retro.** A fresh Opus agent (it may be the auditor) runs `board.py retro SP<n>` and
+4. **Hold the retro.** A fresh Opus agent (it may be the auditor) runs `taskboard retro SP<n>` and
    writes `.ai/retros/SP<n>-retro.md`:
    - the facts table from the command, unedited
    - **on time or not:** planned vs actual pace and overrun, and which cards ran long or short
@@ -43,9 +44,9 @@ One coordinator (Opus) runs one sprint. The board is the taskboard skill
      rules, model choice, parallelism the coordinator should use), each written into
      `.ai/plans/estimation.md` under "Rules learned" with its evidence
    - **re-sizing:** cards in the next sprints whose effort no longer fits the rules, re-sized with
-     `board.py set` (owner-facing scope is unchanged)
+     `taskboard set` (owner-facing scope is unchanged)
    The retro changes no code. Move the "SP<n>: retro" card to Done with a two-line summary.
-5. **Close and begin.** `board.py close-sprint SP<n> --next SP<n+1>`. It refuses until
+5. **Close and begin.** `taskboard close-sprint SP<n> --next SP<n+1>`. It refuses until
    `.ai/audits/SP<n>-audit.md` and `.ai/retros/SP<n>-retro.md` exist (board.json `sprint_close.requires`), carries unfinished cards
    over, archives the finished ones and starts SP<n+1>. Commit it as `Board: close SP<n>`. Reply
    with the result; whoever started you then starts the coordinator for SP<n+1>.

@@ -259,6 +259,6 @@
   "runner": {
     "model": "opus",
     "permission_mode": "auto",
-    "prompt": "You are the coordinator for sprint {sprint} of VSSlicer. Read .ai/instructions.md, .ai/skills/sprint-cycle/SKILL.md (step 0 first: the owner's answers in `board.py inbox`), .ai/plans/estimation.md, and the previous sprint's retro and audit. Run the sprint cycle for {sprint} from start to close without stopping between phases: owner questions become `board.py ask` items, never blockers, and you never take an outward-facing step. Finish with `close-sprint {sprint} --next <the next sprint>` and commit `Board: close {sprint}`."
+    "prompt": "You are the coordinator for sprint {sprint} of VSSlicer. Read .ai/instructions.md, .ai/skills/sprint-cycle/SKILL.md (step 0 first: the owner's answers in `taskboard inbox` (the `inbox` MCP tool)), .ai/plans/estimation.md, and the previous sprint's retro and audit. Run the sprint cycle for {sprint} from start to close without stopping between phases: owner questions become `taskboard ask` items (the `ask` MCP tool), never blockers, and you never take an outward-facing step. Finish with `close-sprint {sprint} --next <the next sprint>` and commit `Board: close {sprint}`."
   }
 }
