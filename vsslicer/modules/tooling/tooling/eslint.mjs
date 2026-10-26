@@ -1,26 +1,54 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Shared flat ESLint config. Consumers: eslint.config.mjs = `export { default } from '@vsslicer/tooling/eslint';`
 import js from '@eslint/js';
+import { closeSync, existsSync, openSync, readSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import boundaries from 'eslint-plugin-boundaries';
 import { importX } from 'eslint-plugin-import-x';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const header = '// SPDX-License-Identifier: AGPL-3.0-or-later';
+const prefix = '// SPDX-License-Identifier: ';
+const orLater = 'AGPL-3.0-or-later';
+const cap = 1024 * 1024;
+const licences = new Map();
+// The header must match the nearest package.json `license` (AGPL-3.0-only or or-later); anything else expects or-later.
+const licenceFor = (dir) => {
+  if (licences.has(dir)) return licences.get(dir);
+  let id;
+  const file = join(dir, 'package.json');
+  if (existsSync(file)) {
+    const fd = openSync(file, 'r');
+    try {
+      const buf = Buffer.alloc(cap + 1);
+      const n = readSync(fd, buf, 0, cap + 1, 0);
+      if (n <= cap) id = JSON.parse(buf.toString('utf8', 0, n)).license;
+    } catch {
+      id = undefined;
+    } finally {
+      closeSync(fd);
+    }
+  } else if (dirname(dir) !== dir) id = licenceFor(dirname(dir));
+  if (id !== 'AGPL-3.0-only') id = orLater;
+  licences.set(dir, id);
+  return id;
+};
 const spdx = {
   rules: {
     header: {
       meta: {
         type: 'problem',
         schema: [],
-        messages: { missing: `First comment must be "${header}" (after a shebang).` },
+        messages: {
+          missing: `First comment must be "${prefix}<the package's AGPL-3.0-only or AGPL-3.0-or-later>" (after a shebang).`,
+        },
       },
       create: (context) => ({
         Program: (node) => {
           const text = context.sourceCode.text;
           const lines = text.split('\n');
           if (lines[0]?.startsWith('#!')) lines.shift();
-          if (lines[0]?.trimEnd() !== header)
+          if (lines[0]?.trimEnd() !== prefix + licenceFor(dirname(context.filename)))
             context.report({ node, loc: { line: 1, column: 0 }, messageId: 'missing' });
         },
       }),

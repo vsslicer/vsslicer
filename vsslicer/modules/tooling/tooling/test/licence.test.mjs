@@ -30,3 +30,36 @@ test('generated and downloaded directories are ignored', () => {
   assert.deepStrictEqual(check(d), []);
   rmSync(d, { recursive: true, force: true });
 });
+
+const mod = (pkg, { provenance = false, header = 'AGPL-3.0-only' } = {}) => {
+  const d = mkdtempSync(join(tmpdir(), 'licence-'));
+  writeFileSync(join(d, 'package.json'), JSON.stringify(pkg));
+  writeFileSync(join(d, 'a.mjs'), `// SPDX-License-Identifier: ${header}\n`);
+  if (provenance) writeFileSync(join(d, 'PROVENANCE.md'), 'x');
+  const problems = check(d);
+  rmSync(d, { recursive: true, force: true });
+  return problems;
+};
+const only = { license: 'AGPL-3.0-only', files: ['PROVENANCE.md'] };
+
+test('or-later passes', () =>
+  assert.deepStrictEqual(mod({ license: 'AGPL-3.0-or-later' }, { header: 'AGPL-3.0-or-later' }), []));
+test('only with PROVENANCE listed and present passes', () =>
+  assert.deepStrictEqual(mod(only, { provenance: true }), []));
+test('only without PROVENANCE in files fails naming the rule', () => {
+  const p = mod({ license: 'AGPL-3.0-only', files: ['dist'] }, { provenance: true });
+  assert.strictEqual(p.length, 1);
+  assert.match(p[0], /package-license: .*PROVENANCE\.md/);
+});
+test('only with PROVENANCE listed but missing fails', () => assert.strictEqual(mod(only).length, 1));
+test('any other SPDX id fails', () =>
+  assert.strictEqual(mod({ license: 'MIT' }, { header: 'AGPL-3.0-or-later' }).length, 1));
+test('an only module needs the only header, an or-later header fails spdx-header', () => {
+  const p = mod(only, { provenance: true, header: 'AGPL-3.0-or-later' });
+  assert.strictEqual(p.length, 1);
+  assert.match(p[0], /spdx-header: .*AGPL-3.0-only/);
+});
+test('an oversized package.json is refused', () => {
+  const p = mod({ license: 'AGPL-3.0-or-later', pad: 'x'.repeat(1024 * 1024) });
+  assert.match(p[0], /cannot read package.json/);
+});

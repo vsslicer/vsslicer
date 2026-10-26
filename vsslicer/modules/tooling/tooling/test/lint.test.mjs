@@ -41,3 +41,8 @@ const formatted = (file) =>
 test('prettier fails the misformatted fixture', async () =>
   assert.strictEqual(await formatted('misformatted.ts'), false));
 test('prettier passes the clean fixture', async () => assert.strictEqual(await formatted('clean.ts'), true));
+
+test('eslint passes an -only header in an -only package', async () =>
+  assert.deepStrictEqual(await rules('licence-only/src/y.ts'), []));
+test('eslint fails an -only header in an or-later package', async () =>
+  assert.deepStrictEqual(await rules('licence-or-later/src/y.ts'), ['spdx/header']));
