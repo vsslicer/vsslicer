@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fixed: readProject parses the root model once instead of two or three times (readModelOnce, shared by dialect detection, readers and the core fallback) (VWR-401).
 - VWR-32: 500 MB 3MF generator (test/large/generate.ts) and run.ts gate: opened through readInNodeWorker with host-thread CPU between event-loop turns under 50 ms, counted through the turn after the worker returns, and peak RSS under 1536 MB (test/large/budget.json). Elapsed time is not gated, so the gate cannot see the host blocked while waiting off-CPU (Atomics.wait, sync I/O).
 - Fixed: the worker no longer crashes with a stack overflow when a result holds more than about 125,000 items in one array, set or object (painted Bambu/Orca objects) (VWR-400).
 - Bambu and Orca projects expose custom G-code per layer (per plate), layer config ranges, layer height profiles and cut information (Project.customGcodes, layerRanges, layerHeightProfiles, cuts) (VWR-24).

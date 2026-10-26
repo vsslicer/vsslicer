@@ -17,7 +17,7 @@ import {
   type Transform,
 } from '../../domain/project/project.ts';
 import { composeTransforms } from '../model/resolveProject.ts';
-import { readModel } from '../model/readModel.ts';
+import { readModelOnce } from '../model/readModelOnce.ts';
 import { MAX_XML_DEPTH } from '../opc/xml.ts';
 
 /** 3mf.cpp:92-93. */
@@ -126,7 +126,7 @@ const named = (pkg: { parts: readonly Part[] }, name: string): Part | undefined 
  */
 export const readPrusa2: DialectReader = (pkg) => {
   const rootPart = named(pkg, pkg.rootModel);
-  const root = readModel(rootPart?.bytes ?? new Uint8Array(), pkg.rootModel);
+  const root = readModelOnce(rootPart?.bytes ?? new Uint8Array(), pkg.rootModel);
   const fail = (msg: string): never => {
     throw new MalformedXmlError(pkg.rootModel, msg);
   };

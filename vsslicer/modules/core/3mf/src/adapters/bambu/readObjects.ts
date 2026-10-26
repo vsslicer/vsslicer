@@ -11,7 +11,7 @@ import {
   type Transform,
 } from '../../domain/project/project.ts';
 import { composeTransforms } from '../model/resolveProject.ts';
-import { readModel } from '../model/readModel.ts';
+import { readModelOnce } from '../model/readModelOnce.ts';
 import { MAX_XML_DEPTH } from '../opc/xml.ts';
 
 /*
@@ -136,7 +136,7 @@ export function readBambuObjects(pkg: Package): { objects: ModelObject[]; instan
     const name = path === undefined ? pkg.rootModel : path.replace(/^\//, '');
     if (!models.has(name)) {
       const bytes = bytesOf.get(name);
-      const model = bytes && readModel(bytes, name);
+      const model = bytes && readModelOnce(bytes, name);
       if (path === undefined) root = model;
       models.set(name, model && new Map(model.objects.map((o) => [o.id, o])));
     }

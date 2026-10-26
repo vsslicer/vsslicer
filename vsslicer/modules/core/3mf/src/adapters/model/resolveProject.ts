@@ -12,7 +12,7 @@ import {
   type Project,
   type Transform,
 } from '../../domain/project/project.ts';
-import { readModel } from './readModel.ts';
+import { readModelOnce } from './readModelOnce.ts';
 
 /** `a` applied first, then `b`, in 3MF's row-vector convention (p' = p * A * B). */
 export function composeTransforms(a: Transform, b: Transform): Transform {
@@ -157,10 +157,10 @@ export function readProject(pkg: Package): Project {
   const read = (name: string): CoreModel | undefined => {
     if (!models.has(name)) {
       const bytes = bytesOf.get(name);
-      models.set(name, bytes && readModel(bytes, name));
+      models.set(name, bytes && readModelOnce(bytes, name));
     }
     return models.get(name);
   };
-  const root = read(pkg.rootModel) ?? readModel(new Uint8Array(), pkg.rootModel);
+  const root = read(pkg.rootModel) ?? readModelOnce(new Uint8Array(), pkg.rootModel);
   return resolveProject(root, pkg.rootModel, (path) => read(path.replace(/^\//, '')));
 }
