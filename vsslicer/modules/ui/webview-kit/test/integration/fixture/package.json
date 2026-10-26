@@ -1,0 +1,11 @@
+{
+  "name": "webview-kit-fixture",
+  "publisher": "vsslicer",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Test extension for webview-kit integration tests. It needs a `main`: without one VS Code serialises ArrayBuffers sent to a webview as JSON.",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "main": "./extension.js"
+}

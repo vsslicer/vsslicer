@@ -5,7 +5,13 @@ import type { Channel } from '../src/application/channel.ts';
 import { handshake } from '../src/application/handshake.ts';
 import { receiveBuffers, sendBuffer } from '../src/application/transfer.ts';
 import { ACK_METHOD, CHUNK_METHOD, ack, chunk } from '../src/domain/chunk.ts';
-import { PROTOCOL_TAG, TRANSPORT_SCHEMA_VERSION, TimeoutError, VersionMismatchError } from '../src/domain/protocol.ts';
+import {
+  PROTOCOL_TAG,
+  TRANSPORT_SCHEMA_VERSION,
+  hello,
+  TimeoutError,
+  VersionMismatchError,
+} from '../src/domain/protocol.ts';
 import { pair } from './pair.ts';
 
 const sha = (b: ArrayBuffer | Uint8Array) => createHash('sha256').update(new Uint8Array(b)).digest('hex');
@@ -40,6 +46,16 @@ describe('chunk reassembly', () => {
     expect(out.byteLength).toBe(n);
     expect(sha(out)).toBe(sha(data));
     expect(kinds(log, CHUNK_METHOD)).toHaveLength(Math.max(1, Math.ceil(n / chunkSize)));
+  });
+
+  test('a Node Buffer sends only its own bytes (Buffer.slice is a view, not a copy)', async () => {
+    const [host, webview, log] = pair();
+    const data = Buffer.from(bytes(100));
+    const got = receiveOne(webview);
+    await sendBuffer(host, 's', data, { chunkSize: 30 });
+    const { data: out } = await got;
+    expect(sha(out)).toBe(sha(data));
+    expect(kinds(log, CHUNK_METHOD).map((c) => (c.payload as ArrayBuffer).byteLength)).toEqual([30, 30, 30, 10]);
   });
 
   test('chunk size is configurable and every chunk payload is an ArrayBuffer of at most that size', async () => {
@@ -263,6 +279,17 @@ describe('late chunks of a closed stream', () => {
     await flush();
     expect(onError).toHaveBeenCalledTimes(1);
     expect(onBuffer).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+
+  test('a reloaded webview (new hello) can reuse a finished stream id', async () => {
+    const { host, onBuffer } = setup();
+    host.post(chunk('s', 0, 1, one));
+    await flush();
+    host.post(hello('session-2'));
+    host.post(chunk('s', 0, 1, one));
+    await flush();
+    expect(onBuffer).toHaveBeenCalledTimes(2);
     vi.useRealTimers();
   });
 });
