@@ -8,7 +8,7 @@ model: opus
 area: [webview-kit]
 story: US7
 milestone: "VSS:M1"
-sprint: "VSS:SP4"
+sprint: "VSS:SP5"
 owner: PLT-31-worker
 depends_on: [15, 30]
 created: 2026-10-25

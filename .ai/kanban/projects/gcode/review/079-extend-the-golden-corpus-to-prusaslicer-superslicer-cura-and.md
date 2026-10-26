@@ -7,7 +7,7 @@ effort: S
 model: sonnet
 area: [parser]
 story: US1
-sprint: "VSS:SP4"
+sprint: "VSS:SP5"
 owner: GCP-79-worker
 depends_on: [2, 10]
 created: 2026-10-25
