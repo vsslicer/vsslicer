@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added: `readOrcaInstances` reads Orca and Bambu user machine presets as printer instances (the model and nozzle ids `splitOrcaPrinters` makes, the print host connection); the credential is returned beside the entity, and an unknown host type or a name repeated across user folders gives a diagnostic (PRF-90).
 - Added: `exportOrcaBundle` writes `.orca_printer`, `.orca_filament` and `.orca_bundle` from entities (preset named by the entity's name, offline bundle id, Orca's seven host and credential keys erased); `importOrcaBundle` keeps each preset's file layout so an untouched bundle re-exports byte for byte (PRF-107).
 - Added: `importBambuBundle` reads Bambu Studio `.bbscfg` and `.bbsflmt` bundles into an ImportResult; ajv is a devDependency for the schema test (PRF-108).
 - Added: `importOrcaBundle` reads `.orca_printer`, `.orca_filament` and `.orca_bundle` into printer, material and process entities; `readBundleArchive` takes `{ lenient }` and returns `missing` (PRF-106).

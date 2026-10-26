@@ -1,0 +1,11 @@
+{
+  "from": "User",
+  "host_type": "moonraker",
+  "inherits": "MyKlipper 0.4 nozzle",
+  "is_custom_defined": "0",
+  "name": "MyKlipper 0.4 nozzle - Voron",
+  "print_host": "http://voron.local:7125",
+  "printer_settings_id": "MyKlipper 0.4 nozzle - Voron",
+  "printhost_apikey": "fixture-api-key-0001",
+  "version": "2.5.0.0"
+}

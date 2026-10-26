@@ -1,0 +1,9 @@
+{
+  "from": "User",
+  "inherits": "MyKlipper 0.6 nozzle",
+  "is_custom_defined": "0",
+  "name": "MyKlipper 0.6 nozzle - Offline",
+  "printer_settings_id": "MyKlipper 0.6 nozzle - Offline",
+  "retract_length": ["0.5"],
+  "version": "2.5.0.0"
+}

@@ -101,3 +101,5 @@
 99. [PRF-222: Build the percent-or-absolute widget and the read-only formula view](222-build-the-percent-or-absolute-widget-and-the-read-only-formu.md)
 100. [PRF-223: Key per-extruder settings by extruder in the Orca and Bambu importers](223-key-per-extruder-settings-by-extruder-in-the-orca-and-bambu-.md)
 101. [PRF-224: Check Orca printer instances against a preset saved by the real app](224-check-orca-printer-instances-against-a-preset-saved-by-the-r.md)
+102. [PRF-225: Keep the OctoPrint user name on imported Orca printer instances](225-keep-the-octoprint-user-name-on-imported-orca-printer-instan.md)
+103. [PRF-226: Read and write Bambu Studio's own .bbsflmt filament-bundle layout](226-read-and-write-bambu-studio-s-own-bbsflmt-filament-bundle-la.md)
