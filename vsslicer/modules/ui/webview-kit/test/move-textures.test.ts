@@ -79,3 +79,8 @@ test('every chunk texel holds the record word the GLSL addressing expects', () =
 test('a buffer that is not whole records is refused', () => {
   expect(() => uploadMoveTextures(fakeGl(8).gl, new ArrayBuffer(30))).toThrow(RangeError);
 });
+
+test('a typed-array view is refused, not misread', () => {
+  const buf = new ArrayBuffer(3 * MOVE_WORDS * 4);
+  expect(() => uploadMoveTextures(fakeGl(8).gl, new Uint8Array(buf, 28, 56) as never)).toThrow(TypeError);
+});

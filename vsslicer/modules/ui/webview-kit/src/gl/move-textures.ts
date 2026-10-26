@@ -60,6 +60,8 @@ export function uploadMoveTextures(
   moves: ArrayBuffer,
   maxTextureSize: number = gl.getParameter(gl.MAX_TEXTURE_SIZE) as number,
 ): MoveTextureChunk[] {
+  // A view would be read as elements, not bytes, by `new Uint32Array(moves, ...)` below.
+  if (!(moves instanceof ArrayBuffer)) throw new TypeError('moves must be an ArrayBuffer, not a typed-array view');
   const stride = MOVE_WORDS * 4;
   if (moves.byteLength % stride !== 0)
     throw new RangeError(`move buffer length ${moves.byteLength} is not a multiple of ${stride}`);
