@@ -5,3 +5,4 @@
 3. [VWR-45: Run admesh as the oracle in CI](045-run-admesh-as-the-oracle-in-ci.md)
 4. [VWR-27: Read Cura workspace containers](027-read-cura-workspace-containers.md)
 5. [VWR-21: Read Bambu and Orca project config and embedded presets](021-read-bambu-and-orca-project-config-and-embedded-presets.md)
+6. [VWR-25: Read PrusaSlicer 2.x config and objects](025-read-prusaslicer-2-x-config-and-objects.md)

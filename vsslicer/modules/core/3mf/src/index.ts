@@ -48,3 +48,5 @@ export type { DialectReader, ReadProjectDeps } from './application/readProject.t
 export type { BuildItem, Component, CoreModel, CoreObject } from './domain/coreModel.ts';
 export { addContentType, dropRelationshipsTo, removeContentType } from './adapters/opc/opcEdit.ts';
 export { createCuraReader } from './adapters/cura/readCura.ts';
+export { MODEL_CONFIG, PRINT_CONFIG, readModelConfig, readPrusa2 } from './adapters/prusa/readPrusa2.ts';
+export type { ObjectConfig, VolumeConfig } from './adapters/prusa/readPrusa2.ts';
