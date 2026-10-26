@@ -62,3 +62,15 @@ Problem:
 Dependency cycle (Left item 2), recommendation: change the runner (`scripts/lib.mjs` order) so a devDependency edge that would close a cycle is dropped from the build order (with a printed note), keeping the generator's devDependency on the published `@vsslicer/profile-api`. A devDependency on an already-published version needs nothing built first. Not a local copy of the types: `groups.ts` imports the runtime `GROUPS` too, and a copy would drift. Not the generator staying in profile-api: it would write into this module's `src/data/`, which is reaching into another module's files.
 
 **Carried to SP10 (sp9-coordinator, 10:41):** its review failed on the ESLint spdx rule; PLT-197 fixed the rule, so it needs tooling 0.8.4 and a re-review. The unreviewed work is parked, untracked, under `.ai/local/wip/SP9/` at the same paths (vsslicer/modules/profile-catalogue-data/ (whole module)); move it back with `mv` before continuing. Nothing of it is committed.
+
+**Review passed (sp10-rev-prf-192)**
+
+Re-locked `@vsslicer/tooling` to `^0.8.4` (`pnpm add -D @vsslicer/tooling@^0.8.4`: package.json specifier `^0.8.1` -> `^0.8.4`, lockfile 0.8.3 -> 0.8.4, no 0.8.3 left; the same resolve took the devDependency `@vsslicer/profile-api` from 0.1.1 to 0.1.2 within `^0.1.1`). No source changes.
+
+Ran in `vsslicer/modules/profile-catalogue-data`: `pnpm install` ok; `pnpm lint` exit 0 (eslint incl. `spdx/header` now accepts the `AGPL-3.0-only` headers, prettier, tsc); `pnpm build` ok (dist has index, load, data/*.json; dist JSON deep-equal to src); `pnpm test` 2 files / 25 tests pass. `cd vsslicer && node scripts/run.mjs checks`: exit 0, runner tests 0 fail, check-licence and check-fixtures pass for the module. `pnpm pack --dry-run`: dist, LICENSE, LICENSE-OrcaSlicer, LICENSE-BambuStudio, PROVENANCE.md, README.md, package.json.
+
+Data: all six `src/data/*.json` byte-identical (cmp) to `profile-api/src/domain/catalogue/data/`; exports cover every file profile-api imports today (orca, bambu, prusa, superslicer, cura) plus groups. Every .ts/.mjs file carries `AGPL-3.0-only`.
+
+Mutation probes on `src/load.ts` in a mktemp copy, each fails the suite: depth check off (2 fail), depth off-by-one (1), key cap off (1), key cap `>=` (1), byte cap counting UTF-16 units only (1), byte cap removed (1), limit upper bound off (1), safe-integer check off (2), top-level array accepted (1), parse error not wrapped (2). Hostile probes against dist: 200,000-deep array inside an object -> depth error, no stack overflow; 1,000,001-element array -> key cap; 9 Mi `é` (18 MiB UTF-8, 9 Mi UTF-16 units) -> byte cap; top-level array -> rejected; `__proto__` key does not pollute the prototype. No wall-time asserts.
+
+Note (not a defect): the shipped exports are parsed by the JSON import before `checkCatalogueJson` runs, so the byte cap applies to `parseCatalogueJson` callers; the shipped files' sizes are covered by the "each shipped file parses within the limits" test. Left item 2 (devDependency cycle) is PLT-200 / PRF-193; release order (item 3) stays for PRF-193.
