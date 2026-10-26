@@ -175,7 +175,7 @@ describe('the generated Prusa and SuperSlicer catalogues', () => {
     for (const [key, e] of Object.entries(prusaCatalogue.entries))
       expect(e.provenance, key).toMatch(/^Ported from PrusaSlicer@(b028299|30ef591):[\w/.-]+:\d+/);
     for (const [key, e] of Object.entries(superslicerCatalogue.entries))
-      expect(e.provenance, key).toMatch(/^Ported from SuperSlicer@1f3d287:src\/libslic3r\/PrintConfig\.cpp:\d+/);
+      expect(e.provenance, key).toMatch(/^Ported from SuperSlicer@1f3d287[:]src\/libslic3r\/PrintConfig\.cpp:\d+/);
   });
 });
 

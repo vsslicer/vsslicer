@@ -8,3 +8,5 @@ version 3 (LICENSE-OrcaSlicer). The files under data/bambu are copied unchanged 
 General Public License, version 3 (LICENSE-BambuStudio). Neither README grants "or any later
 version", so this package is AGPL-3.0-only. The scripts and src/ are VSSlicer's own (AGPL-3.0-or-later headers); the package as a whole is AGPL-3.0-only.
 Source: https://github.com/OrcaSlicer/OrcaSlicer and https://github.com/bambulab/BambuStudio.
+
+The `license` field in package.json stays at the project default (`AGPL-3.0-or-later`, enforced by the repo licence check) until the owner answers Q20 (PRF-179), which decides the field for profile-api and this package together. The upstream data in `data/` is AGPL-3.0-only.

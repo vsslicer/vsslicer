@@ -36,13 +36,13 @@ describe('committed tree', () => {
     expect(hashFiles(dir, files)).toBe(pinned[name]);
   });
 
-  it('carries licences, notice and the commits; SPDX says AGPL-3.0-only', () => {
+  it('carries licences, notice and the commits; package.json keeps the project licence field until Q20 (the data is AGPL-3.0-only, see NOTICE)', () => {
     for (const f of ['LICENSE-OrcaSlicer', 'LICENSE-BambuStudio', 'NOTICE', 'PROVENANCE.md']) {
       expect(existsSync(join(moduleRoot, f))).toBe(true);
     }
     const src = readFileSync(join(moduleRoot, 'source.commit'), 'utf8');
     for (const s of sources) expect(src).toContain(s.commit);
-    expect(JSON.parse(readFileSync(join(moduleRoot, 'package.json'), 'utf8')).license).toBe('AGPL-3.0-only');
+    expect(JSON.parse(readFileSync(join(moduleRoot, 'package.json'), 'utf8')).license).toBe('AGPL-3.0-or-later');
   });
 });
 
