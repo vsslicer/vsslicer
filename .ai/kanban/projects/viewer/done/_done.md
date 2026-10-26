@@ -11,3 +11,6 @@
 9. [VWR-4: Build broken-package fixtures for each error class](004-build-broken-package-fixtures-for-each-error-class.md)
 10. [VWR-46: Build and serialise a BVH with three-mesh-bvh](046-build-and-serialise-a-bvh-with-three-mesh-bvh.md)
 11. [VWR-7: Implement openPackage and Package.parts](007-implement-openpackage-and-package-parts.md)
+12. [VWR-44: Count open and non-manifold edges](044-count-open-and-non-manifold-edges.md)
+13. [VWR-5: Read zip entries with a size cap](005-read-zip-entries-with-a-size-cap.md)
+14. [VWR-6: Read content types and relationships](006-read-content-types-and-relationships.md)
