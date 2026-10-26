@@ -111,6 +111,39 @@
       "source": "upstream"
     },
     {
+      "path": "prusaslicer/mini_cube_ps2.8.1.twin.gcode",
+      "format": "gcode",
+      "slicer": "PrusaSlicer",
+      "slicerVersion": "2.8.1",
+      "printer": "MK4S",
+      "model": "mini-cube",
+      "material": "single",
+      "arcFitting": "on",
+      "source": "upstream"
+    },
+    {
+      "format": "gcode",
+      "slicer": "PrusaSlicer",
+      "slicerVersion": "2.6.0",
+      "printer": "MINI",
+      "model": "mini-cube",
+      "material": "single",
+      "arcFitting": "off",
+      "source": "upstream",
+      "path": "prusaslicer/mini_cube_b.twin.gcode"
+    },
+    {
+      "format": "bgcode",
+      "slicer": "PrusaSlicer",
+      "slicerVersion": "2.6.0",
+      "printer": "MINI",
+      "model": "mini-cube",
+      "material": "single",
+      "arcFitting": "off",
+      "source": "upstream",
+      "path": "prusaslicer/mini_cube_b.bgcode"
+    },
+    {
       "path": "prusaslicer/test_vase.gcode",
       "format": "gcode",
       "slicer": "PrusaSlicer",
@@ -119,6 +152,17 @@
       "model": "vase",
       "material": "single",
       "arcFitting": "off",
+      "source": "upstream"
+    },
+    {
+      "path": "prusaslicer/test_arcs_ps2.9.0-alpha1.gcode",
+      "format": "gcode",
+      "slicer": "PrusaSlicer",
+      "slicerVersion": "2.9.0-alpha1",
+      "printer": "MINI",
+      "model": "test-part-48mm",
+      "material": "single",
+      "arcFitting": "on",
       "source": "upstream"
     },
     {
@@ -174,8 +218,8 @@
     },
     {
       "slicer": "PrusaSlicer",
-      "what": "20 mm calibration cube and a small two-material sample, arc fitting on and off",
-      "reason": "No 20 mm cube and no small multi-material file upstream: the only multi-material sample (prusa3d/PrusaSlicer resources/test_data/test_multimaterial.gcode, 12 MB) exceeds the 5 MB cap and truncation is not acceptable. Present: the 2.8.1 mini cube pair and the 2.9.0-alpha1 vase (MK3MMU2 profile, one material)."
+      "what": "20 mm calibration cube and a small two-material sample, arc fitting off for the cube",
+      "reason": "No 20 mm cube and no small multi-material file upstream: the only multi-material sample (prusa3d/PrusaSlicer resources/test_data/test_multimaterial.gcode, 12 MB) exceeds the 5 MB cap and truncation is not acceptable. Present: the 2.8.1 mini cube pair, the 2.9.0-alpha1 MINI test part with 10,808 arc-fitted G2/G3 lines (3.7 MB, test.gcode) and the 2.9.0-alpha1 vase (MK3MMU2 profile, one material)."
     },
     {
       "slicer": "SuperSlicer",
