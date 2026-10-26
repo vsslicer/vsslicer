@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fixed: the worker no longer crashes with a stack overflow when a result holds more than about 125,000 items in one array, set or object (painted Bambu/Orca objects) (VWR-400).
 - Bambu and Orca projects expose custom G-code per layer (per plate), layer config ranges, layer height profiles and cut information (Project.customGcodes, layerRanges, layerHeightProfiles, cuts) (VWR-24).
 
 ## 0.2.0
