@@ -56,9 +56,12 @@ function check(name: string, gcode: string): void {
 describe('klipper planner against klipper_estimator@dbcff4a', () => {
   it.each(cases)('%s is within 1 minute per 12 hours', (name, gcode) => check(name, gcode()));
 
-  // Known gap (GCP-21 Progress): ours is 7.3 s (0.7%) slower than the oracle's 1011.3 s, against 1.4 s allowed. Micro cases
-  // (straight lines, corners, retractions, M204 S, G4) agree to the 0.25 s estimator start offset; the difference
-  // grows along the 45-degree zig-zag infill after "M204 S500". The bar stays; the case flips to a failure once fixed.
+  // Known gap: ours is 7.3 s (0.7%) slower than the oracle's 1011.3 s, against 1.4 s allowed. Cause (GCP-116): all of
+  // it is extrude-only time (ours 16.93 s, oracle 9.15 s). Klipper gives every move, extrude-only ones too, the
+  // minimum_cruise_ratio pseudo-accel (klipper@ee2c6fb:klippy/toolhead.py:51), which caps a retract's cruise at
+  // sqrt(|e| x accel x (1 - mcr)), slow after "M204 S500"; klipper_estimator gives extrude-only moves an unlimited
+  // smoothed_dv2 (klipper_estimator@dbcff4a:lib/src/planner.rs:363). Dropping that cap brings ours to 1010.78 s, but
+  // ours follows Klipper, so the oracle is the one that is off here. The bar stays; the case flips to a failure once fixed.
   it.fails('orca-cube-marlin is within 1 minute per 12 hours', () =>
     check('orca-cube-marlin', readFileSync(join(dir, 'inputs', 'orca-cube-marlin.gcode'), 'utf8')),
   );
