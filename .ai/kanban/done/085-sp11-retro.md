@@ -28,3 +28,5 @@ Retro for SP11, step 4 of `.ai/skills/sprint-cycle`.
 ## Progress
 
 Not started.
+
+- sp11-retro (written), sp11-coordinator: `.ai/retros/SP11-retro.md`. 101 of 124 points delivered, 95 of them by 13:53 at about 107 an hour (8.3 agents, 6.9% idle); then the permission classifier refused 40+ dispatches and 6 points landed. Rules 8, 9, 14, 19 to 22, 24 to 26 and 29 amended in `.ai/plans/estimation.md`.

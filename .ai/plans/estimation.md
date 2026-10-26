@@ -102,6 +102,21 @@ After SP10 (retro `.ai/retros/SP10-retro.md`):
 - close-sprint records 90 of 114 if the audit and retro cards are done (86 plus VSS-49 and VSS-84; 114 is the
   rebalance's 92 plus ten in-flight cards set back, 20 points, and PLT-202).
 
+After SP11 (retro `.ai/retros/SP11-retro.md`):
+
+- **Plan 5 cards an hour per lane for features, about 10 for short bug cards on disjoint files** (rules 14,
+  23): SP11 delivered 101 points (41 cards) of 124 planned, 95 of them in 53 minutes (13:00 to 13:53, about 107
+  an hour; SP10 81.4) at a mean of 8.3 agents, up to 16, idle 6.9%. Profiles lanes did 6 to 9 cards in 40 to 44
+  minutes; 3mf did 7 in 76 with five rounds. A passing card took a median 13.0 minutes from doing to done (about
+  9 without wave 1's refused dispatches), a card with one round 25.8.
+- Agent time about **4.4 agent-minutes per done point** (13:00 to 13:40, the window the events cover; SP10 3.8);
+  reviews and fixes 45% (137.8 and 13.7 of 334.2).
+- First-review failures 1 in 3.4 (features 7 of 16, bugs 2 of 17, chores 2 of 4); 3 resource-bound rounds.
+- **The permission classifier refused at least 40 dispatches** (rule 29): 6 points from 13:53 to 14:41, 17 points
+  carried. Count it as the largest risk to a sprint's length until rule 29's restart is routine.
+- close-sprint records 105 of 124 if the audit and retro cards are done (101 plus VSS-50 and VSS-85; 124 is
+  `plan-sprints`' 92 plus 16 audit bug cards pulled back, 32 points).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -135,10 +150,16 @@ Each rule: the rule, its evidence (sprint and figures), since when.
    module stay on Sonnet. Evidence: SP2 GCP-57 (S, Opus) worked 6.5 min, more than the M median of
    4.8; Opus cards ran no faster than Sonnet at about twice the cost ($2.65 against $1 to $1.50 for M).
    Since SP2.
+   **Amended SP11:** a card that checks resolved values against an oracle (a slicer's own output for N
+   tuples) is L, whatever its tuple count. Evidence: SP11 PRF-128 and PRF-129 (M, Opus) had 17-minute
+   workers, like the L PRF-42 of the same kind (12.3), and took 24 to 28 minutes to done.
 9. **Measure from the agent events.** Retros take card times from the start, stop and dispatch events
    in `activity.jsonl`. The coordinator moves a card to doing when it dispatches, and board migrations
    must keep done times. Evidence: SP2's `board.py retro` Minutes column was unusable; workers moved
    cards to doing at the end of their run, and `ee9667a` re-stamped all done times to 22:07. Since SP2.
+   **Amended SP11:** changes to how activity is recorded (hooks, plugin settings) do not land while a
+   sprint runs. Evidence: SP11 `3c7f4b5b` at 13:41 cut the agent start and stop events until 14:43, so the
+   retro has agent figures for 13:00 to 13:40 only.
 10. **Plan capacity from concurrency: points = sprint minutes x mean running agents / 1.5**, and the
     sprint's workable points (not owner- or dependency-blocked) must not exceed it. At SP3's mean of
     2 agents that is 80 points an hour; this replaces rule 1's 33. Check before the sprint starts: the
@@ -208,6 +229,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     publishes; the coordinator releases the module once after both pass. Evidence: SP3 GCP-20
     (Klipper) and GCP-24 (Marlin) ran in parallel in `gcode-planner` (22:35 to 22:44), both
     unreleased, with no conflict; the coordinator released 0.2.x. Since SP3.
+    **Amended SP11:** up to four cards at once when they change disjoint files and the release lines
+    (CHANGELOG, `index.ts`) go to the coordinator. Evidence: SP11 3mf ran VWR-21, 25, 27 and 31 at once from
+    13:25, all done by 13:53; profiles-prusa, -orca and -cura did 6 to 9 cards in 40 to 44 minutes at two to
+    four at once, with no conflict recorded.
 15. **A port card lists the parser and API inputs it needs, and missing ones become their own card
     when planning.** Evidence: SP3 GCP-20 needed arc resolution and ESTIMATOR_ADD_TIME the parser
     does not carry (split to GCP-82, GCP-83), GCP-14's parser side became GCP-84, and GCP-19 left
@@ -313,6 +338,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     features failed 12 of 14 (bugs 3 of 9, chores 3 of 5), on what had no test at all: PRF-34's bed guard,
     four behaviours PRF-126 claimed, PRF-57's ticked activation criterion, PRF-67's VSIX packaging, GCP-42's
     budget calibrated on macOS and enforced on Linux.
+    **Amended SP11:** the target held (features 7 of 16 failed first review, 1 in 2.3), but nine of eleven
+    failures named a test that could not fail. Progress lists one probe per acceptance criterion, criterion
+    by criterion; a bound's test asserts the exact cap (one past the cap is refused, not `<=`); an expected
+    value never comes from the code under test. Testable: features at most 1 in 2, and no failed review names
+    a criterion with no probe. Evidence: SP11 PRF-52 and PRF-127 (caps untested), PRF-204 (`<=` passed with
+    the cap moved), PRF-206 (a filter removable), VWR-20 and PRF-54 (criteria tested on part of the
+    fixtures), VWR-31 twice (untested worker halves), GCP-53 (expected value from `session.reveal`), GCP-55.
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -327,6 +359,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     within 5 minutes of the reviewer's done; GCP-90+91, PLT-190+191, GCP-32+33, GCP-92+93 and the GCP-89
     and GCP-95 preview parts each went in one commit, with two "also carries" notes left (SP4: 22 commits
     split by file).
+    **Amended SP11:** the coordinator's commit and release scripts stop on the first failure (`set -e -o
+    pipefail`, `&&`); never `;` between a test and a commit, never a test piped through `tail` without
+    `pipefail`. Testable: no commit with a failing test. Evidence: SP11 VWR-21 committed on a failing
+    `readProject` test (chained with `;`, amended); profiles-data-orca's release continued past a failed
+    `pnpm test` piped through `tail`.
 21. **Workers never publish.** The coordinator publishes each module once per sprint, after the last
     card that changes it has passed review, then runs one clean-registry `run.mjs ci` (extends rule
     13 to every module). Testable: one version per module per sprint in `git log`. Evidence: SP4
@@ -346,6 +383,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     preview's notices check refused saxes's missing licence file, and GCP-111 shipped gcode-parser 0.13.0
     and gcode-preview 0.4.1 (`2b522ab`); the ci passed on its third run (stale pins, then the licence
     check's "Ported from" rule on two test files, `8453720`).
+    **Amended SP11:** before releasing a 0.x minor of any module (0.1 to 0.2 leaves `^0.1` unsatisfied), the
+    coordinator greps every module's range on it, re-ranges the dependents in the same release, and runs the
+    stale-pin check before publishing. Testable unchanged: one version per module per sprint. Evidence: SP11
+    `3mf@0.2.0` (14:27) left gcode-parser and gcode-preview on `^0.1.3`; the clean ci failed the stale-pin
+    check and gcode-preview shipped 0.6.0 and 0.6.1.
 22. **Every agent prompt names a `mktemp -d` scratch directory**; agents delete only files they
     created there and use `command ls -1` (not the aliased `ls`) in scripts. The coordinator runs
     `git status --short` after each wave and restores any change outside the dispatched cards' files.
@@ -376,6 +418,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     its card, the PRF-27 reviewer ran `git checkout -p` in a probe, a stray empty `vsslicer/CHANGELOG.md`, and
     the coordinator's `cat >> $(ls */034-*.md)` with two matches made a literal `034-*.md` that `board.py`
     then moved as PRF-34's card (`b7fdb9d2`).
+    **Amended SP11:** agents edit files with the Edit tool, never `sed -i` (BSD `sed -i -e` writes a backup
+    named `<file>-e`), and fix workers too never run `git checkout`. Testable: zero incidents. Evidence: SP11
+    three incidents: PRF-29's fix worker overwrote its card, PRF-203's worker left `superslicer-keys.ts-e`,
+    GCP-53's fix worker ran `git checkout -p` (no input, no change).
 23. **Capacity is the busiest lane.** A sprint lasts as long as its longest single-module chain: plan
     about 20 points an hour per lane with work (40 in a 2-hour sprint), give a hot module a second card
     on disjoint files (rule 14) where one exists, and keep an ordered pull-in list of next-sprint cards
@@ -420,6 +466,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     the 11:23:20 rebalance (`0202202b`) moved ten wave-1 cards (20 points) to SP31 and later 6 seconds after
     their 11:23:31 to 11:23:33 moves to doing; the coordinator set them back at 11:27:35, and the committed
     figure became 114 against the rebalance's 92.
+    **Amended SP11:** the rebalance at a sprint's close keeps the closing sprint's audit bug cards in the
+    next sprint. Testable: no P1 or P2 audit bug card is scheduled past the next sprint. Evidence: SP11 the
+    12:43 rebalance at SP10's close put P1 and P2 bugs from the SP9 and SP10 audits in SP12 to SP48; the
+    coordinator pulled 16 (32 points) back at 12:58.
 25. **A card that parses untrusted input names its resource bounds at planning.** Size, nesting, count
     and time bounds, and linear-time scanning (no backtracking regex over input bytes), go in its
     acceptance criteria with a hostile-input test (bomb, deep nesting, unterminated tags, pathological
@@ -455,6 +505,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     file descriptors closed on every error path, and no full copy of input before its cap. Testable
     unchanged. Evidence: SP10 five rounds on four cards: PRF-27 (merge memory amplification), PRF-30 (a
     symlinked folder followed), SLC-280 twice (TOCTOU, then an fd leak), VWR-397 (a 2x buffer before the cap).
+    **Amended SP11:** the hostile cases list keys such as `__proto__` and `constructor` for any object built
+    from input keys (a `Map` or `Object.create(null)`), and a length bound on every string derived from
+    input. When a bug card fixes a class of bug in one reader, the coordinator checks the module's other
+    readers in the same sprint. Testable unchanged. Evidence: SP11 three rounds: PRF-127 (an unbounded
+    `secret_ref`, a `__proto__` machine id), PRF-204 (a bound test that did not pin the bound), PRF-52 (a key
+    cap untested); PRF-127 repeated in profiles-cura the `__proto__` bug PRF-209 fixed there the same hour.
 26. **Tests do not assert wall time.** A performance test asserts operation counts, a step budget or a
     ratio between two input sizes; a timeout exists only as a hang guard of at least 30 s. Testable: no
     timing flake in the next sprint's ci runs. Evidence: SP7 at machine load about 76, the 3mf fan-out
@@ -465,6 +521,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     SP9 all three such cards failed first review on exactly that (VWR-395 guard on the wrong test, PRF-186
     timeouts below the guard, GCP-115 hang guards instead of counts, then a count on an unproven path),
     43 to 66 minutes for 2-point bugs.
+    **Amended SP11:** a test that takes over 1 second alone sets an explicit hang-guard timeout of at least
+    30 s; vitest's 5 s default is not a guard. Testable unchanged. Evidence: SP11 four flakes under load:
+    profiles-orca `read-tree.test.ts:240` (2 to 4 s alone), 3mf `opc.test.ts` "reads every Cura 3MF mesh",
+    gcode-preview's timeline integration test, slicer-runtime `run-process.test.ts:62` (1 of 8 runs).
 27. **Agents record in the card file, and the record matches what shipped.** Worker and fix-worker
     prompts say "append under Progress in the card file with an edit"; `board.py note` writes only to
     the activity log and never counts as the record. A release card names its version after reading the
@@ -494,3 +554,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Poisoning"), first on detailed prompts, from 12:04 on minimal ones too; PRF-34's fix waited 11.6 minutes
     after three refusals, GCP-118 left the sprint, PRF-29 carried; the coordinator reviewed 12 cards, 5 of
     them first reviews (4 passed, against 7 of 24 for fresh Opus reviewers). Since SP10.
+    **Amended SP11:** refusals grow with a coordinator session's length and a restart clears them. Send one
+    Agent call per message, never a batch; word the prompt as a plain task description (card, rules file,
+    card path), with no explanation of concerns or earlier failures; after three refusals in a row, stop
+    retrying and restart the coordinator session (the loop's resume) at once, and record it. Testable: no
+    card carried because a dispatch was refused, and fewer than 10 refusals. Evidence: SP11 at least 40
+    refusals, the sprint's main cost: 9 of 12 in the batched wave 1 (13:01), about 12 from 13:50 on any
+    sentence beyond the three-line form, 13 of 14 from 14:15 on three-line prompts too (Q29); 6 points done
+    from 13:53 to 14:41 against 95 in the 53 minutes before; plain task descriptions launched after the
+    14:41 restart; 17 points carried (GCP-55, VWR-23, VWR-24, VWR-29, VWR-32).
