@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Framework-free contract suites: an adapter's test awaits them; they reject with every violation found.
+import { unsafePath } from '../../domain/bundle/index.ts';
 import type { Diagnostic, ImportedEntity, ImportResult } from '../../domain/import-result/index.ts';
 import type { Exporter, ExportResult } from './exporter.ts';
 import type { Importer, SourceFile } from './importer.ts';
@@ -63,6 +64,8 @@ function exportProblems(r: ExportResult, entityCount: number): string[] {
   const out = diagnosticProblems(r.diagnostics);
   r.files.forEach((f, i) => {
     if (typeof f?.path !== 'string' || f.path === '') out.push(`file ${i} has no path`);
+    else if (f.path.includes('\\') || unsafePath(f.path))
+      out.push(`file ${i} has an unsafe path ${JSON.stringify(f.path.slice(0, 64))}`);
     if (!(f?.bytes instanceof Uint8Array)) out.push(`file ${i} bytes are not a Uint8Array`);
   });
   if (entityCount > 0 && r.files.length === 0 && r.diagnostics?.length === 0)

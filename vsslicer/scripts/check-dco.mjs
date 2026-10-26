@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Usage: node scripts/check-dco.mjs <base> <head>
+// Applies from the first-push history rewrite onwards (the rewrite adds sign-offs to the existing history).
 // Every non-merge commit in base..head needs a `Signed-off-by: Name <email>` trailer matching its author
 // (name and email, email case-insensitive). Merge commits are skipped: they carry no authored change.
 import { spawnSync } from 'node:child_process';

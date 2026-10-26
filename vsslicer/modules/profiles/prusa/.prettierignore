@@ -1,3 +1,5 @@
 dist
 coverage
 pnpm-lock.yaml
+# hand-written upstream-shaped YAML: prettier would re-indent the compact sequences under test
+test/fixtures/yaml/preset-print.yaml

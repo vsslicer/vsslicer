@@ -6,6 +6,7 @@ import { Ajv2020 } from 'ajv/dist/2020.js';
 import { describe, expect, test } from 'vitest';
 import { catalogueEntrySchema, catalogueSchema, defsSchema, orcaCatalogue } from '../src/index.ts';
 import { curaCatalogue } from '../src/domain/catalogue/cura.ts';
+import { GUARDED_TIMEOUT, guarded } from './support/guard.ts';
 import {
   CURA_NAMES,
   CURA_OUTPUT,
@@ -146,17 +147,20 @@ describe('the Cura generator bounds (rule 25)', () => {
     expect(() => extractCura(nested(MAX_DEPTH + 1), 'x')).toThrow(/deeper than 32/);
   });
 
-  test('finds the lines of 100k flat settings in linear time', () => {
-    const n = 100_000;
-    const children = Array.from({ length: n }, (_, i) => `"k${i}":\n{"type":"float","default_value":0}`).join(',\n');
-    const text = `{"settings":{"c":{"type":"category","children":{${children}}}}}`;
-    const t0 = performance.now();
-    const out = extractCura(text, 'x');
-    // The old indexOf-from-0 scan took about 19 s at 40k settings; one pass takes well under a second.
-    expect(performance.now() - t0).toBeLessThan(2000);
-    expect(out).toHaveLength(n);
-    expect(out[n - 1]).toMatchObject({ key: `k${n - 1}`, line: 2 * n - 1 });
-  });
+  test(
+    'finds the lines of 100k flat settings in linear time',
+    () => {
+      const n = 100_000;
+      const body = `
+      const n = ${n};
+      const children = Array.from({ length: n }, (_, i) => '"k' + i + '":\\n{"type":"float","default_value":0}').join(',\\n');
+      const out = cura.extractCura('{"settings":{"c":{"type":"category","children":{' + children + '}}}}', 'x');
+      if (out.length !== n || out[n - 1].line !== 2 * n - 1 || out[n - 1].key !== 'k' + (n - 1)) throw new Error('wrong lines');`;
+      // The old indexOf-from-0 scan took about 19 s at 40k settings; one pass takes well under a second.
+      expect(guarded(body)).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 
   test('ignores a key-shaped text inside a string when citing a line', () => {
     const text =

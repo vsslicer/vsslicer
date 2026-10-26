@@ -29,8 +29,16 @@ function cut(s: string, max: number): string {
   return s.slice(0, code >= 0xd800 && code <= 0xdbff ? max - 1 : max);
 }
 
+/** Cut an over-long input to MAX_INPUT_LENGTH, keeping a last `.ext` of up to 64 units (one lastIndexOf, one slice). */
+function cutInput(name: string): string {
+  if (name.length <= MAX_INPUT_LENGTH) return name;
+  const d = name.lastIndexOf('.');
+  const ext = d > 0 && name.length - d <= 64 ? name.slice(d) : '';
+  return cut(name, MAX_INPUT_LENGTH - ext.length) + ext;
+}
+
 function prepare(name: string): string {
-  return cut(name, MAX_INPUT_LENGTH).replace(LONE_SURROGATE, '_').normalize('NFC');
+  return cutInput(name).replace(LONE_SURROGATE, '_').normalize('NFC');
 }
 
 /** Index of the extension dot, or -1 (a leading dot is not an extension separator). */

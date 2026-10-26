@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { SaxesParser } from 'saxes';
 import { MalformedXmlError } from '../../domain/errors.ts';
+import { MAX_XML_DEPTH } from './xml.ts';
 
 export const PRODUCTION_NS = 'http://schemas.microsoft.com/3dmanufacturing/production/2015/06';
 
@@ -17,7 +18,10 @@ export function scanModel(bytes: Uint8Array, part: string): ModelScan {
   const requiredExtensions: string[] = [];
   const productionPaths: string[] = [];
   let root = true;
+  let depth = 0;
+  parser.on('closetag', () => depth--);
   parser.on('opentag', (tag) => {
+    if (++depth > MAX_XML_DEPTH) throw new Error(`elements nested deeper than ${MAX_XML_DEPTH}`);
     for (const a of Object.values(tag.attributes)) {
       if (a.uri === PRODUCTION_NS && a.local === 'path') productionPaths.push(a.value);
       else if (root && a.prefix === '' && a.local === 'requiredextensions') {

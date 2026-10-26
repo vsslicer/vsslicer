@@ -5,7 +5,7 @@ type: chore
 priority: P2
 effort: XS
 model: sonnet
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [28]
 created: 2026-10-26
 ---
@@ -27,3 +27,5 @@ SP5 created the `gcode-language` extension (G-code language, hover, completion, 
 ## Progress
 
 Not started. Blocked on publishing (PLT-28, Q8: marketplace accounts and tokens are the owner's).
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up.

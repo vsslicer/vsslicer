@@ -7,7 +7,7 @@ effort: S
 model: sonnet
 area: [parser]
 story: US1
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 owner: GCP-79-worker
 depends_on: [2, 10]
 created: 2026-10-25
@@ -41,3 +41,5 @@ Partly done; four of five criteria need input only the owner can give. Not publi
 - Files (vsslicer/modules/gcode-parser): test/fixtures/prusaslicer/test_arcs_ps2.9.0-alpha1.gcode, test/fixtures/prusaslicer/PROVENANCE.md, test/fixtures/manifest.json, test/golden/prusaslicer/test_arcs_ps2.9.0-alpha1.gcode.json, test/arc-fixtures.test.ts, CHANGELOG.md.
 
 Review passed (criterion 5); criteria 1-4 wait on owner slicer exports. (GCP-79-reviewer, 00:16; re-added by the coordinator after a stray-file cleanup deleted it.)
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answer Q19 ("Defer this to a later stage"): the fixture projects the owner exports from the slicers are deferred, so this card leaves the sprints.

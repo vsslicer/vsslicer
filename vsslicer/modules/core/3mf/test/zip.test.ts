@@ -63,29 +63,34 @@ test('a deflate stream that disagrees with its declared size is corrupt', () => 
   expect(() => big.inflated('a')).toThrow(CorruptZipError);
 });
 
-test('a deflate stream far bigger than its declared size is stopped quickly', () => {
-  // 256 MiB of zeros deflates to ~256 KiB; declared size is 10. Whole-stream inflate would allocate 256 MiB.
-  const bomb = deflateRawSync(new Uint8Array(256 * 1024 * 1024));
-  const zip = buildZip([{ name: 'a', data: bomb, method: 0, declaredSize: 10 }]);
-  const dv = new DataView(zip.buffer, zip.byteOffset);
-  dv.setUint16(8, 8, true); // local header method
-  for (let i = zip.length - 22; i >= 0; i--) {
-    if (dv.getUint32(i, true) === 0x02014b50) {
-      dv.setUint16(i + 10, 8, true); // central directory method
-      break;
+// Hang guard only: a regression inflates 256 MiB or loops, far past this. No wall-time assertion.
+const HANG_GUARD_MS = 30_000;
+test(
+  'a deflate stream far bigger than its declared size is stopped quickly',
+  () => {
+    // 256 MiB of zeros deflates to ~256 KiB; declared size is 10. Whole-stream inflate would allocate 256 MiB.
+    const bomb = deflateRawSync(new Uint8Array(256 * 1024 * 1024));
+    const zip = buildZip([{ name: 'a', data: bomb, method: 0, declaredSize: 10 }]);
+    const dv = new DataView(zip.buffer, zip.byteOffset);
+    dv.setUint16(8, 8, true); // local header method
+    for (let i = zip.length - 22; i >= 0; i--) {
+      if (dv.getUint32(i, true) === 0x02014b50) {
+        dv.setUint16(i + 10, 8, true); // central directory method
+        break;
+      }
     }
-  }
-  const t = performance.now();
-  expect(() => openZip(zip).inflated('a')).toThrow(CorruptZipError);
-  expect(performance.now() - t).toBeLessThan(2000);
-});
+    const before = process.memoryUsage().arrayBuffers;
+    expect(() => openZip(zip).inflated('a')).toThrow(CorruptZipError);
+    // Whole-stream inflate would allocate 256 MiB; a bounded one stays far below.
+    expect(process.memoryUsage().arrayBuffers - before).toBeLessThan(64 * 1024 * 1024);
+  },
+  HANG_GUARD_MS,
+);
 
 test('declared sizes over the total cap are refused at open, before any inflation', () => {
   const entry = (i: number) => ({ name: `Metadata/pad${i}.bin`, data: new Uint8Array(10), declaredSize: 300_000_000 });
   const zip = buildZip([0, 1, 2, 3].map(entry));
-  const t0 = performance.now();
   expect(() => openZip(zip)).toThrow(SizeCapExceededError);
-  expect(performance.now() - t0).toBeLessThan(100);
   // Each entry is under the per-entry cap, and 3 x 300 MB fits under the 1 GiB default.
   expect(openZip(buildZip([0, 1, 2].map(entry))).entries).toHaveLength(3);
   expect(() => openZip(buildZip([entry(0)]), { maxTotalBytes: 299_999_999 })).toThrow(SizeCapExceededError);

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- VWR-394: `[Content_Types].xml`, `.rels` parts and the model scan refuse XML nested deeper than 64 (`MAX_XML_DEPTH`).
+- VWR-395: tests no longer assert wall time.
+
 ## 0.1.1
 
 - VWR-392: `openZip` refuses a package whose declared inflated sizes sum above `maxTotalBytes` (default 1 GiB, `DEFAULT_MAX_TOTAL_BYTES`), before any inflation.

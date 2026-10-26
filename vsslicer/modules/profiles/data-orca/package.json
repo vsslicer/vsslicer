@@ -35,7 +35,8 @@
   "scripts": {
     "lint": "eslint . && prettier --check . && tsc --noEmit -p tsconfig.test.json",
     "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
-    "prepack": "pnpm build",
+    "prepack": "node scripts/generate.mjs && pnpm build",
+    "generate": "node scripts/generate.mjs",
     "test": "tsc --noEmit -p tsconfig.test.json && vitest run",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write .",

@@ -7,8 +7,7 @@ effort: M
 model: sonnet
 area: [planner]
 story: US8
-milestone: "VSS:M1"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [24, 79]
 created: 2026-10-25
 ---
@@ -29,3 +28,5 @@ Oracle for Marlin and Buddy.
 ## Progress
 
 Not started.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answer Q19 ("Defer this to a later stage"): the fixture projects the owner exports from the slicers are deferred, so this card leaves the sprints.

@@ -4,14 +4,15 @@
 // Run after bundling (vsslicer-bundle writes the esbuild metafile). Lists every third-party package that
 // esbuild inlined, checks each licence against the allow-list (bin/spdx.mjs) and writes the notices file.
 // Failures name the package and version and exit 1 without writing. Output is deterministic: sorted by
-// name@version, no timestamps. Skipped: the module's own sources (no node_modules segment in the path)
-// and @vsslicer/* (our own, AGPL-3.0-or-later).
+// name@version, no timestamps. Skipped: the module's own sources (no node_modules segment in the path).
+// @vsslicer/* (our own, AGPL-3.0-or-later) skip the licence check, but any NOTICE, NOTICE.md or PROVENANCE.md
+// they ship (at most 1 MiB each) is copied in under the package's name.
 // A package that ships no licence file can get one from the module: package.json
 // "vsslicer": {"licenceTexts": {"name@exact-version": "path/relative/to/package.json"}}. The text must contain
 // one of the package's SPDX ids; an entry for a package@version that is not bundled fails (stale).
 // shortcut: a "SEE LICENSE IN <file>" or otherwise non-SPDX licence cannot be classified, so it fails; add the
 // package to a reviewed exception list only if that ever happens.
-import { existsSync, readdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { isAllowed } from './spdx.mjs';
 
@@ -62,15 +63,27 @@ const textFiles = (dir) =>
     .filter((f) => /^(licen[cs]e|copying|notice)([.-].*)?$/i.test(f))
     .sort();
 
+const MAX_NOTICE_BYTES = 1024 * 1024;
+const fenced = (f, path) => {
+  const text = readFileSync(path, 'utf8').replace(/\r\n?/g, '\n').trim();
+  const fence = '`'.repeat(Math.max(3, ...(text.match(/`+/g) ?? []).map((r) => r.length + 1)));
+  return `### ${f}\n\n${fence}text\n${text}\n${fence}\n`;
+};
+
 /** @returns {{markdown: string, problems: string[]}} */
 export const notices = (metafiles, cwd = process.cwd()) => {
   const packages = new Map();
+  const own = new Map(); // @vsslicer/*: no licence check, but their upstream notices are copied
   for (const m of metafiles)
     for (const input of Object.keys(read(m).inputs)) {
       const file = realpathSync(resolve(cwd, input.replace(/^[a-z-]+:/, '')));
       if (!file.split(sep).includes('node_modules')) continue;
       const o = owner(file);
-      if (!o || o.pkg.name.startsWith('@vsslicer/')) continue;
+      if (!o) continue;
+      if (o.pkg.name.startsWith('@vsslicer/')) {
+        own.set(`${o.pkg.name}@${o.pkg.version}`, o);
+        continue;
+      }
       packages.set(`${o.pkg.name}@${o.pkg.version}`, o);
     }
   const problems = [];
@@ -108,13 +121,25 @@ export const notices = (metafiles, cwd = process.cwd()) => {
         sources.push([`${extra} (vendored)`, path]);
       }
     }
-    const body = sources.map(([f, path]) => {
-      const text = readFileSync(path, 'utf8').replace(/\r\n?/g, '\n').trim();
-      const fence = '`'.repeat(Math.max(3, ...(text.match(/`+/g) ?? []).map((r) => r.length + 1)));
-      return `### ${f}\n\n${fence}text\n${text}\n${fence}\n`;
-    });
+    const body = sources.map(([f, path]) => fenced(f, path));
     return `## ${key}\n\nLicence: ${expr ?? 'none declared'}\n\n${body.join('\n')}`;
   });
+  for (const key of [...own.keys()].sort()) {
+    const { dir } = own.get(key);
+    const body = [];
+    for (const f of readdirSync(dir)
+      .filter((f) => /^(notice(\.md)?|provenance\.md)$/i.test(f))
+      .sort()) {
+      if (statSync(join(dir, f)).size > MAX_NOTICE_BYTES) {
+        problems.push(`${key}: ${f} is larger than ${MAX_NOTICE_BYTES} bytes`);
+        continue;
+      }
+      body.push(fenced(f, join(dir, f)));
+    }
+    if (body.length)
+      sections.push(`## ${key}\n\nBundled VSSlicer package; upstream notices it ships.\n\n${body.join('\n')}`);
+  }
+  sections.sort();
   const intro = '# Third-party notices\n\nThis extension bundles the third-party packages listed below.\n';
   const markdown = `${intro}\n${sections.length ? sections.join('\n') : 'No third-party packages are bundled.\n'}`;
   return { markdown, problems };

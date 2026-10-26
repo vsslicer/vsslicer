@@ -1,0 +1,21 @@
+{
+  "sequences": [
+    {
+      "total_time": 456.52767430375945,
+      "total_distance": 12514.812050062957,
+      "total_extrude_distance": 267.3729099999987,
+      "max_flow": 4.425024305998331,
+      "max_speed": 157.52001308122536,
+      "num_moves": 17754,
+      "total_z_time": 5.010833333333339,
+      "total_output_time": 377.39634304453267,
+      "total_travel_time": 42.96883125922397,
+      "total_extrude_only_time": 35.912500000000016,
+      "phase_times": {
+        "acceleration": 30.300193207450747,
+        "cruise": 395.67728788885614,
+        "deceleration": 30.300193207451045
+      }
+    }
+  ]
+}

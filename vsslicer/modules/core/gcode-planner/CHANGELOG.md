@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-21: oracle test against recorded klipper_estimator@dbcff4a outputs (Q14); GCP-116: the orca-cube-marlin divergence (extrude-only pseudo-accel) is documented.
+
 ## 0.5.0
 
 - GCP-108: `ToolheadWindow.toTransfer()` and `ToolheadWindow.fromTransfer()` (exact round trip), and the `@vsslicer/gcode-planner/window` entry, which does not load the planners.

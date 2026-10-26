@@ -18,7 +18,7 @@ describe('section 6 rows', () => {
     ['! nozzle_high_flow[0]', "not (nozzle.flow == 'high_flow')"],
     ['printer_model=="MK4"', "printer.model == 'MK4'"],
     ['printer_model=~/(MK4S|MK3.9S)/', 'printer.model =~ /(MK4S|MK3.9S)/'],
-    ['printer_notes=~/.*PRINTER_VENDOR_PRUSA3D.*/', "(printer.vendor == 'PrusaResearch')"],
+    ['printer_notes=~/.*PRINTER_VENDOR_PRUSA3D.*/', "('PRINTER_VENDOR_PRUSA3D' in printer.tags)"],
     ['printer_notes=~/.*HF_NOZZLE.*/', "('HF_NOZZLE' in printer.tags)"],
     ['printer_notes!~/.*PG.*/', "not ('PG' in printer.tags)"],
     ['a_x && b_y', null],

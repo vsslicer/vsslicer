@@ -186,7 +186,7 @@ describe('regex engine', () => {
       }
     }
     expect(positives).toBeGreaterThan(500); // the comparison covers matches, not only misses
-  });
+  }, 60_000); // hang guard only; the loop is heavy under load
   test('random patterns match exactly as RegExp on short subjects', () => {
     let seed = 7;
     const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;

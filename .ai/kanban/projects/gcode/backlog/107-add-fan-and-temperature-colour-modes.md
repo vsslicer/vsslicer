@@ -5,7 +5,7 @@ type: feature
 priority: P1
 effort: L
 model: opus
-sprint: "VSS:SP9"
+sprint: "VSS:SP10"
 depends_on: [96]
 created: 2026-10-26
 ---

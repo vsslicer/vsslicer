@@ -123,4 +123,8 @@ export interface Progress {
 }
 
 export type TimelineCommand =
-  { action: 'play' | 'pause' } | { action: 'step'; direction: 1 | -1 } | { action: 'speed'; value: number };
+  | { action: 'play' | 'pause' }
+  | { action: 'step'; direction: 1 | -1 }
+  | { action: 'speed'; value: number }
+  /** Pauses and shows global move `move` (a followed print position). */
+  | { action: 'seek'; move: number };

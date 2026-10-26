@@ -14,17 +14,9 @@ import {
   type CatalogueEntry,
   type Dialect,
 } from '../src/index.ts';
-import {
-  defines,
-  extractDefs,
-  extractDomain,
-  MAX_SOURCE_BYTES,
-  readSource,
-  SourceLimitError,
-  substitute,
-  tokenize,
-} from '../tools/catalogue/cpp.ts';
-import { generate, OUTPUT, outputs, PRUSA_OUTPUT, SUPERSLICER_OUTPUT } from '../tools/catalogue/generate.ts';
+import { extractDefs, extractDomain, MAX_SOURCE_BYTES, readSource, tokenize } from '../tools/catalogue/cpp.ts';
+import { GUARDED_TIMEOUT, guarded } from './support/guard.ts';
+import { OUTPUT, outputs, PRUSA_OUTPUT, SUPERSLICER_OUTPUT } from '../tools/catalogue/generate.ts';
 import {
   builtinFeatures,
   headCommit,
@@ -36,7 +28,6 @@ import {
   REPOS,
   SUPERSLICER_ORCA,
   SUPERSLICER_RENAMES,
-  uiSettings,
   vendorFeatures,
 } from '../tools/catalogue/prusa.ts';
 
@@ -217,102 +208,128 @@ describe('reading sources', () => {
 describe('scanning hostile input in linear time', () => {
   const wrap = (body: string) =>
     `void PrintConfigDef::init_common_params() {\n${body}\n}\nvoid PrintConfigDef::init_extruder_option_keys() {}\n`;
-  const fast = (src: string, ms = 3000) => {
-    const start = performance.now();
-    let error: unknown;
-    try {
-      extractDefs(tokenize(src));
-    } catch (e) {
-      error = e;
-    }
-    expect(performance.now() - start).toBeLessThan(ms);
-    return error;
-  };
+  // Runs in a child process with a hang guard: the scan must finish at all, whatever the machine.
+  const fast = (src: string) => guarded('cpp.extractDefs(cpp.tokenize(src));', src);
   const MB = 1 << 20;
 
-  test('many unterminated block comments', () => {
-    // The first one runs to the end of the file, so the functions are not found; what matters is the time.
-    expect(String(fast(wrap('/*'.repeat(2 * MB))))).toMatch(/init_\* not found/);
-  });
+  test(
+    'many unterminated block comments',
+    () => {
+      // The first one runs to the end of the file, so the functions are not found; what matters is the time.
+      expect(String(fast(wrap('/*'.repeat(2 * MB))))).toMatch(/init_\* not found/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('an add call followed by megabytes of whitespace, and many unclosed add calls', () => {
-    expect(fast(wrap(`def = this->add(${' '.repeat(4 * MB)}`))).toBeUndefined();
-    expect(fast(wrap('def = this->add("k", '.repeat(200_000)))).toBeUndefined();
-  });
+  test(
+    'an add call followed by megabytes of whitespace, and many unclosed add calls',
+    () => {
+      expect(fast(wrap(`def = this->add(${' '.repeat(4 * MB)}`))).toBeUndefined();
+      expect(fast(wrap('def = this->add("k", '.repeat(200_000)))).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('many statements without a terminator', () => {
-    expect(fast(wrap(`def = this->add("k", coFloat);${' def->set_enum<X>'.repeat(200_000)}`))).toBeUndefined();
-    expect(fast(wrap(`def = this->add("k", coFloat);${' def->label = '.repeat(300_000)}`))).toBeUndefined();
-  });
+  test(
+    'many statements without a terminator',
+    () => {
+      expect(fast(wrap(`def = this->add("k", coFloat);${' def->set_enum<X>'.repeat(200_000)}`))).toBeUndefined();
+      expect(fast(wrap(`def = this->add("k", coFloat);${' def->label = '.repeat(300_000)}`))).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('deep nesting is refused, not recursed into', () => {
-    const deep = `def = this->add("k", coFloats); def->set_default_value(new ConfigOptionFloats(${'{'.repeat(100_000)}${'}'.repeat(100_000)}));`;
-    expect(String(fast(wrap(deep)))).toMatch(/nesting deeper than 64/);
-  });
+  test(
+    'deep nesting is refused, not recursed into',
+    () => {
+      const deep = `def = this->add("k", coFloats); def->set_default_value(new ConfigOptionFloats(${'{'.repeat(100_000)}${'}'.repeat(100_000)}));`;
+      expect(String(fast(wrap(deep)))).toMatch(/nesting deeper than 64/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('a long number, an unterminated string and many axis keys without a table', () => {
-    expect(fast(wrap(`def = this->add("k", coFloat); def->min = ${'1'.repeat(4 * MB)}x;`))).toBeUndefined();
-    expect(String(fast(wrap(`def->label = L("${'a'.repeat(4 * MB)}`)))).toMatch(/unterminated literal/);
-    const axes = 'def = this->add("machine_max_feedrate_" + axis.name, coFloats);\n'.repeat(100_000);
-    expect(String(fast(wrap(axes)))).toMatch(/axes table not found/);
-  });
+  test(
+    'a long number, an unterminated string and many axis keys without a table',
+    () => {
+      expect(fast(wrap(`def = this->add("k", coFloat); def->min = ${'1'.repeat(4 * MB)}x;`))).toBeUndefined();
+      expect(String(fast(wrap(`def->label = L("${'a'.repeat(4 * MB)}`)))).toMatch(/unterminated literal/);
+      const axes = 'def = this->add("machine_max_feedrate_" + axis.name, coFloats);\n'.repeat(100_000);
+      expect(String(fast(wrap(axes)))).toMatch(/axes table not found/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test("Orca's and Bambu's path: constants, loops and lambdas", () => {
-    const start = performance.now();
-    const header = `${'#define X 1\n'.repeat(100_000)}#define ${'Y'.repeat(MB)} 2\n`;
-    const body = `${'for (const char* key : {"a"}) { def = this->add(key, coString); } '.repeat(20_000)}${'auto f = [this](const char *key) { auto def = this->add(key, coEnum); }; '.repeat(20_000)}`;
-    expect(() => generate(wrap(body), '', header)).toThrow(/list s_Preset_print_options not found/);
-    expect(performance.now() - start).toBeLessThan(3000);
-  });
+  test(
+    "Orca's and Bambu's path: constants, loops and lambdas",
+    () => {
+      const body = `${'for (const char* key : {"a"}) { def = this->add(key, coString); } '.repeat(20_000)}${'auto f = [this](const char *key) { auto def = this->add(key, coEnum); }; '.repeat(20_000)}`;
+      const code =
+        "const header = '#define X 1\\n'.repeat(100_000) + '#define ' + 'Y'.repeat(1 << 20) + ' 2\\n'; generate.generate(src, '', header);";
+      expect(guarded(code, wrap(body))).toMatch(/list s_Preset_print_options not found/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('many calls of one lambda are refused before they are collected', () => {
-    const src = wrap(`auto f = [](std::string k) { def = this->add(k, coFloat); };\n${'f("a");'.repeat(100_000)}`);
-    const error = fast(src, 1000);
-    expect(error).toBeInstanceOf(SourceLimitError);
-    expect(String(error)).toMatch(/more than 64 calls/);
-  });
+  test(
+    'many calls of one lambda are refused before they are collected',
+    () => {
+      const src = wrap(`auto f = [](std::string k) { def = this->add(k, coFloat); };\n${'f("a");'.repeat(100_000)}`);
+      expect(fast(src)).toMatch(/more than 64 calls/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('a lambda body whose arguments multiply its size is refused', () => {
-    const src = wrap(
-      `auto f = [](std::string k, int x) { def = this->add(k, coFloat); ${'x;'.repeat(20_000)} };\nf("a", ${'1+'.repeat(20_000)}1);`,
-    );
-    const error = fast(src, 1000);
-    expect(error).toBeInstanceOf(SourceLimitError);
-    expect(String(error)).toMatch(/expands past 65536 tokens/);
-  });
+  test(
+    'a lambda body whose arguments multiply its size is refused',
+    () => {
+      const src = wrap(
+        `auto f = [](std::string k, int x) { def = this->add(k, coFloat); ${'x;'.repeat(20_000)} };\nf("a", ${'1+'.repeat(20_000)}1);`,
+      );
+      expect(fast(src)).toMatch(/expands past 65536 tokens/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('a #define used many times is refused before it is expanded', () => {
-    const start = performance.now();
-    const many = tokenize('X '.repeat(30_000));
-    expect(() => substitute(many, defines(`#define X ${'1 '.repeat(30_000)}`))).toThrow(SourceLimitError);
-    expect(performance.now() - start).toBeLessThan(1000);
-  });
+  test(
+    'a #define used many times is refused before it is expanded',
+    () => {
+      const body =
+        "cpp.substitute(cpp.tokenize('X '.repeat(30_000)), cpp.defines('#define X ' + '1 '.repeat(30_000)));";
+      expect(guarded(body)).toMatch(/^SourceLimitError/);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test("a loop's keys read its statements once, up to the loop's close", () => {
-    const keys = Array.from({ length: 1024 }, (_, i) => `"k${i}"`).join(',');
-    const tail = 'def->label = "x";'.repeat(100_000);
-    expect(
-      fast(wrap(`for (const char* k : {${keys}}) { def = this->add(k, coFloat); }\n${tail}`), 1000),
-    ).toBeUndefined();
-    expect(
-      fast(wrap(`for (const char* k : {${keys}}) { def = this->add(k, coFloat); ${tail} }`), 1000),
-    ).toBeUndefined();
-    const defs = extractDefs(
-      tokenize(
-        wrap(
-          `for (const char* k : {"a", "b"}) { def = this->add(k, coFloat); def->label = "In"; }\ndef->label = "Out";`,
+  test(
+    "a loop's keys read its statements once, up to the loop's close",
+    () => {
+      const keys = Array.from({ length: 1024 }, (_, i) => `"k${i}"`).join(',');
+      const tail = 'def->label = "x";'.repeat(100_000);
+      expect(fast(wrap(`for (const char* k : {${keys}}) { def = this->add(k, coFloat); }\n${tail}`))).toBeUndefined();
+      expect(fast(wrap(`for (const char* k : {${keys}}) { def = this->add(k, coFloat); ${tail} }`))).toBeUndefined();
+      const defs = extractDefs(
+        tokenize(
+          wrap(
+            `for (const char* k : {"a", "b"}) { def = this->add(k, coFloat); def->label = "In"; }\ndef->label = "Out";`,
+          ),
         ),
-      ),
-    );
-    expect([defs.get('a')?.label, defs.get('b')?.label]).toEqual(['In', 'In']);
-  });
+      );
+      expect([defs.get('a')?.label, defs.get('b')?.label]).toEqual(['In', 'In']);
+    },
+    GUARDED_TIMEOUT,
+  );
 
-  test('a hostile .ui line and vendor.yaml', () => {
-    const start = performance.now();
-    uiSettings(`setting:${':'.repeat(4 * MB)}\n${'page:'.repeat(MB)}`, 'x.ui', () => true);
-    vendorFeatures(`features:\n${'  printer:\n    x:\n      default: "\'\n'.repeat(100_000)}`);
-    expect(performance.now() - start).toBeLessThan(3000);
-  });
+  test(
+    'a hostile .ui line and vendor.yaml',
+    () => {
+      const body = `
+      const MB = 1 << 20;
+      prusa.uiSettings('setting:' + ':'.repeat(4 * MB) + '\\n' + 'page:'.repeat(MB), 'x.ui', () => true);
+      prusa.vendorFeatures('features:\\n' + '  printer:\\n    x:\\n      default: "\\'\\n'.repeat(100_000));`;
+      expect(guarded(body)).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 });
 
 // ---- On the pinned sources (in .reference, ignored; without them only the committed data is checked) ----

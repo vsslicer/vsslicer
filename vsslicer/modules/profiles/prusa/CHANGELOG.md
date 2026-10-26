@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- PRF-185: the INI reader caps total entries at 500,000 (`MAX_ENTRIES`) with one diagnostic.
+- PRF-184: `PRINTER_VENDOR_PRUSA3D` converts to a tag test like every other keyword.
+- PRF-33: bounded YAML subset reader and `readVendorYaml` for the PrusaSlicer 3.0 preset tree (experimental flag, pinned to PrusaSlicer@30ef591).
+- PRF-191: `readPresetYaml` reads PrusaSlicer 3.0 `preset-*.yaml` trees with nested variants (experimental flag; 32 levels, 10,000 variants per file).
 - PRF-11: test: a hand-computed oracle of 79 PrusaSlicer compatibility cases (2.9 INI and 3.0 YAML) for the condition converter and the profile-api evaluator.
 - PRF-24: `parseIni` reads PrusaSlicer INI vendor bundles and user presets into a native section tree (kinds, abstract sections, verbatim values in order, line numbers) as boost `read_ini` does, with diagnostics for malformed lines, rejected headers, duplicates and invalid UTF-8, and bounds on input, line length, sections, keys and diagnostics.
 - PRF-10: `convertPrusaCondition` converts PrusaSlicer compatibility conditions (nozzle diameter and high flow, printer model, `printer_notes` tags through a table built from PrusaResearch.ini@b028299, Prusa 3.0 tool/feeder/base_model) to unified conditions, with lossy flags and diagnostics; tag regexes run on profile-api's non-backtracking matcher; depends on `@vsslicer/profile-api` ^0.1.0.

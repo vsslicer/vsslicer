@@ -1,0 +1,34 @@
+kind: print
+id: '*base*'
+values:
+  layer_height: 0.20
+variants:
+- condition: printer.model == "A"
+  id: v-a
+  match_mode: all_matches
+  values:
+    perimeters: 2
+  variants:
+  # nested by nozzle
+  - condition: tool.nozzle_diameter == 0.4
+    id: v-a-04
+    values:
+      layer_height: 0.15
+  - condition: tool.nozzle_diameter == 0.6
+    id: v-a-06
+    values:
+---
+kind: filament
+id: Demo PLA
+name: Demo PLA
+inherits:
+- '*base*'
+unconditional_inherits:
+- '*common*'
+features:
+  $.type: PLA
+condition: printer.model == "A" and tool.nozzle_diameter >= 0.4
+values:
+  start_filament_gcode: |-
+    M900 K0
+    ; line two

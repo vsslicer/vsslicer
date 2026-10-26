@@ -106,7 +106,6 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
   let total = 0;
   for (let n = 0, p = cdOffset; n < count; n++) {
     if (u32(p) !== 0x02014b50) fail('corrupt archive: bad central directory record');
-    const host = data[p + 5]!;
     const flags = u16(p + 8);
     const method = u16(p + 10);
     const crc = u32(p + 16);
@@ -128,8 +127,8 @@ export function readBundleArchive(data: Uint8Array): BundleArchive {
     const dir = name.endsWith('/');
     const why = unsafeEntryName(dir ? name.slice(0, -1) : name);
     if (why) fail(`unsafe entry ${shown}: ${why}`);
-    // Unix modes sit in the high 16 bits (host 3 Unix, 19 OS X, others may carry them); S_IFLNK is 0o120000.
-    if (host >= 0 && ((attrs >>> 16) & 0o170000) === 0o120000) fail(`unsafe entry ${shown}: symbolic link`);
+    // Unix modes sit in the high 16 bits; S_IFLNK is 0o120000.
+    if (((attrs >>> 16) & 0o170000) === 0o120000) fail(`unsafe entry ${shown}: symbolic link`);
     if (flags & 1) fail(`entry ${shown} is encrypted`);
     if (!dir && method !== 0 && method !== 8) fail(`entry ${shown} uses unsupported compression method ${method}`);
     // Case-folded so the names stay distinct on case-insensitive file systems too.

@@ -71,6 +71,7 @@
           "type": "number",
           "default": 600,
           "minimum": 1,
+          "maximum": 2147483,
           "scope": "window",
           "description": "Seconds to wait for the slicing engine before giving up."
         },

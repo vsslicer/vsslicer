@@ -7,8 +7,7 @@ effort: S
 model: sonnet
 area: [3mf]
 story: US4
-milestone: "VSS:M2"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 depends_on: [PLT-13]
 created: 2026-10-25
 ---
@@ -32,3 +31,5 @@ Own PrusaSlicer 2.9 project exports (object with volumes, per-object settings, l
 ## Progress
 
 Not started.
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answer Q19 ("Defer this to a later stage"): the fixture projects the owner exports from the slicers are deferred, so this card leaves the sprints.

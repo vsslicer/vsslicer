@@ -8,8 +8,8 @@ model: sonnet
 area: [3mf]
 story: US7
 milestone: "VSS:M2"
-sprint: "VSS:SP9"
-depends_on: [20, 11]
+sprint: "VSS:SP10"
+depends_on: [20]
 created: 2026-10-25
 ---
 
@@ -31,3 +31,5 @@ A Prusa 3.0 alpha file is detected and opened as core model plus preserved parts
 ## Progress
 
 Not started.
+
+**Dependency on VWR-11 removed at SP9 (sp9-coordinator, D21):** that card moved to M7 (owner-gated). This card's tests use synthetic or local `.reference` inputs and skip with a reason when those are absent; the owner-gated check lands with VWR-11.

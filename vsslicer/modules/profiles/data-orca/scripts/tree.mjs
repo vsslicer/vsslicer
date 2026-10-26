@@ -5,12 +5,15 @@ import { lstatSync, readdirSync, readFileSync, realpathSync } from 'node:fs';
 import { join, sep } from 'node:path';
 
 export const MAX_FILE_BYTES = 16 * 1024 * 1024;
+export const MAX_FILES = 50_000;
+export const MAX_TOTAL_BYTES = 256 * 1024 * 1024;
 
 /**
  * Relative POSIX paths of every `.json` file under `root`, sorted. Other file types are skipped.
  * Throws on a symlink, a path that leaves `root`, or a `.json` file over `maxBytes` (rule 25).
  */
-export function listJson(root, maxBytes = MAX_FILE_BYTES) {
+export function listJson(root, maxBytes = MAX_FILE_BYTES, maxFiles = MAX_FILES, maxTotal = MAX_TOTAL_BYTES) {
+  let total = 0;
   const real = realpathSync(root);
   const out = [];
   const walk = (dir) => {
@@ -23,6 +26,9 @@ export function listJson(root, maxBytes = MAX_FILE_BYTES) {
       if (st.isDirectory()) walk(full);
       else if (st.isFile() && name.endsWith('.json')) {
         if (st.size > maxBytes) throw new Error(`file over ${maxBytes} bytes: ${full}`);
+        total += st.size;
+        if (out.length >= maxFiles) throw new Error(`more than ${maxFiles} files under ${root}`);
+        if (total > maxTotal) throw new Error(`total over ${maxTotal} bytes under ${root}`);
         out.push(
           full
             .slice(root.length + 1)

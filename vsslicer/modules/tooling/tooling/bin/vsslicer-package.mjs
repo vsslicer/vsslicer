@@ -14,6 +14,8 @@
 // What goes in is decided by the module's `.vscodeignore` (vsce ignores negations in package.json `files`).
 // Packaging runs in a temporary copy: vsce rejects scoped names like @vsslicer/x, so the copy gets the unscoped
 // name and no `files` (vsce refuses `files` together with .vscodeignore).
+// "vsslicer": { "extensionName": "printers" } overrides that name, so the id is <publisher>.printers and the file
+// printers-<version>.vsix (vsce's rule for name: ^[a-z0-9][a-z0-9-]*$, at most 214 characters); the tag stays <module>@<version>.
 import { createRequire } from 'node:module';
 import {
   cpSync,
@@ -47,6 +49,16 @@ export const zipEntries = (file) => {
 };
 
 const shortName = (pkg) => pkg.name.replace(/^@[^/]+\//, '');
+/** The name written into the packaging copy: the "vsslicer.extensionName" override, else the unscoped npm name. */
+export const extensionName = (pkg) => {
+  const o = pkg.vsslicer?.extensionName;
+  if (o === undefined) return shortName(pkg);
+  if (typeof o !== 'string' || o.length > 214 || !/^[a-z0-9][a-z0-9-]*$/.test(o))
+    throw new Error(
+      `package.json "vsslicer.extensionName" must match ^[a-z0-9][a-z0-9-]*$ and be at most 214 characters, is ${JSON.stringify(o)?.slice(0, 60)}`,
+    );
+  return o;
+};
 const norm = (p) => p.replace(/^\.\//, '');
 
 // shortcut: any string in `contributes` or `icon` that names an existing file is an asset; upgrade if a
@@ -103,12 +115,13 @@ export const checkContent = (names, pkg, cwd) => {
 /** Builds the VSIX (for `target`, if given) in `cwd`, checks it and returns { file, kb, budget, problems }. */
 export const pack = async (cwd = process.cwd(), target) => {
   const pkg = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8'));
+  const name = extensionName(pkg); // throws before vsce runs
   const problems = checkManifest(pkg);
-  const file = join(cwd, `${[shortName(pkg), target, pkg.version].filter(Boolean).join('-')}.vsix`);
+  const file = join(cwd, `${[name, target, pkg.version].filter(Boolean).join('-')}.vsix`);
   const stage = mkdtempSync(join(tmpdir(), 'vsslicer-package-'));
   try {
     cpSync(cwd, stage, { recursive: true, filter: (s) => !/(^|[\\/])(node_modules|\.git|coverage)$|\.vsix$/.test(s) });
-    writeFileSync(join(stage, 'package.json'), JSON.stringify({ ...pkg, files: undefined, name: shortName(pkg) }));
+    writeFileSync(join(stage, 'package.json'), JSON.stringify({ ...pkg, files: undefined, name }));
     await createVSIX({
       cwd: stage,
       dependencies: false,

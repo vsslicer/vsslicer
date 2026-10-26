@@ -74,7 +74,7 @@ function jsonDepth(text: string): number {
 }
 
 /** A relative, forward path that stays inside the bundle; also used for the bundle id, which becomes a directory name. */
-function unsafePath(p: string, singleComponent = false): boolean {
+export function unsafePath(p: string, singleComponent = false): boolean {
   if (p.length > BUNDLE_LIMITS.maxPathLength || p.includes('\0')) return true;
   const c0 = p.charCodeAt(0);
   if (c0 === 0x2f || c0 === 0x5c || p.charCodeAt(1) === 0x3a) return true; // /x, \x, C:

@@ -26,7 +26,16 @@ import {
   type ViewState,
 } from '../../domain/summary.ts';
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
-import { SPEEDS, createClock, createMarker, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
+import {
+  SPEEDS,
+  createClock,
+  createMarker,
+  layerOfMove,
+  positionAt,
+  project,
+  stepTime,
+  timeOfMove,
+} from './timeline.ts';
 import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
 import type { PanelLabel } from '../../domain/panel.ts';
 import { moveFileOffset, type TextRequest, type TextWindow } from '../../domain/text-window.ts';
@@ -461,6 +470,10 @@ const command = (c: TimelineCommand) => {
     speeds.value = String(clock.state.speed);
     report();
   } else if (c.action === 'step') seekTo(stepTime(info.moves, clock.state.time, c.direction, info.duration));
+  else if (c.action === 'seek') {
+    if (clock.state.playing) setPlaying(false);
+    seekTo(timeOfMove(info.moves, c.move));
+  }
 };
 playButton.addEventListener('click', () => command({ action: clock.state.playing ? 'pause' : 'play' }));
 stepBack.addEventListener('click', () => command({ action: 'step', direction: -1 }));

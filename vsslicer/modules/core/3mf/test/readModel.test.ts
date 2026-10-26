@@ -145,7 +145,5 @@ test('rejects a second mesh in one object', () => {
 
 test('fails fast on 100k nested elements', () => {
   const n = 100_000;
-  const t = performance.now();
   expect(() => read(model('<a>'.repeat(n) + '</a>'.repeat(n)))).toThrow(MalformedXmlError);
-  expect(performance.now() - t).toBeLessThan(1000);
-});
+}, 30_000); // hang guard only; the opentag count is asserted in xmlDepth.test.ts

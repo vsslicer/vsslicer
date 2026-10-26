@@ -1,6 +1,6 @@
 ---
 id: SP8
-title: Open 3
+title: M2 Open
 status: done
 milestone: M2
 start: "2026-10-26T07:20+00:00"

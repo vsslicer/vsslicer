@@ -15,3 +15,12 @@ export type {
   CuraMachineFlags,
   QualityConversion,
 } from './adapters/conditions/quality-conditions.ts';
+export {
+  CURA_ARCHIVE_LIMITS,
+  CuraArchiveError,
+  readCuraProfileArchive,
+  resolveLimits as resolveCuraArchiveLimits,
+  unsafeEntryName,
+  writeCuraProfileArchive,
+} from './adapters/archive/curaprofile-archive.ts';
+export type { CuraArchiveLimits, CuraProfileEntry } from './adapters/archive/curaprofile-archive.ts';

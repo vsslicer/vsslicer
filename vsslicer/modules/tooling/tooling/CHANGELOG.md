@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.4
+
+- PLT-195: `third-party-notices` copies NOTICE, NOTICE.md and PROVENANCE.md of bundled `@vsslicer/*` packages (1 MiB cap).
+- PLT-196: optional `vsslicer.extensionName` override for the VSIX id.
+- PLT-197: AGPL-3.0-only is accepted for a module that ships PROVENANCE.md; source SPDX headers (check-licence and the ESLint rule) must match the package licence.
+
 ## 0.8.3
 
 - PLT-194: `third-party-notices` takes a pinned vendored licence text (`vsslicer.licenceTexts`) for a package that ships none; the text must name its licence as a whole word or standard phrase, and stay inside the module.

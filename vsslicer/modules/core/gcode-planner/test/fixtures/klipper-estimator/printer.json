@@ -1,0 +1,8 @@
+{
+  "max_velocity": 300.0,
+  "max_acceleration": 3000.0,
+  "minimum_cruise_ratio": 0.5,
+  "square_corner_velocity": 5.0,
+  "instant_corner_velocity": 1.0,
+  "move_checkers": []
+}

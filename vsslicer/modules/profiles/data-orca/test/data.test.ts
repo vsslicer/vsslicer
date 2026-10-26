@@ -28,14 +28,20 @@ const pinned = Object.fromEntries(
     .map((l) => l.split(' ') as [string, string]),
 );
 
-describe('committed tree', () => {
-  it.each(sources.map((s) => s.name))('%s has the expected files and the pinned hash', (name) => {
-    const dir = join(dataRoot, name);
-    const files = listJson(dir);
-    expect(files).toHaveLength(counts[name] ?? -1);
-    expect(hashFiles(dir, files)).toBe(pinned[name]);
-  });
+// data/ is generated at publish time (scripts/generate.mjs); absent in a fresh checkout.
+describe.skipIf(!existsSync(join(dataRoot, 'orca')) || !existsSync(join(dataRoot, 'bambu')))(
+  'generated tree (skipped when data/ is absent: run scripts/generate.mjs)',
+  () => {
+    it.each(sources.map((s) => s.name))('%s has the expected files and the pinned hash', (name) => {
+      const dir = join(dataRoot, name);
+      const files = listJson(dir);
+      expect(files).toHaveLength(counts[name] ?? -1);
+      expect(hashFiles(dir, files)).toBe(pinned[name]);
+    });
+  },
+);
 
+describe('module files', () => {
   it('carries licences, notice and the commits; package.json keeps the project licence field until Q20 (the data is AGPL-3.0-only, see NOTICE)', () => {
     for (const f of ['LICENSE-OrcaSlicer', 'LICENSE-BambuStudio', 'NOTICE', 'PROVENANCE.md']) {
       expect(existsSync(join(moduleRoot, f))).toBe(true);

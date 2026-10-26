@@ -7,8 +7,7 @@ effort: S
 model: sonnet
 area: [parser]
 story: US6
-milestone: "VSS:M1"
-sprint: "VSS:SP9"
+milestone: "VSS:M7"
 owner: GCP-18-worker
 depends_on: [6, 17]
 created: 2026-10-25
@@ -56,3 +55,5 @@ Done locally; the CI part is not (so two criteria stay unticked: "peak worker RS
 - Files: vsslicer/modules/gcode-parser/{bench/generate.ts,bench/case.ts,bench/run.ts,bench/budget.json,test/bench-generator.test.ts,package.json (bench script),tsconfig.test.json (bench included),CHANGELOG.md (Unreleased)}; .reference/notes/GCP-18-benchmark.md.
 
 Review passed; CI step waits on Q7
+
+**Moved to M7 (Owner setup) at SP9 (sp9-coordinator):** owner answers Q7 and Q13 ("Move them to a later milestone until I set up the remote/accounts"); Q8 (no marketplace accounts). This card needs the GitHub remote, CI on it or marketplace accounts, so it leaves the sprints until the owner sets them up. GCP-18: its local benchmark part is done; the CI step is what waits.

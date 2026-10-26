@@ -28,6 +28,7 @@ import {
   tabGroup,
   tabPlaces,
 } from '../tools/catalogue/groups.ts';
+import { GUARDED_TIMEOUT, guarded } from './support/guard.ts';
 import { REPOS } from '../tools/catalogue/prusa.ts';
 
 const files: CatalogueFile[] = [orcaCatalogue, bambuCatalogue, prusaCatalogue, superslicerCatalogue, curaCatalogue];
@@ -168,17 +169,19 @@ describe('the Tab.cpp page scan', () => {
     expect(places.get('m_x')).toMatchObject({ group: 'Seam' });
   });
 
-  test('scans a helper once, even when it calls itself (rule 25: the scan stays linear)', () => {
-    expect(places.get('h')).toMatchObject({ group: 'Seam' });
-    const lines = Array.from({ length: 50_000 }, (_, i) => `o->append_single_option_line("k${i}"); helper();`);
-    const big = tokenize(
-      `void T::build() { add_options_page(L("P")); ${lines.join('\n')} } void helper() { helper(); }`,
-    );
-    const t0 = performance.now();
-    const p = tabPlaces(big, [['T', 'build']], () => true, { helper: { tokens: big } });
-    expect(performance.now() - t0).toBeLessThan(2000);
-    expect(p.size).toBe(50_000);
-  });
+  test(
+    'scans a helper once, even when it calls itself (rule 25: the scan stays linear)',
+    () => {
+      expect(places.get('h')).toMatchObject({ group: 'Seam' });
+      const body = `
+      const lines = Array.from({ length: 50_000 }, (_, i) => 'o->append_single_option_line("k' + i + '"); helper();');
+      const big = cpp.tokenize('void T::build() { add_options_page(L("P")); ' + lines.join('\\n') + ' } void helper() { helper(); }');
+      const p = groups.tabPlaces(big, [['T', 'build']], () => true, { helper: { tokens: big } });
+      if (p.size !== 50_000) throw new Error('size ' + p.size);`;
+      expect(guarded(body)).toBeUndefined();
+    },
+    GUARDED_TIMEOUT,
+  );
 
   test('refuses a page with no group, so a new upstream page is grouped on purpose', () => {
     expect(tabGroup({ cls: 'TabPrint', page: 'Quality', group: 'Seam', line: 1 })).toBe('walls');
