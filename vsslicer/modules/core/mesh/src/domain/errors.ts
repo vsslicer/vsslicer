@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-export type MeshErrorCode = 'truncated' | 'count-mismatch' | 'non-finite' | 'obj-index-out-of-range' | 'file-too-large';
+export type MeshErrorCode =
+  'truncated' | 'count-mismatch' | 'non-finite' | 'obj-index-out-of-range' | 'file-too-large' | 'malformed';
 
 /** Base of every mesh error. `message` is the user message: plain words, no stack or jargon. */
 export abstract class MeshError extends Error {
@@ -67,5 +68,15 @@ export class FileTooLargeError extends MeshError {
     super(`The file is ${bytes} bytes, above the ${capBytes} byte limit for models.`);
     this.bytes = bytes;
     this.capBytes = capBytes;
+  }
+}
+
+/** A text mesh file has a line that is not valid (bad number, wrong word count, missing section). `line` is 1-based. */
+export class MalformedMeshError extends MeshError {
+  readonly code = 'malformed';
+  readonly line: number;
+  constructor(line: number, reason: string) {
+    super(`Line ${line}: ${reason}.`);
+    this.line = line;
   }
 }
