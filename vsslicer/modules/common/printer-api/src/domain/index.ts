@@ -3,3 +3,4 @@
 export const MODULE = 'printer-api';
 export * from './errors.ts';
 export * from './auth.ts';
+export * from './capabilities.ts';
