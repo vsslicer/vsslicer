@@ -23,6 +23,7 @@ import {
   type WindowRequest,
 } from '../domain/summary.ts';
 import { packWindow } from '../domain/window.ts';
+import { resolvePosition, type PrintPosition, type Revealed } from '../domain/print-position.ts';
 import { readTextWindow, type ReadAt } from './read-text.ts';
 import type { Loaded } from './load-preview.ts';
 
@@ -54,7 +55,12 @@ export interface PreviewSession {
   /** Loads again after an error and resolves with the new state; any other state is returned as is. */
   retry(): Promise<ViewState>;
   /** Loads another plate of a `.gcode.3mf` and resolves with the new state; a plate the file does not list is ignored. */
-  selectPlate(plate: number): Promise<ViewState>;
+  setPlate(plate: number): Promise<ViewState>;
+  /**
+   * Waits for the load, resolves `position` (validated by the caller) to a move and seeks every served webview there.
+   * Rejects when the file did not load or the position is outside it (a layer past the last).
+   */
+  reveal(position: PrintPosition): Promise<Revealed>;
   /** Stops a running load (terminates the worker) and drops the buffers. */
   dispose(): void;
 }
@@ -82,6 +88,7 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
   let generation = 0;
   let running: AbortController | undefined;
   let chosen: number | undefined;
+  const served = new Set<Channel>();
   const start = (plate?: number): Promise<ViewState> => {
     if (!kind) return Promise.resolve({ status: 'unsupported', message: `Not a G-code file: ${path}` });
     const mine = ++generation;
@@ -123,13 +130,14 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
       if ((await failed).status === 'error' && state === failed && !abort.signal.aborted) state = start(chosen);
       return state;
     },
-    selectPlate(plate) {
+    setPlate(plate) {
       const shown = loaded?.plates;
       if (!shown?.numbers.includes(plate) || abort.signal.aborted) return state;
       return (state = start(plate));
     },
     serve(channel, { onReceived, onProgress, onMismatch }) {
       let current = '';
+      served.add(channel);
       // one text read in flight; later requests replace the one waiting (the webview ignores stale seqs)
       let reading = false;
       let waiting: { payload: unknown } | undefined;
@@ -163,7 +171,7 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
           else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.plate && current) {
             // `loading` goes out before the load is awaited; a superseded load delivers nothing
             channel.post(notify(Method.state, { status: 'loading' } satisfies ViewState));
-            const p = self.selectPlate((r.envelope.payload as PlateRequest).plate);
+            const p = self.setPlate((r.envelope.payload as PlateRequest).plate);
             void p.then(() => (self.state === p ? deliver(channel, current) : undefined)).catch(() => {});
           } else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.window && current)
             // a bad range (the file changed under a stale webview) or a closed panel is dropped: the marker falls back
@@ -175,7 +183,15 @@ export const openPreview = (path: string, load: LoadPort, readAt?: ReadAt): Prev
             onProgress?.(r.envelope.payload as Progress);
         }),
       ];
-      return () => stops.forEach((stop) => stop());
+      return () => (served.delete(channel), stops.forEach((stop) => stop()));
+    },
+    async reveal(position) {
+      const s = await state;
+      if (s.status !== 'ready' || !loaded) throw new Error(`nothing to reveal: the preview is ${s.status}`);
+      const { parsed, timing } = loaded;
+      const r = resolvePosition({ ...parsed, totalTime: timing.totalTime }, position);
+      for (const channel of served) self.command(channel, { action: 'seek', move: r.move });
+      return r;
     },
     command: (channel, command) => channel.post(notify(Method.command, command)),
     dispose() {

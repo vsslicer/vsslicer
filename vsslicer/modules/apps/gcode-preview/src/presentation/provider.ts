@@ -21,6 +21,8 @@ export interface PreviewProbe {
   command(uri: string, command: TimelineCommand): void;
   /** The latest progress the webview of `uri` reported (undefined before the first). */
   progress(uri: string): Progress | undefined;
+  /** The session of the document open for `uri`, for the commands. */
+  session(uri: string): PreviewSession | undefined;
 }
 
 interface GcodeDocument extends vscode.CustomDocument {
@@ -116,5 +118,6 @@ export const registerPreview = (context: Context, api: Api, load: LoadPort): Pre
       c.session.command(c.channel, command);
     },
     progress: (uri) => open.get(uri)?.progress,
+    session: (uri) => states.get(uri),
   };
 };
