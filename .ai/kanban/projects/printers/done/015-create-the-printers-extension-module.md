@@ -33,3 +33,9 @@ Scaffold `vsslicer/modules/printers-extension/` from the `tooling` module as a V
 ## Progress
 
 Not started.
+
+Review (sp8-reviewer-15, 2026-10-26): PASS
+1. Ran install, test, lint, build, package, test:integration (cached VS Code, activates and registers command): all green; `node scripts/run.mjs checks` green and the runner lists modules by directory scan, so ci picks it up. VSIX has the expected files, `extensionKind ["ui"]` in the packed manifest; `.vsix`, `dist`, `dist-test`, `test-results` are git-ignored. No project-extension leftovers except the intended PROVENANCE line.
+2. Deliberate violation: a `src/domain` file importing `vscode` fails eslint (`no-restricted-imports`), proven in scratch and removed. No permanent violation test (accepted; same as project-extension).
+3. Carried owner/architecture question, not a FAIL: id is `vsslicer.printers-extension`, not `vsslicer.printers`. `vsslicer-package` (tooling/bin) takes the name as `pkg.name` minus scope (`shortName`) and vsce builds the id as publisher.name. Meeting `vsslicer.printers` needs either renaming the npm package or a `vsslicer.extensionName` override in tooling: a cross-module decision.
+4. Note: card says version 0.0.1, module is 0.0.0 (platform convention, SLC-100 says 0.0.0). Card text should be corrected or bumped at release. Tests use node --test like project-extension (accepted).

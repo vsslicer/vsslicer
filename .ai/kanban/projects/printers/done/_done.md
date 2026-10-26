@@ -7,3 +7,4 @@
 5. [PRN-112: Create the `printer-duet` module](112-create-the-printer-duet-module.md)
 6. [PRN-120: Create the `printer-discovery` module](120-create-the-printer-discovery-module.md)
 7. [PRN-130: Create the `printer-folder` module](130-create-the-printer-folder-module.md)
+8. [PRN-15: Create the `printers-extension` module](015-create-the-printers-extension-module.md)
