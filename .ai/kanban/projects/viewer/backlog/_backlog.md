@@ -360,7 +360,3 @@
 358. [VWR-386: Test that auto-orient never touches locked plates under random commands](386-test-that-auto-orient-never-touches-locked-plates-under-rand.md)
 359. [VWR-387: Add Auto-orient to the object and plate menus with progress, cancel and the arrange offer](387-add-auto-orient-to-the-object-and-plate-menus-with-progress-.md)
 360. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
-361. [VWR-390: Cap the parts and triangles resolveProject builds from nested components](390-cap-the-parts-and-triangles-resolveproject-builds-from-neste.md)
-362. [VWR-391: Skip the 3mf real-file suites when .reference is absent](391-skip-the-3mf-real-file-suites-when-reference-is-absent.md)
-363. [VWR-392: Refuse a 3MF whose declared inflated sizes exceed a total cap](392-refuse-a-3mf-whose-declared-inflated-sizes-exceed-a-total-ca.md)
-364. [VWR-393: Check the triangle cap while parsing OBJ and ASCII STL](393-check-the-triangle-cap-while-parsing-obj-and-ascii-stl.md)

@@ -83,29 +83,35 @@ describe('detected extensions open read-only', () => {
   });
 });
 
-describe('real files', () => {
-  const repos = join(import.meta.dirname, '../../../../.reference/repos');
-  const cases: [string, number][] = [
-    // [file, objects]: every one keeps its meshes in 3D/Objects/*.model.
-    ['BambuStudio/resources/calib/pressure_advance/pa_pattern.3mf', 1],
-    ['OrcaSlicer/resources/handy_models/OrcaBadge.3mf', 3],
-    ['PrusaSlicer/src/slic3r-shared/test/data/test_3mf/production_ext.3mf', 1],
-  ];
-  test.each(cases.filter(([f]) => existsSync(join(repos, f))))('%s resolves its sub-models', (f, objects) => {
-    const pkg = openPackage(readFileSync(join(repos, f)));
-    expect(pkg.readOnly).toBeUndefined();
-    const p = readProject(pkg);
-    expect(p.objects).toHaveLength(objects);
-    const triangles = p.objects.flatMap((o) => o.parts).reduce((n, x) => n + x.mesh.triangles.length / 3, 0);
-    expect(triangles).toBeGreaterThan(0);
-  });
+const fixtures = join(import.meta.dirname, 'fixtures/real');
+const repos = join(import.meta.dirname, '../../../../.reference/repos');
+const orcaBadge = join(repos, 'OrcaSlicer/resources/handy_models/OrcaBadge.3mf');
 
-  test.each(
-    [
-      ['3mf-spec-booleans/Examples/booleans_operations.3mf', 'Boolean Operations'],
-      ['3mf-spec-displacement/Examples/CubeDisplacement_oneside.3mf', 'Displacement'],
-    ].filter(([f]) => existsSync(join(repos, f!))),
-  )('%s opens read-only naming %s', (f, name) => {
-    expect(openPackage(readFileSync(join(repos, f!))).readOnly).toContain(name);
+const expectProject = (file: string, objects: number) => {
+  const pkg = openPackage(readFileSync(file));
+  expect(pkg.readOnly).toBeUndefined();
+  const p = readProject(pkg);
+  expect(p.objects).toHaveLength(objects);
+  const triangles = p.objects.flatMap((o) => o.parts).reduce((n, x) => n + x.mesh.triangles.length / 3, 0);
+  expect(triangles).toBeGreaterThan(0);
+};
+
+describe('committed real files (always run)', () => {
+  // Every one keeps its meshes in 3D/Objects/*.model.
+  test.each([
+    ['pa_pattern.3mf', 1],
+    ['production_ext.3mf', 1],
+  ] as const)('%s resolves its sub-models', (f, objects) => expectProject(join(fixtures, f), objects));
+
+  test.each([
+    ['booleans_operations.3mf', 'Boolean Operations'],
+    ['CubeDisplacement_oneside.3mf', 'Displacement'],
+  ] as const)('%s opens read-only naming %s', (f, name) => {
+    expect(openPackage(readFileSync(join(fixtures, f))).readOnly).toContain(name);
   });
+});
+
+// Too big to commit (798 KB); needs the git-ignored .reference clone.
+describe.skipIf(!existsSync(orcaBadge))('real files from .reference', () => {
+  test('OrcaBadge.3mf resolves its sub-models', () => expectProject(orcaBadge, 3));
 });

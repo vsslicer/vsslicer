@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- VWR-391: the real-file tests use committed fixtures (`test/fixtures/real`, with PROVENANCE); only the large OrcaBadge sample still skips without `.reference`.
+
 ## 0.1.0
 
 - VWR-73: first release: the container API (`openPackage`, parts, thumbnails, `save`, `replacePart`, `addPart`, `removePart`, raw-copy writer), core model reading (`readModel`, `resolveProject`, `readProject`) and typed errors.
