@@ -14,3 +14,6 @@
 12. [VWR-44: Count open and non-manifold edges](044-count-open-and-non-manifold-edges.md)
 13. [VWR-5: Read zip entries with a size cap](005-read-zip-entries-with-a-size-cap.md)
 14. [VWR-6: Read content types and relationships](006-read-content-types-and-relationships.md)
+15. [VWR-35: Capture the STL and OBJ corpus](035-capture-the-stl-and-obj-corpus.md)
+16. [VWR-39: Parse binary STL with guard rails](039-parse-binary-stl-with-guard-rails.md)
+17. [VWR-9: Implement Package.save, replacePart, addPart and removePart](009-implement-package-save-replacepart-addpart-and-removepart.md)
