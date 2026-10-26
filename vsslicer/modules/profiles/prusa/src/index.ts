@@ -4,3 +4,4 @@ export * from './adapters/conditions/index.ts';
 export * from './adapters/ini/index.ts';
 export * from './adapters/yaml/index.ts';
 export * from './adapters/physical/index.ts';
+export * from './adapters/import/index.ts';
