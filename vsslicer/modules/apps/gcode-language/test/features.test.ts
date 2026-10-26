@@ -18,6 +18,13 @@ test('resolves flavour names to catalogue flavours, unknown ones to undefined', 
   assert.equal(resolveFlavour(index, undefined), undefined);
 });
 
+test('bambu and prusa-buddy fall back to marlin for codes their own catalogue lacks', () => {
+  assert.equal(lookup(index, 'bambu', 'G28')?.code, 'G28');
+  assert.equal(lookup(index, 'prusa-buddy', 'M400')?.code, 'M400');
+  assert.equal(lookup(index, 'bambu', 'M862.1'), undefined); // Buddy-only
+  assert.equal(resolveFlavour(index, 'bambu'), 'bambu');
+});
+
 test('finds the command word, skipping line numbers and comments, normalising case and zeros', () => {
   assert.deepEqual(commandWord('  N12 g01 X1'), { code: 'G1', start: 6, end: 9 });
   assert.equal(commandWord('; G1 in a comment'), undefined);

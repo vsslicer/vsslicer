@@ -67,11 +67,13 @@
             "type": "string",
             "enum": [
               "marlin",
+              "prusa-buddy",
+              "bambu",
               "klipper",
               "reprapfirmware"
             ]
           },
-          "markdownDescription": "Overrides the G-code flavour shown for a file. Keys are the file path relative to its workspace folder (or the absolute path), values are `marlin`, `klipper` or `reprapfirmware`."
+          "markdownDescription": "Overrides the G-code flavour shown for a file. Keys are the file path relative to its workspace folder (or the absolute path), values are `marlin`, `prusa-buddy`, `bambu`, `klipper` or `reprapfirmware`."
         }
       }
     }

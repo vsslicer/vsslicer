@@ -592,5 +592,90 @@
     "description": "Selects tool 0 (the first extruder) as the active one.",
     "parameters": [],
     "source": "https://reprap.org/wiki/G-code#M6:_Tool_change"
+  },
+  {
+    "code": "G17",
+    "flavours": ["marlin"],
+    "description": "Selects the XY plane for arcs (G2, G3); G18 and G19 select ZX and YZ.",
+    "parameters": [],
+    "source": "https://marlinfw.org/docs/gcode/G017-G019.html"
+  },
+  {
+    "code": "M105",
+    "flavours": ["marlin"],
+    "description": "Reports the current hotend and bed temperatures.",
+    "parameters": [
+      {
+        "name": "T",
+        "description": "Hotend to report."
+      }
+    ],
+    "source": "https://marlinfw.org/docs/gcode/M105.html"
+  },
+  {
+    "code": "M114",
+    "flavours": ["marlin"],
+    "description": "Reports the current position of every axis.",
+    "parameters": [
+      {
+        "name": "D",
+        "description": "Detailed report."
+      },
+      {
+        "name": "E",
+        "description": "Report the extruder position."
+      },
+      {
+        "name": "R",
+        "description": "Real position, read from the steppers."
+      }
+    ],
+    "source": "https://marlinfw.org/docs/gcode/M114.html"
+  },
+  {
+    "code": "M117",
+    "flavours": ["marlin"],
+    "description": "Shows a message on the printer's display.",
+    "parameters": [
+      {
+        "name": "string",
+        "description": "The message text."
+      }
+    ],
+    "source": "https://marlinfw.org/docs/gcode/M117.html"
+  },
+  {
+    "code": "M220",
+    "flavours": ["marlin"],
+    "description": "Sets the feed rate percentage, scaling the speed of every move.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Percentage, 100 is normal speed."
+      },
+      {
+        "name": "B",
+        "description": "Back up the current percentage."
+      },
+      {
+        "name": "R",
+        "description": "Restore the backed-up percentage."
+      }
+    ],
+    "source": "https://marlinfw.org/docs/gcode/M220.html"
+  },
+  {
+    "code": "M400",
+    "flavours": ["marlin"],
+    "description": "Waits until every queued move has finished before running the next command.",
+    "parameters": [],
+    "source": "https://marlinfw.org/docs/gcode/M400.html"
+  },
+  {
+    "code": "T1",
+    "flavours": ["marlin"],
+    "description": "Selects tool 1 (the second extruder or filament slot) as the active one.",
+    "parameters": [],
+    "source": "https://marlinfw.org/docs/gcode/T.html"
   }
 ]

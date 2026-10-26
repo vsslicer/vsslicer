@@ -324,5 +324,206 @@
       }
     ],
     "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20A1%200.4%20nozzle%20template%20change_filament_gcode.json#L5"
+  },
+  {
+    "code": "M620.1",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 tool-change template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template change_filament_gcode.json:5) writes it after the comment \"get travel path for change filament\" (X, Y, P) and before and after the T command with the flush speed and temperature (E, F, T). Parameter meanings are guesses from that template alone.",
+    "parameters": [
+      {
+        "name": "E",
+        "description": "Seen bare, with F and T, around a tool change."
+      },
+      {
+        "name": "F",
+        "description": "Seen as a flush feed rate."
+      },
+      {
+        "name": "T",
+        "description": "Seen as a flush temperature."
+      },
+      {
+        "name": "X",
+        "description": "Travel point X."
+      },
+      {
+        "name": "Y",
+        "description": "Travel point Y."
+      },
+      {
+        "name": "P",
+        "description": "Travel point index."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20X1%200.4%20nozzle%20template%20change_filament_gcode.json#L5"
+  },
+  {
+    "code": "M621",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 tool-change template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template change_filament_gcode.json:5) ends a filament change with it, paired with M620; the machine end template writes M621 S255. Parameter meanings are guesses from that template alone.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Seen as the next filament slot followed by A, or 255."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20X1%200.4%20nozzle%20template%20change_filament_gcode.json#L5"
+  },
+  {
+    "code": "M622",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. Starts a conditional block: OrcaSlicer's X1 templates (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template machine_start_gcode.json:5) write \"M1002 judge_flag <flag>\" then M622 J1 or J0, ended by M623; OrcaSlicer's time estimate treats M622 J1 after the bed-levelling flag as G29 time (src/libslic3r/GCode/GCodeProcessor.cpp:6927). Parameter meanings are guesses from those alone.",
+    "parameters": [
+      {
+        "name": "J",
+        "description": "Seen as 1 (run when the flag is set) or 0 (when it is not)."
+      },
+      {
+        "name": "S",
+        "description": "Seen as 1."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20X1%200.4%20nozzle%20template%20machine_start_gcode.json#L5"
+  },
+  {
+    "code": "M624",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes it before each object's moves (and per layer, after \"; object ids of layer N start\"), with the object label ids encoded in base64 (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:6505), so the printer can skip a cancelled object; M625 ends the block. Meaning inferred from that code alone.",
+    "parameters": [],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/src/libslic3r/GCode.cpp#L6505"
+  },
+  {
+    "code": "M625",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. Ends the block an M624 opens (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:6508). Meaning inferred from that code alone.",
+    "parameters": [],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/src/libslic3r/GCode.cpp#L6508"
+  },
+  {
+    "code": "M970",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's BBL machine start G-code (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/fdm_machine_common.json:163) writes it in pairs after G28, followed by M974, apparently for the vibration (resonance) test. No comment explains it; parameter meanings are unknown.",
+    "parameters": [
+      {
+        "name": "Q",
+        "description": "Seen as 1 and 0."
+      },
+      {
+        "name": "A",
+        "description": "Seen as 10."
+      },
+      {
+        "name": "B",
+        "description": "Seen as 10 and 131."
+      },
+      {
+        "name": "C",
+        "description": "Seen as 130 and 250."
+      },
+      {
+        "name": "H",
+        "description": "Seen as 20."
+      },
+      {
+        "name": "K",
+        "description": "Seen as 0 and 1."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/fdm_machine_common.json#L163"
+  },
+  {
+    "code": "M971",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 timelapse template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template time_lapse_gcode.json:5) writes M971 S11 C10 O0 to take a timelapse frame; the start template uses M971 S5 and S6 during calibration, apparently for camera captures. Parameter meanings are guesses.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Seen as 5, 6 and 11."
+      },
+      {
+        "name": "C",
+        "description": "Seen as 10 and 11."
+      },
+      {
+        "name": "O",
+        "description": "Seen as 0."
+      },
+      {
+        "name": "P",
+        "description": "Seen as 0 to 4."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20X1%200.4%20nozzle%20template%20time_lapse_gcode.json#L5"
+  },
+  {
+    "code": "M974",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's BBL machine start G-code (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/fdm_machine_common.json:163) writes it after each pair of M970, apparently to finish the vibration test. No comment explains it; parameter meanings are unknown.",
+    "parameters": [
+      {
+        "name": "Q",
+        "description": "Seen as 1 and 0."
+      },
+      {
+        "name": "S",
+        "description": "Seen as 1 and 2."
+      },
+      {
+        "name": "P",
+        "description": "Seen as 0."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/fdm_machine_common.json#L163"
+  },
+  {
+    "code": "M976",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's X1 start template (OrcaSlicer@09aa0114:resources/profiles/BBL/machine/Bambu Lab X1 0.4 nozzle template machine_start_gcode.json:5) comments M976 S3 P2 as \"register void printing detection\"; Bambu Studio writes M976 S1 P1 with \"scan model before printing 2nd layer\". Parameter meanings are guesses.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "Seen as 1 and 3."
+      },
+      {
+        "name": "P",
+        "description": "Seen as 1 and 2."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/resources/profiles/BBL/machine/Bambu%20Lab%20X1%200.4%20nozzle%20template%20machine_start_gcode.json#L5"
+  },
+  {
+    "code": "M981",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes M981 S1 P20000 commented \"open spaghetti detector\" (OrcaSlicer@09aa0114:src/libslic3r/GCode.cpp:4607) and M981 S0 P20000 to close it, also telling the camera the last layer is done (GCode.cpp:4808). Parameter meanings are guesses.",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "1 opens, 0 closes the detector."
+      },
+      {
+        "name": "P",
+        "description": "Seen as 20000."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/src/libslic3r/GCode.cpp#L4607"
+  },
+  {
+    "code": "M1003",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer writes M1003 S1 or S0 for Bambu printers to switch power-loss recovery on or off (OrcaSlicer@09aa0114:src/libslic3r/GCodeWriter.cpp:761); Bambu Studio comments it \"open powerlost recovery\".",
+    "parameters": [
+      {
+        "name": "S",
+        "description": "1 enables, 0 disables power-loss recovery."
+      }
+    ],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/src/libslic3r/GCodeWriter.cpp#L761"
+  },
+  {
+    "code": "T255",
+    "flavours": ["bambu"],
+    "description": "UNDOCUMENTED and UNVERIFIED: Bambu Lab private command. OrcaSlicer's time estimate lists T255 as a special Bambu command that is not a tool change (OrcaSlicer@09aa0114:src/libslic3r/GCode/GCodeProcessor.cpp:7105); the X1 end template writes it after moving to the cutter, apparently to unload the filament.",
+    "parameters": [],
+    "source": "https://github.com/SoftFever/OrcaSlicer/blob/09aa0114/src/libslic3r/GCode/GCodeProcessor.cpp#L7105"
   }
 ]

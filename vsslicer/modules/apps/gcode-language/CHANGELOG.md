@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-98: Bambu Lab files (Bambu Studio, Orca) use the Bambu catalogue, and Prusa Buddy printers the Buddy one, both falling back to Marlin, so standard and Bambu codes no longer warn as unknown; added G17, M105, M114, M117, M220, M400, T1 and 12 Bambu codes; `bambu` and `prusa-buddy` can be chosen in `flavourOverrides`.
+
 ## 0.1.0
 
 - GCP-48: hover, completion and unknown-command warnings from the catalogue (filtered by the status-bar flavour, warnings only when it is known), slicer tag hovers, and for files over 50 MB (which VS Code does not give extensions) a message with "Open in preview"; activates on startup finished to see them. Integration tests per flavour on VS Code 1.100.0 and stable.

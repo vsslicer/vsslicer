@@ -6,3 +6,6 @@ Test fixtures in `test/fixtures/`:
 
 - `prusaslicer.gcode`, `orca.gcode`, `bambu-studio.gcode`, `cura.gcode`, `superslicer.gcode`: excerpts (first lines, first commands, and a block of moves) of the gcode-parser corpus, in `vsslicer/modules/gcode-parser/test/fixtures/`: `prusaslicer/mini_cube_ps2.8.1.gcode`, `orca/cube-marlin.gcode`, `bambu-studio/cube.gcode`, `cura/cube-cylinder-4.10.0.gcode`, `superslicer/superslicer-2.3.56-arcwelder.gcode`. Each folder's `PROVENANCE.md` there names the generator, version, settings and licence.
 - `klipper.cfg.gcode`, `rrf.cfg.gcode`: hand-written for this module.
+- `corpus/<folder>--<file>.gcode`: one excerpt per `.gcode` file of the gcode-parser corpus (same licence as above): the
+  `;FLAVOR:`, `; gcode_flavor =` and `; printer_model =` lines from the file's first 64 KiB, then the first line of each
+  distinct G, M or T code, in file order. Enough to detect the flavour and to list every command the file uses.

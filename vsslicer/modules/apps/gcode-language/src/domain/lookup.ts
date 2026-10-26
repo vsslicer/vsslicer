@@ -4,6 +4,11 @@ import type { CatalogueEntry } from './catalogue.ts';
 /** Entries by catalogue flavour, then by normalised code. */
 export type CatalogueIndex = ReadonlyMap<string, ReadonlyMap<string, CatalogueEntry>>;
 
+const FALLBACK = [
+  ['bambu', 'marlin'],
+  ['prusa-buddy', 'marlin'],
+] as const;
+
 export const buildIndex = (entries: readonly CatalogueEntry[]): CatalogueIndex => {
   const index = new Map<string, Map<string, CatalogueEntry>>();
   for (const e of entries)
@@ -13,6 +18,10 @@ export const buildIndex = (entries: readonly CatalogueEntry[]): CatalogueIndex =
       const known = index.get(f)?.get(e.code);
       if (!known || e.flavours.length < known.flavours.length) index.get(f)?.set(e.code, e);
     }
+  // firmware built on Marlin: a code its own catalogue lacks is Marlin's
+  for (const [f, base] of FALLBACK)
+    for (const [code, e] of index.get(base) ?? [])
+      if (index.has(f) && !index.get(f)?.has(code)) index.get(f)?.set(code, e);
   return index;
 };
 

@@ -14,9 +14,16 @@ test('detects the flavour the head names, last one winning', () => {
   assert.equal(detectFlavour('G28\n; no flavour here'), undefined);
 });
 
-test('detects the flavour in real slicer files, undefined where they state none', () => {
+test('a Bambu Lab or Prusa Buddy printer model refines a Marlin or unstated flavour, nothing else', () => {
+  assert.equal(detectFlavour('; gcode_flavor = marlin\n; printer_model = Bambu Lab X1 Carbon'), 'bambu');
+  assert.equal(detectFlavour('; printer_model = MK4S\n'), 'prusa-buddy');
+  assert.equal(detectFlavour('; printer_model = MK3MMU2\n; gcode_flavor = marlin'), 'marlin');
+  assert.equal(detectFlavour('; gcode_flavor = klipper\n; printer_model = Bambu Lab X1 Carbon'), 'klipper');
+});
+
+test('detects the flavour in real slicer files, Buddy from the printer model when the head states none', () => {
   assert.equal(detectFlavour(fixture('cura.gcode'))?.toLowerCase(), 'reprap');
-  assert.equal(detectFlavour(fixture('prusaslicer.gcode')), undefined);
+  assert.equal(detectFlavour(fixture('prusaslicer.gcode')), 'prusa-buddy'); // MK4S, gcode_flavor only at the end
 });
 
 test('the label is the override, else the detected name, else generic', () => {
