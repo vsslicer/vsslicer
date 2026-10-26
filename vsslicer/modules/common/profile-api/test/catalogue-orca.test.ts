@@ -3,14 +3,13 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { describe, expect, test } from 'vitest';
-import { catalogueEntrySchema, catalogueSchema, defsSchema, orcaCatalogue, type CatalogueFile } from '../src/index.ts';
+import { catalogueEntrySchema, catalogueSchema, defsSchema, orcaCatalogue } from '../src/index.ts';
 import {
   BAMBU_SOURCE,
   CONSTANTS,
   DEFAULT_SOURCE,
   generate,
   generateBambu,
-  OUTPUT,
   PRESET,
   PRINT_CONFIG,
   render,
@@ -72,14 +71,8 @@ describe.skipIf(!source)('the generator, on OrcaSlicer@09aa0114', () => {
     expect(run()).toBe(run());
   });
 
-  // The committed file carries Bambu names, so it can only be compared when Bambu's source is present. Its Prusa
-  // and SuperSlicer names (PRF-16) are checked in catalogue-prusa.test.ts.
-  test.skipIf(!bambu)('matches the committed data', () => {
-    const committed = JSON.parse(readFileSync(OUTPUT, 'utf8')) as CatalogueFile;
-    for (const e of Object.values(committed.entries))
-      for (const d of ['prusa', 'prusa3', 'superslicer'] as const) delete e.native[d];
-    expect(run()).toBe(render(committed));
-  });
+  // The committed file also carries every other dialect's names and PRF-18's groups: `outputs()` is compared with it
+  // in catalogue-prusa.test.ts and catalogue-groups.test.ts.
 
   test('cites the line that defines each key', () => {
     const lines = read(PRINT_CONFIG).split('\n');

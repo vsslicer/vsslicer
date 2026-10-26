@@ -19,6 +19,7 @@ import {
   type Value,
 } from './cpp.ts';
 import { type Placement, toEntry } from './entry.ts';
+import { PRUSA_GROUPS, uiGroup } from './groups.ts';
 
 export const PRUSA_COMMIT = 'b028299';
 export const PRUSA3_COMMIT = '30ef591';
@@ -642,10 +643,9 @@ export const generatePrusa = (orca: CatalogueFile, src: Sources): PrusaCatalogue
               ? 'int'
               : 'string';
       prusa.entries[target] = {
-        // shortcut: E11's groups have no surface or feeder home yet, so sheet and feeder features sit on the
-        // printer model; move them when GROUPS gains those homes.
         group: 'machine',
-        home: f.ns === 'tool' ? 'nozzle' : 'printer_model',
+        home:
+          f.ns === 'tool' ? 'nozzle' : f.ns === 'sheet' ? 'surface' : f.ns === 'feeder' ? 'feeder' : 'printer_model',
         type,
         ...(f.default !== undefined ? { default: f.default } : {}),
         label: `${f.ns[0]!.toUpperCase()}${f.ns.slice(1)} ${f.key.replace(/_/g, ' ')}`,
@@ -710,12 +710,21 @@ export const generatePrusa = (orca: CatalogueFile, src: Sources): PrusaCatalogue
     const graph = /^coGraphs?$/.test(d.co);
     const def = graph ? { ...d, co: d.co === 'coGraph' ? 'coPoints' : 'coPointsGroups', value: undefined } : d;
     const e = toEntry(def, sPlace, sMaps, `Ported from SuperSlicer@${SUPERSLICER_COMMIT}:${s.printConfig}`);
+    // A key on a `.ui` page takes that page's group (PRF-18); one on no page keeps its nearest category, hidden.
+    if (place) {
+      Object.assign(e, uiGroup(place.file, place.page, place.group, d.key));
+      delete e.hidden;
+    } else e.hidden = true;
     superslicer.entries[unified('superslicer.', d.key)] = {
       ...e,
       native: { superslicer: { key: d.key } },
       native_only: 'superslicer',
       provenance: `${e.provenance!}${place ? `; GUI: ${place.file}:${place.line} (${place.page} > ${place.group})` : ''}`,
     };
+  }
+  for (const [key, g] of Object.entries(PRUSA_GROUPS)) {
+    if (!prusa.entries[key]) throw new Error(`${key}: PRUSA_GROUPS names no prusa. entry`);
+    Object.assign(prusa.entries[key], g);
   }
   return { orca: merged, prusa, superslicer };
 };

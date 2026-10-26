@@ -5,7 +5,6 @@ import { Ajv2020 } from 'ajv/dist/2020.js';
 import { describe, expect, test } from 'vitest';
 import { bambuCatalogue, catalogueEntrySchema, catalogueSchema, defsSchema, orcaCatalogue } from '../src/index.ts';
 import {
-  BAMBU_OUTPUT,
   BAMBU_RENAMES,
   BAMBU_SOURCE,
   CONSTANTS,
@@ -60,7 +59,8 @@ describe.skipIf(!sources)('the Bambu generator, on BambuStudio@79df7ae', () => {
   const bambu = (path: string) => readFileSync(join(BAMBU_SOURCE, path), 'utf8');
   const orca = (path: string) => readFileSync(join(DEFAULT_SOURCE, path), 'utf8');
 
-  test('is deterministic and matches the committed data', () => {
+  // bambu.json as committed is outputs()'s (PRF-18 regroups it by Bambu's pages), compared in catalogue-prusa.test.ts.
+  test('is deterministic', () => {
     const run = () =>
       render(
         generateBambu(generate(orca(PRINT_CONFIG), orca(PRESET), orca(CONSTANTS)), bambu(PRINT_CONFIG), bambu(PRESET))
@@ -68,7 +68,6 @@ describe.skipIf(!sources)('the Bambu generator, on BambuStudio@79df7ae', () => {
       );
     const first = run();
     expect(run()).toBe(first);
-    expect(first).toBe(readFileSync(BAMBU_OUTPUT, 'utf8'));
   });
 
   test('cites the line that defines each bambu. key', () => {

@@ -2,24 +2,25 @@
 // Generates src/domain/catalogue/data/cura.json from Cura's setting definitions and its XML material key table (PRF-17).
 // Reads fdmprinter.def.json and fdmextruder.def.json as JSON and XmlMaterialProfile.py as text; nothing upstream is
 // built or run, and Cura's `value` formulas are stored verbatim as `{expr}`, never evaluated.
-// Run from the module: node tools/catalogue/cura.ts [<Cura checkout>]
-import { readFileSync, statSync, writeFileSync } from 'node:fs';
+// Run through generate.ts `outputs()`, which merges the Cura names of Orca keys into orca.json (PRF-18).
+import { readFileSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type {
+  Catalogue,
   CatalogueEntry,
   CatalogueFile,
   EnumOption,
   Group,
   HomeEntity,
   NativeKey,
+  OverrideScope,
   SettingType,
   SettingValue,
   ValueConversion,
 } from '../../src/index.ts';
-import { orcaCatalogue } from '../../src/index.ts';
 import type { CuraCatalogueFile, CuraMaterialKey } from '../../src/domain/catalogue/cura.ts';
-import { render } from './generate.ts';
+import { render } from './entry.ts';
 
 export const CURA_COMMIT = '5bea2f8';
 export const FDM_MATERIALS_COMMIT = '0c05969';
@@ -57,6 +58,7 @@ interface CuraNode {
   maximum_value?: unknown;
   options?: { [value: string]: string };
   settable_per_extruder?: boolean;
+  settable_per_mesh?: boolean;
   children?: { [key: string]: CuraNode };
 }
 
@@ -318,6 +320,7 @@ export const CURA_SPLITS: { [orca: string]: string[] } = {
   extruder_offset: ['machine_nozzle_offset_x', 'machine_nozzle_offset_y'],
   printable_area: ['machine_width', 'machine_depth'],
 };
+const PER_EXTRUDER_LOSSY = 'Cura holds one value per extruder, the unified key one';
 const SPLIT_LOSSY: { [orca: string]: string } = {
   printable_area: 'Cura width and depth (plus machine_shape, machine_center_is_zero), Orca a polygon; PRF-20 converts',
 };
@@ -335,29 +338,47 @@ export const XML_FIELDS: { [xmlPath: string]: { field: string; cite?: string } }
   'properties/density': { field: 'density', cite: `fdm_materials@${FDM_MATERIALS_COMMIT}:${FDM_PLA}:21` },
 };
 
-// shortcut: groups and homes come from Cura's top-level category and key patterns, not from a page-accurate
-// mapping; refine per key when grouping matters (E11 review).
-const placeOf = (key: string, category: string): { group: Group; home: HomeEntity } => {
-  if (/gcode|_code$|^relative_extrusion$/.test(key)) return { group: 'gcode', home: 'printer_model' };
-  if (/^material_(guid|type|brand|diameter|density|id|name|spool_cost|spool_weight)$/.test(key))
-    return { group: 'material', home: 'material' };
-  if (/^machine_nozzle_/.test(key)) return { group: 'machine', home: 'nozzle' };
-  if (/^raft_/.test(key)) return { group: 'support', home: 'process' };
-  const byCategory: { [category: string]: { group: Group; home: HomeEntity } } = {
-    machine_settings: { group: 'machine', home: 'printer_model' },
-    resolution: { group: /^layer_height/.test(key) ? 'layers' : 'extrusion', home: 'process' },
-    shell: { group: 'walls', home: 'process' },
-    top_bottom: { group: 'shells_infill', home: 'process' },
-    infill: { group: 'shells_infill', home: 'process' },
-    material: /flow/.test(key) ? { group: 'extrusion', home: 'process' } : { group: 'material', home: 'material' },
-    speed: { group: 'speed', home: 'process' },
-    travel: { group: 'extrusion', home: 'process' },
-    cooling: { group: 'cooling', home: 'material' },
-    support: { group: 'support', home: 'process' },
-    platform_adhesion: { group: 'adhesion', home: 'process' },
-    dual: { group: 'multi_material', home: 'process' },
-  };
-  return byCategory[category] ?? { group: 'special', home: 'process' };
+/**
+ * Cura's categories onto E11's groups, as the matrix counts them (feature-matrix.md §1: `resolution` is layers,
+ * `travel` extrusion, raft is in `platform_adhesion`, `meshfix`, `blackmagic` and `experimental` are special). Two
+ * judgement moves from the matrix count: start/end G-code leaves `machine_settings` for `gcode`, and retraction leaves
+ * `travel` for `machine` (it lives in the printer, with a material override).
+ */
+const CATEGORY_GROUPS: { [category: string]: Group } = {
+  resolution: 'layers',
+  shell: 'walls',
+  top_bottom: 'shells_infill',
+  infill: 'shells_infill',
+  material: 'material',
+  speed: 'speed',
+  travel: 'extrusion',
+  cooling: 'cooling',
+  support: 'support',
+  platform_adhesion: 'adhesion',
+  dual: 'multi_material',
+  meshfix: 'special',
+  blackmagic: 'special',
+  experimental: 'special',
+  ppr: 'gcode',
+  command_line_settings: 'gcode',
+  machine_settings: 'machine',
+};
+
+// Combing (`retraction_combing*`) is travel avoidance, not retraction.
+const RETRACTION = /^(retraction_(?!combing)|retract_)/;
+
+export const placeOf = (
+  key: string,
+  category: string,
+): { group: Group; home: HomeEntity; overridable_in?: HomeEntity[] } => {
+  const group = CATEGORY_GROUPS[category];
+  if (!group) throw new Error(`${key}: Cura category ${category} has no group; add it to CATEGORY_GROUPS`);
+  if (group === 'machine' && /_code$|gcode/.test(key)) return { group: 'gcode', home: 'printer_model' };
+  if (RETRACTION.test(key) && category === 'travel')
+    return { group: 'machine', home: 'printer_model', overridable_in: ['material'] };
+  if (group === 'machine') return { group, home: /^machine_nozzle_/.test(key) ? 'nozzle' : 'printer_model' };
+  if (group === 'material' || group === 'cooling') return { group, home: 'material' };
+  return { group, home: 'process' };
 };
 
 const TYPES: { [cura: string]: { type: SettingType; list?: true } } = {
@@ -399,7 +420,17 @@ const defaultOf = (node: CuraNode, curaType: string): SettingValue | undefined =
 
 const cite = (s: CuraSetting) => `Cura@${CURA_COMMIT}:${s.file}:${s.line}`;
 
-export const generateCura = (printer: string, extruder: string, xmlProfile: string): CuraCatalogueFile => {
+/**
+ * The cura. entries, the material table and the per-extruder list (cura.json), and `names`: the Cura name of each
+ * Orca key Cura has, which generate.ts merges into orca.json as `native.cura`. `orca` is the in-memory Orca catalogue
+ * the names are checked against.
+ */
+export const generateCura = (
+  printer: string,
+  extruder: string,
+  xmlProfile: string,
+  orca: Catalogue,
+): CuraCatalogueFile & { names: { [unified: string]: NativeKey } } => {
   const fromPrinter = extractCura(printer, FDMPRINTER);
   const fromExtruder = extractCura(extruder, FDMEXTRUDER);
   // A key in both files is one setting: fdmextruder's node overrides fdmprinter's for the extruder stack.
@@ -418,14 +449,16 @@ export const generateCura = (printer: string, extruder: string, xmlProfile: stri
 
   const names: { [unified: string]: NativeKey } = {};
   const named = new Map<string, string>();
-  const nameOf = (orca: string, nk: NativeKey, curaKeys: string[]) => {
-    if (!orcaCatalogue.entries[orca]) throw new Error(`${orca}: no such Orca entry`);
-    if (names[orca]) throw new Error(`${orca}: two Cura names`);
+  const nameOf = (target: string, nk: NativeKey, curaKeys: string[]) => {
+    if (!orca[target]) throw new Error(`${target}: no such Orca entry`);
+    if (names[target]) throw new Error(`${target}: two Cura names`);
     for (const k of curaKeys) {
       if (!settings.has(k)) throw new Error(`${k}: no such Cura setting`);
-      named.set(k, orca);
+      named.set(k, target);
     }
-    names[orca] = nk;
+    // Cura resolves most settings per extruder; an Orca key that is not per extruder keeps one value.
+    const lost = curaKeys.some(perExtruder) && !orca[target]!.per_extruder ? PER_EXTRUDER_LOSSY : undefined;
+    names[target] = lost ? { ...nk, lossy: nk.lossy ? `${nk.lossy}; ${lost}` : lost } : nk;
   };
   for (const [cura, n] of Object.entries(CURA_NAMES))
     nameOf(
@@ -453,6 +486,9 @@ export const generateCura = (printer: string, extruder: string, xmlProfile: stri
     const min = bound(node.minimum_value);
     const max = bound(node.maximum_value);
     const value = defaultOf(node, curaType);
+    // Cura's per-model settings (`settable_per_mesh`, default true at Cura@5bea2f8:cura/CuraApplication.py:413) can be
+    // set on a model and on a modifier mesh; Cura has no height ranges or plates.
+    const scope: OverrideScope[] = node.settable_per_mesh === false ? [] : ['object', 'part'];
     entries[`cura.${key}`] = {
       ...placeOf(key, first.category),
       type,
@@ -466,6 +502,7 @@ export const generateCura = (printer: string, extruder: string, xmlProfile: stri
       label: node.label || key,
       ...(node.description ? { tooltip: node.description } : {}),
       native: { cura: { key } },
+      override_scope: scope,
       // Cura's command-line settings are on no settings page.
       ...(first.category === 'command_line_settings' ? { hidden: true } : {}),
       native_only: 'cura',
@@ -529,13 +566,3 @@ export const FDM_MATERIALS_SOURCE =
   join(dirname(fileURLToPath(import.meta.url)), '../../../../../.reference/repos/fdm_materials');
 
 export const renderCura = (file: CuraCatalogueFile): string => render(file as CatalogueFile);
-
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const root = process.argv[2] ?? CURA_SOURCE;
-  const read = (path: string) => readBounded(join(root, path));
-  const file = generateCura(read(FDMPRINTER), read(FDMEXTRUDER), read(XML_PROFILE));
-  writeFileSync(CURA_OUTPUT, renderCura(file));
-  console.log(
-    `${Object.keys(file.entries).length} cura. entries, ${Object.keys(file.names).length} Cura names -> ${CURA_OUTPUT}`,
-  );
-}

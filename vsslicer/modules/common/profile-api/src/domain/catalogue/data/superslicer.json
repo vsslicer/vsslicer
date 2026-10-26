@@ -13,10 +13,11 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:438 (label generated from the key)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.thumbnails_color": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "string",
       "default": "#018aff",
@@ -28,10 +29,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:479; GUI: resources/ui_layout/default/printer_fff.ui:69 (General > Thumbnails)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.thumbnails_custom_color": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "default": false,
@@ -43,10 +45,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:488; GUI: resources/ui_layout/default/printer_fff.ui:68 (General > Thumbnails)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.thumbnails_end_file": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "default": false,
@@ -58,10 +61,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:495; GUI: resources/ui_layout/default/printer_fff.ui:75 (General > Thumbnails)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.thumbnails_with_bed": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "default": true,
@@ -73,10 +77,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:502; GUI: resources/ui_layout/default/printer_fff.ui:73 (General > Thumbnails)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.thumbnails_tag_format": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "default": false,
@@ -88,7 +93,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:515; GUI: resources/ui_layout/default/printer_fff.ui:74 (General > Thumbnails)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.thumbnails_with_support": {
       "group": "gcode",
@@ -104,7 +110,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:522",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.printhost_client_cert": {
       "group": "gcode",
@@ -120,7 +127,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:586",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.printhost_client_cert_password": {
       "group": "gcode",
@@ -136,7 +144,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:594",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.allow_empty_layers": {
       "group": "layers",
@@ -151,7 +160,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:659; GUI: resources/ui_layout/default/print.ui:188 (Slicing > Other)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.arc_fitting_ignore_holes": {
       "group": "machine",
@@ -166,7 +176,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:680; GUI: resources/ui_layout/default/printer_fff.ui:44 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.arc_fitting_resolution": {
       "group": "machine",
@@ -183,7 +194,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:688; GUI: resources/ui_layout/default/printer_fff.ui:47 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.arc_fitting_tolerance": {
       "group": "machine",
@@ -200,7 +212,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:698; GUI: resources/ui_layout/default/printer_fff.ui:48 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.autospeed_min_thin_flow": {
       "group": "speed",
@@ -217,7 +230,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:708; GUI: resources/ui_layout/default/print.ui:427 (Speed > Autospeed (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.avoid_crossing_not_first_layer": {
       "group": "extrusion",
@@ -232,7 +246,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:742; GUI: resources/ui_layout/default/print.ui:67 (Perimeters & Shell > Avoid crossing perimeters)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.avoid_crossing_top": {
       "group": "extrusion",
@@ -247,7 +262,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:762; GUI: resources/ui_layout/default/print.ui:68 (Perimeters & Shell > Avoid crossing perimeters)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.avoid_travel_island": {
       "group": "extrusion",
@@ -262,7 +282,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:769; GUI: resources/ui_layout/default/print.ui:71 (Perimeters & Shell > Avoid crossing perimeters)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.avoid_travel_island_weight": {
       "group": "extrusion",
@@ -278,7 +303,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:777; GUI: resources/ui_layout/default/print.ui:72 (Perimeters & Shell > Avoid crossing perimeters)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.between_objects_gcode_before_move": {
       "group": "gcode",
@@ -293,7 +323,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:826; GUI: resources/ui_layout/default/printer_fff.ui:100 (Custom G-code > Between objects G-code (for sequential printing))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.bridged_infill_margin": {
       "group": "shells_infill",
@@ -310,10 +341,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:882; GUI: resources/ui_layout/default/print.ui:251 (Infill > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.bridge_fill_pattern": {
-      "group": "walls",
+      "group": "shells_infill",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -335,10 +371,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:909; GUI: resources/ui_layout/default/print.ui:218 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.bridge_type": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "enum",
       "unit": "%",
@@ -365,10 +406,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:920; GUI: resources/ui_layout/default/print.ui:534 (Width & Flow > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.over_bridge_flow_ratio": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -383,10 +429,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:954; GUI: resources/ui_layout/default/print.ui:529 (Width & Flow > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.bridge_precision": {
-      "group": "walls",
+      "group": "layers",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -400,10 +451,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:967; GUI: resources/ui_layout/default/print.ui:150 (Slicing > Filtering)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.bridge_overlap_min": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -418,10 +470,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:977; GUI: resources/ui_layout/default/print.ui:522 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.bridge_overlap": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -436,7 +493,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:990; GUI: resources/ui_layout/default/print.ui:523 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.brim_inside_holes": {
       "group": "adhesion",
@@ -451,7 +513,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1016; GUI: resources/ui_layout/default/print.ui:290 (Skirt & Brim > Brim)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.brim_per_object": {
       "group": "adhesion",
@@ -466,7 +531,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1024; GUI: resources/ui_layout/default/print.ui:299 (Skirt & Brim > Brim)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.brim_width_interior": {
       "group": "adhesion",
@@ -483,10 +551,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1043; GUI: resources/ui_layout/default/print.ui:291 (Skirt & Brim > Brim)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.brim_acceleration": {
-      "group": "adhesion",
+      "group": "speed",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm/s² or %",
@@ -500,7 +571,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1071; GUI: resources/ui_layout/default/print.ui:446 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.brim_ears_pattern": {
       "group": "adhesion",
@@ -525,10 +599,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1096; GUI: resources/ui_layout/default/print.ui:296 (Skirt & Brim > Brim)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.brim_speed": {
-      "group": "adhesion",
+      "group": "speed",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm/s or %",
@@ -542,10 +619,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1119; GUI: resources/ui_layout/default/print.ui:389 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.parallel_objects_step": {
-      "group": "special",
+      "group": "gcode",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -558,10 +638,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1217; GUI: resources/ui_layout/default/print.ui:599 (Output options > Sequential printing)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.parallel_objects_step_max_z": {
-      "group": "special",
+      "group": "gcode",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -574,10 +655,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1230; GUI: resources/ui_layout/default/print.ui:600 (Output options > Sequential printing)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.complete_objects_one_skirt": {
-      "group": "adhesion",
+      "group": "gcode",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -589,10 +671,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1238; GUI: resources/ui_layout/default/print.ui:602 (Output options > Sequential printing)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.complete_objects_sort": {
-      "group": "special",
+      "group": "gcode",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -622,7 +705,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1246; GUI: resources/ui_layout/default/print.ui:603 (Output options > Sequential printing)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.curve_smoothing_angle_convex": {
       "group": "special",
@@ -640,7 +724,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1293; GUI: resources/ui_layout/default/print.ui:159 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.curve_smoothing_angle_concave": {
       "group": "special",
@@ -658,10 +747,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1308; GUI: resources/ui_layout/default/print.ui:160 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.curve_smoothing_precision": {
-      "group": "layers",
+      "group": "special",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -675,7 +769,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1322; GUI: resources/ui_layout/default/print.ui:158 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.curve_smoothing_cutoff_dist": {
       "group": "special",
@@ -692,7 +791,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1338; GUI: resources/ui_layout/default/print.ui:161 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.default_fan_speed": {
       "group": "cooling",
@@ -709,7 +813,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1373; GUI: resources/ui_layout/default/filament.ui:66 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.default_speed": {
       "group": "speed",
@@ -726,7 +831,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1396; GUI: resources/ui_layout/default/print.ui:378 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_fill_pattern": {
       "group": "shells_infill",
@@ -795,10 +905,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1532; GUI: resources/ui_layout/default/print.ui:203 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.enforce_full_fill_volume": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -810,10 +925,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1557; GUI: resources/ui_layout/default/print.ui:263 (Infill > Advanced Infill options)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.enforce_retract_first_layer": {
-      "group": "extrusion",
+      "group": "shells_infill",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -825,7 +945,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1567; GUI: resources/ui_layout/default/print.ui:255 (Infill > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.external_infill_margin": {
       "group": "shells_infill",
@@ -842,10 +963,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1589; GUI: resources/ui_layout/default/print.ui:250 (Infill > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeter_extrusion_spacing": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -860,10 +986,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1620; GUI: resources/ui_layout/default/print.ui:476 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeter_extrusion_change_odd_layers": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -875,10 +1006,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1637; GUI: resources/ui_layout/default/print.ui:477 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeter_cut_corners": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -891,7 +1027,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1650; GUI: resources/ui_layout/default/print.ui:544 (Width & Flow > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.external_perimeter_fan_speed": {
       "group": "cooling",
@@ -909,10 +1048,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1661; GUI: resources/ui_layout/default/filament.ui:69 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.external_perimeter_overlap": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -927,7 +1067,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1677; GUI: resources/ui_layout/default/print.ui:514 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeters_first_force": {
       "group": "walls",
@@ -942,7 +1087,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1725; GUI: resources/ui_layout/default/print.ui:120 (Perimeters & Shell > External perimeter first)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeters_vase": {
       "group": "walls",
@@ -957,7 +1107,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1733; GUI: resources/ui_layout/default/print.ui:126 (Perimeters & Shell > External perimeter first)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeters_vase_min_height": {
       "group": "walls",
@@ -972,7 +1127,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1743; GUI: resources/ui_layout/default/print.ui:127 (Perimeters & Shell > External perimeter first)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeters_nothole": {
       "group": "walls",
@@ -987,7 +1147,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1753; GUI: resources/ui_layout/default/print.ui:122 (Perimeters & Shell > External perimeter first)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.external_perimeters_hole": {
       "group": "walls",
@@ -1002,7 +1167,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1761; GUI: resources/ui_layout/default/print.ui:123 (Perimeters & Shell > External perimeter first)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.extra_perimeters_below_area": {
       "group": "walls",
@@ -1017,7 +1187,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1781; GUI: resources/ui_layout/default/print.ui:40 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.extra_perimeters_count": {
       "group": "walls",
@@ -1033,7 +1208,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1791",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.first_layer_extruder": {
       "group": "extrusion",
@@ -1049,7 +1229,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1828",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.extruder_extrusion_multiplier_speed": {
       "group": "machine",
@@ -1064,7 +1245,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1875; GUI: resources/ui_layout/default/extruder.ui:14 (Extruder > Offsets (for multi-extruder printers))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.extruder_temperature_offset": {
       "group": "machine",
@@ -1081,7 +1263,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1913; GUI: resources/ui_layout/default/extruder.ui:12 (Extruder > Offsets (for multi-extruder printers))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.extruder_fan_offset": {
       "group": "machine",
@@ -1098,7 +1281,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1924; GUI: resources/ui_layout/default/extruder.ui:13 (Extruder > Offsets (for multi-extruder printers))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.extrusion_spacing": {
       "group": "extrusion",
@@ -1116,7 +1300,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:1989; GUI: resources/ui_layout/default/print.ui:467 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.filament_custom_variables": {
       "group": "material",
@@ -1131,7 +1318,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2040; GUI: resources/ui_layout/default/filament.ui:147 (Notes > Custom variables)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_fill_top_flow_ratio": {
       "group": "material",
@@ -1148,7 +1336,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2062; GUI: resources/ui_layout/default/filament.ui:11 (Filament > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_first_layer_flow_ratio": {
       "group": "material",
@@ -1165,7 +1354,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2074; GUI: resources/ui_layout/default/filament.ui:12 (Filament > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_max_speed": {
       "group": "material",
@@ -1182,7 +1372,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2097; GUI: resources/ui_layout/default/filament.ui:32 (Speed & Pressure advance > Print speed override)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_max_wipe_tower_speed": {
       "group": "multi_material",
@@ -1200,7 +1391,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2121; GUI: resources/ui_layout/default/filament.ui:116 (Multimaterial > Wipe tower parameters)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_enable_toolchange_temp": {
       "group": "multi_material",
@@ -1215,10 +1407,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2149; GUI: resources/ui_layout/default/filament.ui:102 (Multimaterial > Multimaterial toolchange temperature)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_use_fast_skinnydip": {
-      "group": "material",
+      "group": "multi_material",
       "home": "material",
       "type": "bool",
       "default": false,
@@ -1230,7 +1423,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2156; GUI: resources/ui_layout/default/filament.ui:104 (Multimaterial > Multimaterial toolchange temperature)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_enable_toolchange_part_fan": {
       "group": "multi_material",
@@ -1245,7 +1439,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2163; GUI: resources/ui_layout/default/filament.ui:105 (Multimaterial > Multimaterial toolchange temperature)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_toolchange_part_fan_speed": {
       "group": "multi_material",
@@ -1263,10 +1458,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2170; GUI: resources/ui_layout/default/filament.ui:106 (Multimaterial > Multimaterial toolchange temperature)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_use_skinnydip": {
-      "group": "material",
+      "group": "multi_material",
       "home": "material",
       "type": "bool",
       "default": false,
@@ -1278,10 +1474,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2180; GUI: resources/ui_layout/default/filament.ui:108 (Multimaterial > Multimaterial toolchange string reduction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_melt_zone_pause": {
-      "group": "material",
+      "group": "multi_material",
       "home": "material",
       "type": "int",
       "unit": "milliseconds",
@@ -1295,10 +1492,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2187; GUI: resources/ui_layout/default/filament.ui:110 (Multimaterial > Multimaterial toolchange string reduction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_cooling_zone_pause": {
-      "group": "cooling",
+      "group": "multi_material",
       "home": "material",
       "type": "int",
       "unit": "milliseconds",
@@ -1312,10 +1510,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2196; GUI: resources/ui_layout/default/filament.ui:111 (Multimaterial > Multimaterial toolchange string reduction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_dip_insertion_speed": {
-      "group": "material",
+      "group": "multi_material",
       "home": "material",
       "type": "float",
       "unit": "mm/sec",
@@ -1329,10 +1528,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2205; GUI: resources/ui_layout/default/filament.ui:112 (Multimaterial > Multimaterial toolchange string reduction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_dip_extraction_speed": {
-      "group": "material",
+      "group": "multi_material",
       "home": "material",
       "type": "float",
       "unit": "mm/sec",
@@ -1346,7 +1546,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2214; GUI: resources/ui_layout/default/filament.ui:113 (Multimaterial > Multimaterial toolchange string reduction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_toolchange_temp": {
       "group": "multi_material",
@@ -1363,10 +1564,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2223; GUI: resources/ui_layout/default/filament.ui:103 (Multimaterial > Multimaterial toolchange temperature)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_skinnydip_distance": {
-      "group": "material",
+      "group": "multi_material",
       "home": "material",
       "type": "float",
       "unit": "mm",
@@ -1380,7 +1582,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2232; GUI: resources/ui_layout/default/filament.ui:109 (Multimaterial > Multimaterial toolchange string reduction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_bridge_pa": {
       "group": "material",
@@ -1395,7 +1598,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2345; GUI: resources/ui_layout/default/filament.ui:50 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_bridge_internal_pa": {
       "group": "material",
@@ -1410,7 +1614,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2354; GUI: resources/ui_layout/default/filament.ui:51 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_brim_pa": {
       "group": "material",
@@ -1425,7 +1630,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2363; GUI: resources/ui_layout/default/filament.ui:48 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_external_perimeter_pa": {
       "group": "material",
@@ -1440,7 +1646,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2372; GUI: resources/ui_layout/default/filament.ui:40 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_first_layer_pa": {
       "group": "material",
@@ -1455,7 +1662,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2381; GUI: resources/ui_layout/default/filament.ui:60 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_first_layer_pa_over_raft": {
       "group": "material",
@@ -1470,7 +1678,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2390; GUI: resources/ui_layout/default/filament.ui:61 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_gap_fill_pa": {
       "group": "material",
@@ -1485,7 +1694,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2399; GUI: resources/ui_layout/default/filament.ui:54 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_infill_pa": {
       "group": "material",
@@ -1500,7 +1710,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2408; GUI: resources/ui_layout/default/filament.ui:43 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_ironing_pa": {
       "group": "material",
@@ -1515,7 +1726,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2417; GUI: resources/ui_layout/default/filament.ui:56 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_overhangs_pa": {
       "group": "material",
@@ -1530,7 +1742,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2426; GUI: resources/ui_layout/default/filament.ui:52 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_perimeter_pa": {
       "group": "material",
@@ -1545,7 +1758,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2435; GUI: resources/ui_layout/default/filament.ui:39 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_solid_infill_pa": {
       "group": "material",
@@ -1560,7 +1774,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2444; GUI: resources/ui_layout/default/filament.ui:42 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_support_material_pa": {
       "group": "material",
@@ -1575,7 +1790,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2453; GUI: resources/ui_layout/default/filament.ui:46 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_support_material_interface_pa": {
       "group": "material",
@@ -1590,7 +1806,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2462; GUI: resources/ui_layout/default/filament.ui:47 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_thin_walls_pa": {
       "group": "material",
@@ -1605,7 +1822,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2471; GUI: resources/ui_layout/default/filament.ui:55 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_top_solid_infill_pa": {
       "group": "material",
@@ -1620,7 +1838,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2480; GUI: resources/ui_layout/default/filament.ui:44 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_travel_pa": {
       "group": "material",
@@ -1635,7 +1854,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2489; GUI: resources/ui_layout/default/filament.ui:58 (Speed & Pressure advance > Pressure/Linear advance)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_max_overlap": {
       "group": "material",
@@ -1653,7 +1873,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2565; GUI: resources/ui_layout/default/filament.ui:28 (Filament > Filament properties)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_settings_modified": {
       "group": "material",
@@ -1668,10 +1889,11 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2658 (label generated from the key)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.fill_aligned_z": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -1683,10 +1905,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2668; GUI: resources/ui_layout/default/print.ui:196 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.fill_angle_cross": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -1698,10 +1925,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2692; GUI: resources/ui_layout/default/print.ui:235 (Infill > Infill angle)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.fill_angle_follow_model": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -1713,10 +1945,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2699; GUI: resources/ui_layout/default/print.ui:236 (Infill > Infill angle)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.fill_angle_increment": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "float",
       "unit": "°",
@@ -1731,10 +1966,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2706; GUI: resources/ui_layout/default/print.ui:234 (Infill > Infill angle)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.first_layer_size_compensation_no_collapse": {
-      "group": "layers",
+      "group": "special",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -1746,10 +1986,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2838; GUI: resources/ui_layout/default/print.ui:170 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.first_layer_strong_start": {
-      "group": "layers",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -1763,10 +2006,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2847; GUI: resources/ui_layout/default/print.ui:545 (Width & Flow > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.fill_smooth_width": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm/%",
@@ -1780,10 +2026,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2860; GUI: resources/ui_layout/default/print.ui:261 (Infill > Advanced Infill options)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.fill_smooth_distribution": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -1796,7 +2047,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2875; GUI: resources/ui_layout/default/print.ui:260 (Infill > Advanced Infill options)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.first_layer_extrusion_spacing": {
       "group": "extrusion",
@@ -1814,10 +2070,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2979; GUI: resources/ui_layout/default/print.ui:504 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.first_layer_infill_extrusion_width": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -1832,10 +2091,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:2996; GUI: resources/ui_layout/default/print.ui:507 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.first_layer_infill_extrusion_spacing": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -1850,7 +2112,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3018; GUI: resources/ui_layout/default/print.ui:508 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.first_layer_min_speed": {
       "group": "speed",
@@ -1867,7 +2132,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3088; GUI: resources/ui_layout/default/print.ui:414 (Speed > Modifiers)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.gap_fill_acceleration": {
       "group": "speed",
@@ -1884,10 +2152,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3171; GUI: resources/ui_layout/default/print.ui:452 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_extension": {
-      "group": "special",
+      "group": "walls",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -1901,7 +2174,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3185; GUI: resources/ui_layout/default/print.ui:97 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_fan_speed": {
       "group": "cooling",
@@ -1919,10 +2197,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3199; GUI: resources/ui_layout/default/filament.ui:85 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.gap_fill_flow_match_perimeter": {
-      "group": "walls",
+      "group": "speed",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -1936,10 +2215,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3214; GUI: resources/ui_layout/default/print.ui:400 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_last": {
-      "group": "special",
+      "group": "walls",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -1951,10 +2235,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3226; GUI: resources/ui_layout/default/print.ui:93 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_max_width": {
-      "group": "special",
+      "group": "walls",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -1968,10 +2257,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3234; GUI: resources/ui_layout/default/print.ui:102 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_min_area": {
-      "group": "special",
+      "group": "walls",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm² or %",
@@ -1985,10 +2279,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3248; GUI: resources/ui_layout/default/print.ui:103 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_min_width": {
-      "group": "special",
+      "group": "walls",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2002,7 +2301,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3275; GUI: resources/ui_layout/default/print.ui:101 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_no_overhang": {
       "group": "walls",
@@ -2017,10 +2321,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3289; GUI: resources/ui_layout/default/print.ui:94 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_overlap": {
-      "group": "special",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -2035,7 +2344,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3296; GUI: resources/ui_layout/default/print.ui:515 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gap_fill_perimeter": {
       "group": "walls",
@@ -2050,10 +2364,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3309; GUI: resources/ui_layout/default/print.ui:98 (Perimeters & Shell > Gap Fill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gcode_ascii": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "default": false,
@@ -2065,10 +2384,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3331; GUI: resources/ui_layout/default/printer_fff.ui:52 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.gcode_filename_illegal_char": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "gcode",
       "default": "[<>:\"/\\\\|?*]",
@@ -2080,10 +2400,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3348; GUI: resources/ui_layout/default/printer_fff.ui:51 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.gcode_precision_xyz": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "int",
       "min": 0,
@@ -2097,10 +2418,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3397; GUI: resources/ui_layout/default/printer_fff.ui:31 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.gcode_precision_e": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "int",
       "min": 0,
@@ -2114,7 +2436,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3406; GUI: resources/ui_layout/default/printer_fff.ui:32 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.infill_connection": {
       "group": "shells_infill",
@@ -2147,7 +2470,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3520; GUI: resources/ui_layout/default/print.ui:195 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_connection_top": {
       "group": "shells_infill",
@@ -2180,7 +2508,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3535; GUI: resources/ui_layout/default/print.ui:209 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_connection_bottom": {
       "group": "shells_infill",
@@ -2213,7 +2546,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3550; GUI: resources/ui_layout/default/print.ui:214 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_connection_bridge": {
       "group": "shells_infill",
@@ -2246,7 +2584,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3565; GUI: resources/ui_layout/default/print.ui:219 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_connection_solid": {
       "group": "shells_infill",
@@ -2279,7 +2622,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3579; GUI: resources/ui_layout/default/print.ui:204 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_dense": {
       "group": "shells_infill",
@@ -2294,7 +2642,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3594; GUI: resources/ui_layout/default/print.ui:30 (Perimeters & Shell > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_dense_algo": {
       "group": "shells_infill",
@@ -2331,10 +2684,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3603; GUI: resources/ui_layout/default/print.ui:225 (Infill > Reducing printing time)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_extrusion_change_odd_layers": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2346,10 +2704,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3647; GUI: resources/ui_layout/default/print.ui:482 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_extrusion_spacing": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2364,7 +2727,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3660; GUI: resources/ui_layout/default/print.ui:481 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_fan_speed": {
       "group": "cooling",
@@ -2382,7 +2750,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3676; GUI: resources/ui_layout/default/filament.ui:71 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.infill_filled_bottom": {
       "group": "shells_infill",
@@ -2397,7 +2766,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3691; GUI: resources/ui_layout/default/print.ui:215 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_filled_solid": {
       "group": "shells_infill",
@@ -2412,7 +2786,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3698; GUI: resources/ui_layout/default/print.ui:205 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.infill_filled_top": {
       "group": "shells_infill",
@@ -2427,7 +2806,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3705; GUI: resources/ui_layout/default/print.ui:210 (Infill > Infill)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.internal_bridge_acceleration": {
       "group": "speed",
@@ -2444,10 +2828,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3780; GUI: resources/ui_layout/default/print.ui:449 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.internal_bridge_expansion": {
-      "group": "walls",
+      "group": "shells_infill",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -2459,10 +2848,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3795; GUI: resources/ui_layout/default/print.ui:227 (Infill > Reducing printing time)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.internal_bridge_min_width": {
-      "group": "walls",
+      "group": "shells_infill",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2476,7 +2870,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3820; GUI: resources/ui_layout/default/print.ui:247 (Infill > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.ironing_acceleration": {
       "group": "speed",
@@ -2493,7 +2892,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3868; GUI: resources/ui_layout/default/print.ui:454 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.feature_gcode": {
       "group": "gcode",
@@ -2508,7 +2912,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3954; GUI: resources/ui_layout/default/printer_fff.ui:104 (Custom G-code > Between extrusion role change G-code)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.remaining_times_type": {
       "group": "machine",
@@ -2537,10 +2942,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:3983; GUI: resources/ui_layout/default/printer_fff.ui:28 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.lift_min": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "float",
       "unit": "mm",
@@ -2554,10 +2960,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4044; GUI: resources/ui_layout/default/printer_fff.ui:11 (General > Size and coordinates)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.max_gcode_per_second": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "float",
       "min": 0,
@@ -2570,10 +2977,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4195; GUI: resources/ui_layout/default/printer_fff.ui:39 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.max_speed_reduction": {
-      "group": "material",
+      "group": "cooling",
       "home": "material",
       "type": "percent",
       "unit": "%",
@@ -2588,7 +2996,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4252; GUI: resources/ui_layout/default/filament.ui:95 (Cooling > Very short layer time - began to decrease extrusion rate)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.fan_percentage": {
       "group": "machine",
@@ -2603,7 +3012,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4318; GUI: resources/ui_layout/default/printer_fff.ui:61 (General > Cooling fan)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.model_precision": {
       "group": "layers",
@@ -2620,7 +3030,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4376; GUI: resources/ui_layout/default/print.ui:149 (Slicing > Filtering)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.print_custom_variables": {
       "group": "special",
@@ -2635,7 +3048,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4433; GUI: resources/ui_layout/default/print.ui:627 (Notes > Custom variables)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.object_gcode": {
       "group": "gcode",
@@ -2651,7 +3065,10 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4452",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.only_one_perimeter_top_other_algo": {
       "group": "walls",
@@ -2667,7 +3084,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4478",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_acceleration": {
       "group": "speed",
@@ -2684,10 +3106,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4518; GUI: resources/ui_layout/default/print.ui:450 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_bridge_threshold": {
-      "group": "walls",
+      "group": "special",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -2701,10 +3128,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4532; GUI: resources/ui_layout/default/print.ui:183 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_bridge_upper_layers": {
-      "group": "walls",
+      "group": "special",
       "home": "process",
       "type": "int",
       "unit": "layers",
@@ -2718,7 +3150,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4544; GUI: resources/ui_layout/default/print.ui:184 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_dynamic_fan_speed": {
       "group": "cooling",
@@ -2733,10 +3170,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4556; GUI: resources/ui_layout/default/filament.ui:83 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.overhangs_dynamic_flow": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "polygon",
       "label": "Dynamic overhang flow",
@@ -2747,7 +3185,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4593; GUI: resources/ui_layout/default/print.ui:541 (Width & Flow > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_dynamic_speed": {
       "group": "speed",
@@ -2762,10 +3205,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4628; GUI: resources/ui_layout/default/print.ui:396 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_extrusion_spacing": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2780,7 +3228,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4667; GUI: resources/ui_layout/default/print.ui:500 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_fan_speed": {
       "group": "cooling",
@@ -2798,10 +3251,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4686; GUI: resources/ui_layout/default/filament.ui:82 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.overhangs_flow_ratio": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -2816,10 +3270,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4700; GUI: resources/ui_layout/default/print.ui:538 (Width & Flow > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_max_slope": {
-      "group": "walls",
+      "group": "special",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2833,7 +3292,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4718; GUI: resources/ui_layout/default/print.ui:182 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_speed": {
       "group": "speed",
@@ -2850,7 +3314,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4732; GUI: resources/ui_layout/default/print.ui:394 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_speed_enforce": {
       "group": "speed",
@@ -2867,10 +3336,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4745; GUI: resources/ui_layout/default/print.ui:397 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_type": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "enum",
       "unit": "%",
@@ -2897,10 +3371,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4759; GUI: resources/ui_layout/default/print.ui:539 (Width & Flow > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_width": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -2914,7 +3393,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4786; GUI: resources/ui_layout/default/print.ui:540 (Width & Flow > Flow)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.overhangs_width_speed": {
       "group": "speed",
@@ -2931,10 +3415,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4799; GUI: resources/ui_layout/default/print.ui:395 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.no_perimeter_unsupported_algo": {
-      "group": "support",
+      "group": "walls",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -2968,7 +3457,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4833; GUI: resources/ui_layout/default/print.ui:107 (Perimeters & Shell > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_bonding": {
       "group": "walls",
@@ -2986,10 +3480,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4885; GUI: resources/ui_layout/default/print.ui:129 (Perimeters & Shell > External perimeter first)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.perimeter_extrusion_spacing": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3004,10 +3501,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4931; GUI: resources/ui_layout/default/print.ui:471 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_extrusion_change_odd_layers": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3020,7 +3522,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4947; GUI: resources/ui_layout/default/print.ui:472 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_direction": {
       "group": "walls",
@@ -3053,7 +3560,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4960; GUI: resources/ui_layout/default/print.ui:53 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_fan_speed": {
       "group": "cooling",
@@ -3071,7 +3583,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4973; GUI: resources/ui_layout/default/filament.ui:68 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.perimeter_loop": {
       "group": "walls",
@@ -3086,7 +3599,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4988; GUI: resources/ui_layout/default/print.ui:109 (Perimeters & Shell > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_loop_seam": {
       "group": "walls",
@@ -3111,10 +3629,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:4997; GUI: resources/ui_layout/default/print.ui:110 (Perimeters & Shell > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_overlap": {
-      "group": "walls",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -3129,7 +3652,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5009; GUI: resources/ui_layout/default/print.ui:513 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_reverse": {
       "group": "walls",
@@ -3144,7 +3672,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5022; GUI: resources/ui_layout/default/print.ui:54 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeter_round_corners": {
       "group": "walls",
@@ -3159,7 +3692,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5030; GUI: resources/ui_layout/default/print.ui:112 (Perimeters & Shell > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.perimeters_hole": {
       "group": "walls",
@@ -3177,10 +3715,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5071; GUI: resources/ui_layout/default/print.ui:6 (Perimeters & Shell > Vertical shells)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.priming_position": {
-      "group": "special",
+      "group": "multi_material",
       "home": "process",
       "type": "point",
       "unit": "mm",
@@ -3196,7 +3739,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5103; GUI: resources/ui_layout/default/print.ui:580 (Multiple extruders > Wipe tower)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.printer_custom_variables": {
       "group": "machine",
@@ -3211,7 +3755,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5114; GUI: resources/ui_layout/default/printer_fff.ui:119 (Notes > Custom variables)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.fan_printer_min_speed": {
       "group": "machine",
@@ -3229,10 +3774,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5133; GUI: resources/ui_layout/default/printer_fff.ui:55 (General > Cooling fan)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.print_bed_temperature": {
-      "group": "special",
+      "group": "multi_material",
       "home": "process",
       "type": "int",
       "unit": "°C",
@@ -3246,10 +3792,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5144; GUI: resources/ui_layout/default/print.ui:585 (Multiple extruders > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.print_first_layer_bed_temperature": {
-      "group": "layers",
+      "group": "multi_material",
       "home": "process",
       "type": "int",
       "unit": "°C",
@@ -3263,7 +3810,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5155; GUI: resources/ui_layout/default/print.ui:584 (Multiple extruders > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.print_first_layer_temperature": {
       "group": "layers",
@@ -3281,7 +3829,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5167",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.print_retract_length": {
       "group": "extrusion",
@@ -3298,7 +3851,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5178",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.print_retract_lift": {
       "group": "extrusion",
@@ -3316,7 +3874,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5187",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.print_temperature": {
       "group": "special",
@@ -3334,7 +3897,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5197",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.print_settings_modified": {
       "group": "special",
@@ -3349,7 +3917,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5244 (label generated from the key)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.printer_settings_modified": {
       "group": "machine",
@@ -3364,7 +3933,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5254 (label generated from the key)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.raft_contact_distance_type": {
       "group": "support",
@@ -3393,7 +3963,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5273; GUI: resources/ui_layout/default/print.ui:319 (Support material > Raft)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.raft_layer_height": {
       "group": "support",
@@ -3410,7 +3983,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5329; GUI: resources/ui_layout/default/print.ui:311 (Support material > Raft)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.raft_interface_layer_height": {
       "group": "support",
@@ -3427,7 +4003,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5341; GUI: resources/ui_layout/default/print.ui:312 (Support material > Raft)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.region_gcode": {
       "group": "gcode",
@@ -3443,7 +4022,12 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5353",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.gcode_command_buffer": {
       "group": "gcode",
@@ -3460,10 +4044,11 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5393",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.gcode_min_length": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3477,10 +4062,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5401; GUI: resources/ui_layout/default/printer_fff.ui:35 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.gcode_min_resolution": {
-      "group": "gcode",
+      "group": "machine",
       "home": "printer_model",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3494,7 +4080,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5416; GUI: resources/ui_layout/default/printer_fff.ui:36 (General > Firmware)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.resolution_internal": {
       "group": "layers",
@@ -3511,10 +4098,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5428; GUI: resources/ui_layout/default/print.ui:148 (Slicing > Filtering)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.retract_lift_before_travel": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "float",
       "per_extruder": true,
@@ -3529,10 +4117,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5449; GUI: resources/ui_layout/default/extruder.ui:37 (Extruder > Retraction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.retract_lift_first_layer": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "per_extruder": true,
@@ -3545,10 +4137,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5583; GUI: resources/ui_layout/default/extruder.ui:25 (Extruder > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.retract_lift_top": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "string",
       "per_extruder": true,
@@ -3561,7 +4154,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5593; GUI: resources/ui_layout/default/extruder.ui:26 (Extruder > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.seam_angle_cost": {
       "group": "walls",
@@ -3579,7 +4173,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5673; GUI: resources/ui_layout/default/print.ui:79 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.seam_gap_external": {
       "group": "machine",
@@ -3597,7 +4194,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5697; GUI: resources/ui_layout/default/extruder.ui:60 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.seam_notch_all": {
       "group": "walls",
@@ -3614,7 +4212,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5710; GUI: resources/ui_layout/default/print.ui:87 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.seam_notch_angle": {
       "group": "walls",
@@ -3632,7 +4235,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5724; GUI: resources/ui_layout/default/print.ui:88 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.seam_notch_inner": {
       "group": "walls",
@@ -3650,7 +4258,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5736; GUI: resources/ui_layout/default/print.ui:85 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.seam_notch_outer": {
       "group": "walls",
@@ -3668,7 +4281,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5751; GUI: resources/ui_layout/default/print.ui:86 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.seam_travel_cost": {
       "group": "walls",
@@ -3686,7 +4304,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5766; GUI: resources/ui_layout/default/print.ui:80 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.seam_visibility": {
       "group": "walls",
@@ -3701,7 +4322,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5777; GUI: resources/ui_layout/default/print.ui:81 (Perimeters & Shell > Seam)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.skirt_brim": {
       "group": "adhesion",
@@ -3717,7 +4341,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5817; GUI: resources/ui_layout/default/print.ui:286 (Skirt & Brim > Skirt)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.skirt_distance_from_brim": {
       "group": "adhesion",
@@ -3732,10 +4357,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5835; GUI: resources/ui_layout/default/print.ui:282 (Skirt & Brim > Skirt)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.skirt_extrusion_width": {
-      "group": "adhesion",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3750,7 +4376,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5852; GUI: resources/ui_layout/default/print.ui:497 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.slice_merge_dent": {
       "group": "layers",
@@ -3767,7 +4394,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5890; GUI: resources/ui_layout/default/print.ui:154 (Slicing > Part merging)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.slice_merge_min_width": {
       "group": "layers",
@@ -3784,10 +4416,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5904; GUI: resources/ui_layout/default/print.ui:153 (Slicing > Part merging)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.small_perimeter_max_length": {
-      "group": "walls",
+      "group": "speed",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3801,7 +4438,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5971; GUI: resources/ui_layout/default/print.ui:422 (Speed > Modifiers)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_infill_below_layer_area": {
       "group": "shells_infill",
@@ -3818,7 +4460,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:5994; GUI: resources/ui_layout/default/print.ui:243 (Infill > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_infill_below_width": {
       "group": "shells_infill",
@@ -3835,10 +4482,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6003; GUI: resources/ui_layout/default/print.ui:246 (Infill > Advanced)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_infill_overlap": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -3853,10 +4505,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6014; GUI: resources/ui_layout/default/print.ui:518 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_infill_extrusion_change_odd_layers": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3868,10 +4525,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6064; GUI: resources/ui_layout/default/print.ui:487 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_infill_extrusion_spacing": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -3886,7 +4548,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6077; GUI: resources/ui_layout/default/print.ui:486 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.solid_infill_fan_speed": {
       "group": "cooling",
@@ -3904,7 +4571,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6093; GUI: resources/ui_layout/default/filament.ui:73 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.start_gcode_manual": {
       "group": "gcode",
@@ -3919,7 +4587,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6191; GUI: resources/ui_layout/default/printer_fff.ui:85 (Custom G-code > )",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.solid_over_perimeters": {
       "group": "shells_infill",
@@ -3936,10 +4605,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6277; GUI: resources/ui_layout/default/print.ui:21 (Perimeters & Shell > Horizontal shells)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.support_material_acceleration": {
-      "group": "support",
+      "group": "speed",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm/s² or %",
@@ -3953,10 +4627,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6303; GUI: resources/ui_layout/default/print.ui:444 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.support_material_interface_acceleration": {
-      "group": "support",
+      "group": "speed",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm/s² or %",
@@ -3970,7 +4645,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6325; GUI: resources/ui_layout/default/print.ui:445 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.support_material_angle_height": {
       "group": "support",
@@ -3988,7 +4664,10 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6363",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.support_material_contact_distance_type": {
       "group": "support",
@@ -4017,7 +4696,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6379; GUI: resources/ui_layout/default/print.ui:327 (Support material > Options for support material and raft)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.support_material_fan_speed": {
       "group": "cooling",
@@ -4035,7 +4717,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6471; GUI: resources/ui_layout/default/filament.ui:76 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.support_material_interface_angle": {
       "group": "support",
@@ -4053,7 +4736,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6486; GUI: resources/ui_layout/default/print.ui:350 (Support material > Options for support material interface)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.support_material_interface_angle_increment": {
       "group": "support",
@@ -4071,7 +4757,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6497; GUI: resources/ui_layout/default/print.ui:351 (Support material > Options for support material interface)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.support_material_interface_layer_height": {
       "group": "support",
@@ -4088,7 +4777,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6582; GUI: resources/ui_layout/default/print.ui:343 (Support material > Options for support material interface)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.support_material_bottom_interface_pattern": {
       "group": "support",
@@ -4129,7 +4821,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6629; GUI: resources/ui_layout/default/print.ui:346 (Support material > Options for support material interface)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.support_material_layer_height": {
       "group": "support",
@@ -4146,7 +4841,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6667; GUI: resources/ui_layout/default/print.ui:325 (Support material > Options for support material and raft)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.thin_perimeters": {
       "group": "walls",
@@ -4162,7 +4860,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6864; GUI: resources/ui_layout/default/print.ui:43 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.thin_perimeters_all": {
       "group": "walls",
@@ -4178,7 +4881,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6877; GUI: resources/ui_layout/default/print.ui:44 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.thin_walls_min_width": {
       "group": "walls",
@@ -4194,7 +4902,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6900; GUI: resources/ui_layout/default/print.ui:48 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.thin_walls_overlap": {
       "group": "walls",
@@ -4210,7 +4923,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6913; GUI: resources/ui_layout/default/print.ui:49 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.thin_walls_merge": {
       "group": "walls",
@@ -4225,7 +4943,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6924; GUI: resources/ui_layout/default/print.ui:50 (Perimeters & Shell > Quality)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.thin_walls_acceleration": {
       "group": "speed",
@@ -4242,7 +4963,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6933; GUI: resources/ui_layout/default/print.ui:453 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.thin_walls_speed": {
       "group": "speed",
@@ -4259,7 +4985,12 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6947; GUI: resources/ui_layout/default/print.ui:402 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.time_estimation_compensation": {
       "group": "special",
@@ -4277,7 +5008,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6983",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.time_start_gcode": {
       "group": "gcode",
@@ -4295,7 +5027,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:6992",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.time_toolchange": {
       "group": "multi_material",
@@ -4313,7 +5046,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7001",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.tool_name": {
       "group": "machine",
@@ -4329,7 +5063,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7024; GUI: resources/ui_layout/default/extruder.ui:4 (Extruder > Name and Size)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.top_fan_speed": {
       "group": "cooling",
@@ -4347,10 +5082,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7032; GUI: resources/ui_layout/default/filament.ui:74 (Cooling > Fan speed - default)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.top_infill_extrusion_spacing": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm or %",
@@ -4365,10 +5101,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7065; GUI: resources/ui_layout/default/print.ui:491 (Width & Flow > Extrusion width)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.top_solid_infill_overlap": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -4383,10 +5124,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7094; GUI: resources/ui_layout/default/print.ui:519 (Width & Flow > Overlap)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.travel_deceleration_use_target": {
-      "group": "extrusion",
+      "group": "speed",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -4398,10 +5144,15 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7159; GUI: resources/ui_layout/default/print.ui:457 (Speed > Acceleration control (advanced))",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "superslicer.wipe_extra_perimeter": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "float",
       "per_extruder": true,
@@ -4416,10 +5167,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7235; GUI: resources/ui_layout/default/extruder.ui:52 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_inside_start": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "per_extruder": true,
@@ -4432,10 +5187,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7246; GUI: resources/ui_layout/default/extruder.ui:48 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_inside_end": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "per_extruder": true,
@@ -4448,10 +5207,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7255; GUI: resources/ui_layout/default/extruder.ui:49 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_inside_depth": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "percent",
       "per_extruder": true,
@@ -4465,10 +5228,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7265; GUI: resources/ui_layout/default/extruder.ui:50 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_lift": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "float_or_percent",
       "per_extruder": true,
@@ -4481,10 +5248,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7277; GUI: resources/ui_layout/default/extruder.ui:54 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_lift_length": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "float_or_percent",
       "per_extruder": true,
@@ -4497,10 +5268,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7286; GUI: resources/ui_layout/default/extruder.ui:55 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_min": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "float_or_percent",
       "per_extruder": true,
@@ -4513,10 +5288,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7298; GUI: resources/ui_layout/default/extruder.ui:57 (Extruder > General wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_only_crossing": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "per_extruder": true,
@@ -4529,10 +5308,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7308; GUI: resources/ui_layout/default/extruder.ui:44 (Extruder > Retraction wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_return": {
-      "group": "extrusion",
+      "group": "machine",
       "home": "printer_model",
       "type": "bool",
       "per_extruder": true,
@@ -4545,10 +5328,14 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7316; GUI: resources/ui_layout/default/extruder.ui:45 (Extruder > Retraction wipe)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [],
+      "overridable_in": [
+        "material"
+      ]
     },
     "superslicer.wipe_tower_wipe_starting_speed": {
-      "group": "multi_material",
+      "group": "speed",
       "home": "process",
       "type": "float_or_percent",
       "unit": "mm/s or %",
@@ -4561,7 +5348,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7352; GUI: resources/ui_layout/default/print.ui:406 (Speed > Speed for print moves)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.wipe_tower_extrusion_width": {
       "group": "multi_material",
@@ -4577,7 +5365,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7362; GUI: resources/ui_layout/default/print.ui:574 (Multiple extruders > Wipe tower)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.wipe_advanced": {
       "group": "extrusion",
@@ -4593,7 +5382,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7391",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.wipe_advanced_nozzle_melted_volume": {
       "group": "extrusion",
@@ -4610,7 +5400,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7397",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_advanced_pigment": {
       "group": "multi_material",
@@ -4627,7 +5418,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7404; GUI: resources/ui_layout/default/filament.ui:128 (Multimaterial > Toolchange parameters with single extruder MM printers)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.wipe_advanced_multiplier": {
       "group": "extrusion",
@@ -4644,7 +5436,8 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7413",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.wipe_advanced_algo": {
       "group": "extrusion",
@@ -4674,10 +5467,11 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7422",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.hole_size_compensation": {
-      "group": "walls",
+      "group": "special",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -4690,10 +5484,13 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7575; GUI: resources/ui_layout/default/print.ui:173 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.hole_size_threshold": {
-      "group": "walls",
+      "group": "special",
       "home": "process",
       "type": "float",
       "unit": "mm²",
@@ -4706,7 +5503,10 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7587; GUI: resources/ui_layout/default/print.ui:174 (Slicing > Modifying slices)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": [
+        "object"
+      ]
     },
     "superslicer.z_step": {
       "group": "machine",
@@ -4723,7 +5523,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7640; GUI: resources/ui_layout/default/printer_fff.ui:10 (General > Size and coordinates)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_retract_lift_before_travel": {
       "group": "material",
@@ -4740,7 +5541,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:15 (Filament Overrides > Retraction)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_seam_gap": {
       "group": "material",
@@ -4757,10 +5559,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:32 (Filament Overrides > Others)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_extra_perimeter": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "float",
       "unit": "mm",
@@ -4774,10 +5577,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:23 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_inside_depth": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "percent",
       "unit": "%",
@@ -4790,10 +5594,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:24 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_inside_end": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "bool",
       "default": true,
@@ -4805,10 +5610,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:25 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_inside_start": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "bool",
       "default": false,
@@ -4820,10 +5626,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:26 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_lift": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "float_or_percent",
       "default": 0,
@@ -4835,10 +5642,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:30 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_lift_length": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "float_or_percent",
       "default": "50%",
@@ -4851,10 +5659,11 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_min": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "float_or_percent",
       "default": "150%",
@@ -4867,10 +5676,11 @@
       },
       "hidden": true,
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_only_crossing": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "bool",
       "default": true,
@@ -4882,10 +5692,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:27 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_return": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "bool",
       "default": false,
@@ -4897,10 +5708,11 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:28 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     },
     "superslicer.filament_wipe_speed": {
-      "group": "multi_material",
+      "group": "material",
       "home": "material",
       "type": "float",
       "default": 0,
@@ -4912,7 +5724,8 @@
         }
       },
       "provenance": "Ported from SuperSlicer@1f3d287:src/libslic3r/PrintConfig.cpp:7754; GUI: resources/ui_layout/default/filament_override.ui:29 (Filament Overrides > Travel lift)",
-      "native_only": "superslicer"
+      "native_only": "superslicer",
+      "override_scope": []
     }
   }
 }

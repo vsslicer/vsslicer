@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // One option definition as a catalogue entry: its type, group, home and fields (PRF-14). Shared by the Orca, Bambu,
 // Prusa and SuperSlicer generators; a module of its own so generate.ts and prusa.ts do not import each other.
-import type { CatalogueEntry, EnumOption, Group, HomeEntity, SettingType } from '../../src/index.ts';
+import type { CatalogueEntry, CatalogueFile, EnumOption, Group, HomeEntity, SettingType } from '../../src/index.ts';
 import type { Def, Value } from './cpp.ts';
 
 const PLATE_KEYS = new Set([
@@ -72,6 +72,9 @@ const placeOf = (key: string, lists: { print: Set<string>; filament: Set<string>
           : pick(key, PRINTER_GROUPS, 'machine');
   return { group, home, listed };
 };
+
+/** A data file as committed: two-space JSON and a final newline. */
+export const render = (file: CatalogueFile): string => `${JSON.stringify(file, null, 2)}\n`;
 
 const TYPES: { [co: string]: SettingType } = {
   Bool: 'bool',

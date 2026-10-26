@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-// Generates src/domain/catalogue/data/orca.json from OrcaSlicer's option definitions (PRF-14).
+// Generates src/domain/catalogue/data/orca.json from OrcaSlicer's option definitions (PRF-14), and with it every other
+// catalogue data file and the group report (PRF-15 to PRF-18).
 // Reads PrintConfig.cpp and Preset.cpp as text through the linear tokenizer in cpp.ts; nothing upstream is built or run.
 // Run from the module: node tools/catalogue/generate.ts (sources: the pinned checkouts in .reference/repos).
 import { writeFileSync } from 'node:fs';
@@ -7,8 +8,19 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { CatalogueEntry, CatalogueFile } from '../../src/index.ts';
 import { defines, enumMaps, extractDefs, readSource, stringList, substitute, tokenize } from './cpp.ts';
-import { toEntry } from './entry.ts';
-import { generatePrusa, headCommit, readPinned, REPOS } from './prusa.ts';
+import { render, toEntry } from './entry.ts';
+import { CURA_COMMIT, CURA_OUTPUT, FDMEXTRUDER, FDMPRINTER, generateCura, renderCura, XML_PROFILE } from './cura.ts';
+import {
+  assignTabs,
+  type ConfigClasses,
+  configClass,
+  groupReport,
+  overrideScope,
+  retractionInMachine,
+  TAB_FUNCTIONS,
+  tabPlaces,
+} from './groups.ts';
+import { generatePrusa, headCommit, PRUSA_COMMIT, readPinned, REPOS, SUPERSLICER_COMMIT } from './prusa.ts';
 
 export const ORCA_COMMIT = '09aa0114';
 export const PRINT_CONFIG = 'src/libslic3r/PrintConfig.cpp';
@@ -143,12 +155,35 @@ export const SUPERSLICER_OUTPUT = join(DATA, 'superslicer.json');
 export const BAMBU_SOURCE = join(REPOS, 'BambuStudio');
 export const DEFAULT_SOURCE = join(REPOS, 'OrcaSlicer');
 
-export const render = (file: CatalogueFile): string => `${JSON.stringify(file, null, 2)}\n`;
+export const GROUPS_OUTPUT = join(DATA, 'groups.json');
+export const TAB = 'src/slic3r/GUI/Tab.cpp';
+export const PUBLISH_SETTINGS = 'src/libslic3r/PublishSettings.cpp';
+export const PRINT_CONFIG_HPP = 'src/libslic3r/PrintConfig.hpp';
+
+export { render };
+
+const classesOf = (hpp: string): ConfigClasses => {
+  const t = tokenize(hpp);
+  return { object: configClass(t, 'PrintObjectConfig'), region: configClass(t, 'PrintRegionConfig') };
+};
+
+/** Pages of an Orca-layout Tab.cpp (Orca, Bambu), and the keys of its plate tab. */
+const pagesOf = (tab: string, known: (key: string) => boolean, publish?: string) => {
+  const t = tokenize(tab);
+  const calls: Parameters<typeof tabPlaces>[3] = { build_kinematics_page: { tokens: t, cls: 'TabPrinter' } };
+  if (publish) {
+    const p = tokenize(publish);
+    calls.publishable_printer_retraction_options = { tokens: p };
+    calls.publishable_printer_z_hop_options = { tokens: p };
+  }
+  const plate = tabPlaces(t, [['TabPrintPlate', 'build']], known);
+  return { places: tabPlaces(t, TAB_FUNCTIONS, known, calls), plate: new Set(plate.keys()) };
+};
 
 /**
  * Every generated data file, by output path, from the pinned checkouts under .reference only. A checkout at another
- * commit is refused; so is a source file over 16 MiB. This is the only code that writes orca.json: it holds the
- * Bambu, Prusa 2.9, Prusa 3.0 and SuperSlicer names of Orca's keys.
+ * commit is refused; so is a source file over 16 MiB. This is the only code that writes the data: orca.json holds the
+ * Bambu, Prusa 2.9, Prusa 3.0, SuperSlicer and Cura names of Orca's keys, and groups.json reports the group counts.
  */
 export const outputs = (repos = REPOS): Map<string, string> => {
   const pinned = (name: string, commit: string) => {
@@ -159,14 +194,41 @@ export const outputs = (repos = REPOS): Map<string, string> => {
   };
   const read = pinned('OrcaSlicer', ORCA_COMMIT);
   const bambuRead = pinned('BambuStudio', BAMBU_COMMIT);
+  const curaRead = pinned('Cura', CURA_COMMIT);
   const orca = generate(read(PRINT_CONFIG), read(PRESET), read(CONSTANTS));
   const { orca: withBambu, bambu } = generateBambu(orca, bambuRead(PRINT_CONFIG), bambuRead(PRESET));
   const { orca: file, prusa, superslicer } = generatePrusa(withBambu, readPinned(repos));
+  const { names, ...cura } = generateCura(
+    curaRead(FDMPRINTER),
+    curaRead(FDMEXTRUDER),
+    curaRead(XML_PROFILE),
+    file.entries,
+  );
+  for (const [key, name] of Object.entries(names)) file.entries[key]!.native.cura = name;
+
+  // PRF-18: groups, homes, hidden flags and override scopes from each slicer's own pages.
+  const o = pagesOf(read(TAB), (k) => k in file.entries, read(PUBLISH_SETTINGS));
+  assignTabs(file, o.places, classesOf(read(PRINT_CONFIG_HPP)), o.plate);
+  const b = pagesOf(bambuRead(TAB), (k) => `bambu.${k}` in bambu.entries);
+  assignTabs(bambu, b.places, classesOf(bambuRead(PRINT_CONFIG_HPP)), b.plate, (k) => k.slice('bambu.'.length));
+  const prusaClasses = classesOf(pinned('PrusaSlicer-2.9', PRUSA_COMMIT)(PRINT_CONFIG_HPP));
+  const ssClasses = classesOf(pinned('SuperSlicer', SUPERSLICER_COMMIT)(PRINT_CONFIG_HPP));
+  // shortcut: keys only PrusaSlicer 3.0 has are global, as its object model was not analysed; read the 3.0
+  // Object/Volume locations when a 3.0 importer needs per-object values.
+  for (const [k, e] of Object.entries(prusa.entries)) e.override_scope = overrideScope(k.slice(6), prusaClasses);
+  for (const [k, e] of Object.entries(superslicer.entries)) e.override_scope = overrideScope(k.slice(12), ssClasses);
+  const all = { ...file.entries, ...bambu.entries, ...prusa.entries, ...superslicer.entries };
+  // `prusa.travel_max_lift` has the filament override `prusa.filament_travel_max_lift`.
+  const twin = (key: string) => all[key.replace(/^([a-z]+\.)?/, '$1filament_')];
+  for (const f of [file, bambu, prusa, superslicer]) retractionInMachine(f, twin);
+
   return new Map([
     [OUTPUT, render(file)],
     [BAMBU_OUTPUT, render(bambu)],
     [PRUSA_OUTPUT, render(prusa)],
     [SUPERSLICER_OUTPUT, render(superslicer)],
+    [CURA_OUTPUT, renderCura(cura)],
+    [GROUPS_OUTPUT, `${JSON.stringify(groupReport([file, bambu, prusa, superslicer, cura]), null, 2)}\n`],
   ]);
 };
 
@@ -174,5 +236,5 @@ export const outputs = (repos = REPOS): Map<string, string> => {
 if (process.argv[1] === fileURLToPath(import.meta.url))
   for (const [path, text] of outputs()) {
     writeFileSync(path, text);
-    console.log(`${Object.keys((JSON.parse(text) as CatalogueFile).entries).length} entries -> ${path}`);
+    console.log(`${Object.keys((JSON.parse(text) as CatalogueFile).entries ?? {}).length} entries -> ${path}`);
   }

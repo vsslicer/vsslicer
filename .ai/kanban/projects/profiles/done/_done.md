@@ -14,3 +14,4 @@
 12. [PRF-16: Extend the catalogue with PrusaSlicer 2.9, 3.0 and SuperSlicer keys](016-extend-the-catalogue-with-prusaslicer-2-9-3-0-and-superslice.md)
 13. [PRF-104: Model and validate bundle_structure.json](104-model-and-validate-bundle-structure-json.md)
 14. [PRF-41: Create the `profiles-data-orca` module with the Orca and Bambu JSON trees](041-create-the-vsslicer-profiles-data-orca-package-with-the-orca.md)
+15. [PRF-18: Assign groups, home entities, hidden keys and override scopes](018-assign-groups-home-entities-hidden-keys-and-override-scopes.md)

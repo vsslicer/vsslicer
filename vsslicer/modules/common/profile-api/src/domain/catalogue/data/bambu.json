@@ -13,10 +13,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1086 (label generated from the key)",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.z_direction_outwall_speed_continuous": {
-      "group": "speed",
+      "group": "walls",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -28,10 +30,11 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1240",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.avoid_crossing_wall_includes_support": {
-      "group": "support",
+      "group": "walls",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -43,7 +46,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1259",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.pre_start_fan_time": {
       "group": "cooling",
@@ -61,7 +65,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1480",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.overhang_threshold_participating_cooling": {
       "group": "cooling",
@@ -102,10 +107,11 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1513",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.top_one_wall_type": {
-      "group": "shells_infill",
+      "group": "walls",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -131,10 +137,13 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1596",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.top_area_threshold": {
-      "group": "shells_infill",
+      "group": "walls",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -148,9 +157,11 @@
           "key": "top_area_threshold"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1609",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.overhang_totally_speed": {
       "group": "speed",
@@ -168,7 +179,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1678",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.enable_height_slowdown": {
       "group": "speed",
@@ -184,7 +200,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1690",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.slowdown_start_height": {
       "group": "speed",
@@ -202,7 +223,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1698",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.slowdown_start_speed": {
       "group": "speed",
@@ -219,7 +245,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1708",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.slowdown_start_acc": {
       "group": "speed",
@@ -236,7 +267,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1717",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.slowdown_end_height": {
       "group": "speed",
@@ -254,7 +290,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1726",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.slowdown_end_speed": {
       "group": "speed",
@@ -271,7 +312,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1737",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.slowdown_end_acc": {
       "group": "speed",
@@ -288,7 +334,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1746",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.no_slow_down_for_cooling_on_outwalls": {
       "group": "cooling",
@@ -303,7 +354,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1888",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.cooling_slowdown_logic": {
       "group": "cooling",
@@ -327,9 +379,9 @@
           "key": "cooling_slowdown_logic"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1899",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.cooling_perimeter_transition_distance": {
       "group": "cooling",
@@ -346,9 +398,9 @@
           "key": "cooling_perimeter_transition_distance"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1914",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.travel_short_distance_acceleration": {
       "group": "speed",
@@ -365,9 +417,9 @@
           "key": "travel_short_distance_acceleration"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:1946",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.first_x_layer_part_fan_speed": {
       "group": "cooling",
@@ -385,7 +437,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2031",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.vertical_shell_speed": {
       "group": "speed",
@@ -403,7 +456,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2116",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.detect_floating_vertical_shell": {
       "group": "shells_infill",
@@ -418,7 +476,10 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2128",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.internal_bridge_support_thickness": {
       "group": "support",
@@ -436,10 +497,14 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2134",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.monotonic_travel_into_wall": {
-      "group": "walls",
+      "group": "shells_infill",
       "home": "process",
       "type": "percent",
       "unit": "%",
@@ -453,12 +518,16 @@
           "key": "monotonic_travel_into_wall"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2184",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.sub_top_surface_pattern": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -550,7 +619,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2226",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.process_notes": {
       "group": "special",
@@ -565,7 +639,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2428",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.ams_filament_load_time_ams": {
       "group": "machine",
@@ -582,7 +657,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2639",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.ams_filament_load_time_ams_lite": {
       "group": "machine",
@@ -599,7 +676,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2647",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.ams_filament_load_time_n3f_s": {
       "group": "machine",
@@ -616,7 +695,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2655",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.ams_filament_unload_time_ams": {
       "group": "machine",
@@ -633,7 +714,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2663",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.ams_filament_unload_time_ams_lite": {
       "group": "machine",
@@ -650,7 +733,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2671",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.ams_filament_unload_time_n3f_s": {
       "group": "machine",
@@ -667,7 +752,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2679",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.default_ams_type": {
       "group": "machine",
@@ -682,7 +769,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2687",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.filament_velocity_adaptation_factor": {
       "group": "material",
@@ -698,7 +787,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2782",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_metal_stickiness": {
       "group": "material",
@@ -731,7 +821,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2798",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_scarf_seam_type": {
       "group": "material",
@@ -760,7 +851,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2873",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_scarf_height": {
       "group": "material",
@@ -777,7 +869,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2886",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_scarf_gap": {
       "group": "material",
@@ -793,7 +886,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2895",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_scarf_length": {
       "group": "material",
@@ -810,7 +904,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:2904",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.locked_skin_infill_pattern": {
       "group": "shells_infill",
@@ -895,7 +990,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3240",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.locked_skeleton_infill_pattern": {
       "group": "shells_infill",
@@ -980,10 +1080,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3281",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.initial_layer_infill_line_width": {
-      "group": "shells_infill",
+      "group": "extrusion",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -997,7 +1102,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3448",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.print_in_clockwise": {
       "group": "machine",
@@ -1011,9 +1117,9 @@
           "key": "print_in_clockwise"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3683",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.enable_order_independent_overlap_carving": {
       "group": "special",
@@ -1027,9 +1133,9 @@
           "key": "enable_order_independent_overlap_carving"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.infill_rotate_step": {
       "group": "shells_infill",
@@ -1047,7 +1153,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3858",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_infill": {
       "group": "shells_infill",
@@ -1062,10 +1173,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3930",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_stagger": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -1087,10 +1203,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3939",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_link_keep_layers": {
-      "group": "layers",
+      "group": "shells_infill",
       "home": "process",
       "type": "int",
       "unit": "layers",
@@ -1105,10 +1226,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3952",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_link_flip_layers": {
-      "group": "layers",
+      "group": "shells_infill",
       "home": "process",
       "type": "int",
       "unit": "layers",
@@ -1123,10 +1249,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3964",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_pole": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -1152,10 +1283,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3976",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_ray_count": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "int",
       "min": 0,
@@ -1169,10 +1305,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:3991",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.conformal_hub_radius": {
-      "group": "special",
+      "group": "shells_infill",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -1187,7 +1328,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4001",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.sparse_infill_lattice_angle_1": {
       "group": "shells_infill",
@@ -1205,7 +1351,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4020",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.sparse_infill_lattice_angle_2": {
       "group": "shells_infill",
@@ -1223,7 +1374,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4030",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.silent_mode": {
       "group": "machine",
@@ -1239,10 +1395,11 @@
       },
       "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4336",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.reduce_infill_retraction_mode": {
-      "group": "shells_infill",
+      "group": "gcode",
       "home": "process",
       "type": "enum",
       "enum": [
@@ -1268,10 +1425,11 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4672",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.smooth_speed_discontinuity_area": {
-      "group": "speed",
+      "group": "walls",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -1283,10 +1441,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4712",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.smooth_coefficient": {
-      "group": "special",
+      "group": "walls",
       "home": "process",
       "type": "float",
       "min": 0,
@@ -1299,10 +1462,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4719",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.embedding_wall_into_infill": {
-      "group": "shells_infill",
+      "group": "walls",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -1314,7 +1482,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4767",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.periodic_modifier": {
       "group": "special",
@@ -1329,7 +1502,13 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4781",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.periodic_modifier_skip_layers": {
       "group": "layers",
@@ -1347,7 +1526,13 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4787",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.periodic_modifier_apply_layers": {
       "group": "layers",
@@ -1365,7 +1550,13 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4797",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.modifier_ignore_infill": {
       "group": "shells_infill",
@@ -1380,7 +1571,13 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:4807",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.extruder_nozzle_stats_new": {
       "group": "machine",
@@ -1396,7 +1593,8 @@
       },
       "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5100 (label generated from the key)",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.seam_placement_away_from_overhangs": {
       "group": "walls",
@@ -1411,7 +1609,10 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5257",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.override_filament_scarf_seam_setting": {
       "group": "walls",
@@ -1426,7 +1627,12 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5312",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.seam_slope_gap": {
       "group": "walls",
@@ -1443,10 +1649,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5343",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.role_base_wipe_speed": {
-      "group": "speed",
+      "group": "walls",
       "home": "process",
       "type": "bool",
       "default": true,
@@ -1458,7 +1669,10 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5371",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.skirt_per_object": {
       "group": "adhesion",
@@ -1474,7 +1688,8 @@
       },
       "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5387",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.enable_support_ironing": {
       "group": "support",
@@ -1488,9 +1703,11 @@
           "key": "enable_support_ironing"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5802",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.support_ironing_inset": {
       "group": "support",
@@ -1507,9 +1724,11 @@
           "key": "support_ironing_inset"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5844",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.support_ironing_speed": {
       "group": "support",
@@ -1525,9 +1744,11 @@
           "key": "support_ironing_speed"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5854",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.support_ironing_direction": {
       "group": "support",
@@ -1544,12 +1765,14 @@
           "key": "support_ironing_direction"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5863",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.top_z_overrides_xy_distance": {
-      "group": "shells_infill",
+      "group": "support",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -1561,7 +1784,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:5988",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.impact_strength_z": {
       "group": "material",
@@ -1574,9 +1798,9 @@
           "key": "impact_strength_z"
         }
       },
-      "hidden": true,
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6111",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.infill_instead_top_bottom_surfaces": {
       "group": "shells_infill",
@@ -1591,10 +1815,15 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6187",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object",
+        "part",
+        "height_range"
+      ]
     },
     "bambu.enable_circle_compensation": {
-      "group": "special",
+      "group": "layers",
       "home": "process",
       "type": "bool",
       "default": false,
@@ -1606,10 +1835,13 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6264",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.circle_compensation_manual_offset": {
-      "group": "special",
+      "group": "layers",
       "home": "process",
       "type": "float",
       "unit": "mm",
@@ -1622,7 +1854,10 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6272",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.apply_scarf_seam_on_circles": {
       "group": "walls",
@@ -1637,7 +1872,11 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6279",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": [
+        "object"
+      ]
     },
     "bambu.circle_compensation_speed": {
       "group": "material",
@@ -1654,7 +1893,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6285",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.counter_coef_1": {
       "group": "material",
@@ -1669,7 +1910,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6292",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.counter_coef_2": {
       "group": "material",
@@ -1684,7 +1927,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6297",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.counter_coef_3": {
       "group": "material",
@@ -1700,7 +1945,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6302",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.hole_coef_1": {
       "group": "material",
@@ -1715,7 +1962,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6308",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.hole_coef_2": {
       "group": "material",
@@ -1730,7 +1979,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6313",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.hole_coef_3": {
       "group": "material",
@@ -1746,7 +1997,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6318",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.counter_limit_min": {
       "group": "material",
@@ -1762,7 +2015,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6324",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.counter_limit_max": {
       "group": "material",
@@ -1778,7 +2033,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6330",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.hole_limit_min": {
       "group": "material",
@@ -1794,7 +2051,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6336",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.hole_limit_max": {
       "group": "material",
@@ -1810,7 +2069,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6342",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.diameter_limit": {
       "group": "material",
@@ -1826,7 +2087,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6348",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.prime_tower_max_speed": {
       "group": "multi_material",
@@ -1843,7 +2106,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6426",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.prime_tower_lift_speed": {
       "group": "multi_material",
@@ -1857,7 +2121,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6434 (label generated from the key)",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.prime_tower_lift_height": {
       "group": "multi_material",
@@ -1871,7 +2137,9 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6437 (label generated from the key)",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "hidden": true,
+      "override_scope": []
     },
     "bambu.prime_tower_rib_wall": {
       "group": "multi_material",
@@ -1886,7 +2154,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6479",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_enable_overhang_speed": {
       "group": "material",
@@ -1902,7 +2171,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_bridge_speed": {
       "group": "material",
@@ -1920,7 +2190,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_overhang_1_4_speed": {
       "group": "material",
@@ -1937,7 +2208,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_overhang_2_4_speed": {
       "group": "material",
@@ -1954,7 +2226,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_overhang_3_4_speed": {
       "group": "material",
@@ -1971,7 +2244,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_overhang_4_4_speed": {
       "group": "material",
@@ -1988,7 +2262,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.filament_overhang_totally_speed": {
       "group": "material",
@@ -2006,7 +2281,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6696",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     },
     "bambu.override_process_overhang_speed": {
       "group": "material",
@@ -2022,7 +2298,8 @@
         }
       },
       "provenance": "Ported from BambuStudio@79df7ae:src/libslic3r/PrintConfig.cpp:6724",
-      "native_only": "bambu"
+      "native_only": "bambu",
+      "override_scope": []
     }
   }
 }

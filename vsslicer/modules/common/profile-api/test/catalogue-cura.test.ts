@@ -27,9 +27,13 @@ import {
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 ajv.addSchema(defsSchema).addSchema(catalogueEntrySchema);
 const prefixed = Object.entries(curaCatalogue.entries);
+// The Cura names of Orca keys live in orca.json as native.cura (PRF-18).
+const names = Object.fromEntries(
+  Object.entries(orcaCatalogue.entries).flatMap(([k, e]) => (e.native.cura ? [[k, e.native.cura]] : [])),
+);
 const curaKeys = [
   ...prefixed.map(([k]) => k.slice(5)),
-  ...Object.values(curaCatalogue.names).flatMap((n) =>
+  ...Object.values(names).flatMap((n) =>
     'key' in n ? [n.key] : Array.isArray(n.conversion.keys) ? n.conversion.keys : Object.values(n.conversion.keys),
   ),
 ];
@@ -43,22 +47,31 @@ describe('the generated Cura catalogue', () => {
       expect(e, key).toMatchObject({ native_only: 'cura', native: { cura: { key: key.slice(5) } } });
   });
 
-  test('each Cura name targets an Orca entry and is a valid native.cura there', () => {
+  test('each Cura name sits on a valid Orca entry; cura.json holds no names of its own', () => {
     const valid = ajv.compile(catalogueEntrySchema);
-    for (const [orca, name] of Object.entries(curaCatalogue.names)) {
+    for (const orca of Object.keys(names)) {
       const target = orcaCatalogue.entries[orca];
-      expect(target, orca).toBeDefined();
-      const merged = { ...target, native: { ...target!.native, cura: name } };
-      expect(valid(merged), `${orca}: ${JSON.stringify(valid.errors?.slice(0, 3))}`).toBe(true);
+      expect(valid(target), `${orca}: ${JSON.stringify(valid.errors?.slice(0, 3))}`).toBe(true);
     }
+    expect(curaCatalogue).not.toHaveProperty('names');
+  });
+
+  test('marks an Orca key Cura holds per extruder, but Orca does not, lossy', () => {
+    const per = new Set(curaCatalogue.per_extruder);
+    let n = 0;
+    for (const [orca, name] of Object.entries(names)) {
+      const keys = 'key' in name ? [name.key] : Object.values(name.conversion.keys);
+      const lost = keys.some((k) => per.has(k)) && !orcaCatalogue.entries[orca]!.per_extruder;
+      if (lost) n++;
+      expect(name.lossy?.includes('one value per extruder') ?? false, orca).toBe(lost);
+    }
+    expect(n).toBe(65);
   });
 
   test('assigns each of the 762 Cura keys once (771 definitions, 9 in both files)', () => {
     expect(new Set(curaKeys).size).toBe(curaKeys.length);
     expect(curaKeys).toHaveLength(762);
-    expect(Object.keys(curaCatalogue.names)).toHaveLength(
-      Object.keys(CURA_NAMES).length + Object.keys(CURA_SPLITS).length,
-    );
+    expect(Object.keys(names)).toHaveLength(Object.keys(CURA_NAMES).length + Object.keys(CURA_SPLITS).length);
   });
 
   test('flags extruder-scoped keys per extruder', () => {
@@ -177,6 +190,7 @@ describe('the Cura generator bounds (rule 25)', () => {
       def({}),
       '__material_settings_setting_map = {\n}\n__material_properties_setting_map = {\n "diameter": "material_diameter"\n}\n' +
         '__material_metadata_setting_map = {\n "GUID": "material_guid",\n "material": "material_type",\n "brand": "material_brand"\n}\n',
+      orcaCatalogue.entries,
     );
     expect(out.entries['cura.evil']).toMatchObject({ default: { expr: value } });
     expect(out.entries['cura.evil']).not.toHaveProperty('min');
@@ -189,7 +203,16 @@ describe.skipIf(!sources)('the Cura generator, on Cura@5bea2f8', () => {
   const read = (path: string) => readFileSync(join(CURA_SOURCE, path), 'utf8');
 
   test('is deterministic and matches the committed data', () => {
-    const run = () => renderCura(generateCura(read(FDMPRINTER), read(FDMEXTRUDER), read(XML_PROFILE)));
+    const run = () => {
+      // cura.json is the file without `names`, which generate.ts merges into orca.json.
+      const { notice, entries, per_extruder, material } = generateCura(
+        read(FDMPRINTER),
+        read(FDMEXTRUDER),
+        read(XML_PROFILE),
+        orcaCatalogue.entries,
+      );
+      return renderCura({ notice, entries, per_extruder, material });
+    };
     const first = run();
     expect(run()).toBe(first);
     expect(first).toBe(readFileSync(CURA_OUTPUT, 'utf8'));
