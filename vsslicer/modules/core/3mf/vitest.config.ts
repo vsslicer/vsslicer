@@ -2,4 +2,4 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
 import base from '@vsslicer/tooling/vitest';
 
-export default mergeConfig(base, defineConfig({}));
+export default mergeConfig(base, defineConfig({ test: { testTimeout: 30_000 } })); // hang guard for every test, never a speed assertion (rule 26)

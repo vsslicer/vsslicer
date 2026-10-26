@@ -345,7 +345,4 @@
 343. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
 344. [VWR-29: Test untouched open and save for every dialect](029-test-untouched-open-and-save-for-every-dialect.md)
 345. [VWR-399: Check the Bambu objects golden against Bambu Studio's GUI](399-check-the-bambu-objects-golden-against-bambu-studio-s-gui.md)
-346. [VWR-402: Test that the public readProject reaches the PrusaSlicer 2.x reader](402-test-that-the-public-readproject-reaches-the-prusaslicer-2-x.md)
-347. [VWR-403: Test the p:path refusal on a PrusaSlicer 2.x build item](403-test-the-p-path-refusal-on-a-prusaslicer-2-x-build-item.md)
-348. [VWR-404: Give the slow 3mf opc test its own hang-guard timeout](404-give-the-slow-3mf-opc-test-its-own-hang-guard-timeout.md)
-349. [VWR-405: Cap the Bambu reader's notices](405-cap-the-bambu-reader-s-notices.md)
+346. [VWR-405: Cap the Bambu reader's notices](405-cap-the-bambu-reader-s-notices.md)
