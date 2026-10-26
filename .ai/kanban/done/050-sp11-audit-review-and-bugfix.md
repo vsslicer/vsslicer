@@ -27,3 +27,5 @@ End-of-sprint audit for SP11, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 ## Progress
 
 Not started.
+
+- sp11-auditor wrote `.ai/audits/SP11-audit.md` (15 findings: 4 must, 7 should, 4 nice). sp11-coordinator made the SP12 bug cards: VWR-400, PRF-212, PRF-213, PRF-214 (P0); VWR-401, PRF-215, VWR-402, VWR-403, VWR-404, PRF-216, SLC-282, GCP-124 (existing) (P1); VWR-405, GCP-125, PRF-217, VWR-406 (P2).

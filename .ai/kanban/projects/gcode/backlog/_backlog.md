@@ -28,3 +28,4 @@
 26. [GCP-122: Count move and state-change reads in the planner's linear-time test](122-count-move-and-state-change-reads-in-the-planner-s-linear-ti.md)
 27. [GCP-123: Capture a real Moonraker file_position feed for the follow tests](123-capture-a-real-moonraker-file-position-feed-for-the-follow-t.md)
 28. [GCP-124: Fix the timeline integration test that fails on both VS Code versions](124-fix-the-timeline-integration-test-that-fails-on-both-vs-code.md)
+29. [GCP-125: Flag a new required field in caller-built types in the gcode-preview API gate](125-flag-a-new-required-field-in-caller-built-types-in-the-gcode.md)

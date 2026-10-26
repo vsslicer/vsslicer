@@ -6,6 +6,7 @@ priority: P1
 effort: S
 model: sonnet
 sprint: "VSS:SP12"
+docs: [.ai/audits/SP11-audit.md]
 created: 2026-10-26
 ---
 
