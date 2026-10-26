@@ -299,6 +299,11 @@ describe('readPrusa2 rules', () => {
       /production paths/,
     ],
     [
+      'a production path on a build item',
+      `<resources>${twoTets}</resources><build><item objectid="1" p:path="/3D/o.model"/></build>`,
+      /production paths/,
+    ],
+    [
       'an object without mesh or components',
       `<resources><object id="1" type="model"/></resources>${items}`,
       /neither a mesh nor components/,
