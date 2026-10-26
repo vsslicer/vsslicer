@@ -168,6 +168,9 @@ void main() {
     : normalize(cross(line_dir, UP));
   vec3 line_up_dir = normalize(cross(line_right_dir, line_dir));
   vec2 wh = moveWidthHeight(b);
+  bool sized = wh.x > 0.0 && wh.y > 0.0 && (rtf.z & 1u) == 0u; // non-travel with a cross-section
+  float rawWidth = sized ? wh.x : -1.0;
+  float flow = sized ? max(speed(b, line_len), -1.0) * wh.x * wh.y : -1.0; // mm3/s, negative when unknown
   if (!(wh.x > 0.0 && wh.y > 0.0)) wh = vec2(TRAVEL_SIZE);
   int vertex_id = gl_VertexID;
   vec3 endpoint_pos = vertex_id < 4 ? pos_a : pos_b;
@@ -191,6 +194,8 @@ void main() {
   vec3 base;
   if (uMode == 0u) base = palette(0, int(min(rtf.x, 20u)));
   else if (uMode == 2u) base = palette(1, int(rtf.y % ${TOOL_COLORS.length}u));
+  else if (uMode == 4u) base = gradient(rawWidth);
+  else if (uMode == 5u) base = gradient(flow);
   else base = gradient(uMode == 1u ? speed(b, line_len) : layerTime(uChunkFirst + b));
   vColor = base * (ambient + emission + direct_lighting(eye_position, eye_normal));
   gl_Position = uProjection * vec4(eye_position, 1.0);

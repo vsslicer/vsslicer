@@ -4,7 +4,7 @@ import { MOVE_WORDS, uploadMoveTextures, type MoveTextureChunk } from './move-te
 import { PALETTE_ROWS, PALETTE_WIDTH, SEGMENT_FS, SEGMENT_INDICES, SEGMENT_VS } from './segment-shader.ts';
 
 /** Colour modes, the value of the `uMode` uniform. */
-export const ColorMode = { Feature: 0, Speed: 1, Tool: 2, LayerTime: 3 } as const;
+export const ColorMode = { Feature: 0, Speed: 1, Tool: 2, LayerTime: 3, Width: 4, Flow: 5 } as const;
 export type ColorMode = (typeof ColorMode)[keyof typeof ColorMode];
 
 /** What one `draw` shows. Changing any of it sets uniforms only; nothing is uploaded. */
@@ -21,13 +21,22 @@ export interface SegmentView {
   roleMask?: number;
   /** Moves with any of these `MoveFlag` bits are hidden (e.g. `MoveFlag.Travel`); default none. */
   hiddenFlags?: number;
-  /** Value mapped to the first and last gradient colour in speed (mm/s) and layer-time (s) modes; default from `ranges`. */
+  /** Value mapped to the first and last gradient colour in speed (mm/s), layer-time (s), width (mm) and flow (mm3/s) modes; default from `ranges`. */
   colorRange?: readonly [number, number];
 }
 
 export interface SegmentRenderer {
-  /** Min and max over the data: speed of non-travel moves (mm/s), layer time (s); `[0, 0]` when unknown. */
-  readonly ranges: { speed: [number, number]; layerTime: [number, number] };
+  /**
+   * Min and max over the data: speed of non-travel moves (mm/s), layer time (s), extrusion width (mm) and
+   * volumetric flow (width x height x speed, mm3/s) of non-travel moves; `[0, 0]` when unknown. The
+   * default `colorRange` of each mode, so a legend can label the gradient.
+   */
+  readonly ranges: {
+    speed: [number, number];
+    layerTime: [number, number];
+    width: [number, number];
+    flow: [number, number];
+  };
   /**
    * Draws the visible moves with depth test and writes on, culling and blending off. Leaves that state,
    * its program, VAO and textures (units 0-2) bound, unless created with `foreign: true`.
@@ -51,6 +60,14 @@ export function chunkInstances(
   return hi >= lo ? { lo, n: hi - lo + 1 } : null;
 }
 
+/** IEEE half to number (Float16Array is not in every runtime we target). */
+export function halfToNumber(h: number): number {
+  const e = (h >> 10) & 31;
+  const m = h & 1023;
+  const x = e === 0 ? m * 2 ** -24 : e === 31 ? (m ? NaN : Infinity) : (1024 + m) * 2 ** (e - 25);
+  return h & 0x8000 ? -x : x;
+}
+
 /** Layer table texels `[firstMove, f32 bits of layer time]` and the data ranges; one pass over the moves. */
 export function analyseMoves(
   moves: ArrayBuffer,
@@ -66,17 +83,25 @@ export function analyseMoves(
     s[1] = Math.max(s[1], x);
   };
   const speed = span();
-  for (let r = 1; r + 1 < n; r++) {
+  const width = span();
+  const flow = span();
+  for (let r = 1; r < n; r++) {
     if (v.getUint8(r * STRIDE + 18) & 1) continue; // MoveFlag.Travel
+    const o = r * STRIDE;
+    const w = halfToNumber(v.getUint16(o + 12, true));
+    const h = halfToNumber(v.getUint16(o + 14, true));
+    const sized = w > 0 && h > 0;
+    if (sized) widen(width, w);
+    if (r + 1 >= n) continue;
     const d = start(r + 1) - start(r);
     if (!(d > 0)) continue;
-    const o = r * STRIDE;
     const len = Math.hypot(
       v.getFloat32(o, true) - v.getFloat32(o - STRIDE, true),
       v.getFloat32(o + 4, true) - v.getFloat32(o - STRIDE + 4, true),
       v.getFloat32(o + 8, true) - v.getFloat32(o - STRIDE + 8, true),
     );
     widen(speed, len / d);
+    if (sized) widen(flow, (len / d) * w * h);
   }
   const table = new Uint32Array(2 * layerStarts.length);
   const f32 = new Float32Array(table.buffer);
@@ -89,7 +114,7 @@ export function analyseMoves(
     widen(layerTime, t);
   });
   const done = (s: [number, number]): [number, number] => (s[0] <= s[1] ? s : [0, 0]);
-  return { table, ranges: { speed: done(speed), layerTime: done(layerTime) } };
+  return { table, ranges: { speed: done(speed), layerTime: done(layerTime), width: done(width), flow: done(flow) } };
 }
 
 function compile(gl: WebGL2RenderingContext): WebGLProgram {
@@ -242,7 +267,12 @@ function create(
       gl.uniform1ui(loc.roleMask, (view.roleMask ?? 0xffffffff) >>> 0);
       gl.uniform1ui(loc.hiddenFlags, (view.hiddenFlags ?? 0) >>> 0);
       gl.uniform1ui(loc.mode, view.colorMode);
-      const range = view.colorRange ?? (view.colorMode === ColorMode.LayerTime ? ranges.layerTime : ranges.speed);
+      const modeRange = {
+        [ColorMode.LayerTime]: ranges.layerTime,
+        [ColorMode.Width]: ranges.width,
+        [ColorMode.Flow]: ranges.flow,
+      } as Partial<Record<ColorMode, readonly [number, number]>>;
+      const range = view.colorRange ?? modeRange[view.colorMode] ?? ranges.speed;
       gl.uniform2f(loc.range, range[0], range[1]);
       chunks.forEach((c, i) => {
         const inst = chunkInstances(c, view.first, view.count);
