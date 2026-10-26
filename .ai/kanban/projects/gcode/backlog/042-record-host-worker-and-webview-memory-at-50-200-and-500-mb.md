@@ -3,7 +3,7 @@ id: 42
 title: "Record host, worker and webview memory at 50, 200 and 500 MB"
 type: chore
 priority: P0
-effort: M
+effort: L
 model: sonnet
 area: [editor]
 story: US14

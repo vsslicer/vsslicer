@@ -163,3 +163,5 @@
 161. [PRF-174: Add Apply update and Roll back commands](174-add-apply-update-and-roll-back-commands.md)
 162. [PRF-175: Prove no network request happens when updates are off](175-prove-no-network-request-happens-when-updates-are-off.md)
 163. [PRF-176: Add Edit in template editor to G-code fields](176-add-edit-in-template-editor-to-g-code-fields.md)
+164. [PRF-178: Make the regex timing tests independent of machine load](178-make-the-regex-timing-tests-independent-of-machine-load.md)
+165. [PRF-179: State profile-api's licence for the AGPL-3.0-only Orca and Bambu data and add PROVENANCE](179-state-profile-api-s-licence-for-the-agpl-3-0-only-orca-and-b.md)

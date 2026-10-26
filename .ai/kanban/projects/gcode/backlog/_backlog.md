@@ -34,3 +34,5 @@
 32. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
 33. [GCP-107: Add fan and temperature colour modes](107-add-fan-and-temperature-colour-modes.md)
 34. [GCP-110: Snapshot real corpus files through the preview's webview](110-snapshot-real-corpus-files-through-the-preview-s-webview.md)
+35. [GCP-112: Check slice_info.config's size before inflating it](112-check-slice-info-config-s-size-before-inflating-it.md)
+36. [GCP-113: Add 'restore' to GlFailureCause and drop the preview's cast](113-add-restore-to-glfailurecause-and-drop-the-preview-s-cast.md)
