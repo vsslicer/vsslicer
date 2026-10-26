@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fixed: `api:check --base` now counts a new required member of `PrintPosition` or `OpenOptions` (types other extensions build) as a breaking change (GCP-125).
 - Follow mode: the part after the followed position is dimmed; the user can break out (sliders, play, step, time) and rejoin at the newest fed position (GCP-55).
 
 ## 0.6.1
