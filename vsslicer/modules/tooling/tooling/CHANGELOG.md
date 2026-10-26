@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.8.5
 
+- PLT-202: `vsslicer-package` accepts files reached by a relative `$ref` from a contributed JSON schema (inside the extension folder; absolute, escaping or missing refs fail). Reads only contributed schemas (1 MiB each), 10000 refs per file, 64 files, depth 3.
 - PLT-198: check-licence accepts AGPL-3.0-only only with a non-empty PROVENANCE.md and for the named data packages (profiles-data-orca, profile-catalogue-data).
 
 ## 0.8.4
