@@ -3,6 +3,7 @@ import type { Diagnostic, ImportResult, Settings, SourceFile } from '@vsslicer/p
 import { BundleArchiveError, readBundleArchive } from '../../archive/bundle-archive.ts';
 import { bedShape } from '../../split/split.ts';
 import type { TreeDiagnostic } from '../../tree/read-tree.ts';
+import { readOrcaJson } from '../../export/orca/write-json.ts';
 import { readOrcaUserPresets, type OrcaUserPreset } from '../../user/read-user-presets.ts';
 
 /**
@@ -75,6 +76,7 @@ export function importOrcaBundle(data: Uint8Array): ImportResult {
   const read = readOrcaUserPresets(files, { presets: [] });
   for (const d of read.diagnostics) diag(d.severity, CODES[d.code], origin.get(d.file) ?? d.file, d.message);
 
+  const bytes = new Map(files.map((f) => [f.path, f.bytes]));
   const taken = new Set<string>();
   for (const u of read.presets) {
     const file = origin.get(u.file) ?? u.file;
@@ -134,14 +136,16 @@ export function importOrcaBundle(data: Uint8Array): ImportResult {
       if (!(height > 0)) placeholder('layer_height');
       entities.push({ ...base, layer_height: height > 0 ? height : 0.2 });
     } else continue;
-    native[u.name] = nativeOf(u);
+    native[u.name] = nativeOf(u, bytes.get(u.file));
   }
   return { entities, native, diagnostics };
 }
 
-/** What the unified entity cannot hold: the unresolved parent and the sidecar ids. */
-function nativeOf(u: OrcaUserPreset): Record<string, unknown> {
+/** What the unified entity cannot hold: the unresolved parent, the sidecar ids and the file's layout (for export). */
+function nativeOf(u: OrcaUserPreset, file?: Uint8Array): Record<string, unknown> {
+  const json = file && readOrcaJson(file);
   return {
+    ...(json && 'native' in json ? { json: json.native } : {}),
     ...(u.inherits === undefined ? {} : { inherits: u.inherits }),
     external_ids: u.external_ids,
   };
