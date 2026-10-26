@@ -1,9 +1,9 @@
 ---
 id: SP6
 title: Open 1
-status: planned
+status: active
 milestone: M2
-start: "2026-10-26T03:30+00:00"
+start: "2026-10-26T02:27+00:00"
 end: "2026-10-26T05:30+00:00"
 capacity: 92
 ---
