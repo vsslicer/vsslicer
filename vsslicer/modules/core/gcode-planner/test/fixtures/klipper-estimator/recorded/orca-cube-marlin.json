@@ -1,0 +1,38 @@
+{
+  "sequences": [
+    {
+      "total_time": 0.41430850572012995,
+      "total_distance": 1.044030650891055,
+      "total_extrude_distance": 0,
+      "max_flow": null,
+      "max_speed": 16.666666666666668,
+      "num_moves": 1,
+      "total_z_time": 0.06430850572012997,
+      "total_output_time": 0,
+      "total_travel_time": 0.06430850572012997,
+      "total_extrude_only_time": 0,
+      "phase_times": {
+        "acceleration": 0.0016666666666666668,
+        "cruise": 0.06097517238679664,
+        "deceleration": 0.0016666666666666668
+      }
+    },
+    {
+      "total_time": 1010.8449427197537,
+      "total_distance": 46788.217577270065,
+      "total_extrude_distance": 1400.9503899999836,
+      "max_flow": 12.521432221817053,
+      "max_speed": 150,
+      "num_moves": 7950,
+      "total_z_time": 35.796446752518904,
+      "total_output_time": 915.8331526394174,
+      "total_travel_time": 85.16607579463232,
+      "total_extrude_only_time": 9.145714285714233,
+      "phase_times": {
+        "acceleration": 248.30907167672714,
+        "cruise": 513.5606122504055,
+        "deceleration": 248.2752587926292
+      }
+    }
+  ]
+}
