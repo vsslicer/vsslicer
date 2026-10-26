@@ -68,6 +68,7 @@ export function createWebModelWorkerPool(options: WebPoolOptions): WebModelWorke
   const running = new Set<Job>();
   const queue: Job[] = [];
   let disposed = false;
+  let fetching = 0; // parseUrl downloads under way: each will need a slot, so they count against the limits
 
   // A job ends once: its worker is recycled on success and thrown away on any failure, so a crash costs that job only.
   function end(job: Job, ok: boolean, settle: () => void): void {
@@ -139,7 +140,15 @@ export function createWebModelWorkerPool(options: WebPoolOptions): WebModelWorke
       });
     },
     async parseUrl(url, opts = {}, signal) {
-      const bytes = await fetchBytes(url, Math.min(maxInput, opts.maxFileBytes ?? maxInput), signal);
+      if (disposed) throw new PoolDisposedError();
+      if (running.size + queue.length + fetching >= maxInFlight + maxQueued) throw new PoolQueueFullError(maxQueued);
+      fetching++;
+      let bytes: Uint8Array;
+      try {
+        bytes = await fetchBytes(url, Math.min(maxInput, opts.maxFileBytes ?? maxInput), signal);
+      } finally {
+        fetching--;
+      }
       return pool.parse(bytes, opts, signal);
     },
     dispose() {

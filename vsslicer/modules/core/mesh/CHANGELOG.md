@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- VWR-397: `fetchBytes` preallocates from `Content-Length` only for identity bodies; a content-encoded (gzip) body is read through the capped chunk list.
+- VWR-397: `parseUrl` refuses with `PoolQueueFullError` before downloading when running, queued and downloading requests fill the pool limits.
 - VWR-49: Web Worker pool for the webview (`createWebModelWorkerPool`, `blobWorkerSpawner`, `fetchBytes`): blob: workers (D19), fetch streaming with a byte cap (D18), pool size 1..16, in-flight and queue caps, crash isolation, abort.
 - VWR-393: OBJ and ASCII STL parsers refuse files over the hard triangle cap while parsing, before welding.
 - VWR-389: weld and computeStats use typed-array hash tables (no Map size limit) and binary STL keeps its triangles in fixed blocks: 20 M triangles parse in about 4 s (was 43 s) and computeStats no longer throws.
