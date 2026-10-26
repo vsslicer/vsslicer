@@ -30,7 +30,7 @@ test('colour mode and range changes upload nothing', async () => {
   // The spy sees the construction uploads, so an empty result after it is not a blind spy.
   expect(atCreate.texSubImage2D).toBeGreaterThan(0);
   expect(atCreate.bufferData).toBeGreaterThan(0);
-  expect(draws).toBeGreaterThan(50);
+  expect(draws).toBe(8 * 21); // all eight colour modes (fan and temperature included), 21 ranges each
   expect(afterCreate).toEqual({});
   expect(error).toBe(0);
 });

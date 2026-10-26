@@ -47,7 +47,28 @@ export function moves(): { buffer: ArrayBuffer; layerStarts: number[] } {
 const VIEW = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -32, -32, -10, 1]);
 const PROJECTION = new Float32Array([1 / 32, 0, 0, 0, 0, 1 / 32, 0, 0, 0, 0, -2 / 19, 0, 0, 0, -21 / 19, 1]);
 
-type Options = Partial<SegmentView> & { records?: number; maxTextureSize?: number };
+/**
+ * State changes for the move set: fan 0 on layer 0 and 100% from layer 1 (record 17); hotend T0 200 and
+ * T1 250 C at move 0, tool 1 from record 17. So left is the low end of both ranges, right the high end.
+ */
+export function stateChanges(): ArrayBuffer {
+  const rows = [
+    [0, 2, 0, 200],
+    [0, 2, 1, 250],
+    [17, 1, 0, 1],
+    [17, 20, 0, 1],
+  ];
+  const v = new DataView(new ArrayBuffer(12 * rows.length));
+  rows.forEach(([move, kind, index, value], i) => {
+    v.setUint32(12 * i, move!, true);
+    v.setFloat32(12 * i + 4, value!, true);
+    v.setUint8(12 * i + 8, kind!);
+    v.setUint8(12 * i + 9, index!);
+  });
+  return v.buffer;
+}
+
+type Options = Partial<SegmentView> & { records?: number; maxTextureSize?: number; states?: boolean };
 
 /** Renders the move set (optionally truncated to `records`) and returns the RGBA pixels. */
 function render(o: Options = {}) {
@@ -57,7 +78,11 @@ function render(o: Options = {}) {
   if (!gl) throw new Error('no WebGL2');
   const { buffer, layerStarts } = moves();
   const data = o.records ? buffer.slice(0, o.records * STRIDE) : buffer;
-  const r = createSegmentRenderer(gl, data, { layerStarts, maxTextureSize: o.maxTextureSize });
+  const r = createSegmentRenderer(gl, data, {
+    layerStarts,
+    maxTextureSize: o.maxTextureSize,
+    stateChanges: o.states ? [stateChanges()] : undefined,
+  });
   gl.viewport(0, 0, SIZE, SIZE);
   gl.clearColor(0, 0, 0, 1);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

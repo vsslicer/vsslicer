@@ -13,7 +13,14 @@ function run() {
   if (!gl) throw new Error('no WebGL2');
   const { buffer, layerStarts } = syntheticMoves(2000);
   const spy = spyGlUploads(gl);
-  const r = createSegmentRenderer(spy.gl, buffer, { layerStarts });
+  // fan and hotend changes every 50 moves, so the fan and temperature modes have real step tables
+  const states = new DataView(new ArrayBuffer(12 * 80));
+  for (let i = 0; i < 80; i++) {
+    states.setUint32(12 * i, 50 * (i >> 1), true);
+    states.setFloat32(12 * i + 4, i % 2 ? 190 + i : (i % 7) / 7, true);
+    states.setUint8(12 * i + 8, i % 2 ? 2 : 1); // StateKind HotendTemp, Fan
+  }
+  const r = createSegmentRenderer(spy.gl, buffer, { layerStarts, stateChanges: [states.buffer] });
   const atCreate = { ...spy.uploads };
   spy.reset();
   const modes = [
@@ -23,6 +30,8 @@ function run() {
     ColorMode.LayerTime,
     ColorMode.Width,
     ColorMode.Flow,
+    ColorMode.Fan,
+    ColorMode.Temperature,
   ];
   let draws = 0;
   for (const colorMode of modes)

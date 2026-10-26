@@ -120,7 +120,7 @@ Host: `createPanelChannel(panel)` (`@vsslicer/webview-kit/host`) turns a webview
 - `view`, `projection`: column-major 4x4 (a rigid `view`; the camera position is derived from it).
 - `first`, `count`: the visible moves are the global range `first .. first + count - 1`, intersected per texture.
 - `roleMask` (bit per `MoveRole`, default all) and `hiddenFlags` (`MoveFlag` bits, e.g. travels; default none).
-- `colorMode`: `ColorMode.Feature` (role palette), `Tool`, `Speed` (length over `startTime` difference, mm/s) or `LayerTime` (needs `layerStarts`, the `Layer.firstMove` values); `colorRange` maps speed or layer time to libvgcode's 11-stop gradient, default `ranges`. Unknown values (no planner times) are grey.
+- `colorMode`: `ColorMode.Feature` (role palette), `Tool`, `Speed` (length over `startTime` difference, mm/s) `LayerTime` (needs `layerStarts`, the `Layer.firstMove` values), `Fan` (part fan %, needs `stateChanges: ParsedFile.stateChanges`) or `Temperature` (the move's tool's hotend target, °C, needs `stateChanges`; without them both are grey); `colorRange` maps speed or layer time to libvgcode's 11-stop gradient, default `ranges`. Unknown values (no planner times) are grey.
 
 `draw` turns depth test and depth writes on and culling and blending off, and leaves that state, its program, VAO and textures on units 0-2 bound. Travels (width 0) are drawn 0.1 mm wide.
 
