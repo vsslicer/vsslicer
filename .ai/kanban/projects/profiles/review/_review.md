@@ -1,7 +1,3 @@
 # In review
 
-1. [PRF-130: 130-download-cura-resources-from-upstream-when-cura-is-not-insta.md](130-download-cura-resources-from-upstream-when-cura-is-not-insta.md)
-2. [PRF-112: Import .curaprofile](112-import-curaprofile.md)
-3. [PRF-108: Import .bbscfg and .bbsflmt](108-import-bbscfg-and-bbsflmt.md)
-4. [PRF-106: Import .orca_printer, .orca_filament and .orca_bundle](106-import-orca-printer-orca-filament-and-orca-bundle.md)
-5. [PRF-36: Read installed configuration folders into ImportResults, read-only](036-read-installed-configuration-folders-into-importresults-read.md)
+1. [PRF-39: Run imports in worker_threads with a heartbeat and a time budget](039-run-imports-in-worker-threads-with-a-heartbeat-and-a-time-bu.md)

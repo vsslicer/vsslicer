@@ -13,3 +13,5 @@
 11. [PRF-214: Keep single backslashes when writing converted G-code to Prusa INI](214-keep-single-backslashes-when-writing-converted-g-code-to-pru.md)
 12. [PRF-58: Spike: which workspace folder holds user profiles](058-spike-which-workspace-folder-holds-user-profiles.md)
 13. [PRF-44: Implement ProfileStore get, list, query and the index](044-implement-profilestore-get-list-query-and-the-index.md)
+14. [PRF-130: Download Cura resources from upstream when Cura is not installed](130-download-cura-resources-from-upstream-when-cura-is-not-insta.md)
+15. [PRF-106: Import .orca_printer, .orca_filament and .orca_bundle](106-import-orca-printer-orca-filament-and-orca-bundle.md)
