@@ -5,11 +5,19 @@
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { expect, test } from 'vitest';
 import { parseModel, type MeshStats } from '../../src/index.ts';
 
 const dir = new URL('../fixtures/stl-obj/', import.meta.url);
+// A URL pathname keeps %20 for a space; admesh needs a real file path.
+const fixturePath = (f: string, base: URL = dir): string => fileURLToPath(new URL(f, base));
+
+test('fixturePath decodes a space in the directory', () => {
+  const base = join(tmpdir(), 'my projects');
+  expect(fixturePath('a b.stl', pathToFileURL(base + sep))).toBe(join(base, 'a b.stl'));
+});
 const probe = spawnSync('admesh', ['--version'], { encoding: 'utf8' });
 const haveAdmesh = probe.status === 0;
 // CI sets VSS_REQUIRE_ADMESH so a missing admesh fails the job instead of skipping the oracle
@@ -93,7 +101,7 @@ const clean = readdirSync(dir).filter((f) =>
 
 for (const f of clean) {
   strict(`MeshStats matches admesh on ${f}`, async () => {
-    const { stats, report } = await check(join(dir.pathname, f));
+    const { stats, report } = await check(fixturePath(f));
     expect(compare(stats, report)).toEqual([]);
   });
 }
