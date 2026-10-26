@@ -1,5 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { allSchemas, entitySchemas, nativeKeys, type ImportResult, type SourceFile } from '@vsslicer/profile-api';
+import {
+  allSchemas,
+  applyOverrides,
+  entitySchemas,
+  nativeKeys,
+  type ImportResult,
+  type PrinterModel,
+  type SourceFile,
+} from '@vsslicer/profile-api';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -13,6 +21,7 @@ import {
   prusaIniImporter,
   type PrusaNative,
 } from '../../src/adapters/import/import.ts';
+import { noteTags } from '../../src/adapters/import/notes.ts';
 import { MAX_KEYS_PER_SECTION, MAX_SECTIONS } from '../../src/adapters/ini/parse.ts';
 
 const file = (path: string, text: string): SourceFile => ({ path, bytes: new TextEncoder().encode(text) });
@@ -30,7 +39,14 @@ const SCHEMA = {
   print: 'process',
   filament: 'material',
 } as const;
-const validators = Object.fromEntries(Object.entries(SCHEMA).map(([k, s]) => [k, ajv.compile(entitySchemas[s])]));
+const validators = Object.fromEntries(
+  [...Object.entries(SCHEMA), ['nozzle', 'nozzle'] as const].map(([k, s]) => [k, ajv.compile(entitySchemas[s])]),
+);
+/** The printer_model a split nozzle belongs to. */
+const modelOf = (r: ImportResult, id: string) =>
+  r.entities.find((e) => (e as PrinterModel).nozzles?.includes(id)) as PrinterModel | undefined;
+/** A split nozzle's settings: its model with the nozzle's overrides applied. */
+const resolved = (r: ImportResult, id: string) => applyOverrides(modelOf(r, id)!, { nozzle: { id } }).entity.settings;
 /** Entity fields read from a native key, besides `settings`. */
 const FIELD_KEYS = new Set([
   ...['name', 'config_version', 'repo_id', 'technology', 'family', 'bed_model', 'bed_texture', 'thumbnail'],
@@ -42,10 +58,16 @@ const FIELD_KEYS = new Set([
 function checkAll(r: ImportResult) {
   for (const e of r.entities) {
     const n = nat(r, e.id);
-    const validate = validators[n.kind]!;
+    const nozzle = n.kind === 'printer' && 'diameter' in e;
+    const validate = validators[nozzle ? 'nozzle' : n.kind]!;
     expect(validate(e), `${e.id}: ${JSON.stringify(validate.errors)}`).toBe(true);
-    const settings = (e as { settings?: object }).settings ?? {};
-    const mapped = new Set(Object.keys(settings).flatMap((k) => nativeKeys('prusa', k)));
+    const settings = (nozzle ? resolved(r, e.id) : (e as { settings?: object }).settings) ?? {};
+    // `tags` comes from printer_notes, which stays native
+    const mapped = new Set(
+      Object.keys(settings)
+        .filter((k) => k !== 'tags')
+        .flatMap((k) => nativeKeys('prusa', k)),
+    );
     for (const k of Object.keys(n.values)) {
       if (!n.native_only.includes(k)) expect(mapped.has(k) || FIELD_KEYS.has(k), `${e.id}: ${k}`).toBe(true);
     }
@@ -81,7 +103,141 @@ describe.skipIf(!existsSync(PIN))('golden: PrusaResearch.ini@b028299 (skips with
     expect(v['printer_variant']).toBe('0.4');
     expect(v['nozzle_high_flow']).toBe('0');
     expect(v['inherits']).toBeUndefined();
-    expect(ent(r, 'Original Prusa MK4S 0.4 nozzle')['family']).toBe('MK4S');
+    expect(modelOf(r, 'Original Prusa MK4S 0.4 nozzle')!.id).toBe('MK4S');
+  });
+
+  test('200 presets split into nozzles that resolve to the unsplit preset; the 17 MMU multi-extruder ones stay', () => {
+    const u = importPrusaIni([{ path: 'PrusaResearch.ini', bytes: text }], { splitVariants: false });
+    const nozzles = r.entities.filter((e) => nat(r, e.id).kind === 'printer' && 'diameter' in e);
+    expect(nozzles).toHaveLength(200);
+    for (const n of nozzles) {
+      const orig = ent(u, n.id) as unknown as PrinterModel;
+      expect(resolved(r, n.id), n.id).toEqual(orig.settings);
+      expect(modelOf(r, n.id)!.bed).toEqual(orig.bed);
+      expect(modelOf(r, n.id)!.toolheads).toEqual(orig.toolheads);
+      expect(r.native[n.id]).toEqual(u.native[n.id]);
+    }
+    const kept = r.diagnostics.filter((d) => d.message.includes('not split'));
+    expect(kept.map((d) => d.severity)).toEqual(Array(17).fill('info'));
+    expect(ent(r, 'MK4S')['nozzles']).toHaveLength(10);
+  });
+});
+
+describe('nozzle variants', () => {
+  const fixture = readFileSync(join(import.meta.dirname, '../fixtures/ini/mk4s-nozzles.ini'));
+  const r = importPrusaIni([{ path: 'mk4s-nozzles.ini', bytes: fixture }]);
+  const u = importPrusaIni([{ path: 'mk4s-nozzles.ini', bytes: fixture }], { splitVariants: false });
+  const ids = ['Original Prusa MK4S 0.4 nozzle', 'Original Prusa MK4S 0.6 nozzle'];
+
+  test('MK4S 0.4/0.6 become 1 printer_model + 2 nozzles; model plus nozzle resolves to each original preset', () => {
+    expect(codes(r)).toEqual([]);
+    expect(r.entities.map((e) => [e.id, nat(r, e.id).kind])).toEqual([
+      ['prusa-fff', 'vendor'],
+      ['MK4S', 'printer_model'],
+      [ids[0], 'printer'],
+      [ids[1], 'printer'],
+    ]);
+    expect(r.entities.slice(2)).toEqual([
+      { id: ids[0], diameter: 0.4, flow: 'standard' },
+      { id: ids[1], diameter: 0.6, flow: 'standard' },
+    ]);
+    const m = ent(r, 'MK4S') as unknown as PrinterModel;
+    expect(m.nozzles).toEqual(ids);
+    expect(m.overrides!.map((o) => o.when)).toEqual(ids.map((id) => `nozzle.id == '${id}'`));
+    for (const id of ids) {
+      const orig = ent(u, id) as unknown as PrinterModel;
+      expect(resolved(r, id)).toEqual(orig.settings);
+      expect([m.bed, m.toolheads]).toEqual([orig.bed, orig.toolheads]);
+    }
+    expect(m.settings!['tags']).toEqual(['PRINTER_MODEL_MK4S', 'PG', 'NO_TEMPLATES']);
+    checkAll(r);
+  });
+
+  test('the native form of each original preset stays attached under the nozzle id', () => {
+    for (const id of ids) {
+      expect(r.native[id]).toEqual(u.native[id]);
+      expect(nat(r, id).values['printer_variant']).toBe(id.split(' ').at(-2));
+    }
+  });
+
+  const bundle = (presets: string) =>
+    VENDOR +
+    '[printer_model:M]\nname = M\nvariants = 0.4; HF0.4\n' +
+    '[printer:*common*]\nbed_shape = 0x0,250x0,250x210,0x210\nprinter_model = M\nmax_print_height = 220\n' +
+    presets;
+
+  test('quotes and backslashes in an id are escaped in the override condition; high flow is read', () => {
+    const r2 = importPrusaIni([
+      file(
+        'b.ini',
+        bundle(
+          "[printer:It's 0.4]\ninherits = *common*\nprinter_variant = 0.4\nnozzle_diameter = 0.4\nretract_length = 0.8\n" +
+            '[printer:A\\b HF0.4]\ninherits = *common*\nprinter_variant = HF0.4\nnozzle_diameter = 0.4\n' +
+            'nozzle_high_flow = 1\nretract_length = 0.6\n',
+        ),
+      ),
+    ]);
+    expect(codes(r2)).toEqual([]);
+    expect(ent(r2, 'A\\b HF0.4')['flow']).toBe('high_flow');
+    for (const [id, len] of [
+      ["It's 0.4", 0.8],
+      ['A\\b HF0.4', 0.6],
+    ] as const) {
+      const a = applyOverrides(modelOf(r2, id)!, { nozzle: { id } });
+      expect([a.diagnostics, a.applied.length, a.entity.settings!['retraction_length']]).toEqual([[], 1, len]);
+    }
+  });
+
+  test('a preset with other toolheads than its model, or without a variant, or in a user file, is not split', () => {
+    const r2 = importPrusaIni([
+      file(
+        'b.ini',
+        bundle(
+          '[printer:P1]\ninherits = *common*\nprinter_variant = 0.4\nnozzle_diameter = 0.4\n' +
+            '[printer:P5]\ninherits = *common*\nprinter_variant = 0.4\nnozzle_diameter = 0.4,0.4,0.4,0.4,0.4\n' +
+            '[printer:PB]\ninherits = *common*\nprinter_variant = 0.4\nnozzle_diameter = 0.4\nbed_shape = 0x0,9x0,9x9,0x9\n' +
+            '[printer:PD]\ninherits = *common*\nprinter_variant = 0.4\nnozzle_diameter = abc\n' +
+            '[printer:PX]\ninherits = *common*\nnozzle_diameter = 0.4\n',
+        ),
+      ),
+      file(
+        'printer/Mine.ini',
+        'bed_shape = 0x0,1x0,1x1\nprinter_model = M\nprinter_variant = 0.4\nnozzle_diameter = 0.4\n',
+      ),
+    ]);
+    expect(r2.entities.filter((e) => 'diameter' in e).map((e) => e.id)).toEqual(['P1']);
+    expect(ent(r2, 'M')['nozzles']).toEqual(['P1']);
+    for (const id of ['P5', 'PB', 'PD', 'PX', 'Mine']) expect(ent(r2, id)['family']).toBe('M');
+    expect(r2.diagnostics.filter((d) => d.message.includes('split')).map((d) => [d.severity, d.message])).toEqual([
+      ['info', expect.stringContaining('P5: bed or toolheads differ')],
+      ['info', expect.stringContaining('PB: bed or toolheads differ')],
+      ['warning', expect.stringContaining('PD: no nozzle diameter')],
+    ]);
+  });
+});
+
+describe('printer_notes tags', () => {
+  test('keywords in the tag table become tags; an unknown keyword gives a diagnostic and no tag', () => {
+    const r2 = importPrusaIni([
+      file(
+        'printer/N.ini',
+        'bed_shape = 0x0,1x0,1x1\nnozzle_diameter = 0.4\n' +
+          "printer_notes = Don't remove the following keywords!\\nPRINTER_MODEL_XL\\nPG\\nPG\\nMY_KEYWORD\\n\n",
+      ),
+    ]);
+    expect((ent(r2, 'N')['settings'] as Record<string, unknown>)['tags']).toEqual(['PRINTER_MODEL_XL', 'PG']);
+    expect(r2.diagnostics.map((d) => [d.severity, d.code, d.line, d.message])).toEqual([
+      ['warning', 'unknown-type', 3, expect.stringContaining('MY_KEYWORD')],
+    ]);
+    expect(nat(r2, 'N').native_only).toContain('printer_notes');
+  });
+
+  test('noteTags unescapes as unescape_string_cstyle and skips prose', () => {
+    expect(noteTags('a\\nPG\\r\\nHF_NOZZLE\\\\nx\\')).toEqual({ tags: ['PG'], unknown: [] }); // `\\\\n` is a backslash and n
+    expect(noteTags('PG\nNot a keyword\n  INPUT_SHAPER  \nFOO.1')).toEqual({
+      tags: ['PG', 'INPUT_SHAPER'],
+      unknown: ['FOO.1'],
+    });
   });
 });
 

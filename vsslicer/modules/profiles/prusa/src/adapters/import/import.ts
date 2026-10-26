@@ -18,6 +18,8 @@ import {
 import { convertPrusaCondition } from '../conditions/index.ts';
 import { MAX_DIAGNOSTICS, parseIni, type IniSection, type IniSectionKind } from '../ini/index.ts';
 import { flattenKind, splitList, type Budget, type Diag, type Flattened } from './flatten.ts';
+import { noteTags } from './notes.ts';
+import { splitVariants, type Mapped } from './split.ts';
 
 /** Bytes over all files of one call; one pinned bundle is 1.5 MB. */
 export const MAX_IMPORT_BYTES = 256 * 1024 * 1024;
@@ -205,6 +207,19 @@ function toEntity(
       const nozzles = values.get('nozzle_diameter')?.split(',').length ?? 0;
       if (!nozzles) return missing('nozzle_diameter');
       const height = typeof s.settings['printable_height'] === 'number' ? s.settings['printable_height'] : 0;
+      const notes = values.get('printer_notes');
+      if (notes) {
+        // `printer_notes =~` keyword tests convert to `'TAG' in printer.tags`; the notes text itself stays native
+        const t = noteTags(notes);
+        if (t.tags.length) s.settings['tags'] = t.tags;
+        for (const k of t.unknown)
+          ctx.diag(
+            'warning',
+            'unknown-type',
+            line('printer_notes'),
+            `printer_notes keyword ${k.slice(0, 100)} is not in the tag table; not tagged`,
+          );
+      }
       const m: PrinterModel = {
         ...b,
         vendor: ctx.vendor,
@@ -216,7 +231,7 @@ function toEntity(
         settings: s.settings,
       };
       const model = take('printer_model');
-      if (model) m.family = model; // the [printer_model] id; PRF-34 splits presets into one model per family
+      if (model) m.family = model; // the [printer_model] id; `splitVariants` turns the preset into a nozzle of it
       const proc = take('default_print_profile');
       const fil = take('default_filament_profile');
       if (proc || fil) {
@@ -276,9 +291,11 @@ function kindOfPath(path: string): PresetKind | undefined {
  * Imports PrusaSlicer 2.9 INI files: vendor bundles (`[vendor]` + sections) and user presets (header-less files
  * under `print/`, `filament/`, `printer/`, or config bundles). Each file is flattened on its own, as upstream does.
  * Vendor bundles lose `inherits`; user presets keep the names of parents outside their file. Entity ids are the
- * section names (the `[printer_model]` id for a model). Never throws on bad input.
+ * section names (the `[printer_model]` id for a model). Per-nozzle printer presets of a bundle become `nozzle`
+ * entities of their `[printer_model]` (`splitVariants`); `{ splitVariants: false }` keeps them as one
+ * printer_model each. Never throws on bad input.
  */
-export function importPrusaIni(files: readonly SourceFile[]): ImportResult {
+export function importPrusaIni(files: readonly SourceFile[], options: { splitVariants?: boolean } = {}): ImportResult {
   const result: ImportResult = { entities: [], native: {}, diagnostics: [] };
   const push = (d: Diagnostic) => {
     const n = result.diagnostics.length;
@@ -339,7 +356,7 @@ export function importPrusaIni(files: readonly SourceFile[]): ImportResult {
     }
     const vendorSection = sections.find((s) => s.kind === 'vendor');
     const ctx: Ctx = { file: file.path, vendor: 'user', diag: fileDiag };
-    const add = (r: ReturnType<typeof toEntity>) => {
+    const add = (r: Mapped) => {
       if (!r) return;
       if (Object.hasOwn(result.native, r.entity.id)) {
         fileDiag(
@@ -383,10 +400,13 @@ export function importPrusaIni(files: readonly SourceFile[]): ImportResult {
       const p = r?.entity as PrinterModel | undefined;
       if (p?.family && !printers.has(p.family)) printers.set(p.family, p);
     }
-    for (const s of sections) {
-      if (s.kind === 'printer_model') add(toEntity(own(s), 'printer_model', ctx, printers));
-    }
-    mapped.flat().forEach(add);
+    const all = [
+      ...sections
+        .filter((s) => s.kind === 'printer_model')
+        .map((s) => toEntity(own(s), 'printer_model', ctx, printers)),
+      ...mapped.flat(),
+    ].filter((r) => r !== undefined);
+    (options.splitVariants === false ? all : splitVariants(all, fileDiag)).forEach(add);
   }
   return result;
 }

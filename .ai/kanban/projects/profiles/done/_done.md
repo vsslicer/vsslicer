@@ -13,3 +13,5 @@
 11. [PRF-40: Download Prusa vendor bundles from upstream at a pinned commit](040-download-prusa-vendor-bundles-from-upstream-at-a-pinned-comm.md)
 12. [PRF-32: Import fdm_materials XML as material entities](032-import-fdm-materials-xml-as-material-entities.md)
 13. [PRF-31: Read Cura quality, quality_changes and definition_changes](031-read-cura-quality-quality-changes-and-definition-changes.md)
+14. [PRF-60: Create the fixture workspace and per-OS slicer configuration folders](060-create-the-fixture-workspace-and-per-os-slicer-configuration.md)
+15. [PRF-34: 034-*.md](034-*.md)
