@@ -9,8 +9,8 @@ type Chunks = Iterable<Uint8Array>;
 export interface MeshParsers {
   isBinaryStl(head: Uint8Array, totalBytes: number): boolean;
   parseBinaryStl(chunks: Chunks): Promise<IndexedMesh>;
-  parseAsciiStl(chunks: Chunks): Promise<IndexedMesh>;
-  parseObj(chunks: Chunks): Promise<IndexedMesh>;
+  parseAsciiStl(chunks: Chunks, hardTriangleCap?: number): Promise<IndexedMesh>;
+  parseObj(chunks: Chunks, hardTriangleCap?: number): Promise<IndexedMesh>;
 }
 
 /** Above this many triangles the caller must confirm. Placeholder until the VWR-37 benchmark sets it. */
@@ -66,13 +66,13 @@ export async function parseModelWith(
 
   let mesh: IndexedMesh;
   if (isObj(parsers, bytes, opts.extension)) {
-    mesh = await parsers.parseObj([bytes]);
+    mesh = await parsers.parseObj([bytes], hardTriangleCap);
   } else if (parsers.isBinaryStl(bytes, bytes.length)) {
     const early = check(new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength).getUint32(80, true));
     if (early) return early;
     mesh = await parsers.parseBinaryStl([bytes]);
   } else if (/^\s*solid/i.test(new TextDecoder().decode(bytes.subarray(0, 64)))) {
-    mesh = await parsers.parseAsciiStl([bytes]);
+    mesh = await parsers.parseAsciiStl([bytes], hardTriangleCap);
   } else {
     mesh = await parsers.parseBinaryStl([bytes]); // not text: names the damage (cut short, wrong count)
   }

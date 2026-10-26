@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { weld } from '../../domain/build-mesh.ts';
-import { MalformedMeshError, ObjIndexOutOfRangeError } from '../../domain/errors.ts';
+import { MalformedMeshError, ObjIndexOutOfRangeError, TooManyTrianglesError } from '../../domain/errors.ts';
 import type { IndexedMesh, MeshPart } from '../../domain/indexed-mesh.ts';
 import { FloatBuffer, parseNumber, textLines } from '../text.ts';
 
@@ -8,10 +8,13 @@ import { FloatBuffer, parseNumber, textLines } from '../text.ts';
  * Parse OBJ geometry fed as chunks of any size, then weld it. Reads `v`, `f`, `g` and `o`; everything
  * else (`vt`, `vn`, `mtl`, `usemtl`, `s`...) is ignored. Faces of any size are fanned into triangles,
  * negative indices count back from the vertices read so far, and each `g`/`o` name becomes a part.
- * Throws `ObjIndexOutOfRangeError`, `MalformedMeshError` and `NonFiniteCoordinateError`.
+ * Throws `TooManyTrianglesError` as soon as the triangle count passes `hardTriangleCap`, `ObjIndexOutOfRangeError`, `MalformedMeshError` and `NonFiniteCoordinateError`.
  * shortcut: no `\` line continuation, no 4th-component weights; upgrade if a real file needs them.
  */
-export async function parseObj(chunks: AsyncIterable<Uint8Array> | Iterable<Uint8Array>): Promise<IndexedMesh> {
+export async function parseObj(
+  chunks: AsyncIterable<Uint8Array> | Iterable<Uint8Array>,
+  hardTriangleCap = Infinity,
+): Promise<IndexedMesh> {
   const verts = new FloatBuffer(); // v lines
   const soup = new FloatBuffer(); // triangle corners, 3 per triangle
   const parts: { name: string; firstTriangle: number; triangleCount: number }[] = [];
@@ -44,6 +47,8 @@ export async function parseObj(chunks: AsyncIterable<Uint8Array> | Iterable<Uint
       }
       const view = verts.view();
       for (let k = 1; k < corner.length - 1; k++) {
+        const next = soup.length / 9 + 1;
+        if (next > hardTriangleCap) throw new TooManyTrianglesError(next, hardTriangleCap);
         for (const c of [corner[0], corner[k], corner[k + 1]] as number[]) {
           soup.push(view[c * 3] as number, view[c * 3 + 1] as number, view[c * 3 + 2] as number);
         }
