@@ -59,7 +59,18 @@ describe('runProcess', () => {
     expect(r.lines[0]).toBeDefined();
     const pid = Number(r.lines[0]!.text);
     expect(Number.isInteger(pid)).toBe(true);
-    expect(() => process.kill(pid, 0)).toThrow(/ESRCH/);
+    // The group got SIGKILL when the shell exited, but the grandchild may not be reaped yet: poll a fixed number of steps.
+    let gone = false;
+    for (let i = 0; i < 50 && !gone; i++) {
+      try {
+        process.kill(pid, 0);
+        await new Promise((r) => setTimeout(r, 20));
+      } catch (e) {
+        gone = (e as NodeJS.ErrnoException).code === 'ESRCH';
+        if (!gone) throw e;
+      }
+    }
+    expect(gone).toBe(true);
   });
 
   test('large output does not deadlock; kept lines are bounded', { timeout: GUARD }, async () => {
