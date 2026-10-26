@@ -13,6 +13,8 @@ export interface SlicerSettings {
 
 export type Getter = (key: string) => unknown;
 
+const MAX_TIMEOUT_SECONDS = 2_147_483;
+
 const DEFAULTS: SlicerSettings = {
   engine: 'orca',
   orcaPath: '',
@@ -37,6 +39,17 @@ export const createSettingsReader = (get: Getter, report: (problem: string) => v
     warn(`vsslicer.slicer.${key} must be a string; using the default.`);
     return def;
   };
+  // runProcess accepts an integer 1..2^31-1 ms, so whole seconds in 1..2147483 keep seconds * 1000 valid.
+  const timeoutSeconds = (v: unknown): number => {
+    if (typeof v !== 'number' || !Number.isFinite(v) || v <= 0) {
+      warn(`vsslicer.slicer.timeout must be a positive number; using ${DEFAULTS.timeoutSeconds}.`);
+      return DEFAULTS.timeoutSeconds;
+    }
+    const n = Math.min(MAX_TIMEOUT_SECONDS, Math.max(1, Math.round(v)));
+    if (n !== v)
+      warn(`vsslicer.slicer.timeout must be a whole number of seconds in 1..${MAX_TIMEOUT_SECONDS}; using ${n}.`);
+    return n;
+  };
   return (): SlicerSettings => {
     const engine = get('engine');
     const timeout = get('timeout');
@@ -47,11 +60,7 @@ export const createSettingsReader = (get: Getter, report: (problem: string) => v
           DEFAULTS.engine),
       orcaPath: str('orca.path', DEFAULTS.orcaPath),
       curaPath: str('cura.path', DEFAULTS.curaPath),
-      timeoutSeconds:
-        typeof timeout === 'number' && Number.isFinite(timeout) && timeout > 0
-          ? timeout
-          : (warn(`vsslicer.slicer.timeout must be a positive number; using ${DEFAULTS.timeoutSeconds}.`),
-            DEFAULTS.timeoutSeconds),
+      timeoutSeconds: timeoutSeconds(timeout),
       outputFolder: str('outputFolder', DEFAULTS.outputFolder) || DEFAULTS.outputFolder,
     };
   };

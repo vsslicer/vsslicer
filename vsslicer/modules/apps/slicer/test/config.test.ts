@@ -53,6 +53,26 @@ test('invalid values fall back and are reported once', () => {
   assert.strictEqual(problems.length, 3);
 });
 
+test('timeout is bounded to what runProcess accepts', () => {
+  const cases: [number, number, number][] = [
+    [Number.NaN, 600, 1],
+    [Infinity, 600, 1],
+    [-1, 600, 1],
+    [0, 600, 1],
+    [1.0005, 1, 1],
+    [3_000_000, 2_147_483, 1],
+    [2_147_483, 2_147_483, 0],
+    [0.3, 1, 1],
+  ];
+  for (const [input, want, warnings] of cases) {
+    const { read, problems } = reader({ engine: 'orca', timeout: input });
+    const got = read().timeoutSeconds;
+    assert.strictEqual(got, want, String(input));
+    assert.ok(Number.isInteger(got * 1000) && got * 1000 <= 2 ** 31 - 1, String(input));
+    assert.strictEqual(problems.length, warnings, String(input));
+  }
+});
+
 test('package.json contributes every setting with default, description and scope', () => {
   const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as {
     contributes: {
