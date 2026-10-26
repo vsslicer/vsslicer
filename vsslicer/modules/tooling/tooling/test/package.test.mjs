@@ -7,7 +7,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import test from 'node:test';
-import { checkManifest, pack, packAll } from '../bin/vsslicer-package.mjs';
+import { checkManifest, extensionName, pack, packAll } from '../bin/vsslicer-package.mjs';
 
 const write = (file, text) => (mkdirSync(dirname(file), { recursive: true }), writeFileSync(file, text));
 const strict = '**\n!dist/*.js\n!media/**\n!LICENSE\n!THIRD-PARTY-NOTICES.md\n!README.md\n!CHANGELOG.md\n';
@@ -155,5 +155,38 @@ test('the bin reports a user error as one line, without a stack trace', () => {
     assert.match(r.stderr, /^vsslicer-package: .+\n$/);
   } finally {
     rmSync(d, { recursive: true, force: true });
+  }
+});
+
+test('extensionName: unscoped npm name by default, a valid override wins', () => {
+  assert.strictEqual(extensionName({ name: '@vsslicer/fake' }), 'fake');
+  assert.strictEqual(extensionName({ name: '@vsslicer/fake', vsslicer: { sizeBudgetKB: 1 } }), 'fake');
+  assert.strictEqual(extensionName({ name: '@vsslicer/fake', vsslicer: { extensionName: 'p-1' } }), 'p-1');
+  assert.strictEqual(extensionName({ vsslicer: { extensionName: 'a'.repeat(214) } }).length, 214);
+});
+
+test('extensionName: invalid overrides fail with a named error', () => {
+  for (const bad of ['Fake', 'a/b', '@x/y', '', '-a', 'a'.repeat(215), 5, null, ['a']])
+    assert.throws(() => extensionName({ vsslicer: { extensionName: bad } }), /vsslicer\.extensionName/, String(bad));
+});
+
+test('the override names the VSIX and the id; an invalid one stops before vsce', async () => {
+  const d = extension({ vsslicer: { sizeBudgetKB: 50, extensionName: 'short' } });
+  try {
+    const { file, problems } = await pack(d);
+    assert.deepStrictEqual(problems, []);
+    assert.strictEqual(basename(file), 'short-1.2.3.vsix');
+    const dir = mkdtempSync(join(tmpdir(), 'unzip-'));
+    execFileSync('unzip', ['-q', file, 'extension.vsixmanifest', '-d', dir]);
+    assert.match(readFileSync(join(dir, 'extension.vsixmanifest'), 'utf8'), /Identity Language="en-US" Id="short"/);
+    rmSync(dir, { recursive: true, force: true });
+  } finally {
+    rmSync(d, { recursive: true, force: true });
+  }
+  const bad = extension({ vsslicer: { sizeBudgetKB: 50, extensionName: 'Bad/Name' } });
+  try {
+    await assert.rejects(pack(bad), /vsslicer\.extensionName/);
+  } finally {
+    rmSync(bad, { recursive: true, force: true });
   }
 });
