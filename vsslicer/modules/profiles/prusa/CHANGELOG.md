@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - Fixed: Prusa export refuses a second file whose name differs only in case or Unicode normalisation (PRF-215).
 - Fixed: Prusa INI string values (start and end G-code and other coString options) are imported as decoded text and escaped once on export, so a single backslash from an Orca, Bambu or Cura profile is no longer lost, and imported G-code holds real newlines (PRF-214).

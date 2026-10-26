@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/profiles-prusa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PrusaSlicer and SuperSlicer profile bundles (.ini) to and from the shared profile model.",
   "license": "AGPL-3.0-or-later",
   "type": "module",

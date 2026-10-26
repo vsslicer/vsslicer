@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- Re-range `@vsslicer/webview-kit` to ^0.8.0 (SP12 release).
+
 ## 0.2.2
 
 - Depends on webview-kit ^0.7.0 (re-lock only).

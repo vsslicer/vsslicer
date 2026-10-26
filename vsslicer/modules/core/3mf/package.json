@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/3mf",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Read, inspect and byte-faithfully save 3MF packages: zip, OPC, model XML, slicer project metadata.",
   "license": "AGPL-3.0-or-later",
   "type": "module",

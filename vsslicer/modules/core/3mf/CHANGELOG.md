@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
 - Fixed: the Bambu reader keeps at most 1,000 missing-component notices and adds one 'N more notices suppressed.' line (VWR-405).
 - Added: read Bambu and Orca plates (`Project.plates`: names, lock, instances, thumbnails, G-code part, slice time, weight, filaments, warnings, `plate_N.json` layout); `Instance.plateId` set for Bambu and Orca (VWR-23).
