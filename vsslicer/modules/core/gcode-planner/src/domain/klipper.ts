@@ -281,6 +281,10 @@ export function createKlipperPlanner(options: KlipperOptions = {}): Planner {
         if (!firstLeft) {
           order.length = 0;
           head = 0;
+        } else if (head > 4096) {
+          // Drop the reported prefix, or a file with no G4/M400 keeps every move until the end.
+          order.splice(0, head);
+          head = 0;
         }
       };
       const flushAll = (): void => {

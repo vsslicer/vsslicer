@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+
+- GCP-88: the Klipper planner drops reported moves from its queue every 4096 moves, so memory stays bounded on long files with no G4/M400 (was one 370-byte object per move until the end).
 ## 0.3.0
 
 - GCP-23: `trapezoidsFor(planner, parsed, timing, start, end)` returns each move's `Trapezoid` (start time, entry, cruise, exit, accel), recomputed from the nearest checkpoint; a property test over random windows checks it equals the full pass. A checkpoint may carry the planner's `state` snapshot (`TimingBuilder.snapshot`, `snapshotDue`, `replay`, `stop`); `Planner.plan` takes an optional `Replay`. The Klipper planner snapshots (checkpoints at the first resumable move per interval, so not always at the multiple) and has `KlipperOptions.checkpointInterval`; the other planners keep stateless checkpoints and `trapezoidsFor` throws for them. `TimingBuilder.add` takes optional cruise, exit and accel; `MoveCursor.save`/`restore`. Spacing stays 4096, chosen by spike (about 1 ms per 1 s scrub window, 0.4-1.1 B/move).
