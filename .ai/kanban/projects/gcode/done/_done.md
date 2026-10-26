@@ -16,3 +16,4 @@
 14. [GCP-109: Use ToolheadWindow's transfer form and the planner-free entry in the preview](109-use-toolheadwindow-s-transfer-form-and-the-planner-free-entr.md)
 15. [GCP-34: Set up Playwright snapshots on Chromium with SwiftShader](034-set-up-playwright-snapshots-on-chromium-with-swiftshader.md)
 16. [GCP-15: Write the read-only zip entry reader](015-write-the-read-only-zip-entry-reader.md)
+17. [GCP-16: Open .gcode.3mf plates with statistics, thumbnails and MD5 check](016-open-gcode-3mf-plates-with-statistics-thumbnails-and-md5-che.md)
