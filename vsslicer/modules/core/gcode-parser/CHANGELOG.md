@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-89: the parser fills `flavourName` on chunks and on `collect`'s `ParsedFile` with the last flavour name the file states (`;FLAVOR:` or `; gcode_flavor =`); the `flavour` option does not change it.
+
 ## 0.10.1
 
 - GCP-18: `pnpm bench` (not part of `pnpm test`) generates seeded synthetic 50, 200 and 500 MB files (`straight`, about 34k moves/MB; `arc-heavy`, about 58k moves/MB) in a temp dir, parses each in its own process and fails on a move record over 28 B, a peak RSS over budget or a throughput under budget (`bench/budget.json`, with the machine it was measured on; `--update` re-records it, `--sizes 50,200` limits the run). Dev tooling only; nothing shipped changes.

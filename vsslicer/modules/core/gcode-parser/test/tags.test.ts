@@ -5,7 +5,9 @@ import { describe, expect, it } from 'vitest';
 import { MoveRole, StateKind } from '@vsslicer/gcode-api';
 import { fixturesDir, loadManifest, lineScannable, readGolden } from './support/golden.ts';
 import { parseAll, roleHistogram } from './support/parser-summary.ts';
-import { encode, run } from './support/run.ts';
+import { encode, pieces, run } from './support/run.ts';
+import { collect, parse } from '../src/index.ts';
+import type { NamedChunk } from '../src/domain/chunk-writer.ts';
 import { ROLE_BY_NAME } from '../src/domain/tag-tables.ts';
 
 const text = loadManifest().files.filter(lineScannable);
@@ -232,6 +234,22 @@ describe('flavour', () => {
   });
   it('defaults to marlin', async () => {
     expect(await maxFeed(m203)).toBe(6000);
+  });
+  it('names the stated flavour in ParsedFile.flavourName, as written, the last one winning', async () => {
+    const name = async (src: string, opts = {}): Promise<string | undefined> =>
+      (await collect(parse(pieces(encode(src), 1 << 20), opts))).flavourName;
+    expect(await name(`;FLAVOR:Klipper\n${m203}`)).toBe('Klipper');
+    expect(await name(`;FLAVOR:Griffin\n${m203}`)).toBe('Griffin');
+    expect(await name(`; gcode_flavor = marlin2\n${m203}`)).toBe('marlin2');
+    expect(await name(`;FLAVOR:Marlin\n${m203}; gcode_flavor = klipper\n`)).toBe('klipper');
+    expect(await name(`; gcode_flavor = klipper\n${m203}`, { flavour: 'marlin' })).toBe('klipper');
+    expect(await name(`;FLAVOR:\n${m203}`)).toBeUndefined();
+    expect(await name(m203)).toBeUndefined();
+  });
+  it('carries the name into chunks after the one that read it', async () => {
+    const { chunks } = await run(`;FLAVOR:Klipper\n${'G1 X1 E1\n'.repeat(5)}`, { chunkMoves: 2 });
+    expect(chunks.length).toBeGreaterThan(1);
+    expect(chunks.map((c: NamedChunk) => c.flavourName)).toEqual(chunks.map(() => 'Klipper'));
   });
 });
 

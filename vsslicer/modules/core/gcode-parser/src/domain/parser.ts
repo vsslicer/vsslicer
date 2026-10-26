@@ -73,6 +73,11 @@ export class GCodeParser {
     return this.tags.slicer;
   }
 
+  /** The last flavour name the file stated, as written; `undefined` when it named none. */
+  get flavourName(): string | undefined {
+    return this.tags.flavourName;
+  }
+
   /** The flavour units are read with now: the option, else the detected one, else `marlin`. */
   get flavour(): Flavour {
     return this.machine.flavour;
@@ -140,7 +145,7 @@ export class GCodeParser {
 
   private take(): Chunk {
     this.chunkStart = this.offset;
-    return this.writer.take(this.offset - this.base, this.slicer);
+    return this.writer.take(this.offset - this.base, this.slicer, this.tags.flavourName);
   }
 
   private stash(rest: Uint8Array): void {

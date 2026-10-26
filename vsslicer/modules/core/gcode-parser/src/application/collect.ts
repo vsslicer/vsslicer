@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import type { Chunk, ObjectLabel, ParsedFile } from '@vsslicer/gcode-api';
+import type { ObjectLabel, ParsedFile } from '@vsslicer/gcode-api';
+import type { NamedChunk } from '../domain/chunk-writer.ts';
 
 // `push(...big)` overflows the call stack past ~100k items, so append in a loop.
 const append = <T>(to: T[], from: readonly T[]): void => {
@@ -8,10 +9,10 @@ const append = <T>(to: T[], from: readonly T[]): void => {
 
 /**
  * Gathers a chunk stream into a `ParsedFile`: buffers stay one per chunk (not concatenated), the
- * layer table, markers, diagnostics and thumbnails are joined in file order, the object labels merged by name, id and copy, the config blocks merged. `slicer` is the last chunk's.
+ * layer table, markers, diagnostics and thumbnails are joined in file order, the object labels merged by name, id and copy, the config blocks merged. `slicer` is the last chunk's, `flavourName` the last one a chunk carries.
  */
-export const collect = async (chunks: AsyncIterable<Chunk>): Promise<ParsedFile> => {
-  const file: ParsedFile = {
+export const collect = async (chunks: AsyncIterable<NamedChunk>): Promise<ParsedFile & { flavourName?: string }> => {
+  const file: ParsedFile & { flavourName?: string } = {
     slicer: 'unknown',
     moveCount: 0,
     moves: [],
@@ -27,6 +28,7 @@ export const collect = async (chunks: AsyncIterable<Chunk>): Promise<ParsedFile>
   const labels = new Map<string, ObjectLabel>();
   for await (const c of chunks) {
     file.slicer = c.slicer;
+    if (c.flavourName !== undefined) file.flavourName = c.flavourName;
     file.moveCount = c.firstMove + c.moveCount;
     file.moves.push(c.moves);
     file.extrusion.push(c.extrusion);

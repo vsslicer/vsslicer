@@ -27,6 +27,7 @@ import type {
 test('ParsedFile shape', () => {
   expectTypeOf<ParsedFile>().toEqualTypeOf<{
     slicer: Slicer;
+    flavourName?: string;
     moveCount: number;
     moves: ArrayBuffer[];
     extrusion: ArrayBuffer[];
@@ -52,6 +53,7 @@ test('Chunk shape', () => {
     diagnostics: Diagnostic[];
     bytesRead: number;
     slicer: Slicer;
+    flavourName?: string;
     thumbnails: Thumbnail[];
     objects: ObjectLabel[];
     config: Record<string, string>;

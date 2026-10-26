@@ -36,6 +36,8 @@ const rest = (buf: Uint8Array, i: number, end: number): string => decoder.decode
  */
 export class SlicerTags {
   slicer: Slicer = 'unknown';
+  /** The last flavour name the file stated (`;FLAVOR:`, `; gcode_flavor =`), even when an option fixed the flavour. */
+  flavourName: string | undefined;
   private readonly out: ChunkWriter;
   private readonly machine: Machine;
   /** An explicit `flavour` option beats the detected one. */
@@ -132,6 +134,7 @@ export class SlicerTags {
   }
 
   private flavour(name: string): void {
+    if (name !== '') this.flavourName = name;
     if (!this.flavourFixed) this.machine.flavour = flavourFromName(name);
   }
 
