@@ -72,16 +72,13 @@ export function resolveLimits(limits: Partial<CuraArchiveLimits> = {}): CuraArch
   return out;
 }
 
-/** The reason a name is unsafe to use as a path, or undefined. */
+/** The reason an entry name is unsafe, or undefined. Names stay in memory, so colons and trailing dots/spaces (valid Cura ids) pass; a caller that writes them to disk sanitises there. */
 export function unsafeEntryName(name: string): string | undefined {
   if (name.length === 0) return 'empty name';
   if (name.includes('\0')) return 'NUL in name';
   if (name.includes('\\')) return 'backslash in name';
   if (name.startsWith('/')) return 'absolute path';
-  if (name.charCodeAt(1) === 0x3a) return 'drive-letter path';
-  if (name.includes(':')) return 'colon in name (NTFS alternate stream)';
   if (name.split('/').some((s) => /^[. ]*$/.test(s))) return 'empty, "." or ".." segment'; // single-class star: linear
-  if (name.split('/').some((s) => /[. ]$/.test(s))) return 'segment ends in "." or space (Windows trims it)';
   return undefined;
 }
 
