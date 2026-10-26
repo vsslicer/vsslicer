@@ -30,10 +30,12 @@
     "prepack": "pnpm build",
     "test": "tsc --noEmit -p tsconfig.test.json && vitest run",
     "test:coverage": "vitest run --coverage",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "fixture:large": "node scripts/generate-large-fixture.mjs"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
+    "@types/three": "0.186.0",
     "@vitest/coverage-v8": "5.0.5",
     "@vsslicer/tooling": "^0.8.1",
     "eslint": "10.13.0",
@@ -41,5 +43,9 @@
     "typescript": "7.0.2",
     "vitest": "5.0.5"
   },
-  "prettier": "@vsslicer/tooling/prettier"
+  "prettier": "@vsslicer/tooling/prettier",
+  "dependencies": {
+    "three": "0.186.1",
+    "three-mesh-bvh": "0.9.16"
+  }
 }

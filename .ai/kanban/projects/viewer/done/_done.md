@@ -9,3 +9,5 @@
 7. [VWR-42: Deduplicate vertices into indexed geometry](042-deduplicate-vertices-into-indexed-geometry.md)
 8. [VWR-43: Compute volume, bounding box and degenerate triangles](043-compute-volume-bounding-box-and-degenerate-triangles.md)
 9. [VWR-4: Build broken-package fixtures for each error class](004-build-broken-package-fixtures-for-each-error-class.md)
+10. [VWR-46: Build and serialise a BVH with three-mesh-bvh](046-build-and-serialise-a-bvh-with-three-mesh-bvh.md)
+11. [VWR-7: Implement openPackage and Package.parts](007-implement-openpackage-and-package-parts.md)
