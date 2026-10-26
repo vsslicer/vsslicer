@@ -3,7 +3,7 @@ id: 31
 title: Port the instanced segment renderer to WebGL2
 type: feature
 priority: P0
-effort: L
+effort: M
 model: opus
 area: [renderer]
 story: US10

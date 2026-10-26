@@ -3,7 +3,7 @@ id: 32
 title: Add colour modes with a palette texture
 type: feature
 priority: P0
-effort: L
+effort: M
 model: sonnet
 area: [renderer]
 story: US10

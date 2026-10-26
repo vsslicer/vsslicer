@@ -26,4 +26,4 @@ End-of-sprint audit for SP4, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Not started.
+Audit `.ai/audits/SP4-audit.md`: 11 findings (1 must, 5 should, 5 nice). Cards in SP5: GCP-88 (P0), GCP-89, GCP-90, GCP-91, PLT-189, GCP-92 (P1), GCP-93, PLT-190, PLT-191, GCP-94, GCP-95 (P2).
