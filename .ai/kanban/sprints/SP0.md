@@ -8,6 +8,7 @@ end: "2026-10-25T18:06+00:00"
 committed: 72
 completed: 72
 closed: "2026-10-25T18:06+00:00"
+scheduled: 72
 ---
 
 Answer what VSSlicer has to build: the mainline slicers' features, the formats, printer and
