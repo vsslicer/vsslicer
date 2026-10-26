@@ -108,7 +108,8 @@
     "test": "node --test test/*.test.ts",
     "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode",
     "format": "prettier --write .",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "bench": "node --no-warnings bench/run.ts"
   },
   "dependencies": {
     "@vsslicer/gcode-api": "^0.7.0",

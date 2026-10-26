@@ -2,6 +2,7 @@
 name: ci
 
 on:
+  workflow_dispatch: # also runs the full 500 MB memory bench (GCP-42)
   pull_request:
   push:
     branches: [main]
@@ -97,6 +98,13 @@ jobs:
         env:
           VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
           BASE: ${{ needs.select.outputs.base }}
+      # GCP-42: peak host, worker and webview memory of the G-code preview at 50, 200 and 500 MB against bench/budget.json (bytes, never time; budgets are per OS)
+      - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'gcode-preview')
+        working-directory: vsslicer/modules/gcode-preview
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          # PRs gate 50 and 200 MB; the 500 MB set (minutes, GBs) only on a manual run
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then pnpm bench; else pnpm bench --sizes 50,200; fi
       - if: always()
         run: scripts/registry.sh stop
 
