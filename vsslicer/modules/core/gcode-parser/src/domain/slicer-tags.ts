@@ -78,6 +78,13 @@ export class SlicerTags {
       case 0x43: // C
         if ((n = after(buf, i, end, 'CHANGE_LAYER')) >= 0 && rest(buf, n, end) === '') this.layer();
         return;
+      case 0x45: // E: klipper_estimator macro time (klipper_estimator@dbcff4a:lib/src/planner.rs:171-178)
+        if ((n = after(buf, i, end, 'ESTIMATOR_ADD_TIME')) >= 0 && isBlank(buf[n])) {
+          const word = rest(buf, n, end).split(/\s/, 1)[0] ?? '';
+          const seconds = word === '' ? NaN : Number(word);
+          if (Number.isFinite(seconds) && seconds >= 0) this.out.marker('ESTIMATOR_ADD_TIME', fileOffset, seconds);
+        }
+        return;
       case 0x5a: // Z
         if ((n = after(buf, i, end, 'Z_HEIGHT:')) >= 0 || (n = after(buf, i, end, 'Z:')) >= 0) {
           const z = Number(rest(buf, n, end));

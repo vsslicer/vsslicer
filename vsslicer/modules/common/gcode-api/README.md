@@ -18,7 +18,9 @@ type Parse = (source: AsyncIterable<Uint8Array>, opts?: { signal?: AbortSignal }
   memory), `layers`, `markers`, `diagnostics`, `thumbnails`, `objects`, `config`.
 - `Layer`: `{ z, firstMove }`; layer `i` runs to the next layer's `firstMove` (or `moveCount`).
 - `Marker`: a command kept by name and **not** interpreted (unknown or out-of-scope commands,
-  pauses such as M600): `{ name, fileOffset, moveIndex }`. Interpreted modal commands (F, fan,
+  pauses such as M600): `{ name, fileOffset, moveIndex, seconds? }`. `seconds` is the time the
+  command takes by itself, on `G4` (dwell) and `ESTIMATOR_ADD_TIME` (the `; ESTIMATOR_ADD_TIME <s>`
+  comment) markers only. Interpreted modal commands (F, fan,
   temperatures, limits, pressure advance, tool changes) are never markers; they are state changes.
 - `Diagnostic`: `{ code, severity: 'error' | 'warning' | 'info', fileOffset, message }`.
 

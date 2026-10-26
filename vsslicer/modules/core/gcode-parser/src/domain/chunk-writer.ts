@@ -136,8 +136,10 @@ export class ChunkWriter {
     this.changeCount++;
   }
 
-  marker(name: string, fileOffset: number): void {
-    this.markers.push({ name, fileOffset, moveIndex: this.nextMove });
+  marker(name: string, fileOffset: number, seconds?: number): void {
+    const m: Marker = { name, fileOffset, moveIndex: this.nextMove };
+    if (seconds !== undefined) m.seconds = seconds;
+    this.markers.push(m);
   }
 
   thumbnail(t: Thumbnail): void {

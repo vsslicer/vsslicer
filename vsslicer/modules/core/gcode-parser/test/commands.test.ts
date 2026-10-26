@@ -311,13 +311,33 @@ describe('markers', () => {
     const r = await run('G1 X1\nM486 S1 Acube\nG4 P200\nexclude_object_start NAME=a\nG28\nM600\nG92.1\nG1 X2\n');
     expect(r.markers).toEqual([
       { name: 'M486', fileOffset: 6, moveIndex: 1 },
-      { name: 'G4', fileOffset: 20, moveIndex: 1 },
+      { name: 'G4', fileOffset: 20, moveIndex: 1, seconds: 0.2 },
       { name: 'EXCLUDE_OBJECT_START', fileOffset: 28, moveIndex: 1 },
       { name: 'G28', fileOffset: 56, moveIndex: 1 },
       { name: 'M600', fileOffset: 60, moveIndex: 1 },
       { name: 'G92.1', fileOffset: 65, moveIndex: 1 },
     ]);
     expect(r.moves).toHaveLength(2);
+  });
+  it('G4 carries its dwell in seconds as the flavour reads it', async () => {
+    const g4 = 'G4\nG4 P1500\nG4 S2\nG4 P500 S3\nG4 S2 P500\nG4 P-5\n';
+    const secs = async (flavour?: 'marlin' | 'klipper' | 'reprapfirmware') =>
+      (await run(g4, flavour ? { flavour } : {})).markers.map((m) => [m.name, m.seconds]);
+    const sOverP = [0, 1.5, 2, 3, 2, 0].map((s) => ['G4', s]);
+    expect(await secs()).toEqual(sOverP);
+    expect(await secs('reprapfirmware')).toEqual(sOverP);
+    expect(await secs('klipper')).toEqual([0, 1.5, 0, 0.5, 0.5, 0].map((s) => ['G4', s]));
+  });
+  it('reads ; ESTIMATOR_ADD_TIME <s> [label] as a marker with seconds; a bad value is ignored', async () => {
+    const r = await run(
+      'G1 X1\n; ESTIMATOR_ADD_TIME 12.5 Purge\n;ESTIMATOR_ADD_TIME 3\n; ESTIMATOR_ADD_TIME\n' +
+        '; ESTIMATOR_ADD_TIME -1\n; ESTIMATOR_ADD_TIME x\n; ESTIMATOR_ADD_TIMEX 4\nG1 X2\n',
+    );
+    expect(r.markers).toEqual([
+      { name: 'ESTIMATOR_ADD_TIME', fileOffset: 6, moveIndex: 1, seconds: 12.5 },
+      { name: 'ESTIMATOR_ADD_TIME', fileOffset: 38, moveIndex: 1, seconds: 3 },
+    ]);
+    expect(r.diagnostics).toEqual([]);
   });
   it('interpreted modal commands are never markers; G21 is a silent no-op', async () => {
     const r = await run('G21\nG90\nM82\nG92 E0\nM104 S1\nM106 S1\nT0\nG17\n');
