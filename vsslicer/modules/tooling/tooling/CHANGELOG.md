@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- PLT-198: check-licence accepts AGPL-3.0-only only with a non-empty PROVENANCE.md and for the named data packages (profiles-data-orca, profile-catalogue-data).
+
 ## 0.8.4
 
 - PLT-195: `third-party-notices` copies NOTICE, NOTICE.md and PROVENANCE.md of bundled `@vsslicer/*` packages (1 MiB cap).

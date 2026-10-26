@@ -35,19 +35,19 @@ const mod = (pkg, { provenance = false, header = 'AGPL-3.0-only' } = {}) => {
   const d = mkdtempSync(join(tmpdir(), 'licence-'));
   writeFileSync(join(d, 'package.json'), JSON.stringify(pkg));
   writeFileSync(join(d, 'a.mjs'), `// SPDX-License-Identifier: ${header}\n`);
-  if (provenance) writeFileSync(join(d, 'PROVENANCE.md'), 'x');
+  if (provenance) writeFileSync(join(d, 'PROVENANCE.md'), provenance === 'empty' ? '' : 'x');
   const problems = check(d);
   rmSync(d, { recursive: true, force: true });
   return problems;
 };
-const only = { license: 'AGPL-3.0-only', files: ['PROVENANCE.md'] };
+const only = { name: '@vsslicer/profiles-data-orca', license: 'AGPL-3.0-only', files: ['PROVENANCE.md'] };
 
 test('or-later passes', () =>
   assert.deepStrictEqual(mod({ license: 'AGPL-3.0-or-later' }, { header: 'AGPL-3.0-or-later' }), []));
 test('only with PROVENANCE listed and present passes', () =>
   assert.deepStrictEqual(mod(only, { provenance: true }), []));
 test('only without PROVENANCE in files fails naming the rule', () => {
-  const p = mod({ license: 'AGPL-3.0-only', files: ['dist'] }, { provenance: true });
+  const p = mod({ ...only, files: ['dist'] }, { provenance: true });
   assert.strictEqual(p.length, 1);
   assert.match(p[0], /package-license: .*PROVENANCE\.md/);
 });
@@ -62,4 +62,14 @@ test('an only module needs the only header, an or-later header fails spdx-header
 test('an oversized package.json is refused', () => {
   const p = mod({ license: 'AGPL-3.0-or-later', pad: 'x'.repeat(1024 * 1024) });
   assert.match(p[0], /cannot read package.json/);
+});
+test('only with an empty PROVENANCE.md fails', () => {
+  const p = mod(only, { provenance: 'empty' });
+  assert.strictEqual(p.length, 1);
+  assert.match(p[0], /non-empty PROVENANCE\.md/);
+});
+test('only for a package outside the data allowlist fails', () => {
+  const p = mod({ ...only, name: 'evil' }, { provenance: true });
+  assert.strictEqual(p.length, 1);
+  assert.match(p[0], /allowed only for the data packages/);
 });

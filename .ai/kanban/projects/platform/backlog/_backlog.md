@@ -137,5 +137,4 @@
 135. [PLT-174: Test that a signed macOS or Windows build updates from a GitHub release](174-test-that-a-signed-macos-or-windows-build-updates-from-a-git.md)
 136. [PLT-175: Release signed macOS and Windows installers](175-release-signed-macos-and-windows-installers.md)
 137. [PLT-193: Add gcode-language to the extension pack](193-add-gcode-language-to-the-extension-pack.md)
-138. [PLT-198: Require a non-empty PROVENANCE.md and a data package for AGPL-3.0-only in check-licence](198-require-a-non-empty-provenance-md-and-a-data-package-for-agp.md)
-139. [PLT-199: Give the three extensions short ids with the extensionName override](199-give-the-three-extensions-short-ids-with-the-extensionname-o.md)
+138. [PLT-199: Give the three extensions short ids with the extensionName override](199-give-the-three-extensions-short-ids-with-the-extensionname-o.md)
