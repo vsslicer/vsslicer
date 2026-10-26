@@ -13,3 +13,4 @@
 11. [GCP-97: Drive the timeline marker from ToolheadWindow trapezoids and dwells](097-drive-the-timeline-marker-from-toolheadwindow-trapezoids-and.md)
 12. [GCP-108: Give ToolheadWindow a public transfer form and a planner-free sampler entry](108-give-toolheadwindow-a-public-transfer-form-and-a-planner-fre.md)
 13. [GCP-96: Add width, flow, fan and temperature colour modes](096-add-width-flow-fan-and-temperature-colour-modes.md)
+14. [GCP-109: Use ToolheadWindow's transfer form and the planner-free entry in the preview](109-use-toolheadwindow-s-transfer-form-and-the-planner-free-entr.md)

@@ -2,7 +2,7 @@
 // The timeline behind play/pause/step/speed: a clock over the print's seconds and the toolhead position read from
 // the move records, which carry the planner's start times (f32). Pure, no DOM.
 import { MOVE_STRIDE, MoveOffset, type Layer } from '@vsslicer/gcode-api';
-import type { ToolheadSample, ToolheadWindow } from '@vsslicer/gcode-planner';
+import type { ToolheadSample, ToolheadWindow } from '@vsslicer/gcode-planner/window';
 import { unpackWindow } from '../../domain/window.ts';
 
 /** Speed multipliers offered, 1 = real time. */
