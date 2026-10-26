@@ -78,8 +78,7 @@
       "c": "ini:1459",
       "p": "MK35_025",
       "want": false,
-      "why": "MK3.5 notes have no PRINTER_VENDOR_PRUSA3D keyword",
-      "knownLossy": "PRINTER_VENDOR_PRUSA3D becomes printer.vendor == 'PrusaResearch'; the MK3.5 is a PrusaResearch printer whose notes lack the keyword (PrusaResearch.ini:41869), and .*PRINTER_MODEL_MK3.* widens to the MK3.5 tag, so the unified form says true"
+      "why": "MK3.5 notes have no PRINTER_VENDOR_PRUSA3D keyword"
     },
     {
       "c": "ini:1632",

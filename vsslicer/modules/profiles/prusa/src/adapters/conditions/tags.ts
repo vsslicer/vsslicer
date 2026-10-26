@@ -33,10 +33,11 @@ export const PRUSA_NOTE_TAGS: readonly string[] = [
   'SEQ_ARRANGE_MODEL_COREONEL',
 ];
 
-/** Tags that have a first-class unified field instead of a tag test. */
-export const PRUSA_TAG_FIELDS: Readonly<Record<string, string>> = {
-  PRINTER_VENDOR_PRUSA3D: "printer.vendor == 'PrusaResearch'",
-};
+/**
+ * Tags that have a first-class unified field instead of a tag test. Empty on purpose: PRINTER_VENDOR_PRUSA3D
+ * is not a vendor test, since PrusaResearch.ini:41869 (MK3.5) and :40968 / :40995 (MK4IS, MK4ISMMU3) notes lack it.
+ */
+export const PRUSA_TAG_FIELDS: Readonly<Record<string, string>> = {};
 
 /** Character set of a notes regex core we expand; it is matched by profile-api's non-backtracking engine, never by V8. */
 const SAFE_CORE = /^[A-Za-z0-9_.|()[\]^\\*+?]{1,150}$/;
