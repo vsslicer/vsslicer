@@ -115,6 +115,9 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 - Only the coordinator commits. Parallel workers write files and never run `git add` or
   `git commit`, so commits never race on the index.
 - No Co-Authored-By or other AI attribution trailers in commits.
+- DCO: every commit needs a `Signed-off-by` trailer (owner decision Q12, CONTRIBUTING.md). Until the
+  first-push history rewrite (which also adds sign-offs to the existing history and removes
+  profiles-data-orca's vendored data, Q21), commits need not carry one: the rewrite adds them.
 - Push only when asked. There is no remote yet.
 - Notes and logs under `.ai/local/` (ignored) or `.reference/notes/` (ignored).
 
