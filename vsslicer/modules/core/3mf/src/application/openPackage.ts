@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { MissingProductionPartError, UnsupportedRequiredExtensionError } from '../domain/errors.ts';
 import type { Package } from '../domain/package.ts';
+import { makeEditable } from './editPackage.ts';
+import type { EditablePackage, EditPackageDeps } from './editPackage.ts';
 import type { ZipArchive } from './zipArchive.ts';
 
 /** A `Package` plus the names of its thumbnail parts. */
@@ -16,7 +18,7 @@ export const SUPPORTED_EXTENSIONS: ReadonlySet<string> = new Set([
 ]);
 
 /** What the use case needs from the outside: the zip, the OPC layer and the root-model scan. */
-export interface OpenPackageDeps {
+export interface OpenPackageDeps extends EditPackageDeps {
   openZip(bytes: Uint8Array): ZipArchive;
   readPackage(zip: ZipArchive): Package;
   scanModel(
@@ -33,9 +35,10 @@ const isImage = (type: string): boolean => type === 'image/png' || type === 'ima
  * inflated anyway for the checks; lazy bytes would need a `Part` change, taken up with VWR-32 if the 500 MB target needs it.
  * shortcut: only the root model is scanned for `p:path`, nested production models are checked when they are loaded.
  */
-export function createOpenPackage(deps: OpenPackageDeps): (bytes: Uint8Array) => OpenedPackage {
+export function createOpenPackage(deps: OpenPackageDeps): (bytes: Uint8Array) => EditablePackage {
   return (bytes) => {
-    const pkg = deps.readPackage(deps.openZip(bytes));
+    const zip = deps.openZip(bytes);
+    const pkg = deps.readPackage(zip);
     const root = pkg.parts.find((p) => p.name === pkg.rootModel);
     const scan = deps.scanModel(root?.bytes ?? new Uint8Array(), pkg.rootModel);
     const unsupported = scan.requiredExtensions.find((ns) => !SUPPORTED_EXTENSIONS.has(ns));
@@ -48,6 +51,6 @@ export function createOpenPackage(deps: OpenPackageDeps): (bytes: Uint8Array) =>
     const thumbnails = pkg.parts
       .filter((p) => isImage(p.contentType) && /^Metadata\//i.test(p.name))
       .map((p) => p.name);
-    return { ...pkg, thumbnails };
+    return makeEditable(deps, bytes, zip, { ...pkg, thumbnails });
   };
 }

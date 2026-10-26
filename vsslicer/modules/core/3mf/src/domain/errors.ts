@@ -5,7 +5,8 @@ export type ThreeMfErrorCode =
   | 'malformed-xml'
   | 'unsupported-required-extension'
   | 'size-cap-exceeded'
-  | 'missing-production-part';
+  | 'missing-production-part'
+  | 'invalid-part-edit';
 
 /** Base of every 3MF failure: a stable `code` for callers, a `userMessage` safe to show as is. */
 export abstract class ThreeMfError extends Error {
@@ -66,5 +67,15 @@ export class MissingProductionPartError extends ThreeMfError {
   constructor(path: string, options?: ErrorOptions) {
     super(`The model refers to the part "${path}" (Production extension), but the file does not contain it.`, options);
     this.path = path;
+  }
+}
+
+/** A part edit that cannot be done: the part is missing, already there, the root model, or not a plain part name. */
+export class InvalidPartEditError extends ThreeMfError {
+  readonly code = 'invalid-part-edit';
+  readonly part: string;
+  constructor(part: string, why: string, options?: ErrorOptions) {
+    super(`Cannot edit the part "${part}": ${why}.`, options);
+    this.part = part;
   }
 }

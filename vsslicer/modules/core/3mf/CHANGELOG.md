@@ -7,3 +7,5 @@
 - VWR-4: broken-package fixtures for each error class, and the test zip builder.
 - VWR-5: zip reading behind a `ZipArchive` port with a per-entry size cap (ZIP64, data descriptors, raw entry bytes).
 - VWR-6: read `[Content_Types].xml` and relationships into the `Package` (OPC adapter).
+- VWR-8: `writeZip` saves a zip by copying untouched entries raw and deflating replaced or added ones (ZIP64, archive comment kept).
+- VWR-7: `openPackage(bytes)` returns parts, thumbnails, with the required-extension and production-part checks.
