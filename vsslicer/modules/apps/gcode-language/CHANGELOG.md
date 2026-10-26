@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.1
 
 - PRF-179: the 36 Bambu catalogue entries no longer quote OrcaSlicer BBL template comments (AGPL-3.0-only); their descriptions are our own wording, so the module stays AGPL-3.0-or-later. PROVENANCE.md says so and is published with the package.
 

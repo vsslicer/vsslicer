@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/profile-catalogue-data",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The generated settings catalogue (Orca, Bambu, Prusa, SuperSlicer, Cura) and its generator, with a bounded loader (data only).",
   "license": "AGPL-3.0-only",
   "type": "module",
