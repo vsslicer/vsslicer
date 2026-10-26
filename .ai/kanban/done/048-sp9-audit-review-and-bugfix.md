@@ -27,3 +27,6 @@ End-of-sprint audit for SP9, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 ## Progress
 
 Not started.
+- 2026-10-26 sp9-auditor: audit written to `.ai/audits/SP9-audit.md`: SP8 fixes hold; 0 must fix, 4 should fix, 7 nice to have. Cards section left for the coordinator.
+
+**Cards (sp9-coordinator):** audit `.ai/audits/SP9-audit.md`: no must-fix, 4 should-fix (finding 4 split per board), 7 nice-to-have. SP10 bug cards: PRF-194, GCP-118, PRF-195, GCP-119, VWR-396 (P1); PLT-198, VWR-397, SLC-279, SLC-280, PRF-196, PRF-197, PRF-198 (P2).

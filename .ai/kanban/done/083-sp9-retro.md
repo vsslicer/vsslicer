@@ -28,3 +28,6 @@ Retro for SP9, step 4 of `.ai/skills/sprint-cycle`.
 ## Progress
 
 Not started.
+
+sp9-retro (2026-10-26): `.ai/retros/SP9-retro.md` written; 58 points built and reviewed 09:17 to 10:38 (62 with PLT-31 and PLT-33 closed on Q16), close-sprint records 66 of 280 with VSS-48 and VSS-83 done; idle 31.4% (21.7% without the restart), 13 of 27 first reviews failed, 4 resource-bound rounds.
+Estimation: "After SP9" entry; rules 11, 17, 19, 23, 25, 26 amended and rule 28 added (review rule written into contract cards, PRN-4); no card re-sized, no dry run.

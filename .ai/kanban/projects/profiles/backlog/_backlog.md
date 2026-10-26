@@ -134,3 +134,8 @@
 132. [PRF-176: Add Edit in template editor to G-code fields](176-add-edit-in-template-editor-to-g-code-fields.md)
 133. [PRF-57: Create the `profiles-extension` module (vsslicer.profiles)](057-create-the-vsslicer-profiles-extension-skeleton.md)
 134. [PRF-193: Read the catalogue data from profile-catalogue-data in profile-api](193-read-the-catalogue-data-from-profile-catalogue-data-in-profi.md)
+135. [PRF-194: Accept Cura profile names with a colon or a trailing dot or space in .curaprofile archives](194-accept-cura-profile-names-with-a-colon-or-a-trailing-dot-or-.md)
+136. [PRF-195: Cap the Prusa YAML preset and vendor readers' own diagnostics](195-cap-the-prusa-yaml-preset-and-vendor-readers-own-diagnostics.md)
+137. [PRF-196: Count YAML documents against the parser node cap](196-count-yaml-documents-against-the-parser-node-cap.md)
+138. [PRF-197: Swap generated data into place by rename in profiles-data-orca generate.mjs](197-swap-generated-data-into-place-by-rename-in-profiles-data-or.md)
+139. [PRF-198: Delete the test-only readBounded from the Cura catalogue tool](198-delete-the-test-only-readbounded-from-the-cura-catalogue-too.md)

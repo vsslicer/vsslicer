@@ -29,3 +29,6 @@
 27. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
 28. [GCP-107: Add fan and temperature colour modes](107-add-fan-and-temperature-colour-modes.md)
 29. [GCP-117: Check the extrude-only limit against klipper_estimator with the extruder limiter on](117-check-the-extrude-only-limit-against-klipper-estimator-with-.md)
+30. [GCP-118: Apply a follow position that arrives before the preview has loaded its moves](118-apply-a-follow-position-that-arrives-before-the-preview-has-.md)
+31. [GCP-119: Replace the wall-time assert in gcode-planner planner.test.ts](119-replace-the-wall-time-assert-in-gcode-planner-planner-test-t.md)
+32. [GCP-120: Move PrintPosition and the follow command ids into gcode-api](120-move-printposition-and-the-follow-command-ids-into-gcode-api.md)

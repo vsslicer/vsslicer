@@ -1,7 +1,7 @@
 ---
 id: D21
-title: "Cards that waited on owner-gated cards test with local inputs instead"
-status: proposed
+title: Cards that waited on owner-gated cards test with local inputs instead
+status: accepted
 date: 2026-10-26
 cards: [VWR-13, VWR-21, VWR-25, VWR-27, VWR-28, VWR-70, PRF-25, PRF-27, PRF-30, PRF-32, PRF-40, PRF-130]
 ---

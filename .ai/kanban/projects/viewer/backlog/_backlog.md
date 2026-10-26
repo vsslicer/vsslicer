@@ -358,3 +358,5 @@
 356. [VWR-386: Test that auto-orient never touches locked plates under random commands](386-test-that-auto-orient-never-touches-locked-plates-under-rand.md)
 357. [VWR-387: Add Auto-orient to the object and plate menus with progress, cancel and the arrange offer](387-add-auto-orient-to-the-object-and-plate-menus-with-progress-.md)
 358. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
+359. [VWR-396: Replace the wall-time assert in mesh parse-model.test.ts](396-replace-the-wall-time-assert-in-mesh-parse-model-test-ts.md)
+360. [VWR-397: Check the queue limit before downloading in the mesh worker pool parseUrl](397-check-the-queue-limit-before-downloading-in-the-mesh-worker-.md)

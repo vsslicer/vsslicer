@@ -72,6 +72,22 @@ After SP8 (retro `.ai/retros/SP8-retro.md`):
   them on resource bounds (rule 25's target is one).
 - close-sprint records 92 of 305 if the audit and retro cards are done (88 plus VSS-47 and VSS-82).
 
+After SP9 (retro `.ai/retros/SP9-retro.md`):
+
+- **Plan about 4 cards an hour per lane at sprint start** (rule 23 amended): SP9 built 58 points in 81.1
+  minutes (42.9 an hour; plan 92) from 12 lanes; the one lane with work all sprint (profiles-prusa) did 4
+  cards, 11 points in 67 minutes. A passing card took a median 15.8 minutes from dispatch to done (SP8 11.9)
+  in waves of 9 to 15 agents, and 8 to 10 in waves of 2 to 6.
+- Agent time is **4.2 agent-minutes per built point** (SP8 1.86): reviews 126.3 of 245.2 agent-minutes, all
+  Opus, on mostly 2-point bug cards; reviews and fixes 66.7%.
+- Mixed review-and-worker messages (rule 11, tried first in SP9) raised agents per wave from 4.0 to 7.0 but
+  idle was 31.4% (21.7% without a 10.3-minute coordinator restart) and finished agents waited 243.4
+  agent-minutes (SP8 123.8).
+- First-review failures 1 in 2.1 (features 9 of 12, bugs 3 of 14, all three the wall-clock-assert cards);
+  19 failed reviews, 4 of them on resource bounds although every card had a Bounds criterion.
+- close-sprint records 66 of 280 if the audit and retro cards are done (62 plus VSS-48 and VSS-83; 62
+  includes the SP4 spikes PLT-31 and PLT-33, closed on Q16 without SP9 work).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -144,6 +160,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Testable: idle under 15% from the first wave to the last review. Evidence: SP8 alternated
     workers-only and reviews-only messages, 17 waves for 40 cards; gaps median 0.8 min (16.9 in all, one
     over 2), idle 21.2% of 80.5 minutes.
+    **Amended SP9 (tried):** mixing works and stays: 7.0 agents a wave (SP8 4.0), 11 waves for 25 built
+    cards and 19 failed reviews. It did not bring idle under 15%: the gaps carry one wave's commits and the
+    next wave's prompts (median 1.45 min), and a mixed wave lasts as long as its longest review. Keep a wave
+    to about 8 agents, a review to at most two cards, and write the next wave's prompts while the current
+    one runs. Testable unchanged, excluding a restart the main session causes. Evidence: SP9 idle 31.4% of
+    82.6 minutes from 09:17:00 to 10:39:38, 21.7% without the 10.3-minute coordinator restart; the other
+    large gap (3.7) was the re-plan from the owner's answers.
 12. **Budget fix rounds by kind:** one per 9 bugfix cards, one per 2 cards of new code (ports of
     upstream algorithms, protocols, contracts, research decisions). Each fix round costs a review
     wave, about 5 minutes wall, even when the fix takes under a minute. Evidence: SP3 8 of 22 failed
@@ -204,6 +227,10 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     slicers' keys) ran 30.7 min with four workers and three reviews (180 agent-minutes waiting; the
     reviewed cards' commits waited about 25 min), PRF-18 (M, Opus, four slicers) 23.1 with four short
     agents (72.8); 393 in all.
+    **Amended SP9:** a review of three cards counts as long, and a message that mixes reviews and workers
+    is long if any agent in it is. Testable: finished agents wait under 150 agent-minutes. Evidence: SP9
+    the PRF-186, 188 and 187 review ran 12.7 min and the GCP-21 worker 11.8 (a Rust build) in a 15-agent
+    wave: 116.4 agent-minutes waiting there, 243.4 in all (SP8 123.8); no agent over 15 minutes (met).
 18. **A card that creates a module with VS Code integration tests, or a spike that measures with
     repeated runs, is XL or is split into build and measure**, and every OS a spike must run on other
     than the coordinator's is its own owner-blocked card at planning (rule 6). Testable: no card ends a
@@ -246,6 +273,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     substring `exclude_materials`), PRF-24 (boost `ini_parser` headers, duplicates, ASCII trim) and
     PRF-10 (schema mapping) failed on upstream semantics the cards did not quote; a failed round cost 10
     to 12 minutes (PRF-180 FAIL 07:43, pass 07:52).
+    **Amended SP9:** before moving a card to review, the worker runs the reviewer's mutation probe on each
+    new test (remove the behaviour or bound it names; the test must fail) and records each probe in
+    Progress. Testable: features fail first review at most 1 in 2. Evidence: SP9 features failed 9 of 12
+    (target missed), bugs 3 of 14; most findings were tests that passed with their behaviour removed
+    (PRF-89 size and depth, GCP-115 the counted read path, PLT-197 the fixture walk-up twice, VWR-49 the
+    transfer, PRF-33 the ratio test). A round cost about 26 minutes in the large early waves (with the
+    restart) and 5 to 8 in the small late ones (SLC-13 and PLT-197, two rounds in 22 to 26 minutes).
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -324,6 +358,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     feature lanes ran 3.2 to 11.6 points an hour (profiles 11 in 57 min, profiles-prusa 9 in 71,
     profiles-cura 2 in 38), the five longest cards were long only by review rounds, and the sprint still
     made 65.4 an hour from about 25 lanes (16 scaffolds in 4 agents, 32 points in 12 minutes).
+    **Amended SP9:** held where a lane had work all sprint (profiles-prusa 4 cards in 67 minutes against an
+    estimate of 3 to 4), but the cycle follows wave size: about 15 minutes in waves of 9 or more agents,
+    about 5 in waves of 6 or fewer. Plan 4 cards an hour per lane at sprint start. Evidence: SP9 passing
+    cards' median 15.8 minutes in waves 1 and 2 (14.2 to 18.1), 7.8 and 10.3 in waves 5 and 6; other lanes
+    ran dry or started late (slicer and tooling's second cards at 10:09 and 10:16 after the 09:22 re-plan).
 24. **Report delivered and closed points.** close-sprint counts every card whose `sprint` is the sprint
     at close, done or not, including the audit and retro cards and cards pulled in, and its committed
     figure moves with any re-sizing of carried cards before the close. Retros give both figures and
@@ -355,11 +394,23 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     build) and PRN-131 twice (quadratic collisions), none of which named a bound in its criteria; SLC-9
     (unvalidated `timeoutMs`, an `onLine` throw escaping the stream listener); PRF-180 (the fix dropped
     the `text.length > max` reject).
+    **Amended SP9:** written bounds cut the rounds from 6 to 4, not to one. A Bounds criterion names the
+    hostile cases the review will build, not only the caps: for archives and file trees, symlink chains,
+    Unicode and case aliases of a path component, overlapping entries, and caps that hold across every
+    input of one call; and each bound's test is shown to fail with the bound removed (rule 19). Testable
+    unchanged. Evidence: SP9 bounds in every card before dispatch (coordinator), yet SLC-13 failed twice (a
+    symlink chain escape with an overlap bomb, then a Unicode alias of a parent), PRF-190 once (caps per
+    tree, not across trees; a symlinked root), PRF-89 once (size and depth tests that could not fail).
 26. **Tests do not assert wall time.** A performance test asserts operation counts, a step budget or a
     ratio between two input sizes; a timeout exists only as a hang guard of at least 30 s. Testable: no
     timing flake in the next sprint's ci runs. Evidence: SP7 at machine load about 76, the 3mf fan-out
     (1 s), gcode-parser (500 ms) and a profile-api 5 s timeout flaked (coordinator), in the sprint in
     which PRF-178 made profile-api's regex timing tests load-independent. Since SP7.
+    **Amended SP9:** a card that replaces wall-clock asserts names, per test, what replaces each assert
+    (an operation count, a step budget or a size ratio) and which test carries the hang guard. Evidence:
+    SP9 all three such cards failed first review on exactly that (VWR-395 guard on the wrong test, PRF-186
+    timeouts below the guard, GCP-115 hang guards instead of counts, then a count on an unproven path),
+    43 to 66 minutes for 2-point bugs.
 27. **Agents record in the card file, and the record matches what shipped.** Worker and fix-worker
     prompts say "append under Progress in the card file with an edit"; `board.py note` writes only to
     the activity log and never counts as the record. A release card names its version after reading the
@@ -369,3 +420,11 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     only `activity.jsonl` (reviewers copied them in); PRF-136 planned `profile-api@0.2.0` and released
     0.1.1 because 0.1.0 already carried the increment, re-locking four dependents (coordinator); PRN-5
     (`model: opus`) was built by a Sonnet batch worker and failed first review. Since SP8.
+28. **A failed review of a contract card writes the rule it expects into the card as a criterion**, the
+    semantics and not only the fix, and a re-review checks the card against that criterion instead of
+    deriving the rule again. A second failure on the same rule goes to the coordinator, who settles the
+    rule in the card before the next fix is dispatched. Testable: no card fails three rounds on one rule.
+    Evidence: SP9 PRN-4 (PrinterStatus `mergeStatus` truncations) failed three rounds: round 1 asked to keep
+    base truncations whose top-level field the patch did not set, round 2 found that wrong for keyed lists
+    and merged objects and specified a structural `replaces()` rule, round 3 failed on the truncation rule
+    again; the specs conflicted across fresh reviewers (coordinator) and the card was carried. Since SP9.
