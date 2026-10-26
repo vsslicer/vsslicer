@@ -4,19 +4,19 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 
 | Column | Cards |
 | --- | --- |
-| [Backlog](backlog/_backlog.md) | 90 |
+| [Backlog](backlog/_backlog.md) | 88 |
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 0 |
 | [In progress](doing/_doing.md) | 0 |
 | [In review](review/_review.md) | 0 |
 | [Done](done/_done.md) | 11 |
 
-37 finished card(s) are archived in [archive/](archive/), by sprint or month.
+39 finished card(s) are archived in [archive/](archive/), by sprint or month.
 
 ## Milestones
 
-- [M1: Preview](milestones/M1-preview.md): draft, 113/160 cards done
-- [M2: Open](milestones/M2-open.md): draft, 0/282 cards done
+- [M1: Preview](milestones/M1-preview.md): draft, 128/160 cards done
+- [M2: Open](milestones/M2-open.md): draft, 64/299 cards done
 - [M3: Print](milestones/M3-print.md): draft, 0/361 cards done
 - [M4: Daily use](milestones/M4-daily-use.md): draft, 0/480 cards done
 - [M5: Parity](milestones/M5-parity.md): draft, 0/467 cards done
@@ -65,7 +65,6 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 - [SP48: Parity 13](sprints/SP48.md): planned, 0/2 cards done
 - [SP49: VSSlicer build 1](sprints/SP49.md): planned, 0/41 cards done
 - [SP50: VSSlicer build 2](sprints/SP50.md): planned, 0/29 cards done
-- [SP6: Open 1](sprints/SP6.md): active, 0/86 cards done
-- [SP7: Open 2](sprints/SP7.md): planned, 0/38 cards done
+- [SP7: Open 2](sprints/SP7.md): active, 0/77 cards done
 - [SP8: Open 3](sprints/SP8.md): planned, 0/37 cards done
 - [SP9: Open 4](sprints/SP9.md): planned, 0/34 cards done
