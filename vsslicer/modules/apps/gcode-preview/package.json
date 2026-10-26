@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/gcode-preview",
   "displayName": "VSSlicer G-code Preview",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Read-only custom editor for .gcode, .bgcode and .gcode.3mf: parses and plans in a worker and hands the move buffers to the webview.",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",

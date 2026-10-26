@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+- Re-locked to `@vsslicer/gcode-parser` 0.14.1 and `@vsslicer/3mf` 0.2.0.
+
 ## 0.6.0
 
 - GCP-53: tests: Moonraker `file_position` (in the recorded shape) and Bambu layer and percent feeds with expected moves, and a stub extension that follows them through the exports and through the commands in the extension host.
