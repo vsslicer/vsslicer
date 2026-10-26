@@ -6,3 +6,8 @@
 4. [PRF-207: Replace the duplicated unescapeStrings with splitList in the physical printer reader](207-replace-the-duplicated-unescapestrings-with-splitlist-in-the.md)
 5. [PRF-209: Keep the metadata of a Cura container named __proto__](209-keep-the-metadata-of-a-cura-container-named-proto.md)
 6. [PRF-210: Make curaStackValue's comment match the rule it applies](210-make-curastackvalue-s-comment-match-the-rule-it-applies.md)
+7. [PRF-202: Keep both entities when a Prusa printer model and printer preset share a name](202-keep-both-entities-when-a-prusa-printer-model-and-printer-pr.md)
+8. [PRF-203: Remove the five PrusaSlicer keys from the SuperSlicer-only key list](203-remove-the-five-prusaslicer-keys-from-the-superslicer-only-k.md)
+9. [PRF-54: Write native export to Cura quality_changes and definition_changes](054-write-native-export-to-cura-quality-changes-and-definition-c.md)
+10. [PRF-195: Cap the Prusa YAML preset and vendor readers' own diagnostics](195-cap-the-prusa-yaml-preset-and-vendor-readers-own-diagnostics.md)
+11. [PRF-196: Count YAML documents against the parser node cap](196-count-yaml-documents-against-the-parser-node-cap.md)

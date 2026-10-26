@@ -59,7 +59,7 @@ a `/* */` or `//` block. One example is `compatible_printers`, commented out wit
 | PrusaSlicer 3.0 domain (FDM + SLA + common) | 445 | 471 |
 | PrusaSlicer 2.x legacy `PrintConfig.cpp` (in 3.0 tree) | 587 | 637 |
 | SuperSlicer `PrintConfig.cpp` | 831 | 893 |
-| SuperSlicer-only (not in either Prusa set) | - | 356 |
+| SuperSlicer-only (not in either Prusa set) | - | 351 (five keys PrusaSlicer ignores, `PrusaSlicer-2.9@b028299:src/libslic3r/PrintConfig.cpp:L5281-L5283`, removed in PRF-203) |
 | Prusa keys absent from SuperSlicer | - | 112 (mostly 2.8-3.0 features: scarf seams, interlocking, dynamic overhang speeds, stamping, SLA tilt profiles, junction deviation, pressure advance) |
 | Prusa 2.x keys not yet in the 3.0 domain | 153 defs | 178 (print host, CLI, statistics/placeholder-only options, compatibility keys) |
 
@@ -280,7 +280,7 @@ the PrusaSlicer release notes.
 | Multiple beds, scarf seams, paint-on fuzzy skin, multiple nozzle diameters; height-range painting (inspired by BambuStudio, reimplemented) | PrusaSlicer 2.9 | https://github.com/prusa3d/PrusaSlicer/releases/tag/version_2.9.0 , .../version_2.9.0-alpha1 |
 | SMT sequential arrange, multi-material interlocking | PrusaSlicer 2.9.1 | https://github.com/prusa3d/PrusaSlicer/releases/tag/version_2.9.1 |
 | Tool presets, multi-project, mixed printers per project, Lua plugins, plugin calibration prints, YAML presets, `pressure_advance` setting | PrusaSlicer 3.0 (alpha) | `P@30ef591:src/slic3r-shared/src/Slic3r/App/WelcomeDialog.cpp:299-303`; `ConfigDefsFDM.cpp` (`[3.0]` rows) |
-| Calibration menu prints, AngelScript UI layouts, milling post-process, FreeCAD scripts, mosaic, brim ears/patches, seam volumes, hole compensation/polyholes, dense infill, overhang tuning, per-feature fan and PA, gap-fill tuning, custom variables, `exists()`, G-code precision, parallel objects step, skinnydip, Bambu/HueForge import, Anycubic SLA output | SuperSlicer (all 356 SS-only keys) | Appendix B [SS] rows; https://github.com/supermerill/SuperSlicer (README feature list) |
+| Calibration menu prints, AngelScript UI layouts, milling post-process, FreeCAD scripts, mosaic, brim ears/patches, seam volumes, hole compensation/polyholes, dense infill, overhang tuning, per-feature fan and PA, gap-fill tuning, custom variables, `exists()`, G-code precision, parallel objects step, skinnydip, Bambu/HueForge import, Anycubic SLA output | SuperSlicer (all 351 SS-only keys) | Appendix B [SS] rows; https://github.com/supermerill/SuperSlicer (README feature list) |
 | Arc fitting step "from BBS" in SuperSlicer | BambuStudio, via SuperSlicer | `S@1f3d287:src/libslic3r/Print.hpp:103` comment |
 
 ### 6. Citation coverage
@@ -292,7 +292,7 @@ file. Items marked (unverified) are origin attributions not confirmed against a 
 
 | Aspect | PrusaSlicer 3.0-alpha12 | SuperSlicer 2.7.62-beta2 |
 |---|---|---|
-| Settings count (keys) | 471 (3.0 domain) + 178 legacy-only | 893 (356 SuperSlicer-only) |
+| Settings count (keys) | 471 (3.0 domain) + 178 legacy-only | 893 (351 SuperSlicer-only) |
 | Settings model | typed defs with location, overrides_in, category, option_group, order, gui_type | 2.x `ConfigOptionDef` + `.ui` layout files + AngelScript virtual settings |
 | Preset kinds | Print, Filament/Material, Printer, **Tool**, Physical printer; YAML presets | Print, Filament, Printer, Physical printer; INI |
 | Gizmos | 16 tools incl. fuzzy-skin paint, height range, arrange gizmo; no SLA hollow/support gizmos in the built GUI | 14 gizmos (2.7 set) |
@@ -320,7 +320,7 @@ file. Items marked (unverified) are origin attributions not confirmed against a 
   data, not core code.
 - **Do not double count.** Most model-prep tools (cut, emboss, measure, painting, simplify) are PrusaSlicer features
   that SuperSlicer and the later forks inherited. Count them once under PrusaSlicer. SuperSlicer's own value is in
-  its 356 extra settings and its calibration, milling and scripting features.
+  its 351 extra settings and its calibration, milling and scripting features.
 
 ## Licence notes
 
