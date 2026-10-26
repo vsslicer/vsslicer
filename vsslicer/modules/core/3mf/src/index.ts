@@ -47,3 +47,4 @@ export { createReadProject } from './application/readProject.ts';
 export type { DialectReader, ReadProjectDeps } from './application/readProject.ts';
 export type { BuildItem, Component, CoreModel, CoreObject } from './domain/coreModel.ts';
 export { addContentType, dropRelationshipsTo, removeContentType } from './adapters/opc/opcEdit.ts';
+export { createCuraReader } from './adapters/cura/readCura.ts';
