@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added: `readCuraProfile` reads a `.curaprofile` export as quality_changes entities with the parent quality_type in native and a setting_version diagnostic (PRF-112).
 - Added: `fetchCuraResources(dest, options)` downloads Cura's definitions, extruders, variants and quality resources at a pinned commit (default Cura@5bea2f8) into a new folder with `source.json`: atomic placement, a bounded tar reader, an `idleTimeoutMs` option, a cache written only after the archive unpacks, and a retryable-error result (PRF-130).
 - Fixed: Cura export writes boolean setting values as `True` and `False`, which Uranium can read (PRF-213).
 - Fixed: Cura machine instance file names are decoded as quote_plus, so a machine id with a space finds its nozzle size (PRF-212).

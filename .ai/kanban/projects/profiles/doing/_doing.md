@@ -2,5 +2,3 @@
 
 1. [PRF-45: Implement the file-system store with atomic writes and concurrent-edit protection](045-implement-the-file-system-store-with-atomic-writes-and-concu.md)
 2. [PRF-36: Read installed configuration folders into ImportResults, read-only](036-read-installed-configuration-folders-into-importresults-read.md)
-3. [PRF-108: Import .bbscfg and .bbsflmt](108-import-bbscfg-and-bbsflmt.md)
-4. [PRF-112: Import .curaprofile](112-import-curaprofile.md)

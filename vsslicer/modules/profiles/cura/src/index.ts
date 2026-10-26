@@ -60,3 +60,4 @@ export {
   CURA_FETCH_LIMITS,
 } from './adapters/download/fetch.ts';
 export type { CuraFetchLimits, CuraFetchOptions, CuraFetchResult } from './adapters/download/fetch.ts';
+export { readCuraProfile } from './adapters/bundles/cura/read.ts';

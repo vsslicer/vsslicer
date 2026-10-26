@@ -15,3 +15,4 @@
 13. [PRF-44: Implement ProfileStore get, list, query and the index](044-implement-profilestore-get-list-query-and-the-index.md)
 14. [PRF-130: Download Cura resources from upstream when Cura is not installed](130-download-cura-resources-from-upstream-when-cura-is-not-insta.md)
 15. [PRF-106: Import .orca_printer, .orca_filament and .orca_bundle](106-import-orca-printer-orca-filament-and-orca-bundle.md)
+16. [PRF-112: 112-import-curaprofile.md](112-import-curaprofile.md)
