@@ -50,7 +50,7 @@ test('a truncated archive is a CorruptZipError', () => {
 });
 
 test('a declared size above the cap is refused before inflating, others still read', () => {
-  const zip = openZip(broken('zip-bomb.3mf'), { maxEntryBytes: 1024 * 1024 });
+  const zip = openZip(broken('zip-bomb.3mf'), { maxEntryBytes: 1024 * 1024, maxTotalBytes: 8 * 1024 ** 3 });
   expect(zip.entries.find((e) => e.name === '3D/3dmodel.model')?.size).toBe(4 * 1024 ** 3 - 1);
   expect(() => zip.inflated('3D/3dmodel.model')).toThrow(SizeCapExceededError);
   expect(zip.inflated('_rels/.rels').length).toBeGreaterThan(0);
@@ -78,4 +78,15 @@ test('a deflate stream far bigger than its declared size is stopped quickly', ()
   const t = performance.now();
   expect(() => openZip(zip).inflated('a')).toThrow(CorruptZipError);
   expect(performance.now() - t).toBeLessThan(2000);
+});
+
+test('declared sizes over the total cap are refused at open, before any inflation', () => {
+  const entry = (i: number) => ({ name: `Metadata/pad${i}.bin`, data: new Uint8Array(10), declaredSize: 300_000_000 });
+  const zip = buildZip([0, 1, 2, 3].map(entry));
+  const t0 = performance.now();
+  expect(() => openZip(zip)).toThrow(SizeCapExceededError);
+  expect(performance.now() - t0).toBeLessThan(100);
+  // Each entry is under the per-entry cap, and 3 x 300 MB fits under the 1 GiB default.
+  expect(openZip(buildZip([0, 1, 2].map(entry))).entries).toHaveLength(3);
+  expect(() => openZip(buildZip([entry(0)]), { maxTotalBytes: 299_999_999 })).toThrow(SizeCapExceededError);
 });

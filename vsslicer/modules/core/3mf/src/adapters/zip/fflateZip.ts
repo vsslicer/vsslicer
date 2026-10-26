@@ -6,6 +6,9 @@ import { CorruptZipError, SizeCapExceededError } from '../../domain/errors.ts';
 /** Per-entry cap on uncompressed bytes. */
 export const DEFAULT_MAX_ENTRY_BYTES = 512 * 1024 * 1024;
 
+/** Cap on the summed declared uncompressed bytes of all entries, checked at open. */
+export const DEFAULT_MAX_TOTAL_BYTES = 1024 * 1024 * 1024;
+
 const INPUT_SLICE = 64 * 1024;
 const utf8 = new TextDecoder();
 const ZIP64 = 0xffffffff;
@@ -17,10 +20,12 @@ function corrupt(why: string): CorruptZipError {
 /**
  * Reads the central directory (ZIP64 included) and serves entries lazily. The central directory is the
  * single source of sizes, so data descriptors need no special case. fflate only inflates.
- * shortcut: no total-inflated cap across entries (only per entry), add with the streaming reader.
  * shortcut: CRC-32 is recorded but not verified, add when a damaged-but-inflatable file shows up.
  */
-export function openZip(data: Uint8Array, options: { maxEntryBytes?: number } = {}): ZipArchive {
+export function openZip(
+  data: Uint8Array,
+  options: { maxEntryBytes?: number; maxTotalBytes?: number } = {},
+): ZipArchive {
   const cap = options.maxEntryBytes ?? DEFAULT_MAX_ENTRY_BYTES;
   const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
   const need = (at: number, len: number): void => {
@@ -100,6 +105,10 @@ export function openZip(data: Uint8Array, options: { maxEntryBytes?: number } = 
     });
     p += 46 + nameLen + extraLen + commentLen;
   }
+
+  // Inflation never exceeds the declared size, so the declared sum bounds memory; refuse before any allocation.
+  const maxTotal = options.maxTotalBytes ?? DEFAULT_MAX_TOTAL_BYTES;
+  if (entries.reduce((n, e) => n + e.size, 0) > maxTotal) throw new SizeCapExceededError('the package', maxTotal);
 
   const byName = new Map(entries.map((e) => [e.name, e]));
   const find = (name: string): ZipEntry => {
