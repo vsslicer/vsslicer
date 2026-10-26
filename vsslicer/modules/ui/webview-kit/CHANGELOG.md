@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- GCP-34: Playwright snapshots of the segment renderer on SwiftShader (six colour modes, a layer range, travel hidden); refresh with `pnpm test:browser --update-snapshots`.
+
 ## 0.6.0
 
 - GCP-40: WebGL2 failure messages name `disable-hardware-acceleration` and software rendering.
