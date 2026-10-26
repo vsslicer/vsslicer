@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { parseYaml, yamlGet, yamlScalar } from './parse.ts';
+import { parseYaml, pushDiagnostic, yamlGet, yamlScalar } from './parse.ts';
 import type { YamlDiagnostic, YamlMap } from './parse.ts';
 
 /** The `kind` discriminants HwConfigLoader::load dispatches on (PrusaSlicer@30ef591 HwConfigLoader.cpp:174-209). */
@@ -70,7 +70,14 @@ export function readVendorYaml(
   const stream = parseYaml(input, file);
   doc.diagnostics.push(...stream.diagnostics);
   const warn = (line: number, message: string) =>
-    doc.diagnostics.push({ severity: 'warning', code: 'unknown-type', reason: 'bad-record', file, line, message });
+    pushDiagnostic(doc.diagnostics, {
+      severity: 'warning',
+      code: 'unknown-type',
+      reason: 'bad-record',
+      file,
+      line,
+      message,
+    });
   const seen = new Set<string>();
   for (const { line, root } of stream.documents) {
     if (root === undefined) continue; // comment-only or already diagnosed

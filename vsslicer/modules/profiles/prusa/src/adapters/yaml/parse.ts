@@ -122,6 +122,12 @@ const ESCAPES: Record<string, string> = {
   ' ': ' ',
 };
 
+/** Pushes onto a diagnostics list capped at MAX_YAML_DIAGNOSTICS, the last one saying the rest were suppressed. */
+export function pushDiagnostic(list: YamlDiagnostic[], d: YamlDiagnostic): void {
+  if (list.length > MAX_YAML_DIAGNOSTICS) return;
+  list.push(list.length === MAX_YAML_DIAGNOSTICS ? { ...d, message: 'further diagnostics suppressed' } : d);
+}
+
 /**
  * Reads the YAML subset the PrusaSlicer@30ef591 preset tree uses: a `---` separated stream of block maps and
  * sequences (compact `- key: v` included), single-line flow `[]`/`{}`, plain, single- and double-quoted
@@ -135,9 +141,7 @@ export function parseYaml(input: string | Uint8Array, file: string): YamlStream 
   const diagnostics: YamlDiagnostic[] = [];
   const stats = { nodes: 0, steps: 0 };
   const diag = (severity: Diagnostic['severity'], reason: YamlReason, line: number | undefined, message: string) => {
-    if (diagnostics.length > MAX_YAML_DIAGNOSTICS) return;
-    if (diagnostics.length === MAX_YAML_DIAGNOSTICS) message = 'further diagnostics suppressed';
-    diagnostics.push({
+    pushDiagnostic(diagnostics, {
       severity,
       code: 'malformed-line',
       reason,
@@ -561,6 +565,11 @@ export function parseYaml(input: string | Uint8Array, file: string): YamlStream 
     first = l + 1;
     n = start;
     docEnd = l;
+    // a document counts as a node, so a file of bare `---` lines meets the node cap too
+    if (++stats.nodes > MAX_YAML_NODES) {
+      diag('error', 'too-many-nodes', lineNo(l), `more than ${MAX_YAML_NODES} nodes; rest of the file not read`);
+      break;
+    }
     if (header >= 0) {
       // text after `---` on its own line is a document node the subset does not read
       let a = lstart[header]! + 3;

@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
   MAX_YAML_BYTES,
+  MAX_YAML_DIAGNOSTICS,
   MAX_YAML_DEPTH,
   MAX_YAML_NODES,
   MAX_YAML_SCALAR,
@@ -175,7 +176,7 @@ describe('bounds (hostile input; counts asserted, never time)', () => {
     for (const src of [`a: ${big}`, `a: "${big}"`, `a: |\n  ${big}`]) {
       const s = one(src);
       expect(s.diagnostics.map((d) => d.reason)).toEqual(['scalar-too-long']);
-      expect(s.stats.nodes).toBeLessThanOrEqual(1);
+      expect(s.stats.nodes).toBeLessThanOrEqual(2); // the document, then the one scalar
     }
   });
 
@@ -286,4 +287,19 @@ describe('pinned-30ef591', () => {
       expect(bad).toEqual([]);
     },
   );
+});
+
+describe('SP9 audit findings 3 and 9: bounds', () => {
+  test('bare --- documents count against the node cap (PRF-196)', () => {
+    const s = parseYaml('---\n'.repeat(MAX_YAML_NODES + 100), 'x.yaml');
+    expect(s.stats.nodes).toBe(MAX_YAML_NODES + 1);
+    expect(s.documents.length).toBeLessThanOrEqual(MAX_YAML_NODES);
+    expect(s.diagnostics.map((d) => d.reason)).toContain('too-many-nodes');
+  });
+
+  test('the vendor reader caps its own diagnostics (PRF-195)', () => {
+    const d = readVendorYaml('---\na: 1\n'.repeat(5000), 'v.yaml', { experimental: true });
+    expect(d.diagnostics).toHaveLength(MAX_YAML_DIAGNOSTICS + 1);
+    expect(d.diagnostics.at(-1)!.message).toBe('further diagnostics suppressed');
+  });
 });

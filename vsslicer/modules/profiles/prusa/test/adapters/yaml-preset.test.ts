@@ -2,7 +2,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
-import { parseYaml } from '../../src/adapters/yaml/parse.ts';
+import { MAX_YAML_DIAGNOSTICS, parseYaml } from '../../src/adapters/yaml/parse.ts';
 import type { YamlMap, YamlNode, YamlStream } from '../../src/adapters/yaml/parse.ts';
 import {
   MAX_PRESET_VARIANT_DEPTH,
@@ -198,5 +198,13 @@ describe('pinned-30ef591', () => {
         "variants": 9789,
       }
     `);
+  });
+});
+
+describe('PRF-195: the preset reader caps its own diagnostics', () => {
+  test('10,000 non-map variants give at most MAX_YAML_DIAGNOSTICS + 1 diagnostics', () => {
+    const d = readPresetYaml(`kind: print\nid: x\nvariants:\n${'  - a\n'.repeat(10_000)}`, 'p.yaml', on);
+    expect(d.diagnostics).toHaveLength(MAX_YAML_DIAGNOSTICS + 1);
+    expect(d.diagnostics.at(-1)!.message).toBe('further diagnostics suppressed');
   });
 });
