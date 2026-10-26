@@ -87,7 +87,14 @@ export const FLAVOUR_FIELDS: Record<Flavour, readonly LimitKey[]> = {
     'minTravelFeedrate',
   ],
   klipper: ['maxVelocity', 'accel', 'squareCornerVelocity', 'minCruiseRatio'],
-  reprapfirmware: [...axes('maxFeedrate'), ...axes('maxAccel'), ...axes('jerk'), 'accelPrint', 'accelTravel'],
+  reprapfirmware: [
+    ...axes('maxFeedrate'),
+    ...axes('maxAccel'),
+    ...axes('jerk'),
+    'accelPrint',
+    'accelTravel',
+    'minFeedrate',
+  ],
 };
 
 // Marlin@2ef3ee6:Marlin/Configuration.h: max feedrate :1373, max accel :1386, accel P/R/T :1401-1403,
@@ -126,8 +133,27 @@ export const FLAVOUR_DEFAULTS: Record<Flavour, Readonly<MachineLimits>> = {
   marlin: MARLIN,
   // shortcut: max_velocity 300 / max_accel 3000 placeholders; minimum_cruise_ratio 0.5 unverified, GCP-20 checks.
   klipper: MARLIN,
-  // shortcut: RRF reuses Marlin's values, unverified; GCP-27 replaces them with RRF's.
-  reprapfirmware: MARLIN,
+  // RepRapFirmware@aebf629:src/Config/Configuration.h: max feed :33-35, max accel :37-39, jerk :47-49,
+  // min speed :51, M204 P/T :57-58 (GCP-26). Fields RRF never reads keep Marlin's values.
+  reprapfirmware: {
+    ...MARLIN,
+    maxFeedrateX: 100,
+    maxFeedrateY: 100,
+    maxFeedrateZ: 20,
+    maxFeedrateE: 100,
+    maxAccelX: 1000,
+    maxAccelY: 1000,
+    maxAccelZ: 200,
+    maxAccelE: 500,
+    jerkX: 15,
+    jerkY: 15,
+    jerkZ: 10,
+    jerkE: 5,
+    accel: 50000,
+    accelPrint: 50000,
+    accelTravel: 50000,
+    minFeedrate: 0.5,
+  },
 };
 
 /** Config-block keys per field, first match wins: PrusaSlicer/SuperSlicer, Orca/Bambu, Cura. */
@@ -175,16 +201,21 @@ export function flavourFromName(name: string): Flavour | undefined {
 function configValue(key: LimitKey, raw: string | undefined): number | undefined {
   if (raw === undefined) return undefined;
   const v = Number(raw.split(',')[0]);
-  if (!Number.isFinite(v) || v < 0 || (v === 0 && !ZERO_VALID.has(key))) return undefined;
-  return v;
+  return validLimit(key, v) ? v : undefined;
 }
+
+const KLIPPER_STRICT: ReadonlySet<LimitKey> = new Set<LimitKey>(['accel', 'maxVelocity']);
+
+/** One positivity rule for config and override: finite, >= 0, and 0 only where it is a real setting. */
+const validLimit = (key: LimitKey, v: number): boolean =>
+  Number.isFinite(v) && v >= 0 && (v > 0 || ZERO_VALID.has(key));
 
 export interface LimitInputs {
   /** The file's flavour name (`;FLAVOR:`, `gcode_flavor`); else `config.gcode_flavor` is read. */
   flavour?: string;
   /** `ParsedFile.config`. */
   config?: Record<string, string>;
-  /** Values the user set; they beat the file. Each must be a finite number >= 0. */
+  /** Values the user set; they beat the file. Each must pass the config reader's rule: finite, and > 0 unless 0 is a real setting. */
   override?: Partial<MachineLimits>;
 }
 
@@ -199,7 +230,9 @@ export function resolveLimits({ flavour, config = {}, override = {} }: LimitInpu
   for (const key of Object.keys(defaults) as LimitKey[]) {
     const o = override[key];
     if (o !== undefined) {
-      if (!Number.isFinite(o) || o < 0) throw new RangeError(`limit ${key} must be a finite number >= 0, got ${o}`);
+      // Marlin's per-axis maxima use 0 as "no limit", so only the shared toolhead keys get the strict rule.
+      if (!Number.isFinite(o) || o < 0 || (o === 0 && KLIPPER_STRICT.has(key)))
+        throw new RangeError(`limit ${key} must be a finite number > 0 (>= 0 where 0 is a setting), got ${o}`);
       limits[key] = o;
       sources[key] = 'override';
       continue;
