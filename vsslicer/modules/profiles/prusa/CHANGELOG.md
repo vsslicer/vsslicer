@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-42: 21 PrusaSlicer and SuperSlicer tuples resolve to hand-checked values, each citing the section and line that sets it (`test/tuples/`), with a seeded merge-order bug the suite catches.
 - PRF-208: the inherited-keys cap is 1,000,000 (was 4,000,000), about twice what the pinned PrusaResearch bundle needs.
 - PRF-202: a name another kind already holds in one import (a `[printer_model]` and its `[printer]`, a vendor and its model, user print, filament or printer presets) gets the id `<kind>:<name>` instead of being skipped; `native.name` keeps the section name.
 - PRF-206: a printer preset split into a nozzle lists `default_print_profile` and `default_filament_profile` in `native_only`, so its default print and filament are no longer lost.
