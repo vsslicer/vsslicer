@@ -114,3 +114,10 @@ test("the file's ;FLAVOR: header picks the planner when there is no config block
   assert.strictEqual(resolveLimits({ flavour: marlin.parsed.flavourName }).flavourAssumed, false);
   assert.notStrictEqual(klipper.timing.totalTime, marlin.timing.totalTime);
 });
+
+test('a worker that dies without a reply rejects with worker-crashed; the calling thread carries on', async () => {
+  const crash = new URL('./fixtures/crash-worker.mjs', import.meta.url);
+  await assert.rejects(workerLoader(crash)('/x/a.gcode', 'gcode', new AbortController().signal), {
+    code: 'worker-crashed',
+  });
+});

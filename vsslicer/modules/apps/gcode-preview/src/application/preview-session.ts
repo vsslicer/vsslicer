@@ -8,6 +8,7 @@ import {
   serveHandshake,
   type Channel,
 } from '@vsslicer/webview-kit/host';
+import { plannerFor, ToolheadWindow } from '@vsslicer/gcode-planner';
 import { fileKind } from '../domain/file-kind.ts';
 import {
   Method,
@@ -15,9 +16,12 @@ import {
   summarise,
   type Progress,
   type Received,
+  windowStream,
   type TimelineCommand,
   type ViewState,
+  type WindowRequest,
 } from '../domain/summary.ts';
+import { packWindow } from '../domain/window.ts';
 import type { Loaded } from './load-preview.ts';
 
 /** Parses and plans `path` off the calling thread (the worker adapter). Rejects with an Error that may carry a `code`. */
@@ -36,12 +40,14 @@ export interface ServeHandlers {
 }
 
 export interface PreviewSession {
-  /** Settles once with the final state (never rejects). */
+  /** Settles with the final state of the current load (never rejects); a retry replaces it. */
   readonly state: Promise<ViewState>;
   /** Serves one webview for its lifetime: answers each handshake with the state and the buffers. Returns the unsubscribe. */
   serve(channel: Channel, handlers: ServeHandlers): () => void;
   /** Tells the webview on `channel` to drive its timeline. */
   command(channel: Channel, command: TimelineCommand): void;
+  /** Loads again after an error and resolves with the new state; any other state is returned as is. */
+  retry(): Promise<ViewState>;
   /** Stops a running load (terminates the worker) and drops the buffers. */
   dispose(): void;
 }
@@ -63,40 +69,65 @@ const failure = (e: unknown): ViewState => ({
 export const openPreview = (path: string, load: LoadPort): PreviewSession => {
   const abort = new AbortController();
   const kind = fileKind(path);
-  // The move buffers stay here so a reloaded webview can be served again; everything else of the parse is dropped.
-  let buffers: ArrayBuffer[] = [];
-  const state: Promise<ViewState> =
+  // The parse stays here so a reloaded webview can be served again and can ask for toolhead windows.
+  let loaded: Loaded | undefined;
+  const start = (): Promise<ViewState> =>
     kind === 'gcode' || kind === 'bgcode'
       ? load(path, kind, abort.signal).then(({ parsed, timing }) => {
-          buffers = parsed.moves;
+          loaded = { parsed, timing };
           return { status: 'ready', summary: summarise(kind, parsed, timing) };
         }, failure)
       : Promise.resolve({
           status: 'unsupported',
           message: kind === 'gcode.3mf' ? UNSUPPORTED_3MF : `Not a G-code file: ${path}`,
         });
+  let state = start();
 
   const deliver = async (channel: Channel, session: string): Promise<void> => {
     channel.post(notify(Method.state, { status: 'loading' } satisfies ViewState));
     const s = await state;
     channel.post(notify(Method.state, s));
     if (s.status === 'ready')
-      for (const [i, b] of buffers.entries()) await sendBuffer(channel, moveStream(session, i), b);
+      for (const [i, b] of (loaded?.parsed.moves ?? []).entries()) await sendBuffer(channel, moveStream(session, i), b);
   };
 
-  return {
-    state,
+  const sendWindow = async (channel: Channel, session: string, { seq, from, to }: WindowRequest) => {
+    if (!loaded) return;
+    const { parsed, timing } = loaded;
+    // the planner is stateless (checkpoints hold the state), so it is made again here, not kept from the worker
+    const w = new ToolheadWindow(plannerFor(parsed, timing.limits), parsed, timing, from, to);
+    await sendBuffer(channel, windowStream(session, seq), packWindow(w));
+  };
+
+  const self: PreviewSession = {
+    get state() {
+      return state;
+    },
+    async retry() {
+      const failed = state;
+      if ((await failed).status === 'error' && state === failed && !abort.signal.aborted) state = start();
+      return state;
+    },
     serve(channel, { onReceived, onProgress, onMismatch }) {
+      let current = '';
       const stops = [
         serveHandshake(channel, {
           // a send cut short by a reload or a closed editor is superseded by the next handshake, or by nothing
-          onReady: (session) => void deliver(channel, session).catch(() => {}),
+          onReady: (session) => void deliver(channel, (current = session)).catch(() => {}),
           onMismatch,
         }),
         channel.onMessage((m) => {
           const r = parseEnvelope(m);
           if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.received)
             onReceived?.(r.envelope.payload as Received);
+          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.retry && current)
+            void self
+              .retry()
+              .then(() => deliver(channel, current))
+              .catch(() => {});
+          else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.window && current)
+            // a bad range (the file changed under a stale webview) or a closed panel is dropped: the marker falls back
+            void sendWindow(channel, current, r.envelope.payload as WindowRequest).catch(() => {});
           else if (r.ok && r.envelope.kind === 'notification' && r.envelope.method === Method.progress)
             onProgress?.(r.envelope.payload as Progress);
         }),
@@ -106,7 +137,8 @@ export const openPreview = (path: string, load: LoadPort): PreviewSession => {
     command: (channel, command) => channel.post(notify(Method.command, command)),
     dispose() {
       abort.abort();
-      buffers = [];
+      loaded = undefined;
     },
   };
+  return self;
 };

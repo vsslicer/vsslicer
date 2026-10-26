@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- GCP-97: the timeline marker follows the planner's acceleration trapezoids and holds still through G4 dwells (`ToolheadWindow` windows built in the host on demand).
+- GCP-40: the error panel has a Retry button that reloads the file after a failed load or worker crash.
 - GCP-102: the webview's slider, toggle and saved-view rules are one pure, tested function (`nextView` in controls.ts).
 - GCP-101: a failed GPU context restore shows the failure message instead of a blank preview.
 

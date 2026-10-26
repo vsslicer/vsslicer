@@ -5,9 +5,9 @@ const ARGV_HINT =
   'If you disabled hardware acceleration in argv.json ("disable-hardware-acceleration": true), remove that entry (Preferences: Configure Runtime Arguments) and restart.';
 
 const MESSAGES: Record<GlFailureCause, string> = {
-  'no-webgl2': 'This webview does not support WebGL2, so the 3D view cannot start.',
+  'no-webgl2': `This webview does not support WebGL2, so the 3D view cannot start. ${ARGV_HINT}`,
   'hardware-acceleration-disabled': `WebGL2 is only available through software rendering, which is not supported. ${ARGV_HINT}`,
-  'creation-refused': `The browser refused to create a WebGL2 context (no usable GPU, or the software fallback is removed in current Chromium). ${ARGV_HINT}`,
+  'creation-refused': `The browser refused to create a WebGL2 context (no usable GPU, or software rendering is removed in current Chromium). ${ARGV_HINT}`,
 };
 
 export class GlContextError extends Error {

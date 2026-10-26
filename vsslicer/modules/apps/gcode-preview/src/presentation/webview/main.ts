@@ -20,10 +20,12 @@ import {
   type Progress,
   type Received,
   type TimelineCommand,
+  type WindowRequest,
+  windowSeq,
   type ViewState,
 } from '../../domain/summary.ts';
 import { orbit, pan, presetCamera, zoom, type CameraState, type ViewPreset } from './camera.ts';
-import { SPEEDS, createClock, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
+import { SPEEDS, createClock, createMarker, layerOfMove, positionAt, project, stepTime } from './timeline.ts';
 import { nextView, presentRoles, roleName, type ViewEvent } from './controls.ts';
 import { COLOR_MODES, legendFor } from './legend.ts';
 import {
@@ -71,6 +73,7 @@ let clock = createClock(0);
 /** Marker position in world coordinates; undefined before the first sample. */
 let head: number[] | undefined;
 let headMove = 0;
+let windows: ReturnType<typeof createMarker> | undefined;
 const stage = document.createElement('div');
 stage.style.position = 'relative';
 const marker = document.createElement('div');
@@ -266,7 +269,15 @@ const render = (state: ViewState) => {
   cancelAnimationFrame(frame);
   if (state.status === 'loading') return show('Loading G-code...');
   if (state.status === 'unsupported') return show('Not supported yet', [state.message]);
-  if (state.status === 'error') return show('Could not open this file', [`${state.message} (${state.code})`]);
+  if (state.status === 'error') {
+    show('Could not open this file', [`${state.message} (${state.code})`]);
+    const retry = Object.assign(document.createElement('button'), { textContent: 'Retry' });
+    retry.addEventListener('click', () => {
+      retry.disabled = true;
+      channel.post({ tag: PROTOCOL_TAG, v: TRANSPORT_SCHEMA_VERSION, kind: 'notification', method: Method.retry });
+    });
+    return root.append(retry);
+  }
   summary = state.summary;
   buffers = summary.moveBuffers.map(() => undefined);
   const s = summary;
@@ -307,6 +318,15 @@ const done = () => {
     duration: s.totalTime,
   };
   clock = createClock(s.totalTime);
+  windows = createMarker(moves, s.moveCount, (seq, from, to) =>
+    channel.post({
+      tag: PROTOCOL_TAG,
+      v: TRANSPORT_SCHEMA_VERSION,
+      kind: 'notification',
+      method: Method.window,
+      payload: { seq, from, to } satisfies WindowRequest,
+    }),
+  );
   speeds.value = '1';
   clockSlider.max = String(s.totalTime);
   buildToggles();
@@ -336,7 +356,7 @@ const report = () => {
 const apply = (setView = true) => {
   if (!renderer || !info.moveCount) return;
   const xyz = [0, 0, 0];
-  headMove = positionAt(info.moves, clock.state.time, info.duration, xyz);
+  headMove = windows?.sample(clock.state.time, xyz) ?? positionAt(info.moves, clock.state.time, info.duration, xyz);
   head = xyz;
   const { layer, move } = layerOfMove(info.layers, headMove);
   clockSlider.value = String(clock.state.time);
@@ -388,6 +408,12 @@ clockSlider.addEventListener('input', () => seekTo(Number(clockSlider.value)));
 // subscribe before the handshake: the host answers the welcome with the state and the buffers
 receiveBuffers(channel, {
   onBuffer(stream, data) {
+    const w = windowSeq(session, stream);
+    if (w !== undefined) {
+      windows?.accept(w, data as ArrayBuffer);
+      if (!clock.state.playing) apply(false); // a paused marker moves to the planner's position
+      return;
+    }
     const i = buffers.findIndex((_, j) => moveStream(session, j) === stream);
     if (i < 0) return;
     buffers[i] = data;
