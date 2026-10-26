@@ -45,6 +45,7 @@ describe('the generated Bambu catalogue', () => {
     expect(orcaCatalogue.entries.machine_max_speed_x?.native.bambu).toEqual({ key: 'machine_max_speed_x' });
   });
 
+  // The data these lines check is ported material: Copyright (C) the Bambu Studio authors, AGPL-3.0 (see the file's notice).
   test('carries the AGPL notice and a BambuStudio provenance line on every bambu. entry', () => {
     expect(bambuCatalogue.notice).toMatch(/BambuStudio@79df7ae.*GNU Affero General Public License v3\.0/);
     for (const [, e] of prefixed)

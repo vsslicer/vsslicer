@@ -34,6 +34,7 @@ describe('the generated Orca catalogue', () => {
     expect(entries.filter(([, e]) => !('default' in e)).map(([k]) => k)).toEqual(NO_DEFAULT);
   });
 
+  // The data these lines check is ported material: Copyright (C) the OrcaSlicer authors, AGPL-3.0 (see the file's notice).
   test('carries the AGPL notice and a provenance line on every entry', () => {
     expect(orcaCatalogue.notice).toMatch(/GNU Affero General Public License v3\.0/);
     for (const [, e] of entries)
