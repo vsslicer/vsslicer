@@ -20,3 +20,9 @@ it('latin1 conversion is byte-exact for all 256 values and fast', () => {
   expect(back.length).toBe(big.length);
   expect(mbps).toBeGreaterThan(200);
 });
+
+it('latin1ToBytes returns an exact, unpooled ArrayBuffer', () => {
+  const b = latin1ToBytes('G1 X1');
+  expect(b.byteOffset).toBe(0);
+  expect(b.buffer.byteLength).toBe(5);
+});

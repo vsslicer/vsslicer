@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+
+- GCP-94: `latin1ToBytes` returns bytes backed by an exact-size ArrayBuffer instead of a view into Node's shared pool. The README notes the Node requirement.
 ## 0.4.2
 
 - Perf: `bytesToLatin1` and `latin1ToBytes` use Node Buffer latin1 (about 3000 and 2000 MB/s, was 37 and 16 MB/s on 64 MB); byte-exact for all 256 values, tested. (GCP-86)
