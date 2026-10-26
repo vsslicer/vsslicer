@@ -20,3 +20,4 @@
 18. [PRF-42: Check resolved values for 20 Prusa tuples against the oracle](042-check-resolved-values-for-20-sample-tuples-per-ecosystem-aga.md)
 19. [PRF-145: Release `profiles-data-orca@0.1.0`: the Orca and Bambu JSON trees](145-release-profiles-data-orca-0-1-0-the-orca-and-bambu-json-tre.md)
 20. [PRF-129: Check resolved values for 20 Cura tuples against the oracle](129-check-resolved-values-for-20-cura-tuples-against-the-oracle.md)
+21. [PRF-52: Write native export to PrusaSlicer INI](052-write-native-export-to-prusaslicer-ini.md)

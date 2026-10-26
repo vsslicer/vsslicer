@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-52: native export to PrusaSlicer INI (`exportPrusaIni`, `prusaIniExporter`): unchanged sections are written back from their stored lines, edited settings in PrusaSlicer's own escaping; bounded by key, line and diagnostic caps.
 - PRF-42: 21 PrusaSlicer and SuperSlicer tuples resolve to hand-checked values, each citing the section and line that sets it (`test/tuples/`), with a seeded merge-order bug the suite catches.
 - PRF-208: the inherited-keys cap is 1,000,000 (was 4,000,000), about twice what the pinned PrusaResearch bundle needs.
 - PRF-202: a name another kind already holds in one import (a `[printer_model]` and its `[printer]`, a vendor and its model, user print, filament or printer presets) gets the id `<kind>:<name>` instead of being skipped; `native.name` keeps the section name.
