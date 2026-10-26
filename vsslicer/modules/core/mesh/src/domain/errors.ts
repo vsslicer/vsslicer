@@ -1,7 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 export type MeshErrorCode =
-  'truncated' | 'count-mismatch' | 'non-finite' | 'obj-index-out-of-range' | 'file-too-large' | 'malformed';
+  | 'truncated'
+  | 'count-mismatch'
+  | 'non-finite'
+  | 'obj-index-out-of-range'
+  | 'file-too-large'
+  | 'malformed'
+  | 'too-many-triangles'
+  | 'worker-crashed';
 
 /** Base of every mesh error. `message` is the user message: plain words, no stack or jargon. */
 export abstract class MeshError extends Error {
@@ -78,5 +85,25 @@ export class MalformedMeshError extends MeshError {
   constructor(line: number, reason: string) {
     super(`Line ${line}: ${reason}.`);
     this.line = line;
+  }
+}
+
+/** The model has more triangles than the hard cap allows, even when the caller confirms. */
+export class TooManyTrianglesError extends MeshError {
+  readonly code = 'too-many-triangles';
+  readonly triangles: number;
+  readonly capTriangles: number;
+  constructor(triangles: number, capTriangles: number) {
+    super(`The model has ${triangles} triangles, above the ${capTriangles} triangle limit.`);
+    this.triangles = triangles;
+    this.capTriangles = capTriangles;
+  }
+}
+
+/** The parsing worker died (out of memory, a crash) before it answered; only this file is lost. */
+export class WorkerCrashedError extends MeshError {
+  readonly code = 'worker-crashed';
+  constructor(reason: string) {
+    super(`Reading the model failed unexpectedly: ${reason}.`);
   }
 }

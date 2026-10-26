@@ -28,3 +28,4 @@
 26. [VWR-47: Add parseModel with the triangle cap](047-add-parsemodel-with-the-triangle-cap.md)
 27. [VWR-73: Release 3mf@0.1.0: container API (open, parts, replace, add, remove, save)](073-release-3mf-0-1-0-container-api-open-parts-replace-add-remov.md)
 28. [VWR-389: Make weld, computeStats and binary STL parsing work at 20 M triangles](389-make-weld-computestats-and-binary-stl-parsing-work-at-20-m-t.md)
+29. [VWR-48: Run mesh parsing in worker_threads for the extension host](048-run-mesh-parsing-in-worker-threads-for-the-extension-host.md)

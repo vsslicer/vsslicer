@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { MalformedMeshError } from '../domain/errors.ts';
 
+/** A longer line is not a mesh file; without a cap, one endless line makes joining chunks quadratic. */
+export const MAX_LINE_CHARS = 1 << 20;
+
 /** Lines of a text file fed as chunks of any size; `\r\n` and `\n` both end a line. Yields the 1-based line number too. */
 export async function* textLines(
   chunks: AsyncIterable<Uint8Array> | Iterable<Uint8Array>,
@@ -11,6 +14,8 @@ export async function* textLines(
   for await (const chunk of chunks) {
     const parts = (rest + decoder.decode(chunk, { stream: true })).split('\n');
     rest = parts.pop() as string;
+    if (rest.length > MAX_LINE_CHARS)
+      throw new MalformedMeshError(n + parts.length + 1, 'the line is too long for a model file');
     for (const l of parts) yield [l, (n += 1)];
   }
   rest += decoder.decode();

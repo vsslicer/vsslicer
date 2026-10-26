@@ -2,14 +2,10 @@
 // three-mesh-bvh and three are MIT; used as libraries, no code copied.
 import { BufferAttribute, BufferGeometry } from 'three';
 import { MeshBVH } from 'three-mesh-bvh';
+import type { SerialisedBvh } from '../../application/model-worker.ts';
 import type { IndexedMesh } from '../../domain/indexed-mesh.ts';
 
-/** A built BVH as plain buffers: post it with `transfer` as the transfer list, no `SharedArrayBuffer` needed. */
-export interface SerialisedBvh {
-  readonly roots: ArrayBuffer[];
-  /** Uint16 below 65,536 triangles, Uint32 above (three-mesh-bvh's choice). */
-  readonly indirectBuffer: Uint16Array | Uint32Array;
-}
+export type { SerialisedBvh };
 
 function geometryOf(mesh: IndexedMesh): BufferGeometry {
   const geometry = new BufferGeometry();
