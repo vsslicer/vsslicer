@@ -1,0 +1,44 @@
+{
+  "id": "vivedino.xplorer-idex",
+  "vendor": "vivedino",
+  "name": "Xplorer IDEX",
+  "technology": "fff",
+  "bed": {
+    "shape": [
+      [0, 0],
+      [360, 0],
+      [360, 360],
+      [0, 360]
+    ],
+    "max_height": 401
+  },
+  "toolheads": {
+    "count": 2,
+    "kinematics": "idex"
+  },
+  "nozzles": ["vivedino.nozzle.0.6.high_flow"],
+  "settings": {
+    "nozzle_diameter": {
+      "0": 0.6,
+      "1": 0.6
+    },
+    "extruder_colour": {
+      "0": "#FCE94F",
+      "1": "#729FCF"
+    },
+    "extruder_variant_list": {
+      "0": "Direct Drive High Flow",
+      "1": "Direct Drive High Flow"
+    },
+    "retraction_length": {
+      "0": 1.35,
+      "1": 1.35
+    },
+    "retract_length_toolchange": {
+      "0": 2,
+      "1": 2
+    },
+    "is_imex": true,
+    "imex_mode_names": ["primary", "copy", "mirror"]
+  }
+}

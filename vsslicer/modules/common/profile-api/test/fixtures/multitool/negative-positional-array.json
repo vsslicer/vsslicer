@@ -1,0 +1,22 @@
+{
+  "id": "neg.xl-2t",
+  "vendor": "prusa",
+  "name": "XL 2T (positional)",
+  "technology": "fff",
+  "bed": {
+    "shape": [
+      [0, 0],
+      [360, 0],
+      [360, 360],
+      [0, 360]
+    ],
+    "max_height": 360
+  },
+  "toolheads": {
+    "count": 2,
+    "kinematics": "corexy"
+  },
+  "settings": {
+    "nozzle_diameter": [0.4, 0.4]
+  }
+}

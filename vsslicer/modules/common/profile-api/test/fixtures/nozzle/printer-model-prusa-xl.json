@@ -1,0 +1,33 @@
+{
+  "id": "prusa.xl",
+  "vendor": "prusa",
+  "name": "Original Prusa XL",
+  "technology": "fff",
+  "bed": {
+    "shape": [
+      [0, 0],
+      [360, 0],
+      [360, 360],
+      [0, 360]
+    ],
+    "max_height": 360
+  },
+  "toolheads": {
+    "count": 1,
+    "kinematics": "corexy"
+  },
+  "family": "XL",
+  "nozzles": ["prusa.nozzle.0.4", "prusa.nozzle.0.6"],
+  "surfaces": ["prusa.sheet.satin"],
+  "settings": {
+    "retract_length": 0.8
+  },
+  "overrides": [
+    {
+      "when": "nozzle.diameter == 0.6",
+      "settings": {
+        "retract_length": 0.7
+      }
+    }
+  ]
+}

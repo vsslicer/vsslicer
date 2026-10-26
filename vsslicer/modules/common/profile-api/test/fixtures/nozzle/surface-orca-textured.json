@@ -1,0 +1,7 @@
+{
+  "id": "orca.plate.textured",
+  "type": "pei_textured",
+  "settings": {
+    "textured_plate_temp": 55
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "orca.plate.cool",
+  "type": "cool",
+  "settings": {
+    "cool_plate_temp": 35
+  }
+}

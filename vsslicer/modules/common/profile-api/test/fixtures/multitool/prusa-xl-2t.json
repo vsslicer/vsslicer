@@ -1,0 +1,35 @@
+{
+  "id": "prusa.xl-2t",
+  "vendor": "prusa",
+  "name": "XL 2T",
+  "technology": "fff",
+  "bed": {
+    "shape": [
+      [0, 0],
+      [360, 0],
+      [360, 360],
+      [0, 360]
+    ],
+    "max_height": 360
+  },
+  "toolheads": {
+    "count": 2,
+    "kinematics": "corexy"
+  },
+  "family": "XL",
+  "nozzles": ["prusa.nozzle.0.4"],
+  "settings": {
+    "nozzle_diameter": {
+      "0": 0.4,
+      "1": 0.4
+    },
+    "extruder_offset": {
+      "0": "0x0",
+      "1": "0x0"
+    },
+    "retract_length": {
+      "0": 0.8,
+      "1": 0.8
+    }
+  }
+}
