@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- PRF-122: ImportResult, Diagnostic (closed code union) and InstanceImport types, credential kept outside the entity.
 - PRF-178: the regex linearity tests assert an NFA step bound (`RegexStats` hook) instead of wall-clock time.
 - PRF-14: `orcaCatalogue`: 804 entries generated from OrcaSlicer@09aa0114 PrintConfig.cpp (`tools/catalogue/generate.ts`), with an AGPL-3.0 notice and per-entry provenance; the per-extruder key list in the schema now comes from it.
 - PRF-15: Bambu Studio native names on 512 Orca entries (14 through Orca's legacy renames) and 96 `bambu.` entries in `bambuCatalogue`, generated from BambuStudio@79df7ae with an AGPL-3.0 notice and per-entry provenance.

@@ -8,3 +8,4 @@ export * from './domain/catalogue/index.ts';
 export * from './domain/catalogue/conversion/index.ts';
 export { orcaCatalogue } from './domain/catalogue/orca.ts';
 export { bambuCatalogue } from './domain/catalogue/bambu.ts';
+export type * from './domain/import-result/index.ts';
