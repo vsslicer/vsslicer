@@ -34,3 +34,4 @@
 32. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
 33. [GCP-107: Add fan and temperature colour modes](107-add-fan-and-temperature-colour-modes.md)
 34. [GCP-110: Snapshot real corpus files through the preview's webview](110-snapshot-real-corpus-files-through-the-preview-s-webview.md)
+35. [GCP-111: Move the .gcode.3mf readers to a parser subpath so the preview can take gcode-parser 0.12](111-move-the-gcode-3mf-readers-to-a-parser-subpath-so-the-previe.md)

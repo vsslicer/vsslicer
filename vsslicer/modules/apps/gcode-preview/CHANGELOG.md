@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.4.0
 
+- Depends on gcode-planner ^0.5.0 and webview-kit ^0.6.0. Stays on gcode-parser ^0.11.0: 0.12.0 bundles @vsslicer/3mf's saxes, which ships no licence file, so the notices check refuses it (GCP-111).
 - GCP-109: uses gcode-planner 0.5.0's `toTransfer`/`fromTransfer` and `/window` entry; the webview bundle drops the planners (112 KB to 75 KB).
 - GCP-96: Width (mm) and Flow (mm³/s) colour modes with their legends (depends on webview-kit ^0.6.0).
 - GCP-97: the timeline marker follows the planner's acceleration trapezoids and holds still through G4 dwells (`ToolheadWindow` windows built in the host on demand).
