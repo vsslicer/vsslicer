@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2
+
+- Perf: `bytesToLatin1` and `latin1ToBytes` use Node Buffer latin1 (about 3000 and 2000 MB/s, was 37 and 16 MB/s on 64 MB); byte-exact for all 256 values, tested. (GCP-86)
+
 ## 0.4.1
 
 - Fix: `bgcodeToGcode` no longer drops the last line of a G-code block that does not end in a newline (libbgcode keeps it). Thumbnail checks use `BlockType.Thumbnail`. (GCP-14)
