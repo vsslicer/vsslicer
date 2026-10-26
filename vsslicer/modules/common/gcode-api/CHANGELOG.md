@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
 
 - GCP-89: `flavourName?: string` on `Chunk` and `ParsedFile`: the flavour name the file states (`;FLAVOR:`, `; gcode_flavor =`, last wins), to pass to gcode-planner's `resolveLimits({ flavour })`.
 
