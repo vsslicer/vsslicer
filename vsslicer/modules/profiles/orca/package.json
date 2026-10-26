@@ -43,6 +43,6 @@
   },
   "prettier": "@vsslicer/tooling/prettier",
   "dependencies": {
-    "@vsslicer/profile-api": "^0.1.0"
+    "@vsslicer/profile-api": "^0.1.1"
   }
 }

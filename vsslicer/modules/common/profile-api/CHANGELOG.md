@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - PRF-180: parseBundleStructure refuses a manifest longer than the byte limit in UTF-16 units without copying it, and UTF-8 encodes it only when its length times 3 exceeds the limit.
 
