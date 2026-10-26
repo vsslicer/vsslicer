@@ -12,3 +12,5 @@
 10. [PRF-195: Cap the Prusa YAML preset and vendor readers' own diagnostics](195-cap-the-prusa-yaml-preset-and-vendor-readers-own-diagnostics.md)
 11. [PRF-196: Count YAML documents against the parser node cap](196-count-yaml-documents-against-the-parser-node-cap.md)
 12. [PRF-127: Read Cura machine instances as printer instances](127-read-cura-machine-instances-as-printer-instances.md)
+13. [PRF-53: Write native export to Orca and Bambu JSON](053-write-native-export-to-orca-and-bambu-json.md)
+14. [PRF-206: Keep each Prusa nozzle's default print and filament profile when splitting](206-keep-each-prusa-nozzle-s-default-print-and-filament-profile-.md)
