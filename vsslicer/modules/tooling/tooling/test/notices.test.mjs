@@ -209,3 +209,25 @@ test('a licenceTexts path outside the module directory is refused', async () => 
   );
   assert.match(run(d).problems[0], /outside the module directory/);
 });
+
+test('bundled @vsslicer packages: PROVENANCE.md and NOTICE are copied, no licence check, nothing added without them', async () => {
+  const d = await project([
+    dep('@vsslicer/with', 'UNLICENSED', { files: { 'PROVENANCE.md': 'Derived from Orca\n', NOTICE: 'Orca notice\n' } }),
+    dep('@vsslicer/without', 'UNLICENSED', { files: {} }),
+  ]);
+  const { markdown, problems } = run(d);
+  assert.deepStrictEqual(problems, []);
+  assert.match(
+    markdown,
+    /## @vsslicer\/with@1\.0\.0[\s\S]*### NOTICE[\s\S]*Orca notice[\s\S]*### PROVENANCE\.md[\s\S]*Derived from Orca/,
+  );
+  assert.doesNotMatch(markdown, /@vsslicer\/without/);
+});
+
+test('a bundled @vsslicer notice file over 1 MiB is refused by name', async () => {
+  const d = await project([dep('@vsslicer/big', 'MIT', { files: { 'PROVENANCE.md': 'x'.repeat(1024 * 1024 + 1) } })]);
+  const { markdown, problems } = run(d);
+  assert.strictEqual(problems.length, 1);
+  assert.match(problems[0], /@vsslicer\/big@1\.0\.0: PROVENANCE\.md is larger than 1048576 bytes/);
+  assert.doesNotMatch(markdown, /xxxxxxxx/);
+});
