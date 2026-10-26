@@ -11,3 +11,4 @@
 9. [PRF-54: Write native export to Cura quality_changes and definition_changes](054-write-native-export-to-cura-quality-changes-and-definition-c.md)
 10. [PRF-195: Cap the Prusa YAML preset and vendor readers' own diagnostics](195-cap-the-prusa-yaml-preset-and-vendor-readers-own-diagnostics.md)
 11. [PRF-196: Count YAML documents against the parser node cap](196-count-yaml-documents-against-the-parser-node-cap.md)
+12. [PRF-127: Read Cura machine instances as printer instances](127-read-cura-machine-instances-as-printer-instances.md)
