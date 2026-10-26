@@ -1,9 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { readFileSync } from 'node:fs';
 import { writeZip } from '@vsslicer/3mf';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { collect, parse } from '../src/index.ts';
 import { gcode3mfPlates, gcode3mfSource, readGcode3mfPlate } from '../src/gcode-3mf.ts';
+
+const inflatedNames: string[] = [];
+vi.mock('@vsslicer/3mf', async (orig) => {
+  const m = await orig<typeof import('@vsslicer/3mf')>();
+  return {
+    ...m,
+    openZip: (...a: Parameters<typeof m.openZip>) => {
+      const z = m.openZip(...a);
+      return { ...z, inflated: (n: string) => (inflatedNames.push(n), z.inflated(n)) };
+    },
+  };
+});
 
 const h2c = new Uint8Array(readFileSync(new URL('./fixtures/bambu-studio/h2c-cube.gcode.3mf', import.meta.url)));
 const enc = (s: string): Uint8Array => new TextEncoder().encode(s);
@@ -83,6 +95,17 @@ describe('gcode.3mf plates (H2C fixture, Bambu Studio 02.08.02.61)', () => {
     expect(bad.statistics).toBeUndefined();
     const big = readGcode3mfPlate(cfg(`<!--${'x'.repeat(5 * 1024 * 1024)}-->`), 1);
     expect(big.diagnostics.map((d) => d.code)).toContain('gcode-3mf-slice-info-size');
+  });
+});
+
+describe('slice_info.config declared size', () => {
+  it('is checked before inflating: an entry declaring more than 4 MiB is never inflated', () => {
+    const big = writeZip(h2c, new Map([['Metadata/slice_info.config', enc(`<!--${'x'.repeat(5 * 1024 * 1024)}-->`)]]));
+    inflatedNames.length = 0;
+    const p = readGcode3mfPlate(big, 1);
+    expect(inflatedNames).not.toContain('Metadata/slice_info.config');
+    expect(p.statistics).toBeUndefined();
+    expect(p.diagnostics.map((d) => d.code)).toContain('gcode-3mf-slice-info-size');
   });
 });
 

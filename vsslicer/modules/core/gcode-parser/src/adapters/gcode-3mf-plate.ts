@@ -175,13 +175,16 @@ export function readGcode3mfPlate(
   const text = (name: string): string | undefined =>
     names.has(name) ? new TextDecoder().decode(zip.inflated(name)) : undefined;
 
-  const info = text('Metadata/slice_info.config');
-  if (info !== undefined && info.length > MAX_SLICE_INFO_BYTES) {
+  // The declared size decides before anything is inflated. A lying (too small) declared size cannot get past it:
+  // `inflated` stops the stream as soon as it outgrows the declared size and throws CorruptZipError.
+  const declared = zip.entries.find((e) => e.name === 'Metadata/slice_info.config')?.size ?? 0;
+  const info = declared > MAX_SLICE_INFO_BYTES ? undefined : text('Metadata/slice_info.config');
+  if (declared > MAX_SLICE_INFO_BYTES || (info !== undefined && info.length > MAX_SLICE_INFO_BYTES)) {
     diagnostics.push({
       code: 'gcode-3mf-slice-info-size',
       severity: 'error',
       fileOffset: 0,
-      message: `Metadata/slice_info.config is ${info.length} bytes, over the ${MAX_SLICE_INFO_BYTES} limit: statistics skipped`,
+      message: `Metadata/slice_info.config is ${info?.length ?? declared} bytes, over the ${MAX_SLICE_INFO_BYTES} limit: statistics skipped`,
     });
   }
   const parsed = info === undefined || info.length > MAX_SLICE_INFO_BYTES ? undefined : readSliceInfo(info);
