@@ -22,6 +22,7 @@ Attaches the catalogue conversions for the 56 keys of the §6 table (90-x suppor
 - [ ] All 56 keys convert native to unified and back for Prusa, Orca/Bambu and Cura with the notes of the table as unit tests
 - [ ] `support_angle` converts 90-x between Prusa/Orca and Cura; `flow_ratio` scales x100 for Cura; `elephant_foot` flips sign for Cura; `bed_temp` maps the five Orca plate keys
 - [ ] A lossy mapping is flagged with the note text
+- [ ] Bounds (rule 25): conversions accept native values as strings of at most 64 characters and numbers only when finite; percent-or-absolute parsing is linear (no backtracking regex); a rejected value gives a typed error, not NaN
 
 ## Tasks
 

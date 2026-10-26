@@ -36,8 +36,14 @@ const isWord = (cp: number | undefined): boolean =>
 /** Boost's line separators for `char`: \n \r \f. */
 const isBreak = (cp: number | undefined): boolean => cp === 10 || cp === 13 || cp === 12;
 
+/** Test hook: the tester fills it with the NFA state count and the work done, so tests assert the linear bound without a clock. */
+export interface RegexStats {
+  states: number;
+  steps: number;
+}
+
 /** Compiles `pattern` to a full-match tester, or throws {@link RegexRejected}. */
-export function compileRegex(pattern: string): (subject: string) => boolean {
+export function compileRegex(pattern: string): (subject: string, stats?: RegexStats) => boolean {
   try {
     new RegExp(`^(?:${pattern})$`, 'u'); // syntax check only, never executed
   } catch (e) {
@@ -183,7 +189,11 @@ export function compileRegex(pattern: string): (subject: string) => boolean {
   const predGen = new Int32Array(preds.length).fill(-1);
   const predVal = new Uint8Array(preds.length);
 
-  return (subject: string): boolean => {
+  return (subject: string, stats?: RegexStats): boolean => {
+    if (stats) {
+      stats.states = op.length;
+      stats.steps = 0;
+    }
     const cps = Array.from(subject, (ch) => ch.codePointAt(0)!);
     mark.fill(-1);
     predGen.fill(-1);
@@ -193,6 +203,7 @@ export function compileRegex(pattern: string): (subject: string) => boolean {
       stack.push(s);
       while (stack.length) {
         const t = stack.pop()!;
+        if (stats) stats.steps++;
         if (mark[t] === gen) continue;
         mark[t] = gen;
         const o = op[t];
@@ -220,6 +231,7 @@ export function compileRegex(pattern: string): (subject: string) => boolean {
       const ch = String.fromCodePoint(cp);
       const next: number[] = [];
       for (const s of list) {
+        if (stats) stats.steps++;
         const k = arg[s]!;
         if (predGen[k] !== pos) {
           const p = preds[k]!;
