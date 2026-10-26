@@ -18,3 +18,5 @@ export {
 } from './domain/entities/printer-instance/index.ts';
 export type { ConnectionIssue, HostType, ResolvedToolhead } from './domain/entities/printer-instance/index.ts';
 export { curaCatalogue } from './domain/catalogue/cura.ts';
+export { BUNDLE_LIMITS, buildBundleStructure, offlineBundleId, parseBundleStructure } from './domain/bundle/index.ts';
+export type { BundleError, BundleErrorCode, BundleStructure, ParseBundleResult } from './domain/bundle/index.ts';
