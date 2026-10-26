@@ -15,11 +15,11 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0
       '@vsslicer/gcode-planner':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
       '@vsslicer/webview-kit':
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.5.1
+        version: 0.5.1
     devDependencies:
       '@types/mocha':
         specifier: 10.0.10
@@ -831,10 +831,6 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/gcode-api@0.5.0':
-    resolution: {integrity: sha512-WkGGjf6MgUDN6ZBmxayOii1vU5A78x+yqh2H+6MrkoIzMj6bLRzQyIkyOIw+B4yKi26zGA/pZIdZWqBirNj0LQ==}
-    engines: {node: '>=24'}
-
   '@vsslicer/gcode-api@0.6.0':
     resolution: {integrity: sha512-ygp8MSafvYTx/N7spTrMllK+7eTk3QCbU9wEp4/DMTQYiHA8DohxkwjxoB3mBwdqfGEJXi2uxRZ5/taAlRJd+A==}
     engines: {node: '>=24'}
@@ -847,8 +843,8 @@ packages:
     resolution: {integrity: sha512-vvAPQl1vWFXGhL3lI18n7tEUgiYtU1tQnybo56+CqvQeX45VZqVdPvhg25znnC3in8tyyGYKO2zvMS+xbV8UTg==}
     engines: {node: '>=24'}
 
-  '@vsslicer/gcode-planner@0.3.0':
-    resolution: {integrity: sha512-B84ErZNqzgIdiz26Wx0PqHmZS/O7fzZW7P2sznWOJ3DnrTBQ3fC1q0YzmUDKKFahBY/AzFeImLCip/VasBrVTQ==}
+  '@vsslicer/gcode-planner@0.4.0':
+    resolution: {integrity: sha512-gN4slooX1bIDptVZNZpaF5wReoSJUnsP+soXfdGxDP6WtiKw4pZy5MX2xlwD7kGZWoHUy+NV9yLWLewiHfSJeA==}
     engines: {node: '>=24'}
 
   '@vsslicer/test-vscode@0.2.3':
@@ -861,8 +857,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.5.0':
-    resolution: {integrity: sha512-yIrQRDLStzuUY/+phv11cl92cAnamhTOhAHjT1dEEpwNp4noPXzmI3E0RVaOKM4dz0ZWB741xNV4Mhe3SWqe4g==}
+  '@vsslicer/webview-kit@0.5.1':
+    resolution: {integrity: sha512-WbhvpN5K9HMv2lMgHVOou/cn3sVPiM2DJzc+sFRnO0MtViZLHYcBkFJBMo6q+89xU36/GnliEwIPDrBqjmIXpQ==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -3027,8 +3023,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/gcode-api@0.5.0': {}
-
   '@vsslicer/gcode-api@0.6.0': {}
 
   '@vsslicer/gcode-bgcode@0.4.3': {}
@@ -3038,9 +3032,9 @@ snapshots:
       '@vsslicer/gcode-api': 0.6.0
       '@vsslicer/gcode-bgcode': 0.4.3
 
-  '@vsslicer/gcode-planner@0.3.0':
+  '@vsslicer/gcode-planner@0.4.0':
     dependencies:
-      '@vsslicer/gcode-api': 0.5.0
+      '@vsslicer/gcode-api': 0.6.0
 
   '@vsslicer/test-vscode@0.2.3(supports-color@8.1.1)':
     dependencies:
@@ -3070,7 +3064,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.5.0': {}
+  '@vsslicer/webview-kit@0.5.1': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
