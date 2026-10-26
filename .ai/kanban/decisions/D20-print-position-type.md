@@ -1,7 +1,7 @@
 ---
 id: D20
 title: "The preview follows a PrintPosition of optional fileOffset, layer, z and percent"
-status: proposed
+status: accepted
 date: 2026-10-26
 cards: [GCP-49, GCP-50]
 ---

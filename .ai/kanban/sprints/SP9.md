@@ -1,9 +1,9 @@
 ---
 id: SP9
 title: Open 4
-status: planned
+status: active
 milestone: M2
-start: "2026-10-26T09:30+00:00"
+start: "2026-10-26T09:11+00:00"
 end: "2026-10-26T11:30+00:00"
 capacity: 92
 ---

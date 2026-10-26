@@ -8,7 +8,7 @@ model: sonnet
 area: [monorepo]
 story: US1
 milestone: "VSS:M1"
-sprint: "VSS:SP8"
+sprint: "VSS:SP9"
 owner: PLT-1-worker
 created: 2026-10-25
 ---

@@ -138,3 +138,4 @@
 136. [PLT-175: Release signed macOS and Windows installers](175-release-signed-macos-and-windows-installers.md)
 137. [PLT-181: Reconcile the DCO requirement with the project commit convention](181-reconcile-the-dco-requirement-with-the-project-commit-conven.md)
 138. [PLT-193: Add gcode-language to the extension pack](193-add-gcode-language-to-the-extension-pack.md)
+139. [PLT-195: Copy NOTICE and PROVENANCE of bundled vsslicer packages into third-party notices](195-copy-notice-and-provenance-of-bundled-vsslicer-packages-into.md)

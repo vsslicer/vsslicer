@@ -137,3 +137,8 @@
 135. [PRF-176: Add Edit in template editor to G-code fields](176-add-edit-in-template-editor-to-g-code-fields.md)
 136. [PRF-57: Create the `profiles-extension` module (vsslicer.profiles)](057-create-the-vsslicer-profiles-extension-skeleton.md)
 137. [PRF-184: Stop rewriting PRINTER_VENDOR_PRUSA3D to printer.vendor as exact](184-stop-rewriting-printer-vendor-prusa3d-to-printer-vendor-as-e.md)
+138. [PRF-185: Cap total entries in the Prusa INI reader](185-cap-total-entries-in-the-prusa-ini-reader.md)
+139. [PRF-186: Replace the wall-clock assert in profile-api catalogue-prusa test](186-replace-the-wall-clock-assert-in-profile-api-catalogue-prusa.md)
+140. [PRF-187: Ship PROVENANCE.md in the profile-api package](187-ship-provenance-md-in-the-profile-api-package.md)
+141. [PRF-188: Check exporter output paths in the profile-api port contract](188-check-exporter-output-paths-in-the-profile-api-port-contract.md)
+142. [PRF-189: Delete the dead host check in the Orca bundle reader](189-delete-the-dead-host-check-in-the-orca-bundle-reader.md)

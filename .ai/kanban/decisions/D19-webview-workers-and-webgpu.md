@@ -1,7 +1,7 @@
 ---
 id: D19
 title: "Webview workers start from blob: URLs; WebGPU is an opt-in upgrade over WebGL2"
-status: proposed
+status: accepted
 date: 2026-10-26
 cards: [PLT-33]
 ---

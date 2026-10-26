@@ -28,3 +28,6 @@ Retro for SP8, step 4 of `.ai/skills/sprint-cycle`.
 ## Progress
 
 Not started.
+
+2026-10-26 sp8-retro: `.ai/retros/SP8-retro.md` written. On time: 88 points delivered (65 planned workable plus 23 pulled in) by 08:48 against an 08:50 plan, 65.4 an hour; close records 92 of 305 if VSS-47 and VSS-82 are done.
+Lesson: wall time per card is set by review rounds (12 min a cycle, S or M alike), not effort; rules 11, 19, 23 and 25 amended, rule 27 added, "After SP8" calibration added; no cards re-sized.

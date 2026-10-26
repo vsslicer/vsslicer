@@ -30,3 +30,4 @@
 28. [GCP-74: Add the editTemplate command with a save callback](074-add-the-edittemplate-command-with-a-save-callback.md)
 29. [GCP-75: Test the template editor against fixture profiles in the extension host](075-test-the-template-editor-against-fixture-profiles-in-the-ext.md)
 30. [GCP-107: Add fan and temperature colour modes](107-add-fan-and-temperature-colour-modes.md)
+31. [GCP-115: Replace wall-clock asserts in gcode-bgcode and gcode-parser tests](115-replace-wall-clock-asserts-in-gcode-bgcode-and-gcode-parser-.md)

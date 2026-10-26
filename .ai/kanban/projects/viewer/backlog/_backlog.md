@@ -359,3 +359,5 @@
 357. [VWR-386: Test that auto-orient never touches locked plates under random commands](386-test-that-auto-orient-never-touches-locked-plates-under-rand.md)
 358. [VWR-387: Add Auto-orient to the object and plate menus with progress, cancel and the arrange offer](387-add-auto-orient-to-the-object-and-plate-menus-with-progress-.md)
 359. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
+360. [VWR-394: Cap XML nesting depth in 3mf startTags and scanModel](394-cap-xml-nesting-depth-in-3mf-starttags-and-scanmodel.md)
+361. [VWR-395: Replace wall-clock asserts in 3mf tests](395-replace-wall-clock-asserts-in-3mf-tests.md)

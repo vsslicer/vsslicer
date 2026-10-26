@@ -4,20 +4,20 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 
 | Column | Cards |
 | --- | --- |
-| [Backlog](backlog/_backlog.md) | 86 |
+| [Backlog](backlog/_backlog.md) | 84 |
 | [Next](next/_next.md) | 0 |
 | [Ready to start](todo/_todo.md) | 0 |
 | [In progress](doing/_doing.md) | 0 |
 | [In review](review/_review.md) | 0 |
 | [Done](done/_done.md) | 11 |
 
-42 finished card(s) are archived in [archive/](archive/), by sprint or month.
+44 finished card(s) are archived in [archive/](archive/), by sprint or month.
 
 ## Milestones
 
-- [M1: Preview](milestones/M1-preview.md): draft, 132/162 cards done
-- [M2: Open](milestones/M2-open.md): draft, 97/303 cards done
-- [M3: Print](milestones/M3-print.md): draft, 0/361 cards done
+- [M1: Preview](milestones/M1-preview.md): draft, 133/162 cards done
+- [M2: Open](milestones/M2-open.md): draft, 139/344 cards done
+- [M3: Print](milestones/M3-print.md): draft, 25/364 cards done
 - [M4: Daily use](milestones/M4-daily-use.md): draft, 0/480 cards done
 - [M5: Parity](milestones/M5-parity.md): draft, 0/467 cards done
 - [M6: VSSlicer build](milestones/M6-vsslicer-build.md): draft, 0/70 cards done
@@ -27,14 +27,14 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 - [SP10: Open 5](sprints/SP10.md): planned, 0/35 cards done
 - [SP11: Open 6](sprints/SP11.md): planned, 0/36 cards done
 - [SP12: Open 7](sprints/SP12.md): planned, 0/16 cards done
-- [SP13: Print 1](sprints/SP13.md): planned, 0/39 cards done
-- [SP14: Print 2](sprints/SP14.md): planned, 0/41 cards done
-- [SP15: Print 3](sprints/SP15.md): planned, 0/43 cards done
-- [SP16: Print 4](sprints/SP16.md): planned, 0/38 cards done
-- [SP17: Print 5](sprints/SP17.md): planned, 0/40 cards done
-- [SP18: Print 6](sprints/SP18.md): planned, 0/41 cards done
-- [SP19: Print 7](sprints/SP19.md): planned, 0/40 cards done
-- [SP20: Print 8](sprints/SP20.md): planned, 0/38 cards done
+- [SP13: Print 1](sprints/SP13.md): planned, 0/35 cards done
+- [SP14: Print 2](sprints/SP14.md): planned, 0/39 cards done
+- [SP15: Print 3](sprints/SP15.md): planned, 0/37 cards done
+- [SP16: Print 4](sprints/SP16.md): planned, 0/37 cards done
+- [SP17: Print 5](sprints/SP17.md): planned, 0/38 cards done
+- [SP18: Print 6](sprints/SP18.md): planned, 0/37 cards done
+- [SP19: Print 7](sprints/SP19.md): planned, 0/36 cards done
+- [SP20: Print 8](sprints/SP20.md): planned, 0/36 cards done
 - [SP21: Print 9](sprints/SP21.md): planned, 0/39 cards done
 - [SP22: Print 10](sprints/SP22.md): planned, 0/2 cards done
 - [SP23: Daily use 1](sprints/SP23.md): planned, 0/39 cards done
@@ -65,5 +65,4 @@ The project's tasks, one Markdown card each, kept with [taskboard](https://githu
 - [SP48: Parity 13](sprints/SP48.md): planned, 0/2 cards done
 - [SP49: VSSlicer build 1](sprints/SP49.md): planned, 0/41 cards done
 - [SP50: VSSlicer build 2](sprints/SP50.md): planned, 0/29 cards done
-- [SP8: Open 3](sprints/SP8.md): active, 0/89 cards done
-- [SP9: Open 4](sprints/SP9.md): planned, 0/30 cards done
+- [SP9: Open 4](sprints/SP9.md): active, 0/118 cards done

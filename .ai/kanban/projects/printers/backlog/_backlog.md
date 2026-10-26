@@ -430,3 +430,4 @@
 428. [PRN-440: Release `printer-unofficial-snapmaker@0.1.0`: SACP discovery, status, upload and start for Snapmaker](440-release-printer-unofficial-snapmaker-0-1-0-sacp-discovery-st.md)
 429. [PRN-441: Register the Snapmaker (reverse engineered) adapter with vsslicer.printers](441-register-the-snapmaker-reverse-engineered-adapter-with-vssli.md)
 430. [PRN-442: Write vendor contributor checklists and ToS review notes](442-write-vendor-contributor-checklists-and-tos-review-notes.md)
+431. [PRN-443: Keep the extension when cutting names over 1024 characters in printer-folder](443-keep-the-extension-when-cutting-names-over-1024-characters-i.md)

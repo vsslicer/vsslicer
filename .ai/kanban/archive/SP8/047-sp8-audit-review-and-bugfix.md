@@ -26,4 +26,8 @@ End-of-sprint audit for SP8, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Not started.
+- 2026-10-26 sp8-auditor: `.ai/audits/SP8-audit.md` written (probe-based, 35 min). 10 findings: 1 must fix (3mf
+  `startTags`/`scanModel` nesting is quadratic: a 741 B 3MF costs 17 s), 4 should fix, 5 nice to have; PRF-180 holds.
+  Cards table left TBD for the coordinator; this card was not moved.
+
+- Coordinator (09:12): bug cards in SP9 from the audit's 10 findings (12 cards, every one sonnet): P0 VWR-394; P1 PRF-185, SLC-277, VWR-395, GCP-115, PRF-186, PRF-187; P2 PRN-443, SLC-278, PLT-195, PRF-188, PRF-189. Also PRF-184 (P1, SP9) from PRF-11's oracle. Recorded in the report's Cards table.

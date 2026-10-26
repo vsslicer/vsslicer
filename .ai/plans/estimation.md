@@ -58,6 +58,20 @@ After SP7 (retro `.ai/retros/SP7-retro.md`):
 - First-review failures 1 in 3.9 (rule 19), median 23.7 minutes of wall each.
 - close-sprint records 79 of 235 (75 plus the audit and retro cards).
 
+After SP8 (retro `.ai/retros/SP8-retro.md`):
+
+- **Plan lanes in review cycles, not points** (rule 23 amended): SP8 delivered 88 points in 80.7 minutes
+  of building (65.4 an hour; plan 65 workable points, 49 an hour) from about 25 lanes, but feature lanes
+  ran 3 to 12 points an hour (profiles 11.6, profiles-prusa 7.6). A card that passes review takes about
+  12 minutes from dispatch to done, S or M alike; each failed review adds about 12.
+- Agent time is **1.86 agent-minutes per done point** (SP7 3.3) with no agent over 7.5 minutes; reviews
+  and fixes are 64% of agent time (83.9 and 20.7 of 164.1).
+- Idle 21.2% from the first wave to the last review (SP7 15.9%), all of it in 16 short gaps between 17
+  alternating worker and review waves; finished agents waited 123.8 agent-minutes (SP7 393).
+- First-review failures 1 in 3.0 (features 12 of 18, chores 0 of 18, bugs 1 of 3); 19 fix rounds, 6 of
+  them on resource bounds (rule 25's target is one).
+- close-sprint records 92 of 305 if the audit and retro cards are done (88 plus VSS-47 and VSS-82).
+
 ## Rules learned
 
 Each rule: the rule, its evidence (sprint and figures), since when.
@@ -124,6 +138,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     min); no other agent ran and the coordinator wrote no event, while five cards it had moved to doing at
     02:31 waited until 02:38. With waves after that: 22% idle from 02:38:11 to 04:28:15 (28% over the whole
     sprint), 17 gaps of median 1.7 min, three over 2 min; no commit or coordinator event inside a wave.
+    **Amended SP8:** with short gaps, idle is set by the number of waves. A message may carry reviews of
+    one lane and workers of another when all of them are short (rule 17 forbids mixing long with short,
+    not reviews with workers), so a sprint needs about one wave per card cycle instead of two (untried).
+    Testable: idle under 15% from the first wave to the last review. Evidence: SP8 alternated
+    workers-only and reviews-only messages, 17 waves for 40 cards; gaps median 0.8 min (16.9 in all, one
+    over 2), idle 21.2% of 80.5 minutes.
 12. **Budget fix rounds by kind:** one per 9 bugfix cards, one per 2 cards of new code (ports of
     upstream algorithms, protocols, contracts, research decisions). Each fix round costs a review
     wave, about 5 minutes wall, even when the fix takes under a minute. Evidence: SP3 8 of 22 failed
@@ -217,6 +237,15 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Evidence: SP7 8 of 31 done cards failed first review (1 in 3.9), all new code or chores, bugs 0 of 8;
     wall 7.2 to 50.6 min, median 23.7 (PLT-194 two rounds); fix workers twice overwrote the reviewer's
     FAIL text (coordinator).
+    **Amended SP8:** budget by kind: features 2 in 3 fail first review and a quarter of those twice;
+    bugs 1 in 3; chores, scaffolds and releases none. About 12 minutes of wall a round under alternating
+    waves. A card that ports or parses an upstream format quotes, in its criteria, the upstream lines
+    that define the behaviour (`repo@commit:path:line`), not only the project. Testable: features' first
+    reviews fail at most 1 in 2 in the next sprint. Evidence: SP8 13 of 39 reviewed cards failed (1 in
+    3.0): features 12 of 18, bugs 1 of 3 (PRF-180), chores 0 of 18; 19 rounds; PRF-125 (Cura's
+    substring `exclude_materials`), PRF-24 (boost `ini_parser` headers, duplicates, ASCII trim) and
+    PRF-10 (schema mapping) failed on upstream semantics the cards did not quote; a failed round cost 10
+    to 12 minutes (PRF-180 FAIL 07:43, pass 07:52).
 20. **Commit each card when its review passes**, before another card that touches its files is
     dispatched. Cards in one module that run at the same time (rule 14) leave CHANGELOG, README,
     `index.ts`, `package.json` and the lockfile to the coordinator's release commit, and list their
@@ -287,6 +316,14 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     planned end, not until the planned cards are done. Evidence: SP6 3mf 22, mesh 22, profile-api 20,
     the gcode modules 20 (73.2 an hour); 74 points pulled in from SP7 as lanes freed, but no dispatch after
     04:32 and the sprint ended 56 minutes early with PRF-16 and PRF-17 workable since 04:13.
+    **Amended SP8:** under wave dispatch count a lane in review cycles: a card that passes takes about 12
+    minutes from dispatch to done whatever its size, and each expected fix round (rule 19) adds 12. Plan
+    a lane at 5 cards an hour less one per expected round, and get points from many lanes (batch
+    scaffolds several to an agent). Testable: each lane's done cards in the next sprint are within one of
+    this estimate. Evidence: SP8 passing cards took a median 11.9 minutes (S 5.9 to 13.3, M 7.3 to 11.2);
+    feature lanes ran 3.2 to 11.6 points an hour (profiles 11 in 57 min, profiles-prusa 9 in 71,
+    profiles-cura 2 in 38), the five longest cards were long only by review rounds, and the sprint still
+    made 65.4 an hour from about 25 lanes (16 scaffolds in 4 agents, 32 points in 12 minutes).
 24. **Report delivered and closed points.** close-sprint counts every card whose `sprint` is the sprint
     at close, done or not, including the audit and retro cards and cards pulled in, and its committed
     figure moves with any re-sizing of carried cards before the close. Retros give both figures and
@@ -310,8 +347,25 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     failed on resource bounds in paths they did not name: PRF-16 (quadratic and unbounded C++ tokenizer
     paths), PRF-17 (quadratic line lookup), GCP-36 (thumbnails inflated before the cap and copied to the
     host; unbounded plate loads), GCP-39 (unbounded request flood).
+    **Amended SP8:** the coordinator checks every card before dispatch, pulled in or planned, and writes
+    a Bounds criterion into any card that parses, scans, loops over or copies input and has none;
+    numeric limits a caller passes (timeouts, sizes, counts) are validated as finite, positive and in
+    range, and a fix keeps the cheap reject it optimises. Testable unchanged: at most one resource-bound
+    round. Evidence: SP8 six resource-bound rounds: PRF-10 (regex backtracking), PRF-71 (quadratic index
+    build) and PRN-131 twice (quadratic collisions), none of which named a bound in its criteria; SLC-9
+    (unvalidated `timeoutMs`, an `onLine` throw escaping the stream listener); PRF-180 (the fix dropped
+    the `text.length > max` reject).
 26. **Tests do not assert wall time.** A performance test asserts operation counts, a step budget or a
     ratio between two input sizes; a timeout exists only as a hang guard of at least 30 s. Testable: no
     timing flake in the next sprint's ci runs. Evidence: SP7 at machine load about 76, the 3mf fan-out
     (1 s), gcode-parser (500 ms) and a profile-api 5 s timeout flaked (coordinator), in the sprint in
     which PRF-178 made profile-api's regex timing tests load-independent. Since SP7.
+27. **Agents record in the card file, and the record matches what shipped.** Worker and fix-worker
+    prompts say "append under Progress in the card file with an edit"; `board.py note` writes only to
+    the activity log and never counts as the record. A release card names its version after reading the
+    registry's latest published version, and a dispatch uses the card's `model`. Testable: every fix
+    round in the next sprint has the fix worker's lines in the card's Progress, and every release card's
+    title matches the published version. Evidence: SP8 fix notes for PLT-51, PRN-131 and others reached
+    only `activity.jsonl` (reviewers copied them in); PRF-136 planned `profile-api@0.2.0` and released
+    0.1.1 because 0.1.0 already carried the increment, re-locking four dependents (coordinator); PRN-5
+    (`model: opus`) was built by a Sonnet batch worker and failed first review. Since SP8.
