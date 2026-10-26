@@ -8,7 +8,7 @@ model: opus
 area: [prusalink]
 story: US21
 milestone: "VSS:M3"
-sprint: "VSS:SP19"
+sprint: "VSS:SP20"
 depends_on: [106, 105]
 created: 2026-10-25
 ---

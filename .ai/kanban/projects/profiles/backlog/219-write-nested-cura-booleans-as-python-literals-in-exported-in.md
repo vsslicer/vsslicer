@@ -6,7 +6,7 @@ priority: P2
 effort: S
 model: sonnet
 area: [export]
-sprint: "VSS:SP13"
+sprint: "VSS:SP29"
 created: 2026-10-26
 ---
 

@@ -8,7 +8,7 @@ model: opus
 area: [prusa]
 story: US66
 milestone: "VSS:M5"
-sprint: "VSS:SP40"
+sprint: "VSS:SP41"
 depends_on: [216]
 created: 2026-10-25
 ---

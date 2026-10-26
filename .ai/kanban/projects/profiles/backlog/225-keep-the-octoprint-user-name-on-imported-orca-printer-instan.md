@@ -6,7 +6,7 @@ priority: P2
 effort: S
 model: sonnet
 area: [importers]
-sprint: "VSS:SP13"
+sprint: "VSS:SP30"
 depends_on: [90]
 created: 2026-10-26
 ---

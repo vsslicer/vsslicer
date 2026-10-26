@@ -8,7 +8,7 @@ model: opus
 area: [editor, painting]
 story: US84
 milestone: "VSS:M5"
-sprint: "VSS:SP42"
+sprint: "VSS:SP44"
 depends_on: [311, 273, SLC-30, SLC-42, GCP-4, GCP-5]
 created: 2026-10-25
 ---
