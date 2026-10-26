@@ -6,7 +6,7 @@ priority: P2
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP48"
+sprint: "VSS:SP11"
 docs: [.ai/audits/SP10-audit.md]
 created: 2026-10-26
 ---
