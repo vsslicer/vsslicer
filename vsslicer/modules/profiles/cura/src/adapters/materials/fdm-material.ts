@@ -119,7 +119,7 @@ export function readFdmMaterials(files: readonly SourceFile[], limits: Partial<C
     if (density !== undefined) m.density = density;
     if (fields.get('metadata/color_code')) m.color = fields.get('metadata/color_code')!;
     const settings: Material['settings'] = {};
-    const unmapped: Record<string, string> = {};
+    const unmapped: Record<string, string> = Object.create(null); // a key may be `__proto__`
     for (const [name, value] of fields) {
       if (!name.startsWith('settings/')) continue;
       const target = curaCatalogue.material[name]?.setting;

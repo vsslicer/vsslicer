@@ -396,3 +396,18 @@ describe.skipIf(!existsSync(cura))('real Cura@5bea2f8 resources', () => {
     expect(r.entities.some((e) => e.id === 'dagoma_sigma_0.8_pla_h0.6inst.cf')).toBe(true);
   }, 120_000);
 });
+
+describe('a container named __proto__', () => {
+  const make = (dir: string, type: string) =>
+    ['__proto__', 'normal'].map((n) =>
+      file(`${dir}/${n}.inst.cfg`, cfg('name = N\ndefinition = fdmprinter', `type = ${type}\nquality_type = t`)),
+    );
+  test('keeps its metadata as an own key of native', () => {
+    for (const r of [
+      readCuraQualities(make('quality', 'quality'), resources),
+      readCuraUserChanges(make('quality_changes', 'quality_changes')),
+    ]) {
+      expect(Object.keys(r.native).sort()).toEqual(['__proto__', 'normal']);
+    }
+  });
+});

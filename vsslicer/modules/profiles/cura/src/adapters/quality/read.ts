@@ -188,7 +188,7 @@ export function readCuraQualities(
     }
   }
   const entities: Process[] = [];
-  const native: Record<string, unknown> = {};
+  const native: Record<string, unknown> = Object.create(null); // an id may be `__proto__`
   for (const c of cfgs) {
     const type = c.metadata['quality_type'];
     const height =
@@ -239,7 +239,7 @@ export function readCuraUserChanges(
       base.set(`${n['definition']}\0${n['quality_type']}`, (e as Process).layer_height);
   }
   const entities: (Process | PrinterInstance)[] = [];
-  const native: Record<string, unknown> = {};
+  const native: Record<string, unknown> = Object.create(null); // an id may be `__proto__`
   for (const c of readCfgs(files, ['quality_changes', 'definition_changes'], lim, diag)) {
     if (c.kind === 'definition_changes') {
       entities.push({ id: c.id, model: c.definition, toolheads: [], settings: c.settings });

@@ -145,3 +145,10 @@ describe.skipIf(!existsSync(REPO))('fdm_materials@0c05969', () => {
     }
   });
 });
+
+describe('a setting named __proto__', () => {
+  test('is kept in native settings', () => {
+    const r = readFdmMaterials([f('p.xml.fdm_material', GOOD('g1', '<setting key="__proto__">9</setting>'))]);
+    expect(Object.keys(Object.values(r.native)[0]!.settings)).toContain('__proto__');
+  });
+});
