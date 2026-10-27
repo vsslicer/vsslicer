@@ -5,7 +5,7 @@ on:
   workflow_dispatch: # also runs the full 500 MB memory bench (GCP-42)
   pull_request:
   push:
-    branches: [main]
+    branches: [main, develop]
 
 permissions:
   contents: read
