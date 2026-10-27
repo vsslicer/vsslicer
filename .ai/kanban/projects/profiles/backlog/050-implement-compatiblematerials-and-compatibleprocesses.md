@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compatibility queries by running each candidate's `when` against a printer instance.
 
-**Code:** `vsslicer/modules/profiles/src/application/resolve/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/resolve/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 
