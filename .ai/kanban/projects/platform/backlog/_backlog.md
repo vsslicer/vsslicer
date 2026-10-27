@@ -149,3 +149,5 @@
 147. [PLT-211: Remove the Accounts menu in the VSSlicer build](211-remove-the-accounts-menu-in-the-vsslicer-build.md)
 148. [PLT-212: Replace the stock Settings entry with the VSSlicer settings page in the build](212-replace-the-stock-settings-entry-with-the-vsslicer-settings-.md)
 149. [PLT-213: Remove the stock Extensions view and MCP gallery in the build](213-remove-the-stock-extensions-view-and-mcp-gallery-in-the-buil.md)
+150. [PLT-215: Make @vsslicer lockfile checksums match on every machine](215-make-vsslicer-lockfile-checksums-match-on-every-machine.md)
+151. [PLT-216: Fix Windows paths in the tooling bin tests](216-fix-windows-paths-in-the-tooling-bin-tests.md)
