@@ -14,3 +14,6 @@ created: 2026-10-27
 Module: `3mf`, layer: test (adapters under test).
 
 Done when: the bound measures the fan-out's own allocation (e.g. `global.gc()` before the baseline, or a delta against a measured baseline), not process-wide heap noise, and still fails when the fan-out cap is removed (mutation probe recorded).
+## Progress
+
+coordinator (2026-10-27): the delta counts earlier tests' uncollected garbage (100-115 MB in two of three full CI runs, under 100 MB alone). Bound raised to 512 MB with the reason in a comment. Probe: `MAX_PARTS = 1e12` in `src/adapters/model/resolveProject.ts` makes the test fail (the 8-level fan-out is no longer refused with the cap message); restored. Test-only change, so no version bump.
