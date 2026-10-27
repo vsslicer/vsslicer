@@ -96,3 +96,8 @@
 94. [FIL-94: Release `filament-spoolman@0.1.0`: REST client, import, two-way sync, offline queue and Moonraker proxy transport](094-release-filament-spoolman-0-1-0-rest-client-import-two-way-s.md)
 95. [FIL-95: Add the Spoolman settings, the private-URL warning and the import command](095-add-the-spoolman-settings-the-private-url-warning-and-the-im.md)
 96. [FIL-96: Show sync state, conflicts and the Moonraker wiring in the view](096-show-sync-state-conflicts-and-the-moonraker-wiring-in-the-vi.md)
+97. [FIL-97: Add the in-memory inventory store adapter](097-add-the-in-memory-inventory-store-adapter.md)
+98. [FIL-98: Release `filament@0.0.2`: entities, inventory commands and the in-memory store](098-release-filament-0-0-2-entities-inventory-commands-and-the-i.md)
+99. [FIL-99: Activate vsslicer.filament on the in-memory store with the Filaments container](099-activate-vsslicer-filament-on-the-in-memory-store-with-the-f.md)
+100. [FIL-100: Add, edit and archive a blank spool from the Filaments view](100-add-edit-and-archive-a-blank-spool-from-the-filaments-view.md)
+101. [FIL-101: Add the printer grouping and flag marks to the filament tree models](101-add-the-printer-grouping-and-flag-marks-to-the-filament-tree.md)

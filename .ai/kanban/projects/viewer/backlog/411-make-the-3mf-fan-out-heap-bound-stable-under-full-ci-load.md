@@ -5,7 +5,7 @@ type: bug
 priority: P1
 effort: S
 model: sonnet
-sprint: "VSS:SP14"
+sprint: "VSS:SP15"
 created: 2026-10-27
 ---
 

@@ -2,13 +2,13 @@
 id: 3
 title: Convert filament length to grams and refuse a missing density
 type: feature
-priority: P1
+priority: P0
 effort: S
 model: sonnet
 area: [model]
 story: US1
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP14"
 depends_on: [2]
 created: 2026-10-25
 ---

@@ -428,3 +428,8 @@
 426. [PRN-442: Write vendor contributor checklists and ToS review notes](442-write-vendor-contributor-checklists-and-tos-review-notes.md)
 427. [PRN-444: Refuse null vendorState and duplicate patch keys in mergeStatus, and pin the caps in tests](444-refuse-null-vendorstate-and-duplicate-patch-keys-in-mergesta.md)
 428. [PRN-445: Bound zero-byte writes and close the safe-write test gaps](445-bound-zero-byte-writes-and-close-the-safe-write-test-gaps.md)
+429. [PRN-448: Create the `printer-mock` module](448-create-the-printer-mock-module.md)
+430. [PRN-449: Write the mock printer adapter: discovery, status, progress and errors](449-write-the-mock-printer-adapter-discovery-status-progress-and.md)
+431. [PRN-450: Release `printer-mock@0.1.0`: the mock printer adapter](450-release-printer-mock-0-1-0-the-mock-printer-adapter.md)
+432. [PRN-451: Register the mock printer adapter in vsslicer.printers behind a setting](451-register-the-mock-printer-adapter-in-vsslicer-printers-behin.md)
+433. [PRN-452: Read the current project in the Printers view](452-read-the-current-project-in-the-printers-view.md)

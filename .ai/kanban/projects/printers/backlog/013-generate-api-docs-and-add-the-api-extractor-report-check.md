@@ -2,7 +2,7 @@
 id: 13
 title: Generate API docs and add the api-extractor report check
 type: chore
-priority: P1
+priority: P0
 effort: S
 model: sonnet
 area: [api]

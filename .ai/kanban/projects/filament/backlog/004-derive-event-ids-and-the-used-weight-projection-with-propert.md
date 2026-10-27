@@ -2,13 +2,13 @@
 id: 4
 title: Derive event ids and the used-weight projection with property tests
 type: feature
-priority: P1
+priority: P0
 effort: M
 model: opus
 area: [model]
 story: US2
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP14"
 depends_on: [2, 3]
 created: 2026-10-25
 ---

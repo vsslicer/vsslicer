@@ -2,13 +2,13 @@
 id: 5
 title: "Write the inventory commands: create, update, archive and entity queries"
 type: feature
-priority: P1
+priority: P0
 effort: M
 model: sonnet
 area: [model]
 story: US2
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP14"
 depends_on: [4]
 created: 2026-10-25
 ---

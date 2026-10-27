@@ -7,7 +7,7 @@
 5. [PRF-55: Implement ProfileStore.export with edit-diff and overwrite protection](055-implement-profilestore-export-with-edit-diff-and-overwrite-p.md)
 6. [PRF-56: Keep G-code macro text verbatim with a dialect tag and warn on cross-dialect export](056-keep-g-code-macro-text-verbatim-with-a-dialect-tag-and-warn-.md)
 7. [PRF-59: Host the ProfileStore in a worker and expose getStore](059-host-the-profilestore-in-a-worker-and-expose-getstore.md)
-8. [PRF-61: Show the profile tree in the explorer](061-show-the-profile-tree-in-the-explorer.md)
+8. [PRF-61: Show the profile tree in the Profiles container](061-show-the-profile-tree-in-the-explorer.md)
 9. [PRF-62: Add the 'compatible with printer instance' tree filter](062-add-the-compatible-with-printer-instance-tree-filter.md)
 10. [PRF-63: Add the 'Import from installed slicer' command and the import report](063-add-the-import-from-installed-slicer-command-and-the-import-.md)
 11. [PRF-64: Add the 'Download Prusa vendor bundle' command](064-add-the-download-prusa-vendor-bundle-command.md)
@@ -102,3 +102,4 @@
 100. [PRF-230: Break a stale file-store lock without letting two writers in](230-break-a-stale-file-store-lock-without-letting-two-writers-in.md)
 101. [PRF-231: Warn when a Bambu bundle entry's name differs from its file name](231-warn-when-a-bambu-bundle-entry-s-name-differs-from-its-file-.md)
 102. [PRF-50: Implement compatibleMaterials and compatibleProcesses](050-implement-compatiblematerials-and-compatibleprocesses.md)
+103. [PRF-233: Read the current project in the Profiles view](233-read-the-current-project-in-the-profiles-view.md)

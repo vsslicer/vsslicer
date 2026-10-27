@@ -1,7 +1,7 @@
 ---
 id: D22
 title: "Print profiles are computed from printer, toolhead, nozzle and material capabilities"
-status: proposed
+status: accepted
 date: 2026-10-27
 ---
 

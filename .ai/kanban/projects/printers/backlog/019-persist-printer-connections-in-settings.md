@@ -2,13 +2,13 @@
 id: 19
 title: Persist printer connections in settings
 type: feature
-priority: P1
+priority: P0
 effort: S
 model: sonnet
 area: [api]
 story: US4
 milestone: "VSS:M3"
-sprint: "VSS:SP15"
+sprint: "VSS:SP14"
 depends_on: [17]
 created: 2026-10-25
 ---

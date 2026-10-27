@@ -2,13 +2,13 @@
 id: 2
 title: Define the inventory entities and their validation
 type: feature
-priority: P1
+priority: P0
 effort: M
 model: sonnet
 area: [model]
 story: US1
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP14"
 depends_on: [1]
 created: 2026-10-25
 ---

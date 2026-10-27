@@ -2,13 +2,13 @@
 id: 1
 title: Create the `filament` module
 type: chore
-priority: P1
+priority: P0
 effort: S
 model: sonnet
 area: [model]
 story: US1
 milestone: "VSS:M4"
-sprint: "VSS:SP23"
+sprint: "VSS:SP14"
 depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---

@@ -2,7 +2,7 @@
 id: 14
 title: "Release `printer-api@0.1.0`: types, ports, hub, fake adapter and contract kit"
 type: chore
-priority: P1
+priority: P0
 effort: XS
 model: sonnet
 area: [api]
