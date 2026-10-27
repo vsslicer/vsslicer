@@ -356,7 +356,10 @@ describe('loadProfileTree', () => {
           ['limit', `${Array.from({ length: MAX_TREE_DIRS_DEEP + 1 }, (_, i) => `d${i}`).join('/')}`],
         ].sort(),
       );
-      expect((await loadProfileTree(root, { maxFiles: 1 })).files).toHaveLength(1);
+      // every folder entry counts against maxFiles and listing order is the file system's, so 0 or 1 files come back
+      const capped = await loadProfileTree(root, { maxFiles: 1 });
+      expect(capped.files.length).toBeLessThanOrEqual(1);
+      expect(capped.diagnostics.some((d) => d.code === 'limit')).toBe(true);
       expect((await loadProfileTree(root, { maxTotalBytes: 5 })).files.length).toBeLessThan(2);
     } finally {
       await rm(dir, { recursive: true, force: true });

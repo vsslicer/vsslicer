@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.4
+
+- The grammar snapshot test quotes its glob with double quotes, so it runs on Windows (PLT-216).
+
 ## 0.2.3
 
 - Repository URL points at github.com/vsslicer/vsslicer (PLT-214).

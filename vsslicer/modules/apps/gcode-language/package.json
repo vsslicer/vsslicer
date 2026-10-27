@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/gcode-language",
   "displayName": "VSSlicer G-code Language",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "G-code language support: language contribution, TextMate grammar (G/M/T codes, parameters, comments, Klipper and RepRapFirmware extensions, placeholders).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/vsslicer/vsslicer/tree/gcode-language@0.2.3/vsslicer/modules/apps/gcode-language",
+  "repository": "https://github.com/vsslicer/vsslicer/tree/gcode-language@0.2.4/vsslicer/modules/apps/gcode-language",
   "vsslicer": {
     "sizeBudgetKB": 200
   },
@@ -84,8 +84,8 @@
     "lint": "eslint . && prettier --check . && tsc",
     "build": "tsc && vsslicer-bundle",
     "test": "node --test test/*.test.ts && pnpm test:grammar",
-    "test:grammar": "vscode-tmgrammar-snap --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode 'test/fixtures/*.gcode'",
-    "test:grammar:update": "vscode-tmgrammar-snap --updateSnapshot --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode 'test/fixtures/*.gcode'",
+    "test:grammar": "vscode-tmgrammar-snap --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode \"test/fixtures/*.gcode\"",
+    "test:grammar:update": "vscode-tmgrammar-snap --updateSnapshot --grammar syntaxes/gcode.tmLanguage.json --scope source.gcode \"test/fixtures/*.gcode\"",
     "bench": "node bench/tokenise.mjs",
     "format": "prettier --write .",
     "test:integration": "pnpm build && esbuild test/integration/*.test.ts --bundle --platform=node --format=cjs --external:vscode --outdir=dist-test && vsslicer-test-vscode"
