@@ -2,7 +2,7 @@
 
 Card VSS-86. Written by the retro agent (Opus, `sp12-retro`), who wrote none of SP12's code. Sources: `taskboard
 retro SP12` (below, unedited), the start, stop, dispatch and move events in `.ai/local/taskboard/activity.jsonl`
-from 2026-10-26T15:13 and the questions in `.ai/local/taskboard/attention.jsonl`, `git log 848f4d39..HEAD` (46
+from 2026-10-26T15:13 and the questions in `.ai/local/taskboard/attention.jsonl`, `git log dc0746eb..HEAD` (46
 commits), the review text in the cards' Progress in `.ai/kanban/projects/{profiles,gcode,viewer,slicer}/`, the
 coordinator's notes `.ai/local/sp12/retro-notes.md` and its standing rules `.ai/local/sp12/{worker,review}-rules.md`.
 Facts the coordinator (`sp12-coordinator`) supplied are marked "(coordinator)". The audit (VSS-51) runs in
@@ -93,7 +93,7 @@ The Started column is the first move to doing, so the five cards carried from SP
 (132), VWR-32 (102), VWR-23 (90), GCP-55 (79) and VWR-24 (70) took 12.0, about 18, 16.8, about 8.5 and about 8.6
 minutes in SP12 (from the 15:16:09 review dispatch of the parked work, or the 15:28 and 15:46 moves). Those five
 inflate the L row (14.5 minutes a point) and the chore row (102 median). PRF-112's Done (16:28) is the
-coordinator's bookkeeping move of commit `e36e60b7`/`e17bc08e`; it passed at 15:52:58, 16.1 minutes after its move
+coordinator's bookkeeping move of commit `0e7002a9`/`0e76b555`; it passed at 15:52:58, 16.1 minutes after its move
 to doing. PRF-211 (2 points) was done at 14:29 in SP11, on Q27, and only carries `sprint: SP12`; PRF-139 and PRF-138
 went from backlog to done at their releases.
 
@@ -187,9 +187,9 @@ profiles-orca lane: PRF-109 was moved to doing at 16:05 and its review waited on
 
 ### Releases (coordinator; the commits agree)
 
-`profiles-cura@0.1.0` (PRF-139, 15:55, `2be55691`), then one release commit at 16:22 (`957700f9`): `3mf@0.3.0`,
+`profiles-cura@0.1.0` (PRF-139, 15:55, `8e734ed9`), then one release commit at 16:22 (`d7fea00d`): `3mf@0.3.0`,
 `webview-kit@0.8.0`, `profiles-prusa@0.1.1`, `gcode-parser@0.14.2`, `test-webview@0.2.3`, `gcode-preview@0.7.0`,
-and `profiles-orca@0.1.0` (PRF-138, 16:27, `d68dd5c6`). **Rule 21 held: one version per module.** The 0.x minors
+and `profiles-orca@0.1.0` (PRF-138, 16:27, `692f6480`). **Rule 21 held: one version per module.** The 0.x minors
 of 3mf and webview-kit were re-ranged in their dependents in the same release (rule 21's SP11 amendment). One slip:
 `run.mjs publish` published gcode-preview 0.7.0 before its lockfile was re-locked to webview-kit 0.8.0 and
 gcode-parser 0.14.2, so 0.7.0 was built against the old ones; re-locked and tested after (coordinator).

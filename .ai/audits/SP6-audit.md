@@ -1,6 +1,6 @@
 # SP6 audit
 
-Date: 2026-10-26. Range: `git diff 470d05f..HEAD -- vsslicer/` (HEAD `b1e523f`, 300 files).
+Date: 2026-10-26. Range: `git diff e5c1d6a..HEAD -- vsslicer/` (HEAD `639beb4`, 300 files).
 Auditor: `sp6-auditor`, a fresh Opus agent that wrote none of SP6's code (card VSS-45). Read-only: no code changed.
 Scope: the new modules 3mf 0.1.0, mesh 0.0.0 and profile-api 0.0.0; the changes in gcode-api, gcode-parser 0.13.0
 (the `.gcode.3mf` subpath), gcode-planner 0.5.0, gcode-language 0.2.0, gcode-preview 0.4.1, webview-kit 0.6.0 and

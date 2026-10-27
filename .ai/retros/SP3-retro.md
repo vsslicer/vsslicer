@@ -2,8 +2,8 @@
 
 Card VSS-77. Written by the retro agent, who wrote none of SP3's code. Sources: `board.py retro SP3`
 (below, unedited), the start, stop, dispatch, move and note events in
-`.ai/local/taskboard/activity.jsonl`, the cards' Progress and `git log ae50ae2..HEAD` (`2cf1923` to
-`425be46`).
+`.ai/local/taskboard/activity.jsonl`, the cards' Progress and `git log 38e4938..HEAD` (`332fe0c` to
+`95c8008`).
 
 ## SP3 Preview 2: the facts
 
@@ -104,7 +104,7 @@ By type:
 Rule 9 was not followed. **Started** is the wave commit time (22:24, 22:34, 22:44, 22:51) and **Done**
 is 23:05 for every card: the coordinator moved all 22 done cards between 23:04:15 and 23:04:17. The
 Minutes column (13 to 41) measures neither work nor wall time. The sprint-level figures are right:
-**22 cards and 62 points done**, code final at 23:05 (`425be46`). Measured from the agent events instead:
+**22 cards and 62 points done**, code final at 23:05 (`95c8008`). Measured from the agent events instead:
 
 | Wave | Dispatched | Agents (workers, reviews, fixes) | Last stop |
 |---|---|---|---|
@@ -116,7 +116,7 @@ Minutes column (13 to 41) measures neither work nor wall time. The sprint-level 
 | 6 | 23:00:26 | fix PLT-36/37 (1) | 23:01:30 |
 
 Coordinator from 23:01:30 to 23:05: tooling 0.8.2, the lockfile-only re-lock of 10 modules and a
-clean-registry `run.mjs ci` (exit 0 in 70 s, `35dc269`). 31 agents ran 95 agent-minutes in all:
+clean-registry `run.mjs ci` (exit 0 in 70 s, `facfcf0`). 31 agents ran 95 agent-minutes in all:
 **1.5 agent-minutes per point** (SP2: 2.4). Mean running agents 2.0 from 22:19 to 23:06 (SP2: 1.34), peak 8.
 No agent ran for 17.5 of those 47 minutes (37%).
 

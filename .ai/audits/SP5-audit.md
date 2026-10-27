@@ -1,6 +1,6 @@
 # SP5 audit
 
-Date: 2026-10-26. Range: `git diff 6efd9c7..HEAD -- vsslicer/` (HEAD `10b3337`, 28 commits, 114 files).
+Date: 2026-10-26. Range: `git diff 4ea462d..HEAD -- vsslicer/` (HEAD `c336d68`, 28 commits, 114 files).
 Auditor: fresh Opus agent that wrote none of SP5's code. Read-only: no code changed.
 Scope: gcode-api 0.6.0, gcode-bgcode 0.4.3, gcode-parser 0.11.0, gcode-planner 0.4.0, webview-kit 0.5.1,
 gcode-preview 0.3.0 and the new gcode-language 0.1.0 (test-webview only re-locked).

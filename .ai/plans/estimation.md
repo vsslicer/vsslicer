@@ -174,9 +174,9 @@ Each rule: the rule, its evidence (sprint and figures), since when.
 9. **Measure from the agent events.** Retros take card times from the start, stop and dispatch events
    in `activity.jsonl`. The coordinator moves a card to doing when it dispatches, and board migrations
    must keep done times. Evidence: SP2's `board.py retro` Minutes column was unusable; workers moved
-   cards to doing at the end of their run, and `ee9667a` re-stamped all done times to 22:07. Since SP2.
+   cards to doing at the end of their run, and `432f203` re-stamped all done times to 22:07. Since SP2.
    **Amended SP11:** changes to how activity is recorded (hooks, plugin settings) do not land while a
-   sprint runs. Evidence: SP11 `3c7f4b5b` at 13:41 cut the agent start and stop events until 14:43, so the
+   sprint runs. Evidence: SP11 `9582beb8` at 13:41 cut the agent start and stop events until 14:43, so the
    retro has agent figures for 13:00 to 13:40 only.
 10. **Plan capacity from concurrency: points = sprint minutes x mean running agents / 1.5**, and the
     sprint's workable points (not owner- or dependency-blocked) must not exceed it. At SP3's mean of
@@ -199,7 +199,7 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     dispatch and the final release stays under 15%. Evidence: SP5 every agent sent with
     `run_in_background: true` still returned per message; no agent ran for 26.1 of 65.1 minutes (40%):
     7.2 for the trim at the start, 3.0 for the release, 15.9 in ten gaps (median 1.2), 29% without the
-    first two; all 25 card and release commits (`913e9b5` to `2c12e29`) fall in those gaps.
+    first two; all 25 card and release commits (`0ef82ec` to `5bd0049`) fall in those gaps.
     **Amended SP6:** one agent per message is not per-lane dispatch: a `run_in_background` Agent call
     still blocks its message until the agent stops, so one agent per message runs one agent at a time.
     Dispatch in waves; measure idle from the first wave's start to the last review's stop. Testable: under
@@ -237,12 +237,12 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     5 minutes of coordinator time for it. A card that changes a shared module and its consumers is at
     least L, or split per module. Evidence: SP3 every tooling or gcode-api release made dependents
     stale under PLT-179's check (PLT-180's pins after gcode-api 0.4.1); holding tooling 0.8.2 to the
-    end and re-locking 10 modules once passed a clean-registry ci in 70 s (`35dc269`). Since SP3.
+    end and re-locking 10 modules once passed a clean-registry ci in 70 s (`facfcf0`). Since SP3.
     **Amended SP7:** a `tooling` release is a patch unless it breaks consumers' config; a minor
     (0.x to 0.x+1) leaves every module's `^0.x` range unsatisfied, so it is its own card that re-ranges
     every module. Testable: one published tooling version per sprint. Evidence: SP7 tooling 0.9.0
-    (`e5ef902`) failed the clean-registry lockfile integrity check in every `^0.8` module and was
-    re-versioned as 0.8.3 (`03873c5`).
+    (`52e9a8d`) failed the clean-registry lockfile integrity check in every `^0.8` module and was
+    re-versioned as 0.8.3 (`ca7ce63`).
 14. **A module lane may take two cards at once** when they change disjoint files and neither
     publishes; the coordinator releases the module once after both pass. Evidence: SP3 GCP-20
     (Klipper) and GCP-24 (Marlin) ran in parallel in `gcode-planner` (22:35 to 22:44), both
@@ -404,7 +404,7 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     13 to every module). Testable: one version per module per sprint in `git log`. Evidence: SP4
     gcode-parser shipped 0.9.0 (GCP-83), 0.10.0 (GCP-84) and 0.10.1, because GCP-79 and GCP-18 changed
     its `package.json` after 0.10.0; the clean-registry ci failed lockfile integrity once and needed
-    gcode-preview 0.2.1 too (`39a31c1`). Since SP4.
+    gcode-preview 0.2.1 too (`859ad22`). Since SP4.
     **Amended SP5:** a card that creates a module copies the `prepack` build script from an existing
     module's `package.json`, and the coordinator commits each release before the clean-registry ci.
     Testable: the ci passes on its first run. Evidence: SP5 held one version per module (gcode-bgcode
@@ -416,8 +416,8 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     subpath export, not the main entry. Testable: one version per module and the ci passes on its first
     run. Evidence: SP6 gcode-parser 0.12.0 put `@vsslicer/3mf` (and saxes) in its main entry, the
     preview's notices check refused saxes's missing licence file, and GCP-111 shipped gcode-parser 0.13.0
-    and gcode-preview 0.4.1 (`2b522ab`); the ci passed on its third run (stale pins, then the licence
-    check's "Ported from" rule on two test files, `8453720`).
+    and gcode-preview 0.4.1 (`134e32b`); the ci passed on its third run (stale pins, then the licence
+    check's "Ported from" rule on two test files, `489aec9`).
     **Amended SP11:** before releasing a 0.x minor of any module (0.1 to 0.2 leaves `^0.1` unsatisfied), the
     coordinator greps every module's range on it, re-ranges the dependents in the same release, and runs the
     stale-pin check before publishing. Testable unchanged: one version per module per sprint. Evidence: SP11
@@ -446,13 +446,13 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     its card to review. Testable: the clean-registry ci fails on no finding that `checks` reports.
     Evidence: SP7 VSS-471 created on the VSS board for want of `--board`; the PRF-16 worker messaged the
     main session; ci run 4 failed on check-licence for PRF-16's test ("Ported from" without Copyright)
-    and PRF-41's missing `license`, the same rule that failed SP6's third run (`8453720`).
+    and PRF-41's missing `license`, the same rule that failed SP6's third run (`489aec9`).
     **Amended SP10:** the coordinator's own scripts follow the one-path rule (`command ls -1`, stop on none or
     two), and reviewers' mutation probes run in a `mktemp -d` copy of the module, never through git commands in
     the repository. Testable: zero incidents. Evidence: SP10 four incidents: the VWR-397 fix worker overwrote
     its card, the PRF-27 reviewer ran `git checkout -p` in a probe, a stray empty `vsslicer/CHANGELOG.md`, and
     the coordinator's `cat >> $(ls */034-*.md)` with two matches made a literal `034-*.md` that `board.py`
-    then moved as PRF-34's card (`b7fdb9d2`).
+    then moved as PRF-34's card (`35aa74f1`).
     **Amended SP11:** agents edit files with the Edit tool, never `sed -i` (BSD `sed -i -e` writes a backup
     named `<file>-e`), and fix workers too never run `git checkout`. Testable: zero incidents. Evidence: SP11
     three incidents: PRF-29's fix worker overwrote its card, PRF-203's worker left `superslicer-keys.ts-e`,
@@ -509,7 +509,7 @@ Each rule: the rule, its evidence (sprint and figures), since when.
     Since SP5.
     **Amended SP10:** a rebalance or re-plan does not run once the sprint's coordinator has started, and never
     moves a card in doing or review. Testable: no card's sprint changes while it is in doing. Evidence: SP10
-    the 11:23:20 rebalance (`0202202b`) moved ten wave-1 cards (20 points) to SP31 and later 6 seconds after
+    the 11:23:20 rebalance (`026b8520`) moved ten wave-1 cards (20 points) to SP31 and later 6 seconds after
     their 11:23:31 to 11:23:33 moves to doing; the coordinator set them back at 11:27:35, and the committed
     figure became 114 against the rebalance's 92.
     **Amended SP11:** the rebalance at a sprint's close keeps the closing sprint's audit bug cards in the

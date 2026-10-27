@@ -33,7 +33,7 @@ The layout every other card builds in, under the independent-module model: `vssl
 
 ## Progress
 
-Reopened for the independent-module model (owner decision, `.ai/instructions.md` "Architecture rules" at 241f7cf; D12). The first version (commit 62b9723: pnpm workspace + Turborepo under `vsslicer/`) is replaced: criteria rewritten to modules, runner and local registry. Not started on the new criteria.
+Reopened for the independent-module model (owner decision, `.ai/instructions.md` "Architecture rules" at fed66fd; D12). The first version (commit f0d9f34: pnpm workspace + Turborepo under `vsslicer/`) is replaced: criteria rewritten to modules, runner and local registry. Not started on the new criteria.
 
 Done (all paths under `vsslicer/`, which is the code root):
 - Removed the workspace scaffold (root package.json, pnpm-workspace.yaml, turbo.json, lockfile, packages/, extensions/, apps/, tools/, node_modules). `apply-repo-settings.sh` moved to `scripts/github/` unchanged (relative path to `.github/rulesets/main.json` still resolves).

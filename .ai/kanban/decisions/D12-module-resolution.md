@@ -7,7 +7,7 @@ date: 2026-10-25
 
 ## Context
 
-The architecture rules (`.ai/instructions.md`, commit 241f7cf) make every capability an
+The architecture rules (`.ai/instructions.md`, commit fed66fd) make every capability an
 independent module in `vsslicer/modules/<name>/`, with its own `package.json`, lockfile, version,
 tests, build and release, depending on other modules only through semver ranges on published
 packages. There is no root workspace and no root lockfile. Nothing is published yet (D10, Q7,

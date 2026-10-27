@@ -31,6 +31,6 @@ Split from PRF-70 at SP8 start (rule 17: an Opus L goes in two halves of under 1
 Not started.
 
 Review (sp8-reviewer-13, 08:05): PASS
-1. Snapshot vs PRF-70 (2d6b074): 869 of 1966 lines changed, only the widget column (percent_or_absolute 120, per_extruder 693, expr 33, gcode 23); keys and list/hidden flags untouched. Spot-checked 10 per kind against profile-api data JSON, and recomputed all entries: 869/869 match, no special entry missed.
+1. Snapshot vs PRF-70 (f02578f): 869 of 1966 lines changed, only the widget column (percent_or_absolute 120, per_extruder 693, expr 33, gcode 23); keys and list/hidden flags untouched. Spot-checked 10 per kind against profile-api data JSON, and recomputed all entries: 869/869 match, no special entry missed.
 2. form-model.ts: precedence (per_extruder, then expr, then type kind) documented in the WidgetKind comment; Object.hasOwn lookup kept; WIDGET_KINDS stays Record<SettingType,...> so a new catalogue type still fails to compile and the test for unknown types still passes. Note: 257 entries are both per_extruder and have an {expr} default and render as per_extruder (as documented).
 3. Ran in profiles: pnpm test (29 pass), lint, build; vsslicer/ run.mjs checks: clean. Tests cover each kind plus real keys.

@@ -1,6 +1,6 @@
 # SP4 audit
 
-Date: 2026-10-26. Range: `git diff dbaad77..HEAD -- vsslicer/` (HEAD `39a31c1`, 28 commits).
+Date: 2026-10-26. Range: `git diff 1151bd1..HEAD -- vsslicer/` (HEAD `859ad22`, 28 commits).
 Auditor: fresh Opus agent that wrote none of SP4's code. Read-only: no code changed.
 Scope: gcode-api 0.5, gcode-bgcode 0.4.2, gcode-parser 0.10.1, gcode-planner 0.3, new gcode-preview 0.2.1,
 webview-kit 0.5 (new `gl` entry, `testing` entry, window channel and transfer changes), test-webview.

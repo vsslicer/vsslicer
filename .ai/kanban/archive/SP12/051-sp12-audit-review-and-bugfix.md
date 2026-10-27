@@ -28,4 +28,4 @@ End-of-sprint audit for SP12, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 
 Not started.
 
-**Audit (sp12-auditor) and bugfix cards (sp12-coordinator):** `.ai/audits/SP12-audit.md`, 157 files over 848f4d39..d68dd5c6, all 15 SP11 fixes hold; 12 findings (1 must, 4 should, 7 nice) became SP13 bug cards PRF-227, PRF-228, VWR-407, PRF-229, VWR-408, GCP-127, PRF-230, PRF-231, VWR-409, GCP-128, VWR-410, PRF-232.
+**Audit (sp12-auditor) and bugfix cards (sp12-coordinator):** `.ai/audits/SP12-audit.md`, 157 files over dc0746eb..692f6480, all 15 SP11 fixes hold; 12 findings (1 must, 4 should, 7 nice) became SP13 bug cards PRF-227, PRF-228, VWR-407, PRF-229, VWR-408, GCP-127, PRF-230, PRF-231, VWR-409, GCP-128, VWR-410, PRF-232.

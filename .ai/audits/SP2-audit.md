@@ -1,7 +1,7 @@
 # SP2 audit
 
 Auditor: fresh Opus agent that wrote none of SP2's code (card VSS-41). Read-only: no code changed.
-Scope: `git diff 62b9723^..f275dce -- vsslicer/ .github/` (65 commits): `vsslicer/scripts/`, modules
+Scope: `git diff f0d9f34^..60db5b4 -- vsslicer/ .github/` (65 commits): `vsslicer/scripts/`, modules
 `tooling`, `example`, `example-extension`, `test-vscode`, `test-webview`, `pack`, `gcode-api`,
 `gcode-parser`, `gcode-bgcode`, `vsslicer/fixtures/`, `.github/workflows/ci.yml`, `.github/rulesets/`.
 Method: `/ponytail:ponytail-audit`, plus probes in `mktemp -d` scratch copies. The shared registry was
@@ -63,7 +63,7 @@ gcode-api 13, test-vscode 10, pack 3, gcode-parser 286, all passing when the mac
 4. **No commit in the repo is signed off, but CI requires a DCO sign-off on every PR commit** (`scripts/check-dco.mjs:L9-L19`, `.github/workflows/ci.yml:L97-L111`, `.ai/instructions.md` Conventions)
    - **What this is:** the `dco` job, part of the required `ci` check, fails a pull request if any commit lacks `Signed-off-by: <author name> <email>`.
    - **Problem:** none of SP2's 65 commits carry the trailer, and the project's commit rules (only the coordinator commits, one commit per card) never say to use `git commit -s`. The first PR made the way the project commits today fails the required check.
-   - **How verified:** `git log 62b9723^..HEAD --format='%h %(trailers:key=Signed-off-by,valueonly)'`: 65 of 65 commits have no sign-off.
+   - **How verified:** `git log f0d9f34^..HEAD --format='%h %(trailers:key=Signed-off-by,valueonly)'`: 65 of 65 commits have no sign-off.
    - **Fix:** add "commit with `-s`" to the Conventions in `.ai/instructions.md` (and the sprint-cycle/taskboard commit step). Decide whether existing history is pushed straight to `main` (not checked) or needs `git rebase --signoff`.
    - **If we skip it:** the first pull request is red for a reason nobody on the board is told about.
    - **Priority:** P1. **Board:** PLT. **Module:** scripts / repo conventions.

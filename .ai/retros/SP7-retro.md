@@ -3,8 +3,8 @@
 Card VSS-81. Written by the retro agent, who wrote none of SP7's code. Sources: `board.py retro SP7`
 (below, unedited), the start, stop, dispatch, move, create, update and note events in
 `.ai/local/taskboard/activity.jsonl` from 2026-10-26T04:48, the cards' Progress in
-`.ai/kanban/projects/{viewer,profiles,gcode,platform}/`, and `git log ed86b9e..HEAD` (43 commits, `b9cf852`
-05:05 to `8fefca0` 07:06), and the clean-registry ci log `/private/tmp/claude-501/sp7-ci.log`. Facts the
+`.ai/kanban/projects/{viewer,profiles,gcode,platform}/`, and `git log 691fa63..HEAD` (43 commits, `80c190b`
+05:05 to `54c22c4` 07:06), and the clean-registry ci log `/private/tmp/claude-501/sp7-ci.log`. Facts the
 coordinator supplied are marked "(coordinator)" and were checked against the events where the events can
 show them. The audit (VSS-46) ran in parallel; its findings are not in this retro.
 
@@ -142,7 +142,7 @@ By type:
   06:44:47, PRF-18 06:48:34, GCP-39 06:49:40. Agent time below comes from the start and stop events.
 - PLT-9, PLT-10, PLT-31, PLT-33, GCP-79 and GCP-18 show start times from earlier sprints: they are
   carry-overs, not SP7 work.
-- PRF-179 (S, Opus) ran in wave 2 (6.2 min) and is not done: its PROVENANCE was committed (`84338ed`),
+- PRF-179 (S, Opus) ran in wave 2 (6.2 min) and is not done: its PROVENANCE was committed (`6636299`),
   its licence field waits on the owner's Q20 (note 06:51:06).
 
 ### Points: what close-sprint will record
@@ -212,7 +212,7 @@ releases).
 
 ## On time or not
 
-**Early by the clock, short by points.** The last card was done at 07:06 (`8fefca0`, PRF-135), 24 minutes
+**Early by the clock, short by points.** The last card was done at 07:06 (`54c22c4`, PRF-135), 24 minutes
 before the planned end of 07:30; the clean-registry ci's fourth run (started 07:07) **failed** at 07:09 on
 `check-licence` (`/private/tmp/claude-501/sp7-ci.log`, `exit=1`): `profile-api/test/catalogue-prusa.test.ts`
 line 178 has "Ported from" without an upstream Copyright line (PRF-16's test), and
@@ -284,9 +284,9 @@ By effort, model and type (agent time from the events):
   the criteria before start (coordinator): the findings were in paths the criteria did not name, a
   generator's tokenizer and line lookup (PRF-16, 17), a copy across the host and webview boundary
   (GCP-36), and concurrent requests (GCP-39). Rule 25's test (at most one) failed.
-- *Releases and the ci* (coordinator; the log confirms the versions): webview-kit 0.7.0 (`e5b0eb8`), 3mf
-  0.1.1 and gcode-parser 0.14.0 (`0278157`), gcode-preview 0.5.0 (`7b9ec46`), tooling 0.9.0 (`e5ef902`)
-  re-versioned as 0.8.3 with test-webview 0.2.2 (`03873c5`), profile-api 0.1.0 (`862368d`). **Rule 13
+- *Releases and the ci* (coordinator; the log confirms the versions): webview-kit 0.7.0 (`c9a99f1`), 3mf
+  0.1.1 and gcode-parser 0.14.0 (`d86e0e9`), gcode-preview 0.5.0 (`918f42e`), tooling 0.9.0 (`52e9a8d`)
+  re-versioned as 0.8.3 with test-webview 0.2.2 (`ca7ce63`), profile-api 0.1.0 (`5f75d57`). **Rule 13
   broke:** a minor of `tooling` (0.9.0) left every module's `^0.8` range unsatisfied, which the clean
   registry's lockfile integrity check caught (run 2); re-versioning as a patch fixed it. One version per
   module held except tooling. Clean-registry ci: run 1 failed on a CHANGELOG the coordinator wrote
@@ -297,7 +297,7 @@ By effort, model and type (agent time from the events):
   messaged the main session directly instead of reporting; fix workers twice overwrote the reviewer's
   FAIL text in Progress; VSS-471 was created on the VSS board because `board.py` needs `--board` for
   project boards; PRF-41's 31 MB data went in under `* text=auto eol=lf` and was re-added as `-text`
-  (`dfd977a`) so its hash test holds. Rule 22's target of zero was missed again (four).
+  (`78e3eb6`) so its hash test holds. Rule 22's target of zero was missed again (four).
 - *Machine load* (coordinator): load reached about 76 and wall-clock tests flaked: the 3mf fan-out (1 s),
   gcode-parser (500 ms) and a profile-api 5 s timeout. PRF-178 had made the regex timing tests
   load-independent in this same sprint; the other modules still assert wall time.
@@ -349,5 +349,5 @@ consumers (rule 13). For the SP8 coordinator (not changed here):
 
 ## Addendum (coordinator, after the retro agent stopped)
 
-- Clean-registry ci run 4's two check-licence findings were fixed in `10fe74c` (PRF-16's test regex no longer reads as a "Ported from" line; profiles-data-orca's `license` field is back at the project default until Q20, its NOTICE says the data is AGPL-3.0-only). Run 5 failed on check-fixtures (no PROVENANCE.md in `fixtures/profile-research` and `profile-api/test/fixtures/catalogue-keys`), fixed in the next commit. **Run 6 passed at 07:19** on an empty registry: 15 packages published, 7 modules skipped as unreleased 0.0.0 (mesh, profiles, profiles-prusa/orca/cura, profiles-data-orca, project-extension). Six ci runs for one sprint: every failure was a repo-level check (`run.mjs checks`, lockfile integrity, version-check) that no worker or reviewer ran, which is the evidence for rule 22's new "workers run `node scripts/run.mjs checks`" clause.
+- Clean-registry ci run 4's two check-licence findings were fixed in `6a3d552` (PRF-16's test regex no longer reads as a "Ported from" line; profiles-data-orca's `license` field is back at the project default until Q20, its NOTICE says the data is AGPL-3.0-only). Run 5 failed on check-fixtures (no PROVENANCE.md in `fixtures/profile-research` and `profile-api/test/fixtures/catalogue-keys`), fixed in the next commit. **Run 6 passed at 07:19** on an empty registry: 15 packages published, 7 modules skipped as unreleased 0.0.0 (mesh, profiles, profiles-prusa/orca/cura, profiles-data-orca, project-extension). Six ci runs for one sprint: every failure was a repo-level check (`run.mjs checks`, lockfile integrity, version-check) that no worker or reviewer ran, which is the evidence for rule 22's new "workers run `node scripts/run.mjs checks`" clause.
 - The audit (`.ai/audits/SP7-audit.md`) was read-only within a 14-minute box: no probes or tests; it found one nice-to-have (PRF-180). The SP8 audit should re-run SP6's and SP7's hostile probes.

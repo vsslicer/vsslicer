@@ -29,7 +29,7 @@ Edge-use counting on the indexed mesh to report open edges and non-manifold edge
 
 ## Progress
 
-Already done by VWR-43 (e553e7d): `computeStats` counts edge uses on the welded mesh (open = 1 use, non-manifold = 3 or more), skipping degenerate triangles. The cube and open-cube cases were already tested.
+Already done by VWR-43 (595656a): `computeStats` counts edge uses on the welded mesh (open = 1 use, non-manifold = 3 or more), skipping degenerate triangles. The cube and open-cube cases were already tested.
 Added here: a test of three triangles on one edge (1 non-manifold edge, 6 open edges). No code change.
 Not met: "equal admesh's report on every fixture". admesh is not installed and no admesh numbers are recorded, so the comparison is not done; the first criterion and the "tests against recorded admesh numbers" task stay unticked. Needs recorded admesh output per fixture (VWR-34 fixtures).
 Verified: `pnpm lint && pnpm build && pnpm test` in modules/mesh, 20 tests pass.

@@ -1,6 +1,6 @@
 # SP11 audit
 
-Date: 2026-10-26. Range: `git diff eb679221..HEAD -- vsslicer/` (code up to `e761b4ff`; the commits after it touch
+Date: 2026-10-26. Range: `git diff ff7ee29b..HEAD -- vsslicer/` (code up to `022fac12`; the commits after it touch
 only the board). That is 475 files and about 70,100 added lines. Most of them are data: the profiles-data-orca trees,
 the Orca and Bambu golden files (about 21,000 lines), the tuple fixtures and the Prusa INI fixtures. The new source
 under `src/` is about 2,800 lines. The rest is tests, the mesh bench and CI.

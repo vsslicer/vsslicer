@@ -281,7 +281,7 @@ and fixes are 64% of agent time (SP7 46%). **1.86 agent-minutes per done point**
 - `board.py note` writes only to the activity log, not the card's Progress, so several fix workers'
   notes never reached their cards; reviewers recorded them (PLT-51 and PRN-131 re-reviews say so in
   Progress).
-- A coordinator script aborted mid-way and three CHANGELOG lines were committed late (`f4539dd`).
+- A coordinator script aborted mid-way and three CHANGELOG lines were committed late (`d2a3cb7`).
 - profile-api's planned 0.2.0 was released as 0.1.1, because 0.1.0 already carried that increment
   (PRF-136); its four dependents were re-locked once. The card's title still says 0.2.0.
 - The coordinator pre-added dependencies (profile-api to four profile modules, fflate to profiles-orca)
@@ -366,7 +366,7 @@ Idle (21%) came from the number of waves, not their gaps: alternating workers-on
 messages means 17 waves for 40 cards, and each gap costs about a minute.
 
 The `board.py note` trap cost no wall time but made reviewers reconstruct fix notes from the activity
-log. The late CHANGELOG lines (`f4539dd`) and the 0.2.0-as-0.1.1 release were coordinator overhead
+log. The late CHANGELOG lines (`d2a3cb7`) and the 0.2.0-as-0.1.1 release were coordinator overhead
 between waves; the release was planned with a version number before the registry's state was checked.
 
 ## Change
@@ -406,7 +406,7 @@ title says `profile-api@0.2.0`, but 0.1.1 was released.
 
 ## Addendum (coordinator, after the retro agent stopped)
 
-- **Clean-registry ci passed on its first run** (rule 22's testable target met; SP7 needed six): `node scripts/run.mjs ci` from an empty Verdaccio storage (old storage kept in `/private/tmp/claude-501/sp8reg.8xmM`) at `315c954`, 08:49:23 to 08:53:49, exit 0, log `/private/tmp/claude-501/sp8-ci.log`. One module published this sprint: `profile-api@0.1.1` (PRF-136); every other changed module is still 0.0.0 or changed tests only (gcode-preview).
+- **Clean-registry ci passed on its first run** (rule 22's testable target met; SP7 needed six): `node scripts/run.mjs ci` from an empty Verdaccio storage (old storage kept in `/private/tmp/claude-501/sp8reg.8xmM`) at `59eb20a`, 08:49:23 to 08:53:49, exit 0, log `/private/tmp/claude-501/sp8-ci.log`. One module published this sprint: `profile-api@0.1.1` (PRF-136); every other changed module is still 0.0.0 or changed tests only (gcode-preview).
 - **No card moved out of SP8 before close.** Carried cards stay in SP8 and close-sprint carries them, so the committed figure is the one above: 305 points, 92 recorded with VSS-47 and VSS-82 done.
 - The audit (`.ai/audits/SP8-audit.md`, 09:10, about 20 minutes of probes) found 1 must-fix, 4 should-fix (one split per module into three cards) and 5 nice-to-have: 12 SP9 bug cards (VWR-394 P0; PRF-185, SLC-277, VWR-395, GCP-115, PRF-186, PRF-187 P1; PRN-443, SLC-278, PLT-195, PRF-188, PRF-189 P2), plus PRF-184 from PRF-11. Its must-fix is a pre-SP8 parser (3mf `startTags`/`scanModel`, quadratic saxes nesting), which supports rule 25's lesson that bounds must cover every parser path, not only the one a card names.
 - PRF-136's card title still names 0.2.0; it shipped 0.1.1 (title fix left to SP9, noted on the card).

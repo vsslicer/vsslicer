@@ -1,6 +1,6 @@
 # SP12 audit
 
-Date: 2026-10-26. Range: `git diff 848f4d39..HEAD -- vsslicer/` (code up to `d68dd5c6`; the two commits after it
+Date: 2026-10-26. Range: `git diff dc0746eb..HEAD -- vsslicer/` (code up to `692f6480`; the two commits after it
 touch only the board). That is 157 files and about 8,600 added lines. About 3,400 of them are new source under
 `src/`, most of it in profiles (store, file store, watcher, worker), the profiles-orca bundles and instances,
 profiles-cura (`.curaprofile`, resource download) and 3mf (plates, layer data). The rest is tests, fixtures and spikes.

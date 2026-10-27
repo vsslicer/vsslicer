@@ -1,6 +1,6 @@
 # SP10 audit
 
-Date: 2026-10-26. Range: `git diff a5f14ccb..HEAD -- vsslicer/` (39 commits, up to `93935bed`). Leaving out the
+Date: 2026-10-26. Range: `git diff bd852384..HEAD -- vsslicer/` (39 commits, up to `420add73`). Leaving out the
 profiles-data-orca data and the lockfiles, that is 217 files and about 64,900 added lines. Most of those lines are
 data: the profile-catalogue-data JSON (about 47,000 lines, copied byte for byte from profile-api), the schema copies
 and the fixtures. The new source is about 7,500 lines.

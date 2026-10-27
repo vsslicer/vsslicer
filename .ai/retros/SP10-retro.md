@@ -2,7 +2,7 @@
 
 Card VSS-84. Written by the retro agent (`sp10-retro`, Opus), who wrote none of SP10's code. Sources:
 `board.py retro SP10` (below, unedited), the start, stop, dispatch, move, create and update events in
-`.ai/local/taskboard/activity.jsonl` from 2026-10-26T11:08, `git log d2c8a210..HEAD`, the review text in the
+`.ai/local/taskboard/activity.jsonl` from 2026-10-26T11:08, `git log d4bd2ee6..HEAD`, the review text in the
 cards' Progress in `.ai/kanban/projects/{profiles,printers,slicer,platform,gcode,viewer}/`, the coordinator's
 notes `.ai/local/sp10/retro-notes.md`, and the sprint doc `.ai/kanban/sprints/SP10.md`. Facts the coordinator
 (`sp10-coordinator`) supplied are marked "(coordinator)" and were checked against the events where the events
@@ -97,7 +97,7 @@ event attribution is wrong for this card; its Done time from git (11:45:12) is r
 ### The plan and the rebalance
 
 The sprint doc planned 92 points (33 cards) from `plan-sprints M2`. At 11:23:20 the owner's rebalance (`rebalance`
-event, commit `0202202b` at 11:23:39) moved cards past SP10 to later sprints, writing 1,821 `update` events from
+event, commit `026b8520` at 11:23:39) moved cards past SP10 to later sprints, writing 1,821 `update` events from
 11:23:00 (it moved some cards through every sprint from SP31 to SP48 one by one). It ran 6 seconds after the
 coordinator had moved wave 1 to doing (11:23:31 to 11:23:33), and moved ten of those in-flight cards out of SP10:
 GCP-119, PLT-198, PLT-200, PRF-197, SLC-279, SLC-280, VWR-13, VWR-396, VWR-397 and PRF-194 (20 points). The
@@ -189,7 +189,7 @@ Worker time follows effort now: L workers 12.2 to 15.7 minutes (PRF-25, PRF-27, 
   matter, criteria and FAIL text; the reviewer rebuilt it from HEAD and the run log), the PRF-27 reviewer ran `git
   checkout -p` during a mutation probe (no input given, no change), a stray empty `vsslicer/CHANGELOG.md` (12:05,
   removed about 12:3x), and the coordinator's own `cat >> $(ls */034-*.md)` with two matches, which created a
-  literal `034-*.md` that a fix worker appended to and `board.py` moved as PRF-34's card (repaired in `b7fdb9d2`).
+  literal `034-*.md` that a fix worker appended to and `board.py` moved as PRF-34's card (repaired in `35aa74f1`).
 - **Rule 27 (records in the card): held** except VWR-397's overwrite, whose record was rebuilt.
 - **Rule 28 (contract rule settled in the card): held.** PRN-4, carried after three rounds on one truncation rule,
   had the rule settled before its fix (11:24:38, "fix truncation rule", Opus) and passed its first re-review at
@@ -214,10 +214,10 @@ coordinator's reviews were weaker, but it is the one place this sprint's reviews
 
 ### Releases (coordinator; the commits agree)
 
-One version per module (rule 21 held): `printer-api@0.1.0` mid-sprint (`c66ca479`, 11:32, which PRN-132
-needed), `tooling@0.8.5` mid-sprint with PLT-202 (`4d0d89a4`, 12:16) and a re-lock of every module (`5068acfb`,
+One version per module (rule 21 held): `printer-api@0.1.0` mid-sprint (`844887c8`, 11:32, which PRN-132
+needed), `tooling@0.8.5` mid-sprint with PLT-202 (`4f0bec3a`, 12:16) and a re-lock of every module (`ec0c7440`,
 12:20), then `3mf@0.1.3`, `gcode-language@0.2.1`, `gcode-preview@0.5.1`, `profile-api@0.1.3` and
-`profile-catalogue-data@0.1.0` with a re-lock of their dependents (`3392bebd`, 12:26). The clean-registry ci's
+`profile-catalogue-data@0.1.0` with a re-lock of their dependents (`4aafea6c`, 12:26). The clean-registry ci's
 result is not known to this retro; it is for the coordinator's addendum.
 
 ## On time or not
@@ -276,8 +276,8 @@ Cards well over their size, from the reviews in their Progress:
   suite, rule 17's long kind); the coordinator's review found `schemas/*.json` missing from the VSIX, which needed
   PLT-202's tooling change and a release (12:16) before PRF-67 could pass.
 - **PRF-29 (M, carried, two rounds):** reviewed with PRF-28 in one agent; it failed twice, and PRF-28's commit
-  (`62f97d15`) carried PRF-29's `index.ts` and CHANGELOG lines while PRF-29 was still failing, so two clean-up
-  commits followed (`2676ca30`, `93935bed`). Rule 20 says those shared lines go in the coordinator's release
+  (`9ba2dbd5`) carried PRF-29's `index.ts` and CHANGELOG lines while PRF-29 was still failing, so two clean-up
+  commits followed (`066c2015`, `420add73`). Rule 20 says those shared lines go in the coordinator's release
   commit when two cards of one module run at once.
 - **VWR-397, SLC-280, PLT-200 (S, two rounds each, 17 to 21 minutes):** under per-lane dispatch a round on an S
   card cost about 4 minutes, so two rounds still finished inside 21.
@@ -350,5 +350,5 @@ findings fixed; PRF-42, PRF-52 and PRF-53 (L, Opus) and PRF-54 and PRF-127 (M) w
 ## Addendum (coordinator, after the retro agent stopped)
 
 - **Why building stopped at 12:37 with PRF-42, 52, 53, 54 and 127 workable.** The coordinator's call, for two reasons: from 12:08 the permission classifier refused most dispatches (PRF-29's fix twice, PRF-26 once, reviews of PRF-26 and PRF-29), so an M or L card started at 12:40 had little chance of passing a review cycle (8 to 21 minutes each) before the audit had to start on final code; and the audit, retro, releases and clean ci needed about 40 minutes before the 13:30 end. In hindsight the two M Sonnet cards (PRF-54, PRF-127) could have run until about 12:55. Rule 23's "keep dispatching to the planned end" needs an exception for the audit window; the audit should start no later than 40 minutes before the planned end.
-- **Releases and ci.** Published this sprint: printer-api 0.1.0, tooling 0.8.5, 3mf 0.1.3, gcode-language 0.2.1, gcode-preview 0.5.1, profile-api 0.1.3, profile-catalogue-data 0.1.0; re-locks `5068acfb` (tooling, 39 lockfiles) and `3392bebd` (the other four, 8 lockfiles, transitive pins included: grep found none left). First full `run.mjs ci` (12:42) failed on profiles-orca's CHANGELOG formatting after the coordinator dropped the parked PRF-29 line (`93935bed`, fixed `169fa025`); second run exit 0 (log `/private/tmp/claude-501/sp10-ci2.log`). 0.0.0 modules (mesh, printer-folder, profiles-*, slicer-runtime) were not released; their release cards are planned.
+- **Releases and ci.** Published this sprint: printer-api 0.1.0, tooling 0.8.5, 3mf 0.1.3, gcode-language 0.2.1, gcode-preview 0.5.1, profile-api 0.1.3, profile-catalogue-data 0.1.0; re-locks `ec0c7440` (tooling, 39 lockfiles) and `4aafea6c` (the other four, 8 lockfiles, transitive pins included: grep found none left). First full `run.mjs ci` (12:42) failed on profiles-orca's CHANGELOG formatting after the coordinator dropped the parked PRF-29 line (`420add73`, fixed `69b744bc`); second run exit 0 (log `/private/tmp/claude-501/sp10-ci2.log`). 0.0.0 modules (mesh, printer-folder, profiles-*, slicer-runtime) were not released; their release cards are planned.
 - **Carried:** PRF-29 (fix ready but unreviewed, parked under `.ai/local/wip/SP10/`), PRF-42, PRF-52, PRF-53, PRF-54, PRF-127 (not started).

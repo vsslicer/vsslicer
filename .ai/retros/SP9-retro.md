@@ -2,7 +2,7 @@
 
 Card VSS-83. Written by the retro agent (`sp9-retro`, Opus), who wrote none of SP9's code. Sources:
 `board.py retro SP9` (below, unedited), the start, stop, dispatch and move events in
-`.ai/local/taskboard/activity.jsonl` from 2026-10-26T09:11, `git log 8174765e..HEAD`, the review text in
+`.ai/local/taskboard/activity.jsonl` from 2026-10-26T09:11, `git log c65f5a57..HEAD`, the review text in
 the cards' Progress in `.ai/kanban/projects/{profiles,printers,slicer,platform,gcode,viewer}/`, and the sprint
 doc `.ai/kanban/sprints/SP9.md`. Facts the coordinator (`sp9-coordinator`) supplied are marked
 "(coordinator)" and were checked against the events where the events show them. The audit (VSS-48) ran
@@ -415,7 +415,7 @@ minutes, and the long cards were long by review rounds and wave size, as in SP8.
 
 ## Addendum (coordinator, after the retro agent stopped)
 
-- **Releases, late and in three runs.** The coordinator planned no releases, to keep the clean-registry ci green; the first clean ci (10:44 to 10:50) failed lockfile integrity in 43 modules because tooling, profile-api and 3mf had changed since their last release. The coordinator then released `tooling@0.8.4`, `profile-api@0.1.2` and `3mf@0.1.2` and re-locked 37 dependents (`6932c534`); the second ci (10:58 to 11:03) failed only on gcode-preview's transitive `@vsslicer/3mf@0.1.1` pin, which the re-lock loop skipped because the dependency is indirect (`e4f1f0c6`). Lesson for rule 13 and 21: changing a published module's `src` or package content means it must be released before the clean ci, whatever the plan says, and the re-lock covers transitive pins (`grep -l '<name>@<old>' */pnpm-lock.yaml`). Third clean-registry ci (11:03:30 to 11:07:45, at `e4f1f0c6`, log `/private/tmp/claude-501/sp9-ci.log`): exit 0.
+- **Releases, late and in three runs.** The coordinator planned no releases, to keep the clean-registry ci green; the first clean ci (10:44 to 10:50) failed lockfile integrity in 43 modules because tooling, profile-api and 3mf had changed since their last release. The coordinator then released `tooling@0.8.4`, `profile-api@0.1.2` and `3mf@0.1.2` and re-locked 37 dependents (`e19e1892`); the second ci (10:58 to 11:03) failed only on gcode-preview's transitive `@vsslicer/3mf@0.1.1` pin, which the re-lock loop skipped because the dependency is indirect (`b2751072`). Lesson for rule 13 and 21: changing a published module's `src` or package content means it must be released before the clean ci, whatever the plan says, and the re-lock covers transitive pins (`grep -l '<name>@<old>' */pnpm-lock.yaml`). Third clean-registry ci (11:03:30 to 11:07:45, at `b2751072`, log `/private/tmp/claude-501/sp9-ci.log`): exit 0.
 - **Audit** (`.ai/audits/SP9-audit.md`, 10:47 to 10:58): no must-fix, 4 should-fix, 7 nice-to-have; all ten SP8 fixes hold; the catalogue tools and the 3mf suite without `.reference` (153 pass, 3 skip) were covered as briefed. SP10 bug cards: PRF-194, GCP-118, PRF-195, GCP-119, VWR-396 (P1); PLT-198, VWR-397, SLC-279, SLC-280, PRF-196, PRF-197, PRF-198 (P2). Finding 4 (two wall-time asserts the SP8 grep missed, gcode-planner and mesh) again supports rule 26's grep across every module.
 - **Follow-up cards created at close for SP10:** PLT-199 (short extension ids with the PLT-196 override, Q22), GCP-120 (move PrintPosition into gcode-api, from GCP-50's review), GCP-117 (extruder limiter re-record, re-scoped by GCP-116).
 - **Integration suites:** slicer-extension and printers-extension passed at 09:44 after their last fixes (SP8 slip 4).

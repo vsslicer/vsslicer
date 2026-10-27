@@ -4,7 +4,7 @@ Card VSS-79. Written by the retro agent, who wrote none of SP5's code. Sources: 
 (below, unedited), the start, stop, dispatch, move, create and update events in
 `.ai/local/taskboard/activity.jsonl` from 2026-10-26T01:06, the cards' Progress in
 `.ai/kanban/projects/{gcode,platform}/`, `.ai/kanban/sprints/SP5.md` ("Plan at start"), `board.py`'s
-`close_sprint` and `_read_done_times`, and `git log 6efd9c7..HEAD` (`a57f2af` to `10b3337`). Facts the
+`close_sprint` and `_read_done_times`, and `git log 4ea462d..HEAD` (`79395e8` to `c336d68`). Facts the
 coordinator supplied are marked "(coordinator)" and were checked against the events where the events
 can show them.
 
@@ -151,11 +151,11 @@ minutes for 11 points (GCP-31, GCP-37, GCP-49, GCP-89's first part: 1.9 a point,
 point), Sonnet reviews 20.5.
 
 **No agent ran for 26.1 minutes (40%; SP4 21%, SP3 37%):** 7.2 at the start (01:06:54 to 01:14:09: the
-trim of 14 cards to SP6 and the lane plan, `a57f2af` at 01:12:26), 3.0 at the end (release and the
+trim of 14 cards to SP6 and the lane plan, `79395e8` at 01:12:26), 3.0 at the end (release and the
 clean-registry ci), and **15.9 in ten gaps between waves** (0.4 to 3.7, median 1.2). Without the start
 and the end: 15.9 of 54.9 minutes, 29%.
 
-**Every commit falls in one of those gaps.** The 25 commits from `913e9b5` (01:25:55) to `2c12e29`
+**Every commit falls in one of those gaps.** The 25 commits from `0ef82ec` (01:25:55) to `5bd0049`
 (02:09:15) all land between a wave's last stop and the next wave's first start (for example the three
 releases: 01:32:50 in the 01:30:39 to 01:34:22 gap, 01:41:04 in 01:39:52 to 01:42:13, 01:48:38 in
 01:47:25 to 01:49:25). The coordinator did no work while a wave ran: it was blocked on the wave's
@@ -171,8 +171,8 @@ and gcode-parser release); SP4: 43 for wave 1. Rule 17's test (under 10) passes.
 
 ## On time or not
 
-**Early, and out of work again.** The last card was done at 02:09:15 (`2c12e29`) and the release after
-the clean-registry ci was committed at 02:12:02 (`83b5a06`), **78 minutes before the planned end of
+**Early, and out of work again.** The last card was done at 02:09:15 (`5bd0049`) and the release after
+the clean-registry ci was committed at 02:12:02 (`90ec776`), **78 minutes before the planned end of
 03:30**.
 
 | | Points |
@@ -239,10 +239,10 @@ below.
   needs less coordinator work per gap or that work sent in the same message as the next wave's agents
   (not tried in SP5; whether the harness runs a Bash call alongside background Agent calls is unverified).
 - *Cards split across modules ran in parts* (coordinator; the commits confirm it). GCP-89 (M, Opus):
-  gcode-api and gcode-parser part (`4be8889`), release (`ff745f6`), preview part (`c09f156`), and a part
+  gcode-api and gcode-parser part (`d83d16f`), release (`0a8d353`), preview part (`75445cd`), and a part
   C in gcode-planner that the card did not name: Cura writes `;FLAVOR:RepRap` for RepRapFirmware, so
   `flavourFromName` had to map Cura's names (its Progress, CuraEngine@47b0388). Doing to done 34.2
-  minutes for 7.3 agent-minutes. GCP-95 (S): parser part (`4b016f4`), release, preview part, 22.7
+  minutes for 7.3 agent-minutes. GCP-95 (S): parser part (`99796a2`), release, preview part, 22.7
   minutes. Rule 13 says a card that changes a shared module and its consumers is at least L or split;
   these were neither, and the parts waited on releases and other lanes' reviews.
 - *Fix rounds* (coordinator; confirmed by the move events):
@@ -262,19 +262,19 @@ below.
   validator changed.
 - *Combined commits* (coordinator; the log confirms them). Where two cards changed the same hunks the
   coordinator gave them to one lane agent in sequence and committed them together, with both tickets in
-  the subject: GCP-90+91 (`77bd6cc`, rrf-planner.ts), PLT-190+191 (`c0b2e33`), GCP-32+33 (`f14268d`,
-  main.ts and preview-renderer.ts), GCP-92+93 (`08fbd31`, klipper.ts), GCP-89+95 preview parts
-  (`c09f156`, load-preview.ts). Two "also carries" notes remain (`f14268d` carries GCP-95's
-  renderer.test.ts line, `b710742` GCP-89's and GCP-95's CHANGELOG lines): far fewer than SP4's split of
+  the subject: GCP-90+91 (`1e2b6f6`, rrf-planner.ts), PLT-190+191 (`2ea965e`), GCP-32+33 (`5793f83`,
+  main.ts and preview-renderer.ts), GCP-92+93 (`a9eddb4`, klipper.ts), GCP-89+95 preview parts
+  (`75445cd`, load-preview.ts). Two "also carries" notes remain (`5793f83` carries GCP-95's
+  renderer.test.ts line, `103900c` GCP-89's and GCP-95's CHANGELOG lines): far fewer than SP4's split of
   22 commits by file.
 - *One card per module at a time* (coordinator; confirmed by the dispatch descriptions). Every overlap
   in a module was a review of one card while the next card in that module ran (gcode-planner,
   gcode-parser, webview-kit, gcode-preview, gcode-language), or GCP-46 and GCP-47 on separate data files
   in gcode-language (rule 14).
 - *Releases* (coordinator; the log confirms the versions). One version per module (rule 21 held):
-  gcode-bgcode 0.4.3, gcode-api 0.6.0 and gcode-parser 0.11.0 (`ff745f6`), webview-kit 0.5.1
-  (`e5415de`), gcode-planner 0.4.0 (`69f7d93`), gcode-preview 0.3.0 and gcode-language 0.1.0
-  (`83b5a06`). The clean-registry ci exited 0 on the third try: first gcode-language, created by GCP-43,
+  gcode-bgcode 0.4.3, gcode-api 0.6.0 and gcode-parser 0.11.0 (`0a8d353`), webview-kit 0.5.1
+  (`31df13f`), gcode-planner 0.4.0 (`08e96f1`), gcode-preview 0.3.0 and gcode-language 0.1.0
+  (`90ec776`). The clean-registry ci exited 0 on the third try: first gcode-language, created by GCP-43,
   had no `prepack` build; then the version check wanted the change committed. About 3 minutes at the end.
 - *Stray files* (coordinator; not in the events). Reviewers wrote review lines to a literal
   `review/088-*.md` (an unmatched glob) and to a stale `review/189-*.md` after moving the card to done;

@@ -1,6 +1,6 @@
 # SP3 audit
 
-Date: 2026-10-25. Range: `git diff ae50ae2..425be46 -- vsslicer/ .github/workflows/ci.yml` (33 commits).
+Date: 2026-10-25. Range: `git diff 38e4938..95c8008 -- vsslicer/ .github/workflows/ci.yml` (33 commits).
 Auditor: fresh Opus agent that wrote none of SP3's code. Read-only: no code changed.
 Scope: `vsslicer/scripts/` (run.mjs, versioning.mjs, lib.mjs), tooling 0.8.2, gcode-parser 0.8.5, gcode-bgcode
 0.4.1, gcode-api 0.4.1, the example / example-extension / test-vscode / test-webview patch releases, new

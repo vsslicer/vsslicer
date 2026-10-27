@@ -2,7 +2,7 @@
 
 Card VSS-76. Written by the retro agent, who wrote none of SP2's code. Sources: `board.py retro SP2`
 (below, unedited), the agent start, stop and dispatch events in `.ai/local/taskboard/activity.jsonl`,
-the cards' Progress, `.reference/notes/<ticket>-*.md` and `git log 62b9723^..HEAD`.
+the cards' Progress, `.reference/notes/<ticket>-*.md` and `git log f0d9f34^..HEAD`.
 
 ## SP2 Preview 1: the facts
 
@@ -93,7 +93,7 @@ By type:
 
 The facts table above has two measurement faults, so this retro measures from the agent events instead.
 
-- **Done** is 22:07 for almost every card. The commit `ee9667a` (22:07:05, "Board: move project
+- **Done** is 22:07 for almost every card. The commit `432f203` (22:07:05, "Board: move project
   boards under .ai/kanban/projects") re-stamped every done card's finish time. The real review
   passes ran from 19:28 (PLT-2) to 22:10 (GCP-10), as the `move review>done` events show.
 - **Started** is the card's first move into an active column, and workers often made that move
@@ -234,7 +234,7 @@ XS is off: an XS card costs as much as an S, because the fixed cost of a dispatc
 | GCP-3 | L | 18 min | Failed review: relative-E semantics under G91 and M83, and a leading UTF-8 BOM, fixed in 0.2.1 (card Progress, "Review fixes"). The parser's protocol semantics are where reviews catch real bugs. |
 | GCP-57 | S, opus | 17 min wall, 9.5 agent | Ran over. Its work (6.5 min) was longer than the median M, because it settled state-change design decisions that GCP-3 relied on (notes `GCP-57-state-changes.md`). Its review then started 7.5 minutes after the worker finished: the coordinator was busy. Design cards that fix a shared contract are at least M. |
 | PLT-23 | S | 20 min | It collided with PLT-22 in the shared `tooling` module: tooling 0.8.1 had to fix `vsslicer-package`, the bins and `check-licence` before the pack could package (card Progress). Module-lane conflict. |
-| PLT-2 | M | 12 min, redone | The owner decided on independent modules mid-card (D12). The first scaffold (`62b9723`) was discarded. |
+| PLT-2 | M | 12 min, redone | The owner decided on independent modules mid-card (D12). The first scaffold (`f0d9f34`) was discarded. |
 | PLT-6 | S | 10 min | The review (5.5 min) ran five times longer than the work (1.1 min). A licence review checks every package's fields. |
 | PLT-15 | M | 12 min, 9 of worker | Downloading VS Code for `@vscode/test-electron` was slow. The audit later filed PLT-176 to share that download. |
 | GCP-77 | XS | 8 min | Failed review: 0.8.1 was published with a stale `dist`. The fix added `prepack: pnpm build` and released 0.8.2. A publish step without a rebuild is a process bug that the review caught. |

@@ -3,7 +3,7 @@
 Card VSS-78. Written by the retro agent, who wrote none of SP4's code. Sources: `board.py retro SP4`
 (below, unedited), the start, stop, dispatch and move events in `.ai/local/taskboard/activity.jsonl`
 from 2026-10-25T23:16, the cards' Progress in `.ai/kanban/projects/{gcode,platform}/`, and
-`git log dbaad77..HEAD` (`26e6955` to `39a31c1`). Facts the coordinator supplied are marked
+`git log 1151bd1..HEAD` (`78d050b` to `859ad22`). Facts the coordinator supplied are marked
 "(coordinator)" and were checked against the events where the events can show them.
 
 ## SP4 Preview 1: the facts
@@ -89,8 +89,8 @@ By type:
 
 **Started** is right this time: it is each card's move to doing, made by the coordinator at dispatch
 (rule 16's first half held). **Done** is not: `board.py` takes it from the git commit that brought the
-card into `done/` (`_read_done_times`), and every card was committed in one run, `26e6955` at 00:43:30
-to `86fb405` at 00:44:47. The reviewers did move each card to done at review time; the move events
+card into `done/` (`_read_done_times`), and every card was committed in one run, `78d050b` at 00:43:30
+to `78e7e1b` at 00:44:47. The reviewers did move each card to done at review time; the move events
 give the real done times, 00:06:59 (GCP-28) to 00:49:26 (GCP-87). So the Minutes column (4 to 83) again
 measures commit batching, not work. Per card from the move events instead (doing to done, minutes):
 
@@ -135,7 +135,7 @@ per done point (SP3 1.5); 2.6 if the 14 points of partial cards are counted.
 ## On time or not
 
 **Early, and out of work.** The last card was done at 00:49 and the clean-registry ci exited 0 at 00:52
-(`39a31c1`), 38 minutes before the planned end of 01:30.
+(`859ad22`), 38 minutes before the planned end of 01:30.
 
 | | Points |
 |---|---|
@@ -204,14 +204,14 @@ By effort, model and type (agent time, not the table's Minutes):
   GCP-28's `bambu.ts`, and GCP-83, GCP-23 and GCP-82 all edited `klipper.ts`. Nothing was committed
   between cards, so the coordinator split the working tree by file after all reviews: 22 commits in
   77 seconds (00:43:30 to 00:44:47), each shared file in the last card's commit with an "also carries"
-  note (`709296f`, `599f85d`, `4c7506c`, `3342049`, `35f76f9`, `978564d`); `e6c6583` (PLT-187) holds
-  only its card file and GCP-28's `bambu.ts` landed in GCP-27's `4c7506c`. A reader cannot tell from
+  note (`823877f`, `84d145a`, `1042e99`, `f3b1ce0`, `9809180`, `d4a4738`); `d674f94` (PLT-187) holds
+  only its card file and GCP-28's `bambu.ts` landed in GCP-27's `1042e99`. A reader cannot tell from
   one commit what a card changed, and `board.py retro` reads all done times as 00:43 to 00:44.
 - *Release ripple* (coordinator; the log confirms the versions). Workers published as they went:
   gcode-api 0.5.0 and gcode-parser 0.9.0 (GCP-83, 23:29), gcode-preview 0.1.0 (GCP-30), gcode-parser
   0.10.0 (GCP-84). GCP-79 and GCP-18 then changed gcode-parser's `package.json`, so the clean-registry
   ci failed lockfile integrity once; gcode-parser 0.10.1 and gcode-preview 0.2.1 fixed it, and
-  `run.mjs ci` from an empty registry exited 0 at 00:52 (`39a31c1`). gcode-parser shipped three
+  `run.mjs ci` from an empty registry exited 0 at 00:52 (`859ad22`). gcode-parser shipped three
   versions in one sprint, against rule 13's one.
 - *Stray files* (coordinator; not in the events). Two reviewers' shell mistakes created files named
   after `ls` output in a board folder (`ls` is aliased to long output, as SP3 noted); one reviewer

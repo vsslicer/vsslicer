@@ -1,6 +1,6 @@
 # SP8 audit
 
-Date: 2026-10-26. Range: `git diff ec339162..HEAD -- vsslicer/` (348 files: about 2,000 lines of new source code; the
+Date: 2026-10-26. Range: `git diff 01857faa..HEAD -- vsslicer/` (348 files: about 2,000 lines of new source code; the
 rest is tests, fixtures, lockfiles and 12 empty scaffolds).
 Auditor: `sp8-auditor`, a fresh Opus agent that wrote none of SP8's code (card VSS-47). Read-only: no code, no cards and
 no git state changed, except this report and VSS-47's Progress.

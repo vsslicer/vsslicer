@@ -2,7 +2,7 @@
 
 Card VSS-85. Written by the retro agent (Opus), who wrote none of SP11's code. Sources: `board.py retro SP11`
 (below, unedited), the start, stop, dispatch, move, ask and answer events in `.ai/local/taskboard/activity.jsonl`
-from 2026-10-26T12:42 and the questions in `.ai/local/taskboard/attention.jsonl`, `git log eb679221..HEAD`, the
+from 2026-10-26T12:42 and the questions in `.ai/local/taskboard/attention.jsonl`, `git log ff7ee29b..HEAD`, the
 review text in the cards' Progress in `.ai/kanban/projects/{profiles,printers,slicer,gcode,viewer}/`, the
 coordinator's notes `.ai/local/sp11/retro-notes.md` and its standing rules `.ai/local/sp11/worker-rules.md`, and the
 sprint doc `.ai/kanban/sprints/SP11.md`. Facts the coordinator (`sp11-coordinator`) supplied are marked
@@ -92,7 +92,7 @@ By type:
 ## Reading the facts table
 
 The Started column is the coordinator's first move to doing, so GCP-118 (11:23) and PRF-29 (11:59) carry their
-SP10 start. PRF-127's Done (14:29) is the coordinator's Q27 bookkeeping commit (`cc087280`), not its review: PRF-127's review passed at 13:25:12 and its code was committed at 13:26 (`9ecef705`). From the
+SP10 start. PRF-127's Done (14:29) is the coordinator's Q27 bookkeeping commit (`c7175c57`), not its review: PRF-127's review passed at 13:25:12 and its code was committed at 13:26 (`85579f2f`). From the
 move events, GCP-118 took 12.4 minutes in SP11 (doing 12:59:25, done 13:11:50), PRF-29 11 (its fix agent 13:00:05,
 done 13:10:55) and PRF-127 25.8. With those three corrected, the M row's 12.1 minutes a point is about 8.
 
@@ -100,7 +100,7 @@ Wave 1 was moved to doing at 12:59:24 to 12:59:26, but its agents started 13:03:
 permission classifier refused most of the first dispatch message (below), so every wave-1 card's Minutes include
 4 to 9 minutes of refused dispatches.
 
-**Agent events stop at 13:41.** Commit `3c7f4b5b` (13:41, "the taskboard plugin records activity now") changed how
+**Agent events stop at 13:41.** Commit `9582beb8` (13:41, "the taskboard plugin records activity now") changed how
 activity is recorded mid-sprint. After it, the log has no stop for the five agents started 13:35 to 13:40 and no
 start or stop at all until 14:43. Agent figures below cover 13:00 to 13:40 only; the hour after it is known from
 moves, commits and the coordinator's notes.
@@ -110,7 +110,7 @@ moves, commits and the coordinator's notes.
 - **Planned: 124 points**, 50 cards: `plan-sprints M2` put 92 points (34 cards) in the sprint doc, and at 12:58 the
   coordinator pulled 16 audit bug cards (32 points) back into SP11, because the 12:43 rebalance at SP10's close
   ("935 cards moved to later sprints") had put P1 and P2 bugs from the SP9 and SP10 audits in SP12 to SP48
-  (coordinator; commit `2a7cfd1e`). PLT-203 stayed out (it needs PRF-193, SP13).
+  (coordinator; commit `801f2fad`). PLT-203 stayed out (it needs PRF-193, SP13).
 - **Delivered: 101 points**, 41 cards. 95 of them were done by 13:53 (all but GCP-53 and VWR-22, done 14:06 and
   14:15); with PRF-127's real done time the last card done is 14:15, not 14:29.
 - **Not done: 23 points**: VSS-50 and VSS-85 (4, in progress), GCP-29 (2, owner-carried on Q23), and 17 points the
@@ -318,7 +318,7 @@ Written into `.ai/plans/estimation.md`:
 - **Rule 8 amended (SP11):** a card that checks resolved values against an oracle is L, whatever its tuple count.
   Evidence: PRF-128 and PRF-129 (M) had 17-minute workers, like the L PRF-42 of the same kind.
 - **Rule 9 amended (SP11):** changes to how activity is recorded do not land while a sprint runs. Evidence:
-  `3c7f4b5b` at 13:41 cut the agent events until 14:43.
+  `9582beb8` at 13:41 cut the agent events until 14:43.
 - **Current calibration:** "After SP11" entry added.
 
 ## Re-sizing

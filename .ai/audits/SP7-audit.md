@@ -1,6 +1,6 @@
 # SP7 audit
 
-Date: 2026-10-26. Range: `git diff b9cf8526~1..HEAD -- vsslicer/` (18,270 files, nearly all of them the pinned
+Date: 2026-10-26. Range: `git diff 80c190b6~1..HEAD -- vsslicer/` (18,270 files, nearly all of them the pinned
 OrcaSlicer/Bambu Studio data in `profiles-data-orca/data`, about 117 files of code, tests and docs).
 Auditor: `sp7-auditor`, a fresh Opus agent that wrote none of SP7's code (card VSS-46). Read-only: no code changed.
 Scope: the SP6 bugfix cards in 3mf, mesh, gcode-parser, webview-kit and profile-api; gcode-preview (side panel, plate

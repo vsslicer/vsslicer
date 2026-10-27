@@ -26,4 +26,4 @@ End-of-sprint audit for SP3, steps 2 and 3 of `.ai/skills/sprint-cycle`.
 
 ## Progress
 
-Audit by a fresh Opus agent at 425be46 (ae50ae2..425be46): no must-fix, 3 should-fix. SP2 fixes hold. Cards in SP4: GCP-85, PLT-187, GCP-86 (all P1, sonnet).
+Audit by a fresh Opus agent at 95c8008 (38e4938..95c8008): no must-fix, 3 should-fix. SP2 fixes hold. Cards in SP4: GCP-85, PLT-187, GCP-86 (all P1, sonnet).

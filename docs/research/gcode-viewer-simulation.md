@@ -239,7 +239,7 @@ Orca's libvgcode adds colour modes (pressure advance, acceleration, jerk), order
 | Fluidd structure-of-arrays (2D) | 26 | 390 MB |
 | **Proposed:** f32×3 position, f16 width and height, u8 role/tool/flags, u32 file offset, f32 start time; colour from the shader | ~28 | ~420 MB |
 
-**Measured moves per byte (GCP-17, 2026-10-25).** `@vsslicer/gcode-parser@0.8.5` on the 12 text files of the golden corpus (`vsslicer/modules/gcode-parser/test/fixtures`, repo `0714681`), default tessellation (0.05 mm, 15° per chord); raw numbers in `.reference/notes/GCP-17-moves-per-byte.md`:
+**Measured moves per byte (GCP-17, 2026-10-25).** `@vsslicer/gcode-parser@0.8.5` on the 12 text files of the golden corpus (`vsslicer/modules/gcode-parser/test/fixtures`, repo `a959e0b`), default tessellation (0.05 mm, 15° per chord); raw numbers in `.reference/notes/GCP-17-moves-per-byte.md`:
 
 - The corpus averages 33.4k moves per MB (30 bytes per move, 23–31 bytes per line). Files without arcs reach at most 39.8k per MB, so 500 MB gives 16.7M moves on average and 19.9M at worst.
 - Arc fitting raises moves per byte, because the file shrinks more than the move count. Bambu Studio's cylinder goes from 36.1k to 57.1k per MB (−68% bytes, −50% moves, 5.5 chords per G2/G3). Orca's goes from 30.0k to 32.1k (3.8 chords per arc).

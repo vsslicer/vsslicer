@@ -4,7 +4,7 @@ Card VSS-80. Written by the retro agent, who wrote none of SP6's code. Sources: 
 (below, unedited), the start, stop, dispatch, move, create, update and ask events in
 `.ai/local/taskboard/activity.jsonl` from 2026-10-26T02:27, the cards' Progress in
 `.ai/kanban/projects/{gcode,viewer,profiles,platform}/`, `.ai/kanban/sprints/SP6.md`, and
-`git log 470d05f..HEAD` (`190cd59` to `b1e523f`, 52 commits). Facts the coordinator supplied are marked
+`git log e5c1d6a..HEAD` (`bcc2f35` to `639beb4`, 52 commits). Facts the coordinator supplied are marked
 "(coordinator)" and were checked against the events where the events can show them. The audit (VSS-45)
 ran in parallel; its findings are not in this retro.
 
@@ -242,7 +242,7 @@ reviews released ten cards for commit at once).
 ## On time or not
 
 **Early, out of planned work, and two workable cards left in SP7.** The last card was done at 04:34:10
-(`2b522ab`), the ci passed at 04:36:07 (`8453720`), the trim commit followed at 04:37:54, **56 minutes
+(`134e32b`), the ci passed at 04:36:07 (`489aec9`), the trim commit followed at 04:37:54, **56 minutes
 before the planned end of 05:30**.
 
 | | Points |
@@ -327,14 +327,14 @@ By effort, model and type (agent time from the events):
   hostile input** (PRF-7, VWR-5+6, PRF-8, VWR-8, VWR-15, GCP-16), and so was VWR-389 (from the VWR-37 spike
   for 20 M triangles): cards that parse untrusted bytes (zip, XML, regexes in profile conditions, Bambu
   tags) named the format but not the bounds, and reviewers found them by probing.
-- *Releases and the ci* (coordinator; the log confirms the versions): gcode-api 0.7.0 (`f322497`),
-  webview-kit 0.6.0 and gcode-language 0.2.0 (`5842273`), gcode-planner 0.5.0 (`236a63c`), 3mf 0.1.0
-  (`a2e6fc1`), gcode-parser 0.12.0 (`72303fd`), gcode-preview 0.4.0 (`7b6ae33`), then gcode-parser 0.13.0,
-  gcode-preview 0.4.1 and test-webview 0.2.1 (`2b522ab`). **Rule 21 broke for two modules:** gcode-parser
+- *Releases and the ci* (coordinator; the log confirms the versions): gcode-api 0.7.0 (`e8cd36e`),
+  webview-kit 0.6.0 and gcode-language 0.2.0 (`7a3b961`), gcode-planner 0.5.0 (`82f6e38`), 3mf 0.1.0
+  (`9aa5728`), gcode-parser 0.12.0 (`52f4193`), gcode-preview 0.4.0 (`7debb3e`), then gcode-parser 0.13.0,
+  gcode-preview 0.4.1 and test-webview 0.2.1 (`134e32b`). **Rule 21 broke for two modules:** gcode-parser
   0.12.0 put `@vsslicer/3mf` (and through it saxes) in its main entry; the preview's notices check refused
   saxes's missing licence file, and GCP-111 moved the `.gcode.3mf` readers to a subpath. The clean-registry
   ci passed on its third run: first stale pins from the held-back preview, then the licence check's
-  "Ported from" rule on two PRF-14 and PRF-15 test files (`8453720`). profile-api and mesh were not
+  "Ported from" rule on two PRF-14 and PRF-15 test files (`489aec9`). profile-api and mesh were not
   released (PRF-135 and VWR-75 are in SP7). About 8 minutes at the end.
 - *Stray files and board slips* (coordinator; not in the events except the moves). Workers ran
   `prettier --write` over whole modules, touching files outside their card; one worker truncated and

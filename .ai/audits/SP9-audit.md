@@ -1,6 +1,6 @@
 # SP9 audit
 
-Date: 2026-10-26. Range: `git diff 8174765e..HEAD -- vsslicer/`. That is 18,140 files, but 18,009 of them are the
+Date: 2026-10-26. Range: `git diff c65f5a57..HEAD -- vsslicer/`. That is 18,140 files, but 18,009 of them are the
 untracked profiles-data-orca data (PRF-190, Q21), which this audit skips. What is left is about 3,300 lines of new
 source and about 31,000 lines of tests and fixtures. Most of the fixture lines are two klipper-estimator G-code
 inputs.
@@ -146,7 +146,7 @@ None.
 
 4. **Two older tests still assert wall time** (`gcode-planner/test/planner.test.ts:L116-L118`,
    `mesh/test/parse-model.test.ts:L54-L56`)
-   - **Module / layer:** tests in gcode-planner and mesh. Both predate SP8 (commits `08fbd31f` and `e9830e0d`), and
+   - **Module / layer:** tests in gcode-planner and mesh. Both predate SP8 (commits `a9eddb49` and `8e279115`), and
      the SP8 grep missed them.
    - **What this is / Problem:** both use `expect(performance.now() - t).toBeLessThan(2000)`.
      - The planner test guards against the per-move marker scan (20,000 G4 markers).
