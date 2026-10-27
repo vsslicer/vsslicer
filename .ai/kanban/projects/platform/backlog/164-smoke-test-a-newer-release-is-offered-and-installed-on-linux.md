@@ -2,20 +2,20 @@
 id: 164
 title: "Smoke test: a newer release is offered and installed on Linux"
 type: chore
-priority: P2
+priority: P1
 effort: M
 model: sonnet
 area: [ci]
 story: US66
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
+sprint: "VSS:SP18"
 depends_on: [157, 160]
 created: 2026-10-25
 ---
 
 Serves two builds' manifests from a local server, starts the older and checks the update is offered and applied.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `test/smoke/` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

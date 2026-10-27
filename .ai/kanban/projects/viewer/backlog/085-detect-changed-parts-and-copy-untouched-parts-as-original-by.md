@@ -8,7 +8,7 @@ model: opus
 area: [3mf]
 story: US31
 milestone: "VSS:M4"
-sprint: "VSS:SP24"
+sprint: "VSS:SP26"
 depends_on: [79, 81, 82, 83, 84, 29]
 created: 2026-10-25
 ---

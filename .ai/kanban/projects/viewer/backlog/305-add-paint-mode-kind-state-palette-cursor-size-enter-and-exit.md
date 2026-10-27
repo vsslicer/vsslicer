@@ -8,7 +8,7 @@ model: sonnet
 area: [viewer, painting]
 story: US81
 milestone: "VSS:M5"
-sprint: "VSS:SP42"
+sprint: "VSS:SP47"
 depends_on: [55, 57, 301]
 created: 2026-10-25
 ---

@@ -2,13 +2,11 @@
 id: 122
 title: Generate the signature key pair for development and read the production key from a secret
 type: feature
-priority: P2
+priority: P3
 effort: M
 model: opus
 area: [registry]
 story: US62
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [112]
 created: 2026-10-25
 ---

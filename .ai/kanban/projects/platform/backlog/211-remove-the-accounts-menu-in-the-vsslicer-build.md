@@ -1,31 +1,32 @@
 ---
 id: 211
-title: Remove the Accounts menu in the VSSlicer build
+title: Patch out the Accounts entry in the VSSlicer build
 type: feature
-priority: P1
+priority: P0
 effort: S
-model: opus
+model: sonnet
 area: [fork]
 story: US71
 milestone: "VSS:M6"
+sprint: "VSS:SP15"
 depends_on: [149]
 created: 2026-10-27
 ---
 
-D23 step 2: the build has no Accounts entry, not just a hidden one. Prefer a `product.json` or configuration default over a source patch; a patch only if neither works, and then the smallest one, recorded for the rebase rehearsal (PLT-169).
+D23 step 2: no Accounts entry, not just a hidden one. There's no `product.json` or setting for it: visibility is the profile storage key `workbench.activity.showAccounts`, default `true`, read by `isAccountsActionVisible` (`vscode@07f806f:src/vs/workbench/browser/parts/globalCompositeBar.ts:853-855`). Research: `docs/research/vscodium-build.md` §4.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/build/` (overlay and patches) (module: `vsslicer-build`, layer: `n/a (build)`)
+**Code:** `patches/accounts.patch` (repo: `vsslicer/vsslicer-build`, layer: n/a (patch to VS Code's `browser/parts`))
 
 ## Acceptance criteria
 
-- [ ] The built editor shows no Accounts icon in the activity bar and no Accounts item in any menu, on a fresh user-data dir
-- [ ] The way it's done (product.json key, default setting or patch) is written in the card with the VS Code source lines it relies on, `repo@commit:path:line`
-- [ ] The smoke test (PLT-160) checks the Accounts entry is absent
+- [ ] The patch makes `isAccountsActionVisible` return `false` and removes the "Accounts" toggles (`globalCompositeBar.ts:146`, `:848`); about 10 lines, header per PLT-149
+- [ ] No Accounts entry in the activity bar or the title bar (`titlebarPart.ts:768-769`), on a fresh user-data dir and on one whose storage has the key set to `true`
+- [ ] `pnpm check-patches` passes; the smoke test (PLT-160) checks Accounts is absent
 
 ## Tasks
 
-- [ ] Find the least-invasive switch in the pinned VSCodium/VS Code sources
-- [ ] Apply it and extend the smoke test
+- [ ] Patch
+- [ ] Smoke check
 
 ## Progress
 

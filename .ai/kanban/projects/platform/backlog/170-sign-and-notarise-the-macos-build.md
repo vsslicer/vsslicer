@@ -7,15 +7,14 @@ effort: L
 model: opus
 area: [fork]
 story: US68
-milestone: "VSS:M6"
-sprint: "VSS:SP50"
+milestone: "VSS:M7"
 depends_on: [128, 153]
 created: 2026-10-25
 ---
 
 Developer ID signing and `xcrun notarytool` in the build workflow. Blocked on a signing budget (D5, D10): do not start until `PLT-128` records a yes for signing. Fallback without budget: the step logs "signing skipped: no budget" and the build stays an unsigned CI artefact; the local unsigned recipe from PLT-153 is the way to run it.
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

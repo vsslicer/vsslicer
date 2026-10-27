@@ -8,7 +8,7 @@ model: opus
 area: [daemon]
 story: US18
 milestone: "VSS:M3"
-sprint: "VSS:SP19"
+sprint: "VSS:SP22"
 depends_on: [65]
 created: 2026-10-25
 ---

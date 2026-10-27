@@ -6,7 +6,7 @@ priority: P1
 effort: S
 model: sonnet
 milestone: "VSS:M2"
-sprint: "VSS:SP16"
+sprint: "VSS:SP18"
 created: 2026-10-26
 ---
 

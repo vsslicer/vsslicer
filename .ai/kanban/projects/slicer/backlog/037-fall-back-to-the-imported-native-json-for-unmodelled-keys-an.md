@@ -8,7 +8,7 @@ model: opus
 area: [orca]
 story: US9
 milestone: "VSS:M3"
-sprint: "VSS:SP16"
+sprint: "VSS:SP17"
 depends_on: [32, 33, 34, 7, PRF-140]
 created: 2026-10-25
 ---

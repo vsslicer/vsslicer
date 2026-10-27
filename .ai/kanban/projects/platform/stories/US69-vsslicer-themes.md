@@ -2,7 +2,7 @@
 id: US69
 title: "A user of any VS Code, VSCodium or VSSlicer picks a VSSlicer colour or file-icon theme"
 status: reviewed
-epic: VSS:E69
+epic: VSS:E71
 ---
 
 As a VS Code, VSCodium or VSSlicer user, I want dark, light and high-contrast VSSlicer colour themes and a file-icon theme for 3D-printing files, so that the editor and the webviews look right and printing files are recognisable. The build uses them by default.

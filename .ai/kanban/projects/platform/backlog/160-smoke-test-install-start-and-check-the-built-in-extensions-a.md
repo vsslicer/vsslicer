@@ -1,32 +1,33 @@
 ---
 id: 160
-title: "Smoke test: install, start and check the built-in extensions are active"
+title: "Smoke test: install, start, built-in extensions active, stock chrome absent"
 type: chore
-priority: P2
+priority: P0
 effort: M
 model: sonnet
 area: [ci]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
-depends_on: [149, 159, 152]
+sprint: "VSS:SP17"
+depends_on: [152, 159, 211, 212, 213, 219, 220]
 created: 2026-10-25
 ---
 
-Installs the Linux build, starts it headless and asks the extension host which extensions are active.
+The first smoke test of the built editor, on linux-x64 under `xvfb`.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `test/smoke/` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 
-- [ ] The test starts the build under a virtual display, lists active extensions via the test harness and fails naming any bundled extension that is not active
-- [ ] The editor quits cleanly (exit code 0 within 10 s)
-- [ ] Runs on linux-x64 in CI; other targets when their builds exist
+- [ ] The test unpacks the artifact, starts it with a fresh user-data dir, and checks every built-in VSSlicer extension is active
+- [ ] Accounts, Extensions (with its MCP views), Run and Debug and Source Control are absent from the activity bar; the Explorer is present
+- [ ] The gear menu's Settings opens the VSSlicer settings page; its Extensions entry opens the VSSlicer extensions view
+- [ ] The editor quits cleanly; the test fails with a named step otherwise
 
 ## Tasks
 
-- [ ] Write the harness
-- [ ] Write the activation assertions
+- [ ] Driver (Playwright's Electron support or the VS Code test harness, whichever the patched build allows)
+- [ ] Checks
 
 ## Progress
 

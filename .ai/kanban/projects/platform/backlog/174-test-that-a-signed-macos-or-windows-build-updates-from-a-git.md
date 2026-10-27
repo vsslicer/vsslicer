@@ -7,15 +7,14 @@ effort: M
 model: sonnet
 area: [ci]
 story: US68
-milestone: "VSS:M6"
-sprint: "VSS:SP50"
+milestone: "VSS:M7"
 depends_on: [171, 173, 164]
 created: 2026-10-25
 ---
 
 Extends the update smoke test to the signed platforms. Blocked on a signing budget (D5, D10): do not start until `PLT-128` records a yes for signing. Fallback: Linux update test (PLT-164) is the only update test.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `test/smoke/` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

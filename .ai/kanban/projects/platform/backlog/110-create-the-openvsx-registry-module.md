@@ -1,33 +1,31 @@
 ---
 id: 110
-title: Create the `openvsx-registry` module
+title: Create the `vsslicer-marketplace` repository
 type: chore
-priority: P2
+priority: P0
 effort: S
 model: sonnet
 area: [registry]
-story: US60
+story: US72
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
-depends_on: [2, 3, 4, 8]
+sprint: "VSS:SP15"
 created: 2026-10-25
 ---
 
-Creates the deployment module for the self-hosted Open VSX registry from the tooling module (no server code is written: configuration, scripts and tests only).
+Sets up the public repo `vsslicer/vsslicer-marketplace` (owner-created, empty) for the static marketplace (D24): the `index.json` schema, the generator and the Pages site. Its own repository, following the module rules (own `package.json`, lockfile, tests, CI, layers).
 
-**Code:** `vsslicer/modules/tooling/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** repo root: `package.json`, `src/{domain,application,adapters}/`, `site/`, `.github/workflows/ci.yml` (repo: `vsslicer/vsslicer-marketplace`, layer: n/a (scaffold))
 
 ## Acceptance criteria
 
-- [ ] `pnpm install && pnpm test && pnpm build` works alone inside `vsslicer/modules/tooling/openvsx-registry`
-- [ ] `node scripts/run.mjs ci` picks the module up
-- [ ] A `compose/`, `scripts/` and `test/` layout exists; a smoke test asserts the layout and the pinned Open VSX server image tag in one config file
+- [ ] `pnpm install && pnpm test && pnpm build` works in a fresh clone; TypeScript, ESLint (layer-boundary rule) and vitest config copied from `tooling` with its version noted (the local registry isn't reachable from a public repo's CI, D12)
+- [ ] `LICENSE` AGPL-3.0-or-later; `README.md` links D24
+- [ ] CI runs lint and tests on push and pull request
 
 ## Tasks
 
-- [ ] Create the module from `tooling`
-- [ ] Pin the Open VSX server and web UI versions in one config file
-- [ ] Add the CI job
+- [ ] Clone the empty repo next to this one (`~/Workspace/vsslicer-marketplace`) and scaffold it
+- [ ] CI workflow
 
 ## Progress
 

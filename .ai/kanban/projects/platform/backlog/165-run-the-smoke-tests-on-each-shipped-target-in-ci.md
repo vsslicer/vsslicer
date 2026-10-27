@@ -2,20 +2,20 @@
 id: 165
 title: Run the smoke tests on each shipped target in CI
 type: chore
-priority: P2
+priority: P0
 effort: S
 model: sonnet
 area: [ci]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
-depends_on: [163, 161, 162, 153]
+sprint: "VSS:SP17"
+depends_on: [161, 163, 153]
 created: 2026-10-25
 ---
 
 Matrix job: the smoke tests on every target for which an artefact exists (Linux first; unsigned macOS and Windows artefacts are tested but not released).
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

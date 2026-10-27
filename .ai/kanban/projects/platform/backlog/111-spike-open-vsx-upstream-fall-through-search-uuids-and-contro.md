@@ -1,34 +1,28 @@
 ---
 id: 111
-title: "Spike: Open VSX upstream fall-through, search, UUIDs and control list on a local instance"
+title: "Spike: a serverless /extensionquery adapter over index.json (later option)"
 type: spike
-priority: P2
+priority: P3
 effort: M
 model: opus
 area: [registry]
-story: US60
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
-depends_on: [110]
+story: US72
 created: 2026-10-25
 ---
 
-Answers how an unmodified Open VSX behaves as an upstream-registry instance before the deployment is written (E68 risk: fall-through is documented but untested by us).
+Parked (D24 item 4). VS Code's gallery POSTs to `${serviceUrl}/extensionquery` (`vscode@07f806f:src/vs/platform/extensionManagement/common/extensionGalleryManifestService.ts:46`), which GitHub Pages can't serve. A small serverless function (a Cloudflare Worker, for example) could answer gallery queries from `index.json`, making the marketplace usable as a regular VS Code/VSCodium gallery. Plan this only if the owner wants the stock Extensions view or open-vsx.org fall-through back.
 
-**Code:** `vsslicer/modules/tooling/openvsx-registry/docs/upstream-spike.md` (module: `openvsx-registry`, layer: n/a (spike))
+**Code:** `docs/extensionquery-spike.md` (repo: `vsslicer/vsslicer-marketplace`, layer: n/a (spike))
 
 ## Acceptance criteria
 
-- [ ] A written result in `docs/upstream-spike.md` states, with a transcript from a local instance, how search ranking, deprecated extensions, the extension-control list and UUIDs behave for an extension we host and one we do not
-- [ ] The result lists the exact `application.yml`/environment settings that work and any that do not (and the fallback: a documented limitation)
-- [ ] Database search versus Elasticsearch: query latency measured on the local instance; the result says whether Elasticsearch is needed (default: not)
-- [ ] No server code changed
+- [ ] The spike lists the gallery endpoints and request shapes VSCodium uses, with `vscode@<commit>:path:line`
+- [ ] It says what a Worker needs (routes, caching, costs, free-tier limits) and recommends do or don't
 
 ## Tasks
 
-- [ ] Run the server from the published image against a local PostgreSQL
-- [ ] Configure the upstream registry and publish one test extension
-- [ ] Record the transcript, settings and the search decision
+- [ ] Read the gallery service
+- [ ] Write the spike
 
 ## Progress
 

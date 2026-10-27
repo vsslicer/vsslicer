@@ -1,32 +1,33 @@
 ---
 id: 126
-title: "Release `openvsx-registry@0.1.0`: local stack with upstream, policy, signatures, backup and gallery tests"
+title: Publish index.json on GitHub Pages (marketplace 0.1.0)
 type: chore
-priority: P2
+priority: P0
 effort: XS
 model: sonnet
 area: [registry]
-story: US64
+story: US72
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
-depends_on: [116, 117, 119, 120, 123, 124, 125]
+sprint: "VSS:SP16"
+depends_on: [223, 125]
 created: 2026-10-25
 ---
 
-Releases the local registry stack so the build can depend on its URL settings and test fixtures.
+The first published marketplace (D24): a workflow regenerates `index.json` and deploys it with the site to GitHub Pages, on a schedule, on manual dispatch and on a `repository_dispatch` from a VSSlicer release.
 
-**Code:** `vsslicer/modules/tooling/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (release))
+**Code:** `.github/workflows/pages.yml` (repo: `vsslicer/vsslicer-marketplace`, layer: n/a (ci))
 
 ## Acceptance criteria
 
-- [ ] Changelog, version bump to 0.1.0, `node scripts/run.mjs publish` to the local registry succeeds
-- [ ] The release notes say that the hosted deployment is not included (budget-gated)
+- [ ] The workflow runs the generator (PLT-223), validates the result against the schema (PLT-222), and deploys `index.json`, `schema.json` and the site to Pages
+- [ ] A run with no new releases produces a byte-identical `index.json` and deploys nothing new
+- [ ] The published URL is recorded in the README and in `apps/workbench`'s default `vsslicer.workbench.marketplaceUrl`
+- [ ] `vsslicer-marketplace@0.1.0` is tagged with a changelog entry
 
 ## Tasks
 
-- [ ] Update the changelog
-- [ ] Bump the version
-- [ ] Publish to the local registry
+- [ ] Pages workflow
+- [ ] Tag and changelog
 
 ## Progress
 

@@ -1,32 +1,33 @@
 ---
 id: 118
-title: "Implement the upload policy: licence expression, copyleft source link and namespace allow-list"
+title: Enforce the registry policy in the index generator
 type: feature
-priority: P2
+priority: P0
 effort: S
 model: sonnet
 area: [registry]
-story: US61
+story: US72
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
-depends_on: [110]
+sprint: "VSS:SP15"
+depends_on: [222]
 created: 2026-10-25
 ---
 
-A pure function decides whether a package manifest may be published: valid SPDX licence expression, a repository link for copyleft licences, namespace on the allow-list (default `vsslicer` only).
+The policy E68 put on an Open VSX server now runs in the generator (D24): every entry needs a licence expression, a copyleft entry needs a repository link, and only the `vsslicer` namespace is accepted (`licensing.md` §2 (e); roadmap question 20's default).
 
-**Code:** `vsslicer/modules/tooling/openvsx-registry/src/domain/upload-policy.ts` (module: `openvsx-registry`, layer: `domain`)
+**Code:** `src/domain/policy.ts` (repo: `vsslicer/vsslicer-marketplace`, layer: `domain`)
 
 ## Acceptance criteria
 
-- [ ] `checkUpload(manifest, policy)` returns accept or a list of named refusals (`NoLicence`, `InvalidLicenceExpression`, `CopyleftWithoutSource`, `NamespaceNotAllowed`)
-- [ ] Unit tests cover MIT, AGPL-3.0-or-later with and without `repository`, `UNLICENSED`, `SEE LICENSE IN` and an unknown namespace
-- [ ] The copyleft list is data in the module, not code
+- [ ] `checkPolicy(entry)` returns named violations: missing licence, copyleft without repository, foreign namespace
+- [ ] The generator (PLT-223) fails the workflow listing every violation by extension and version
+- [ ] Fixture tests for each violation and for a clean entry
 
 ## Tasks
 
-- [ ] Write the domain function and the licence class table
-- [ ] Write the unit tests
+- [ ] Policy function
+- [ ] Wire into the generator
+- [ ] Tests
 
 ## Progress
 

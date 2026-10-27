@@ -2,13 +2,11 @@
 id: 116
 title: Test that extension UUIDs match open-vsx.org
 type: chore
-priority: P2
+priority: P3
 effort: S
 model: sonnet
 area: [registry]
 story: US60
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [113]
 created: 2026-10-25
 ---

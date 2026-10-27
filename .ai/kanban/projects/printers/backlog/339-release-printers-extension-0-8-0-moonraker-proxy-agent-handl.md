@@ -8,7 +8,7 @@ model: sonnet
 area: [api]
 story: "FIL:US38"
 milestone: "VSS:M4"
-sprint: "VSS:SP37"
+sprint: "VSS:SP38"
 depends_on: [335, 336, 337, 338]
 created: 2026-10-25
 ---

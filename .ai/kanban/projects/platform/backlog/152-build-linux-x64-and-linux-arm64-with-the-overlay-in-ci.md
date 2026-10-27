@@ -1,32 +1,33 @@
 ---
 id: 152
-title: Build linux-x64 and linux-arm64 with the overlay in CI
+title: Build linux-x64 with the overlay and patches in CI
 type: feature
-priority: P2
+priority: P0
 effort: M
 model: sonnet
 area: [ci]
 story: US65
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
-depends_on: [149, 150, 151]
+sprint: "VSS:SP16"
+depends_on: [149, 150]
 created: 2026-10-25
 ---
 
-The main workflow builds both Linux targets from the pinned tag with the overlay and patches and uploads the artefacts.
+The first VSSlicer build: linux-x64 only (owner: Linux first), from the prepared sources, as a CI artifact. macOS, Windows and linux-arm64 follow in PLT-153.
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 
-- [ ] Both Linux artefacts build in CI and the Microsoft-marks scan passes on them
-- [ ] `product.json` in the output equals `buildProduct` output (diff test)
-- [ ] Build time stays within the free runner limits recorded in PLT-147, or the split is documented
+- [ ] On push to `main` and on manual dispatch the workflow fetches the pin, runs `pnpm prepare-sources` and builds `vsslicer-linux-x64.tar.gz`
+- [ ] The artifact starts on a GitHub-hosted Ubuntu runner under `xvfb` and prints its version (`--version`)
+- [ ] npm and Electron downloads are cached; cold and warm build times are added to `docs/build-cost.md`
 
 ## Tasks
 
-- [ ] Extend the workflow to both targets
-- [ ] Add the diff test
+- [ ] Workflow job
+- [ ] Cache
+- [ ] Record times
 
 ## Progress
 

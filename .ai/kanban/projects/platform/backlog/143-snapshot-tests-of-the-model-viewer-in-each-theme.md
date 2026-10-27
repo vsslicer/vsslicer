@@ -7,8 +7,8 @@ effort: M
 model: sonnet
 area: [themes]
 story: US69
-milestone: "VSS:M6"
-sprint: "VSS:SP50"
+milestone: "VSS:M8"
+sprint: "VSS:SP52"
 depends_on: [134, 135, 38, 17, VWR-388]
 created: 2026-10-25
 ---

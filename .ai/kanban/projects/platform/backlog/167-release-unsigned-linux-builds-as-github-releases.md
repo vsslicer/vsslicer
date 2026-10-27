@@ -1,21 +1,21 @@
 ---
 id: 167
-title: Release unsigned Linux builds as GitHub releases
+title: Release unsigned Linux builds as GitHub Releases
 type: feature
-priority: P2
+priority: P0
 effort: M
 model: sonnet
 area: [publishing]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
-depends_on: [165, 166, 146, 154, 25]
+sprint: "VSS:SP17"
+depends_on: [165, 166, 146]
 created: 2026-10-25
 ---
 
 The release job for tags `vsslicer-build@x.y.z`: Linux artefacts, checksums, notices and source tarball attached to a GitHub release; unsigned Linux builds are allowed by D10. macOS and Windows are not attached.
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

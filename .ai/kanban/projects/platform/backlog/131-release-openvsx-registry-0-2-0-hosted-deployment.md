@@ -2,13 +2,11 @@
 id: 131
 title: "Release `openvsx-registry@0.2.0`: hosted deployment"
 type: chore
-priority: P2
+priority: P3
 effort: XS
 model: sonnet
 area: [registry]
 story: US64
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [130, 129]
 created: 2026-10-25
 ---

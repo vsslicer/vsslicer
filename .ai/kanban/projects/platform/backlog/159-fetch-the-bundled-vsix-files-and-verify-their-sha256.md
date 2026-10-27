@@ -1,32 +1,34 @@
 ---
 id: 159
-title: Fetch the bundled VSIX files and verify their sha256
+title: Bundle the VSSlicer extensions as built-in VSIX files with sha256
 type: feature
-priority: P2
+priority: P0
 effort: M
 model: sonnet
 area: [fork]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
-depends_on: [158, 144, 102, GCP-75, VWR-388, PRF-176, PRN-378, PRN-60, PRN-315, SLC-276, FIL-96]
+sprint: "VSS:SP16"
+depends_on: [158, 206]
 created: 2026-10-25
 ---
 
-Downloads each bundled extension's VSIX from its GitHub release (or the local registry in tests), checks the pinned `sha256`, and puts them where the build expects them. Depends on the final or release card of each bundled extension module and on `themes@0.1.0`.
+The build ships our extensions built in, through `product.json#builtInExtensions` entries with a local `vsix` path and its `sha256`, which VS Code's build already supports (`vscode@07f806f:build/lib/builtInExtensions.ts:18-31,85-86`; checksum at `build/lib/extensions.ts:255-267`). No patch. Starts with the extensions that have a VSIX today (at least `apps/workbench`, PLT-206); others join the list as they release. Research: `docs/research/vscodium-build.md` §1.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/src/adapters/fetch-builtins.ts` (module: `vsslicer-build`, layer: `adapters`)
+**Code:** `src/adapters/fetch-builtins.ts`, `builtins.json` (repo: `vsslicer/vsslicer-build`, layer: `adapters`)
 
 ## Acceptance criteria
 
-- [ ] The G-code (GCP-75 and PLT-102), project (VWR-388), profiles (PRF-176), printers (PRN-378), Bambu (PRN-60), camera (PRN-315), slicer (SLC-276), filament (FIL-96) and themes extensions are fetched
-- [ ] A hash mismatch fails naming the extension and both hashes; a missing release fails naming the version
-- [ ] A test uses a local registry fixture, no network
+- [ ] `builtins.json` lists each extension with version, VSIX URL (a GitHub Release asset, or the marketplace `index.json` once PLT-126 exists) and `sha256`
+- [ ] The fetch step downloads each VSIX, refuses a checksum mismatch by name, and writes the `builtInExtensions` entries the overlay builder consumes
+- [ ] A test with a corrupted VSIX fails by name
+- [ ] Until the release workflow exists (PLT-25, M7), a VSIX built in this repo's CI from `vsslicer/` is accepted, with a note in `builtins.json`
 
 ## Tasks
 
-- [ ] Write the fetcher and verifier
-- [ ] Write the tests against a local fixture registry
+- [ ] List and fetch
+- [ ] Wire into the overlay
+- [ ] Test
 
 ## Progress
 

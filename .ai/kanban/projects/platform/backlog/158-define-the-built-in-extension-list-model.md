@@ -2,20 +2,20 @@
 id: 158
 title: Define the built-in extension list model
 type: feature
-priority: P2
+priority: P0
 effort: S
 model: sonnet
 area: [fork]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP15"
 depends_on: [148]
 created: 2026-10-25
 ---
 
 The `builtInExtensions` entries (id, version, repository, `sha256`) as a typed list read from one file; every shipped extension appears exactly once.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/src/domain/builtins.ts` (module: `vsslicer-build`, layer: `domain`)
+**Code:** `src/domain/builtins.ts` (repo: `vsslicer/vsslicer-build`, layer: `domain`)
 
 ## Acceptance criteria
 

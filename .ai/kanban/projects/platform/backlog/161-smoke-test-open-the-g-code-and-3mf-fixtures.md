@@ -2,31 +2,30 @@
 id: 161
 title: "Smoke test: open the G-code and 3MF fixtures"
 type: chore
-priority: P2
+priority: P0
 effort: S
 model: sonnet
 area: [ci]
 story: US67
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
+sprint: "VSS:SP17"
 depends_on: [160]
 created: 2026-10-25
 ---
 
-Opens the golden G-code and 3MF fixtures in the build and asserts the custom editors open without console errors.
+Before M3 the smoke test only opens files; slicing joins it in M3 (PLT-162).
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `test/smoke/` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 
-- [ ] Both fixtures open; the preview and viewer webviews report ready
-- [ ] Any error in the extension host log fails the test
-- [ ] Fixtures only; no printer
+- [ ] The test opens the G-code fixture in the G-code preview and the 3MF fixture in the viewer, and finds no error notification
+- [ ] Fixtures come from `vsslicer/` at a pinned commit, not copied by hand
 
 ## Tasks
 
-- [ ] Add the open steps
-- [ ] Add the log assertions
+- [ ] Fixture fetch
+- [ ] Checks
 
 ## Progress
 

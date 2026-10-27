@@ -7,15 +7,14 @@ effort: S
 model: sonnet
 area: [publishing]
 story: US68
-milestone: "VSS:M6"
-sprint: "VSS:SP50"
+milestone: "VSS:M7"
 depends_on: [171, 173, 174, 167]
 created: 2026-10-25
 ---
 
 Attaches signed installers to the GitHub release. Blocked on a signing budget (D5, D10): do not start until `PLT-128` records a yes for signing. Fallback: the release carries Linux only (D10).
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

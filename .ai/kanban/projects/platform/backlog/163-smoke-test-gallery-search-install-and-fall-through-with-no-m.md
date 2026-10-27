@@ -1,32 +1,32 @@
 ---
 id: 163
-title: "Smoke test: gallery search, install and fall-through with no Microsoft Marketplace traffic"
+title: "Smoke test: the extensions view installs from the marketplace index, with no Microsoft or Open VSX request"
 type: chore
-priority: P2
+priority: P0
 effort: M
 model: sonnet
 area: [ci]
 story: US66
 milestone: "VSS:M6"
-sprint: "VSS:SP50"
-depends_on: [155, 160, 126]
+sprint: "VSS:SP17"
+depends_on: [160, 210, 126]
 created: 2026-10-25
 ---
 
-In the build with the local registry as gallery, searches and installs our extension and a public one, and checks a proxy log.
+D24: the build has no gallery; its extensions view reads `index.json`. This proves it, and that nothing reaches the Microsoft Marketplace or open-vsx.org.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `test/smoke/` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 
-- [ ] Search and install of a `vsslicer` extension from the local registry works; a public extension installs through fall-through
-- [ ] A proxy log of the run contains no request to the Microsoft Marketplace hosts; any such request fails the test and prints it
-- [ ] Local registry only; the hosted one is covered by the registry module when it exists
+- [ ] With the build pointed at a fixture `index.json` served locally, the VSSlicer extensions view lists it and installs one extension
+- [ ] A proxy log of the whole smoke run shows no request to `marketplace.visualstudio.com`, `*.gallery.vsassets.io`, `open-vsx.org` or `*.vscode-unpkg.net`
+- [ ] A VSIX with a wrong `sha256` is refused
 
 ## Tasks
 
-- [ ] Run the build behind a logging proxy
-- [ ] Write the install steps and the log check
+- [ ] Local index server and proxy
+- [ ] Checks
 
 ## Progress
 

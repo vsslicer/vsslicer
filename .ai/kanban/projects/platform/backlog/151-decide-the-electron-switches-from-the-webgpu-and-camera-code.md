@@ -2,20 +2,20 @@
 id: 151
 title: Decide the Electron switches from the WebGPU and camera-codec spikes
 type: spike
-priority: P2
+priority: P1
 effort: S
 model: opus
 area: [fork]
 story: US65
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP18"
 depends_on: [127, 33, PRN-261, PRN-273]
 created: 2026-10-25
 ---
 
 Reads the I1 WebGPU probe and the I7 camera codec spikes and decides whether the build needs any Electron switch; the default is none.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/electron-switches.md` (module: `vsslicer-build`, layer: n/a (decision))
+**Code:** `docs/electron-switches.md` (repo: `vsslicer/vsslicer-build`, layer: n/a (decision))
 
 ## Acceptance criteria
 

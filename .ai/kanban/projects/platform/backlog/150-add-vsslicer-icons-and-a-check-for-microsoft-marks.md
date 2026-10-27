@@ -2,20 +2,20 @@
 id: 150
 title: Add VSSlicer icons and a check for Microsoft marks
 type: chore
-priority: P2
+priority: P0
 effort: S
 model: sonnet
 area: [fork]
 story: US65
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP15"
 depends_on: [127]
 created: 2026-10-25
 ---
 
 Product icons for each platform (original artwork) and a scan of the build output for Microsoft marks, icons and Microsoft-licensed extensions (`licensing.md` section 2 (d), (g)).
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/src/adapters/ms-marks-scan.ts` (module: `vsslicer-build`, layer: `adapters`)
+**Code:** `src/adapters/ms-marks-scan.ts` (repo: `vsslicer/vsslicer-build`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -8,7 +8,7 @@ model: opus
 area: [plates]
 story: US50
 milestone: "VSS:M4"
-sprint: "VSS:SP27"
+sprint: "VSS:SP30"
 depends_on: [174, 103]
 created: 2026-10-25
 ---

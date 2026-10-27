@@ -2,13 +2,11 @@
 id: 112
 title: "Compose stack: server, web UI, PostgreSQL, database search and local-disk storage"
 type: feature
-priority: P2
+priority: P3
 effort: M
 model: sonnet
 area: [registry]
 story: US60
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [111]
 created: 2026-10-25
 ---

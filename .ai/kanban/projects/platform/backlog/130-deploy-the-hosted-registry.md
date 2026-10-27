@@ -2,13 +2,11 @@
 id: 130
 title: Deploy the hosted registry
 type: feature
-priority: P2
+priority: P3
 effort: L
 model: opus
 area: [registry]
 story: US64
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [128, 124, 114, 115, 125, 129]
 created: 2026-10-25
 ---

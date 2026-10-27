@@ -7,15 +7,14 @@ effort: S
 model: sonnet
 area: [ci]
 story: US68
-milestone: "VSS:M6"
-sprint: "VSS:SP50"
+milestone: "VSS:M7"
 depends_on: [170]
 created: 2026-10-25
 ---
 
 Runs `codesign --verify` and `spctl` on the signed app. Blocked on a signing budget (D5, D10): do not start until `PLT-128` records a yes for signing. Fallback: the job is skipped when PLT-170 skipped.
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

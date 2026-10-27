@@ -8,7 +8,7 @@ model: opus
 area: [consumption]
 story: US21
 milestone: "VSS:M4"
-sprint: "VSS:SP35"
+sprint: "VSS:SP38"
 depends_on: [44, 47]
 created: 2026-10-25
 ---

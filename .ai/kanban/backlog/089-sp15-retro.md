@@ -5,7 +5,7 @@ type: chore
 priority: P0
 effort: S
 model: opus
-milestone: M3
+milestone: M6
 sprint: SP15
 created: 2026-10-25
 ---

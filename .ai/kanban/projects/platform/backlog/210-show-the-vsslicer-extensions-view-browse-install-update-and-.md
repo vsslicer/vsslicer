@@ -2,12 +2,13 @@
 id: 210
 title: "Show the VSSlicer extensions view: browse, install, update and remove"
 type: feature
-priority: P1
+priority: P0
 effort: M
 model: sonnet
 area: [fork, registry]
 story: US71
 milestone: "VSS:M6"
+sprint: "VSS:SP16"
 depends_on: [209]
 created: 2026-10-27
 ---

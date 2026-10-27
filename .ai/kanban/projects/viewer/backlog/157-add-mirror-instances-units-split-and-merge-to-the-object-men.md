@@ -8,7 +8,7 @@ model: sonnet
 area: [editor]
 story: US44
 milestone: "VSS:M4"
-sprint: "VSS:SP27"
+sprint: "VSS:SP29"
 depends_on: [139, 140, 141, 142, 143, 152]
 created: 2026-10-25
 ---

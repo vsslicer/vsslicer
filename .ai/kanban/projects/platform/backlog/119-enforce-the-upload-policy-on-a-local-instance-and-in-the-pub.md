@@ -2,13 +2,11 @@
 id: 119
 title: Enforce the upload policy on a local instance and in the publish gate
 type: feature
-priority: P2
+priority: P3
 effort: M
 model: sonnet
 area: [registry]
 story: US61
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [118, 113]
 created: 2026-10-25
 ---

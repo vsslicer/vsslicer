@@ -2,13 +2,11 @@
 id: 123
 title: Create signature archives on publish and run `ovsx verify` in CI
 type: feature
-priority: P2
+priority: P3
 effort: S
 model: sonnet
 area: [registry]
 story: US62
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [122, 119]
 created: 2026-10-25
 ---

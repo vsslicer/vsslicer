@@ -2,20 +2,20 @@
 id: 156
 title: "Spike: how VSCodium finds updates and what GitHub releases must publish"
 type: spike
-priority: P2
+priority: P1
 effort: S
 model: opus
 area: [fork]
 story: US66
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP18"
 depends_on: [152]
 created: 2026-10-25
 ---
 
 Reads the VSCodium update path (`updateUrl`, its versions repository) and decides what a GitHub-release-only update channel needs.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/update-spike.md` (module: `vsslicer-build`, layer: n/a (spike))
+**Code:** `docs/update-spike.md` (repo: `vsslicer/vsslicer-build`, layer: n/a (spike))
 
 ## Acceptance criteria
 

@@ -8,7 +8,7 @@ model: opus
 area: [multimaterial]
 story: US55
 milestone: "VSS:M5"
-sprint: "VSS:SP40"
+sprint: "VSS:SP42"
 depends_on: [195, PRF-145, PRN-46]
 created: 2026-10-25
 ---

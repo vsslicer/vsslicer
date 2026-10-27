@@ -2,12 +2,13 @@
 id: 206
 title: Create the `workbench-extension` module
 type: chore
-priority: P1
+priority: P0
 effort: S
 model: sonnet
 area: [fork]
 story: US71
 milestone: "VSS:M6"
+sprint: "VSS:SP15"
 created: 2026-10-27
 ---
 

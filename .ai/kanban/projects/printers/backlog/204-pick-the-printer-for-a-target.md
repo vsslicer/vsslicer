@@ -8,7 +8,7 @@ model: sonnet
 area: [fleet]
 story: US56
 milestone: "VSS:M4"
-sprint: "VSS:SP34"
+sprint: "VSS:SP35"
 depends_on: [202, 203]
 created: 2026-10-25
 ---

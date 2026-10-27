@@ -2,20 +2,20 @@
 id: 154
 title: Check that two Linux builds are byte-identical
 type: feature
-priority: P2
+priority: P1
 effort: M
 model: opus
 area: [ci]
 story: US65
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP18"
 depends_on: [152]
 created: 2026-10-25
 ---
 
 Runs the Linux build twice from the same inputs and compares; differing files are listed and either fixed or explained.
 
-**Code:** `.github/workflows/vsslicer-build.yml` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/build.yml` (repo: `vsslicer/vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

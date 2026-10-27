@@ -2,20 +2,20 @@
 id: 157
 title: Generate the update manifests and set `updateUrl`
 type: feature
-priority: P2
+priority: P1
 effort: M
 model: sonnet
 area: [fork]
 story: US66
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP18"
 depends_on: [156, 148]
 created: 2026-10-25
 ---
 
 Generates the per-platform update manifests from release assets so a new GitHub release is offered to older builds.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/src/application/update-manifest.ts` (module: `vsslicer-build`, layer: `application`)
+**Code:** `src/application/update-manifest.ts` (repo: `vsslicer/vsslicer-build`, layer: `application`)
 
 ## Acceptance criteria
 

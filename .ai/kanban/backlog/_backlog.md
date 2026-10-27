@@ -76,3 +76,7 @@
 74. [VSS-468: SP49: retro](468-sp49-retro.md)
 75. [VSS-469: SP50: audit review and bugfix](469-sp50-audit-review-and-bugfix.md)
 76. [VSS-470: SP50: retro](470-sp50-retro.md)
+77. [VSS-472: SP51: audit review and bugfix](472-sp51-audit-review-and-bugfix.md)
+78. [VSS-473: SP51: retro](473-sp51-retro.md)
+79. [VSS-474: SP52: audit review and bugfix](474-sp52-audit-review-and-bugfix.md)
+80. [VSS-475: SP52: retro](475-sp52-retro.md)

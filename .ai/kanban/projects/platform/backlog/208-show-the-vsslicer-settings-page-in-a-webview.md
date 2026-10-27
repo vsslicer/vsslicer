@@ -2,12 +2,13 @@
 id: 208
 title: Show the VSSlicer settings page in a webview
 type: feature
-priority: P1
+priority: P0
 effort: L
 model: sonnet
 area: [fork, webview-kit]
 story: US71
 milestone: "VSS:M6"
+sprint: "VSS:SP16"
 depends_on: [207]
 created: 2026-10-27
 ---

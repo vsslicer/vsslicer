@@ -2,20 +2,18 @@
 id: 155
 title: "Point the build's gallery and control list at the VSSlicer registry"
 type: feature
-priority: P2
+priority: P3
 effort: S
 model: sonnet
 area: [fork]
 story: US66
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [148, 126]
 created: 2026-10-25
 ---
 
 Sets `extensionsGallery` and `controlUrl` in the overlay from the registry release settings; the default is the local instance URL for tests and the registry URL is a build variable. Hosted URL is blocked on the hosting budget; open-vsx.org is the fallback gallery when no registry URL is given.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/src/application/gallery.ts` (module: `vsslicer-build`, layer: `application`)
+**Code:** `src/application/gallery.ts` (repo: `vsslicer/vsslicer-build`, layer: `application`)
 
 ## Acceptance criteria
 

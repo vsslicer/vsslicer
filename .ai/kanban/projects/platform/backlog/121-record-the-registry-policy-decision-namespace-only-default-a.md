@@ -1,14 +1,14 @@
 ---
 id: 121
-title: "Record the registry policy decision: namespace-only default and third-party uploads"
+title: "Record the marketplace policy: VSSlicer namespace only by default"
 type: docs
-priority: P2
+priority: P0
 effort: XS
 model: sonnet
 area: [registry]
-story: US61
+story: US72
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP15"
 depends_on: [118]
 created: 2026-10-25
 ---

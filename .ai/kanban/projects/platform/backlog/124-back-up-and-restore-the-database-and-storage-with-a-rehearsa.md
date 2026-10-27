@@ -2,13 +2,11 @@
 id: 124
 title: Back up and restore the database and storage with a rehearsal test
 type: feature
-priority: P2
+priority: P3
 effort: M
 model: sonnet
 area: [registry]
 story: US63
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [112]
 created: 2026-10-25
 ---

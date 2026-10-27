@@ -8,7 +8,7 @@ model: sonnet
 area: [mesh]
 story: US90
 milestone: "VSS:M5"
-sprint: "VSS:SP46"
+sprint: "VSS:SP48"
 depends_on: [323, 324]
 created: 2026-10-25
 ---

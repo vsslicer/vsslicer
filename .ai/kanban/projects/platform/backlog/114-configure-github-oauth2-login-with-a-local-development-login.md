@@ -2,13 +2,11 @@
 id: 114
 title: Configure GitHub OAuth2 login with a local development login
 type: feature
-priority: P2
+priority: P3
 effort: S
 model: sonnet
 area: [registry]
 story: US60
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [112]
 created: 2026-10-25
 ---

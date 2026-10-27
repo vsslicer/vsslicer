@@ -2,20 +2,20 @@
 id: 146
 title: Record the product name trademark search
 type: docs
-priority: P1
+priority: P0
 effort: XS
 model: sonnet
 area: [fork]
 story: US65
 milestone: "VSS:M6"
-sprint: "VSS:SP49"
+sprint: "VSS:SP16"
 depends_on: [127]
 created: 2026-10-25
 ---
 
 The owner runs the trademark search for the product name (roadmap question 4) before the first public build; this card records the outcome and gates the first release job.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/trademark.md` (module: `vsslicer-build`, layer: n/a (owner record))
+**Code:** `docs/trademark.md` (repo: `vsslicer/vsslicer-build`, layer: n/a (owner record))
 
 ## Acceptance criteria
 

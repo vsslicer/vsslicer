@@ -7,15 +7,14 @@ effort: S
 model: opus
 area: [fork]
 story: US68
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
+milestone: "VSS:M7"
 depends_on: [127]
 created: 2026-10-25
 ---
 
 The single decision card for the paid items of I11: D5 says no budget for signing, notarisation, a hosted registry or paid CI. This card puts the question to the owner with costs and options and records the answer; every signing and hosting card depends on it.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/budget-decision.md` (module: `vsslicer-build`, layer: n/a (decision))
+**Code:** `docs/budget-decision.md` (repo: `vsslicer/vsslicer-build`, layer: n/a (decision))
 
 ## Acceptance criteria
 

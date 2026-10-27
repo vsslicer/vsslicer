@@ -8,7 +8,7 @@ model: opus
 area: [bambu]
 story: US33
 milestone: "VSS:M3"
-sprint: "VSS:SP21"
+sprint: "VSS:SP22"
 depends_on: [30, 45, GCP-49]
 created: 2026-10-25
 ---

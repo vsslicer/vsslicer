@@ -7,15 +7,15 @@ effort: XS
 model: sonnet
 area: [themes]
 story: US69
-milestone: "VSS:M6"
-sprint: "VSS:SP50"
+milestone: "VSS:M8"
+sprint: "VSS:SP52"
 depends_on: [148, 144]
 created: 2026-10-25
 ---
 
 Adds `configurationDefaults` for `workbench.colorTheme` and `workbench.iconTheme` to the overlay.
 
-**Code:** `vsslicer/modules/tooling/vsslicer-build/src/application/defaults.ts` (module: `vsslicer-build`, layer: `application`)
+**Code:** `src/application/defaults.ts` (repo: `vsslicer/vsslicer-build`, layer: `application`)
 
 ## Acceptance criteria
 

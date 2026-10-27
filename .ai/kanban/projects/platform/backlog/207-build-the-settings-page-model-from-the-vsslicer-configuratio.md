@@ -2,12 +2,13 @@
 id: 207
 title: Build the settings page model from the VSSlicer configuration schemas
 type: feature
-priority: P1
+priority: P0
 effort: M
 model: sonnet
 area: [fork]
 story: US71
 milestone: "VSS:M6"
+sprint: "VSS:SP15"
 depends_on: [206]
 created: 2026-10-27
 ---

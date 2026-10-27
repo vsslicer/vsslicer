@@ -8,7 +8,7 @@ model: sonnet
 area: [3mf]
 story: US30
 milestone: "VSS:M4"
-sprint: "VSS:SP25"
+sprint: "VSS:SP26"
 depends_on: [87, 88, 89, 90]
 created: 2026-10-25
 ---

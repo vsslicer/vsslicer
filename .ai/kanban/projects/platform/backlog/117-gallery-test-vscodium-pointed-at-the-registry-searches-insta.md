@@ -2,13 +2,11 @@
 id: 117
 title: "Gallery test: VSCodium pointed at the registry searches, installs, updates and falls through"
 type: chore
-priority: P2
+priority: P3
 effort: M
 model: sonnet
 area: [registry]
 story: US60
-milestone: "VSS:M6"
-sprint: "VSS:SP49"
 depends_on: [113, 114, 115, 14, 21, 16]
 created: 2026-10-25
 ---
