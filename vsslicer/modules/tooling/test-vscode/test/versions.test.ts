@@ -24,8 +24,8 @@ describe('resolveVersion', () => {
 
 describe('paths', () => {
   it('keys cache and results by version', () => {
-    expect(cachePath('.vscode-test', '1.100.0')).toBe('.vscode-test/1.100.0');
-    expect(resultsPath('test-results/integration', 'stable')).toBe('test-results/integration/stable');
+    expect(cachePath('.vscode-test', '1.100.0')).toBe(join('.vscode-test', '1.100.0'));
+    expect(resultsPath('test-results/integration', 'stable')).toBe(join('test-results/integration', 'stable'));
   });
 });
 
