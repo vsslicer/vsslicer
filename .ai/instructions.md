@@ -123,9 +123,13 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 - Only the coordinator commits. Parallel workers write files and never run `git add` or
   `git commit`, so commits never race on the index.
 - No Co-Authored-By or other AI attribution trailers in commits.
-- DCO: every commit needs a `Signed-off-by` trailer (owner decision Q12, CONTRIBUTING.md). Until the
-  first-push history rewrite (which also adds sign-offs to the existing history and removes
-  profiles-data-orca's vendored data, Q21), commits need not carry one: the rewrite adds them.
+- DCO: every commit needs a `Signed-off-by` trailer matching its author (owner decision Q12,
+  CONTRIBUTING.md): commit with `git commit -s`. CI checks it (`scripts/check-dco.mjs`). The history
+  was signed off and rewritten once before the first push (PLT-214); never rewrite pushed history.
+- GitHub: org `vsslicer`. This repository is `vsslicer/vsslicer` (default branch `develop`); the
+  editor build is `vsslicer/vsslicer-build`, the marketplace `vsslicer/vsslicer-marketplace` and the
+  website `vsslicer/vsslicer.github.io`. Claude has access to every repository through the Claude
+  GitHub App; workflows use the org secret `CLAUDE_CODE_OAUTH_TOKEN`.
 - Branches: `develop` takes the per-card commits; `main` takes only sprint merges. Closing SP<n>
   merges `develop` into `main` with `--no-ff` ("Merge sprint SP<n> into main") and tags the merge
   `sprint/SP<n>`; a finished milestone tags its closing merge `milestone/<id>` (annotated tags).
