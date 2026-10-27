@@ -6,5 +6,5 @@
   "packageManager": "pnpm@11.22.0",
   "engines": { "node": ">=24" },
   "scripts": { "test": "node --test test/" },
-  "devDependencies": { "verdaccio": "6.11.1" }
+  "devDependencies": { "fflate": "0.8.3", "verdaccio": "6.11.1" }
 }

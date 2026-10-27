@@ -973,7 +973,7 @@ packages:
     hasBin: true
 
   '@vsslicer/tooling@0.8.5':
-    resolution: {integrity: sha512-d+ZPpjyQG+R3dIxDrQxjeuOx5tJFY+JxE81kqELZLErKK5QDb/n0VQWc90Q6AnZY8oJBQyM1l2ImZ9KO2jSd8Q==}
+    resolution: {integrity: sha512-kI16R1axtHd9RcQgmNl8p08vIMEHOcR6r80iDwQpH7c0v0FLtXmTbmYTnB92L+fB2ss1eNQ0z6re8Rr+BlhFkQ==}
     engines: {node: '>=24'}
     hasBin: true
 

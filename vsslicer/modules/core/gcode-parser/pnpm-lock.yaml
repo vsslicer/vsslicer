@@ -979,19 +979,19 @@ packages:
     hasBin: true
 
   '@vsslicer/3mf@0.3.0':
-    resolution: {integrity: sha512-UfHEtR1PQavU3lcysuWxApvnk6FJFrrfbDv5iCPuGrseuqMtaZ92gm757lLT3kxOhLm9he9iebrVaVIQJCmzNw==}
+    resolution: {integrity: sha512-p95EYSZJWTtG7wTswqdZQ27ZFeGhEF1c5C4jygKrBwPXPZm+7KVZBzN4X9H80wnAOMCYgAEbHGtHH/zOVUCirg==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-api@0.7.0':
-    resolution: {integrity: sha512-jXm7NlRExnwITIkKO6J5l/wXLfcDlF0VHO0QsqXtW9CJRZ24ccAU8OpwG+nUJSYzuOY0szLv6d79GeB/vEr2IQ==}
+    resolution: {integrity: sha512-7ijFVU0/IMtp2p5821pLTPhYR2KF/UFMRwRXYgCOpPiUICOyN6VJf2Mqc3AGHYzWk+yqyLw0WOTO9Fdv8SGiBw==}
     engines: {node: '>=24'}
 
   '@vsslicer/gcode-bgcode@0.4.3':
-    resolution: {integrity: sha512-PigT/jVQ9DONuiOTNJL048q9jsrc+ISSFM9OcaoR9KZj6JW9iKOlDkBD67uuv0M9L1HEapkF69Z3mTwQf/6jgQ==}
+    resolution: {integrity: sha512-jN1XoOyPO9PR2Rm9pnQMTdTxIa30rncbf6US4X0TLk0b3x8Pu/iEPJd8TPkkEcRlBsdmYwDSjVjp0X4ihxMpsg==}
     engines: {node: '>=24'}
 
   '@vsslicer/tooling@0.8.5':
-    resolution: {integrity: sha512-d+ZPpjyQG+R3dIxDrQxjeuOx5tJFY+JxE81kqELZLErKK5QDb/n0VQWc90Q6AnZY8oJBQyM1l2ImZ9KO2jSd8Q==}
+    resolution: {integrity: sha512-kI16R1axtHd9RcQgmNl8p08vIMEHOcR6r80iDwQpH7c0v0FLtXmTbmYTnB92L+fB2ss1eNQ0z6re8Rr+BlhFkQ==}
     engines: {node: '>=24'}
     hasBin: true
 

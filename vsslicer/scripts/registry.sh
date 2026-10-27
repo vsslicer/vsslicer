@@ -10,9 +10,10 @@ up() { curl -fs "$url/-/ping" >/dev/null 2>&1; }
 alive() { [ -f "$pidfile" ] && kill -0 "$(cat "$pidfile")" 2>/dev/null; }
 case "${1:-}" in
   start)
+    # always: an older checkout's node_modules lacks fflate, which run.mjs publish needs (PLT-215); a no-op when up to date
+    (cd "$here" && pnpm install --frozen-lockfile --silent)
     if up; then echo "registry already running at $url"; exit 0; fi
     mkdir -p "$dir"
-    [ -d "$here/node_modules" ] || (cd "$here" && pnpm install --frozen-lockfile)
     # own process group so stop can kill verdaccio and anything it spawned
     nohup "$here/node_modules/.bin/verdaccio" -c "$here/verdaccio/config.yaml" -l localhost:4873 \
       >"$dir/verdaccio.log" 2>&1 &

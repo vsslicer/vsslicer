@@ -984,20 +984,20 @@ packages:
     hasBin: true
 
   '@vsslicer/example-extension@0.7.5':
-    resolution: {integrity: sha512-irsnRV+/aaydEVI8Z3CWJKrjCxwwuu6YZIWlYjF5SEbHJpjoVju6chU1IWUsORLmNDOHyRB3gu54uRlNx6IS7w==}
+    resolution: {integrity: sha512-nIQSI3CkNfvpISAROImU2qlBPrLgTFCGG6B4x5cN/ebDmK6NaQBTR6uIvYkkMPh8UnlrqVEWRd5vMjw/7UpM0g==}
     engines: {node: '>=24', vscode: ^1.100.0}
 
   '@vsslicer/example@0.3.2':
-    resolution: {integrity: sha512-Yn3gof/Ww6tiUhG9w3tYaAzanvQuDZ6BJ+QdmgR5t4CYd7i6+Dpo3mbFHFfk3Puf45fvoX/4tNYemUTfcptwBQ==}
+    resolution: {integrity: sha512-XLleUXexB8ARv87xxVEPDTA6xT7p+IO/2hz0Kyd8u0QCLPEoFG9Wfn5wtMz40bFCrHfcLKMmN+iinlbm+qRPFg==}
     engines: {node: '>=24'}
 
   '@vsslicer/tooling@0.8.5':
-    resolution: {integrity: sha512-d+ZPpjyQG+R3dIxDrQxjeuOx5tJFY+JxE81kqELZLErKK5QDb/n0VQWc90Q6AnZY8oJBQyM1l2ImZ9KO2jSd8Q==}
+    resolution: {integrity: sha512-kI16R1axtHd9RcQgmNl8p08vIMEHOcR6r80iDwQpH7c0v0FLtXmTbmYTnB92L+fB2ss1eNQ0z6re8Rr+BlhFkQ==}
     engines: {node: '>=24'}
     hasBin: true
 
   '@vsslicer/webview-kit@0.8.0':
-    resolution: {integrity: sha512-s9Ta5qSmxQP8eiKiAyFVPAUQOraKzqRnqLPcyMSUkQhpcfCrVnXQpCCM4AsN/dqicghQVTGk6fFtYBEr7Z+RRQ==}
+    resolution: {integrity: sha512-LNF/ti5NPb/NiHQYFEJGtX7GZfS4XA/XmzAgQHILamv7SBSlRNU3zH/h/PCnViRcRQ6Bu5UKbedAI7LSmFU7HQ==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:

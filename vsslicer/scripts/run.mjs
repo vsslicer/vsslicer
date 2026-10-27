@@ -126,7 +126,18 @@ const published = async (m) => {
 const publish = async (m) => {
   if (isUnreleased(m)) return console.log(`\n[${m.name}] 0.0.0 is unreleased, skipping publish`);
   if (await published(m)) return console.log(`\n[${m.name}] ${m.version} already published, skipping`);
-  sh(m, ['publish', '--no-git-checks'], publishEnv);
+  // PLT-215: publish our own deterministic tarball, so lockfile integrities match on every machine. Imported here so
+  // `--list` and version-check run without scripts/node_modules (the CI select job installs nothing).
+  const { packDeterministic } = await import('./pack.mjs');
+  console.log(`\n[${m.name}] deterministic pack`);
+  let tgz;
+  try {
+    tgz = packDeterministic(join(root, 'modules', m.dir), env);
+  } catch (e) {
+    console.error(e.message);
+    process.exit(1);
+  }
+  sh(m, ['publish', tgz, '--no-git-checks'], publishEnv);
 };
 
 const steps = { install: ['install', '--frozen-lockfile'] };

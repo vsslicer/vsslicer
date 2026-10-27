@@ -1080,12 +1080,12 @@ packages:
     hasBin: true
 
   '@vsslicer/test-vscode@0.2.3':
-    resolution: {integrity: sha512-zgJnS78SbRcksEvAXFpMrCz7aSE1jLb9IhynWGhSUStbIotNs8X5h0yeRDcsNV7qSxNTUQwEW7dFg9D6xKBt1w==}
+    resolution: {integrity: sha512-AG3RAB3ktxg+IeLaLOb6tPa13Yne1lQLNvYWt/0zfCB7ireO9lvCFyUetNIfvkwCnZb4OCNrGhJjRJxjiqRzxA==}
     engines: {node: '>=24'}
     hasBin: true
 
   '@vsslicer/tooling@0.8.5':
-    resolution: {integrity: sha512-d+ZPpjyQG+R3dIxDrQxjeuOx5tJFY+JxE81kqELZLErKK5QDb/n0VQWc90Q6AnZY8oJBQyM1l2ImZ9KO2jSd8Q==}
+    resolution: {integrity: sha512-kI16R1axtHd9RcQgmNl8p08vIMEHOcR6r80iDwQpH7c0v0FLtXmTbmYTnB92L+fB2ss1eNQ0z6re8Rr+BlhFkQ==}
     engines: {node: '>=24'}
     hasBin: true
 
