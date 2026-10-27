@@ -220,7 +220,8 @@ describe('component fan-out bounds (rule 25)', () => {
     const heap = process.memoryUsage().heapUsed;
     expect(() => resolveProject(parse(xml))).toThrow(MalformedXmlError);
     expect(() => resolveProject(parse(xml))).toThrow(/components expand to more than 100000 parts/);
-    expect(process.memoryUsage().heapUsed - heap).toBeLessThan(100 * 1024 * 1024);
+    // heapUsed also counts earlier tests' uncollected garbage (100-115 MB seen under full CI); uncapped, 10^8 parts need GBs
+    expect(process.memoryUsage().heapUsed - heap).toBeLessThan(512 * 1024 * 1024);
   }, 30_000); // hang guard only; the deterministic cap message is asserted above
 
   test('a fan-out under the caps still resolves', () => {
