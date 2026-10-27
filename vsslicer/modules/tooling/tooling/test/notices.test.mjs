@@ -118,7 +118,7 @@ test('no third-party packages is a valid, stable output', async () => {
 
 test('the bin writes byte-identical output on two runs and fails without writing', async () => {
   const d = await project([dep('b', 'MIT'), dep('a', 'Apache-2.0', { files: { 'LICENSE.md': 'has ``` fence\n' } })]);
-  const bin = new URL('../bin/third-party-notices.mjs', import.meta.url).pathname;
+  const bin = join(import.meta.dirname, '../bin/third-party-notices.mjs');
   const go = () => {
     execFileSync(process.execPath, [bin, 'dist/extension.meta.json'], { cwd: d });
     return readFileSync(join(d, 'THIRD-PARTY-NOTICES.md'), 'utf8');
@@ -146,7 +146,7 @@ test('works when the module lives under a symlinked directory', async () => {
 
 test('a missing metafile prints one line and exits 1, no stack', () => {
   const d = mkdtempSync(join(tmpdir(), 'nometa-'));
-  const bin = new URL('../bin/third-party-notices.mjs', import.meta.url).pathname;
+  const bin = join(import.meta.dirname, '../bin/third-party-notices.mjs');
   const r = spawnSync(process.execPath, [bin], { cwd: d, encoding: 'utf8' });
   assert.strictEqual(r.status, 1);
   assert.strictEqual(r.stderr.trim().split('\n').length, 1, r.stderr);

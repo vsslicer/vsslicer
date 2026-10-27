@@ -33,7 +33,7 @@ test('runs as a bin through a symlink', async () => {
   mkdirSync(join(d, 'src'));
   writeFileSync(join(d, 'src', 'e.ts'), 'export const a: number = 1;\n');
   const link = join(d, 'vsslicer-bundle');
-  symlinkSync(new URL('../bin/vsslicer-bundle.mjs', import.meta.url).pathname, link);
+  symlinkSync(join(import.meta.dirname, '../bin/vsslicer-bundle.mjs'), link);
   execFileSync(process.execPath, [link, 'src/e.ts', 'dist/extension.js'], { cwd: d, stdio: 'ignore' });
   assert.match(readFileSync(join(d, 'dist', 'extension.js'), 'utf8'), /a = 1/);
 });
@@ -49,7 +49,7 @@ test('bundle writes the metafile under cwd, not the caller folder', async () => 
 test('a missing entry prints one line and exits 1, no stack', async () => {
   const { spawnSync } = await import('node:child_process');
   const d = mkdtempSync(join(tmpdir(), 'bin-missing-'));
-  const bin = new URL('../bin/vsslicer-bundle.mjs', import.meta.url).pathname;
+  const bin = join(import.meta.dirname, '../bin/vsslicer-bundle.mjs');
   const r = spawnSync(process.execPath, [bin, 'src/nope.ts', 'dist/extension.js'], { cwd: d, encoding: 'utf8' });
   assert.strictEqual(r.status, 1);
   assert.strictEqual(r.stderr.trim().split('\n').length, 1, r.stderr);
@@ -61,7 +61,7 @@ test('a warning is printed and the build still exits 0', async () => {
   const d = mkdtempSync(join(tmpdir(), 'bin-warn-'));
   mkdirSync(join(d, 'src'));
   writeFileSync(join(d, 'src', 'e.ts'), 'export const u: string = import.meta.url;\n');
-  const bin = new URL('../bin/vsslicer-bundle.mjs', import.meta.url).pathname;
+  const bin = join(import.meta.dirname, '../bin/vsslicer-bundle.mjs');
   const r = spawnSync(process.execPath, [bin, 'src/e.ts', 'dist/extension.js'], { cwd: d, encoding: 'utf8' });
   assert.strictEqual(r.status, 0, r.stderr);
   assert.match(r.stderr, /import\.meta/);

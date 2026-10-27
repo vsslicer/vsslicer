@@ -149,7 +149,7 @@ test('an extension pack without main packages cleanly', async () => {
 test('the bin reports a user error as one line, without a stack trace', () => {
   const d = extension({ vsslicer: { sizeBudgetKB: 50, targets: ['nope-x64'] } });
   try {
-    const bin = new URL('../bin/vsslicer-package.mjs', import.meta.url).pathname;
+    const bin = join(import.meta.dirname, '../bin/vsslicer-package.mjs');
     const r = spawnSync(process.execPath, [bin], { cwd: d, encoding: 'utf8' });
     assert.strictEqual(r.status, 1);
     assert.match(r.stderr, /^vsslicer-package: .+\n$/);
