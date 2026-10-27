@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Publish-time generator: copies the profile JSON trees from OrcaSlicer and Bambu Studio checkouts
 // into data/ and checks them against source.commit and tree.sha256. Reads bytes only; the only
-// process run is read-only `git rev-parse HEAD`. Usage: node scripts/generate.mjs [reposDir]
-// (or VSS_PROFILE_REPOS). Per-repo override: VSS_REPO_<ORCASLICER|BAMBUSTUDIO>.
+// process run is git. Usage: node scripts/generate.mjs [reposDir] (or VSS_PROFILE_REPOS). Per-repo override:
+// VSS_REPO_<ORCASLICER|BAMBUSTUDIO>. A missing clone is fetched at its pinned commit (fetch.mjs, PLT-224).
 import { cpSync, existsSync, mkdirSync, readFileSync, realpathSync, renameSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hashFiles, listJson, MAX_FILE_BYTES, MAX_FILES, MAX_TOTAL_BYTES } from './tree.mjs';
 import { defaultRepos, headOf, moduleRoot } from './regenerate.mjs';
+import { fetchPinned } from './fetch.mjs';
 
 const NAMES = { OrcaSlicer: 'orca', BambuStudio: 'bambu' };
 
@@ -32,12 +33,14 @@ export function generate({
   maxFiles = MAX_FILES,
   maxTotal = MAX_TOTAL_BYTES,
   rename = renameSync,
+  fetch = fetchPinned,
 } = {}) {
   const out = resolve(outDir);
   let totalFiles = 0;
   let totalBytes = 0;
   const staged = pins.map((p) => {
-    const clone = resolve(process.env[`VSS_REPO_${p.repo.toUpperCase()}`] ?? join(repos, p.repo));
+    const local = resolve(process.env[`VSS_REPO_${p.repo.toUpperCase()}`] ?? join(repos, p.repo));
+    const clone = existsSync(local) ? local : fetch(p);
     const got = head(clone);
     if (got !== p.commit) throw new Error(`commit mismatch: ${p.repo} is at ${got}, expected ${p.commit}`);
     const root = join(clone, 'resources', 'profiles');

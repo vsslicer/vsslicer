@@ -88,6 +88,12 @@ jobs:
         with:
           path: ${{ runner.temp }}/cura-fetch
           key: cura-fetch-5bea2f86153faed3a1c2d9081b8d6b753684678a
+      # PLT-224: profiles-data-orca's prepack fetches the pinned Orca and Bambu profile trees (git only, ~43 MB) when no clone exists; keyed on source.commit
+      - if: contains(needs.select.outputs.modules, '"@vsslicer/profiles-data-orca"')
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/profile-repos
+          key: profile-repos-${{ hashFiles('vsslicer/modules/profiles/data-orca/source.commit') }}
       # VWR-45: admesh is the oracle for the mesh module's MeshStats; with VSS_REQUIRE_ADMESH the test fails instead of skipping when it is missing
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'mesh')
         run: |
@@ -99,6 +105,7 @@ jobs:
         env:
           VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
           CURA_FETCH_CACHE: ${{ runner.temp }}/cura-fetch
+          VSS_PROFILE_FETCH_CACHE: ${{ runner.temp }}/profile-repos
           BASE: ${{ needs.select.outputs.base }}
       # modules with a test:integration script (VS Code extension host); Linux needs a virtual display
       - if: runner.os == 'Linux'

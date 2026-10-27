@@ -13,6 +13,8 @@ export interface GenerateOptions {
   maxBytes?: number;
   maxFiles?: number;
   maxTotal?: number;
+  rename?: (from: string, to: string) => void;
+  fetch?: (pin: Pin) => string;
 }
 export function readPins(root?: string): Pin[];
 export function generate(options?: GenerateOptions): string[];

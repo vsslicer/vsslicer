@@ -54,10 +54,14 @@ describe('module files', () => {
 
 const clones = sources.map((s) => ({ ...s, dir: join(defaultRepos, s.repo) }));
 describe.skipIf(!clones.every((c) => existsSync(c.dir) && headOf(c.dir) === c.commit))('pinned clones', () => {
-  it.each(clones.map((c) => [c.name, c.dir] as const))('%s clone matches the committed tree', (name, dir) => {
-    const root = join(dir, 'resources', 'profiles');
-    expect(hashFiles(root, listJson(root))).toBe(pinned[name]);
-  });
+  it.each(clones.map((c) => [c.name, c.dir] as const))(
+    '%s clone matches the committed tree',
+    (name, dir) => {
+      const root = join(dir, 'resources', 'profiles');
+      expect(hashFiles(root, listJson(root))).toBe(pinned[name]);
+    },
+    60_000,
+  ); // hashes ~14k files; only runs where the clones are (PLT-224 fixed defaultRepos)
 });
 
 describe('listJson refuses hostile trees', () => {

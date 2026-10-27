@@ -14,7 +14,7 @@ export const SOURCES = [
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const moduleRoot = resolve(here, '..');
-export const defaultRepos = resolve(moduleRoot, '../../../.reference/repos');
+export const defaultRepos = resolve(moduleRoot, '../../../../.reference/repos');
 
 export function headOf(clone) {
   return execFileSync('git', ['-C', clone, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
