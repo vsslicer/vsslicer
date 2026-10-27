@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { fixturesDir, loadManifest, readGolden, summarise, type Summary } from './support/golden.ts';
 import { parserSummary } from './support/parser-summary.ts';
@@ -17,7 +17,7 @@ describe('golden corpus', () => {
   it('manifest and fixture folders list the same files', () => {
     const onDisk = readdirSync(fixturesDir, { recursive: true, withFileTypes: true })
       .filter((e) => e.isFile() && e.name !== 'manifest.json' && e.name !== 'PROVENANCE.md')
-      .map((e) => join(e.parentPath, e.name).slice(fixturesDir.length + 1))
+      .map((e) => join(e.parentPath, e.name).slice(fixturesDir.length + 1).split(sep).join('/'))
       .sort();
     expect(onDisk).toEqual(manifest.files.map((f) => f.path).sort());
   });
