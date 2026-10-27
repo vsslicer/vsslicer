@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the per-layer XML parts (layer config ranges, custom G-code per print Z, layer height profile).
 
-**Code:** `vsslicer/modules/3mf/src/adapters/prusa/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/prusa/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

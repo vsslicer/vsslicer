@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Splits one painted triangle into 2, 3 or 4 children along its sides, merges children that all hold the same state, and answers the state at a barycentric point. Ported from `split_triangle`, `perform_split` and `remove_useless_children` in `OrcaSlicer@09aa0114:src/libslic3r/TriangleSelector.cpp` and `.hpp` (AGPL-3.0, D2; cross-check `PrusaSlicer@30ef591:src/slic3r-domain/include/Slic3r/Domain/TriangleSelector.hpp`).
 
-**Code:** `vsslicer/modules/mesh/src/domain/paint/subdivide/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/paint/subdivide/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

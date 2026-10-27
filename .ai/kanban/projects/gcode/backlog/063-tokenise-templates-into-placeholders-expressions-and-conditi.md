@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure tokenizer over template text: `[name]`, `[name[index]]`, `{expression}` with the identifiers it contains, `{if}`/`{elsif}`/`{else}`/`{endif}`, comments and plain G-code, with offsets, tolerant of unterminated input.
 
-**Code:** `vsslicer/modules/gcode-templates/src/domain/...` (module: `gcode-templates`, layer: `domain`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/domain/...` (module: `gcode-templates`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -13,9 +13,9 @@ depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---
 
-Creates `vsslicer/modules/arrange/` from the `tooling` module: a pure geometry library for arranging objects, consumed by the editor, the slicer extension and the fleet queue. It has no VS Code and no `mesh` dependency.
+Creates `vsslicer/modules/core/arrange/` from the `tooling` module: a pure geometry library for arranging objects, consumed by the editor, the slicer extension and the fleet queue. It has no VS Code and no `mesh` dependency.
 
-**Code:** `vsslicer/modules/arrange/` (module: `arrange`, layer: n/a (module scaffold))
+**Code:** `vsslicer/modules/core/arrange/` (module: `arrange`, layer: n/a (module scaffold))
 
 ## Acceptance criteria
 

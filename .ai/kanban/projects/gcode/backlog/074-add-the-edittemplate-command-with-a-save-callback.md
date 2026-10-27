@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `vsslicer.gcode.editTemplate({slicer, kind, text, title, saveCommand})` opens an in-memory template document; on save it executes `saveCommand.id` with `saveCommand.args` plus the text. Arguments and results are serialisable so a UI-side extension can call it from another host.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

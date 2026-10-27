@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pulls the `CuraEngine` binary and its definitions out of the AppImage (self-extract) and the DMG (`hdiutil` attach and copy) into the install directory.
 
-**Code:** `vsslicer/modules/slicer-cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The use case behind `Slicer.slice`: engine, then post-processing scripts, then `writeSlicedOutput`, then an atomic commit into `.vsslicer/sliced/`. Any failing step stops the chain and leaves the sliced folder unchanged.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure test that a footprint polygon lies inside a rectangular, circular or polygon bed and outside exclusion areas.
 
-**Code:** `vsslicer/modules/project-extension/src/domain/plates/bed.ts` (module: `project-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/project/src/domain/plates/bed.ts` (module: `project-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

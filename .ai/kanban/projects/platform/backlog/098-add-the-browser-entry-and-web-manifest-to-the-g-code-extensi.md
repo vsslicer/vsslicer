@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds a `browser` entry and `extensionKind` for workspace and web to `vsslicer.gcode`, activates the preview, the G-code language and the simulation view, and keeps the desktop `main` entry unchanged.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

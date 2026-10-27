@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `filament@0.5.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/filament/` (module: `filament`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/filament/filament/` (module: `filament`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

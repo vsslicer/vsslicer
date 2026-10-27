@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A versioned export (and a command fallback) that returns, for a Moonraker printer, the `spoolmanProxy` request function and the `spoolman` flag, so `filament-extension` needs no connector.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

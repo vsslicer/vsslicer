@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Brand, Material, Filament, Spool, Tag and ConsumptionEvent as immutable value objects with validation, following Spoolman's field list (MIT, `filament-management.md` sections 1 and 5) written new.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

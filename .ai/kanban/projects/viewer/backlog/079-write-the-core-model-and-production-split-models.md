@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Serialises a `Project` to `3D/3dmodel.model` and `3D/Objects/object_N.model` with build items, components, transforms and UUIDs, as the Production extension lays them out.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/core/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/core/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

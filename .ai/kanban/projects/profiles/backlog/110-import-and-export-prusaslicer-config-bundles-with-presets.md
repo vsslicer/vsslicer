@@ -15,7 +15,7 @@ created: 2026-10-25
 
 PrusaSlicer `.ini` config bundles including the `[presets]` section.
 
-**Code:** `vsslicer/modules/profiles-prusa/src/adapters/bundles/prusa/` (module: `profiles-prusa`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/prusa/src/adapters/bundles/prusa/` (module: `profiles-prusa`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Manifest entries for the pinned Cura release (AppImage, DMG, Windows installer) with SHA-256, validated against the `slicer-api` schema. CuraEngine has no standalone release.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

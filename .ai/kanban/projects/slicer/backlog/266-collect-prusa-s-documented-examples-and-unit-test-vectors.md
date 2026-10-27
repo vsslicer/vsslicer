@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Collects test vectors (rule list, input G-code, expected output) from Prusa's documentation and unit tests where they exist (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/slicer-extension/test/fixtures/substitutions/` (module: `slicer-extension`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/apps/slicer/test/fixtures/substitutions/` (module: `slicer-extension`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

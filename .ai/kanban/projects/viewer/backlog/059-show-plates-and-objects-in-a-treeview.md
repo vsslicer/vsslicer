@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `TreeView` under the file with plates and their objects.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

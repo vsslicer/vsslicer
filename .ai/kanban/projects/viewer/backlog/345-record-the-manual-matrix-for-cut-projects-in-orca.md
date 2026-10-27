@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Opens VSSlicer-cut projects with each connector kind and a dovetail in Orca and Bambu Studio, and Orca-cut projects in VSSlicer.
 
-**Code:** `vsslicer/modules/project-extension/test/manual/cut-matrix.md` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/manual/cut-matrix.md` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

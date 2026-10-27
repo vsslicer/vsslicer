@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure rules: pick the booked source in the order Moonraker `filament_used`, Bambu `used_g`, slicer total; keep the others as observations; flag a disagreement above max(5 g, 10 percent) (settings).
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

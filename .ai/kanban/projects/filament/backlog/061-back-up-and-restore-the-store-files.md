@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Copy snapshot, log and catalogue to a chosen folder; restore replaces the store and keeps the previous one as a backup.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

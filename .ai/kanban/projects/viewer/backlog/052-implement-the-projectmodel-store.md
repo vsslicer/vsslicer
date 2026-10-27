@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Read-only model of plates, objects and per-plate sliced artefacts with change events, built from `Project`.
 
-**Code:** `vsslicer/modules/project-extension/src/application/projectModel.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/projectModel.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

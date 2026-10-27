@@ -15,7 +15,7 @@ created: 2026-10-25
 
 High-contrast variants with the `hc` and `hcLight` base and the borders those bases require.
 
-**Code:** `vsslicer/modules/themes/src/domain/palettes/` (module: `themes`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/themes/src/domain/palettes/` (module: `themes`, layer: `domain`)
 
 ## Acceptance criteria
 

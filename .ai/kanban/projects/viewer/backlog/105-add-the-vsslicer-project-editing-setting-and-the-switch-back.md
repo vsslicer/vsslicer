@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The setting turns editing on or off; switching off asks to save a dirty project first.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/settings/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/settings/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

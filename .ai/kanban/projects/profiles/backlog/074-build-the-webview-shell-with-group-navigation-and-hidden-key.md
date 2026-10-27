@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The webview app: pages per schema group from the model, subgroup order, a hidden-keys toggle and 'modified only' and 'differs from parent' filters; VS Code theme tokens.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/shell/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/shell/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

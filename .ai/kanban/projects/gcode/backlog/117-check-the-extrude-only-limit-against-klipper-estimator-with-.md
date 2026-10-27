@@ -13,7 +13,7 @@ created: 2026-10-26
 
 Found reviewing GCP-21 (SP9): the recorded klipper_estimator outputs were made with `"move_checkers": []`, so the extruder limiter (`klipper_estimator@dbcff4a:lib/src/planner.rs:925-928,954-963`) was off, and the oracle test runs our planner with `maxExtrudeOnlyAccel: 1e9`. Our extrude-only limit (faithful to Klipper `klippy/kinematics/extruder.py:163-166,223`) is therefore not checked against the oracle. Q14 allowed one build; a re-record needs another local build.
 
-**Code:** `vsslicer/modules/gcode-planner/test/fixtures/klipper-estimator/` (module: `gcode-planner`, layer: tests)
+**Code:** `vsslicer/modules/core/gcode-planner/test/fixtures/klipper-estimator/` (module: `gcode-planner`, layer: tests)
 
 ## Acceptance criteria
 

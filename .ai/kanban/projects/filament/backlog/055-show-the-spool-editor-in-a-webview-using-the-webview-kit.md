@@ -17,7 +17,7 @@ A single accessible form webview using the CSP helper (`createWebviewHtml`) and 
 
 UNRESOLVED: needs webview-kit: a release card; PLT-32 and PLT-37 are depended on directly.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

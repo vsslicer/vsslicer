@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wires the testkit to `OrcaEngine` (callback applies unified patches through emission) and commits the generated capability report for the pinned version.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

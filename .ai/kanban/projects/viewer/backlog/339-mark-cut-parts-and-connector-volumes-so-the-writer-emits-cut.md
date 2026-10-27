@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets the cut id, check sum, connector count and connector flags on the parts and volumes a cut produces, in the shape the 3mf writer saves as `cut_information.xml`.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/cut/cutInfo.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/cut/cutInfo.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

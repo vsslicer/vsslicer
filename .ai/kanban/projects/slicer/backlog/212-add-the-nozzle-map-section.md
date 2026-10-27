@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Panel section for manual or automatic filament-to-nozzle grouping; in automatic mode it shows the grouping read back after a slice.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

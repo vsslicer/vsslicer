@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure evaluator over a value-lookup interface; Python semantics for the subset (integer and float division, truthiness, `and`/`or`, conditional expressions, lists).
 
-**Code:** `vsslicer/modules/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
+**Code:** `vsslicer/modules/core/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
 
 ## Acceptance criteria
 

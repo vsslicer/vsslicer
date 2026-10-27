@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Serves two builds' manifests from a local server, starts the older and checks the update is offered and applied.
 
-**Code:** `vsslicer/modules/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

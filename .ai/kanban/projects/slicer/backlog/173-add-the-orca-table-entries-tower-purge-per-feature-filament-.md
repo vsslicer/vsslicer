@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds entries for `wipe_tower_type`, tower position and size, ramming, `flush_into_*`, the `*_filament_id` keys, `filament_map` and `filament_map_mode`.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

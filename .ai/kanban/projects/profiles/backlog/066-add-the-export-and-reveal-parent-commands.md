@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `Export to PrusaSlicer/Orca/Bambu/Cura` and `Reveal parent` from the tree.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/commands/export/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/commands/export/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

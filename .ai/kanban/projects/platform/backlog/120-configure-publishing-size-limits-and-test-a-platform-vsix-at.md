@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets `ovsx.publishing.max-content-size` and the per-namespace override sized for platform-specific engine VSIX files.
 
-**Code:** `vsslicer/modules/openvsx-registry/compose/` and `test/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/compose/` and `test/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 

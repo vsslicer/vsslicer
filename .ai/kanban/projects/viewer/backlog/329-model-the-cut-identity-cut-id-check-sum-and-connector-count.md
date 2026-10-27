@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The identity that ties the parts of one cut together so Orca can recognise them: cut id, check sum, connector count and the connector flags of a volume. Follows `CutObjectBase` and `CutId` in `OrcaSlicer@09aa0114:src/libslic3r/CutUtils.cpp` and the connector types of `Model.hpp` (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/mesh-boolean/src/domain/cutId.ts` (module: `mesh-boolean`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/domain/cutId.ts` (module: `mesh-boolean`, layer: `domain`)
 
 ## Acceptance criteria
 

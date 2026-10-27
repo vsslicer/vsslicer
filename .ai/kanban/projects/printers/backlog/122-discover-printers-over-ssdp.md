@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `Discoverer` for SSDP on 239.255.255.250:1900.
 
-**Code:** `vsslicer/modules/printer-discovery/src/adapters/...` (module: `printer-discovery`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/discovery/src/adapters/...` (module: `printer-discovery`, layer: `adapters`)
 
 ## Acceptance criteria
 

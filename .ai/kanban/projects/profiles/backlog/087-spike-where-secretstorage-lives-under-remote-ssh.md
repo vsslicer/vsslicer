@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Checks where secrets are kept when the workspace is remote, before release.
 
-**Code:** `vsslicer/modules/profiles-extension/docs/remote-secrets.md` (module: `profiles-extension`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/apps/profiles/docs/remote-secrets.md` (module: `profiles-extension`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

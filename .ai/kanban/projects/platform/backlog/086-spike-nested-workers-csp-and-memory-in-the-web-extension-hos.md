@@ -15,13 +15,13 @@ created: 2026-10-25
 
 Roadmap question 30 asks whether the web build is worth maintaining, and the epic's riskiest unknown is whether a worker can start from the web extension host (itself a WebWorker) under vscode.dev's CSP. Build a sample web extension that tries it and measure the largest buffer a tab holds.
 
-**Code:** `vsslicer/modules/example-extension/docs/web-workers.md` (module: `example-extension`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/apps/example-extension/docs/web-workers.md` (module: `example-extension`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 
 - [ ] On vscode.dev (Chromium) and in the `@vscode/test-web` host, the sample records whether a nested Worker starts, with how it was created (Blob URL, file URL) and the CSP message when it does not
 - [ ] A memory measurement states the largest file (parsed buffers included) that opens without the tab crashing; the web size limit is set from it with a margin
-- [ ] The decision names the fallback (chunked in-host parsing with yields at a lower limit) and the numbers; findings are in `vsslicer/modules/example-extension/docs/web-workers.md` with browser versions and dates
+- [ ] The decision names the fallback (chunked in-host parsing with yields at a lower limit) and the numbers; findings are in `vsslicer/modules/apps/example-extension/docs/web-workers.md` with browser versions and dates
 
 ## Tasks
 

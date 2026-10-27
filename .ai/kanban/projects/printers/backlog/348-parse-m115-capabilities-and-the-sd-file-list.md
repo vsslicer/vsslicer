@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns the `M115` reply into firmware info and capability flags (`Cap:LONG_FILENAME`, `LFN_WRITE`, `EXTENDED_M20`, `BINARY_FILE_TRANSFER`, `SDCARD`, `AUTOREPORT_TEMP`) and parses `M20` and `M20 L` lists. Written new from the protocol; Marlin is GPL-3.0 and no Marlin code is copied.
 
-**Code:** `vsslicer/modules/printer-serial/src/domain/...` (module: `printer-serial`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/serial/src/domain/...` (module: `printer-serial`, layer: `domain`)
 
 ## Acceptance criteria
 

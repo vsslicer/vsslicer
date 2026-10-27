@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Per unified key: `supported | renamed(nativeKey, valueMap) | unsupported`, plus note, review state and engine version range.
 
-**Code:** `vsslicer/modules/slicer-api/src/domain/...` (module: `slicer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/slicer-api/src/domain/...` (module: `slicer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

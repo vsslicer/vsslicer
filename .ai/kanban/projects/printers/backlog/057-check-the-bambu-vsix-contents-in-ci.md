@@ -15,7 +15,7 @@ created: 2026-10-25
 
 List the VSIX and fail on any closed binary, key or certificate other than Bambu's public CA chain.
 
-**Code:** `vsslicer/modules/bambu-extension/` (module: `bambu-extension`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/apps/bambu/` (module: `bambu-extension`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

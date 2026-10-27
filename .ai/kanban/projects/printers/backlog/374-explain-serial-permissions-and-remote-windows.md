@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns the `refused` error with its hint into a message naming the `dialout` or `uucp` group and the command, and says in Remote-SSH, WSL and dev-container windows that the ports belong to the local machine.
 
-**Code:** `vsslicer/modules/printers-serial-extension/src/presentation/...` (module: `printers-serial-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers-serial/src/presentation/...` (module: `printers-serial-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

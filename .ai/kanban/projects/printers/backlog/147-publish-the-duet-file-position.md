@@ -15,7 +15,7 @@ created: 2026-10-25
 
 RRF/DSF `job.filePosition` into `position.byteOffset`.
 
-**Code:** `vsslicer/modules/printer-duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
 
 ## Acceptance criteria
 

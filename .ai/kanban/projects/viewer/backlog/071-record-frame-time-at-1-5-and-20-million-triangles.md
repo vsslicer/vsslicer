@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Measures first-render and frame time on the reference machines and writes the budgets into the epic's notes; the size policy reads them.
 
-**Code:** `vsslicer/modules/project-extension/test/perf/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/perf/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

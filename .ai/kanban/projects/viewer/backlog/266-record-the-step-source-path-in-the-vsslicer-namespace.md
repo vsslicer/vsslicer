@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Stores the source path and options of each STEP-imported object as a namespace record and offers it again when the user adds a STEP file.
 
-**Code:** `vsslicer/modules/project-extension/src/application/stepSource.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/stepSource.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

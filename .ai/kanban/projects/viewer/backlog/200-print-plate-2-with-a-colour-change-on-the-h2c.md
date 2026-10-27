@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hardware check: a two-plate project with a colour change on plate 2, sliced by the Orca CLI and sent through the Bambu adapter.
 
-**Code:** `vsslicer/modules/project-extension/docs/h2c-plates-verification.md` (module: `project-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/project/docs/h2c-plates-verification.md` (module: `project-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

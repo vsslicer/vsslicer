@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Tree items and form fields for a `printer_instance`: model, nozzle per toolhead, surface, feeder and connection fields, with the credential entered through an input box and never shown.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/instances/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/instances/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

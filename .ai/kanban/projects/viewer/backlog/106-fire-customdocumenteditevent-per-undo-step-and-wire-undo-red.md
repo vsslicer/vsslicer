@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Each executed step fires `onDidChangeCustomDocument` with undo and redo callbacks into the model, which drives VS Code's stack and the dirty dot.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

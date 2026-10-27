@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The widgets most likely to mislead: relative values stay relative, keyed per-extruder tables, multiline G-code with a dialect badge (text only), and read-only Cura formulas.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/widgets/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/widgets/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

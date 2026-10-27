@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes the pieces into the `sdcp` `PrinterAdapter`: capabilities from what exists, start (command 128 with `Filename` and `StartLayer`) after upload, pause 129, continue 131, stop 130, file list 258 and delete 259.
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/src/application/...` (module: `printer-unofficial-sdcp`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/src/application/...` (module: `printer-unofficial-sdcp`, layer: `application`)
 
 ## Acceptance criteria
 

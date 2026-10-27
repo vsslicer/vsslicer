@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Export into a mounted loopback FAT image on Linux CI and read the directory back.
 
-**Code:** `vsslicer/modules/printer-folder/test/` (module: `printer-folder`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/folder/test/` (module: `printer-folder`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

@@ -11,9 +11,9 @@ depends_on: [22]
 created: 2026-10-26
 ---
 
-Criterion 1 of VWR-22, carried: compare `vsslicer/modules/3mf/test/fixtures/real/auto_pa_line_single.golden.json` with the fixture opened in Bambu Studio 2.x (object and part names, part types, extruders, positions), since VWR-22's golden was checked against the file's XML only (Q28).
+Criterion 1 of VWR-22, carried: compare `vsslicer/modules/core/3mf/test/fixtures/real/auto_pa_line_single.golden.json` with the fixture opened in Bambu Studio 2.x (object and part names, part types, extruders, positions), since VWR-22's golden was checked against the file's XML only (Q28).
 
-**Code:** `vsslicer/modules/3mf/test/fixtures/real/` (module: `3mf`, layer: n/a (fixture))
+**Code:** `vsslicer/modules/core/3mf/test/fixtures/real/` (module: `3mf`, layer: n/a (fixture))
 
 ## Acceptance criteria
 

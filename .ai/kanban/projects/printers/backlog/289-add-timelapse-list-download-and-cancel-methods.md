@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Agent methods `timelapse.list`, `timelapse.download` (streams to the caller with progress) and `timelapse.cancel`, using providers loaded like camera sources.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

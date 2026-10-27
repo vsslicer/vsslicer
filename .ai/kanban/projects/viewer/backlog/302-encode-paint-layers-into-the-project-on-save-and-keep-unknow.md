@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On save, painted volumes are encoded to the channel strings in the worker and handed to the writer; unpainted volumes and unknown channels pass through untouched.
 
-**Code:** `vsslicer/modules/project-extension/src/application/paint/save.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/paint/save.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

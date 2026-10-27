@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One-day spike: OctoPrint in Docker with the virtual printer plugin on a free CI runner.
 
-**Code:** `vsslicer/modules/printer-octoprint/test/` (module: `printer-octoprint`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/octoprint/test/` (module: `printer-octoprint`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

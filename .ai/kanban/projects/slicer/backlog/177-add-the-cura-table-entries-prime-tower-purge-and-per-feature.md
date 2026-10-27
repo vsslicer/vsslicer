@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds entries for the prime tower, `support_*_extruder_nr`, `adhesion_extruder_nr` and related purge settings.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

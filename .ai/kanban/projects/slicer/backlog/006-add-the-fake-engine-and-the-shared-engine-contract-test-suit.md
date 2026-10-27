@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A scriptable fake `SlicerEngine` for consumers' unit tests, and a contract suite every real adapter runs: progress ordering, cancel, staged outputs, error mapping.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

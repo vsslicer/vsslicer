@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `camera-api@0.2.0`.
 
-**Code:** `vsslicer/modules/camera-api/` (module: `camera-api`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/common/camera-api/` (module: `camera-api`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

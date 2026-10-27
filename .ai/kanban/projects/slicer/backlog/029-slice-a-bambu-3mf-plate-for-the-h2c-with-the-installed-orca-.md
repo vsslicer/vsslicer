@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Owner-machine check (D5): the adapter slices the H2C fixture plate with the installed Orca and the H2C machine profile. No printing here.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

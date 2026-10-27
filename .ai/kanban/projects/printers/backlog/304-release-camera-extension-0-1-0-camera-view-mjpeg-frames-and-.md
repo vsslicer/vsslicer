@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `camera-extension@0.1.0`.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

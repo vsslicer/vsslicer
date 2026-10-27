@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Plate icons from `plate_N.png`, cover thumbnail, and sliced time and weight as the tree description.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

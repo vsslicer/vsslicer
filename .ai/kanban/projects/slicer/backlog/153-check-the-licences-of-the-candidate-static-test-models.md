@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Records, per file, the licence and origin of every candidate static model (cube, tolerance test, bed levelling pattern, ironing patterns) including Orca's bundled models, and rules which can ship.
 
-**Code:** `vsslicer/modules/calibration/docs/` (module: `calibration`, layer: n/a (docs))
+**Code:** `vsslicer/modules/core/calibration/docs/` (module: `calibration`, layer: n/a (docs))
 
 ## Acceptance criteria
 

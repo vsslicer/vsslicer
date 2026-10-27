@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Entry types (pause, colour change, tool change, custom) with their parameters, ordering by height, and snapping a height to the nearest layer boundary given first-layer and layer heights.
 
-**Code:** `vsslicer/modules/project-extension/src/domain/plates/layers.ts` (module: `project-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/project/src/domain/plates/layers.ts` (module: `project-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

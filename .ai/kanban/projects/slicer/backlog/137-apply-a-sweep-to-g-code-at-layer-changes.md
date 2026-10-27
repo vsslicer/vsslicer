@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Takes sliced text G-code and a plan and inserts the sweep command at the first move of each block, using `@vsslicer/gcode-parser` layers; follows the CAL2 decision on where the injection survives the engine's own commands.
 
-**Code:** `vsslicer/modules/calibration/src/application/...` (module: `calibration`, layer: `application`)
+**Code:** `vsslicer/modules/core/calibration/src/application/...` (module: `calibration`, layer: `application`)
 
 ## Acceptance criteria
 

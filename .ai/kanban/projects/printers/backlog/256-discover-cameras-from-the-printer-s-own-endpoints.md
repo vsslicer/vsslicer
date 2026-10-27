@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fetch the camera lists with the `AuthorizedFetch` the agent provides and return descriptors through the mappers.
 
-**Code:** `vsslicer/modules/camera-mjpeg/src/adapters/...` (module: `camera-mjpeg`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/mjpeg/src/adapters/...` (module: `camera-mjpeg`, layer: `adapters`)
 
 ## Acceptance criteria
 

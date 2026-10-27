@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Opens the golden G-code and 3MF fixtures in the build and asserts the custom editors open without console errors.
 
-**Code:** `vsslicer/modules/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

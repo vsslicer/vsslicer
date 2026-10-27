@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `checkSupported(test, firmware)` returns either ok or a refusal that names the firmware, the parameter and the missing command.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.1
+
+- Moved to `vsslicer/modules/apps/profiles`; the repository URL follows (PLT-204).
+
 ## Unreleased
 
 - Document the multi-root rule for the user-profile folder and the remote/web limitation (PRF-58).

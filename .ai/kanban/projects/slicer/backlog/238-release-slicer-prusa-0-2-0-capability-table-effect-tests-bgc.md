@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-prusa@0.2.0` so other modules can depend on the range: capability table, effect tests, `.bgcode` comparison and the 3.0 option. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (release))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (release))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Multipart `POST /printer/model/<slug>?a=upload` with `name`, `group` and `filename`, `overwrite=true` where the server supports it, with progress and abort.
 
-**Code:** `vsslicer/modules/printer-unofficial-repetier/src/adapters/...` (module: `printer-unofficial-repetier`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-repetier/src/adapters/...` (module: `printer-unofficial-repetier`, layer: `adapters`)
 
 ## Acceptance criteria
 

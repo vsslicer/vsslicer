@@ -17,7 +17,7 @@ A `SpoolmanTransport` that sends requests through Moonraker's `/server/spoolman/
 
 UNRESOLVED: needs printer-moonraker: a proxy request method, the `[spoolman]` component flag and active spool get/set, and a recorded session with `[spoolman]`.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/adapters/...` (module: `filament-spoolman`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/spoolman/src/adapters/...` (module: `filament-spoolman`, layer: `adapters`)
 
 ## Acceptance criteria
 

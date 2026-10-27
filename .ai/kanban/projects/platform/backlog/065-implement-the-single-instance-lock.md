@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A lock in the runtime directory so two windows cannot start two daemons, robust to crashes (stale lock) and races.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One entry per unified key. Orca names are canonical (D9) so most are identity `supported`; Bambu-only and prefixed keys, and the keys Orca lacks, are judged one by one. Hand-maintained JSON checked by tests, not inferred from engine help.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

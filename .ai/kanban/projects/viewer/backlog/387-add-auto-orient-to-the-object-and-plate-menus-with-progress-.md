@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The menu entries, a progress notification with cancel, a summary (oriented, skipped on locked plates, already best) and an offer to run arrange afterwards.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/menus/orient.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/menus/orient.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

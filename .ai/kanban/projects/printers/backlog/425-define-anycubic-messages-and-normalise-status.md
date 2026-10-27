@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure types for the status and control payloads and the mapping to `PrinterStatus`, written from the spike document.
 
-**Code:** `vsslicer/modules/printer-unofficial-anycubic/src/domain/...` (module: `printer-unofficial-anycubic`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/unofficial-anycubic/src/domain/...` (module: `printer-unofficial-anycubic`, layer: `domain`)
 
 ## Acceptance criteria
 

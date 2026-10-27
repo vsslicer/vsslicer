@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The real side of the port: opens a device path at a baud rate, controls DTR and RTS so a reset on connect can be turned off, reads lines and maps operating-system errors to `PrinterError` kinds.
 
-**Code:** `vsslicer/modules/printer-serial/src/adapters/...` (module: `printer-serial`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/serial/src/adapters/...` (module: `printer-serial`, layer: `adapters`)
 
 ## Acceptance criteria
 

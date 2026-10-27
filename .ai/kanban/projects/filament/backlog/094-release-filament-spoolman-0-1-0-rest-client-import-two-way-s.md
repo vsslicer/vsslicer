@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `filament-spoolman@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/filament-spoolman/` (module: `filament-spoolman`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/filament/spoolman/` (module: `filament-spoolman`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

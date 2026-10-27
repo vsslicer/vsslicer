@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Arranges a fixture (rectangular and excluded-area bed), saves it and slices it through `slicer-orca`.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/arrange/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/arrange/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

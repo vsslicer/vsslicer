@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Decides whether `CustomExecution` pseudoterminal output reaches problem matchers on the minimum and current VS Code, else uses a `ShellExecution` wrapper around a small Node CLI.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (spike))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (spike))
 
 ## Acceptance criteria
 

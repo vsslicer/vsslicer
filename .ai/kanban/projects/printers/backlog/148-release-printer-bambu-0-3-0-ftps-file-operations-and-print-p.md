@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-bambu@0.3.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-bambu/` (module: `printer-bambu`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/bambu/` (module: `printer-bambu`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

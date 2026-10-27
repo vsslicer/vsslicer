@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Settles the open points before the module is built: the WASM size and load time in a worker_thread, peak memory on the largest fixture, what happens with non-manifold input, whether the output carries the originating face (`faceID`/`runOriginalID` of the MeshGL) needed to carry paint, and whether `splitByPlane` returns capped halves.
 
-**Code:** `vsslicer/modules/mesh-boolean/test/spikes/` (module: `mesh-boolean`, layer: n/a (spike))
+**Code:** `vsslicer/modules/core/mesh-boolean/test/spikes/` (module: `mesh-boolean`, layer: n/a (spike))
 
 ## Acceptance criteria
 

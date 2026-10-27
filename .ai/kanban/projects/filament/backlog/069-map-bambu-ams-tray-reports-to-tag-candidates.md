@@ -17,7 +17,7 @@ From a tray report (`tag_uid`, `tray_uuid`, `tray_info_idx`, `tray_type`, `tray_
 
 UNRESOLVED: needs printer-bambu/printer-api: tray tag and metadata fields in `materials[]`; PRN-4 has only tray, type, colour and remain.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

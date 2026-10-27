@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Generates random command sequences over fixture projects and checks undo and redo. Every later epic registers its commands with the generator, so a non-invertible command fails here.
 
-**Code:** `vsslicer/modules/project-extension/test/property/` (module: `project-extension`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/project/test/property/` (module: `project-extension`, layer: n/a (tests))
 
 ## Acceptance criteria
 

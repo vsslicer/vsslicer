@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Resolve the project or fleet-root `.vsslicer/queue.json`, open it through the queue store and apply the restart rule.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

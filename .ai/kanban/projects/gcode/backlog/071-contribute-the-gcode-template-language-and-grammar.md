@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Declares the `gcode-template` language and a TextMate grammar that includes the G-code grammar and highlights `[var]`, `{expr}`, conditions and indexed vectors; activation on the language id.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `hms` array entries become `PrinterStatus.notifications` with code, severity and a link to Bambu's public HMS wiki page.
 
-**Code:** `vsslicer/modules/printer-bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

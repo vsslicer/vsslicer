@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compare a multi-colour H2C print's `used_g` with scale readings of the spools before and after, and record whether `remain_g` is reported (firmware version and date recorded).
 
-**Code:** `vsslicer/modules/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/filament/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 

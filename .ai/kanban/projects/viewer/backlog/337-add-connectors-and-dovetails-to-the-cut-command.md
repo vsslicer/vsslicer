@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extends the cut command payload with connector placements and the dovetail option; the cut result carries plugs and holes.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/cut/connectors.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/cut/connectors.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

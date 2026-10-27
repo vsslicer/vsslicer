@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Map Bambu `push_status` (state, progress, temperatures, AMS trays, line number) into the normalised status and merge partial pushes.
 
-**Code:** `vsslicer/modules/printer-bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

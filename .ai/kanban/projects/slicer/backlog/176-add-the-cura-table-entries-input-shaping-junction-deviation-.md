@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds entries for the motion keys; CuraEngine writes none of these commands, so entries are `unsupported` unless the pinned engine proves otherwise.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

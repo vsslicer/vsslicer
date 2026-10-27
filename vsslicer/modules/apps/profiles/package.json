@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/profiles-extension",
   "displayName": "VSSlicer Profiles",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "VSSlicer printer, filament and print profiles (VS Code extension, presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/profiles-extension@0.0.0/vsslicer/modules/profiles-extension",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/profiles-extension@0.0.1/vsslicer/modules/apps/profiles",
   "vsslicer": {
     "sizeBudgetKB": 200,
     "extensionName": "profiles"

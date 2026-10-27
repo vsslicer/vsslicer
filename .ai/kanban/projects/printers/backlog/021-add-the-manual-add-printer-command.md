@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pick a registered adapter, enter host and the auth fields the adapter declares, store the secret and add the printer.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

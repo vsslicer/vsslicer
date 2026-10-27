@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Calls the reader with the quality, converts each solid's triangles to an `IndexedMesh`, takes names from the STEP product names and maps reader failures to the typed errors.
 
-**Code:** `vsslicer/modules/mesh-step/src/application/importStep.ts` (module: `mesh-step`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-step/src/application/importStep.ts` (module: `mesh-step`, layer: `application`)
 
 ## Acceptance criteria
 

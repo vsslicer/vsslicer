@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds the exact shape of machine, process and filament presets for `--load-settings` and `--load-filaments`: required header keys, `inherits`, `from`, per-slot filaments, and which of the 43 keys the CLI refuses on the command line, with the classes of refusal.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (spike))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A recorded manual check that VSSlicer-saved plates open in the other slicers.
 
-**Code:** `vsslicer/modules/project-extension/docs/plates-manual-matrix.md` (module: `project-extension`, layer: n/a (manual matrix))
+**Code:** `vsslicer/modules/apps/project/docs/plates-manual-matrix.md` (module: `project-extension`, layer: n/a (manual matrix))
 
 ## Acceptance criteria
 

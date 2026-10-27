@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Two protocol clients add and watch items.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

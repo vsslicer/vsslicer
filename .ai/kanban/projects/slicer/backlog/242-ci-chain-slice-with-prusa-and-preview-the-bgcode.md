@@ -15,7 +15,7 @@ created: 2026-10-25
 
 In the test host: slice a fixture with the Prusa engine to `.bgcode` and open it in the preview.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

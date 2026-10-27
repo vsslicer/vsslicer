@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The H2C's AMS trays appear under the printer grouping with their assigned spools.
 
-**Code:** `vsslicer/modules/filament-extension/docs/hardware-checklist.md` (module: `filament-extension`, layer: `n/a (hardware verification)`)
+**Code:** `vsslicer/modules/apps/filament/docs/hardware-checklist.md` (module: `filament-extension`, layer: `n/a (hardware verification)`)
 
 ## Acceptance criteria
 

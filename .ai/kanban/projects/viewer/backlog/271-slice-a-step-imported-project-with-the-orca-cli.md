@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Imports a STEP fixture, saves the project and slices it through `slicer-orca`.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/step/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/step/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

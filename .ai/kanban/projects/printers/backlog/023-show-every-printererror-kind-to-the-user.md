@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Each error kind gets a notification or a tree item state with an action where one exists.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

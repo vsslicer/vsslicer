@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A command that returns the loaded AMS filaments to its caller.
 
-**Code:** `vsslicer/modules/bambu-extension/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/bambu/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

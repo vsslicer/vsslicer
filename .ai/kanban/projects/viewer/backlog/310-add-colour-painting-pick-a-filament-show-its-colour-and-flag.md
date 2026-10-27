@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A filament picker built from the palette drives the brush, bucket and other tools in colour mode; painted indices without a filament show a warning on the object.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/paint/colour.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/paint/colour.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect tests for the §2 motion rows: `input_shaping_*`, the junction deviation or jerk key, and `adaptive_pressure_advance_model`.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

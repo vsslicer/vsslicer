@@ -15,7 +15,7 @@ created: 2026-10-25
 
 New library module for multi-material logic with no VS Code dependency: the flush volume calculator, the models of tower, purge, feature-assignment and nozzle-map settings. PRN's send-time remapping can reuse the calculator (E63).
 
-**Code:** `vsslicer/modules/multimaterial/` (module: `multimaterial`, layer: n/a (module scaffold))
+**Code:** `vsslicer/modules/core/multimaterial/` (module: `multimaterial`, layer: n/a (module scaffold))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `profiles@0.4.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/profiles/` (module: `profiles`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/profiles/profiles/` (module: `profiles`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fixtures for the status tests: ha-bambulab `mock_data` (MIT) and pairs of full X1-style and partial P1-style pushes.
 
-**Code:** `vsslicer/modules/printer-bambu/test/fixtures/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/bambu/test/fixtures/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

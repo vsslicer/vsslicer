@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads `printable_area`, `bed_exclude_area` and height from the resolved profile of the plate's printer and builds the `Bed` for arrange.
 
-**Code:** `vsslicer/modules/project-extension/src/application/arrangeBed.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/arrangeBed.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

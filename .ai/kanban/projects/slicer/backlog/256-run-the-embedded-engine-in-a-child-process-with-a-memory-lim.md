@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Starts the engine module with the extension host's Node (Electron as Node) as a child process through the runtime module, with the memory limit from the decision.
 
-**Code:** `vsslicer/modules/slicer-embedded/src/adapters/...` (module: `slicer-embedded`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/embedded/src/adapters/...` (module: `slicer-embedded`, layer: `adapters`)
 
 ## Acceptance criteria
 

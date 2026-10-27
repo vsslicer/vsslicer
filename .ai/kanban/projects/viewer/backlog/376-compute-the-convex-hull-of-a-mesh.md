@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The convex hull as an indexed mesh, used to generate candidate orientations; uses an installed quickhull library rather than new code.
 
-**Code:** `vsslicer/modules/mesh/src/application/hull.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/hull.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Selects the 3.0 argv and config path when the setting is on and applies the same output verification, which already treats exit 0 as untrusted.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
 
 ## Acceptance criteria
 

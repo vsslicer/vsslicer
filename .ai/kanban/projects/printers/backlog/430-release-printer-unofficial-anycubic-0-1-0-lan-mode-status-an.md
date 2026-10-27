@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-unofficial-anycubic@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-unofficial-anycubic/` (module: `printer-unofficial-anycubic`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/unofficial-anycubic/` (module: `printer-unofficial-anycubic`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

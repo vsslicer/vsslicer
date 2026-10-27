@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A panel for the active plate: bed type, print sequence, spiral mode, filament order and maps, with the source of each value from the layering.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

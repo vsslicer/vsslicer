@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Returns the keys allowed at plate, object, part, modifier and height-range level from the catalogue, and the reason a key is refused.
 
-**Code:** `vsslicer/modules/project-extension/src/application/overrides/scope.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/overrides/scope.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

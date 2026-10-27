@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads name, lock, bed type, print sequence, spiral mode and filament maps into the plate fields.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

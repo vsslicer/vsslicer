@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Brand = vendor, Filament + Material = filament, Spool = spool, Tag = tag, superset fields in `extra`; ids kept as `external_id` pairs. Used by export here and by `filament-spoolman`.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

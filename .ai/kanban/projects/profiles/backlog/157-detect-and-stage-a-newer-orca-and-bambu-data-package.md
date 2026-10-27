@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Implements `UpdateSource` for the Orca and Bambu trees: `latest` reads the release index of the `profiles-data-orca` package (version, tarball URL, sha256) from a configurable index URL; `stage` downloads the tarball, verifies the checksum and extracts it with the archive safety limits.
 
-**Code:** `vsslicer/modules/profiles-orca/src/adapters/...` (module: `profiles-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/orca/src/adapters/...` (module: `profiles-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

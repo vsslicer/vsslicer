@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The agent asks the window that opened the session for the secret, holds it in memory and never writes it.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

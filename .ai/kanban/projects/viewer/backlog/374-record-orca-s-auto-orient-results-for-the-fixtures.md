@@ -14,7 +14,7 @@ created: 2026-10-25
 
 Meshes that need orienting (an overhanging bracket, a tilted cylinder, a figurine, a flat plate on its edge, a symmetrical case) with the rotation Orca's auto-orient chose, taken from the GUI.
 
-**Code:** `vsslicer/modules/mesh/test/fixtures/orient/` (module: `mesh`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/mesh/test/fixtures/orient/` (module: `mesh`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

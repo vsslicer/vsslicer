@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Prove the log replay stays fast enough to load on activation.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

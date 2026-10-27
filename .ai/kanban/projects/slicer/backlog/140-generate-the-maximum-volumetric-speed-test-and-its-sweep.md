@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Single-wall tower whose feed rate ramps per layer; the picked layer gives the flow limit; target key `filament_max_volumetric_speed`.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

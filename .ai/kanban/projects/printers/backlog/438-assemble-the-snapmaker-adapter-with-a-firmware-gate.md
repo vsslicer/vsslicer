@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes discovery, status, upload and start into the `snapmaker-sacp` adapter; the firmware table decides read-only mode.
 
-**Code:** `vsslicer/modules/printer-unofficial-snapmaker/src/application/...` (module: `printer-unofficial-snapmaker`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-snapmaker/src/application/...` (module: `printer-unofficial-snapmaker`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Looks in the standard install paths on macOS, Windows and Linux and at the `vsslicer.slicer.orca.path` value, runs the version probe, and compares with the pinned version.
 
-**Code:** `vsslicer/modules/slicer-orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

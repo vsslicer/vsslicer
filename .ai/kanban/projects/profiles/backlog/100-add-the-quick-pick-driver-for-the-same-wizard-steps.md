@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A second driver over the same step model, for keyboard-first and web hosts.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/wizard/quickpick/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/wizard/quickpick/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

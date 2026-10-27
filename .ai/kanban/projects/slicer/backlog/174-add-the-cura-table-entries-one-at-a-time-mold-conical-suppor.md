@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds entries for `print_sequence` (`one_at_a_time`), `mold_*`, `support_conical_*` and `gradual_infill_*`, and `unsupported` entries for overhang printing and bed mesh.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

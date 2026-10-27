@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes a filament preset per material slot in plate order, so multi-material plates get the right filament per extruder.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

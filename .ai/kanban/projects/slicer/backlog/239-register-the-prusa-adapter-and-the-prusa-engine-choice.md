@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds `slicer-prusa` to the engine registry beside Orca and Cura.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

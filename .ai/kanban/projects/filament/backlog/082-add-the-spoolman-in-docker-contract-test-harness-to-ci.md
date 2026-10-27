@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A CI job on Linux runners (free, D5) that starts Spoolman at the pinned tag and exposes its URL to the contract tests; skipped on other platforms with a visible reason.
 
-**Code:** `vsslicer/modules/filament-spoolman/` CI entry (module: `filament-spoolman`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/filament/spoolman/` CI entry (module: `filament-spoolman`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

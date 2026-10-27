@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wires the new `slicer-api@0.3.0` effect tests to `OrcaEngine` and regenerates the capability report for the pinned version.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

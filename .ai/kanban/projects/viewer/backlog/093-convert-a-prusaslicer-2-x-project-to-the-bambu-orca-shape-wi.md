@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps PrusaSlicer 2.x objects, volumes, ranges and settings to the `Project` shape the Bambu/Orca writer saves, and reports what was converted and what stays only as preserved parts.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/convert/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/convert/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

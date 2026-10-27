@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Measures frame time while dragging on the 5 million triangle fixture and records the result.
 
-**Code:** `vsslicer/modules/project-extension/test/perf/` (module: `project-extension`, layer: n/a (benchmark))
+**Code:** `vsslicer/modules/apps/project/test/perf/` (module: `project-extension`, layer: n/a (benchmark))
 
 ## Acceptance criteria
 

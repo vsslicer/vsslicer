@@ -15,7 +15,7 @@ created: 2026-10-25
 
 MIT attribution for both data sources, in the module's third-party notices and as each record's source text.
 
-**Code:** `vsslicer/modules/filament-ofd/` (module: `filament-ofd`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/filament/ofd/` (module: `filament-ofd`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

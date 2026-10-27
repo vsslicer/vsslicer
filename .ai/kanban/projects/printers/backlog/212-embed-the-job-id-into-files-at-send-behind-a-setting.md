@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Before upload, add the job id to G-code or `.gcode.3mf` when the setting is on; checksums are computed afterwards.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

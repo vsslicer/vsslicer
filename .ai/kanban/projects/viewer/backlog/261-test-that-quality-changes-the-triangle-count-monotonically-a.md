@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Imports the curved-face fixture at every preset.
 
-**Code:** `vsslicer/modules/mesh-step/test/quality/` (module: `mesh-step`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh-step/test/quality/` (module: `mesh-step`, layer: n/a (tests))
 
 ## Acceptance criteria
 

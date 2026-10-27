@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `3mf@0.6.0`. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/3mf/` (module: `3mf`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/3mf/` (module: `3mf`, layer: n/a (release))
 
 ## Acceptance criteria
 

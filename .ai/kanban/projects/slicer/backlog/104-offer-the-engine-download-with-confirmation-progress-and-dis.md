@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The prompt that names version, size and source, a progress notification, and a distinct message per failure. On macOS it follows the spike's decision.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

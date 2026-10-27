@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One-day spike: can Klipper with a simulated printer and Moonraker run in a CI container to record sessions? Fallback is hand-derived fixtures.
 
-**Code:** `vsslicer/modules/printer-moonraker/test/` (module: `printer-moonraker`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/moonraker/test/` (module: `printer-moonraker`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

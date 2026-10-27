@@ -15,7 +15,7 @@ created: 2026-10-25
 
 After the planar cut, adds each plug to one half and subtracts its hole from the other at the placed positions. Ported from the connector processing of `OrcaSlicer@09aa0114:src/libslic3r/CutUtils.cpp` and the connector types of `Model.hpp` (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/mesh-boolean/src/application/connectors.ts` (module: `mesh-boolean`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/application/connectors.ts` (module: `mesh-boolean`, layer: `application`)
 
 ## Acceptance criteria
 

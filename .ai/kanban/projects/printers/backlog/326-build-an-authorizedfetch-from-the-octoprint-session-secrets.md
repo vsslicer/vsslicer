@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `session.authorizedFetch()` adds the `X-Api-Key` (or the paired application key) to requests for webcam and timelapse URLs.
 
-**Code:** `vsslicer/modules/printer-octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
 
 ## Acceptance criteria
 

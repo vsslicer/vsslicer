@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds the triangles a cursor can touch using `shapecast` on the transferred BVH: all triangles within a radius for the sphere cursor, and the visible front-facing triangles in a cylinder along the view ray for the circle cursor (behaviour checked once against Orca's GUI and recorded).
 
-**Code:** `vsslicer/modules/mesh/src/adapters/bvh/paintCursor.ts` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/bvh/paintCursor.ts` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

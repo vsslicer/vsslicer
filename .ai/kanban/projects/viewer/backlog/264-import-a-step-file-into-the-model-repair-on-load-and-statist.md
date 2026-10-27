@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the file, calls `importStep` with the chosen quality, runs `repairOnLoad` and the statistics on each solid and returns meshes with names and reports.
 
-**Code:** `vsslicer/modules/project-extension/src/application/importStepFile.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/importStepFile.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One-day spike: a workspace-kind extension calling the exports of a UI-kind `vsslicer.printers` under Remote-SSH or a split host.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

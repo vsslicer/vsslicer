@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands that apply the chosen update with a snapshot and roll back from the snapshot list, with progress and a result summary.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

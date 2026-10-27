@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands 'Add plate to queue' and 'Send plate to printers': pick printers, show each check result with its reason, confirm for `any`.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

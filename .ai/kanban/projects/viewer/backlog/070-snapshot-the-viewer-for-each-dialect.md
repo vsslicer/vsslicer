@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Playwright snapshots in headless Chromium with software WebGL (CI only) for a fixture from each dialect.
 
-**Code:** `vsslicer/modules/project-extension/test/snapshots/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/snapshots/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

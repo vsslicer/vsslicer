@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Contributes the flag `vsslicer.slicer.calibration` and the command "VSSlicer: Calibration" with a quick pick of tests and their parameters; it slices the plan and opens the preview.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

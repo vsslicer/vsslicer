@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Webview colours follow the theme through the E2 theme tokens; this test lists the `--vscode-*` variables the token helper reads and asserts each is defined by all four themes.
 
-**Code:** `vsslicer/modules/themes/test/webview-tokens.test.ts` (module: `themes`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/themes/test/webview-tokens.test.ts` (module: `themes`, layer: n/a (tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The pipeline calls `unsupportedKeys` for the chosen engine and prints one warning line per key in the format the matcher reads.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

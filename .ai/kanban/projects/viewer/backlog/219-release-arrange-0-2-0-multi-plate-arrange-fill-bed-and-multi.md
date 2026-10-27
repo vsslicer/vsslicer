@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `arrange@0.2.0`. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`, so the editor, the slicer extension and the fleet queue can depend on the range.
 
-**Code:** `vsslicer/modules/arrange/` (module: `arrange`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/arrange/` (module: `arrange`, layer: n/a (release))
 
 ## Acceptance criteria
 

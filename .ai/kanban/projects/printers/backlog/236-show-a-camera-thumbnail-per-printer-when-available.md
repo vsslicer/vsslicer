@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fleet view shows a camera frame for printers whose camera is available; nothing when not.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 UNRESOLVED needs camera: a released snapshot/thumbnail API in `camera-api` or `camera-extension` (E38); the planner wires the camera release card.
 

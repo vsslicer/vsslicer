@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Downloads the pinned release after confirmation, verifies SHA-256, extracts it into global storage with the runtime module and records the install.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Replaces an object's mesh with the repaired one. The history keeps a reference to the original mesh; the log stores the options and replay recomputes the repair.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/repair/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/repair/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

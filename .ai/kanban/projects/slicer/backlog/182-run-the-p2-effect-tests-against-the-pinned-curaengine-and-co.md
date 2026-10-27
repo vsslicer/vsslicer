@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wires the new effect tests to `CuraEngine` and regenerates the capability report for the pinned version.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

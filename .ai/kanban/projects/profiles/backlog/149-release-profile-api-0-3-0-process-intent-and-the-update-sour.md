@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `profile-api@0.3.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/profile-api/` (module: `profile-api`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/common/profile-api/` (module: `profile-api`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

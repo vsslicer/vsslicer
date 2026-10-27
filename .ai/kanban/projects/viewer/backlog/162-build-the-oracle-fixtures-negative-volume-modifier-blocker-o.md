@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Projects saved by `writeProject` that each carry one feature the Orca CLI must honour, with a PROVENANCE.md and the expected effect per fixture.
 
-**Code:** `vsslicer/modules/project-extension/test/fixtures/edit-oracle/` (module: `project-extension`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/apps/project/test/fixtures/edit-oracle/` (module: `project-extension`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

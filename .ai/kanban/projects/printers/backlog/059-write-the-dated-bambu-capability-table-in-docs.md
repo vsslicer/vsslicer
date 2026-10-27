@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The per-model, per-firmware capability table starting with the H2C and its firmware.
 
-**Code:** `vsslicer/modules/printer-bambu/docs/` (module: `printer-bambu`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/printer/bambu/docs/` (module: `printer-bambu`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes one whole line per event to `.vsslicer/history/YYYY-MM.jsonl` with fsync; never rewrites in place; reads skip damaged lines.
 
-**Code:** `vsslicer/modules/job-history/src/adapters/...` (module: `job-history`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/job-history/src/adapters/...` (module: `job-history`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes session, streamer, SD operations and discoverer into the adapter descriptor `serial-marlin` with no auth scheme, the module path the agent loads, and capabilities from what is built.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

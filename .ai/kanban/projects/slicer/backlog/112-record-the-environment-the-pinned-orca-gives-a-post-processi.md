@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A fixture script that dumps its argv and environment, run by the pinned Orca through a preset with `post_process`, and the recording committed as the oracle.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

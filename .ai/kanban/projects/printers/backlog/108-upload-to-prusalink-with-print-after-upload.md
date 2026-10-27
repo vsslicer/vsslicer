@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `PUT /api/v1/files/{storage}/{path}` with progress, abort and the `Print-After-Upload` header.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
 
 ## Acceptance criteria
 

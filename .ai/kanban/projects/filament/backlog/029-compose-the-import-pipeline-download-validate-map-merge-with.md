@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One use case producing records and an import report, with progress and cancellation.
 
-**Code:** `vsslicer/modules/filament-ofd/src/application/...` (module: `filament-ofd`, layer: `application`)
+**Code:** `vsslicer/modules/filament/ofd/src/application/...` (module: `filament-ofd`, layer: `application`)
 
 ## Acceptance criteria
 

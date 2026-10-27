@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `fleet-queue@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/fleet-queue/` (module: `fleet-queue`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/fleet-queue/` (module: `fleet-queue`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

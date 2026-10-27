@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure form model: initial weight, empty spool weight, location, lot, price, extras, archive, with validation and draft state.
 
-**Code:** `vsslicer/modules/filament-extension/src/application/...` (module: `filament-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/filament/src/application/...` (module: `filament-extension`, layer: `application`)
 
 ## Acceptance criteria
 

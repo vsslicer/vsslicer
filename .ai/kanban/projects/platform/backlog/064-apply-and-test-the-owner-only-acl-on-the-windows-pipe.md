@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Security-sensitive: implements the spike's chosen Windows pipe protection so only the creating user can connect. Verified on the Windows runner.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

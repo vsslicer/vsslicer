@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `<video>` with MediaSource for the sidecar's MSE stream over the proxy WebSocket, with `connect-src` limited to the proxy origin.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

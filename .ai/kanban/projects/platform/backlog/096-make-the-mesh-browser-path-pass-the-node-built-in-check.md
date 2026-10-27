@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the check on the library's browser entry and replaces what it finds; the Web Worker pool already exists.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/...` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/...` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

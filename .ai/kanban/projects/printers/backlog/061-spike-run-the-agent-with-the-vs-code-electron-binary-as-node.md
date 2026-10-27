@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Decide how the agent runs: `ELECTRON_RUN_AS_NODE=1` with `process.execPath` on macOS, Windows and Linux, versus a `node` on PATH or a bundled Node. Shared with the slicer engine child-process spike (SLC) so they agree.
 
-**Code:** `vsslicer/modules/printer-agent/` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

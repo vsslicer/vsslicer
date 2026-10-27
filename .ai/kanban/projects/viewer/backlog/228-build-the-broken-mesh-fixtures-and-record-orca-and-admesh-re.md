@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fixtures with open edges, flipped normals, duplicate faces, small holes, self-intersections and zero-area slivers, with admesh's report and Orca's repaired volume recorded once per fixture and a PROVENANCE.md.
 
-**Code:** `vsslicer/modules/mesh/test/fixtures/broken/` (module: `mesh`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/mesh/test/fixtures/broken/` (module: `mesh`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

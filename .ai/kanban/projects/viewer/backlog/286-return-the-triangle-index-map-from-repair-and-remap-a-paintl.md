@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Repair removes degenerate and duplicate faces, which shifts triangle indices and would move paint onto the wrong triangles. Adds an additive `triangleMap` to the repair report and a function that remaps a `PaintLayer` through it.
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/remap.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/remap.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

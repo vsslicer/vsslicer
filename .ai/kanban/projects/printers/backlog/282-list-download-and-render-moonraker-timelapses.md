@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The Moonraker provider: files in the `timelapse` root (`/server/files/list?root=timelapse`), download from `/server/files/timelapse/<name>`, and `/machine/timelapse/render` for unrendered frames.
 
-**Code:** `vsslicer/modules/camera-timelapse/src/adapters/...` (module: `camera-timelapse`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/timelapse/src/adapters/...` (module: `camera-timelapse`, layer: `adapters`)
 
 ## Acceptance criteria
 

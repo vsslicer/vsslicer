@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sketch the Bambu adapter (from the PRN-1 findings) and a Moonraker adapter against the types to find where the API is wrong before 0.1 freezes.
 
-**Code:** `vsslicer/modules/printer-api/docs/` (module: `printer-api`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/common/printer-api/docs/` (module: `printer-api`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

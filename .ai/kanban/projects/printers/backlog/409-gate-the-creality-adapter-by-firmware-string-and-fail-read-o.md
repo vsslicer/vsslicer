@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Vendor firmware updates break reverse-engineered protocols without notice, so the adapter checks the reported firmware string against a table of tested ones and opens read-only (status only, no upload, no job control) on any other.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/src/application/...` (module: `printer-unofficial-creality`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/src/application/...` (module: `printer-unofficial-creality`, layer: `application`)
 
 ## Acceptance criteria
 

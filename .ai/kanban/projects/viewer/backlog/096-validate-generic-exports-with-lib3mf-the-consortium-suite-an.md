@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the generic export of each fixture through the lib3mf WASM oracle, the Consortium positive cases and three.js `3MFLoader`.
 
-**Code:** `vsslicer/modules/3mf/test/integration/generic/` (module: `3mf`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/core/3mf/test/integration/generic/` (module: `3mf`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

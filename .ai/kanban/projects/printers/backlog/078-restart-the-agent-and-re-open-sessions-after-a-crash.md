@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On connection loss the client restarts the agent, re-subscribes and re-opens sessions; the tree shows a reconnected state.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

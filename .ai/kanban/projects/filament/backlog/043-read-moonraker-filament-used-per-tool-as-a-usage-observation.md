@@ -17,7 +17,7 @@ Turn `print_stats.filament_used` (and job history per tool when present) deliver
 
 UNRESOLVED: needs printer-moonraker (and printer-api): the job's `filament_used` per tool at job end exposed to consumers.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

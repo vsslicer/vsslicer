@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `PrinterAdapter` with capabilities, job control and `probe`.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/application/...` (module: `printer-prusalink`, layer: `application`)
+**Code:** `vsslicer/modules/printer/prusalink/src/application/...` (module: `printer-prusalink`, layer: `application`)
 
 ## Acceptance criteria
 

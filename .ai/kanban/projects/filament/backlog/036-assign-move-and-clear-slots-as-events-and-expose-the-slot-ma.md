@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slot changes are log events (so the snapshot stays rebuildable); the slot map is exposed through `Inventory`.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

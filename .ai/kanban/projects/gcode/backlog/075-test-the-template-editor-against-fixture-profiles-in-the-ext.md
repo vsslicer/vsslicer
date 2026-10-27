@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Integration tests with `@vscode/test-electron` over imported Orca and Prusa fixture templates.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

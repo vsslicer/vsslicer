@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When a printer does not report loaded materials, read the spool loaded on it from the inventory and send it as facts.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 UNRESOLVED needs filament: a released `Inventory` API (E40) giving the spool or material loaded on a printer, and the material identity rule agreed with FIL; the planner wires the filament release card.
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Gap fill paints narrow regions that a bucket fill left (a triangle area threshold, as Orca's gap fill does); height-range fill paints everything between two Z values, splitting triangles at the band edges. Ported where it follows `OrcaSlicer@09aa0114:src/libslic3r/TriangleSelector.cpp` and `.hpp` (AGPL-3.0, D2; cross-check `PrusaSlicer@30ef591:src/slic3r-domain/include/Slic3r/Domain/TriangleSelector.hpp`).
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/gapAndHeight.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/gapAndHeight.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

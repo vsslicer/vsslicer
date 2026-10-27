@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes `project_settings.config` and the embedded preset JSON parts from content the caller supplies (the writer imports no profile module). Without new content the originals are kept.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

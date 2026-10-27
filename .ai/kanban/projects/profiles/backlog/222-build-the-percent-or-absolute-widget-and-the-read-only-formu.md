@@ -11,9 +11,9 @@ milestone: "VSS:M2"
 created: 2026-10-26
 ---
 
-From the PRF-69 spike decision (`vsslicer/modules/profiles-extension/docs/widget-spike.md`): percent-or-absolute values are stored as typed and resolved only for display; the unit toggle converts rather than reinterprets (105% must not become 105 mm); `max_literal` prompts "did you mean %?"; Cura `{expr}` formulas show in a read-only formula view that can be replaced by a literal and restored.
+From the PRF-69 spike decision (`vsslicer/modules/apps/profiles/docs/widget-spike.md`): percent-or-absolute values are stored as typed and resolved only for display; the unit toggle converts rather than reinterprets (105% must not become 105 mm); `max_literal` prompts "did you mean %?"; Cura `{expr}` formulas show in a read-only formula view that can be replaced by a literal and restored.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

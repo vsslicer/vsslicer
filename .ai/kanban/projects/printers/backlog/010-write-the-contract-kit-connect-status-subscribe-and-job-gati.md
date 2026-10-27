@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The suite every adapter runs against its fixtures: the status and job surface.
 
-**Code:** `vsslicer/modules/printer-api/src/adapters/testing/` (module: `printer-api`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/printer-api/src/adapters/testing/` (module: `printer-api`, layer: `adapters`)
 
 ## Acceptance criteria
 

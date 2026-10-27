@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `ProjectModel.execute(command)` applies a command, pushes a step, and raises change events; `undo` and `redo` move along the history. State changes only through commands.
 
-**Code:** `vsslicer/modules/project-extension/src/application/projectModel.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/projectModel.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

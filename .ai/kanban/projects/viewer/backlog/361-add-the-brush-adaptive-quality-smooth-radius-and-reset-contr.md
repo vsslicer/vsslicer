@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The editor panel: a brush with radius and strength on the curve, an adaptive button with a quality slider, a smooth button with a radius, and Reset. Each action is one undo step.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/layerheight/controls.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/layerheight/controls.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

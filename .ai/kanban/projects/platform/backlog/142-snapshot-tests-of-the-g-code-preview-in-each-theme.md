@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Playwright snapshots of the preview webview in each of the four themes through the E2 webview stub; Linux CI only. Depends on the final cards of the G-code extension.
 
-**Code:** `vsslicer/modules/themes/test/snapshots/preview/` (module: `themes`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/themes/test/snapshots/preview/` (module: `themes`, layer: n/a (tests))
 
 ## Acceptance criteria
 

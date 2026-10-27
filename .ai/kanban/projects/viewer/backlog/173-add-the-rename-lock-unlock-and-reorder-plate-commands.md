@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Rename, lock, unlock and reorder; a locked plate refuses every other command.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

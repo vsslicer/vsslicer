@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The target function that ranks candidates, with the overhang and bottom-area weights. Ported from the scoring of `OrcaSlicer@09aa0114:src/libslic3r/Orient.cpp` (AGPL-3.0, D2; overhang and bottom-area weights at `Orient.hpp:34,60`).
 
-**Code:** `vsslicer/modules/mesh/src/application/orient/score.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/orient/score.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

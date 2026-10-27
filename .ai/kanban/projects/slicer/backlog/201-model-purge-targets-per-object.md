@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Per-object flags for `flush_into_infill`, `flush_into_objects` and `flush_into_support`, with inheritance from the plate default.
 
-**Code:** `vsslicer/modules/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
+**Code:** `vsslicer/modules/core/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
 
 ## Acceptance criteria
 

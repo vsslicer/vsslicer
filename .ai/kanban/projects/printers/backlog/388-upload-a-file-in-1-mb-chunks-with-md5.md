@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Streams a file as multipart packets to `POST http://IP:3030/uploadFile/upload` with `S-File-MD5`, `Check`, `Offset`, `Uuid` and `TotalSize`, with progress and abort, never holding the whole file in memory.
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/src/adapters/...` (module: `printer-unofficial-sdcp`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/src/adapters/...` (module: `printer-unofficial-sdcp`, layer: `adapters`)
 
 ## Acceptance criteria
 

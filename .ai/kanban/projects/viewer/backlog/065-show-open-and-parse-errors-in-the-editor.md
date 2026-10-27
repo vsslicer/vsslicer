@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A single error view for E8 and E9 errors, missing thumbnails and unsupported extension notices.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/errors/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/errors/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the MQTT `ipcam` block (`rtsp_url`, liveview state, resolution, timelapse flag) into `session.ipcam()` and a change event, for `camera-bambu`.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

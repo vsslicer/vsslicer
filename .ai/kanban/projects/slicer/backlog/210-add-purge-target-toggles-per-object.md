@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Panel section with the three purge toggles per object and the plate default.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

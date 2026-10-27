@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Additive fields on the `Plate` type for the per-plate settings Bambu and Orca store.
 
-**Code:** `vsslicer/modules/3mf/src/domain/project/` (module: `3mf`, layer: `domain`)
+**Code:** `vsslicer/modules/core/3mf/src/domain/project/` (module: `3mf`, layer: `domain`)
 
 ## Acceptance criteria
 

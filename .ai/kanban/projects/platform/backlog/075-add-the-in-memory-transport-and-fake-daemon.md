@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `@vsslicer/agent-protocol/testkit` exports an in-memory transport pair and a `FakeDaemon` that scripts replies per method and pushes topic notifications, running the real `AgentServer` dispatch so schemas are enforced.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

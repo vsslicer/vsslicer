@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Repairs the fixtures, saves them and slices them through `slicer-orca`.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/repair/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/repair/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

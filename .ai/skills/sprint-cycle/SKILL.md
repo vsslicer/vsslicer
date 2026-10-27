@@ -48,7 +48,10 @@ shell (the same commands `board.py` had); pass your agent name to every write.
    The retro changes no code. Move the "SP<n>: retro" card to Done with a two-line summary.
 5. **Close and begin.** `taskboard close-sprint SP<n> --next SP<n+1>`. It refuses until
    `.ai/audits/SP<n>-audit.md` and `.ai/retros/SP<n>-retro.md` exist (board.json `sprint_close.requires`), carries unfinished cards
-   over, archives the finished ones and starts SP<n+1>. Commit it as `Board: close SP<n>`. Reply
+   over, archives the finished ones and starts SP<n+1>. Commit it on `develop` as `Board: close SP<n>`,
+   then `git checkout main && git merge --no-ff develop -m "Merge sprint SP<n> into main" &&
+   git tag -a sprint/SP<n> -m "Sprint SP<n> closed" && git checkout develop`. If the sprint finished a
+   milestone, also `git tag -a milestone/<id> main -m "Milestone <id>: <title>"`. Reply
    with the result; whoever started you then starts the coordinator for SP<n+1>.
 
 ## Traps

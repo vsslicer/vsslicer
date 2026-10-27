@@ -15,7 +15,7 @@ created: 2026-10-25
 
 CI helpers: a go2rtc process with a test source (pinned version, checksum verified) and a small WHEP server that answers an offer with a canned answer.
 
-**Code:** `vsslicer/modules/camera-webrtc/` (module: `camera-webrtc`, layer: `n/a (test kit)`)
+**Code:** `vsslicer/modules/camera/webrtc/` (module: `camera-webrtc`, layer: `n/a (test kit)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Types for vendor, filament, spool, `extra`, `/export` and the change events; a bookkeeping value pairing local ids with Spoolman ids (`external_id`).
 
-**Code:** `vsslicer/modules/filament-spoolman/src/domain/...` (module: `filament-spoolman`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/spoolman/src/domain/...` (module: `filament-spoolman`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Orders items, tries rotation candidates, picks the candidate that best satisfies the alignment (bed centre, corner) and records the pose. Ported from `OrcaSlicer@09aa0114:src/libslic3r/Arrange.cpp` and `ModelArrange.cpp` (AGPL-3.0) on `deps_src/libnest2d` (LGPL-3.0) (D2), with the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/arrange/src/application/place/` (module: `arrange`, layer: `application`)
+**Code:** `vsslicer/modules/core/arrange/src/application/place/` (module: `arrange`, layer: `application`)
 
 ## Acceptance criteria
 

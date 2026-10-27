@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Parse the progress text only if it is stable across two pinned releases; otherwise keep indeterminate progress. Optionally note an upstream `--pipe` patch.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (spike))
 
 ## Acceptance criteria
 

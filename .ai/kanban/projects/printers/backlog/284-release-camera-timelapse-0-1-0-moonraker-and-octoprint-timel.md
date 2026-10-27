@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `camera-timelapse@0.1.0`.
 
-**Code:** `vsslicer/modules/camera-timelapse/` (module: `camera-timelapse`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/camera/timelapse/` (module: `camera-timelapse`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

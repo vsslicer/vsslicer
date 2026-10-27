@@ -12,7 +12,7 @@ created: 2026-10-26
 
 From GCP-119's passing review (SP10): the planner's read count covers only the markers list. A quadratic loop over moves, or over a copied marker list, passes both tests (the 300k-move hang guard finishes in 20 to 23 s, under its 60 s timeout).
 
-**Code:** `vsslicer/modules/gcode-planner/test/planner.test.ts` (tests)
+**Code:** `vsslicer/modules/core/gcode-planner/test/planner.test.ts` (tests)
 
 ## Acceptance criteria
 

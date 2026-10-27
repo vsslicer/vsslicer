@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure helpers for turning JPEG frames into a `multipart/x-mixed-replace` stream and for checking a buffer is a whole JPEG, used by the agent proxy and the Bambu frame source.
 
-**Code:** `vsslicer/modules/camera-api/src/domain/...` (module: `camera-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/camera-api/src/domain/...` (module: `camera-api`, layer: `domain`)
 
 ## Acceptance criteria
 

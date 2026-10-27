@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the CLI through the runtime module, then applies the success rule: file exists, is non-empty, parses with the G-code parser (text or `.bgcode`) and stderr has no error line.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
 
 ## Acceptance criteria
 

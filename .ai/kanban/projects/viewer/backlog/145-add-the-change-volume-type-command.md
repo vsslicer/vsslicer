@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Changes the kind of a volume and keeps its transform and name.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/volumes/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/volumes/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Tower sweeping `SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY`, Marlin `M205 J`, or jerk per block; writes the printer's junction deviation or jerk key.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

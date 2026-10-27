@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure check given the table and a list of unified keys (the list comes from PRF's catalogue in the adapters' tests).
 
-**Code:** `vsslicer/modules/slicer-api/src/application/...` (module: `slicer-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/slicer-api/src/application/...` (module: `slicer-api`, layer: `application`)
 
 ## Acceptance criteria
 

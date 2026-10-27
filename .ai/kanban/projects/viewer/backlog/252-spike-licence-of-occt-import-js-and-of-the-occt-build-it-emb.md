@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `occt-import-js` was last published 2024-12 and its README states no licence. This spike confirms the licence of the package and of the OCCT it embeds, records the OCCT version, and decides whether to build OCCT's STEP reader to WASM ourselves (LGPL-2.1 with the OCCT exception), which spends an innovation token.
 
-**Code:** `vsslicer/modules/mesh-step/docs/licence-spike.md` (module: `mesh-step`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/core/mesh-step/docs/licence-spike.md` (module: `mesh-step`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

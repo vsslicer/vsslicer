@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When a plate's content changed, its G-code, md5, plate thumbnails and `slice_info` entries are removed from the output and listed in a `SaveNotice`.
 
-**Code:** `vsslicer/modules/3mf/src/application/writer/` (module: `3mf`, layer: `application`)
+**Code:** `vsslicer/modules/core/3mf/src/application/writer/` (module: `3mf`, layer: `application`)
 
 ## Acceptance criteria
 

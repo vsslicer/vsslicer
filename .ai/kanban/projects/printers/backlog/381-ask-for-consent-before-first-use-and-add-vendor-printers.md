@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A command `Add printer (vendor protocol)` shows the adapters with their labels; for a reverse-engineered adapter a modal dialog says what that means (unofficial, may break on a firmware update, LAN mode caveats where the adapter has them) and records the answer, then hands over to the Add printer flow with the host type preselected and the consent version stored in the connection. The adapters themselves refuse to open without that consent version.
 
-**Code:** `vsslicer/modules/printers-unofficial-extension/src/presentation/...` (module: `printers-unofficial-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers-unofficial/src/presentation/...` (module: `printers-unofficial-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

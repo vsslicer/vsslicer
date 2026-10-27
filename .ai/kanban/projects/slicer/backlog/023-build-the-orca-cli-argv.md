@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure function from a job to an argv array: `--slice N`, `--load-settings`, `--load-filaments`, `--outputdir`, `--pipe` where supported, and extra `--key=value` overrides. No shell quoting.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -17,7 +17,7 @@ Consume the `printer-api` status stream (`@vsslicer/printer-api` ^0.1.0) and emi
 
 UNRESOLVED: needs printer-api (a job-end signal with a stable job id and outcome, or a documented derivation from `state` and `job`); PRN-4 has `job` and `materials[]` but no end event.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

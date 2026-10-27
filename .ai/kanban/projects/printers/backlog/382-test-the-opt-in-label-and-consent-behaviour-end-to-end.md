@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Integration test with the stub registry and a fake adapter per label kind.
 
-**Code:** `vsslicer/modules/printers-unofficial-extension/src/presentation/...` (module: `printers-unofficial-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers-unofficial/src/presentation/...` (module: `printers-unofficial-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -3,9 +3,10 @@
 // Usage: node scripts/run.mjs <command> [--changed <git-ref>] [--list]   (--list prints the selected module names as JSON and exits)
 // Commands: install | publish | checks | ci [--allow-unbumped] | version-check --base <ref> | release --dry-run <dir> | any pnpm script name (run where the module defines it).
 import { spawnSync } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { moduleDirs } from './modules.mjs';
 import { changed, fetchRetry, isUnreleased, unreleasedDepProblems, localDeps, order, withDeps } from './lib.mjs';
 import { changelogSection, integrityProblems, stalePinProblems, lockfileIntegrities, prepackProblems, registryProblems, releaseTag, versionProblems } from './versioning.mjs';
 
@@ -24,13 +25,10 @@ if (!cmd || cmd.startsWith('--') || (args.includes('--changed') && !ref)) {
   process.exit(2);
 }
 
-const modules = readdirSync(join(root, 'modules'), { withFileTypes: true })
-  .filter((e) => e.isDirectory())
-  .filter((e) => existsSync(join(root, 'modules', e.name, 'package.json')) || (console.warn(`warning: modules/${e.name} has no package.json yet, skipping`), false))
-  .map((e) => {
-    const pkg = JSON.parse(readFileSync(join(root, 'modules', e.name, 'package.json'), 'utf8'));
-    return { dir: e.name, name: pkg.name, version: pkg.version, pkg, scripts: pkg.scripts ?? {}, deps: localDeps(pkg), devDeps: localDeps({ devDependencies: pkg.devDependencies }).filter((n) => !localDeps({ ...pkg, devDependencies: {} }).includes(n)) };
-  });
+const modules = moduleDirs(join(root, 'modules')).map((dir) => {
+  const pkg = JSON.parse(readFileSync(join(root, 'modules', dir, 'package.json'), 'utf8'));
+  return { dir, name: pkg.name, version: pkg.version, pkg, scripts: pkg.scripts ?? {}, deps: localDeps(pkg), devDeps: localDeps({ devDependencies: pkg.devDependencies }).filter((n) => !localDeps({ ...pkg, devDependencies: {} }).includes(n)) };
+});
 
 const modFile = (m, f) => (existsSync(join(root, 'modules', m.dir, f)) ? readFileSync(join(root, 'modules', m.dir, f), 'utf8') : undefined);
 
@@ -65,11 +63,11 @@ if (cmd === 'version-check') {
 
 if (cmd === 'release') {
   // prints the CHANGELOG section and the tag; creating the tag is left to the release process
-  const m = modules.find((x) => x.dir === args[2]);
-  if (!args.includes('--dry-run') || !m) (console.error('usage: node scripts/run.mjs release --dry-run <module-folder>'), process.exit(2));
+  const m = modules.find((x) => x.dir === args[2] || x.name === `@vsslicer/${args[2]}`);
+  if (!args.includes('--dry-run') || !m) (console.error('usage: node scripts/run.mjs release --dry-run <module-folder or name>'), process.exit(2));
   const section = changelogSection(modFile(m, 'CHANGELOG.md') ?? '', m.version);
   if (section === null) (console.error(`release: ${m.dir} CHANGELOG.md has no "## ${m.version}" entry`), process.exit(1));
-  console.log(`${section}\n\ntag: ${releaseTag(m.dir, m.version)}`);
+  console.log(`${section}\n\ntag: ${releaseTag(m.name.replace('@vsslicer/', ''), m.version)}`);
   process.exit(0);
 }
 
@@ -173,7 +171,7 @@ if (cmd === 'ci' || cmd === 'checks') {
   // licence fields, SPDX headers, ported-file provenance: tooling's bin from source, so it needs no install
   console.log('\n[checks] check-licence');
   const dirs = [...modules.map((m) => join(root, 'modules', m.dir)), join(root, 'fixtures', 'phantom-dep')];
-  const l = spawnSync(process.execPath, [join(root, 'modules', 'tooling', 'bin', 'check-licence.mjs'), ...dirs], { stdio: 'inherit', env });
+  const l = spawnSync(process.execPath, [join(root, 'modules', 'tooling', 'tooling', 'bin', 'check-licence.mjs'), ...dirs], { stdio: 'inherit', env });
   if (l.status !== 0) (console.error('checks failed'), process.exit(l.status ?? 1));
   console.log('\n[checks] check-fixtures');
   const f = spawnSync(process.execPath, [join(root, 'scripts', 'check-fixtures.mjs'), root], { stdio: 'inherit', env });

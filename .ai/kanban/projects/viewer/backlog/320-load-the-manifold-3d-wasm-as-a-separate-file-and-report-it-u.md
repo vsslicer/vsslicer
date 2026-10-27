@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Loads the WASM from a path the caller gives, never bundled into the JavaScript. A missing file or a failed load is reported as unavailable, not thrown into the caller.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/adapters/manifold/loader.ts` (module: `mesh-boolean`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/adapters/manifold/loader.ts` (module: `mesh-boolean`, layer: `adapters`)
 
 ## Acceptance criteria
 

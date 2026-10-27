@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On Linux the JSON progress from `--pipe` is read and `result.json` is parsed after the run; macOS and Windows report indeterminate progress, or parsed debug text only if the spike called it stable.
 
-**Code:** `vsslicer/modules/slicer-orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

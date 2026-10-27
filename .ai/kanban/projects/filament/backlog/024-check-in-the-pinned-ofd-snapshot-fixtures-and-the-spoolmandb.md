@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A trimmed OFD snapshot at two revisions (recorded commit and date), its JSON Schema and a trimmed SpoolmanDB `filaments.json`, each with a PROVENANCE note.
 
-**Code:** `vsslicer/modules/filament-ofd/test/fixtures/` (module: `filament-ofd`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/filament/ofd/test/fixtures/` (module: `filament-ofd`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

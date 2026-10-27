@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Oracle test: extract every G-code template string from the pinned Orca/Bambu and PrusaSlicer vendor packs that the profiles CI cache downloads, run `validateTemplate` with the right kind, and require no placeholder warnings.
 
-**Code:** `vsslicer/modules/gcode-templates/test/vendor-packs/` (module: `gcode-templates`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/core/gcode-templates/test/vendor-packs/` (module: `gcode-templates`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

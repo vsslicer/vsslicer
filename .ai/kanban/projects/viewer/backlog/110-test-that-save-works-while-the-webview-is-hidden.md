@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A test-host test: edit, hide the editor, run Save, check the file.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

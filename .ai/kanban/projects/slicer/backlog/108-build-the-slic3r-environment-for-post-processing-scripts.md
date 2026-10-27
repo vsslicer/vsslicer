@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure function from the resolved config to the environment Orca gives scripts: `SLIC3R_PP_OUTPUT_NAME`, `SLIC3R_PP_HOST` and every config key as `SLIC3R_<KEY>`, following the key-name transformation Orca uses (`features-bambustudio-orcaslicer.md` section 6).
 
-**Code:** `vsslicer/modules/slicer-extension/src/domain/...` (module: `slicer-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/slicer/src/domain/...` (module: `slicer-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

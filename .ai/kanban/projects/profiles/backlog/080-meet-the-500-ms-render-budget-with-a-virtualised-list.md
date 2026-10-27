@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Virtualises the field list so a process with every catalogue key set renders quickly.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/shell/virtual/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/shell/virtual/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

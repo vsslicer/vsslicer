@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The data path of the panel: reads tower, flush, purge, assignment and nozzle-map values with their sources and writes plate and profile settings.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

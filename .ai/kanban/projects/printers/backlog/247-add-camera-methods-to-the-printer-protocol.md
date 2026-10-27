@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The agent protocol methods the camera extension calls: `camera.registerSources`, `camera.list`, `camera.open` (returns the proxy URL and token for a stream), `camera.snapshot` and `camera.close`.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

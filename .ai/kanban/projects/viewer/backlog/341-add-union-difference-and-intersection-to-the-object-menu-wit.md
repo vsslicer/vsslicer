@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The menu entries for the boolean tools on a multi-selection: operand order for difference, progress with cancel, and the refusal message when an operand is not manifold.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/menus/boolean.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/menus/boolean.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

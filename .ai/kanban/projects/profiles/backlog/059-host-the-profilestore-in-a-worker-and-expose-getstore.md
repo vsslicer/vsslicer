@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the store and index in a worker so the extension host stays responsive; a worker crash restarts it with an error message; exposes `vsslicer.profiles` API `getStore()`.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/host/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/host/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

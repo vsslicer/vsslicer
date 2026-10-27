@@ -15,7 +15,7 @@ created: 2026-10-25
 
 REST calls and the WebSocket with `printer.objects.subscribe`, timeouts and reconnect.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

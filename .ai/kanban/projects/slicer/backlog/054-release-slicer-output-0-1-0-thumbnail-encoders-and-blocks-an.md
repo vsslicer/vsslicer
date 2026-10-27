@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-output@0.1.0` so other modules can depend on the range: thumbnail encoders and blocks, and `.gcode.3mf` assembly. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-output/` (module: `slicer-output`, layer: n/a (release))
+**Code:** `vsslicer/modules/slicer/output/` (module: `slicer-output`, layer: n/a (release))
 
 ## Acceptance criteria
 

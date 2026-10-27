@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Start, end, layer-change and other G-code templates, and their placeholders, reach the engine unchanged. `post_process` is removed so the engine does not run scripts (the extension runs them), and engine-side thumbnails are turned off because the viewer renders them.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

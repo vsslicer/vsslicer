@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Use case that restores a snapshot and re-indexes the store.
 
-**Code:** `vsslicer/modules/profiles/src/application/...` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/...` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

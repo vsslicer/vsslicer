@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `.vsslicer/` folder beside the 3MF with `sliced/`, reserved `queue.json` and `history/`, a README line and the recommended `.gitignore` entry, created lazily through a `FolderStore` port.
 
-**Code:** `vsslicer/modules/project-extension/src/application/projectFolder.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/projectFolder.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

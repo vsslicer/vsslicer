@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On activation call `registerAdapter` with the Bambu descriptor, including the module path the agent will load.
 
-**Code:** `vsslicer/modules/bambu-extension/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/bambu/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

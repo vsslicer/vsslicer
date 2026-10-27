@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `TreeView` grouped vendor, printer model, nozzle, plus materials, processes and printer instances; abstract entities greyed; inheritance chain on expand.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/tree/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/tree/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

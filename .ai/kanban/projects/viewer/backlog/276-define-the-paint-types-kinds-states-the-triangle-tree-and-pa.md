@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The data the painting tools and the codec share: a `PaintLayer` per kind (support, seam, colour) holding a subdivision tree for each painted triangle.
 
-**Code:** `vsslicer/modules/mesh/src/domain/paint/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/paint/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

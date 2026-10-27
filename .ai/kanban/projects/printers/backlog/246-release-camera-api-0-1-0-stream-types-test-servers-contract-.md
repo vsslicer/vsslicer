@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `camera-api@0.1.0` so the camera modules, the agent and the extension can take the range.
 
-**Code:** `vsslicer/modules/camera-api/` (module: `camera-api`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/common/camera-api/` (module: `camera-api`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

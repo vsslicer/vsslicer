@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Random sequences of lock, unlock, move-to-plate and auto-orient over a three-plate fixture, checking that no object on a locked plate changes.
 
-**Code:** `vsslicer/modules/project-extension/test/property/orient/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/property/orient/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

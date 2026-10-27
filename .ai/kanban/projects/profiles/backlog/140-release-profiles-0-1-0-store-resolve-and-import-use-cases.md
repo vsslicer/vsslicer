@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publishes `profiles@0.1.0` to the local registry so dependent modules can consume store, resolve and import use cases.
 
-**Code:** `vsslicer/modules/profiles/` (module: `profiles`, layer: n/a (release))
+**Code:** `vsslicer/modules/profiles/profiles/` (module: `profiles`, layer: n/a (release))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 An override goes on the command line as `--key=value` where Orca accepts it, else into the emitted JSON, using the refused-key classes from the spike.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

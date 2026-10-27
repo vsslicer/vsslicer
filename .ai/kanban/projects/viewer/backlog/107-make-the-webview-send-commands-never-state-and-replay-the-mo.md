@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The webview posts command requests; the host executes and sends back the change. After a reload the host sends the whole model so the webview rebuilds.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

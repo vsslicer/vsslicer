@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `upload` with start streams the file through the streamer: progress by bytes sent, abort through `AbortSignal`, completion when the last `ok` returns, and the job state reaches `PrinterStatus`.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

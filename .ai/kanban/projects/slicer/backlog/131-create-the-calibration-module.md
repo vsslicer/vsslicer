@@ -15,7 +15,7 @@ created: 2026-10-25
 
 New library module for calibration tests: sweep definitions, test model generators, firmware command table, block-to-value mapping and the write-back plan. It has no VS Code dependency, so the printer agent can reuse `Calibration.run` later (E62).
 
-**Code:** `vsslicer/modules/calibration/` (module: `calibration`, layer: n/a (module scaffold))
+**Code:** `vsslicer/modules/core/calibration/` (module: `calibration`, layer: n/a (module scaffold))
 
 ## Acceptance criteria
 

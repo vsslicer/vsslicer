@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Activity-bar container with the TreeView over the view models; colour swatch icons; refresh on `onDidChange`.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

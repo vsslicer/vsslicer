@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A generator of random `Project` values and the property test that writing then reading gives an equal project.
 
-**Code:** `vsslicer/modules/3mf/test/property/` (module: `3mf`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/3mf/test/property/` (module: `3mf`, layer: n/a (tests))
 
 ## Acceptance criteria
 

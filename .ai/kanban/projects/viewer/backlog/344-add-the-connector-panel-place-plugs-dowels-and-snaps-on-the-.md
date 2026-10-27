@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Click the cut face to place a connector, choose type, style, shape, size, depth and clearance, drag to move, delete; the dovetail option with its angle, depth and count.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/cut/connectors.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/cut/connectors.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

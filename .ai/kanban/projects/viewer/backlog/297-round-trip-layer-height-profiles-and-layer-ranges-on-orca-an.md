@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Closes the layer-height part of the persistence row: the profile and the ranges survive read, write, conversion from Prusa and save. Any gap the test finds in the reader or writer is fixed in this card.
 
-**Code:** `vsslicer/modules/3mf/test/roundtrip/layers/` (module: `3mf`, layer: `application`)
+**Code:** `vsslicer/modules/core/3mf/test/roundtrip/layers/` (module: `3mf`, layer: `application`)
 
 ## Acceptance criteria
 

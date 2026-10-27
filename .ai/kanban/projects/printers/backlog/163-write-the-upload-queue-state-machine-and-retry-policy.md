@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Items `{id, file, printer, dest, startAfter, state, progress, error}`, states `queued, uploading, done, failed, cancelled`, FIFO per printer, and retry by error kind.
 
-**Code:** `vsslicer/modules/printer-agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
 
 ## Acceptance criteria
 

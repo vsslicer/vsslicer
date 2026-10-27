@@ -15,7 +15,7 @@ created: 2026-10-25
 
 PRN-75 keeps `AgentClient` private. Exports a handle (socket path or pipe and token, plus the protocol version) so `camera-extension` can talk to the same agent.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

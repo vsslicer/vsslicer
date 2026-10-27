@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `paintCursor(layer, mesh, candidates, cursor, state, options)` sets the state of the triangles inside the cursor, splitting the ones the cursor edge crosses down to a depth limit, and returns the new layer and a `PaintDelta`. Ported from `select_patch` and the cursor classes of `OrcaSlicer@09aa0114:src/libslic3r/TriangleSelector.cpp` and `.hpp` (AGPL-3.0, D2; cross-check `PrusaSlicer@30ef591:src/slic3r-domain/include/Slic3r/Domain/TriangleSelector.hpp`).
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/select.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/select.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

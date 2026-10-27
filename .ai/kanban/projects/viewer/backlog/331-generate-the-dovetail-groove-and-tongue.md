@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Geometry of Bambu Studio's dovetail cut: a tongue on one half and a groove on the other along the cut face, with angle, depth, count and clearance. Behaviour matched to the Orca project in the fixtures; code ported where it follows `OrcaSlicer@09aa0114:src/libslic3r/CutUtils.cpp` and the connector types of `Model.hpp` (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/mesh-boolean/src/domain/connectors/dovetail.ts` (module: `mesh-boolean`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/domain/connectors/dovetail.ts` (module: `mesh-boolean`, layer: `domain`)
 
 ## Acceptance criteria
 

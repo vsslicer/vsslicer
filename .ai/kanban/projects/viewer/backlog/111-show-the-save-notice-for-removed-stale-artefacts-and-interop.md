@@ -15,7 +15,7 @@ created: 2026-10-25
 
 After a save, a notification lists the plate artefacts removed and any known interop limit (for example, a second printer lost in Orca).
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

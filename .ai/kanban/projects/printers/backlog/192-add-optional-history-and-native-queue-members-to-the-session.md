@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `session.history?.list({since, limit})`, `session.nativeQueue?.{list, enqueue, remove, start, pause, jump, subscribe}`, and contract-kit checks that run only for adapters that declare the flag.
 
-**Code:** `vsslicer/modules/printer-api/src/application/...` (module: `printer-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/printer-api/src/application/...` (module: `printer-api`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Exports a `printer_instance` in the native shapes with the `connection` credentials left out.
 
-**Code:** `vsslicer/modules/profiles/src/application/instances/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/instances/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

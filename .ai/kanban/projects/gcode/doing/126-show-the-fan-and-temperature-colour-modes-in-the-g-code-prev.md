@@ -12,7 +12,7 @@ created: 2026-10-26
 
 Follow-up of GCP-107, which built the modes in `webview-kit` (released as 0.8.0 at SP12's close). The preview still has to send the parser's state changes to the webview and offer the modes.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/` (`preview-session.ts`, `webview/main.ts`) (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/` (`preview-session.ts`, `webview/main.ts`) (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

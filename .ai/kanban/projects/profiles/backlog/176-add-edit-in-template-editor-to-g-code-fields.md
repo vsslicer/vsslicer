@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The G-code widget gets an action that calls `vsslicer.gcode.editTemplate` with the field's text, the dialect (Prusa or Orca) and the template kind derived from the catalogue key, and a save command that writes the text back through the form's edit path.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

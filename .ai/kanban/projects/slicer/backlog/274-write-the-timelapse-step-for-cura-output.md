@@ -14,7 +14,7 @@ created: 2026-10-25
 
 Inserts the timelapse commands at each layer change of Cura G-code (trigger command, optional park head, pause delay, feed rate), following the behaviour of Cura's own TimeLapse script (AGPL-3.0/LGPL provenance noted).
 
-**Code:** `vsslicer/modules/slicer-extension/src/domain/...` (module: `slicer-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/slicer/src/domain/...` (module: `slicer-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

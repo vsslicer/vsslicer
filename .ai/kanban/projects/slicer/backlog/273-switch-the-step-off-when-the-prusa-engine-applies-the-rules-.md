@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the engine's capability table and skips the built-in substitution step for an engine whose `gcode_substitutions` entry is applied by the engine.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

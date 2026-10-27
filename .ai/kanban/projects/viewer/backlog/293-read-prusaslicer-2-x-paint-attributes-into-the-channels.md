@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads `slic3rpe:custom_supports`, `slic3rpe:custom_seam` and `slic3rpe:mmu_segmentation` from `<triangle>` as raw strings, with the attribute names as in PrusaSlicer's `3mf.cpp` (path under `PrusaSlicer@30ef591` recorded in the notice).
 
-**Code:** `vsslicer/modules/3mf/src/adapters/prusa/triangleAttributes.ts` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/prusa/triangleAttributes.ts` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

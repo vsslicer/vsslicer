@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When the project-level printer, filament or process selection changes, asks `profiles` for the native Orca JSON and passes it to the writer; otherwise the original embedded presets are preserved.
 
-**Code:** `vsslicer/modules/project-extension/src/application/nativePresets.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/nativePresets.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

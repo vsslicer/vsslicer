@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `backup` writes a reference to the original file (path, size, hash) plus the log through a `BackupStore` port; `restore` replays it. An incompatible log falls back to the last saved file with a message.
 
-**Code:** `vsslicer/modules/project-extension/src/application/backup.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/backup.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

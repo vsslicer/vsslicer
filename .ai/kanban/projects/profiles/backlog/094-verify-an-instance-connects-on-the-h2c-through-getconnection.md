@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The H2C criterion: an imported or created instance reaches the real printer through `getConnection` and the registered Bambu adapter; firmware version and date go in the test log (D5).
 
-**Code:** `vsslicer/modules/profiles-extension/test/h2c/` (module: `profiles-extension`, layer: `presentation`, manual hardware test)
+**Code:** `vsslicer/modules/apps/profiles/test/h2c/` (module: `profiles-extension`, layer: `presentation`, manual hardware test)
 
 ## Acceptance criteria
 

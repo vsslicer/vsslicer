@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Builds the argv: `--export-gcode` (or `--export-binary-gcode`), `--load` for each config, `--output`, and a private `--datadir` so the preset-update prompt cannot block slicing.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

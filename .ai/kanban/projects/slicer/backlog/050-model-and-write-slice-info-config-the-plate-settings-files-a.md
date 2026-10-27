@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Builds the text of `slice_info.config`, `model_settings.config` and `project_settings.config` from the plate, its statistics (from `readSummary`) and the resolved settings, and the `plate_N.gcode.md5` entry.
 
-**Code:** `vsslicer/modules/slicer-output/src/domain/...` (module: `slicer-output`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/output/src/domain/...` (module: `slicer-output`, layer: `domain`)
 
 ## Acceptance criteria
 

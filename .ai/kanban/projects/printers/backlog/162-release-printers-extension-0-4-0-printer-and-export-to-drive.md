@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printers-extension@0.4.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printers-extension/` (module: `printers-extension`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/apps/printers/` (module: `printers-extension`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

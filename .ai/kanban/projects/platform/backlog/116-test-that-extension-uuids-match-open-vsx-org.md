@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Catches the regression where random UUIDs break auto-update (`vscode-platform.md` section 5, "UUIDs").
 
-**Code:** `vsslicer/modules/openvsx-registry/test/uuid.test.ts` (module: `openvsx-registry`, layer: n/a (tests))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/test/uuid.test.ts` (module: `openvsx-registry`, layer: n/a (tests))
 
 ## Acceptance criteria
 

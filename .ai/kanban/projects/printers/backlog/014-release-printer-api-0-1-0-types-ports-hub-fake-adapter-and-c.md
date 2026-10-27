@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-api@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-api/` (module: `printer-api`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/common/printer-api/` (module: `printer-api`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

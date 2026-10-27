@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure transform from the 3.0 config schema to a capability table, with a comparison against the hand table for shared keys.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

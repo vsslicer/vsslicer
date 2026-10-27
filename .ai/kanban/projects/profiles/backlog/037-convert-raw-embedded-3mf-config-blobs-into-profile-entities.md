@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the embedded config blobs of a 3MF (`Metadata/project_settings.config`, PrusaSlicer `Slic3r_PE.config`) through a `ProjectConfigSource` port and routes each blob to the registered importer for its dialect. NOTE: needs `@vsslicer/3mf@0.2.0` (raw config blobs) for the real source in PRF-114; wired once the VWR release card exists.
 
-**Code:** `vsslicer/modules/profiles/src/application/embedded/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/embedded/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

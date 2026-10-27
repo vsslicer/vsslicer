@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds `prusa-slicer` from the setting, the PATH and the usual install locations, runs `--version`, and reports compatible, too old or not found.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/prusa/src/adapters/...` (module: `slicer-prusa`, layer: `adapters`)
 
 ## Acceptance criteria
 

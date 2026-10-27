@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Drives strokes, fills and the overlay on the 1 M triangle fixture in headless Chromium and checks interaction against the frame budget set when the viewer was measured.
 
-**Code:** `vsslicer/modules/project-extension/test/perf/paint/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/perf/paint/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect test for `print_sequence`, `complete_objects` and Cura `one_at_a_time`: the parser sees objects printed one after another in the set order.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

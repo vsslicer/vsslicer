@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Downloads the manifest entry for this OS with the verified downloader, extracts or prepares it (AppImage extract, zip, DMG as the spikes found) and registers it as an `EngineInstall`.
 
-**Code:** `vsslicer/modules/slicer-orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

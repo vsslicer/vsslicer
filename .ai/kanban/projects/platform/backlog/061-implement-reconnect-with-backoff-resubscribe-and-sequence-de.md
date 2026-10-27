@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Keeps subscriptions alive across a daemon restart: bounded exponential backoff, resubscribe of every topic after reconnect and re-handshake, and dropping notifications whose `seq` was already seen.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

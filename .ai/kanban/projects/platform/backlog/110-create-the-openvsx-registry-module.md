@@ -15,11 +15,11 @@ created: 2026-10-25
 
 Creates the deployment module for the self-hosted Open VSX registry from the tooling module (no server code is written: configuration, scripts and tests only).
 
-**Code:** `vsslicer/modules/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 
-- [ ] `pnpm install && pnpm test && pnpm build` works alone inside `vsslicer/modules/openvsx-registry`
+- [ ] `pnpm install && pnpm test && pnpm build` works alone inside `vsslicer/modules/tooling/openvsx-registry`
 - [ ] `node scripts/run.mjs ci` picks the module up
 - [ ] A `compose/`, `scripts/` and `test/` layout exists; a smoke test asserts the layout and the pinned Open VSX server image tag in one config file
 

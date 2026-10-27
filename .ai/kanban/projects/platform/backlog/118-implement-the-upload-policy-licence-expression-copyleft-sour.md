@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure function decides whether a package manifest may be published: valid SPDX licence expression, a repository link for copyleft licences, namespace on the allow-list (default `vsslicer` only).
 
-**Code:** `vsslicer/modules/openvsx-registry/src/domain/upload-policy.ts` (module: `openvsx-registry`, layer: `domain`)
+**Code:** `vsslicer/modules/tooling/openvsx-registry/src/domain/upload-policy.ts` (module: `openvsx-registry`, layer: `domain`)
 
 ## Acceptance criteria
 

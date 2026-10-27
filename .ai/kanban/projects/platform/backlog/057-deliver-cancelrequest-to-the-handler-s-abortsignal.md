@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Server side of cancellation: a cancel for an in-flight request aborts its signal and the response becomes `Cancelled`.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

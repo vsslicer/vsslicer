@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/example-extension",
   "displayName": "VSSlicer Example",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Sample VSSlicer VS Code extension (presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/example-extension@0.7.0/vsslicer/modules/example-extension",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/example-extension@0.7.4/vsslicer/modules/apps/example-extension",
   "vsslicer": {
     "sizeBudgetKB": 200
   },

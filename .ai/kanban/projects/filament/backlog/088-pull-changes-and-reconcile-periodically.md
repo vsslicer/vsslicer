@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Apply change events and a periodic full reconcile; `used_weight` changes made by other clients arrive as `extrusion` events marked external.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

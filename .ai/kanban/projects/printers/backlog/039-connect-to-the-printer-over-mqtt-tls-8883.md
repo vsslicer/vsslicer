@@ -15,7 +15,7 @@ created: 2026-10-25
 
 MQTT client with the Bambu CA bundle, explicit CN check against the serial when connecting by IP, `pushall` request and subscription.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

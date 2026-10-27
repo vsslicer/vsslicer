@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One `@vscode/test-electron` suite for add from catalogue, edit, archive, restore, history correction and slot assignment together, with a 2000-spool inventory.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

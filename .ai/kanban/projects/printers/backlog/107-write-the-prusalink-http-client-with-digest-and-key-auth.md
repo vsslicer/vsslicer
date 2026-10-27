@@ -15,7 +15,7 @@ created: 2026-10-25
 
 HTTP client with Digest auth and `X-Api-Key` fallback, polling and timeouts.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
 
 ## Acceptance criteria
 

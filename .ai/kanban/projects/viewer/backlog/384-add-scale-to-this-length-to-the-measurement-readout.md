@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A button on a distance or diameter readout opens a field for the wanted length (uniform or one axis) and applies it.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/measure/scaleTo.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/measure/scaleTo.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

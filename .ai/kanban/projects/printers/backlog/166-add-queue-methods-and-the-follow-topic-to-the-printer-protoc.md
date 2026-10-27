@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `queue.add/cancel/retry/list/dismiss` and the `printer.follow` topic in the catalogue.
 
-**Code:** `vsslicer/modules/printer-agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
 
 UNRESOLVED: needs agent-protocol (schema DSL and namespaced registration, AgentServer/AgentClient, conformance suite).
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Tokenizer and parser for the Python-expression subset. Semantics follow Uranium's `SettingFunction` (LGPL-3.0, porting allowed under D2): ported pieces carry the notice and `Ported from Uranium@<commit>:UM/Settings/SettingFunction.py`.
 
-**Code:** `vsslicer/modules/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
+**Code:** `vsslicer/modules/core/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
 
 ## Acceptance criteria
 

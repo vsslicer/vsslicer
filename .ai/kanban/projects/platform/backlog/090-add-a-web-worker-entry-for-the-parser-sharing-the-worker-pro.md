@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The parser's worker protocol (parse, cancel, progress, memory cap, typed errors) is bound to `worker_threads` in the Node runner. Separate the protocol from the port and add a Web Worker entry that uses `workerPort()` from the shim, so one protocol serves both runtimes.
 
-**Code:** `vsslicer/modules/gcode-parser/src/adapters/...` (module: `gcode-parser`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/gcode-parser/src/adapters/...` (module: `gcode-parser`, layer: `adapters`)
 
 ## Acceptance criteria
 

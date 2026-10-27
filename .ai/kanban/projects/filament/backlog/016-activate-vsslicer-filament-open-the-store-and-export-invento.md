@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Activation, the output channel, warnings for store problems and the exported `Inventory`, with the store in `globalStorageUri`.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

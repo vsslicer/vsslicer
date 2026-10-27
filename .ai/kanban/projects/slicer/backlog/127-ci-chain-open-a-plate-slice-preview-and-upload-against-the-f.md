@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The I5 end-to-end chain in CI with the pinned Orca: Bambu 3MF plate, imported profile, slice, `.gcode.3mf` assembly, preview opens, upload to the fake MQTT broker and FTPS fixture from PRN.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

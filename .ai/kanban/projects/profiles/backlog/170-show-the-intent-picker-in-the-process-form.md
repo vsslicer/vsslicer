@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A picker next to the quality in the process form fed by the form model, showing the effective values and their source when an intent is chosen.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
 // Needs Playwright and its Chromium, which the mesh module does not depend on: set PLAYWRIGHT_MODULE to the
-// package's entry file (for example the one in modules/test-webview) or add @playwright/test as a dev dependency.
+// package's entry file (for example the one in modules/tooling/test-webview) or add @playwright/test as a dev dependency.
 // Without either the test is skipped (the title says why); a PLAYWRIGHT_MODULE that does not import fails the file.
 const spec = process.env['PLAYWRIGHT_MODULE'] ?? '@playwright/test';
 const requested = process.env['PLAYWRIGHT_MODULE'] !== undefined;

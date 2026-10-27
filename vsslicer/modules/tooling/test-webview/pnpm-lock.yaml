@@ -22,8 +22,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
       '@vsslicer/example-extension':
-        specifier: ^0.7.3
-        version: 0.7.3
+        specifier: ^0.7.4
+        version: 0.7.4
       '@vsslicer/tooling':
         specifier: ^0.8.1
         version: 0.8.5(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)
@@ -983,8 +983,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/example-extension@0.7.3':
-    resolution: {integrity: sha512-YLp42/2w5lwtOY53ASUtCUtn+vpC8XLaQUuway08RgVHTSkpgQUehwczN+YeeLaKYhcU5CcsqpEfZDEa3nR96w==}
+  '@vsslicer/example-extension@0.7.4':
+    resolution: {integrity: sha512-KU9xGz3a5ds1wwyzHDx+tLeIwq7JJkFhRk5lpkzxIvR8jSwVvaga41nH+7ALhaNjEo0Yg1vKq3Y3aBx2m9yxYg==}
     engines: {node: '>=24', vscode: ^1.100.0}
 
   '@vsslicer/example@0.3.2':
@@ -3358,7 +3358,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/example-extension@0.7.3':
+  '@vsslicer/example-extension@0.7.4':
     dependencies:
       '@vsslicer/example': 0.3.2
 

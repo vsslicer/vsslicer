@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Select the capability set from model, firmware and the `print.fun` Developer Mode flag.
 
-**Code:** `vsslicer/modules/printer-bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

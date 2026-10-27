@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Checks in recorded stderr and output states for each failure path of 2.9.x and 3.0: missing output, empty output, error line with output, error line without.
 
-**Code:** `vsslicer/modules/slicer-prusa/test/fixtures/` (module: `slicer-prusa`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/slicer/prusa/test/fixtures/` (module: `slicer-prusa`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

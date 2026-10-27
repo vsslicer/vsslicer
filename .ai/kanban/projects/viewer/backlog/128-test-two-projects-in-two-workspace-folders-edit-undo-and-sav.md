@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A multi-root test-host test.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/multiroot/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/multiroot/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

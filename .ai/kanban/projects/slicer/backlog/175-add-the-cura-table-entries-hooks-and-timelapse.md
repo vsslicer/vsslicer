@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Marks role-change hooks and timelapse keys `unsupported` for Cura (no engine key) with the reason, so the TimeLapse built-in step (US63) and the warnings follow.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

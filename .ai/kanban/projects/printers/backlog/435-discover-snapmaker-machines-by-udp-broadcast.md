@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `Discoverer` that broadcasts `discover` to UDP port 20054 and parses `name@ip|key:value...` replies.
 
-**Code:** `vsslicer/modules/printer-unofficial-snapmaker/src/adapters/...` (module: `printer-unofficial-snapmaker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-snapmaker/src/adapters/...` (module: `printer-unofficial-snapmaker`, layer: `adapters`)
 
 ## Acceptance criteria
 

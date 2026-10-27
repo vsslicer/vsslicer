@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `progress.filepos` into `position.byteOffset`.
 
-**Code:** `vsslicer/modules/printer-octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
 
 ## Acceptance criteria
 

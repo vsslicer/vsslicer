@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One entry point other modules call: lists tests, checks the firmware, builds the plan and the model, and returns what the pipeline needs. Exposes the sweep definitions for reuse by PRN.
 
-**Code:** `vsslicer/modules/calibration/src/application/...` (module: `calibration`, layer: `application`)
+**Code:** `vsslicer/modules/core/calibration/src/application/...` (module: `calibration`, layer: `application`)
 
 ## Acceptance criteria
 

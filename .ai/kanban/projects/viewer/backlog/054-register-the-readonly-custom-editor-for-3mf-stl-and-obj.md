@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `CustomReadonlyEditorProvider` that serves the webview HTML with the kit's CSP and file bytes through `asWebviewUri`.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

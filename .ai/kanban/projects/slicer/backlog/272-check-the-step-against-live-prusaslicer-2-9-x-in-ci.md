@@ -15,7 +15,7 @@ created: 2026-10-25
 
 In the module's CI job, installs the pinned PrusaSlicer with `@vsslicer/slicer-prusa`'s installer, slices a fixture with and without rules, applies the step to the unsubstituted output and compares with the substituted one.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

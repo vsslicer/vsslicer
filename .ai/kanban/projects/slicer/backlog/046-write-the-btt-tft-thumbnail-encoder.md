@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Encodes the BTT TFT thumbnail comment format. Written from the spec text; if the spec is not enough it may be ported from OrcaSlicer (AGPL-3.0, D2) with notice and a `Ported from OrcaSlicer@09aa0114:<path>` line (path recorded at port time).
 
-**Code:** `vsslicer/modules/slicer-output/src/domain/...` (module: `slicer-output`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/output/src/domain/...` (module: `slicer-output`, layer: `domain`)
 
 ## Acceptance criteria
 

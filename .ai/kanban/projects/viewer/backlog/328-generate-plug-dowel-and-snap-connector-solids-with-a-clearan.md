@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Builds the male and female solids for plug, dowel and snap connectors (prism or frustum style; triangle, square, hexagon or circle section; size, depth, rotation) with the clearance applied to the hole only. The model follows the connector types of `OrcaSlicer@09aa0114:src/libslic3r/CutUtils.cpp` and the connector types of `Model.hpp` (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/mesh-boolean/src/domain/connectors/` (module: `mesh-boolean`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/domain/connectors/` (module: `mesh-boolean`, layer: `domain`)
 
 ## Acceptance criteria
 

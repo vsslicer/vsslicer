@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Orca's self-intersection removal is built on CGAL. This spike compares a TypeScript implementation, a CGAL WASM build (an innovation token, with the licence of the CGAL packages used) and manifold-3d's repair features (shared with the cut tool) on the fixtures, and picks one.
 
-**Code:** `vsslicer/modules/mesh/docs/self-intersection-spike.md` (module: `mesh`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/core/mesh/docs/self-intersection-spike.md` (module: `mesh`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One contract test any `CameraSource` must pass, run by each camera module against the local servers.
 
-**Code:** `vsslicer/modules/camera-api/` (module: `camera-api`, layer: `n/a (test kit)`)
+**Code:** `vsslicer/modules/common/camera-api/` (module: `camera-api`, layer: `n/a (test kit)`)
 
 ## Acceptance criteria
 

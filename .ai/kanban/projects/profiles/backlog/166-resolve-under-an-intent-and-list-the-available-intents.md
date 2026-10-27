@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `resolve` takes an optional intent and applies the matching override blocks after the quality and before user changes, recording them in the provenance; `listIntents(printer, material[], process)` returns the categories that match.
 
-**Code:** `vsslicer/modules/profiles/src/application/...` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/...` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

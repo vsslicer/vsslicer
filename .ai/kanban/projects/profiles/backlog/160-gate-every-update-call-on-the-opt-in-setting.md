@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `UpdateService.check` first asks the `UpdatePolicy` port; when disabled it returns `{status: 'disabled'}` without touching any `UpdateSource`.
 
-**Code:** `vsslicer/modules/profiles/src/application/...` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/...` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bundle Moonraker, OctoPrint, PrusaLink and Duet and register them with the registry and the agent loader.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

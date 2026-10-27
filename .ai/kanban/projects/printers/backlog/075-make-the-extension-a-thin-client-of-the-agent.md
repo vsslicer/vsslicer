@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Spawn or connect to the agent with `AgentClient`, route registry calls through it, answer secret requests from SecretStorage; the `PrinterRegistry` API stays the same.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 UNRESOLVED: needs agent-protocol (schema DSL and namespaced registration, AgentServer/AgentClient, conformance suite).
 

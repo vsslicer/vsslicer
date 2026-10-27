@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the pinned 2.9.x CLI headless and records what the adapter needs: argv for `--load`, `--datadir`, output naming, `binary_gcode`, thumbnails in `.bgcode`, the preset-update gate, exit codes, stderr error lines, whether post-processing scripts run before binarisation and which progress text exists.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (spike))
 
 ## Acceptance criteria
 

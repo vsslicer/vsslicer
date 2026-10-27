@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Keep upper, lower or both, cut to parts or to objects, and the Cut button with progress, cancel and the refusal message.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/cut/panel.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/cut/panel.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

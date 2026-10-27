@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `fleet.queue.add/addMany/list/cancel/retry/reorder`, `fleet.facts.set` and the `fleet.queue.changed` topic.
 
-**Code:** `vsslicer/modules/printer-agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
 
 ## Acceptance criteria
 

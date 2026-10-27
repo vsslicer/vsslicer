@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `filament-ofd@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/filament-ofd/` (module: `filament-ofd`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/filament/ofd/` (module: `filament-ofd`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

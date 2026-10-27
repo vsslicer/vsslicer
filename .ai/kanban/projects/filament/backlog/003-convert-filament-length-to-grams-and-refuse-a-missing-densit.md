@@ -15,7 +15,7 @@ created: 2026-10-25
 
 g = pi * (d/2)^2 * L * rho / 1000 (d and L in mm, rho in g/cm3). A missing density is a typed error, never a default.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

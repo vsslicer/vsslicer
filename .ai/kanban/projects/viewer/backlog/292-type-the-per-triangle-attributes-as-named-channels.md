@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Gives the raw per-triangle strings a shape: named channels (`paint_supports`, `paint_seam`, `paint_color`, and every other attribute by name) per mesh, so known paint can be decoded elsewhere and unknown attributes are kept and written back.
 
-**Code:** `vsslicer/modules/3mf/src/domain/project/triangleChannels.ts` (module: `3mf`, layer: `domain`)
+**Code:** `vsslicer/modules/core/3mf/src/domain/project/triangleChannels.ts` (module: `3mf`, layer: `domain`)
 
 ## Acceptance criteria
 

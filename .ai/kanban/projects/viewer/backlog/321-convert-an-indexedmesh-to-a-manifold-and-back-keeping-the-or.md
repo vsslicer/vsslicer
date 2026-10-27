@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The only place that touches the manifold API: builds a Manifold from an indexed mesh, reads a MeshGL back as an indexed mesh with the originating triangle of each output triangle, and checks input with the mesh statistics first.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/adapters/manifold/convert.ts` (module: `mesh-boolean`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/adapters/manifold/convert.ts` (module: `mesh-boolean`, layer: `adapters`)
 
 ## Acceptance criteria
 

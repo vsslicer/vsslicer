@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One print of the Arachne plus tree-support fixture (D5).
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

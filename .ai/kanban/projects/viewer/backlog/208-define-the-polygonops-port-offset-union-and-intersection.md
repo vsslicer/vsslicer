@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The port the placement uses for polygon offset by spacing and boolean operations, with a rectangle-only reference implementation for tests.
 
-**Code:** `vsslicer/modules/arrange/src/application/ports.ts` (module: `arrange`, layer: `application`)
+**Code:** `vsslicer/modules/core/arrange/src/application/ports.ts` (module: `arrange`, layer: `application`)
 
 ## Acceptance criteria
 

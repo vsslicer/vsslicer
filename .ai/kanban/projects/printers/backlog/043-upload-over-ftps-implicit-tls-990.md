@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The upload client: stream with progress, abort, typed errors.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

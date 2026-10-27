@@ -11,9 +11,9 @@ milestone: "VSS:M2"
 created: 2026-10-26
 ---
 
-From the PRF-69 spike (`vsslicer/modules/profiles-extension/docs/widget-spike.md`): 257 of 290 Cura formula keys are `per_extruder`, and the form model gives `per_extruder` priority, so they show an empty editor; and 15,782 Cura `.inst.cfg` values are `=formula` on keys whose default is a literal.
+From the PRF-69 spike (`vsslicer/modules/apps/profiles/docs/widget-spike.md`): 257 of 290 Cura formula keys are `per_extruder`, and the form model gives `per_extruder` priority, so they show an empty editor; and 15,782 Cura `.inst.cfg` values are `=formula` on keys whose default is a literal.
 
-**Code:** `vsslicer/modules/profiles/src/application/` form model (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/` form model (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

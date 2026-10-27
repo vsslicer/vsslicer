@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One checklist per vendor (what to verify on the printer, how to attach a recorded session as a fixture) and one terms-of-service review note per reverse-engineered adapter, signed off by the owner before that adapter ships.
 
-**Code:** `vsslicer/modules/printers-unofficial-extension/docs/` (module: `printers-unofficial-extension`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/apps/printers-unofficial/docs/` (module: `printers-unofficial-extension`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Full keyboard navigation and labelled controls on every page.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

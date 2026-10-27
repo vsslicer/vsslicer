@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure model: each adapter has a label kind (`official protocol` or `reverse engineered`) and a consent record (none, accepted for a consent-text version, declined); changing the text version asks again.
 
-**Code:** `vsslicer/modules/printers-unofficial-extension/src/application/...` (module: `printers-unofficial-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/printers-unofficial/src/application/...` (module: `printers-unofficial-extension`, layer: `application`)
 
 ## Acceptance criteria
 

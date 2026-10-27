@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `mesh-step@0.1.0` after the licence spike. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`, so the editor can depend on the range.
 
-**Code:** `vsslicer/modules/mesh-step/` (module: `mesh-step`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/mesh-step/` (module: `mesh-step`, layer: n/a (release))
 
 ## Acceptance criteria
 

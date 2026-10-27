@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Checks whether Prusa publishes a WASM build or target for 3.0; if so, measures it like EM2, otherwise records that it does not exist.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (spike))
 
 ## Acceptance criteria
 

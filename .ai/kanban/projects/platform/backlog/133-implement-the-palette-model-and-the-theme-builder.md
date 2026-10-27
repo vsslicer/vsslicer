@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure builder turns a palette (named roles) into the VS Code colour-theme JSON (workbench colours and token colours), so four themes share one mapping.
 
-**Code:** `vsslicer/modules/themes/src/domain/` (module: `themes`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/themes/src/domain/` (module: `themes`, layer: `domain`)
 
 ## Acceptance criteria
 

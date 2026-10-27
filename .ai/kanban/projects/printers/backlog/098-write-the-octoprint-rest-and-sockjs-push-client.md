@@ -15,7 +15,7 @@ created: 2026-10-25
 
 REST with `X-Api-Key` and the SockJS push channel, timeouts and reconnect.
 
-**Code:** `vsslicer/modules/printer-octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
 
 ## Acceptance criteria
 

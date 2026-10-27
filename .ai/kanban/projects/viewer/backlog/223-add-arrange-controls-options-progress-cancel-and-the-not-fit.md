@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A command and panel with spacing, rotation and plate options, a progress bar with cancel, and a result list of items that did not fit.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/arrange/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/arrange/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

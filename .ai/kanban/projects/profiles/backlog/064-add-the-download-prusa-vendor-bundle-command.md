@@ -15,7 +15,7 @@ created: 2026-10-25
 
 States the upstream URL and pinned commit before fetching (D4), writes only to `globalStorageUri`, and handles offline.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/commands/download/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/commands/download/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

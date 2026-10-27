@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pick a maintained MIT CBOR decoder that handles integer keys, bounds nesting and size, and preserves unknown keys; check bundle size and its licence.
 
-**Code:** `vsslicer/modules/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/filament/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 

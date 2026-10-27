@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The pinned 2.9.x release per platform (URL, SHA-256, executable path) in the manifest schema of `slicer-api`; a 3.0 entry exists but is gated.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

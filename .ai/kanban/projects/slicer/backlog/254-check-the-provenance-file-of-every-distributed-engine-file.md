@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A CI check fails when a shipped binary or WASM file has no entry with source revision and build recipe in the provenance file.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (ci))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (ci))
 
 ## Acceptance criteria
 

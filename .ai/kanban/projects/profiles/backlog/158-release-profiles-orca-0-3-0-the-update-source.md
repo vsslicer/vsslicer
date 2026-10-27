@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `profiles-orca@0.3.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/profiles-orca/` (module: `profiles-orca`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/profiles/orca/` (module: `profiles-orca`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

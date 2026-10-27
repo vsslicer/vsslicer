@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `PackageSink` port with a Node file-system adapter (and an in-memory side for tests): write to a temp file beside the target, flush, rename over the target; compare the target's recorded size and mtime first.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/node/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/node/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

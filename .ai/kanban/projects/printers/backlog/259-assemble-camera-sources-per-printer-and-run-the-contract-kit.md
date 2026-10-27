@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The module's registration entry: the `CameraSource` for a printer from discovered and manual cameras, declaring snapshot and live per camera.
 
-**Code:** `vsslicer/modules/camera-mjpeg/src/application/...` (module: `camera-mjpeg`, layer: `application`)
+**Code:** `vsslicer/modules/camera/mjpeg/src/application/...` (module: `camera-mjpeg`, layer: `application`)
 
 ## Acceptance criteria
 

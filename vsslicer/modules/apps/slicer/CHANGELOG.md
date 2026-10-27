@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.1
+
+- Moved to `vsslicer/modules/apps/slicer`; the repository URL follows (PLT-204).
+
 ## Unreleased
 
 - SLC-278: `vsslicer.slicer.timeout` is bounded to 1..2147483 s and rounded, with a warning when changed.

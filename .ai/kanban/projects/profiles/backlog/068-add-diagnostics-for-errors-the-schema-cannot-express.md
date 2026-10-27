@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `DiagnosticCollection` for unknown parent, cycle, unparsable `when` and unmapped key.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/diagnostics/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/diagnostics/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

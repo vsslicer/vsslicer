@@ -12,7 +12,7 @@ created: 2026-10-26
 
 From PRF-57's review (SP10): `@vsslicer/test-vscode` (`dist/run.js:42`) opens no workspace folder, so no extension's integration suite can show that a `workspaceContains:` activation event works; the suites call `ext.activate()` themselves.
 
-**Code:** `vsslicer/modules/test-vscode` (adapters), then `profiles-extension` integration test (presentation)
+**Code:** `vsslicer/modules/tooling/test-vscode` (adapters), then `profiles-extension` integration test (presentation)
 
 ## Acceptance criteria
 

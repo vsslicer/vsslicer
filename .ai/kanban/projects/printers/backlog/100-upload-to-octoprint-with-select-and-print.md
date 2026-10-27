@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Multipart upload to `local` with `select` and `print`, progress and abort.
 
-**Code:** `vsslicer/modules/printer-octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `history.backfill` pages `session.history.list`, merges through job-history and reports counts.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Types for a slicer id, a template kind (the slicer's native key, e.g. `layer_change_gcode`), a placeholder definition (name, value type, vector flag, label, tooltip, provenance) and the catalogue that says which kinds provide which placeholders.
 
-**Code:** `vsslicer/modules/gcode-templates/src/domain/...` (module: `gcode-templates`, layer: `domain`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/domain/...` (module: `gcode-templates`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `history.query`, `history.backfill` and the `history.changed` topic, namespaced so they do not clash with the upload `queue.*` methods.
 
-**Code:** `vsslicer/modules/printer-agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One effect test per row: Cura `mold_*`, `support_conical_*`, `gradual_infill_*` and Orca `make_overhang_printable*`.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

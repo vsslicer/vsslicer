@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Atomic write (temp file and rename) of `.vsslicer/queue.json`, with the restart rule applied on load.
 
-**Code:** `vsslicer/modules/fleet-queue/src/adapters/...` (module: `fleet-queue`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/adapters/...` (module: `fleet-queue`, layer: `adapters`)
 
 ## Acceptance criteria
 

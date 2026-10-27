@@ -15,7 +15,7 @@ created: 2026-10-25
 
 'Add printer' lists probed hosts from the agent, with manual entry always available.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -17,7 +17,7 @@ A payload from a printer connector becomes a match-or-create decision through th
 
 UNRESOLVED: needs printer-api: a capability flag and an event carrying tag payload bytes (the spike states the shape).
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

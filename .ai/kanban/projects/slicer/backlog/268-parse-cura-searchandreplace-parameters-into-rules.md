@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the SearchAndReplace entries from an imported Cura profile's post-processing script settings and turns them into the same rule type.
 
-**Code:** `vsslicer/modules/slicer-extension/src/domain/...` (module: `slicer-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/slicer/src/domain/...` (module: `slicer-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

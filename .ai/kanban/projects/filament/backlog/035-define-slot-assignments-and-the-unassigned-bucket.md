@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A slot is (printer id, tool or AMS tray); an assignment points at a spool id; each printer has an `unassigned` bucket.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

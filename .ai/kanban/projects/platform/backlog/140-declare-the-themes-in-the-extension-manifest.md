@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `contributes` section: four colour themes with `uiTheme` values, the icon theme, and the marketplace metadata.
 
-**Code:** `vsslicer/modules/themes/package.json` (module: `themes`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/themes/package.json` (module: `themes`, layer: `presentation`)
 
 ## Acceptance criteria
 

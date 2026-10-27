@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The deterministic local servers D5 requires: every camera module and the agent test against them instead of real cameras.
 
-**Code:** `vsslicer/modules/camera-api/` (module: `camera-api`, layer: `n/a (test kit)`)
+**Code:** `vsslicer/modules/common/camera-api/` (module: `camera-api`, layer: `n/a (test kit)`)
 
 ## Acceptance criteria
 

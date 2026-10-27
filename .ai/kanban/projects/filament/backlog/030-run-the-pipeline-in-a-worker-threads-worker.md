@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Parse 15,070 variants off the extension host, in chunks, with the `all.ndjson` stream as the documented fallback if the memory spike demands it.
 
-**Code:** `vsslicer/modules/filament-ofd/src/adapters/...` (module: `filament-ofd`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/ofd/src/adapters/...` (module: `filament-ofd`, layer: `adapters`)
 
 ## Acceptance criteria
 

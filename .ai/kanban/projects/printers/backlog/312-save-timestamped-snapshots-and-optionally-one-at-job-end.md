@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Snapshots saved with a timestamped name to a configured folder, and an optional setting that takes one when a print ends (from the registry's status events).
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

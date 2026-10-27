@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Answers the epic's Windows risk before the transport is built: pipe naming, path length limits, owner-only ACLs and antivirus behaviour with `vscode-jsonrpc`. Verified on the Windows CI runner; no H2C.
 
-**Code:** `vsslicer/modules/agent-protocol/` (module: `agent-protocol`, layer: n/a (spike))
+**Code:** `vsslicer/modules/common/agent-protocol/` (module: `agent-protocol`, layer: n/a (spike))
 
 ## Acceptance criteria
 

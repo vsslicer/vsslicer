@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Per-spool history as child nodes or a panel: source, job, printer, estimate and disagreement flags; actions to measure on a scale, correct and reassign to another spool.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

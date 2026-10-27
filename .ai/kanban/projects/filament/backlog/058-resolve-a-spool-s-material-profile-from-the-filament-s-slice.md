@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Using `findMaterialByExternalId` (`@vsslicer/profiles`): one match links automatically, several or none (or a generic `GFL99`) ask the user; absent profiles yield an "install" result. Id kinds: Bambu `filament_id`, Orca id, Prusa name, Cura GUID.
 
-**Code:** `vsslicer/modules/filament-extension/src/application/...` (module: `filament-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/filament/src/application/...` (module: `filament-extension`, layer: `application`)
 
 ## Acceptance criteria
 

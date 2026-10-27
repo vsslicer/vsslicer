@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Coarse progress from 'Starting <stage>...' lines; exit 1, exit 2 and SIGFPE become typed errors; bad model and bad argument have their own messages.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

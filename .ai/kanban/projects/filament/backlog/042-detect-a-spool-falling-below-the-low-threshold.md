@@ -15,7 +15,7 @@ created: 2026-10-25
 
 After a booking, emit a low-remaining signal when remaining weight crosses the threshold downwards; once per crossing.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

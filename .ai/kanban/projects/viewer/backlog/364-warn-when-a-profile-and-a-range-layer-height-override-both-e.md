@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Applies the spike's finding on what the engine does when an object has both a variable profile and a range with its own `layer_height`: the editor warns and says which one wins.
 
-**Code:** `vsslicer/modules/project-extension/src/application/layerheight/conflict.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/layerheight/conflict.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

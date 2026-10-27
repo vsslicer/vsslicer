@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The kernel runs in a worker so the extension host stays responsive; the WASM is loaded in the worker and only on first use.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/adapters/worker-node/` (module: `mesh-boolean`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/adapters/worker-node/` (module: `mesh-boolean`, layer: `adapters`)
 
 ## Acceptance criteria
 

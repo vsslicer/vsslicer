@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure 4x4 helpers the commands share: compose and decompose, rotate and scale about a pivot, mirror matrices, unit factors and the rotation that turns a face normal to point down.
 
-**Code:** `vsslicer/modules/project-extension/src/domain/transform/` (module: `project-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/project/src/domain/transform/` (module: `project-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

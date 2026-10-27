@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Computes the flush matrix from filament colours, ported from `OrcaSlicer@09aa0114:src/libslic3r/FlushVolCalc.cpp` (AGPL-3.0, D2), with the cap and multiplier as parameters.
 
-**Code:** `vsslicer/modules/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
+**Code:** `vsslicer/modules/core/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
 
 ## Acceptance criteria
 

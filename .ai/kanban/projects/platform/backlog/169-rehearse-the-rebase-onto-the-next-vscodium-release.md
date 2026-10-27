@@ -15,7 +15,7 @@ created: 2026-10-25
 
 After the first release, waits for the next VSCodium tag and rebases our patch series, recording the cost (E69: monthly rebase over 41 top-level patches plus ours). Starts only when upstream has a newer tag.
 
-**Code:** `vsslicer/modules/vsslicer-build/docs/rebase-rehearsal.md` (module: `vsslicer-build`, layer: n/a (docs))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/rebase-rehearsal.md` (module: `vsslicer-build`, layer: n/a (docs))
 
 ## Acceptance criteria
 

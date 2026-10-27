@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Packaging rule and test: the VSIX contains the WASM as its own file, outside the bundle; a second run with the file removed starts, edits, saves and reports STEP unavailable.
 
-**Code:** `vsslicer/modules/project-extension/scripts/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/scripts/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

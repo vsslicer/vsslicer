@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The example payloads and field tables from `OpenPrintTag@060e420` (`docs_src/nfc_data_format.md`, `data/main_fields.yaml`, `data/aux_fields.yaml`, MIT) with a PROVENANCE note and the MIT notice.
 
-**Code:** `vsslicer/modules/filament/test/fixtures/openprinttag/` (module: `filament`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/filament/filament/test/fixtures/openprinttag/` (module: `filament`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

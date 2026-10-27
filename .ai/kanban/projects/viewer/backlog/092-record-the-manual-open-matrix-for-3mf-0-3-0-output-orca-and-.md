@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A recorded manual check that VSSlicer-saved projects open in the Orca and Bambu Studio GUIs.
 
-**Code:** `vsslicer/modules/3mf/docs/manual-matrix.md` (module: `3mf`, layer: n/a (manual matrix))
+**Code:** `vsslicer/modules/core/3mf/docs/manual-matrix.md` (module: `3mf`, layer: n/a (manual matrix))
 
 ## Acceptance criteria
 

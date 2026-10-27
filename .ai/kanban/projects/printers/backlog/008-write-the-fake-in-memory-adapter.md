@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A controllable adapter for contract-kit, extension and agent tests, with scripted failures and a disconnect fixture.
 
-**Code:** `vsslicer/modules/printer-api/src/adapters/fake/` (module: `printer-api`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/printer-api/src/adapters/fake/` (module: `printer-api`, layer: `adapters`)
 
 ## Acceptance criteria
 

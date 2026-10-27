@@ -15,7 +15,7 @@ created: 2026-10-25
 
 From an intent file's metadata (`definition`, `variant`, `material`, `quality_type`, `intent_category`) build the `when` condition and the override block tagged with the intent, using the same condition construction as the quality conversion.
 
-**Code:** `vsslicer/modules/profiles-cura/src/domain/...` (module: `profiles-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/profiles/cura/src/domain/...` (module: `profiles-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

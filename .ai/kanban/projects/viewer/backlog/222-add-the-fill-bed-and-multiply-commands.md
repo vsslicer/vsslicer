@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds copies as instances through the instance commands, as one undoable step.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/arrange/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/arrange/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

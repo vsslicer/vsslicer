@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reference G-code files with ColPic and BTT TFT thumbnails produced by the installed Orca on the owner's machine (the engine needs GL for them), with the source image.
 
-**Code:** `vsslicer/modules/slicer-output/` (module: `slicer-output`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/slicer/output/` (module: `slicer-output`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

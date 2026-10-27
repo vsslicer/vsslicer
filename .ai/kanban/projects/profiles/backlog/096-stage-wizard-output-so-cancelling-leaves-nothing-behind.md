@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Entities and secrets are held in a draft and written only at finish.
 
-**Code:** `vsslicer/modules/profiles/src/application/wizard/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/wizard/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

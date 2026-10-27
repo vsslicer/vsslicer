@@ -15,7 +15,7 @@ created: 2026-10-25
 
 'Slice and preview' opens the result with `GcodePreview.open` (the `vsslicer.gcode` exports, GCP-50); 'Slice and print' chains upload and start.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

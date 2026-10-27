@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Camera and timelapse modules need HTTP requests authenticated from a session's secrets. Choice: the function shape lives in `printer-api` (connectors already depend on it and must not depend on `camera-api`); `camera-api`'s `AuthorizedFetch` (PRN-242) is declared structurally identical so the agent can hand one value to both, and a later camera-api release may re-export this one.
 
-**Code:** `vsslicer/modules/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The command that opens the wizard, creates the instance on finish and opens the resolved default process in the form; selected materials and the default process appear in the tree.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/wizard/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/wizard/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `mesh@0.8.1` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/mesh/` (module: `mesh`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/core/mesh/` (module: `mesh`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Usage for a tool with no spool goes to the printer's bucket and emits one warning signal per job; reassigning moves the event to the chosen spool.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

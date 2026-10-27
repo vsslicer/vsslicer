@@ -15,7 +15,7 @@ created: 2026-10-25
 
 OFD brand > material > filament > variant plus `sizes.json` (weight, diameter, EAN, article number, spool dimensions) into `CatalogueRecord`s. `slicer_ids` from `slicer_settings.{bambustudio,orcaslicer}.{id,generic_id}` and prusaslicer and cura.
 
-**Code:** `vsslicer/modules/filament-ofd/src/domain/...` (module: `filament-ofd`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/ofd/src/domain/...` (module: `filament-ofd`, layer: `domain`)
 
 ## Acceptance criteria
 

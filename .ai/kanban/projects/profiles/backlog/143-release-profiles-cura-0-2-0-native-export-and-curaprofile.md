@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publishes `profiles-cura@0.2.0` to the local registry so dependent modules can consume native export and .curaprofile.
 
-**Code:** `vsslicer/modules/profiles-cura/` (module: `profiles-cura`, layer: n/a (release))
+**Code:** `vsslicer/modules/profiles/cura/` (module: `profiles-cura`, layer: n/a (release))
 
 ## Acceptance criteria
 

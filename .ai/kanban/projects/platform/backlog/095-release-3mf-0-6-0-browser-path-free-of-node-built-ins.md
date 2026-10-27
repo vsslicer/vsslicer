@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `3mf@0.7.1` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/3mf/` (module: `3mf`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/core/3mf/` (module: `3mf`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

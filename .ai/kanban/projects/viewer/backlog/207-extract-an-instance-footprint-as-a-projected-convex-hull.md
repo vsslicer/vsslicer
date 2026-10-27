@@ -15,7 +15,7 @@ created: 2026-10-25
 
 From a vertex array and a 4x4 transform, projects to the plate and returns the convex hull polygon.
 
-**Code:** `vsslicer/modules/arrange/src/domain/footprint/` (module: `arrange`, layer: `domain`)
+**Code:** `vsslicer/modules/core/arrange/src/domain/footprint/` (module: `arrange`, layer: `domain`)
 
 ## Acceptance criteria
 

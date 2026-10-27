@@ -15,7 +15,7 @@ created: 2026-10-25
 
 After a mesh is parsed, runs `repairOnLoad` unless the setting is off, and attaches the report to the object.
 
-**Code:** `vsslicer/modules/project-extension/src/application/loadRepair.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/loadRepair.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

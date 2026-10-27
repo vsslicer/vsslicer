@@ -14,7 +14,7 @@ created: 2026-10-25
 
 Runs the `test_suites` core and Production cases (BSD-2-Clause) fetched at CI time, not committed.
 
-**Code:** `vsslicer/modules/3mf/test/conformance/` (module: `3mf`, layer: n/a (ci))
+**Code:** `vsslicer/modules/core/3mf/test/conformance/` (module: `3mf`, layer: n/a (ci))
 
 ## Acceptance criteria
 

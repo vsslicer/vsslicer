@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `server/job_queue/*` calls and `notify_job_queue_changed` as the `nativeQueue` member.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

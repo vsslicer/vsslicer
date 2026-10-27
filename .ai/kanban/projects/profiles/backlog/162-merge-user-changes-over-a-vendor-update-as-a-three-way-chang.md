@@ -15,7 +15,7 @@ created: 2026-10-25
 
 For each user entity, base = the parent as of `meta.base_version`, theirs = the parent now, mine = the user's diff: keep my keys, take the vendor's changed keys, mark both-changed-differently keys as conflicts. Arrays, `overrides[]` blocks and `renamed_from` need defined rules.
 
-**Code:** `vsslicer/modules/profiles/src/domain/...` (module: `profiles`, layer: `domain`)
+**Code:** `vsslicer/modules/profiles/profiles/src/domain/...` (module: `profiles`, layer: `domain`)
 
 ## Acceptance criteria
 

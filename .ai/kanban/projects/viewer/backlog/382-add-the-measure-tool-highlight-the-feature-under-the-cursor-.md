@@ -15,7 +15,7 @@ created: 2026-10-25
 
 In measure mode the point, edge, circle or plane under the cursor is highlighted (through the BVH pick and the feature detection); picking two shows the distance, angle, diameter or plane separation as lines and a readout.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/measure/tool.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/measure/tool.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Temperatures and SD progress become the normalised `PrinterStatus` with the vendor state kept alongside. Polling pauses while the window is saturated; `M155` autoreport is used when advertised.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

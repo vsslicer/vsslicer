@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Concatenates meshes after applying each transform, offsetting indices, and keeps a part map.
 
-**Code:** `vsslicer/modules/mesh/src/domain/merge/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/merge/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

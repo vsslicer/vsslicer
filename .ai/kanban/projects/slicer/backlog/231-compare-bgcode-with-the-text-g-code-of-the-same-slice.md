@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices each fixture twice, with and without `binary_gcode`, parses both and compares.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A table of ranges for the selected object with numeric from and to, and the override form per range.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/overrides/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/overrides/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Static models appear in the registry beside the generators, with no sweep and no write-back.
 
-**Code:** `vsslicer/modules/calibration/src/application/...` (module: `calibration`, layer: `application`)
+**Code:** `vsslicer/modules/core/calibration/src/application/...` (module: `calibration`, layer: `application`)
 
 ## Acceptance criteria
 

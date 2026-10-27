@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The first adapter core: runs the CLI on already-written preset files (emission comes later), maps exit codes, signals and timeouts to typed errors, verifies that `plate_N.gcode` exists and is non-empty, and hands staged paths to the job.
 
-**Code:** `vsslicer/modules/slicer-orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/orca/src/adapters/...` (module: `slicer-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A form generated from the `profiles` form model that lists only the allowed keys for the level, shows each value's source, validates input with the catalogue message and offers reset to inherited.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/overrides/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/overrides/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

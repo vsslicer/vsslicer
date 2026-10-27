@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Cura's intent layer sits between quality and the user's changes. Decide the representation (an optional `intent` on `overrides[]` blocks of a `process`, matched when that intent is requested, so no new entity kind) and extend the types and JSON Schema. Existing `intent` values from `profiles.md` §6 stay valid.
 
-**Code:** `vsslicer/modules/profile-api/src/domain/...` (module: `profile-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/profile-api/src/domain/...` (module: `profile-api`, layer: `domain`)
 
 ## Acceptance criteria
 

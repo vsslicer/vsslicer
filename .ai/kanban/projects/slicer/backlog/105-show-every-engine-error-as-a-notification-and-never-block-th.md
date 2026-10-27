@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps `EngineError` to a notification with its remediation and logs details to an output channel; crash and timeout tests run in the extension host.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

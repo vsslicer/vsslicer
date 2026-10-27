@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Spoolman's image and API version drift. Pin an image tag, record the OpenAPI document as a fixture, and check whether websocket events work through Moonraker's `/server/spoolman/proxy` (fallback is polling on `sync_rate`).
 
-**Code:** `vsslicer/modules/filament-spoolman/docs/` (module: `filament-spoolman`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/filament/spoolman/docs/` (module: `filament-spoolman`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 

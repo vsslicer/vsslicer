@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Changelog, version bump, publish to the local registry so the build can consume the VSIX.
 
-**Code:** `vsslicer/modules/themes/` (module: `themes`, layer: n/a (release))
+**Code:** `vsslicer/modules/apps/themes/` (module: `themes`, layer: n/a (release))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns rectangular, circular and custom polygon beds with exclusion areas into the region items may occupy, with containment tests.
 
-**Code:** `vsslicer/modules/arrange/src/domain/bed/` (module: `arrange`, layer: `domain`)
+**Code:** `vsslicer/modules/core/arrange/src/domain/bed/` (module: `arrange`, layer: `domain`)
 
 ## Acceptance criteria
 

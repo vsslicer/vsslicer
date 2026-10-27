@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bucket, smart and gap fill over large regions run in the webview's worker pool so a fill on a dense mesh does not freeze the viewer; brush strokes stay on the main thread.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/worker-web/paint.ts` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/worker-web/paint.ts` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

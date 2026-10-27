@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Use cases over an `EventLogStore` port with an in-memory fake (the file store is the second side): entity changes are events in the log so the snapshot is rebuildable.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

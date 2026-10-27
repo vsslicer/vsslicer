@@ -14,7 +14,7 @@ created: 2026-10-25
 
 PLT's monorepo cards do not provide lib3mf, so this card adds it as a dev-only dependency that compares object, triangle and build-item counts on every fixture. lib3mf is never shipped.
 
-**Code:** `vsslicer/modules/3mf/test/oracle/` (module: `3mf`, layer: n/a (ci))
+**Code:** `vsslicer/modules/core/3mf/test/oracle/` (module: `3mf`, layer: n/a (ci))
 
 ## Acceptance criteria
 

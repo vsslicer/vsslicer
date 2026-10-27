@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The table for the embedded engine version, starting from the `slicer-cura@0.2.0` entries as data and confirmed by its own effect tests.
 
-**Code:** `vsslicer/modules/slicer-embedded/src/domain/...` (module: `slicer-embedded`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/embedded/src/domain/...` (module: `slicer-embedded`, layer: `domain`)
 
 ## Acceptance criteria
 

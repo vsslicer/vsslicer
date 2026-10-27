@@ -15,7 +15,7 @@ created: 2026-10-25
 
 In the test host: run a test, pick a block, confirm the preset, undo it.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect test for `time_lapse_gcode` and `timelapse_type`: the template text appears at each layer change.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

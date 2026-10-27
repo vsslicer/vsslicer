@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Generates a 100 MB project, runs 50 transform edits and measures the backup file.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/` (module: `project-extension`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/` (module: `project-extension`, layer: n/a (tests))
 
 ## Acceptance criteria
 

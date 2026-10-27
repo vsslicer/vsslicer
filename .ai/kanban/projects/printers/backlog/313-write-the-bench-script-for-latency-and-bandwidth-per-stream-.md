@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A repeatable bench for MJPEG, frames, MSE and WebRTC: glass-to-glass latency with a timestamped test source, and bandwidth at the proxy.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (bench)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (bench)`)
 
 ## Acceptance criteria
 

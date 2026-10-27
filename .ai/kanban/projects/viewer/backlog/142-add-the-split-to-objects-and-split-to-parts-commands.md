@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Splits an object into objects or into parts using the worker. The history stores the operation, not the result meshes; replay recomputes it deterministically.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/split/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/split/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

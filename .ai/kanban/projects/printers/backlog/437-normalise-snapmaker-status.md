@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure mapping from the SACP status values the fixtures show to `PrinterStatus`, with the machine type kept.
 
-**Code:** `vsslicer/modules/printer-unofficial-snapmaker/src/domain/...` (module: `printer-unofficial-snapmaker`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/unofficial-snapmaker/src/domain/...` (module: `printer-unofficial-snapmaker`, layer: `domain`)
 
 ## Acceptance criteria
 

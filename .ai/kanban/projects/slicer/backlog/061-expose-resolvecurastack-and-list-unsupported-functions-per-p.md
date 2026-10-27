@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The public use cases: `resolveCuraStack(stack): ResolvedCuraSettings` and `listUnsupported(stack)` for import time, so gaps show before slicing.
 
-**Code:** `vsslicer/modules/cura-settings/src/application/...` (module: `cura-settings`, layer: `application`)
+**Code:** `vsslicer/modules/core/cura-settings/src/application/...` (module: `cura-settings`, layer: `application`)
 
 ## Acceptance criteria
 

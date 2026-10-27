@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Filters materials and processes by the evaluator for a chosen printer instance.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/tree/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/tree/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

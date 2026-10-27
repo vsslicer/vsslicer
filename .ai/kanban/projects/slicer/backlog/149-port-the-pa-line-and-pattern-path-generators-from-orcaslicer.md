@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Generates the extrusion paths of the PA line and PA pattern tests (the E-dependent lines and the corner pattern), ported from `OrcaSlicer@09aa0114:src/libslic3r/calib.cpp` and the path code in `GCode.cpp` (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

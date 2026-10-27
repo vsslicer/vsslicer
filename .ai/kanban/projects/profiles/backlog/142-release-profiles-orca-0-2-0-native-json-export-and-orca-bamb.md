@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publishes `profiles-orca@0.2.0` to the local registry so dependent modules can consume native JSON export and Orca/Bambu bundles.
 
-**Code:** `vsslicer/modules/profiles-orca/` (module: `profiles-orca`, layer: n/a (release))
+**Code:** `vsslicer/modules/profiles/orca/` (module: `profiles-orca`, layer: n/a (release))
 
 ## Acceptance criteria
 

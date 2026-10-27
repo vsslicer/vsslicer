@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Tower whose outer-wall speed steps per block so a user can see vertical fine artifacts; the picked block gives a resonance-avoidance speed written to `outer_wall_speed`.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

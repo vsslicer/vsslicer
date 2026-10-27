@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Opens the VSSlicer-painted fixtures in Orca and Bambu Studio and the upstream-painted fixtures in VSSlicer, and records whether the regions match.
 
-**Code:** `vsslicer/modules/project-extension/test/manual/paint-matrix.md` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/manual/paint-matrix.md` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

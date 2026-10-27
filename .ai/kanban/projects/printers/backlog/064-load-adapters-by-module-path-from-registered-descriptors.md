@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Import an adapter module from another extension's folder, check its declared id and version against the descriptor, and refuse a mismatch.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

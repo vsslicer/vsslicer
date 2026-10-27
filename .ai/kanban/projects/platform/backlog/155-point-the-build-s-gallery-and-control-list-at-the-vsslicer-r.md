@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets `extensionsGallery` and `controlUrl` in the overlay from the registry release settings; the default is the local instance URL for tests and the registry URL is a build variable. Hosted URL is blocked on the hosting budget; open-vsx.org is the fallback gallery when no registry URL is given.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/application/gallery.ts` (module: `vsslicer-build`, layer: `application`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/application/gallery.ts` (module: `vsslicer-build`, layer: `application`)
 
 ## Acceptance criteria
 

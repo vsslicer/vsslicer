@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `planWriteBack(test, value, target)` returns a patch of exactly one key (value, previous value, preset kind) and the diff text; it never touches ProfileStore itself.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

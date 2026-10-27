@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Given text, an offset, a slicer and a template kind, returns completions: inside `[` and `{` the kind's placeholders first, then option variables; after a name with a vector option the index form; `if`/`elsif`/`endif` keywords at the start of `{`.
 
-**Code:** `vsslicer/modules/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
 
 ## Acceptance criteria
 

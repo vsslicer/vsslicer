@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The executable entry that composes server, sessions, loader and logs; bundled to one file runnable as Node.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

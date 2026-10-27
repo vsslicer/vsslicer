@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `FlushMatrix` value that remembers which cells the user edited and recalculates the rest when a filament or colour changes.
 
-**Code:** `vsslicer/modules/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
+**Code:** `vsslicer/modules/core/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
 
 ## Acceptance criteria
 

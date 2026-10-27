@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A testkit entry `defineEffectTest({row, patch, fixture, assert})` that slices a fixture twice (feature off, on) through an adapter-supplied `slice(patchedSettings)` callback, parses both outputs with `@vsslicer/gcode`, and asserts the measurable effect. It skips an engine whose table marks the key unsupported, and asserts the entry is `unsupported`.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

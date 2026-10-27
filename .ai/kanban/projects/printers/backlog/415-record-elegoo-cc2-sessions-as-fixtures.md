@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Protocol exchanges for the adapter's tests, derived from the spike document and `OrcaSlicer@09aa0114` `ElegooLink.cpp`: `GET /system/info` with `X-Token`, a chunked upload with its responses, status and a start print; the default token is a printer setting the user supplies, because no such printer is available (D5).
 
-**Code:** `vsslicer/modules/printer-unofficial-elegoo-cc2/test/fixtures/` (module: `printer-unofficial-elegoo-cc2`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/unofficial-elegoo-cc2/test/fixtures/` (module: `printer-unofficial-elegoo-cc2`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

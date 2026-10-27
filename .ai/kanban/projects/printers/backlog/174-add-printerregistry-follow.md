@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Export `follow(printerId)` returning the agent's feed as an event stream.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

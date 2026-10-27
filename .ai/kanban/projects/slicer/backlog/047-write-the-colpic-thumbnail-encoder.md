@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Encodes the ColPic format used by some Creality-class printers. May be ported from OrcaSlicer (AGPL-3.0, D2) with provenance if the text spec is not enough.
 
-**Code:** `vsslicer/modules/slicer-output/src/domain/...` (module: `slicer-output`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/output/src/domain/...` (module: `slicer-output`, layer: `domain`)
 
 ## Acceptance criteria
 

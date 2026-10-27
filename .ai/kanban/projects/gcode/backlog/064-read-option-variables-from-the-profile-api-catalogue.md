@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adapter from `@vsslicer/profile-api`'s catalogue (canonical keys, native names per dialect, type, label, tooltip, per-extruder flag) to the library's option-variable type, and from a canonical G-code profile key to the template kind in each dialect.
 
-**Code:** `vsslicer/modules/gcode-templates/src/adapters/...` (module: `gcode-templates`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/adapters/...` (module: `gcode-templates`, layer: `adapters`)
 
 ## Acceptance criteria
 

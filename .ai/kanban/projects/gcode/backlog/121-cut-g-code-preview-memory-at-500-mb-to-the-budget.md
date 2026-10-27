@@ -10,9 +10,9 @@ depends_on: [42]
 created: 2026-10-26
 ---
 
-From GCP-42 (SP10): at 500 MB the preview peaks at host 656 MB, worker 561 MB, webview 978 MB on SwiftShader (arc-heavy: 2,984 MB host plus webview), against the target of about 1 GB total (`.reference/notes/GCP-42-memory.md`, `vsslicer/modules/gcode-preview/bench/`). Blocked on the owner's answer to the GCP-42 budget question.
+From GCP-42 (SP10): at 500 MB the preview peaks at host 656 MB, worker 561 MB, webview 978 MB on SwiftShader (arc-heavy: 2,984 MB host plus webview), against the target of about 1 GB total (`.reference/notes/GCP-42-memory.md`, `vsslicer/modules/apps/gcode-preview/bench/`). Blocked on the owner's answer to the GCP-42 budget question.
 
-**Code:** `vsslicer/modules/gcode-preview` (adapters: worker and webview buffers)
+**Code:** `vsslicer/modules/apps/gcode-preview` (adapters: worker and webview buffers)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Implements `UpdateSource` for Cura: `latest` finds the newest release tag of the pinned Cura repository (D4), `stage` downloads the resources of that tag with the existing downloader into the staging folder.
 
-**Code:** `vsslicer/modules/profiles-cura/src/adapters/...` (module: `profiles-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/cura/src/adapters/...` (module: `profiles-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

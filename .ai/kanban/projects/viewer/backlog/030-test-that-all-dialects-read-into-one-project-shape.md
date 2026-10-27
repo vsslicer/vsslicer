@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A schema-level test over every fixture: plates, objects, parts, instances, per-object config and raw project config are present in the same typed structure.
 
-**Code:** `vsslicer/modules/3mf/test/` (module: `3mf`, layer: n/a (ci))
+**Code:** `vsslicer/modules/core/3mf/test/` (module: `3mf`, layer: n/a (ci))
 
 ## Acceptance criteria
 

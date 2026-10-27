@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Two rows: wall generator enum (varying extrusion widths in walls) and support type (support role present, tree footprint differs from normal supports by coarse per-layer statistics).
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

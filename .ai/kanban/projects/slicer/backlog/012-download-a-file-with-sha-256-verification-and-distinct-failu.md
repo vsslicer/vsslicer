@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Downloads to a temp file, verifies the size and SHA-256, then renames into place. Security-sensitive: the binary is run later.
 
-**Code:** `vsslicer/modules/slicer-runtime/src/adapters/...` (module: `slicer-runtime`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/runtime/src/adapters/...` (module: `slicer-runtime`, layer: `adapters`)
 
 ## Acceptance criteria
 

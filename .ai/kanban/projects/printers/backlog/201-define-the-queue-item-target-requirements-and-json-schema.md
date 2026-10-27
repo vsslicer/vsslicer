@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `{id, plate_ref, gcode_path, target (printer|group|any), requires {nozzle, material, model}, state, added_at, history_id}` with a `v` field.
 
-**Code:** `vsslicer/modules/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A quick-pick or webview-free dialog to confirm the AMS mapping and send options, then send and start.
 
-**Code:** `vsslicer/modules/bambu-extension/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/bambu/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

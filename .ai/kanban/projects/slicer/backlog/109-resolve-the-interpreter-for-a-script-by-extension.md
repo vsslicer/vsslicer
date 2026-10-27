@@ -15,7 +15,7 @@ created: 2026-10-25
 
 As Orca does: by extension (`.py`, `.ps1`, `.bat`, `.sh`, native executables).
 
-**Code:** `vsslicer/modules/slicer-extension/src/adapters/...` (module: `slicer-extension`, layer: `adapters`)
+**Code:** `vsslicer/modules/apps/slicer/src/adapters/...` (module: `slicer-extension`, layer: `adapters`)
 
 ## Acceptance criteria
 

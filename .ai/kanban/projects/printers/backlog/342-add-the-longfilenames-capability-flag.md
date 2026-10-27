@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds an optional `longFilenames` capability that a connector sets when the printer's file system accepts names longer than 8.3, so storage export can read it. Additive: a minor version.
 
-**Code:** `vsslicer/modules/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

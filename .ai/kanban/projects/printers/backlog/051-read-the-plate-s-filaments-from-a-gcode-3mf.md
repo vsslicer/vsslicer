@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turn the plate/filament info of a `.gcode.3mf` into the `PlateFilament[]` the AMS mapper takes.
 
-**Code:** `vsslicer/modules/bambu-extension/src/application/...` (module: `bambu-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/bambu/src/application/...` (module: `bambu-extension`, layer: `application`)
 
 UNRESOLVED: needs 3mf (plates and filament list of `.gcode.3mf`).
 

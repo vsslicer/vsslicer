@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compare two entities or an entity and its parent in the form, and hand the two files to VS Code's diff editor.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/compare/` and `vsslicer/modules/profiles-extension/src/presentation/form/diff.ts` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/compare/` and `vsslicer/modules/apps/profiles/src/presentation/form/diff.ts` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -13,9 +13,9 @@ depends_on: [PLT-2, PLT-3, PLT-4, PLT-8, PLT-14, PLT-21]
 created: 2026-10-25
 ---
 
-Scaffold `vsslicer/modules/camera-extension/` from the `tooling` module as a VS Code extension module (`vsslicer.camera`, `extensionKind ["ui"]`).
+Scaffold `vsslicer/modules/apps/camera/` from the `tooling` module as a VS Code extension module (`vsslicer.camera`, `extensionKind ["ui"]`).
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (module scaffold)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (module scaffold)`)
 
 ## Acceptance criteria
 

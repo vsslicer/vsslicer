@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs CuraEngine with `connect host:port`, the extension as TCP server, `protobufjs` and `Cura.proto`, and measures what it adds: progress and `LayerOptimized` live layers.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (spike))
 
 ## Acceptance criteria
 

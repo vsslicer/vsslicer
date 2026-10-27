@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The end-to-end counterpart of the core's export use case: with real exporters registered, import then export is byte-equivalent and one edited key changes one line.
 
-**Code:** `vsslicer/modules/profiles-extension/test/integration/` (module: `profiles-extension`, layer: `presentation`, integration test)
+**Code:** `vsslicer/modules/apps/profiles/test/integration/` (module: `profiles-extension`, layer: `presentation`, integration test)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The nine PrusaLink states, progress and temperatures.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/domain/...` (module: `printer-prusalink`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/prusalink/src/domain/...` (module: `printer-prusalink`, layer: `domain`)
 
 ## Acceptance criteria
 

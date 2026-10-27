@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure function merges our branding and gallery fields over VSCodium's `product.json` and validates the result, so the field list is tested rather than patched by hand.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/domain/product.ts` (module: `vsslicer-build`, layer: `domain`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/domain/product.ts` (module: `vsslicer-build`, layer: `domain`)
 
 ## Acceptance criteria
 

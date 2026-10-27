@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes the plate records, instance-to-plate assignment and assemble items. Ported from `OrcaSlicer@09aa0114:src/libslic3r/Format/bbs_3mf.cpp` (AGPL-3.0, D2), with the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

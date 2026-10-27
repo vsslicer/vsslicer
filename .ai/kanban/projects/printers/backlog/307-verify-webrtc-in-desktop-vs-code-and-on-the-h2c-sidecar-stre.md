@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Check WebRTC in a desktop webview on one platform, the H2C stream through the sidecar's WebRTC, and record remote hosts as unverified if it fails there.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (hardware verification)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (hardware verification)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Closes the cut part of the persistence row: `cut_information.xml` (cut id, check sum, connectors count) and the per-volume connector metadata in `model_settings.config` read and write back. Gaps found are fixed in this card.
 
-**Code:** `vsslicer/modules/3mf/test/roundtrip/cut/` (module: `3mf`, layer: `application`)
+**Code:** `vsslicer/modules/core/3mf/test/roundtrip/cut/` (module: `3mf`, layer: `application`)
 
 ## Acceptance criteria
 

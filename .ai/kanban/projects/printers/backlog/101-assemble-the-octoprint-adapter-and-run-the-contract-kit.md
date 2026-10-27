@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `PrinterAdapter` with capabilities, job control, `probe` (`api/version`).
 
-**Code:** `vsslicer/modules/printer-octoprint/src/application/...` (module: `printer-octoprint`, layer: `application`)
+**Code:** `vsslicer/modules/printer/octoprint/src/application/...` (module: `printer-octoprint`, layer: `application`)
 
 ## Acceptance criteria
 

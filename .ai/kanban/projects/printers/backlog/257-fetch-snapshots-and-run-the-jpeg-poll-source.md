@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Snapshot fetch with auth and timeout, and a polling live source for cameras that offer only snapshots (PrusaLink `/snap`).
 
-**Code:** `vsslicer/modules/camera-mjpeg/src/adapters/...` (module: `camera-mjpeg`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/mjpeg/src/adapters/...` (module: `camera-mjpeg`, layer: `adapters`)
 
 ## Acceptance criteria
 

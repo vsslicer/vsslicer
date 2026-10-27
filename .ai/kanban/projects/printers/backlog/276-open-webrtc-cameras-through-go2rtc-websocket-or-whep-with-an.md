@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `webrtc` `CameraSource`: probe the signalling endpoint, relay one offer/answer exchange, and declare the fallback so the player can switch.
 
-**Code:** `vsslicer/modules/camera-webrtc/src/adapters/...` (module: `camera-webrtc`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/webrtc/src/adapters/...` (module: `camera-webrtc`, layer: `adapters`)
 
 ## Acceptance criteria
 

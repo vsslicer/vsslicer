@@ -15,7 +15,7 @@ created: 2026-10-25
 
 CRUD for vendors, filaments and spools, `PUT /spool/{id}/use`, `PUT /spool/{id}/measure`, `/export`, pagination and typed errors, over a `SpoolmanTransport` with the direct HTTP implementation (the Moonraker proxy is the second).
 
-**Code:** `vsslicer/modules/filament-spoolman/src/adapters/...` (module: `filament-spoolman`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/spoolman/src/adapters/...` (module: `filament-spoolman`, layer: `adapters`)
 
 ## Acceptance criteria
 

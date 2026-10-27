@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Checks that the planner estimate on Orca's G-code is within the I5 tolerance of the estimate in Orca's own header.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

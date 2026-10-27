@@ -34,9 +34,9 @@ test('changelogSection and releaseTag', () => {
 });
 
 test('lockfile integrity: a doctored lockfile names both modules', () => {
-  const lock = readFileSync(join(scripts, '..', 'modules', 'example-extension', 'pnpm-lock.yaml'), 'utf8');
+  const lock = readFileSync(join(scripts, '..', 'modules', 'apps', 'example-extension', 'pnpm-lock.yaml'), 'utf8');
   const entries = lockfileIntegrities(lock);
-  const ex = JSON.parse(readFileSync(join(scripts, '..', 'modules', 'example', 'package.json'), 'utf8')).version;
+  const ex = JSON.parse(readFileSync(join(scripts, '..', 'modules', 'tooling', 'example', 'package.json'), 'utf8')).version;
   assert.ok(entries.has(`@vsslicer/example@${ex}`));
   const served = new Map(entries);
   const lookup = (n, v) => served.get(`${n}@${v}`);

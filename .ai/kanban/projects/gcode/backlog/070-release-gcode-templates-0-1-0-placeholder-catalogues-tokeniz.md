@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `gcode-templates@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/gcode-templates/` (module: `gcode-templates`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/core/gcode-templates/` (module: `gcode-templates`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

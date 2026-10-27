@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure functions that report violations: an instance on no plate or two plates, a locked plate changed, a plate count above 36.
 
-**Code:** `vsslicer/modules/project-extension/src/domain/plates/invariants.ts` (module: `project-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/project/src/domain/plates/invariants.ts` (module: `project-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

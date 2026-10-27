@@ -7,7 +7,7 @@ import { mkdtempSync, readFileSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const mod = join(import.meta.dirname, '..', '..', 'modules', 'tooling');
+const mod = join(import.meta.dirname, '..', '..', 'modules', 'tooling', 'tooling');
 
 test('packing a module twice gives the same tarball hash', () => {
   const sha = () => {

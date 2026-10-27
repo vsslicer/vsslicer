@@ -15,7 +15,7 @@ created: 2026-10-25
 
 HTTP client for info, status and the chunked `POST /upload` with progress and abort; the token travels in the `X-Token` header, not the query, wherever the printer allows.
 
-**Code:** `vsslicer/modules/printer-unofficial-elegoo-cc2/src/adapters/...` (module: `printer-unofficial-elegoo-cc2`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-elegoo-cc2/src/adapters/...` (module: `printer-unofficial-elegoo-cc2`, layer: `adapters`)
 
 ## Acceptance criteria
 

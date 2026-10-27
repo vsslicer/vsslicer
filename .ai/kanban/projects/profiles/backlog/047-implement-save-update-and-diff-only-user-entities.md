@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `save`/`update` write a user entity as its diff against the parent plus the parent `id` and `version` (`profiles.md` §6), and `update` is the write-back SLC calibration will call.
 
-**Code:** `vsslicer/modules/profiles/src/application/store/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/store/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

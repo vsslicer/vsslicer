@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Feed registry status to the tray handler; setting `filament.tags.autoCreate` (ask, always, never; default ask); a prompt for a new tagged spool; a warning for a cloned tag.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

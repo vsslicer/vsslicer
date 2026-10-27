@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands for JSON export in Spoolman's `/export` shape, import of such a file, backup and restore, with file pickers.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

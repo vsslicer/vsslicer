@@ -13,9 +13,9 @@ depends_on: [63, 56, 66]
 created: 2026-10-25
 ---
 
-End-to-end security tests against the reference server. Path: `vsslicer/modules/agent-protocol/test/integration/security.test.ts` (layer: adapters, test).
+End-to-end security tests against the reference server. Path: `vsslicer/modules/common/agent-protocol/test/integration/security.test.ts` (layer: adapters, test).
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

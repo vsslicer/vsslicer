@@ -345,3 +345,4 @@
 343. [VWR-388: Release `project-extension@0.10.0`: measure, scale to length and auto-orient](388-release-project-extension-0-10-0-measure-scale-to-length-and.md)
 344. [VWR-399: Check the Bambu objects golden against Bambu Studio's GUI](399-check-the-bambu-objects-golden-against-bambu-studio-s-gui.md)
 345. [VWR-409: Merge 3MF custom G-code blocks of one plate and skip bad plate ids](409-merge-3mf-custom-g-code-blocks-of-one-plate-and-skip-bad-pla.md)
+346. [VWR-411: Make the 3mf fan-out heap bound stable under full-CI load](411-make-the-3mf-fan-out-heap-bound-stable-under-full-ci-load.md)

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `print.pause`, `print.resume` and `print.stop` publishes with sequence ids and result matching.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

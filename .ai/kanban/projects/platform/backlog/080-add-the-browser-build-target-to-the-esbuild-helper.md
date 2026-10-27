@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Builds a module's `browser` entry as a web-extension-host bundle (`platform: browser`, `vscode` external, no Node shims) next to the existing `main` bundle, from a `browser` field in the module's `package.json`.
 
-**Code:** `vsslicer/modules/tooling/src/build/...` (module: `tooling`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/tooling/src/build/...` (module: `tooling`, layer: `adapters`)
 
 ## Acceptance criteria
 

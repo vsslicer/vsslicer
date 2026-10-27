@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Configures the extension-control list that `controlUrl` in the build points at, starting empty.
 
-**Code:** `vsslicer/modules/openvsx-registry/compose/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/compose/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 

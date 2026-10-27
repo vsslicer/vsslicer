@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect test for `change_extrusion_role_gcode` and its process and filament variants: the hook text appears at role changes only.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

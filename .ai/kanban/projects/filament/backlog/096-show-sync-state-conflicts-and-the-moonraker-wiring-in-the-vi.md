@@ -17,7 +17,7 @@ A status bar item for sync state, the conflict list in the inventory view, push 
 
 UNRESOLVED: needs printers-extension: an export that gives `filament-extension` the Moonraker session's proxy request function.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

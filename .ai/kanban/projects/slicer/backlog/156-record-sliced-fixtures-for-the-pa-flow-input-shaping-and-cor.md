@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Same as CAL15 for the second set of generators.
 
-**Code:** `vsslicer/modules/calibration/test/fixtures/` (module: `calibration`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/calibration/test/fixtures/` (module: `calibration`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads `resources/intent/**/*.inst.cfg` and attaches each block to the matching quality `process` from the quality reader, in the `ImportResult`.
 
-**Code:** `vsslicer/modules/profiles-cura/src/adapters/...` (module: `profiles-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/cura/src/adapters/...` (module: `profiles-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

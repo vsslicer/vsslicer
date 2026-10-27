@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `server/files/*` for the `gcodes` root: list, metadata with thumbnails, download, delete, move.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

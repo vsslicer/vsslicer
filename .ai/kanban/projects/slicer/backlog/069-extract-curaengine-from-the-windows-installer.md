@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extracts CuraEngine without running the installer (unverified how: archive tooling over the NSIS installer or an official zip if one exists).
 
-**Code:** `vsslicer/modules/slicer-cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

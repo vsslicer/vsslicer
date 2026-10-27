@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Two commands over `Inventory.book` and `Inventory.measure`: manual entry in grams and a scale reading (gross weight) that records a correction.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 DSF `/machine/*` REST plus the WebSocket model patches and upload.
 
-**Code:** `vsslicer/modules/printer-duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
 
 ## Acceptance criteria
 

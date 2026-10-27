@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Combine model and nozzles declared by the window (from the `printer_instance`) with live status (nozzle, loaded trays); live values win.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

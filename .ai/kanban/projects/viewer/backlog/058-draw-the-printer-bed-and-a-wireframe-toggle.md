@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bed from the project's printable area when known (a default bed otherwise) and a wireframe toggle.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/render/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/render/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

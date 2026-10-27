@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A status-bar summary of active uploads and `withProgress` notifications for foreground sends.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

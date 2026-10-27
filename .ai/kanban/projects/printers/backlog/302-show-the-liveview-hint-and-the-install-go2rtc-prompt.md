@@ -15,7 +15,7 @@ created: 2026-10-25
 
 UI for the two guided states: 'Turn on LAN Mode Liveview' when the printer reports `disable`, and an explicit consent prompt before downloading go2rtc, with the explanation when it is declined.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

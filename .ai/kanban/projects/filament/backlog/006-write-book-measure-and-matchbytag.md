@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The booking use cases the other modules call: `book(event)` (idempotent), `measure(spoolId, grossGrams)` and `matchByTag(uid)`.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

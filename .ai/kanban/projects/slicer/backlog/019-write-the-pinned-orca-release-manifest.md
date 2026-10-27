@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The manifest of pinned Orca releases with per-OS URL, size and SHA-256, validated against the schema from `slicer-api`.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

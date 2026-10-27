@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure mappers from the camera endpoints' responses to `mjpeg` or `jpeg-poll` descriptors: Moonraker `/server/webcams/list` (services other than MJPEG and snapshot are skipped for camera-webrtc), OctoPrint settings webcam URLs, PrusaLink `/api/v1/cameras`, and a manual URL.
 
-**Code:** `vsslicer/modules/camera-mjpeg/src/domain/...` (module: `camera-mjpeg`, layer: `domain`)
+**Code:** `vsslicer/modules/camera/mjpeg/src/domain/...` (module: `camera-mjpeg`, layer: `domain`)
 
 ## Acceptance criteria
 

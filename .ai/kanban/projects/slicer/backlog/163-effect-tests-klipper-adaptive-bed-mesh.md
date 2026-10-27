@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect test for `bed_mesh_*`: the keys reach the `BED_MESH_CALIBRATE` parameters in the start G-code.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

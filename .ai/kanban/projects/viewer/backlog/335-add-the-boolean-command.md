@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Union, difference or intersection of selected objects or parts as one undoable command: the operands are replaced by the result object or part. The log holds the operands and the operation; the result is recomputed on replay with the pinned kernel.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/boolean/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/boolean/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

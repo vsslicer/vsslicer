@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Traverses the esbuild metafile from each browser entry and fails on any import of a Node built-in (`fs`, `worker_threads`, `child_process`, `net`, every name in `module.builtinModules`, with or without `node:`), naming the importing file and the chain from the entry.
 
-**Code:** `vsslicer/modules/tooling/src/lint/...` (module: `tooling`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/tooling/src/lint/...` (module: `tooling`, layer: `adapters`)
 
 ## Acceptance criteria
 

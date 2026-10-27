@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Connect the proxy to a source: `mjpeg` passes the upstream multipart through, `jpeg-poll` and `frames` are remuxed with the camera-api muxer, and the upstream closes when the viewer disconnects.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

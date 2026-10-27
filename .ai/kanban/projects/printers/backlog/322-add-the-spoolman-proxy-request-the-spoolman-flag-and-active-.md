@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Exposes what `filament-spoolman` needs through Moonraker: a `spoolmanProxy(request)` method that posts to `/server/spoolman/proxy` shaped as `moonraker@b559b9a:components/spoolman.py` expects, a `spoolman` boolean from the `[spoolman]` component list, and `getActiveSpool()` / `setActiveSpool(id)`.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

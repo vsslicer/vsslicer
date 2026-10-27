@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The pure comparison used by the form: two entities (or an entity and its parent) to the list of keys whose resolved values differ.
 
-**Code:** `vsslicer/modules/profiles/src/application/form-model/compare/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/form-model/compare/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Manual hardware checklist per D5.
 
-**Code:** `vsslicer/modules/printers-extension/docs/h2c-queue-follow-checklist.md` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/docs/h2c-queue-follow-checklist.md` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

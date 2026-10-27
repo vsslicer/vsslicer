@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A profile is a list of (z, height) samples with the object height, the printer's minimum and maximum layer height and the first layer height. Reads and writes the `layer_heights_profile.txt` text form (`z;height;z;height...`).
 
-**Code:** `vsslicer/modules/mesh/src/domain/layerheight/profile.ts` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/layerheight/profile.ts` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

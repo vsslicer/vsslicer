@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A TLS server with a self-signed certificate that checks the auth packet and replays frames, as the A1/P1 camera does.
 
-**Code:** `vsslicer/modules/camera-bambu/` (module: `camera-bambu`, layer: `n/a (test kit)`)
+**Code:** `vsslicer/modules/camera/bambu/` (module: `camera-bambu`, layer: `n/a (test kit)`)
 
 ## Acceptance criteria
 

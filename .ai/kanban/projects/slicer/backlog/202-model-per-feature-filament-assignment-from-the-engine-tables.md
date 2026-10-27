@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Lists the features an engine can assign (from its capability table) and maps an assignment to the engine's keys: Orca `*_filament_id`, Cura support and adhesion extruder settings.
 
-**Code:** `vsslicer/modules/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
+**Code:** `vsslicer/modules/core/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
 
 ## Acceptance criteria
 

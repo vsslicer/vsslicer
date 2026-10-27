@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extends the matrix test to PA, flow, input shaping and cornering. Motion tests are fixtures only (D5).
 
-**Code:** `vsslicer/modules/calibration/test/` (module: `calibration`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/calibration/test/` (module: `calibration`, layer: n/a (tests))
 
 ## Acceptance criteria
 

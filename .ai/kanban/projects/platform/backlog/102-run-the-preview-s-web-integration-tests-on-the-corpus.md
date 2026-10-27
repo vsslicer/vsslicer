@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `@vscode/test-web` tests that open a fixture from each slicer family and a `.bgcode`, a `.gcode.3mf`, scrub layers and read thumbnails, and time the open of a file under the limit.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

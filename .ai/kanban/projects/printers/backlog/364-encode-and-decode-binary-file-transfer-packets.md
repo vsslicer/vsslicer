@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure codec for the packet format of Marlin's binary file transfer (`Marlin@2ef3ee6:Marlin/src/feature/binary_stream.h`, `binary_stream.cpp`; read, not copied): sync, header, payload, CRC16, the ping/open/write/close/abort packet types and the printer's responses.
 
-**Code:** `vsslicer/modules/printer-serial/src/domain/...` (module: `printer-serial`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/serial/src/domain/...` (module: `printer-serial`, layer: `domain`)
 
 ## Acceptance criteria
 

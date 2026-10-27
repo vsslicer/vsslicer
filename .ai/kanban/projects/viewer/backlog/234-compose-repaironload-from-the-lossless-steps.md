@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `repairOnLoad(mesh) -> {mesh, report}` runs merge, degenerate removal and normals in order and returns the report; it never fills holes.
 
-**Code:** `vsslicer/modules/mesh/src/application/repairOnLoad.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/repairOnLoad.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

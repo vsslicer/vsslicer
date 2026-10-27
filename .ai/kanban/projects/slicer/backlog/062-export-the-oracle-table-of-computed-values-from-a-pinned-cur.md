@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A script and the resulting fixture: resolved values for a set of (machine, extruder count, material, quality) tuples, including a two-extruder machine, computed by the pinned Cura itself. Run once by hand; the table is committed with the Cura version recorded.
 
-**Code:** `vsslicer/modules/cura-settings/` (module: `cura-settings`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/cura-settings/` (module: `cura-settings`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

@@ -13,7 +13,7 @@ test('build --list stdout stays JSON when a dev edge is dropped', () => {
   try {
     const scripts = join(dir, 'scripts');
     mkdirSync(scripts);
-    for (const f of ['run.mjs', 'lib.mjs', 'versioning.mjs']) cpSync(fileURLToPath(new URL(`../${f}`, import.meta.url)), join(scripts, f));
+    for (const f of ['run.mjs', 'lib.mjs', 'modules.mjs', 'versioning.mjs']) cpSync(fileURLToPath(new URL(`../${f}`, import.meta.url)), join(scripts, f));
     const mod = (d, deps, devDependencies) => {
       mkdirSync(join(dir, 'modules', d), { recursive: true });
       writeFileSync(join(dir, 'modules', d, 'package.json'), JSON.stringify({ name: `@vsslicer/${d}`, version: '1.0.0', dependencies: deps, devDependencies }));

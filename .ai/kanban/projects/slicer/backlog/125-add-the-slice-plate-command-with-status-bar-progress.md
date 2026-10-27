@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A command that slices the active project plate with `withProgress` in the status bar, cancellable.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

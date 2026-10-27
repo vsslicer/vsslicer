@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The owner runs the trademark search for the product name (roadmap question 4) before the first public build; this card records the outcome and gates the first release job.
 
-**Code:** `vsslicer/modules/vsslicer-build/docs/trademark.md` (module: `vsslicer-build`, layer: n/a (owner record))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/trademark.md` (module: `vsslicer-build`, layer: n/a (owner record))
 
 ## Acceptance criteria
 

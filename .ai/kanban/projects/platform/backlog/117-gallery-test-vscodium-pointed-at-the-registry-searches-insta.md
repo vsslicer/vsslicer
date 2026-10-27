@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Drives a stock VSCodium with `VSCODE_GALLERY_*` variables against the local registry, using the sample extension as the hosted extension.
 
-**Code:** `vsslicer/modules/openvsx-registry/test/gallery/` (module: `openvsx-registry`, layer: n/a (tests))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/test/gallery/` (module: `openvsx-registry`, layer: n/a (tests))
 
 ## Acceptance criteria
 

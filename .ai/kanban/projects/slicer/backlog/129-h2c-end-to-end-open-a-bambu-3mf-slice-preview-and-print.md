@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The first complete loop on the owner's machine (D5): Bambu 3MF with an imported profile, slice, preview in `vsslicer.gcode`, print on the H2C via `vsslicer.bambu`.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

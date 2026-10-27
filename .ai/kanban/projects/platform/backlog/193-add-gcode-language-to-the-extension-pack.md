@@ -10,9 +10,9 @@ depends_on: [28]
 created: 2026-10-26
 ---
 
-SP5 created the `gcode-language` extension (G-code language, hover, completion, warnings). The extension pack (`vsslicer/modules/pack`) installs only ids listed in `shipped-extensions.txt`, and only published ids may be listed (VS Code cannot install an id that does not exist). No pack card covered gcode-language, so this card adds it once it is published.
+SP5 created the `gcode-language` extension (G-code language, hover, completion, warnings). The extension pack (`vsslicer/modules/apps/pack`) installs only ids listed in `shipped-extensions.txt`, and only published ids may be listed (VS Code cannot install an id that does not exist). No pack card covered gcode-language, so this card adds it once it is published.
 
-**Code:** `vsslicer/modules/pack/shipped-extensions.txt` (module: `pack`, layer: n/a (manifest))
+**Code:** `vsslicer/modules/apps/pack/shipped-extensions.txt` (module: `pack`, layer: n/a (manifest))
 
 ## Acceptance criteria
 

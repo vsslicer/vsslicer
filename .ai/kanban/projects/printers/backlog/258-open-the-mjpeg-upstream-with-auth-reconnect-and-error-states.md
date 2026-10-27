@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Open the printer's MJPEG stream with credentials, hand the multipart body to the proxy, and reconnect with backoff.
 
-**Code:** `vsslicer/modules/camera-mjpeg/src/adapters/...` (module: `camera-mjpeg`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/mjpeg/src/adapters/...` (module: `camera-mjpeg`, layer: `adapters`)
 
 ## Acceptance criteria
 

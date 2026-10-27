@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `bambu-extension@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/bambu-extension/` (module: `bambu-extension`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/apps/bambu/` (module: `bambu-extension`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

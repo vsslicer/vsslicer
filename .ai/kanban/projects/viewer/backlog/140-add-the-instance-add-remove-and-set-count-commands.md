@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds or removes instances of an object, offsetting new ones so they do not overlap, on the object's plate.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/instances/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/instances/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

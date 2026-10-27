@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Atomic state-file persistence and restart rules.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

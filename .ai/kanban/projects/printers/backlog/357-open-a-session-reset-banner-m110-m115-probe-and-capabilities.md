@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `open(connection)` waits for the firmware banner after a DTR reset, sends `M110 N0` and `M115`, and fills the session's capabilities from what the firmware reports, including `longFilenames`; `probe(endpoint)` is the same without starting a session.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

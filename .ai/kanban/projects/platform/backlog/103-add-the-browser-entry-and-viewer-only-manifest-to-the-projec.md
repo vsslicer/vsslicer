@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds a `browser` entry for viewer mode: the read-only custom editor for 3MF, STL and OBJ, with editing, repair, STEP and arrange contributions not registered on the web.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/...` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/...` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

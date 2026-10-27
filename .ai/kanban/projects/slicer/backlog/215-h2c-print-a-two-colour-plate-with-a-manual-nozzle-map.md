@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hardware verification on the owner's H2C of one two-colour plate with a manual nozzle map (D5).
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

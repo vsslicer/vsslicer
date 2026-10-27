@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Command that opens the file in the preview and calls `GcodePreview.follow(uri, offset)` as events arrive (never imports GCP code).
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

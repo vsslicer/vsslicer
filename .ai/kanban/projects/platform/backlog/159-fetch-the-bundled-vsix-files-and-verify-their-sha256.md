@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Downloads each bundled extension's VSIX from its GitHub release (or the local registry in tests), checks the pinned `sha256`, and puts them where the build expects them. Depends on the final or release card of each bundled extension module and on `themes@0.1.0`.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/adapters/fetch-builtins.ts` (module: `vsslicer-build`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/adapters/fetch-builtins.ts` (module: `vsslicer-build`, layer: `adapters`)
 
 ## Acceptance criteria
 

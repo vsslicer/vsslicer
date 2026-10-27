@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns `ResolvedCuraSettings` into the file the spike chose, with the global, per-extruder and per-model sections.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 FIL-44 and FIL-69 need per-tray data and the AMS mapping recorded at send, which `materials[]` (PRN-4) lacks.
 
-**Code:** `vsslicer/modules/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

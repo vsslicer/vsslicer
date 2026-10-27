@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The types every camera module and the proxy share, refining the `CameraSource` port of `printer-api` (PRN-6): stream kinds `mjpeg`, `jpeg-poll`, `frames`, `rtsp`, `webrtc` (go2rtc WS or WHEP signalling), an optional `fallback` descriptor, camera states, typed errors and the `AuthorizedFetch` type the agent hands to HTTP camera modules.
 
-**Code:** `vsslicer/modules/camera-api/src/domain/...` (module: `camera-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/camera-api/src/domain/...` (module: `camera-api`, layer: `domain`)
 
 ## Acceptance criteria
 

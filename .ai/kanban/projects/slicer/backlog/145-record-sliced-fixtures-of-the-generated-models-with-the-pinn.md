@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices the 0.1.0 generators' models with the pinned Orca and CuraEngine once and checks in the G-code (sweep not applied) so tests run without an engine.
 
-**Code:** `vsslicer/modules/calibration/test/fixtures/` (module: `calibration`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/calibration/test/fixtures/` (module: `calibration`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

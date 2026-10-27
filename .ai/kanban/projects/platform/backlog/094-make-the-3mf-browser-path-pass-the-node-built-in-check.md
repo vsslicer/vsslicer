@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the check on the library's browser entry and replaces what it finds; the Web Worker adapter already exists.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/...` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/...` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

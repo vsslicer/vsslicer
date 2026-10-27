@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wire `AgentServer`: Unix socket or named pipe in the user runtime dir, random token in a 0600 file, lock file, version handshake.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 UNRESOLVED: needs agent-protocol (schema DSL and namespaced registration, AgentServer/AgentClient, conformance suite).
 

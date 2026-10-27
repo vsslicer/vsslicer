@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Websocket change events with reconnect and backoff; polling as the fallback.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/adapters/...` (module: `filament-spoolman`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/spoolman/src/adapters/...` (module: `filament-spoolman`, layer: `adapters`)
 
 ## Acceptance criteria
 

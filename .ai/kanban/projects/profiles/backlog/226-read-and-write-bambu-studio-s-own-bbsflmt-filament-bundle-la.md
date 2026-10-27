@@ -13,7 +13,7 @@ created: 2026-10-26
 
 Found by sp12-rev-prf-109: Bambu Studio writes `.bbsflmt` as `<vendor>/<name>.json` entries under a manifest with `bundle_type: "filament config bundle"`, `filament_name` and a `filament_vendor` list (BambuStudio@79df7ae `src/slic3r/GUI/CreatePresetsDialog.cpp:4170-4245`). Our exporter writes `filament/<name>.json` under a printer config bundle manifest, and `importBambuBundle` refuses a real Studio `.bbsflmt` ("Unknown bundle_type", 0 entities).
 
-**Code:** profile-api's bundle manifest (`vsslicer/modules/profile-api/src/domain/bundle/`, layer `domain`) and `vsslicer/modules/profiles-orca/src/adapters/bundles/bambu/` (layer `adapters`). Split the card if the profile-api release must land first.
+**Code:** profile-api's bundle manifest (`vsslicer/modules/common/profile-api/src/domain/bundle/`, layer `domain`) and `vsslicer/modules/profiles/orca/src/adapters/bundles/bambu/` (layer `adapters`). Split the card if the profile-api release must land first.
 
 ## Acceptance criteria
 

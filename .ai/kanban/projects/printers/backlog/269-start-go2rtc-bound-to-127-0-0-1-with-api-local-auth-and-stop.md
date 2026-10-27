@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Run the sidecar with generated config: API and RTSP bound to 127.0.0.1, `api.local_auth`, random port, credentials in memory only; it exits with the agent.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

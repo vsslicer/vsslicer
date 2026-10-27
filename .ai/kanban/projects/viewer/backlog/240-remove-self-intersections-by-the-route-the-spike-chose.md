@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Resolves the detected intersections following the step order of Orca's `MeshRepair.cpp` (AGPL-3.0, D2) with the route from the spike. Written as a TypeScript implementation by default; if the spike picks WASM the card is re-pointed to an adapter and says so.
 
-**Code:** `vsslicer/modules/mesh/src/domain/repair/selfIntersections.ts` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/repair/selfIntersections.ts` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

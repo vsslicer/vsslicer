@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The OctoPrint provider: `GET /api/timelapse`, render of unrendered sets, download from the timelapse downloads path.
 
-**Code:** `vsslicer/modules/camera-timelapse/src/adapters/...` (module: `camera-timelapse`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/timelapse/src/adapters/...` (module: `camera-timelapse`, layer: `adapters`)
 
 ## Acceptance criteria
 

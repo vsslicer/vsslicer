@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Streaming knows exactly which file offset the printer has accepted, so it publishes that position on the same channel as the other connectors, for the preview's follow mode.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

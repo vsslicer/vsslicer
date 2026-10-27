@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Edits each Bambu and Orca fixture with a scripted set of operations (rename, move, delete), saves it with `writeProject` and slices it with the pinned Orca CLI through `slicer-orca`; the parser reads the output.
 
-**Code:** `vsslicer/modules/3mf/test/integration/reslice/` (module: `3mf`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/core/3mf/test/integration/reslice/` (module: `3mf`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

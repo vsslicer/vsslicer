@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Starts the parser with `startWorker` from the kit; when it throws `WorkerStartError` the preview parses in chunks in the extension host with yields, applies the lower fallback limit from the spike, and logs the reason.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

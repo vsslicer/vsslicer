@@ -2,7 +2,7 @@
 // Chromium host for one file, in its own process: `node test/bench/chromium-case.ts <file.stl>`. The stages run in a
 // dedicated Web Worker (as the webview's pool does) on bytes fetched from a local server; Node sums the RSS of the
 // browser's process tree every 50 ms (the GCP-42 method) and attributes each sample to the stage running. Needs
-// Playwright: PLAYWRIGHT_MODULE (an entry file, e.g. modules/test-webview's @playwright/test) or @playwright/test.
+// Playwright: PLAYWRIGHT_MODULE (an entry file, e.g. modules/tooling/test-webview's @playwright/test) or @playwright/test.
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createReadStream, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';

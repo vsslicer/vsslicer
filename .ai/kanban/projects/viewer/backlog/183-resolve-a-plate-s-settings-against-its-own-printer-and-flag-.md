@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Resolves printer, material and process for the plate's printer instance, reads `printable_area` and the exclusion areas, and flags instances whose footprint is outside.
 
-**Code:** `vsslicer/modules/project-extension/src/application/plateResolve.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/plateResolve.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

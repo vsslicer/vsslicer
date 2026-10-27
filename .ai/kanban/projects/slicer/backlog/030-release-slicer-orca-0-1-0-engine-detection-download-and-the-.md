@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-orca@0.1.0` so other modules can depend on the range: engine detection, download and the CLI adapter. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (release))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (release))
 
 ## Acceptance criteria
 

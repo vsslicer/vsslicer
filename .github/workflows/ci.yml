@@ -73,14 +73,14 @@ jobs:
         with:
           node-version-file: vsslicer/.nvmrc
           cache: pnpm
-          cache-dependency-path: vsslicer/modules/*/pnpm-lock.yaml
+          cache-dependency-path: vsslicer/modules/*/*/pnpm-lock.yaml
       # one VS Code download for every extension module (@vsslicer/test-vscode); `stable` moves, so the key carries the ISO week
       - id: week
         run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/vscode-test
-          key: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-${{ hashFiles('vsslicer/modules/*/package.json') }}
+          key: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-${{ hashFiles('vsslicer/modules/*/*/package.json') }}
           restore-keys: vscode-test-${{ runner.os }}-${{ steps.week.outputs.week }}-
       # PRF-130: profiles-cura's live test downloads Cura's resources at the pinned commit once, then reads the cache
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -112,7 +112,7 @@ jobs:
           BASE: ${{ needs.select.outputs.base }}
       # GCP-42: peak host, worker and webview memory of the G-code preview at 50, 200 and 500 MB against bench/budget.json (bytes, never time; budgets are per OS)
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'gcode-preview')
-        working-directory: vsslicer/modules/gcode-preview
+        working-directory: vsslicer/modules/apps/gcode-preview
         run: |
           pnpm exec playwright install --with-deps chromium
           # PRs gate 50 and 200 MB; the 500 MB set (minutes, GBs) only on a manual run
@@ -122,10 +122,10 @@ jobs:
       # Until a linux budget is recorded the step records one and uploads it, to be committed (no gate without a budget).
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'mesh')
         id: mesh-bench
-        working-directory: vsslicer/modules/mesh
+        working-directory: vsslicer/modules/core/mesh
         run: |
-          (cd ../test-webview && pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium)
-          export PLAYWRIGHT_MODULE="$PWD/../test-webview/node_modules/@playwright/test/index.mjs"
+          (cd ../../tooling/test-webview && pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium)
+          export PLAYWRIGHT_MODULE="$PWD/../../tooling/test-webview/node_modules/@playwright/test/index.mjs"
           sizes=1,5; if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then sizes=1,5,20; fi
           if node -e "process.exit(require('./test/bench/budget.json').platforms.linux ? 0 : 1)"; then
             node --no-warnings test/bench/run.ts --sizes "$sizes"
@@ -136,17 +136,17 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: mesh-bench-budget
-          path: vsslicer/modules/mesh/test/bench/budget.json
+          path: vsslicer/modules/core/mesh/test/bench/budget.json
       # VWR-32: open the 500 MB 3MF through the worker; host CPU between turns < 50 ms, peak RSS <= test/large/budget.json capMB.
       # capMB gates every OS; --update also records the linux measurement, uploaded to be committed.
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, '3mf')
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: vsslicer/modules/3mf/.cache/large-fixtures
-          key: 3mf-large-${{ hashFiles('vsslicer/modules/3mf/test/large/generate.ts', 'vsslicer/modules/3mf/test/support/zipBuilder.ts', 'vsslicer/modules/3mf/test/support/minimalPackage.ts') }}
+          path: vsslicer/modules/core/3mf/.cache/large-fixtures
+          key: 3mf-large-${{ hashFiles('vsslicer/modules/core/3mf/test/large/generate.ts', 'vsslicer/modules/core/3mf/test/support/zipBuilder.ts', 'vsslicer/modules/core/3mf/test/support/minimalPackage.ts') }}
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, '3mf')
         id: threemf-large
-        working-directory: vsslicer/modules/3mf
+        working-directory: vsslicer/modules/core/3mf
         run: |
           if node -e "process.exit(require('./test/large/budget.json').platforms.linux ? 0 : 1)"; then
             node --no-warnings test/large/run.ts
@@ -157,10 +157,10 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: 3mf-large-budget
-          path: vsslicer/modules/3mf/test/large/budget.json
+          path: vsslicer/modules/core/3mf/test/large/budget.json
       # GCP-54: the api-extractor report must match the source, and a breaking change needs a higher GCODE_PREVIEW_API_VERSION
       - if: runner.os == 'Linux' && contains(needs.select.outputs.modules, 'gcode-preview')
-        working-directory: vsslicer/modules/gcode-preview
+        working-directory: vsslicer/modules/apps/gcode-preview
         run: pnpm api:check --base "$BASE"
         env:
           BASE: ${{ needs.select.outputs.base }}

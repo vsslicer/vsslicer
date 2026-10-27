@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Derive `started` and `ended` events (with vendor end state and filament used) from status transitions, matched to the upload record for the file.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

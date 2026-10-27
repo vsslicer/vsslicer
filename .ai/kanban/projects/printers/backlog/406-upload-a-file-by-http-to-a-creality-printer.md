@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `POST /upload/<name>` as a stream with progress and abort, with a filename made safe for the printer's file system.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/src/adapters/...` (module: `printer-unofficial-creality`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/src/adapters/...` (module: `printer-unofficial-creality`, layer: `adapters`)
 
 ## Acceptance criteria
 

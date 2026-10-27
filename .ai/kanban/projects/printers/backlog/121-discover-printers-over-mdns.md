@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `Discoverer` for `_moonraker._tcp`, `_octoprint._tcp` and `_http._tcp` using `bonjour-service` (MIT).
 
-**Code:** `vsslicer/modules/printer-discovery/src/adapters/...` (module: `printer-discovery`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/discovery/src/adapters/...` (module: `printer-discovery`, layer: `adapters`)
 
 ## Acceptance criteria
 

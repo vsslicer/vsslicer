@@ -15,7 +15,7 @@ created: 2026-10-25
 
 SACP client over TCP (through the vetted SDK or our own codec, per the spike): connect, status requests, and the file-send and start-print sequence with progress and abort.
 
-**Code:** `vsslicer/modules/printer-unofficial-snapmaker/src/adapters/...` (module: `printer-unofficial-snapmaker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-snapmaker/src/adapters/...` (module: `printer-unofficial-snapmaker`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 New library module `@vsslicer/job-history`: the job record, its JSONL store, queries, back-fill merge and job id embedding, with no VS Code API.
 
-**Code:** `vsslicer/modules/job-history/` (module: `job-history`, layer: `n/a (scaffold)`)
+**Code:** `vsslicer/modules/printer/job-history/` (module: `job-history`, layer: `n/a (scaffold)`)
 
 ## Acceptance criteria
 

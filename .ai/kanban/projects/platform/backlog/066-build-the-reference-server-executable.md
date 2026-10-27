@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A runnable server (`dist/reference-server.js`) wiring `AgentServer`, the core handlers, the transport, the token file and the lock together. Used by tests, by the spawn test and as the conformance target. E22's daemon is the real server.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

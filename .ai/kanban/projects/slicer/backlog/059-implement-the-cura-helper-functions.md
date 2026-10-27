@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `resolveOrValue`, `extruderValue`, `extruderValues`, `anyExtruderWithMaterial`, `defaultExtruderPosition` and the others in the survey, with Uranium/Cura semantics for missing extruders and `None`.
 
-**Code:** `vsslicer/modules/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
+**Code:** `vsslicer/modules/core/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
 
 ## Acceptance criteria
 

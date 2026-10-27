@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Cuts an object at a plane into parts of the same object or into separate objects, keeping upper, lower or both, as one undoable command. Results go through the mesh repair check.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/cut/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/cut/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

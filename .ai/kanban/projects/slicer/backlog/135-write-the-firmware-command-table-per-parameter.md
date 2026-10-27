@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps each calibratable parameter to the command of Klipper, Marlin, RRF and Bambu: `M104`/`M109`, `M221`, `SET_PRESSURE_ADVANCE`/`M900`/`M572`, retraction, `SET_INPUT_SHAPER`/`M593`, `SET_VELOCITY_LIMIT`/`M205`, speed.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

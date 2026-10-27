@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One test per error class: unsupported schema, empty file, WASM load failure (missing file and a blocked-load simulation), out of memory.
 
-**Code:** `vsslicer/modules/mesh-step/test/errors/` (module: `mesh-step`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh-step/test/errors/` (module: `mesh-step`, layer: n/a (tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A suite any server implementation must pass, run by E22 against the real daemon. Judgment-heavy: deciding the normative behaviours. Exported as a library and a `pnpm conformance` CLI taking a socket path and token file.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publishes `profiles@0.2.0` to the local registry so dependent modules can consume export, form model, instances, wizard model and bundle use cases.
 
-**Code:** `vsslicer/modules/profiles/` (module: `profiles`, layer: n/a (release))
+**Code:** `vsslicer/modules/profiles/profiles/` (module: `profiles`, layer: n/a (release))
 
 ## Acceptance criteria
 

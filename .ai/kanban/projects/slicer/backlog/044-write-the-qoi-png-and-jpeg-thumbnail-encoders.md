@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure encoders from RGBA pixels. A test-only decoder checks lossless round trips.
 
-**Code:** `vsslicer/modules/slicer-output/src/domain/...` (module: `slicer-output`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/output/src/domain/...` (module: `slicer-output`, layer: `domain`)
 
 ## Acceptance criteria
 

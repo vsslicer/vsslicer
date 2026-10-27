@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reuses the large-download flow of PRN-156 for any `AsyncIterable<Uint8Array>`: folder picker, progress notification, cancel that removes the partial file.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

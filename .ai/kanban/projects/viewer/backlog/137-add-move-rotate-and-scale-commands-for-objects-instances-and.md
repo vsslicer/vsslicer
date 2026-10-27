@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands that change the transform of a selection by a delta or to a value, about a pivot, in world or local space; uniform and non-uniform scale.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

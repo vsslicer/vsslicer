@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The increment E22 (daemon) needs: the server half and transport. Contains the TypeBox DSL, error model, committed JSON Schema, core methods, `AgentServer`, `AgentClient` (request, cancel, reconnect, connect-or-spawn), owner-only socket/pipe with token auth, single-instance lock and the reference server. Does not contain the test kit, conformance suite or VS Code helpers (0.2.0).
 
-**Code:** `vsslicer/modules/agent-protocol/` (module: `agent-protocol`, layer: n/a (release))
+**Code:** `vsslicer/modules/common/agent-protocol/` (module: `agent-protocol`, layer: n/a (release))
 
 ## Acceptance criteria
 

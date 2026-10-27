@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Translates each rule to a JavaScript `RegExp` per the RX1 table and applies the rules in order to G-code text; written new, with Prusa's tests as vectors (AGPL-3.0, D2).
 
-**Code:** `vsslicer/modules/slicer-extension/src/domain/...` (module: `slicer-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/slicer/src/domain/...` (module: `slicer-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

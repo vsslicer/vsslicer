@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The regression guard for the most serious failure: a credential in a git-tracked workspace. Runs with the real adapters composed.
 
-**Code:** `vsslicer/modules/profiles-extension/test/secrets/` (module: `profiles-extension`, layer: `presentation`, integration test)
+**Code:** `vsslicer/modules/apps/profiles/test/secrets/` (module: `profiles-extension`, layer: `presentation`, integration test)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Default a project filament to a tray by type and colour and produce the exact `ams_mapping` array the printer accepts.
 
-**Code:** `vsslicer/modules/printer-bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

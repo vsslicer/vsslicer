@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A progress notification with cancel, and a message for each error class that says what to do.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/step/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/step/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

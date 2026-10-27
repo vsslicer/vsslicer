@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands to import a bundle (including from the explorer context menu on a bundle file) and export selected entities to a chosen format.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/commands/bundles/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/commands/bundles/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

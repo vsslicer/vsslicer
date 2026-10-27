@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The pure protocol of the A1/P1 camera: the 80-byte auth packet (username `bblp`, access code) and the frame parser (16-byte header with payload size, then a JPEG), following ha-bambulab (MIT) and OpenBambuAPI facts, no GFDL prose.
 
-**Code:** `vsslicer/modules/camera-bambu/src/domain/...` (module: `camera-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/camera/bambu/src/domain/...` (module: `camera-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

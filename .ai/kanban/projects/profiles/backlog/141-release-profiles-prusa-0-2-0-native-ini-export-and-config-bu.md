@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publishes `profiles-prusa@0.2.0` to the local registry so dependent modules can consume native INI export and config bundles.
 
-**Code:** `vsslicer/modules/profiles-prusa/` (module: `profiles-prusa`, layer: n/a (release))
+**Code:** `vsslicer/modules/profiles/prusa/` (module: `profiles-prusa`, layer: n/a (release))
 
 ## Acceptance criteria
 

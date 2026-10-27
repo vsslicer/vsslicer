@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-agent@0.4.0` so the camera extension can drive streams through the agent.
 
-**Code:** `vsslicer/modules/printer-agent/` (module: `printer-agent`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/agent/` (module: `printer-agent`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

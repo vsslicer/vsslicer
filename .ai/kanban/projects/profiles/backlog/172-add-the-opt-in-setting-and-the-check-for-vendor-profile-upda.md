@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Setting `vsslicer.profiles.updates.enabled` (default false) and a command that, when enabled, checks the vendors that are installed and lists the newer versions with their changed presets; there is no timer and no check at activation.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

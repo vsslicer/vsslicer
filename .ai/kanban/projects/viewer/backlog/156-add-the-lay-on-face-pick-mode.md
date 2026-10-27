@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A toolbar mode: hover highlights a face, click sends the lay-on-face command with the BVH-picked triangle.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/gizmo/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/gizmo/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

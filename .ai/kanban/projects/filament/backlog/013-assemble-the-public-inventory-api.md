@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `Inventory`: spools(), get(id), onDidChange, book, measure, matchByTag, create/update/archive, built over the store ports with a tiny typed emitter (no `vscode`).
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

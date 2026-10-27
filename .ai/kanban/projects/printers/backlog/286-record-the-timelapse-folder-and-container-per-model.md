@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The per-model capability table for timelapses, from the spike.
 
-**Code:** `vsslicer/modules/camera-bambu/src/domain/...` (module: `camera-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/camera/bambu/src/domain/...` (module: `camera-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

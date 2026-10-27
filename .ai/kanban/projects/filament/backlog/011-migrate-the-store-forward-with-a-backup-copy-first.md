@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A schema version field and forward migrations; a backup of the old files is written before any migration.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

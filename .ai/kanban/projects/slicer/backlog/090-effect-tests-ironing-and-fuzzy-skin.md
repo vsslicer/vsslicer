@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Ironing role on top layers; fuzzy-skin displacement of outer-wall points within the set thickness.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

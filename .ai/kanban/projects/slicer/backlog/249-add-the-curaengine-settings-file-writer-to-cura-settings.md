@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The embedded engine needs the same resolved-settings input file as `slicer-cura`, and adapters may not depend on each other: the writer moves into `cura-settings` (a copy first, tests moved with it).
 
-**Code:** `vsslicer/modules/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
+**Code:** `vsslicer/modules/core/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
 
 ## Acceptance criteria
 

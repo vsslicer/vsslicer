@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes the registry policy down (roadmap question 20): the default is the `vsslicer` namespace only; the owner may change it.
 
-**Code:** `vsslicer/modules/openvsx-registry/docs/policy.md` (module: `openvsx-registry`, layer: n/a (docs))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/docs/policy.md` (module: `openvsx-registry`, layer: n/a (docs))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps `remain`, `remain_g`, `tag_uid`, `tray_uuid`, `tray_info_idx`, `tray_sub_brands`, `tray_weight`, `tray_diameter` and temperatures from the MQTT AMS report into `materials[]`.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

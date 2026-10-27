@@ -13,9 +13,9 @@ depends_on: [75, 73, 15]
 created: 2026-10-25
 ---
 
-Proves the test kit works inside a real extension host. Path: `vsslicer/modules/agent-protocol/test/integration/extension/` (layer: presentation, test).
+Proves the test kit works inside a real extension host. Path: `vsslicer/modules/common/agent-protocol/test/integration/extension/` (layer: presentation, test).
 
-**Code:** `vsslicer/modules/agent-protocol/src/presentation/...` (module: `agent-protocol`, layer: `presentation`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/presentation/...` (module: `agent-protocol`, layer: `presentation`)
 
 ## Acceptance criteria
 

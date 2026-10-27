@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The contract every edit follows: a `Command` with `apply`, `invert`, a type id, a version and a serialisable payload, a registry of command types, and the grouping of commands into one undo step. Cura's approach, `projects-and-fleet.md` section 5.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

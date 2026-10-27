@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Delivers `docker compose up` for the registry on a developer machine or a CI runner with the settings the spike found.
 
-**Code:** `vsslicer/modules/openvsx-registry/compose/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/compose/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Per-field last writer wins; conflicts are recorded with both values; a delete in Spoolman archives the local spool, never deletes it.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

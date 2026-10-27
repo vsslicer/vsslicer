@@ -52,7 +52,7 @@ Done locally; the CI part is not (so two criteria stay unticked: "peak worker RS
 - RSS is the whole child process (main-thread parse, not `parseInWorker`), the same parser code.
 - Verified: `pnpm lint`, `pnpm test`, `pnpm build` pass; `pnpm bench --sizes 50,200` passes against the budget; an edited budget (999 MB/s, 10 MB) makes it exit 1 with both messages.
 - Not done: CI. `.github/workflows/ci.yml` runs a generic changed-module matrix (`run.mjs ci`), no per-module jobs, and there is no remote (Q7), so the bench is not wired; `pnpm bench` needs about 1 GB and 35 s. The coordinator can add it as a dedicated step if wanted.
-- Files: vsslicer/modules/gcode-parser/{bench/generate.ts,bench/case.ts,bench/run.ts,bench/budget.json,test/bench-generator.test.ts,package.json (bench script),tsconfig.test.json (bench included),CHANGELOG.md (Unreleased)}; .reference/notes/GCP-18-benchmark.md.
+- Files: vsslicer/modules/core/gcode-parser/{bench/generate.ts,bench/case.ts,bench/run.ts,bench/budget.json,test/bench-generator.test.ts,package.json (bench script),tsconfig.test.json (bench included),CHANGELOG.md (Unreleased)}; .reference/notes/GCP-18-benchmark.md.
 
 Review passed; CI step waits on Q7
 

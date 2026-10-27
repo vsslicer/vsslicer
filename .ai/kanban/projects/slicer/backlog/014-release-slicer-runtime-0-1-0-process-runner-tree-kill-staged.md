@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-runtime@0.1.0` so other modules can depend on the range: process runner, tree-kill, staged output, verified download and archive extraction. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-runtime/` (module: `slicer-runtime`, layer: n/a (release))
+**Code:** `vsslicer/modules/slicer/runtime/` (module: `slicer-runtime`, layer: n/a (release))
 
 ## Acceptance criteria
 

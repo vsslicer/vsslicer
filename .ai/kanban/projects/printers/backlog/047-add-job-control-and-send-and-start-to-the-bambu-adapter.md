@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compose pause/resume/stop, FTPS upload and `project_file` into `uploadAndStart`, and expose the AMS sync.
 
-**Code:** `vsslicer/modules/printer-bambu/src/application/...` (module: `printer-bambu`, layer: `application`)
+**Code:** `vsslicer/modules/printer/bambu/src/application/...` (module: `printer-bambu`, layer: `application`)
 
 ## Acceptance criteria
 

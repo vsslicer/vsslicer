@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Table from vendor job states to `completed|cancelled|failed|interrupted|in_progress`.
 
-**Code:** `vsslicer/modules/job-history/src/domain/...` (module: `job-history`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/job-history/src/domain/...` (module: `job-history`, layer: `domain`)
 
 ## Acceptance criteria
 

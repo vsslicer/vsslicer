@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Gap fill with its area threshold, a height-range tool with two draggable planes and the state to paint, and Clear for the current kind with a confirmation.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/paint/gapHeightClear.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/paint/gapHeightClear.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

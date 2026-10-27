@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Installs the Linux build, starts it headless and asks the extension host which extensions are active.
 
-**Code:** `vsslicer/modules/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

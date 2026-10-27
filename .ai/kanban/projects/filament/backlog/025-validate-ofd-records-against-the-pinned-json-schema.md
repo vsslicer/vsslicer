@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Draft-07 validation of brand, material, filament, variant and sizes records; invalid records are skipped and reported, an unknown major version fails closed.
 
-**Code:** `vsslicer/modules/filament-ofd/src/domain/...` (module: `filament-ofd`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/ofd/src/domain/...` (module: `filament-ofd`, layer: `domain`)
 
 ## Acceptance criteria
 

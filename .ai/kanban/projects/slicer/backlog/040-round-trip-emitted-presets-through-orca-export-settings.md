@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Proves the engine reads what we wrote: emit, load into the pinned Orca, export settings, compare values for every emitted key.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

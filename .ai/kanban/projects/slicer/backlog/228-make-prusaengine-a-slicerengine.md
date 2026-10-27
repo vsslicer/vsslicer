@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes emit, run and verify behind the `slicer-api` interface; progress is indeterminate because the CLI prints none.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/application/...` (module: `slicer-prusa`, layer: `application`)
+**Code:** `vsslicer/modules/slicer/prusa/src/application/...` (module: `slicer-prusa`, layer: `application`)
 
 ## Acceptance criteria
 

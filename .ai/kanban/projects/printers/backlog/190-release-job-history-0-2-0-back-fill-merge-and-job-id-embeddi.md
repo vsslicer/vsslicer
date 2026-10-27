@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `job-history@0.2.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/job-history/` (module: `job-history`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/job-history/` (module: `job-history`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

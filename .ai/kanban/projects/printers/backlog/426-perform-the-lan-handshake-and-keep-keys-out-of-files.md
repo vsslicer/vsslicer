@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the HTTP handshake on port 18910, validates what it returns, and hands the device certificate and keys to the secret store port; they are never written to settings, workspace files or logs.
 
-**Code:** `vsslicer/modules/printer-unofficial-anycubic/src/adapters/...` (module: `printer-unofficial-anycubic`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-anycubic/src/adapters/...` (module: `printer-unofficial-anycubic`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Draws each plate's bed in a row with gaps, highlights the active plate and moves the camera to it.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

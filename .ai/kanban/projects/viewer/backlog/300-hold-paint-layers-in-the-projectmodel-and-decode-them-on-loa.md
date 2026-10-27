@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Decodes the paint channels of each volume into `PaintLayer`s through the mesh worker, remaps them through the repair index map, and converts PrusaSlicer 2.x layers (supports, seam, mmu segmentation) into the same model. Layers are held per volume and kind in the ProjectModel.
 
-**Code:** `vsslicer/modules/project-extension/src/application/paint/load.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/paint/load.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

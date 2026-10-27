@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Insert a Bambu-tagged spool into the H2C AMS and check it appears assigned in the inventory within one status report.
 
-**Code:** `vsslicer/modules/filament-extension/docs/hardware-checklist.md` (module: `filament-extension`, layer: `n/a (hardware verification)`)
+**Code:** `vsslicer/modules/apps/filament/docs/hardware-checklist.md` (module: `filament-extension`, layer: `n/a (hardware verification)`)
 
 ## Acceptance criteria
 

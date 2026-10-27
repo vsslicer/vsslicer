@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes each channel as the attribute on `<triangle>` in the core model writer, for supports, seams, colours and every unknown attribute, and leaves a channel out when all its strings are empty.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/core/triangleAttributes.ts` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/core/triangleAttributes.ts` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

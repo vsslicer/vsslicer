@@ -15,7 +15,7 @@ created: 2026-10-25
 
 First E21 card: turn the PRN-1 decision (depend, port or re-implement) into a module design and the list of protocol facts to record from the H2C.
 
-**Code:** `vsslicer/modules/printer-bambu/docs/` (module: `printer-bambu`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/printer/bambu/docs/` (module: `printer-bambu`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

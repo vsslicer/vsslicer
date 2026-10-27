@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Integration test with all outbound sockets blocked: activation, opening the form, importing and downloading nothing.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

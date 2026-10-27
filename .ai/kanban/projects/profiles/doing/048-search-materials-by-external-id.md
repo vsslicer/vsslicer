@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `findMaterialByExternalId` over Bambu `filament_id`, Orca ids, Prusa names and Cura GUIDs, for the FIL spool-to-profile link.
 
-**Code:** `vsslicer/modules/profiles/src/application/store/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/store/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

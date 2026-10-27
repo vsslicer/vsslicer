@@ -15,7 +15,7 @@ created: 2026-10-25
 
 End to end on the H2C: send a plate from a project, watch the job, check the record, the job id in the file and the History view.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

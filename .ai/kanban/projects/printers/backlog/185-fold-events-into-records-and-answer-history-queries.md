@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `History` use cases: `append(event)`, `query({month, project, printer, status})` and change events, folding events by `vsslicer_job_id`.
 
-**Code:** `vsslicer/modules/job-history/src/application/...` (module: `job-history`, layer: `application`)
+**Code:** `vsslicer/modules/printer/job-history/src/application/...` (module: `job-history`, layer: `application`)
 
 ## Acceptance criteria
 

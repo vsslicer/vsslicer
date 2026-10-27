@@ -15,7 +15,7 @@ created: 2026-10-25
 
 RRF `rr_filelist`/`rr_download`/`rr_delete` and DSF `/machine/directory`.
 
-**Code:** `vsslicer/modules/printer-duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
 
 ## Acceptance criteria
 

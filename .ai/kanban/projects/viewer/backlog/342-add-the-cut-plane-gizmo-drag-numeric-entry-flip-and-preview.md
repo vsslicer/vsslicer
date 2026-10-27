@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Places the cut plane by dragging it and by typing its position and angles, with flip, and shows the cut preview as two shaded halves.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/cut/plane.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/cut/plane.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Stage the new version, take a snapshot, swap the vendor tree, rebase the user entities with the three-way merge (bumping `meta.base_version` where there are no conflicts), and record `source.commit` or version on the vendor.
 
-**Code:** `vsslicer/modules/profiles/src/application/...` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/...` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

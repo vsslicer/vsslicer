@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When a stroke splits an edge, the triangle across that edge is split at the same point so no leaf has a split point its neighbour lacks. Ported from the neighbour handling of `OrcaSlicer@09aa0114:src/libslic3r/TriangleSelector.cpp` and `.hpp` (AGPL-3.0, D2; cross-check `PrusaSlicer@30ef591:src/slic3r-domain/include/Slic3r/Domain/TriangleSelector.hpp`), using the connectivity built by the repair steps.
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/neighbours.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/neighbours.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

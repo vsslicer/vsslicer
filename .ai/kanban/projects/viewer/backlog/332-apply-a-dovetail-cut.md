@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Cuts with a dovetail: one half gets the tongue added and the other the groove subtracted, and both carry the cut identity.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/application/dovetail.ts` (module: `mesh-boolean`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/application/dovetail.ts` (module: `mesh-boolean`, layer: `application`)
 
 ## Acceptance criteria
 

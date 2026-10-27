@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `session.authorizedFetch()` answers PrusaLink's Digest challenge (or sends `X-Api-Key`) for camera URLs.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
 
 ## Acceptance criteria
 

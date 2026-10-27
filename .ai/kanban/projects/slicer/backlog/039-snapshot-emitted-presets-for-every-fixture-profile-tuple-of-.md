@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The full tuple set from PRF's fixtures (printer, material, process combinations) emitted and snapshotted.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (snapshot tests))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (snapshot tests))
 
 ## Acceptance criteria
 

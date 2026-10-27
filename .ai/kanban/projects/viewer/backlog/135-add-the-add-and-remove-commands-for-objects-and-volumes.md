@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands that add or remove an object or a volume with its mesh, name and transform. They are the primitives that split, merge, volumes and STEP import use.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/structure/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/structure/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

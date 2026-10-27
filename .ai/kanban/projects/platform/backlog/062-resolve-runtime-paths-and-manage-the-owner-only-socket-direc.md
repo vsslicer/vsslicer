@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Security-sensitive: finds the per-user runtime directory (XDG_RUNTIME_DIR, macOS per-user temp, Windows pipe name from the spike), creates it 0700, writes the random token 0600 next to the socket, and rotates it on server start.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

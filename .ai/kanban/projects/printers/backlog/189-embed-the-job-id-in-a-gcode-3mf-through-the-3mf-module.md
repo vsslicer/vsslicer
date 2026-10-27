@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds the metadata entry the spike chose through `@vsslicer/3mf` and reads it back.
 
-**Code:** `vsslicer/modules/job-history/src/application/...` (module: `job-history`, layer: `application`)
+**Code:** `vsslicer/modules/printer/job-history/src/application/...` (module: `job-history`, layer: `application`)
 
 ## Acceptance criteria
 

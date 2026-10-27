@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Creates ranges with the drag tool's command (with an infill and a layer-height override), saves, slices and checks the G-code per layer.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/range-oracle/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/integration/range-oracle/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

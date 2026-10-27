@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A curve of layer height against Z beside the selected object, with the same Z axis as the object, and bands on the object shaded by layer height.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/layerheight/curve.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/layerheight/curve.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

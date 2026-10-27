@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `camera-bambu@0.1.0`.
 
-**Code:** `vsslicer/modules/camera-bambu/` (module: `camera-bambu`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/camera/bambu/` (module: `camera-bambu`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

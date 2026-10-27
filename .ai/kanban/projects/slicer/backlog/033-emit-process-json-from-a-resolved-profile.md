@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Same for the process preset (layers, walls, infill, supports, speeds).
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases the hosted-deployment increment. Blocked on a hosting budget (D5, D10): do not start until `PLT-128` records a yes for hosting.
 
-**Code:** `vsslicer/modules/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (release))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (release))
 
 ## Acceptance criteria
 

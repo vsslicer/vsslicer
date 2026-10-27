@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The use case: instance entity into the store, credential into the vault, diagnostics for what could not import, sources untouched. It consumes `InstanceImport` results from the registered importers.
 
-**Code:** `vsslicer/modules/profiles/src/application/instances/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/instances/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -13,9 +13,9 @@ depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---
 
-Scaffold `vsslicer/modules/camera-api/` from the `tooling` module: the small shared boundary for camera stream types, the contract kit and the pure helpers the camera modules share.
+Scaffold `vsslicer/modules/common/camera-api/` from the `tooling` module: the small shared boundary for camera stream types, the contract kit and the pure helpers the camera modules share.
 
-**Code:** `vsslicer/modules/camera-api/` (module: `camera-api`, layer: `n/a (module scaffold)`)
+**Code:** `vsslicer/modules/common/camera-api/` (module: `camera-api`, layer: `n/a (module scaffold)`)
 
 ## Acceptance criteria
 

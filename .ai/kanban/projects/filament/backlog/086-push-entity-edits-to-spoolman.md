@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Local creates, edits and archives pushed with CRUD; every push logged.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

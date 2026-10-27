@@ -15,7 +15,7 @@ created: 2026-10-25
 
 New engine adapter module for the zero-install engine. Its candidate is chosen by the spikes below; the implementation cards assume the expected winner (CuraEngine as WASM in a Node child process) and are revised if the decision says otherwise (E66).
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (module scaffold))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (module scaffold))
 
 ## Acceptance criteria
 

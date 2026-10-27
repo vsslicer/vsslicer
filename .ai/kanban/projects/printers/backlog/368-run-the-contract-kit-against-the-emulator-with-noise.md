@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the printer-api contract kit against the adapter through the emulator, over the pty pair where available, with the noise profile on.
 
-**Code:** `vsslicer/modules/printer-serial/test/contract/` (module: `printer-serial`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/serial/test/contract/` (module: `printer-serial`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

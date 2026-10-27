@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Lists editing, repair, STEP and arrange commands as `desktopOnlyCommands` with `!isWeb`, and shows a one-line note where a user would look for them.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/...` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/...` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

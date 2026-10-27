@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wires the testkit to `PrusaEngine` and commits the capability report for the pinned version.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

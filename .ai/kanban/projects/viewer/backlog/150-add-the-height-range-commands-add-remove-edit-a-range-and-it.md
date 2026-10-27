@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds, removes and edits height ranges of an object and their overrides; refuses overlapping ranges and ranges outside the object height.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/ranges/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/ranges/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

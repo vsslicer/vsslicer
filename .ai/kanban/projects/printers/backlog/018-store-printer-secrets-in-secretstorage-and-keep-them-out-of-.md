@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `SecretStore` implementation over `context.secrets`, with the leak test as the regression guard.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

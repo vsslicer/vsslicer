@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One click fills the region under the cursor with the bucket tool or the smart fill tool and its angle limit; the fill runs in the worker with a progress hint and is one undo step.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/paint/fill.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/paint/fill.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

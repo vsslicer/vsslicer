@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Context menu and command palette entries for the structural operations, with progress for split.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/menus/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/menus/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

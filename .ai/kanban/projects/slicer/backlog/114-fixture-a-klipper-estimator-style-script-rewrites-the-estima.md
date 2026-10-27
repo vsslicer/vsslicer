@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A fixture script that rewrites the time estimate, run through the pipeline; the assembled archive is checked.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

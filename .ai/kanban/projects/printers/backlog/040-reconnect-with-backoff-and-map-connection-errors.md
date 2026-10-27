@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reconnect loop with exponential backoff capped at 60 s; a wrong access code stops retrying.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

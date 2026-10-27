@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compares an archive exported by Bambu Studio for the fixture plate with Orca's `--export-3mf` and finds which `slice_info.config` fields (filament list, prediction, weight, nozzle info) the H2C needs, by sending variants.
 
-**Code:** `vsslicer/modules/slicer-output/` (module: `slicer-output`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/output/` (module: `slicer-output`, layer: n/a (spike))
 
 ## Acceptance criteria
 

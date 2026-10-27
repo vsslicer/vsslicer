@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hover text for a placeholder or option variable: type, tooltip (the slicer's text, with provenance), whether it is a vector, and the template kinds that fill it.
 
-**Code:** `vsslicer/modules/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
 
 ## Acceptance criteria
 

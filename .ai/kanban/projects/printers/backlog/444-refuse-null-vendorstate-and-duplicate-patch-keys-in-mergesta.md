@@ -10,9 +10,9 @@ sprint: "VSS:SP38"
 created: 2026-10-26
 ---
 
-From PRN-4's passing review (SP10, `vsslicer/modules/printer-api/src/domain/status.ts`; review text in the PRN-4 card).
+From PRN-4's passing review (SP10, `vsslicer/modules/common/printer-api/src/domain/status.ts`; review text in the PRN-4 card).
 
-**Code:** `vsslicer/modules/printer-api/src/domain/status.ts`, `test/status.test.ts` (domain)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/status.ts`, `test/status.test.ts` (domain)
 
 ## Acceptance criteria
 

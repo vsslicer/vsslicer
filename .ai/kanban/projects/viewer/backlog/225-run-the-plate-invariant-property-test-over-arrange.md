@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds the arrange commands to the plate generator.
 
-**Code:** `vsslicer/modules/project-extension/test/property/plates/` (module: `project-extension`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/project/test/property/plates/` (module: `project-extension`, layer: n/a (tests))
 
 ## Acceptance criteria
 

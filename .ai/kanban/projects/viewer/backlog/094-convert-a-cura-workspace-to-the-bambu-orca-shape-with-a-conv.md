@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps Cura workspace objects and per-object settings to the writer's `Project` and reports what is converted and what stays preserved.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/convert/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/convert/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

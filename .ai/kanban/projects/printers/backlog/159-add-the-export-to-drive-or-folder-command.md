@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Register the folder adapter and add the command: pick volume or folder, preview the sanitised name, write, show the eject hint.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

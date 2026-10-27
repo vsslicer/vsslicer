@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure codec for `{"method":"get|set","params":{...}}` messages, the status fields the adapter reads, and the CFS types (`boxsInfo` boxes and slots, `colorMatch`, `multiColorPrint`). Written new from the protocol as `OrcaSlicer@09aa0114` shows it; any code ported from Orca (AGPL-3.0) is allowed under D2 and then carries the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/src/domain/...` (module: `printer-unofficial-creality`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/src/domain/...` (module: `printer-unofficial-creality`, layer: `domain`)
 
 ## Acceptance criteria
 

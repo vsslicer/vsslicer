@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the VSCodium update path (`updateUrl`, its versions repository) and decides what a GitHub-release-only update channel needs.
 
-**Code:** `vsslicer/modules/vsslicer-build/docs/update-spike.md` (module: `vsslicer-build`, layer: n/a (spike))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/update-spike.md` (module: `vsslicer-build`, layer: n/a (spike))
 
 ## Acceptance criteria
 

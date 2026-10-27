@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The panel and sidebar view, an 'Open camera' action on a printer in the Printers tree (camera picker when there are several), reached through the proxy with `asExternalUri`/`portMapping`.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Paints supports, seams and colours while the pointer drags: candidates from the BVH, selection on the main thread, live overlay, and one stroke command on pointer up.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/paint/brush.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/paint/brush.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

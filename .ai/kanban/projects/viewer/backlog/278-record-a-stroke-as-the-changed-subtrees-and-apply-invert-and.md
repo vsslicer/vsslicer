@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `PaintDelta` holds only the triangle subtrees a stroke changed, before and after. Applying it, inverting it and clearing a whole layer all use it, so a stroke command stays small.
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/delta.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/delta.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

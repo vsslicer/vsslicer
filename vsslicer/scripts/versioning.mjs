@@ -34,7 +34,7 @@ export const changelogSection = (changelog, version) => {
   return lines.slice(start, end < 0 ? undefined : end).join('\n').trim();
 };
 
-export const releaseTag = (dir, version) => `${dir}@${version}`;
+export const releaseTag = (name, version) => `${name}@${version}`;
 
 /** m: { dir, changed: module-relative paths changed since base, files, baseVersion (null: new module), version, changelog } -> problems */
 export function versionProblems(m) {

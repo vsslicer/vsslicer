@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Start, end, layer and toolchange G-code survive store, resolve and export unchanged; exporting to the other dialect warns because the languages are not portable.
 
-**Code:** `vsslicer/modules/profiles/src/application/export/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/export/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Proves the resolved input is complete: run the pinned CuraEngine on each fixture tuple.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

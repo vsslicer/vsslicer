@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure types for the CC2 info and status responses and the state mapping, written from the spike document.
 
-**Code:** `vsslicer/modules/printer-unofficial-elegoo-cc2/src/domain/...` (module: `printer-unofficial-elegoo-cc2`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/unofficial-elegoo-cc2/src/domain/...` (module: `printer-unofficial-elegoo-cc2`, layer: `domain`)
 
 ## Acceptance criteria
 

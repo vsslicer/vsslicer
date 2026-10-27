@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One command per setting group with validation (closed enums, filament ids present in the project).
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

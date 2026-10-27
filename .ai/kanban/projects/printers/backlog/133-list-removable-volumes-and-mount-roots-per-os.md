@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Mount root listing: macOS `/Volumes`, Linux `/media` and `/run/media`, Windows drive letters; any folder is also allowed.
 
-**Code:** `vsslicer/modules/printer-folder/src/adapters/...` (module: `printer-folder`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/folder/src/adapters/...` (module: `printer-folder`, layer: `adapters`)
 
 ## Acceptance criteria
 

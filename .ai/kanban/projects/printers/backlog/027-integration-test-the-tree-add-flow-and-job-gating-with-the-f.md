@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `@vscode/test-electron` suite that proves the epic's user-visible criteria.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

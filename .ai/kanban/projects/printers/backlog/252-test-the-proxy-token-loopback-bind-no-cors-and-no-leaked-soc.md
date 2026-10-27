@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The cross-cutting proxy proofs from the E38 criteria, run against the real server.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

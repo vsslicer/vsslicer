@@ -15,7 +15,7 @@ created: 2026-10-25
 
 For an extension with a `browser` field the packaging task also asserts that the entry file is in the VSIX, that its bundle passes the Node-built-in check, and that the size budget covers it.
 
-**Code:** `vsslicer/modules/tooling/src/package/...` (module: `tooling`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/tooling/src/package/...` (module: `tooling`, layer: `adapters`)
 
 ## Acceptance criteria
 

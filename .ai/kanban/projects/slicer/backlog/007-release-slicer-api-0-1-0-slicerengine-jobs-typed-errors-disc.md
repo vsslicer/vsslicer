@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-api@0.1.0` so other modules can depend on the range: SlicerEngine, jobs, typed errors, discovery types and the fake engine. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (release))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (release))
 
 ## Acceptance criteria
 

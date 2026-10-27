@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices the shared fixture plates with the Prusa profile tuples and checks layer count and roles as in I5.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

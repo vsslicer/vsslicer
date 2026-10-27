@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-cura@0.3.0` so other modules can depend on the range: capability entries and effect tests for the P2 rows, one-at-a-time messages. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (release))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (release))
 
 ## Acceptance criteria
 

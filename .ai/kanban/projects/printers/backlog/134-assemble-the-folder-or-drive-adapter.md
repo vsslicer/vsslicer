@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `PrinterAdapter` with only `upload`: sanitise the name, safe-write, report progress.
 
-**Code:** `vsslicer/modules/printer-folder/src/application/...` (module: `printer-folder`, layer: `application`)
+**Code:** `vsslicer/modules/printer/folder/src/application/...` (module: `printer-folder`, layer: `application`)
 
 ## Acceptance criteria
 

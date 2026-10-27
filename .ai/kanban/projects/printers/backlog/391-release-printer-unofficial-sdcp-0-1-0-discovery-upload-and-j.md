@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-unofficial-sdcp@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/` (module: `printer-unofficial-sdcp`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/` (module: `printer-unofficial-sdcp`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

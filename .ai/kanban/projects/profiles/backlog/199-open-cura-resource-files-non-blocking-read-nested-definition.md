@@ -10,7 +10,7 @@ sprint: "VSS:SP29"
 created: 2026-10-26
 ---
 
-From PRF-30's reviews (SP10), `vsslicer/modules/profiles-cura/src/adapters/definitions/`.
+From PRF-30's reviews (SP10), `vsslicer/modules/profiles/cura/src/adapters/definitions/`.
 
 **Code:** `src/adapters/definitions/folder.ts`, `read.ts` (adapters)
 

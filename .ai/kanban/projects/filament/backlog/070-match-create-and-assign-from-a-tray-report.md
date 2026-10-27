@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On each tray report: match a spool by `tag_uid` then `tray_uuid`; otherwise, per the setting ask, always or never, create a spool linked to the catalogue filament whose `slicer_ids.bambu` equals `tray_info_idx` (falling back to the tray fields) and assign it to the slot; a tray swap reassigns the slot.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

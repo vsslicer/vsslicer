@@ -13,9 +13,9 @@ depends_on: [77, 75]
 created: 2026-10-25
 ---
 
-The module README and `docs/protocol.md`: methods, error table, handshake, auth, data rules, adding `printer.*` methods, using the test kit and running conformance. Path: `vsslicer/modules/agent-protocol/README.md`.
+The module README and `docs/protocol.md`: methods, error table, handshake, auth, data rules, adding `printer.*` methods, using the test kit and running conformance. Path: `vsslicer/modules/common/agent-protocol/README.md`.
 
-**Code:** `vsslicer/modules/agent-protocol/` (module: `agent-protocol`, layer: n/a (docs))
+**Code:** `vsslicer/modules/common/agent-protocol/` (module: `agent-protocol`, layer: n/a (docs))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Applies adaptive, smooth and brushed profiles to the fixtures, saves, reopens, slices through `slicer-orca` and reads the layer Z values from the G-code with the parser.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/layerheight-oracle/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/integration/layerheight-oracle/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

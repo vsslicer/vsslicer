@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs each script from the stripped `post_process` list or the workspace setting, in order, on a temp copy of the G-code, with a timeout, and detects a script that deletes its input.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

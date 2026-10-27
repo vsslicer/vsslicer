@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A staging directory per job and an atomic commit of its files into `.vsslicer/sliced/`. Cancel, failure or crash removes the staging directory; nothing partial is ever visible.
 
-**Code:** `vsslicer/modules/slicer-runtime/src/adapters/...` (module: `slicer-runtime`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/runtime/src/adapters/...` (module: `slicer-runtime`, layer: `adapters`)
 
 ## Acceptance criteria
 

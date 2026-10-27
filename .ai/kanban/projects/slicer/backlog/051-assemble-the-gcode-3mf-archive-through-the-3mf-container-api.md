@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes the zip through the `3mf` module's container API (create container, add parts). The archive has the G-code, MD5, thumbnails and config parts and no mesh.
 
-**Code:** `vsslicer/modules/slicer-output/src/adapters/...` (module: `slicer-output`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/output/src/adapters/...` (module: `slicer-output`, layer: `adapters`)
 
 ## Acceptance criteria
 

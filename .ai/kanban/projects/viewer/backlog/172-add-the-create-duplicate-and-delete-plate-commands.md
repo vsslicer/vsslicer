@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Create appends a plate; duplicate copies instances with new ids; delete removes the plate and moves nothing (its instances are deleted and restored on undo). The limit is 36 plates.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

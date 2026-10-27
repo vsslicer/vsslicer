@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the generator on `OrcaSlicer@09aa0114` and commits the result under `src/domain/catalogue/data/orca.json` with reviewed labels and tooltips. Ported as data from OrcaSlicer@09aa0114:src/libslic3r/PrintConfig.cpp:13656-13793 (AGPL-3.0, D2): the file carries the notice and a `Ported from` line with the repo, commit and path.
 
-**Code:** `vsslicer/modules/gcode-templates/src/domain/catalogue/data/` (module: `gcode-templates`, layer: `domain`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/domain/catalogue/data/` (module: `gcode-templates`, layer: `domain`)
 
 ## Acceptance criteria
 

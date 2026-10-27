@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Security: scripts run only in a trusted workspace, and a `post_process` found in a 3MF's embedded config is shown and needs explicit confirmation.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

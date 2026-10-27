@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `calibration@0.1.0` so other modules can depend on the range: sweep engine, firmware table, towers (temperature, retraction, max volumetric speed, VFA), pick mapping, write-back plan and `Calibration.run`. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/calibration/` (module: `calibration`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/calibration/` (module: `calibration`, layer: n/a (release))
 
 ## Acceptance criteria
 

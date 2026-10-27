@@ -13,9 +13,9 @@ depends_on: [73, 66, 15]
 created: 2026-10-25
 ---
 
-An `@vscode/test-electron` test with the sample extension for the version-mismatch criterion. Path: `vsslicer/modules/agent-protocol/test/integration/extension/` (layer: presentation, test).
+An `@vscode/test-electron` test with the sample extension for the version-mismatch criterion. Path: `vsslicer/modules/common/agent-protocol/test/integration/extension/` (layer: presentation, test).
 
-**Code:** `vsslicer/modules/agent-protocol/src/presentation/...` (module: `agent-protocol`, layer: `presentation`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/presentation/...` (module: `agent-protocol`, layer: `presentation`)
 
 ## Acceptance criteria
 

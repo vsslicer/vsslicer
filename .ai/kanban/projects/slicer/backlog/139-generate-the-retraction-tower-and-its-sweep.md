@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Tower with one block per retraction length; target key `retraction_length`.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

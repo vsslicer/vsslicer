@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish API docs from TSDoc and fail CI when the public API changes without a report update.
 
-**Code:** `vsslicer/modules/printer-api/` (module: `printer-api`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/common/printer-api/` (module: `printer-api`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

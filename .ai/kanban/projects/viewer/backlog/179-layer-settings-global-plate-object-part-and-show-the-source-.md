@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes the resolved profile with a plate layer, then object and part layers, using the profile merge from `profile-api`, and tags each key with its layer. The plate layer is applied here because `resolve` takes no plate argument.
 
-**Code:** `vsslicer/modules/project-extension/src/application/overrides/layering.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/overrides/layering.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

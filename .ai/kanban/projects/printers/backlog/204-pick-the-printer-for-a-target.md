@@ -15,7 +15,7 @@ created: 2026-10-25
 
 From a target, the printers' facts and states, choose the first idle compatible printer; `any` marks the choice as needing confirmation.
 
-**Code:** `vsslicer/modules/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
 
 ## Acceptance criteria
 

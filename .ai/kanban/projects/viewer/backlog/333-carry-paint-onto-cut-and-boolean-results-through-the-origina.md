@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Gives each output triangle the paint state at its place on the input triangle it came from (the state at the centroid via `stateAt`), so supports, seams and colours follow the geometry through a cut or boolean.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/application/paint.ts` (module: `mesh-boolean`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/application/paint.ts` (module: `mesh-boolean`, layer: `application`)
 
 ## Acceptance criteria
 

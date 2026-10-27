@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Plain types: a polygon as number arrays, an item with id, name, footprint and current pose, a bed (shape, size, exclusion areas, locked flag per plate), options (spacing, rotation steps, alignment, multi-plate) and a result with placed and unplaced items.
 
-**Code:** `vsslicer/modules/arrange/src/domain/` (module: `arrange`, layer: `domain`)
+**Code:** `vsslicer/modules/core/arrange/src/domain/` (module: `arrange`, layer: `domain`)
 
 ## Acceptance criteria
 

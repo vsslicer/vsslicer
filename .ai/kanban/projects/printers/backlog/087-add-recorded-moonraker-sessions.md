@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Recorded REST and JSON-RPC WebSocket sessions: idle, print with `file_position`, pause, upload with checksum, 422 on a corrupt upload, oneshot token.
 
-**Code:** `vsslicer/modules/printer-moonraker/test/fixtures/` (module: `printer-moonraker`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/moonraker/test/fixtures/` (module: `printer-moonraker`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

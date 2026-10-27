@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices each plate of the two-printer fixture with the presets of its own printer.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/mixed-printers/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/mixed-printers/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

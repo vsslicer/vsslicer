@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Settings `vsslicer.slicer.prusa.path` and `vsslicer.slicer.prusa.useVersion3` (default false), plus the download offer with the confirmation of the existing flow.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

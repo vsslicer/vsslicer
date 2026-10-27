@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The shared shell of the painting tools: a toolbar to enter support, seam or colour painting, choose enforcer or blocker (or a filament), cursor shape and size, and leave with Escape. Tools plug into it.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/paint/mode.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/paint/mode.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

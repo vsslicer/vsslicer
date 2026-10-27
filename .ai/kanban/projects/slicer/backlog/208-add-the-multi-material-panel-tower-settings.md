@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A webview panel (webview kit) for the selected plate with the tower section: type, position, size and ramming.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

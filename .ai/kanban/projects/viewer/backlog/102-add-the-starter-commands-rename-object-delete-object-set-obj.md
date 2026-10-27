@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Three small commands that prove the core: rename an object, delete an object, set an object transform matrix.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/starter/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/starter/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

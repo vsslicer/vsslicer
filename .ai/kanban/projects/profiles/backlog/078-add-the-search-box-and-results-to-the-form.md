@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The search input in the webview, jump-to-field and highlight.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/search/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/search/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

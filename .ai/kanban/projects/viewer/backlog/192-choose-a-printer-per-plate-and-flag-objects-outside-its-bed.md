@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A printer picker on the plate, listing instances from `profiles`, drawing the plate's own bed and marking objects outside it.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

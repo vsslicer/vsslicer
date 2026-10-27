@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices a temperature tower both ways on Orca and CuraEngine and decides how sweeps are applied: a post-processing step at layer changes (engine-independent but fights the engine's own temperature commands) or layer-range modifiers in the 3MF.
 
-**Code:** `vsslicer/modules/calibration/` (module: `calibration`, layer: n/a (spike))
+**Code:** `vsslicer/modules/core/calibration/` (module: `calibration`, layer: n/a (spike))
 
 ## Acceptance criteria
 

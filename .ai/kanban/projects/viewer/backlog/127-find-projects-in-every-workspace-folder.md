@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Discovers 3MF projects in all workspace folders, shows them in the tree roots and opens each in its own editor.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/workspace/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/workspace/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

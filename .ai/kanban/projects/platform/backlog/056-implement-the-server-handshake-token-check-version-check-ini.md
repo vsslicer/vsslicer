@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Security-sensitive: `initialize` is the only method allowed first; it checks the token (constant-time compare), the protocol major, and returns the server version and capabilities.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

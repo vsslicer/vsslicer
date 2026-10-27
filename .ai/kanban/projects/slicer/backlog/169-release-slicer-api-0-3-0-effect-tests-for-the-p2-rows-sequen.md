@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-api@0.3.0` so other modules can depend on the range: effect tests for the P2 rows (sequential, mold, conical, overhang, gradual infill, bed mesh, hooks, timelapse, motion keys, tower, purge, per-feature, nozzle map). Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (release))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (release))
 
 ## Acceptance criteria
 

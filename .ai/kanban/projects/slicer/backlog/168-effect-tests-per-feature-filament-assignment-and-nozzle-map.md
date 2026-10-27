@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect tests for the Orca `*_filament_id` keys, Cura support and adhesion extruder settings, and `filament_map` with `filament_map_mode`.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

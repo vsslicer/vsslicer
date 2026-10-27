@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Recordings for `rr_connect`, `rr_model`, `rr_upload` with crc32, session expiry, and DSF `/machine/*` plus WebSocket patches.
 
-**Code:** `vsslicer/modules/printer-duet/test/fixtures/` (module: `printer-duet`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/duet/test/fixtures/` (module: `printer-duet`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

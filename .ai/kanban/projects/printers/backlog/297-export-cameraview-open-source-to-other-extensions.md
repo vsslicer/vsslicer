@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The exported `CameraView.open(source)` so the fleet view and other extensions can show a camera tile or panel.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

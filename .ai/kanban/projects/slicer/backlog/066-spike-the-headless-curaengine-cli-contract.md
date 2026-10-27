@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads `CommandLine.cpp` at the pinned revision and runs fixtures to decide: `-j` with `-e` versus `-r` resolved JSON, which defaults load from definitions, how per-extruder settings are passed, and what the log lines look like.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (spike))
 
 ## Acceptance criteria
 

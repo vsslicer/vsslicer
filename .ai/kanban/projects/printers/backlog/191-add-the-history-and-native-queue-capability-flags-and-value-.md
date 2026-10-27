@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Optional capability flags `history` and `nativeQueue`, and the `NativeJob` (job_id, filename, status, start_time, end_time, print_duration, filament_used) and `NativeQueueItem` types.
 
-**Code:** `vsslicer/modules/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

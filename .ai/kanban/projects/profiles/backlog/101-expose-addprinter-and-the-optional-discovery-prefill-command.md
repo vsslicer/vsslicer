@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `vsslicer.profiles.addPrinter()` for SLC and PRN, plus an optional command that prefills the connection step when a printer extension provides discovery results.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/api/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/api/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

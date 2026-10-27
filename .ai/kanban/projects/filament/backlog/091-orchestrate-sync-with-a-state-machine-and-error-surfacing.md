@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A sync service with states off, syncing, offline and error, exposing state and conflicts, with sync off by default.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

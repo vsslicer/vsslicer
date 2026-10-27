@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extends the project tree with volume and range nodes, their type icons and menu actions to add, retype and remove.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

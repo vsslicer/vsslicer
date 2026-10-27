@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads each generated theme and checks editor foreground/background and the main token colours at AA (4.5:1; 3:1 for large UI pairs as listed).
 
-**Code:** `vsslicer/modules/themes/src/adapters/contrast-check.ts` (module: `themes`, layer: `adapters`)
+**Code:** `vsslicer/modules/apps/themes/src/adapters/contrast-check.ts` (module: `themes`, layer: `adapters`)
 
 ## Acceptance criteria
 

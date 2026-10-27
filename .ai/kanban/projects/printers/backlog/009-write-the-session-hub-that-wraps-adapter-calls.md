@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Plain-Node hub shared by the extension (in-process) and the agent: opens sessions, wraps every adapter call, fans status out.
 
-**Code:** `vsslicer/modules/printer-api/src/application/...` (module: `printer-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/printer-api/src/application/...` (module: `printer-api`, layer: `application`)
 
 ## Acceptance criteria
 

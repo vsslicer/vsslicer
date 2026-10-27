@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Effect tests for `wipe_tower_x`, `wipe_tower_y`, tower type and `flush_into_infill/objects/support`: the tower role's bounding box and the purge moves' roles in the parsed G-code.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

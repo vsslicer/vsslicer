@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On activation registers the `elegoo-cc2` descriptor with its label and the module path the agent loads, so it appears in the vendor Add printer flow.
 
-**Code:** `vsslicer/modules/printers-unofficial-extension/src/presentation/...` (module: `printers-unofficial-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers-unofficial/src/presentation/...` (module: `printers-unofficial-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

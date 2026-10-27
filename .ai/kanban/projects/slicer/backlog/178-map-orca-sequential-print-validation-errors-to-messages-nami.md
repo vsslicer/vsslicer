@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps `CLI_VALIDATE_ERROR` text for collisions and height in one-at-a-time mode to a typed error that names the objects involved.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

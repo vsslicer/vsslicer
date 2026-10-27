@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `Inventory.catalogue.search(text)`, `byEAN(ean)` and `bySlicerIds(ids)` over an in-memory index.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

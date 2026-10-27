@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Points the instance at open-vsx.org as its upstream and configures stable UUID fetching so public extensions keep their upstream identity.
 
-**Code:** `vsslicer/modules/openvsx-registry/compose/` and `test/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/compose/` and `test/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 

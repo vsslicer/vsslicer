@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The use case that picks the registered `Exporter` for a format, exports unmodified entities as their stored native form, and refuses to overwrite without confirmation.
 
-**Code:** `vsslicer/modules/profiles/src/application/export/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/export/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

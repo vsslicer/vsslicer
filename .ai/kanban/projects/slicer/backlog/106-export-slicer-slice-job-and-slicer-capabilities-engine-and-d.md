@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The cross-extension contract (PRF's form reads capabilities, PRN and others call slice) via extension `exports`; versioned types come from `slicer-api`.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds pairs of triangles that intersect other than along shared edges, using the BVH, as input to the removal.
 
-**Code:** `vsslicer/modules/mesh/src/domain/repair/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/repair/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

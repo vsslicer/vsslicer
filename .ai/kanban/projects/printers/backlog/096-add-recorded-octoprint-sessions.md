@@ -15,7 +15,7 @@ created: 2026-10-25
 
 REST and SockJS recordings: idle, printing, paused, upload with select/print, AppKeys flow.
 
-**Code:** `vsslicer/modules/printer-octoprint/test/fixtures/` (module: `printer-octoprint`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/octoprint/test/fixtures/` (module: `printer-octoprint`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices each plate of the fixture through `slicer-orca` and uses the G-code parser to check bed type, print sequence, spiral mode, plate custom G-code and layer entries.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/plates-oracle/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/plates-oracle/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

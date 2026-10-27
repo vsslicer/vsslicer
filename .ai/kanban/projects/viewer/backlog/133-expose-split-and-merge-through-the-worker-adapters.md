@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds `splitComponents` and `mergeMeshes` to the worker_threads and Web Worker adapters with transferable buffers.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/workers/` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/workers/` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

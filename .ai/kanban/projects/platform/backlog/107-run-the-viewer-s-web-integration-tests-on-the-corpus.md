@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `@vscode/test-web` tests that open `.3mf` (each dialect fixture), `.stl` and `.obj` from the I2 corpus and check statistics, the tree and a rendered frame.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/...` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/...` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

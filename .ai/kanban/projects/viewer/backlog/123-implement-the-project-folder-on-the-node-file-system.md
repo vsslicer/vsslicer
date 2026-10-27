@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The Node file-system side of `FolderStore`, with a test that PRN-shaped reads and writes of the reserved paths work.
 
-**Code:** `vsslicer/modules/project-extension/src/adapters/folderStore.ts` (module: `project-extension`, layer: `adapters`)
+**Code:** `vsslicer/modules/apps/project/src/adapters/folderStore.ts` (module: `project-extension`, layer: `adapters`)
 
 ## Acceptance criteria
 

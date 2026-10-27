@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Set `history_id` on dispatch so job events extend the queue item's record.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

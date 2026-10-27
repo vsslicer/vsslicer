@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the exit-code table in `OrcaSlicer@09aa0114:src/libslic3r/Utils.hpp:43-95` (read, not ported) as a signed byte and maps each row to an `EngineError` with a message.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fetch `json/all.json.gz` (pinned default, overridable), verify gzip and content type, and report failures; nothing is fetched unless asked.
 
-**Code:** `vsslicer/modules/filament-ofd/src/adapters/...` (module: `filament-ofd`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/ofd/src/adapters/...` (module: `filament-ofd`, layer: `adapters`)
 
 ## Acceptance criteria
 

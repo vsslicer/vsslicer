@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Returns host type, url and credential to the calling extension, and only for instances whose `host_type` the caller names; missing credential gives `credential-missing` with a re-enter action.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/api/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/api/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A script that reads `s_CustomGcodeSpecificPlaceholders` and `CustomGcodeSpecificConfigDef` (`new_def` and `def->add` forms) from a slicer checkout and writes the catalogue JSON. Both slicers use the same structure (`OrcaSlicer@09aa0114` `PrintConfig.cpp:13656-13793`; `PrusaSlicer@30ef591` legacy `PrintConfig.cpp:6414-6468`).
 
-**Code:** `vsslicer/modules/gcode-templates/src/adapters/...` (module: `gcode-templates`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/adapters/...` (module: `gcode-templates`, layer: `adapters`)
 
 ## Acceptance criteria
 

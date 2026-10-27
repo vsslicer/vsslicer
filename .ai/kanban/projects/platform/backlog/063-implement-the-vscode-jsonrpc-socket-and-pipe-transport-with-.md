@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Implements the server `Connection` and client `Transport` ports over `vscode-jsonrpc` on a Unix socket or named pipe. No TCP.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

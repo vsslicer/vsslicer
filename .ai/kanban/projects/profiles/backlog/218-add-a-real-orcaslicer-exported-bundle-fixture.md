@@ -11,9 +11,9 @@ depends_on: [105]
 created: 2026-10-26
 ---
 
-PRF-105 shipped documented-layout bundles and a Bambu Studio preset bundle zipped by our writer; no bundle exported by OrcaSlicer's own dialog exists on this machine (see `vsslicer/modules/profiles-orca/test/fixtures/bundles/PROVENANCE.md`). Waits on the owner's answer to the question asked on PRF-105.
+PRF-105 shipped documented-layout bundles and a Bambu Studio preset bundle zipped by our writer; no bundle exported by OrcaSlicer's own dialog exists on this machine (see `vsslicer/modules/profiles/orca/test/fixtures/bundles/PROVENANCE.md`). Waits on the owner's answer to the question asked on PRF-105.
 
-**Code:** `vsslicer/modules/profiles-orca/test/fixtures/bundles/` (module: `profiles-orca`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/profiles/orca/test/fixtures/bundles/` (module: `profiles-orca`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

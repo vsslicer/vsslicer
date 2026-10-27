@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `cut(mesh, plane, options)` returns the upper half, the lower half or both, each a closed mesh with a cap on the cut face, plus the cap triangle indices.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/application/cut.ts` (module: `mesh-boolean`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/application/cut.ts` (module: `mesh-boolean`, layer: `application`)
 
 ## Acceptance criteria
 

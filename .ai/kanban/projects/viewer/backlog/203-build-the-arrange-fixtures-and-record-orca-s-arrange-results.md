@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets of 10, 50 and 200 mixed object footprints and beds (rectangular, circular, with exclusion areas) as plain JSON, with Orca's GUI arrange result (placed count and bed utilisation) recorded once per fixture and a PROVENANCE.md.
 
-**Code:** `vsslicer/modules/arrange/test/fixtures/` (module: `arrange`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/arrange/test/fixtures/` (module: `arrange`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

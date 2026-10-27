@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `startWorker(entry, options)` returns one handle (post with transfer list, message and error events, terminate) backed by `worker_threads` on desktop and by a Web Worker in the web extension host, plus a worker-side `workerPort()` with the same interface; failure to start is a typed `WorkerStartError` with the reason.
 
-**Code:** `vsslicer/modules/webview-kit/src/adapters/...` (module: `webview-kit`, layer: `adapters`)
+**Code:** `vsslicer/modules/ui/webview-kit/src/adapters/...` (module: `webview-kit`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A recorded session from a Moonraker with `[spoolman]` enabled, for the proxy and active-spool tests.
 
-**Code:** `vsslicer/modules/printer-moonraker/test/fixtures/` (module: `printer-moonraker`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/moonraker/test/fixtures/` (module: `printer-moonraker`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

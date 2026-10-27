@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Installs the pinned CuraEngine on the three runners into a cache keyed by the manifest hash. Extraction per platform is its own CI step.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (ci))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (ci))
 
 ## Acceptance criteria
 

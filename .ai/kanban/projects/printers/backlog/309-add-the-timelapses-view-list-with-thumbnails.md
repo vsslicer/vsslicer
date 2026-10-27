@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A Timelapses view per printer: name, date, size, state (rendered or not) and a thumbnail where the provider has one (Moonraker, OctoPrint), else an icon; a render action for unrendered sets.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

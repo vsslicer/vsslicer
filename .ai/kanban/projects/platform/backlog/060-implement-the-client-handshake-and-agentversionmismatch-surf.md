@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On connect the client sends `initialize` with its version, name and capabilities and token, exposes the server's version and capabilities, and raises a typed `AgentVersionMismatch` for presentation to show.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

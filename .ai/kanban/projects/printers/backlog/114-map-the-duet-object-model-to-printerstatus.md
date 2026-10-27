@@ -15,7 +15,7 @@ created: 2026-10-25
 
 RRF `rr_model` and DSF object model status, heaters, job and progress.
 
-**Code:** `vsslicer/modules/printer-duet/src/domain/...` (module: `printer-duet`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/duet/src/domain/...` (module: `printer-duet`, layer: `domain`)
 
 ## Acceptance criteria
 

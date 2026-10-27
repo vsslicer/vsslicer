@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `events.jsonl` append-only log and `entities.json` snapshot (a cache rebuildable from the log), written atomically (temp file and rename) in a directory the caller passes.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

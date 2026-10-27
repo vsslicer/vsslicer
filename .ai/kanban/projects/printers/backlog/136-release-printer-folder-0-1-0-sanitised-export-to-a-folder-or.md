@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-folder@0.1.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-folder/` (module: `printer-folder`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/folder/` (module: `printer-folder`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

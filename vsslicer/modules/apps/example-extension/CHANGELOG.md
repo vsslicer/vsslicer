@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.4
+
+- Moved to `vsslicer/modules/apps/example-extension`; the repository URL follows (PLT-204).
+
 ## 0.7.3
 
 - Build in `prepack` (PLT-180); dev: `@vsslicer/example` ^0.3.2, `@vsslicer/test-vscode` ^0.2.3.

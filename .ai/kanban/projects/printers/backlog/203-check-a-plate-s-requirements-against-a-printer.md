@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure `check(requires, printerFacts)` returning `ok | warn | blocked` with machine and human reasons for model, nozzle and material.
 
-**Code:** `vsslicer/modules/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
 
 ## Acceptance criteria
 

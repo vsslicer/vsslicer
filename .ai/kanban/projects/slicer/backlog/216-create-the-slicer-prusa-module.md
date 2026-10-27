@@ -15,7 +15,7 @@ created: 2026-10-25
 
 New engine adapter module for the PrusaSlicer CLI (2.9.x first, 3.0 behind a setting). It depends on `slicer-api` and never on `slicer-orca` or `slicer-cura` (E65).
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (module scaffold))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (module scaffold))
 
 ## Acceptance criteria
 

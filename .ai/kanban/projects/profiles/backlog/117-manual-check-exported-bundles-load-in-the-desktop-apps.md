@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Loads one exported `.orca_printer` and one `.bbscfg` into the real apps and records versions.
 
-**Code:** `vsslicer/modules/profiles-extension/test/manual/bundles.md` (module: `profiles-extension`, layer: n/a (manual verification))
+**Code:** `vsslicer/modules/apps/profiles/test/manual/bundles.md` (module: `profiles-extension`, layer: n/a (manual verification))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Camera controls and view cube with fit-to-view.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/camera/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/camera/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 STEP files (single solid, assembly with several solids, AP203, AP214, curved faces, an unsupported-schema file, an empty file) with PrusaSlicer's solid count and volumes recorded per file and a PROVENANCE.md.
 
-**Code:** `vsslicer/modules/mesh-step/test/fixtures/` (module: `mesh-step`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/mesh-step/test/fixtures/` (module: `mesh-step`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

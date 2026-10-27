@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds a volume of a chosen kind to an object from a generated primitive or a mesh file, with a transform inside the object.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/volumes/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/volumes/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

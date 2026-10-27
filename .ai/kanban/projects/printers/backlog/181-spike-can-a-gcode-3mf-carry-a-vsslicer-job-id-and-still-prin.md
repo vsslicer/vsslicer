@@ -15,13 +15,13 @@ created: 2026-10-25
 
 Find the metadata entry that a `.gcode.3mf` can carry for the job id without the H2C firmware refusing or dropping it, before the format is fixed.
 
-**Code:** `vsslicer/modules/job-history/` (module: `job-history`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/printer/job-history/` (module: `job-history`, layer: `n/a (spike)`)
 
 Verified on the H2C (D5); the entry survives a round trip through `@vsslicer/3mf` on fixtures.
 
 ## Acceptance criteria
 
-- [ ] A note in `vsslicer/modules/job-history/docs/` records the entry name and part, the `@vsslicer/3mf` calls used, the H2C firmware version, and whether the print started and finished
+- [ ] A note in `vsslicer/modules/printer/job-history/docs/` records the entry name and part, the `@vsslicer/3mf` calls used, the H2C firmware version, and whether the print started and finished
 - [ ] A file with the entry sent through the 3mf send path still prints on the H2C
 - [ ] Fallback decided if the H2C rejects it (history records from the sender side only)
 

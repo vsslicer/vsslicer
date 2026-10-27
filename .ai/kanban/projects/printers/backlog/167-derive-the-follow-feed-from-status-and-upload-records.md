@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turn the position in the status into `{fileName, fileUri?, byteOffset, layer?, progress, state}` events, mapping the printer's file to a local URI via upload records.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

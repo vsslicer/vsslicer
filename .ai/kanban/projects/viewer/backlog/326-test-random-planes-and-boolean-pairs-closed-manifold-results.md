@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Property test over the fixtures: random planes and random operand pairs always give a closed manifold mesh or a typed refusal, never a mesh with open edges.
 
-**Code:** `vsslicer/modules/mesh-boolean/test/property/` (module: `mesh-boolean`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh-boolean/test/property/` (module: `mesh-boolean`, layer: n/a (tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `printer.*` methods and topics on top of `@vsslicer/agent-protocol`: session open/close, status subscription, job commands, upload streaming by local path, adapter loading, secret requests back to the window.
 
-**Code:** `vsslicer/modules/printer-agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/agent/src/domain/...` (module: `printer-agent`, layer: `domain`)
 
 UNRESOLVED: needs agent-protocol (schema DSL and namespaced registration, AgentServer/AgentClient, conformance suite).
 

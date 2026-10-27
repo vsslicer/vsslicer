@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bundles built from the documented layout plus at least one saved by a real PrusaSlicer 2.9.6.
 
-**Code:** `vsslicer/modules/profiles-prusa/test/fixtures/bundles/` (module: `profiles-prusa`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/profiles/prusa/test/fixtures/bundles/` (module: `profiles-prusa`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

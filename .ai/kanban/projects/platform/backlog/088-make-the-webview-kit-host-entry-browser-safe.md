@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The host entry must load in the web extension host: replace any Node built-in it reaches, keeping the desktop behaviour.
 
-**Code:** `vsslicer/modules/webview-kit/src/adapters/...` (module: `webview-kit`, layer: `adapters`)
+**Code:** `vsslicer/modules/ui/webview-kit/src/adapters/...` (module: `webview-kit`, layer: `adapters`)
 
 ## Acceptance criteria
 

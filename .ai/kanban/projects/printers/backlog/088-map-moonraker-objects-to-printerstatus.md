@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `print_stats`, `virtual_sdcard`, `heater_*`, `extruder`, `display_status` into the normalised status.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/domain/...` (module: `printer-moonraker`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/moonraker/src/domain/...` (module: `printer-moonraker`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `busy:` lines reset the watchdog; silence past the timeout ends the job with a `timeout` error; `M112`, `M108` and `M410` skip the queue and the window because Marlin's emergency parser acts on them as they arrive.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The pipeline treats `.bgcode` as a final artefact: text-only steps (scripts, regex, our thumbnails) cannot run on it. If any is configured the adapter is asked for text G-code and the report says why.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

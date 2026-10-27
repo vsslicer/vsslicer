@@ -13,9 +13,9 @@ depends_on: [67]
 created: 2026-10-25
 ---
 
-The epic's single-instance acceptance test over the real reference server. Path: `vsslicer/modules/agent-protocol/test/integration/single-instance.test.ts` (layer: adapters, test).
+The epic's single-instance acceptance test over the real reference server. Path: `vsslicer/modules/common/agent-protocol/test/integration/single-instance.test.ts` (layer: adapters, test).
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

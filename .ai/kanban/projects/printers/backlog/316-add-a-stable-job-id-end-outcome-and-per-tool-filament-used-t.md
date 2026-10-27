@@ -14,7 +14,7 @@ created: 2026-10-25
 
 Gives consumers (FIL-39, FIL-43) a job-end signal without scraping vendor states. `PRN-186` (`job-history@0.1.0`) only maps end states to a record status and the end detection lives in the agent (PRN-210), so the filament module cannot take it from there.
 
-**Code:** `vsslicer/modules/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

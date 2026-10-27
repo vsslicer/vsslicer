@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Types shared by the core and the three format adapters: `VendorVersion` (ecosystem, vendor, opaque version id such as a commit, index version or release tag, optional date), and the `UpdateSource` port with `latest(vendor, signal)` and `stage(version, folder, progress, signal)` that downloads a version into a staging folder and returns it for the registered importer to read.
 
-**Code:** `vsslicer/modules/profile-api/src/application/...` (module: `profile-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/profile-api/src/application/...` (module: `profile-api`, layer: `application`)
 
 ## Acceptance criteria
 

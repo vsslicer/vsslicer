@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The container reader uses `node:zlib` behind a codec interface; add a codec for the browser using `DecompressionStream` (or the bundled `fflate` where it is missing) and select it from the browser entry.
 
-**Code:** `vsslicer/modules/gcode-bgcode/src/adapters/...` (module: `gcode-bgcode`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/gcode-bgcode/src/adapters/...` (module: `gcode-bgcode`, layer: `adapters`)
 
 ## Acceptance criteria
 

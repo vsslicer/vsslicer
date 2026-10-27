@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `frames` `CameraSource` over TLS TCP 6000: connect, authenticate, yield JPEG frames, reconnect with backoff.
 
-**Code:** `vsslicer/modules/camera-bambu/src/adapters/...` (module: `camera-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/camera/bambu/src/adapters/...` (module: `camera-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

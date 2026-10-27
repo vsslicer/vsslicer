@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A snapshot store that copies the vendor folder and the user entity files to a snapshot directory with a manifest of hashes, and restores them.
 
-**Code:** `vsslicer/modules/profiles/src/adapters/...` (module: `profiles`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/profiles/src/adapters/...` (module: `profiles`, layer: `adapters`)
 
 ## Acceptance criteria
 

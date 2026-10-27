@@ -15,7 +15,7 @@ created: 2026-10-25
 
 VS Code calls `backupCustomDocument` about a second after edits stop, so a long log could be slow. Measures serialise, compact and replay time of 1,000 to 10,000 commands and picks the compaction and cap rules.
 
-**Code:** `vsslicer/modules/project-extension/docs/backup-log-spike.md` (module: `project-extension`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/apps/project/docs/backup-log-spike.md` (module: `project-extension`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

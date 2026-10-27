@@ -15,7 +15,7 @@ created: 2026-10-25
 
 File operations on the printer's card through `M20`, `M20 L`, `M23`, `M24`, `M25`, `M27` and `M30`, offered only when `M115` and `M21` report a card.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

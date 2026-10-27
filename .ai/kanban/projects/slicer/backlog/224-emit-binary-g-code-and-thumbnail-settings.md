@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets `binary_gcode` from the unified key and the thumbnail sizes from the printer profile so the `.bgcode` carries the engine's own thumbnail blocks.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

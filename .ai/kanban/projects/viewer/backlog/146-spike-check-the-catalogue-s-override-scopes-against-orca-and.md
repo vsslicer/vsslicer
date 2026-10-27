@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compares the `override_scope` of the profile catalogue with the keys Orca offers per object, part and range (TabPrintPart, TabPrintModel) and Prusa's `overrides_in`, and lists gaps for the profile owners.
 
-**Code:** `vsslicer/modules/project-extension/docs/override-scope-spike.md` (module: `project-extension`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/apps/project/docs/override-scope-spike.md` (module: `project-extension`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

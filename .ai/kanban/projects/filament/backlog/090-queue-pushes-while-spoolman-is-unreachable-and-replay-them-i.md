@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A persisted outbound queue replayed in order when the server returns; never duplicates.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

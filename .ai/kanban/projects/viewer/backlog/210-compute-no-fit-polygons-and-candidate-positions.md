@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Computes no-fit polygons between items and the bed region and the candidate positions for the next item. Ported from `OrcaSlicer@09aa0114:src/libslic3r/Arrange.cpp` and `ModelArrange.cpp` (AGPL-3.0) on `deps_src/libnest2d` (LGPL-3.0) (D2), with the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/arrange/src/application/nfp/` (module: `arrange`, layer: `application`)
+**Code:** `vsslicer/modules/core/arrange/src/application/nfp/` (module: `arrange`, layer: `application`)
 
 ## Acceptance criteria
 

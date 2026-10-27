@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Playwright snapshots of the 3MF/model viewer webview in each theme through the E2 stub. Depends on the final release of the project extension.
 
-**Code:** `vsslicer/modules/themes/test/snapshots/viewer/` (module: `themes`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/themes/test/snapshots/viewer/` (module: `themes`, layer: n/a (tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Toasts for new HMS-style notifications with severity mapping; the tree item lists active ones.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

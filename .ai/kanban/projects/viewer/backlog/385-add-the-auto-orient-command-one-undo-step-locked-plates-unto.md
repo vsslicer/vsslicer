@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Orients the selected objects or all objects of a plate through the mesh workers and applies the rotations as one undoable command. Objects on locked plates are skipped and listed in the result.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/orient/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/orient/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

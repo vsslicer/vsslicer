@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bundle camera-mjpeg and camera-bambu into one agent-loadable file inside the VSIX, as the Bambu extension does for its adapter (PRN-49/50).
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (build)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (build)`)
 
 ## Acceptance criteria
 

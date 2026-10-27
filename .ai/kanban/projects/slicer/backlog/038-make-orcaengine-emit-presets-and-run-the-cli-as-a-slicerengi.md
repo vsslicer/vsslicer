@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes emission, the CLI driver and warnings: `slice(job)` writes presets into the staging directory, runs Orca, returns staged G-code and the removed `post_process` list.
 
-**Code:** `vsslicer/modules/slicer-orca/src/application/...` (module: `slicer-orca`, layer: `application`)
+**Code:** `vsslicer/modules/slicer/orca/src/application/...` (module: `slicer-orca`, layer: `application`)
 
 ## Acceptance criteria
 

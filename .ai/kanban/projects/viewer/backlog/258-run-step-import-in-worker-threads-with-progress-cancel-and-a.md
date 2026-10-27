@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the import in a worker. The OCCT call is synchronous, so cancel terminates the worker; a memory cap turns an out-of-memory crash into the typed error.
 
-**Code:** `vsslicer/modules/mesh-step/src/adapters/worker/` (module: `mesh-step`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh-step/src/adapters/worker/` (module: `mesh-step`, layer: `adapters`)
 
 ## Acceptance criteria
 

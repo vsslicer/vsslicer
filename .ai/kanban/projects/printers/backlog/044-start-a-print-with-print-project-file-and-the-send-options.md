@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The start command: `print.project_file` with `ams_mapping`, timelapse, bed levelling, flow calibration and use-AMS options.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

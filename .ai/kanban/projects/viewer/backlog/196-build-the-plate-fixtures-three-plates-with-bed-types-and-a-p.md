@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Projects saved by `writeProject` with the plate features the oracles need, with PROVENANCE.md and expected results.
 
-**Code:** `vsslicer/modules/project-extension/test/fixtures/plates/` (module: `project-extension`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/apps/project/test/fixtures/plates/` (module: `project-extension`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

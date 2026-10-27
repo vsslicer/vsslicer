@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Open a file in Bambu Connect through `bambu-connect://import-file`.
 
-**Code:** `vsslicer/modules/bambu-extension/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/bambu/src/presentation/...` (module: `bambu-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 For an object, part or modifier, resolves the profile through `profiles` and reports each key's value with its source: profile entity, plate or override.
 
-**Code:** `vsslicer/modules/project-extension/src/application/overrides/inherit.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/overrides/inherit.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

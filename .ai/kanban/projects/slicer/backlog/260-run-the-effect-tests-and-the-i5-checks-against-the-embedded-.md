@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the shared effect tests, the layer-count check and the estimate comparison on the embedded engine's fixtures and commits the report.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

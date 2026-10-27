@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Protocol exchanges for the adapter's tests, derived from the spike document and `Luban@db573f5` (`BroadcastMachineFinder.ts`, the SACP channel): the `discover` reply, SACP status and file-send frames; no machine firmware minimum is known, because no such printer is available (D5).
 
-**Code:** `vsslicer/modules/printer-unofficial-snapmaker/test/fixtures/` (module: `printer-unofficial-snapmaker`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/unofficial-snapmaker/test/fixtures/` (module: `printer-unofficial-snapmaker`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

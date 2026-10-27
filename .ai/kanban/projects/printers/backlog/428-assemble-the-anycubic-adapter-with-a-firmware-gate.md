@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes status and job control into the `anycubic-lan` adapter; upload is offered only if the spike found a procedure. The firmware table decides read-only mode.
 
-**Code:** `vsslicer/modules/printer-unofficial-anycubic/src/application/...` (module: `printer-unofficial-anycubic`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-anycubic/src/application/...` (module: `printer-unofficial-anycubic`, layer: `application`)
 
 ## Acceptance criteria
 

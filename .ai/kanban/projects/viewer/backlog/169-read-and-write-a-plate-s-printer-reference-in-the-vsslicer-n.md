@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Stores the printer instance id of a plate as a namespace record; the Orca-readable part is untouched.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/vsslicer/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/vsslicer/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

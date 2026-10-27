@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Imports every fixture at the default quality and compares solid count and volume with the recorded PrusaSlicer values.
 
-**Code:** `vsslicer/modules/mesh-step/test/oracle/` (module: `mesh-step`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh-step/test/oracle/` (module: `mesh-step`, layer: n/a (tests))
 
 ## Acceptance criteria
 

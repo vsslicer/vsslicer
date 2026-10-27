@@ -13,9 +13,9 @@ depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---
 
-Scaffold `vsslicer/modules/camera-bambu/`: the Bambu camera sources (pushed JPEG frames on port 6000 for A1/P1, RTSPS for X1, P2S and H2) and later the SD-card timelapse provider.
+Scaffold `vsslicer/modules/camera/bambu/`: the Bambu camera sources (pushed JPEG frames on port 6000 for A1/P1, RTSPS for X1, P2S and H2) and later the SD-card timelapse provider.
 
-**Code:** `vsslicer/modules/camera-bambu/` (module: `camera-bambu`, layer: `n/a (module scaffold)`)
+**Code:** `vsslicer/modules/camera/bambu/` (module: `camera-bambu`, layer: `n/a (module scaffold)`)
 
 ## Acceptance criteria
 

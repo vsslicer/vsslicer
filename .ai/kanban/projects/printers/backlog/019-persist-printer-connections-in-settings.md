@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The non-secret connection data (name, adapter id, host, optional instance id) in a settings contribution.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

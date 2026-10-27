@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds the sharp edge under the cursor and, when it belongs to a closed loop of edges lying on a circle, the circle with its centre, radius and axis. Written new, same approach note as the plane detection.
 
-**Code:** `vsslicer/modules/mesh/src/application/measure/edges.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/measure/edges.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

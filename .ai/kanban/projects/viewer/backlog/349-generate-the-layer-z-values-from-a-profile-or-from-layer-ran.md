@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns a profile into the list of layer tops, and a set of layer ranges (with their `layer_height` overrides) into a profile. Ported from `generate_object_layers` and `layer_height_profile_from_ranges` in `OrcaSlicer@09aa0114:src/libslic3r/Slicing.cpp` (AGPL-3.0, D2; the functions behind `Slicing.hpp:166,179`; PrusaSlicer's `Slicing` as the cross-check).
 
-**Code:** `vsslicer/modules/mesh/src/domain/layerheight/layers.ts` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/layerheight/layers.ts` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

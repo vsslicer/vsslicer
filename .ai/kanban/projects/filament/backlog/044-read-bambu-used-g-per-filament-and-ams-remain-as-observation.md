@@ -17,7 +17,7 @@ Read the job's `.gcode.3mf` `slice_info.config` `used_g` per filament with `@vss
 
 UNRESOLVED: needs printer-bambu: the AMS mapping recorded at send attached to the job record and the extra tray fields (`remain_g`, `tag_uid`, `tray_uuid`) exposed to consumers.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

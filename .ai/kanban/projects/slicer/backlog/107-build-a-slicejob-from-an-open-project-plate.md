@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the plate with the project reader (`ProjectModel` from `3mf` `readProject`), resolves the printer, material and process triple through `profiles`, and returns the job (plate input path, resolved profile, overrides). Depends on modules not wired yet; the code uses ports with fakes until then.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

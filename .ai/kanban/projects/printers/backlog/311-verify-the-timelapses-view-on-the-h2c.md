@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The E39 oracle on the H2C: list and download one timelapse from the SD card in the view, and play it.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (hardware verification)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (hardware verification)`)
 
 ## Acceptance criteria
 

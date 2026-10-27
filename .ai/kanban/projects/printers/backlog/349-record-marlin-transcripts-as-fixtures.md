@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Transcripts of `M115`, `M105`, `M20`, `M27`, resend and busy exchanges for the parser and emulator tests, derived from the `Marlin@2ef3ee6` source (`Marlin/src/gcode/host/M115.cpp:135,211-221`) and the Marlin documentation, because no Marlin printer is available (D5).
 
-**Code:** `vsslicer/modules/printer-serial/test/fixtures/` (module: `printer-serial`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/serial/test/fixtures/` (module: `printer-serial`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

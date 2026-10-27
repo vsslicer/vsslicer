@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Warnings without a file get a file: the profile file when the key came from a profile, else the plate's 3MF.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

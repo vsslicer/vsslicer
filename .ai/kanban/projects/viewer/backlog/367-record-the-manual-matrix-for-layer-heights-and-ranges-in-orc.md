@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Opens VSSlicer-saved projects with a profile and a range in Orca and Bambu Studio, and the PrusaSlicer 2.x fixtures in VSSlicer.
 
-**Code:** `vsslicer/modules/project-extension/test/manual/layerheight-matrix.md` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/manual/layerheight-matrix.md` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

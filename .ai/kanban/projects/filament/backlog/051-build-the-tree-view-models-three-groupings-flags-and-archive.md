@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure view models: brand > filament > spool, location, and printer > tool or tray (using slot assignments), with swatch colour, remaining grams and percent, flag marks and an archived filter.
 
-**Code:** `vsslicer/modules/filament-extension/src/application/...` (module: `filament-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/filament/src/application/...` (module: `filament-extension`, layer: `application`)
 
 ## Acceptance criteria
 

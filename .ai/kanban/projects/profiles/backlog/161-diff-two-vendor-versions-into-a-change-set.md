@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure function from two sets of vendor entities to added, removed, changed (with the changed keys) and renamed (via `renamed_from`) presets.
 
-**Code:** `vsslicer/modules/profiles/src/domain/...` (module: `profiles`, layer: `domain`)
+**Code:** `vsslicer/modules/profiles/profiles/src/domain/...` (module: `profiles`, layer: `domain`)
 
 ## Acceptance criteria
 

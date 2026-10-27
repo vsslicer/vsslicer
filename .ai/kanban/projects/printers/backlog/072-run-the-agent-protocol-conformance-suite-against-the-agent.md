@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One command that runs the E19 conformance suite on the real daemon, wired into CI.
 
-**Code:** `vsslicer/modules/printer-agent/` (module: `printer-agent`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/agent/` (module: `printer-agent`, layer: `n/a (ci)`)
 
 UNRESOLVED: needs agent-protocol (schema DSL and namespaced registration, AgentServer/AgentClient, conformance suite).
 

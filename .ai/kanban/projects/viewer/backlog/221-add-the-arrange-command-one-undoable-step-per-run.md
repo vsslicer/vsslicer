@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Collects footprints of the plate's (or selection's) instances, calls arrange across plates in a worker and applies the poses as one command. The log stores the resulting poses, not the input.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/arrange/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/arrange/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

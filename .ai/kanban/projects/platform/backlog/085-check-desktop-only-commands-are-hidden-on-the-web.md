@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A manifest check: commands listed in an extension's `desktopOnlyCommands` (a documented field) must have `!isWeb` in their command palette and menu `when` clauses; extensions call it from their own tests.
 
-**Code:** `vsslicer/modules/tooling/src/manifest/...` (module: `tooling`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/tooling/src/manifest/...` (module: `tooling`, layer: `adapters`)
 
 ## Acceptance criteria
 

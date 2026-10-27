@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The increment UI extensions (`vsslicer.printers`, `.bambu`, `.camera`, `.fleet`) and E22's CI need: the VS Code helper under `/vscode`, the test kit under `/testkit`, and the conformance suite and CLI. Builds on 0.1.0 without breaking it.
 
-**Code:** `vsslicer/modules/agent-protocol/` (module: `agent-protocol`, layer: n/a (release))
+**Code:** `vsslicer/modules/common/agent-protocol/` (module: `agent-protocol`, layer: n/a (release))
 
 ## Acceptance criteria
 

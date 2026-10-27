@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Counts and lists every syntax form and function in `value` and `enabled`-style formulas in `fdmprinter.def.json` and the printer definitions at the pinned Cura revision, and chooses the supported subset. Also pins the Uranium revision for ported `SettingFunction` semantics.
 
-**Code:** `vsslicer/modules/cura-settings/` (module: `cura-settings`, layer: n/a (spike))
+**Code:** `vsslicer/modules/core/cura-settings/` (module: `cura-settings`, layer: n/a (spike))
 
 ## Acceptance criteria
 

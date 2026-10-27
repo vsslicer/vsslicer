@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Packages the engine as the decision says (inside `vsslicer.slicer`, or a separate `vsslicer.engine-*` VSIX) and fails the build over the budget; the extension must work without the files.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (ci))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (ci))
 
 ## Acceptance criteria
 

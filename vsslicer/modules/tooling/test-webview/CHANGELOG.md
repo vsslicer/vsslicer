@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.4
+
+- Re-range `@vsslicer/example-extension` to ^0.7.4 after the module regroup (PLT-204).
+
 ## 0.2.3
 
 - Re-range `@vsslicer/webview-kit` to ^0.8.0 (SP12 release).

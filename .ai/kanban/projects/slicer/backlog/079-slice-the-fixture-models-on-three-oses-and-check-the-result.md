@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The I5 CI criterion for Cura: parse with `@vsslicer/gcode`, expected layers and roles, estimate versus `;TIME:`.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

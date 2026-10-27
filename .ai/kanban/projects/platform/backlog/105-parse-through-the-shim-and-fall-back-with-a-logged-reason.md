@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Loads files and meshes with `startWorker` and the Web Worker adapters of `3mf` and `mesh`; on `WorkerStartError` it parses in chunks in the extension host at the lower limit and logs the reason.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/...` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/...` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

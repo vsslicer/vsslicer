@@ -15,7 +15,7 @@ created: 2026-10-25
 
 In the build, runs the slice command on the cube fixture after the engine download from the pinned release, and checks the output G-code parses.
 
-**Code:** `vsslicer/modules/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

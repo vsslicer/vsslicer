@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A list of entries for the active plate with add, edit and remove, a height field that shows the snapped layer, and a plate custom G-code editor.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/plates/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

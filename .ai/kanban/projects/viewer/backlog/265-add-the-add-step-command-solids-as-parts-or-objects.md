@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds the solids to the project as separate objects or as parts of one object, using the add commands. The log stores the file path, hash and options; replay re-imports deterministically.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/step/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/step/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

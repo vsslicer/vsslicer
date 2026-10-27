@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Infill pattern enum values per engine (infill paths differ per value) and arc fitting (G2/G3 present and parsed).
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

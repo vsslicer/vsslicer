@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure transform that adds `; vsslicer_job_id = <id>` in the leading comment block and reads it back.
 
-**Code:** `vsslicer/modules/job-history/src/domain/...` (module: `job-history`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/job-history/src/domain/...` (module: `job-history`, layer: `domain`)
 
 ## Acceptance criteria
 

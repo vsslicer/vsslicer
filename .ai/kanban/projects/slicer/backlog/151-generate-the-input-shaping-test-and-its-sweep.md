@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Ringing tower sweeping the shaper frequency per block with `SET_INPUT_SHAPER` or `M593`; writes `input_shaping_*` keys of the printer profile.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

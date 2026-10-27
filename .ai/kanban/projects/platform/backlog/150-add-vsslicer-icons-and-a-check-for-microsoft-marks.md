@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Product icons for each platform (original artwork) and a scan of the build output for Microsoft marks, icons and Microsoft-licensed extensions (`licensing.md` section 2 (d), (g)).
 
-**Code:** `vsslicer/modules/vsslicer-build/src/adapters/ms-marks-scan.ts` (module: `vsslicer-build`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/adapters/ms-marks-scan.ts` (module: `vsslicer-build`, layer: `adapters`)
 
 ## Acceptance criteria
 

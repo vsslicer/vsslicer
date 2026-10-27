@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When ICE fails or times out, switch to the descriptor's MJPEG fallback with a visible note; a setting pins a camera to MJPEG.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

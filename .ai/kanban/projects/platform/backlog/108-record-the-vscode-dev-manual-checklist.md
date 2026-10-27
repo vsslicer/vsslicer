@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A checklist with browser and date columns for the one manual run per release on vscode.dev: open a G-code file from a public GitHub repository, scrub layers, read thumbnails, open a 3MF, and on Chrome open a local folder with File System Access.
 
-**Code:** `vsslicer/modules/tooling/docs/web-checklist.md` (module: `tooling`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/tooling/tooling/docs/web-checklist.md` (module: `tooling`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

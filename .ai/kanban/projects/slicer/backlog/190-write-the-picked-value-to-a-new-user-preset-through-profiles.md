@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Applies the one-key patch of the plan: saves a new user preset by default or updates the existing one, and keeps what is needed to undo.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

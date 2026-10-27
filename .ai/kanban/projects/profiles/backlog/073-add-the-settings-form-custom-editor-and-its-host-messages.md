@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The host half of the custom editor for one entity: sends the form model and values, and sends every edit to `ProfileStore.save`; the webview holds no state of record.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/form/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/form/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

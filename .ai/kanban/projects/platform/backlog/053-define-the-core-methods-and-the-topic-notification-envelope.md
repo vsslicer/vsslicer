@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Schemas for `initialize`, `shutdown`, `ping`, `subscribe`/`unsubscribe`, `log.tail` and the `topic` notification carrying topic, per-topic sequence number and payload.
 
-**Code:** `vsslicer/modules/agent-protocol/src/domain/...` (module: `agent-protocol`, layer: `domain`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/domain/...` (module: `agent-protocol`, layer: `domain`)
 
 ## Acceptance criteria
 

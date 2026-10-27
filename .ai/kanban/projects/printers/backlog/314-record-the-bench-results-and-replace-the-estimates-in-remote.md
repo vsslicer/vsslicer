@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Run the bench and commit the numbers with hardware, network and date.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

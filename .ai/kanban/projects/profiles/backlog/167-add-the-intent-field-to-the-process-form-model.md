@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The generated form model for a process includes an `intent` field with options from `listIntents`, hidden when only the default exists.
 
-**Code:** `vsslicer/modules/profiles/src/application/...` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/...` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

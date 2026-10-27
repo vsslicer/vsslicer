@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Dispose geometry, textures, renderer and workers when the editor closes.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

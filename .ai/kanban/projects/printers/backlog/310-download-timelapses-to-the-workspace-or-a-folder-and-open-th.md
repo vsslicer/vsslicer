@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Download with progress and cancel through E24's download path (large-download prompt and folder streaming of `vsslicer.printers`), then 'Open' in VS Code's media preview.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

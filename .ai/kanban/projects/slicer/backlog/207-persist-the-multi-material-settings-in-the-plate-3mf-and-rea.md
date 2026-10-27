@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Saves tower, flush matrix, purge targets, feature assignment and nozzle map in the plate settings of the project and reads them on reopen.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The engine's only reliable signal is its output: success needs an existing, non-empty, parseable file and no error line on stderr. This card holds the stderr classifier and the typed errors; the I/O is in P12.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

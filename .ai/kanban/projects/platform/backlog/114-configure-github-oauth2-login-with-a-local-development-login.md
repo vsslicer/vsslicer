@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets up GitHub OAuth2 for publishers (free) and a clearly-marked local development login for CI and offline work.
 
-**Code:** `vsslicer/modules/openvsx-registry/compose/` and `scripts/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/compose/` and `scripts/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 

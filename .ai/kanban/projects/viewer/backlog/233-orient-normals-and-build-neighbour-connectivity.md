@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Makes face winding consistent across connected faces and builds the neighbour structure the later steps use. Ported from `OrcaSlicer@09aa0114:deps_src/admesh/*` (GPL-2.0-or-later, combinable with AGPL under GPL-3.0 section 13) (D2), with the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/mesh/src/domain/repair/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/repair/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers the bundled sources with the agent and offers list, open, snapshot and close for a printer, so views need no protocol detail.
 
-**Code:** `vsslicer/modules/camera-extension/src/application/...` (module: `camera-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/camera/src/application/...` (module: `camera-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds `repair` to both worker adapters.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/workers/` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/workers/` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

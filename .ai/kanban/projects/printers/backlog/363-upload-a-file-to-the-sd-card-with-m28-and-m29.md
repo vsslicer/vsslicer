@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Streams a file into `M28 <name>` ... `M29` with progress and abort. How the firmware treats line numbers and checksums while writing is checked against `Marlin@2ef3ee6:Marlin/src/gcode/sd/M28_M29.cpp` and `Marlin/src/gcode/queue.cpp` (read, not copied) and recorded in the module README.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Converting a PrusaSlicer 2.x project to the Bambu/Orca shape writes its paint under the Bambu/Orca attribute names; the generic export has no vendor parts, so it drops paint and says so in the report.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/convert/paint.ts` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/convert/paint.ts` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

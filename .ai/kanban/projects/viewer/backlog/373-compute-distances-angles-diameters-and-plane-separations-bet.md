@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `measure(a, b)` returns the right result for each pair of feature kinds: point to point, point to plane, edge to edge angle, plane to plane angle or separation, circle diameter, circle to circle centre distance.
 
-**Code:** `vsslicer/modules/mesh/src/application/measure/measure.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/measure/measure.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

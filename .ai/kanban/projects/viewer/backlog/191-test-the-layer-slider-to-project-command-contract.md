@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A test-host test where the preview's slider command calls the project command and the entry lands on the right plate.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/slider/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/slider/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

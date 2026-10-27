@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The WebRTC path in the player: peer connection, signalling through the proxy's forwarded WebSocket or WHEP POST, `connect-src` limited to the proxy origin. Adds `camera-webrtc` to the agent bundle.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The fake adapter keeps an in-memory job history and native queue, with change events.
 
-**Code:** `vsslicer/modules/printer-api/src/adapters/...` (module: `printer-api`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/printer-api/src/adapters/...` (module: `printer-api`, layer: `adapters`)
 
 ## Acceptance criteria
 

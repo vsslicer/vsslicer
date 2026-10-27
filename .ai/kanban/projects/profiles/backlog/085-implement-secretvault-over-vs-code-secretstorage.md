@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The VS Code side of the vault, using `context.secrets` under the `secret_ref`; security-sensitive.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/secrets/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/secrets/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

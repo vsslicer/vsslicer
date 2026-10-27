@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Split to objects or parts and merge keep the paint with the triangles: the new meshes get the matching trees, and merge concatenates layers with an index offset.
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/splitMerge.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/splitMerge.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

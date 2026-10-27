@@ -15,7 +15,7 @@ created: 2026-10-25
 
 WebSocket client for `ws://IP:3030/websocket`: subscribes to status and attributes topics, sends requests with ids and waits for the matching response, reconnects with backoff.
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/src/adapters/...` (module: `printer-unofficial-sdcp`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/src/adapters/...` (module: `printer-unofficial-sdcp`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When a source declares `rtsp`, register it in the sidecar and expose the sidecar's MJPEG or MSE output through the proxy; without go2rtc, offer a snapshot if the printer has one, with an explanation.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `BookingService`: for a `JobEnd`, collect the source observations per tool, apply the rules, book to the spools in the assigned slots and store the observations and flags. Honours `filament.booking.<adapter>` and an external-booking switch per printer.
 
-**Code:** `vsslicer/modules/filament/src/application/...` (module: `filament`, layer: `application`)
+**Code:** `vsslicer/modules/filament/filament/src/application/...` (module: `filament`, layer: `application`)
 
 ## Acceptance criteria
 

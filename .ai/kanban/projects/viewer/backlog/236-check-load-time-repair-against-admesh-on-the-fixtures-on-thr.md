@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs `repairOnLoad` on every defect fixture and compares the result with admesh's report.
 
-**Code:** `vsslicer/modules/mesh/test/repair/onload/` (module: `mesh`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh/test/repair/onload/` (module: `mesh`, layer: n/a (tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `Queue` (add, list, events) exported so the slicer extension can 'slice and queue'.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

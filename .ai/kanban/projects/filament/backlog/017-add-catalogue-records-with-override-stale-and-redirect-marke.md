@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `CatalogueRecord` wrapping Brand, Material and Filament with source, `ofd_uuid`, `moved_from`, a per-field local override marker and a stale flag, plus the normalisation key (brand, material, name, diameter, net weight).
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

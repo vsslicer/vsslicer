@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `arrange(items, bed, options)` use case: unselected items act as obstacles; unplaced items are returned by name with their poses unchanged.
 
-**Code:** `vsslicer/modules/arrange/src/application/arrange.ts` (module: `arrange`, layer: `application`)
+**Code:** `vsslicer/modules/core/arrange/src/application/arrange.ts` (module: `arrange`, layer: `application`)
 
 ## Acceptance criteria
 

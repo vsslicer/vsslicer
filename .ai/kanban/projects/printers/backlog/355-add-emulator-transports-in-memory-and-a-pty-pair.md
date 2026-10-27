@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Two ways to reach the emulator: an in-memory duplex for unit tests and a pty pair (created with `socat` on Linux and macOS in CI) so the real `serialport` binding is exercised. Windows CI uses the in-memory duplex and the `serialport` mock binding.
 
-**Code:** `vsslicer/modules/printer-serial/src/adapters/testing/` (module: `printer-serial`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/serial/src/adapters/testing/` (module: `printer-serial`, layer: `adapters`)
 
 ## Acceptance criteria
 

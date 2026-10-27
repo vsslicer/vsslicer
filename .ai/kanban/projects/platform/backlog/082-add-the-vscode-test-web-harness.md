@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A shared runner that serves an extension's browser bundle to `@vscode/test-web`, runs its mocha tests in headless Chromium and exposes `test:web` per extension, like `test:integration` for desktop.
 
-**Code:** `vsslicer/modules/tooling/src/test-web/...` (module: `tooling`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/tooling/src/test-web/...` (module: `tooling`, layer: `adapters`)
 
 ## Acceptance criteria
 

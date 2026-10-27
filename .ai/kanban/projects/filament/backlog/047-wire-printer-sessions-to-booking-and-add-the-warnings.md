@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Subscribe to the printers extension's registry (PRN-28 exports), pass sessions to the tracker, expose `filament.booking.<adapter>` settings and show warnings with "Assign spool" and "Enter usage manually" actions.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

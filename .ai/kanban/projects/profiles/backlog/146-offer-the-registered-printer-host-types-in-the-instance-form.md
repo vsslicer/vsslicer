@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Replace the static `host_type` list in the instance form with the adapters `vsslicer.printers` registers, once E20's registry exists.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/instances/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/instances/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

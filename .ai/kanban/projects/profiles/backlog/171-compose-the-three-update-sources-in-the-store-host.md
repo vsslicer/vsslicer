@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers the Prusa, Orca/Bambu and Cura `UpdateSource`s with the update service in the worker that hosts the store.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

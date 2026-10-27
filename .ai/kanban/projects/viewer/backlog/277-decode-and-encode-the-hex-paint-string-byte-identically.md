@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Decodes the per-triangle hex string stored on `<triangle>` into the tree and encodes it back. Ported from the serialise and deserialise functions of `OrcaSlicer@09aa0114:src/libslic3r/TriangleSelector.cpp` and `.hpp` (AGPL-3.0, D2; cross-check `PrusaSlicer@30ef591:src/slic3r-domain/include/Slic3r/Domain/TriangleSelector.hpp`).
 
-**Code:** `vsslicer/modules/mesh/src/domain/paint/codec/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/paint/codec/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

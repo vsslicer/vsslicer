@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Our own data lives in `Metadata/vsslicer/*` (versioned JSON records keyed by owner: plate printer, STEP source path and similar). The part is registered with a MustPreserve relationship and read back into the `Project`. `Application` is `VSSlicer-<version>`.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/vsslicer/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/vsslicer/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

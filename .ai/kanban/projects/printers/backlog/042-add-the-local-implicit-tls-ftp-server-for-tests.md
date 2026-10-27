@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A local FTPS implicit-TLS (port 990 shape) server that checks `bblp` credentials and stores files in memory.
 
-**Code:** `vsslicer/modules/printer-bambu/test/support/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/bambu/test/support/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

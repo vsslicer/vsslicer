@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Lets pure functions run as steps of the slice pipeline beside external scripts: each step gets the G-code path and the job, runs after the engine and before thumbnails and assembly, and fails by name.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

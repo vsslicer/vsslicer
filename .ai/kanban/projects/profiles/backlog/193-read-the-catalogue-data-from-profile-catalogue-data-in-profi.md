@@ -13,7 +13,7 @@ created: 2026-10-26
 
 Split from PRF-192 (Q20, separate data package). After `profile-catalogue-data@0.1.0` is published, profile-api drops its AGPL-3.0-only catalogue data and reads it through a semver dependency.
 
-**Code:** `vsslicer/modules/profile-api` (`src/domain/catalogue/`, `tools/catalogue/`, package) (module: `profile-api`, layer: domain and package)
+**Code:** `vsslicer/modules/common/profile-api` (`src/domain/catalogue/`, `tools/catalogue/`, package) (module: `profile-api`, layer: domain and package)
 
 ## Acceptance criteria
 

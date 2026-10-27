@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The NDEF payload `application/vnd.openprinttag`: meta, main and aux regions with integer keys, decoded through the chosen CBOR decoder with size and depth limits; unknown keys preserved.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Settles how Orca runs on a headless free GitHub Actions Linux runner (AppImage extraction without FUSE, whether `xvfb-run` is needed, the CLI exiting 1 without a display) and which release to pin: it must carry an H2C machine profile, else the adapter targets the Bambu Studio CLI as a configured variant.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (spike))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure conversion from `materials[]` to the `LoadedFilament[]` shape returned to the caller; the profile write is PRF's.
 
-**Code:** `vsslicer/modules/printer-bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/bambu/src/domain/...` (module: `printer-bambu`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the Compose stack on a chosen host with TLS, backups on a schedule and the production key. Blocked on a hosting budget (D5, D10): do not start until `PLT-128` records a yes for hosting. Fallback without budget: the local instance from `openvsx-registry@0.1.0` remains the only registry and the card stays in backlog.
 
-**Code:** `vsslicer/modules/openvsx-registry/deploy/` (module: `openvsx-registry`, layer: n/a (deployment))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/deploy/` (module: `openvsx-registry`, layer: n/a (deployment))
 
 ## Acceptance criteria
 

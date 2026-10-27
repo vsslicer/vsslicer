@@ -13,9 +13,9 @@ depends_on: [61, 66, 67]
 created: 2026-10-25
 ---
 
-Integration test of the reconnect acceptance criterion. Path: `vsslicer/modules/agent-protocol/test/integration/reconnect.test.ts` (layer: adapters, test).
+Integration test of the reconnect acceptance criterion. Path: `vsslicer/modules/common/agent-protocol/test/integration/reconnect.test.ts` (layer: adapters, test).
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

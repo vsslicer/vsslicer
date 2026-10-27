@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A Prusa 3.0 alpha file is detected and opened as core model plus preserved parts with a notice; the JSON layout is not parsed until beta.
 
-**Code:** `vsslicer/modules/3mf/src/application/` (module: `3mf`, layer: `application`)
+**Code:** `vsslicer/modules/core/3mf/src/application/` (module: `3mf`, layer: `application`)
 
 ## Acceptance criteria
 

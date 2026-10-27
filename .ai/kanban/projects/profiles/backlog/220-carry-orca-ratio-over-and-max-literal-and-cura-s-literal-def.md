@@ -11,9 +11,9 @@ milestone: "VSS:M2"
 created: 2026-10-26
 ---
 
-From the PRF-69 spike (`vsslicer/modules/profiles-extension/docs/widget-spike.md`): the catalogue drops Orca's `ratio_over` and `max_literal` on `float_or_percent` entries and Cura's literal `default_value` beside `{expr}` defaults, so the form can neither resolve a percent for display nor catch "42" typed as mm.
+From the PRF-69 spike (`vsslicer/modules/apps/profiles/docs/widget-spike.md`): the catalogue drops Orca's `ratio_over` and `max_literal` on `float_or_percent` entries and Cura's literal `default_value` beside `{expr}` defaults, so the form can neither resolve a percent for display nor catch "42" typed as mm.
 
-**Code:** `vsslicer/modules/profile-api/src/domain/catalogue/` and its catalogue generator (module: `profile-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/profile-api/src/domain/catalogue/` and its catalogue generator (module: `profile-api`, layer: `domain`)
 
 ## Acceptance criteria
 

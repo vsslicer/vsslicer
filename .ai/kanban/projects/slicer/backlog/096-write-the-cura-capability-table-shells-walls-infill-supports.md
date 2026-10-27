@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Maps the unified (Orca-named) keys of the geometry groups to Cura keys and value maps, or marks them unsupported. The mapping between Orca and Cura names is a judgement; each entry records its reasoning so reviews can challenge it.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

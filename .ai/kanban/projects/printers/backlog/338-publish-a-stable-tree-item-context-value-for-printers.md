@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets `contextValue` on printer tree items to a documented constant list (`vsslicer.printer`, plus `.hasCamera` when a camera exists) so other extensions can contribute an 'Open camera' menu.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

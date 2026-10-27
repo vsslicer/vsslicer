@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publishes `validateTemplate` results as diagnostics with a debounce and a size guard.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

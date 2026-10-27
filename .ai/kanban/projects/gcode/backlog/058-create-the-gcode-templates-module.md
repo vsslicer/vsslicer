@@ -13,13 +13,13 @@ depends_on: [PLT-2, PLT-3, PLT-4, PLT-8, PRF-135]
 created: 2026-10-25
 ---
 
-Scaffold `vsslicer/modules/gcode-templates/` from the `tooling` module so later cards add code in layers.
+Scaffold `vsslicer/modules/core/gcode-templates/` from the `tooling` module so later cards add code in layers.
 
-**Code:** `vsslicer/modules/gcode-templates/` (module: `gcode-templates`, layer: `n/a (module scaffold)`)
+**Code:** `vsslicer/modules/core/gcode-templates/` (module: `gcode-templates`, layer: `n/a (module scaffold)`)
 
 ## Acceptance criteria
 
-- [ ] `cd vsslicer/modules/gcode-templates && pnpm install && pnpm test && pnpm build` works alone inside the module (package `@vsslicer/gcode-templates`, own lockfile, changelog, version 0.0.1)
+- [ ] `cd vsslicer/modules/core/gcode-templates && pnpm install && pnpm test && pnpm build` works alone inside the module (package `@vsslicer/gcode-templates`, own lockfile, changelog, version 0.0.1)
 - [ ] `domain/ application/ adapters/ presentation/` folders exist as needed; the layer-boundary lint is on and one deliberate violation fails it
 - [ ] `node scripts/run.mjs ci` picks the module up
 

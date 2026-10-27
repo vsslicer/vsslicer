@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fills printer-api `job.id` (`task_id`), `job.materialMapping` (the `ams_mapping` recorded when VSSlicer sent the job, PRN-36/48) and the end outcome of a Bambu job. A job started elsewhere has no mapping.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

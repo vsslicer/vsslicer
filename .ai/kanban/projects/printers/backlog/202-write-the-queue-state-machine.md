@@ -15,7 +15,7 @@ created: 2026-10-25
 
 States `ready, starting, paused, done, failed, cancelled` and the transitions with reasons.
 
-**Code:** `vsslicer/modules/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
 
 ## Acceptance criteria
 

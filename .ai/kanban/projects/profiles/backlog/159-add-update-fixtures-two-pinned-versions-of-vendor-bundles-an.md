@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Small synthetic vendor trees in the Prusa, Orca and Cura shapes at two pinned versions (v1, v2) with added, changed, removed and renamed presets, and user entities with `meta.base_version` = v1 that do and do not collide with the v2 changes.
 
-**Code:** `vsslicer/modules/profiles/test/fixtures/updates/` (module: `profiles`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/profiles/profiles/test/fixtures/updates/` (module: `profiles`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

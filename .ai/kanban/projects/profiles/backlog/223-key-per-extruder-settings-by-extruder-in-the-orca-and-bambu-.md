@@ -12,7 +12,7 @@ created: 2026-10-26
 
 Found by sp12-rev-prf-106: settings from the Orca and Bambu importers (bundle and folder) fail the profile-api schema on per-extruder keys such as `nozzle_diameter` and `nozzle_temperature`: the schema wants them keyed by extruder, the importers pass raw arrays. `decodeVariants` exists but no import path uses it, and no profiles-orca test validates against `entitySchemas`.
 
-**Code:** `vsslicer/modules/profiles-orca/src/adapters/` (module: `profiles-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/orca/src/adapters/` (module: `profiles-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

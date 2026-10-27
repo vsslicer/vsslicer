@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `cura-settings@0.2.0` so other modules can depend on the range: CuraEngine settings-file writer. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/cura-settings/` (module: `cura-settings`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/cura-settings/` (module: `cura-settings`, layer: n/a (release))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Notice-and-takedown procedure and contact (`licensing.md` section 2 (e)) shown on the registry web UI about page.
 
-**Code:** `vsslicer/modules/openvsx-registry/docs/takedown.md` (module: `openvsx-registry`, layer: n/a (docs))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/docs/takedown.md` (module: `openvsx-registry`, layer: n/a (docs))
 
 ## Acceptance criteria
 

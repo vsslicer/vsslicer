@@ -15,7 +15,7 @@ created: 2026-10-25
 
 From the Moonraker webcam `service` field (`webrtc-go2rtc`, `webrtc-camerastreamer`, `webrtc-mediamtx`) to `webrtc` descriptors with an MJPEG fallback, plus the go2rtc `webrtc/offer|answer|candidate` message builders and the WHEP request builder. The same helpers describe the H2C stream served by the E38 sidecar.
 
-**Code:** `vsslicer/modules/camera-webrtc/src/domain/...` (module: `camera-webrtc`, layer: `domain`)
+**Code:** `vsslicer/modules/camera/webrtc/src/domain/...` (module: `camera-webrtc`, layer: `domain`)
 
 ## Acceptance criteria
 

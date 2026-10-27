@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Protocol exchanges for the adapter's tests, derived from the spike document and kobra-connect's published message formats: handshake responses, MQTT topics with encrypted payloads (test keys only), status and control messages, because no such printer is available (D5).
 
-**Code:** `vsslicer/modules/printer-unofficial-anycubic/test/fixtures/` (module: `printer-unofficial-anycubic`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/unofficial-anycubic/test/fixtures/` (module: `printer-unofficial-anycubic`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 SpoolmanDB `filaments.json` as a secondary source: add an entry only when no OFD record matches by EAN, else by normalised key; record every match.
 
-**Code:** `vsslicer/modules/filament-ofd/src/domain/...` (module: `filament-ofd`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/ofd/src/domain/...` (module: `filament-ofd`, layer: `domain`)
 
 ## Acceptance criteria
 

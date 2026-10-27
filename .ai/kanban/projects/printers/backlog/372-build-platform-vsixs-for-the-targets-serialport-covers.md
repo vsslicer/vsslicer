@@ -15,7 +15,7 @@ created: 2026-10-25
 
 CI builds one VSIX per target the spike found covered, each with the right `serialport` prebuild and the adapter bundle, and publishes the matrix of covered and uncovered targets.
 
-**Code:** `vsslicer/modules/printers-serial-extension/ (ci)` (module: `printers-serial-extension`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/apps/printers-serial/ (ci)` (module: `printers-serial-extension`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

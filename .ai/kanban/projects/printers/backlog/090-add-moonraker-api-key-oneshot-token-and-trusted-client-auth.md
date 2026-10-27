@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The three auth modes.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Drag an object onto a plate in the tree, or drag in 3D onto another plate's bed, to send the move-instance command.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

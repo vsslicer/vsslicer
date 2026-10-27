@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `project-extension@0.4.0`. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`, so the slicer and printer extensions can use the plate API.
 
-**Code:** `vsslicer/modules/project-extension/` (module: `project-extension`, layer: n/a (release))
+**Code:** `vsslicer/modules/apps/project/` (module: `project-extension`, layer: n/a (release))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The contract every engine adapter implements: `slice(job): AsyncIterable<Progress|Warning|Layer>` resolving to staged output paths, plus `cancel()`, as in `slicing-engine-embedding.md` section 6 item 1. `SliceJob` carries the input 3MF or models, plate, the resolved profile (type from `profile-api`) and overrides.
 
-**Code:** `vsslicer/modules/slicer-api/src/domain/...` (module: `slicer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/slicer-api/src/domain/...` (module: `slicer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

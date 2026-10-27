@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hand-maintained table: every unified key `supported`, `renamed` or `unsupported` for PrusaSlicer 2.9.x, including pressure equalizer, ramping travels and native `gcode_substitutions`.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

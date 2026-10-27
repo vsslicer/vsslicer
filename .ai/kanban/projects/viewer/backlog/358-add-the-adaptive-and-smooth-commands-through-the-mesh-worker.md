@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adaptive (with the quality value) and smooth (with the radius) compute through the worker and then set the profile as one undoable command.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/layerheight/auto.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/layerheight/auto.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

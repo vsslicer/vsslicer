@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Applies the stack order definition, variant, material, quality, intent, user for the global stack and each extruder stack, then `limit_to_extruder` routing so support and adhesion settings come from the right extruder. Input types are defined here structurally; PRF's stack satisfies them.
 
-**Code:** `vsslicer/modules/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
+**Code:** `vsslicer/modules/core/cura-settings/src/domain/...` (module: `cura-settings`, layer: `domain`)
 
 ## Acceptance criteria
 

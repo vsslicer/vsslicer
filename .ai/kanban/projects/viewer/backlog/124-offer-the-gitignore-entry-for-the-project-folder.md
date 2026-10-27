@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On first creation of the folder in a git workspace, offers to add `.vsslicer/` to `.gitignore`; never edits without a yes.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/folder/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/folder/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

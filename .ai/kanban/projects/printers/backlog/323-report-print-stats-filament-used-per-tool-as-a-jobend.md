@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Emits the printer-api `JobEnd` (id from `job_id`, outcome, `filamentUsed[]` per tool in millimetres) when a Moonraker job finishes, from `print_stats.filament_used` and, when present, the job's history entry per tool.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

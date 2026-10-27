@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Settings: Spoolman URL (no credentials) and sync on or off per instance; a warning when the URL is not private or loopback; the import command with the dry-run summary shown for confirmation.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

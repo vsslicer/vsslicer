@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Request an application key through the AppKeys workflow instead of copying a key.
 
-**Code:** `vsslicer/modules/printer-octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/octoprint/src/adapters/...` (module: `printer-octoprint`, layer: `adapters`)
 
 ## Acceptance criteria
 

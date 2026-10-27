@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A registry keyed by document URI that creates, finds and disposes models; histories never share state.
 
-**Code:** `vsslicer/modules/project-extension/src/application/registry.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/registry.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

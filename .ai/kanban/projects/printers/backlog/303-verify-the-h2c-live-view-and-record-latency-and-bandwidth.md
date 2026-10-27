@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The E38 oracle on the owner's H2C (D5): live view in VS Code through go2rtc, with glass-to-glass latency and bandwidth measured.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (hardware verification)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (hardware verification)`)
 
 ## Acceptance criteria
 

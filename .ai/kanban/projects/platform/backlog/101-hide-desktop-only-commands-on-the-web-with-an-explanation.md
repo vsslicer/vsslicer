@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Marks follow, printer and daemon-dependent commands `desktopOnlyCommands`, gives them `!isWeb` in their `when` clauses, and shows a one-line note where the follow control would be.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

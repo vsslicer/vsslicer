@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Each field shows where its value comes from (own, parent name, override block) and offers reset to parent.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/fields/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/fields/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

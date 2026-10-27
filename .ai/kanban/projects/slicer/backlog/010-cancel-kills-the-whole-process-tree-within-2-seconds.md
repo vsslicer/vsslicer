@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Cancel sends SIGTERM to the process group then SIGKILL on POSIX, and `taskkill /T /F` on Windows, so the engine's helper processes die with it.
 
-**Code:** `vsslicer/modules/slicer-runtime/src/adapters/...` (module: `slicer-runtime`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/runtime/src/adapters/...` (module: `slicer-runtime`, layer: `adapters`)
 
 ## Acceptance criteria
 

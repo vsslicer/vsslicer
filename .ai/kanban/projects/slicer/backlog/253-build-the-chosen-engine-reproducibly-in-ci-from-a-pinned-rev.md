@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A CI job builds the engine (Emscripten or native, per the decision) from a pinned upstream revision within free runner limits (D5), and publishes the corresponding source with each release (D2 obligation 4).
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (ci))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (ci))
 
 ## Acceptance criteria
 

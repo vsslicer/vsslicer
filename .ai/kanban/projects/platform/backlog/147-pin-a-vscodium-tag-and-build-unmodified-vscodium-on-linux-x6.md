@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Proves the pinned upstream builds on a free runner and measures time and disk before our patches exist; the tag is pinned in one file.
 
-**Code:** `.github/workflows/vsslicer-build.yml` and `vsslicer/modules/vsslicer-build/build/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `.github/workflows/vsslicer-build.yml` and `vsslicer/modules/tooling/vsslicer-build/build/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

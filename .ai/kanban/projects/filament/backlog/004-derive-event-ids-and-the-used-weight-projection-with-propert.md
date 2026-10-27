@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Event id = hash(source, printer, job, spool, tool); used weight is a fold over events, with `scale` corrections that keep `used = sum(events)`. The invariant core of the inventory.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

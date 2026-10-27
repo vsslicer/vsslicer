@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `slicer-embedded@0.1.0` so other modules can depend on the range: zero-install engine adapter with capability table. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (release))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (release))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Every cut and boolean result passes through the statistics (zero open and zero non-manifold edges); a result that fails goes through repair once, and still failing is returned as an error, never as a mesh.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/application/verify.ts` (module: `mesh-boolean`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/application/verify.ts` (module: `mesh-boolean`, layer: `application`)
 
 ## Acceptance criteria
 

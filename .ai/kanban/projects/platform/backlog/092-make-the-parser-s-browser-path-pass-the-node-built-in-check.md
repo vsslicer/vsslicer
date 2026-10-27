@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the check on the parser's browser entry and replaces what it finds behind existing ports (for example the MD5 of `.gcode.3mf` plates and zip inflate), without changing desktop results.
 
-**Code:** `vsslicer/modules/gcode-parser/src/domain/...` (module: `gcode-parser`, layer: `domain`)
+**Code:** `vsslicer/modules/core/gcode-parser/src/domain/...` (module: `gcode-parser`, layer: `domain`)
 
 ## Acceptance criteria
 

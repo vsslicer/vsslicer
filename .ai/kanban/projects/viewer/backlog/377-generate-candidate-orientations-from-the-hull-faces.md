@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Builds the set of candidate rotations: one per large hull face laid flat, plus the extra candidates Orca adds. Ported from the candidate generation of `OrcaSlicer@09aa0114:src/libslic3r/Orient.cpp` (AGPL-3.0, D2; overhang and bottom-area weights at `Orient.hpp:34,60`).
 
-**Code:** `vsslicer/modules/mesh/src/application/orient/candidates.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/orient/candidates.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Integration test with the agent: start a print to the emulator, reload the window, and check the agent still holds the port and the print finishes with the right lines.
 
-**Code:** `vsslicer/modules/printers-serial-extension/src/presentation/...` (module: `printers-serial-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers-serial/src/presentation/...` (module: `printers-serial-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

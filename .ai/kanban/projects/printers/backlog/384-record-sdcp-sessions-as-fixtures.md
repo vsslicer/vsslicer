@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Protocol exchanges for the adapter's tests, derived from `SDCP@f977215` (the SDCP V3.0.0 document): the `M99999` reply, WebSocket status and attributes messages, response codes, a chunked upload with MD5 and the error codes. Firmware shown in the document is a placeholder, so none is claimed, because no such printer is available (D5).
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/test/fixtures/` (module: `printer-unofficial-sdcp`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/test/fixtures/` (module: `printer-unofficial-sdcp`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

@@ -10,7 +10,7 @@ sprint: "VSS:SP29"
 created: 2026-10-26
 ---
 
-From PRF-27's review (SP10), `vsslicer/modules/profiles-orca/src/adapters/tree/load-tree.ts`.
+From PRF-27's review (SP10), `vsslicer/modules/profiles/orca/src/adapters/tree/load-tree.ts`.
 
 **Code:** `src/adapters/tree/load-tree.ts`, `test/` (adapters)
 

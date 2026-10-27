@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Types for `CutPlane` (point and normal), `CutOptions` (keep upper, lower or both, to parts or objects, connectors), `BooleanOp` and the results, plus typed errors: non-manifold input, WASM unavailable, empty result, cancelled.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/domain/types.ts` (module: `mesh-boolean`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/domain/types.ts` (module: `mesh-boolean`, layer: `domain`)
 
 ## Acceptance criteria
 

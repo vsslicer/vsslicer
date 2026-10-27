@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Lists what `locateInstalledSlicers()` found, imports the chosen sources, and prints counts and diagnostics to an output channel.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/commands/import/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/commands/import/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

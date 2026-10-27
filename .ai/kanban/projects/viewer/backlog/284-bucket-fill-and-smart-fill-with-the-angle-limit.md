@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bucket fill paints the connected region of one state; smart fill stops at edges sharper than an angle. Ported from the seed-fill functions of `OrcaSlicer@09aa0114:src/libslic3r/TriangleSelector.cpp` and `.hpp` (AGPL-3.0, D2; cross-check `PrusaSlicer@30ef591:src/slic3r-domain/include/Slic3r/Domain/TriangleSelector.hpp`).
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/fill.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/fill.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

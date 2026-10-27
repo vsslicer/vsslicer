@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Handles on the band edges resize it and a drag on the band moves it, with the same refusals and snapping; the range's overrides are edited in the override form.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/ranges/handles.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/ranges/handles.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

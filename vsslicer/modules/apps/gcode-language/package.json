@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/gcode-language",
   "displayName": "VSSlicer G-code Language",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "G-code language support: language contribution, TextMate grammar (G/M/T codes, parameters, comments, Klipper and RepRapFirmware extensions, placeholders).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-language@0.2.0/vsslicer/modules/gcode-language",
+  "repository": "https://github.com/<owner>/VSSlicer/tree/gcode-language@0.2.2/vsslicer/modules/apps/gcode-language",
   "vsslicer": {
     "sizeBudgetKB": 200
   },

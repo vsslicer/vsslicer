@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands to download the catalogue, a first-run prompt, a setting for the URL override, a revert command and the import report shown in a document.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

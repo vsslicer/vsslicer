@@ -15,7 +15,7 @@ created: 2026-10-25
 
 CI downloads the pinned release on each OS with the verified downloader, caches it by hash, and fetches the upstream Prusa profile bundle for the fixtures (D4) from a pinned revision.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (ci))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (ci))
 
 ## Acceptance criteria
 

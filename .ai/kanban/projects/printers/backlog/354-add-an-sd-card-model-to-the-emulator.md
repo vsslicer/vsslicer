@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The emulator gains `M20`/`M20 L`, `M21`, `M23`, `M24`, `M25`, `M27`, `M28`/`M29`, `M30` and `M33` with an in-memory card that can limit file-name length and refuse writes, so SD behaviour is testable without a printer.
 
-**Code:** `vsslicer/modules/printer-serial/src/adapters/testing/` (module: `printer-serial`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/serial/src/adapters/testing/` (module: `printer-serial`, layer: `adapters`)
 
 ## Acceptance criteria
 

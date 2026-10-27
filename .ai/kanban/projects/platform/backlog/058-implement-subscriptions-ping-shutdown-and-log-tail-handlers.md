@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Topic broker with per-topic sequence numbers per subscriber, plus the `ping`, `shutdown` and `log.tail` handlers. `log.tail` takes a log-source function the host supplies.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hardware verification on the owner's H2C: one print with timelapse G-code from a profile (D5).
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

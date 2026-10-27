@@ -17,7 +17,7 @@ Auto-link when a spool is added, a QuickPick for ambiguous cases, the "Install V
 
 UNRESOLVED: needs profiles-extension: an exported accessor for the live `ProfileStore` lookup (PRF-57 only creates the module).
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

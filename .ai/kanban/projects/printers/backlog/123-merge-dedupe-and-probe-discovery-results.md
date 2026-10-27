@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A discovery service that merges discoverers, dedupes by host, and probes each through the registered adapters' `probe` before offering it.
 
-**Code:** `vsslicer/modules/printer-discovery/src/application/...` (module: `printer-discovery`, layer: `application`)
+**Code:** `vsslicer/modules/printer/discovery/src/application/...` (module: `printer-discovery`, layer: `application`)
 
 ## Acceptance criteria
 

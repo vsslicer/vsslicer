@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `adaptiveProfile(mesh, limits, quality)` gives the layer height at each z from the steepest surface in the layer (the cusp height rule). Ported from `layer_height_profile_adaptive` and `SlicingAdaptive::next_layer_height` in `OrcaSlicer@09aa0114:src/libslic3r/Slicing.cpp` (AGPL-3.0, D2; the functions behind `Slicing.hpp:166,179`; PrusaSlicer's `Slicing` as the cross-check).
 
-**Code:** `vsslicer/modules/mesh/src/application/layerheight/adaptive.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/layerheight/adaptive.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

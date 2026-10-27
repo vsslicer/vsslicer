@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Scales an object by an inch or metre factor so it reads as millimetres.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The use cases `importBundle(uri)` and `exportBundle(ids, format)` over the registered importers and exporters: imports land under one bundle group that can be deleted as a unit; exports never contain secrets.
 
-**Code:** `vsslicer/modules/profiles/src/application/bundles/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/bundles/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

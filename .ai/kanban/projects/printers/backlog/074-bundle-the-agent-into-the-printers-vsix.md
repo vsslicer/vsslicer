@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Ship `vsslicer-agent` inside `vsslicer.printers`.
 
-**Code:** `vsslicer/modules/printers-extension/` (module: `printers-extension`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/apps/printers/` (module: `printers-extension`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

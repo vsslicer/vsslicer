@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `AgentClient.connectOrSpawn({ executablePath, args })`: connects if a daemon answers, otherwise spawns the supplied executable detached and waits for readiness. The client never spawns unless this is called.
 
-**Code:** `vsslicer/modules/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/adapters/...` (module: `agent-protocol`, layer: `adapters`)
 
 ## Acceptance criteria
 

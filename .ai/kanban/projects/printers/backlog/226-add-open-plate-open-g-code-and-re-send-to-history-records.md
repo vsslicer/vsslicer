@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Actions per record; each is shown only when its target exists. Open plate uses the project viewer; re-send uses the upload queue.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

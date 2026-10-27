@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One entry point exports the catalogue loader, the tokenizer, `complete`, `hover`, `validateTemplate` and the option-variable adapter, with versioned types.
 
-**Code:** `vsslicer/modules/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
 
 ## Acceptance criteria
 

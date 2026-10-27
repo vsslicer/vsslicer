@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Recorded or derived v1 and legacy sessions for the nine states, upload with and without `Print-After-Upload`, Digest challenge and key fallback.
 
-**Code:** `vsslicer/modules/printer-prusalink/test/fixtures/` (module: `printer-prusalink`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/prusalink/test/fixtures/` (module: `printer-prusalink`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

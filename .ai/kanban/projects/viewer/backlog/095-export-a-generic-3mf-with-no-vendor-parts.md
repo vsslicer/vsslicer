@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `exportGeneric(project)` writes core model parts only, with transforms baked into meshes or kept as build items, and no vendor `Metadata/`.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/core/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/core/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

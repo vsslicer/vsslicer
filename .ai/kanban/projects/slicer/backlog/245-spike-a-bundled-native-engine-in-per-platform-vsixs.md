@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Measures a native Orca or CuraEngine bundled in platform-specific VSIXs: VSIX size, speed, cancel and the macOS signing and notarisation problem (no budget, D5).
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (spike))
 
 ## Acceptance criteria
 

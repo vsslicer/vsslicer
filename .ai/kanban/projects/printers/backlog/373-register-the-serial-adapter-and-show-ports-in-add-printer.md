@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On activation registers `serial-marlin` with `vsslicer.printers`, with the module path the agent loads; the Add printer form asks for the port (filled from the agent's discovery), the baud rate and whether to reset on connect.
 
-**Code:** `vsslicer/modules/printers-serial-extension/src/presentation/...` (module: `printers-serial-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers-serial/src/presentation/...` (module: `printers-serial-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

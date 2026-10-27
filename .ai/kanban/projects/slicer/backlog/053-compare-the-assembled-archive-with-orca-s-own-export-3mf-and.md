@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Oracle tests for the archive: Orca's own export is the structural reference and `@vsslicer/gcode` opens the result.
 
-**Code:** `vsslicer/modules/slicer-output/` (module: `slicer-output`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/output/` (module: `slicer-output`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

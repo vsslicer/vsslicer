@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Resolves the Cura stack with `cura-settings`, writes the settings with the shared writer, exports the plate's objects as STL and runs the engine.
 
-**Code:** `vsslicer/modules/slicer-embedded/src/application/...` (module: `slicer-embedded`, layer: `application`)
+**Code:** `vsslicer/modules/slicer/embedded/src/application/...` (module: `slicer-embedded`, layer: `application`)
 
 ## Acceptance criteria
 

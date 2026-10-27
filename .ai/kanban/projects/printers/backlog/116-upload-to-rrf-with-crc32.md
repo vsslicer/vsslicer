@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `rr_upload` with crc32 verification, progress and abort.
 
-**Code:** `vsslicer/modules/printer-duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/duet/src/adapters/...` (module: `printer-duet`, layer: `adapters`)
 
 ## Acceptance criteria
 

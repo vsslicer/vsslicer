@@ -15,7 +15,7 @@ created: 2026-10-25
 
 OFD is young. Diff two OFD revisions a month apart, measure the memory peak of `all.json.gz` in a worker (fallback `all.ndjson`), and check whether OFD's Orca ids (`OGFxx`) match what PRF imports from Orca profiles.
 
-**Code:** `vsslicer/modules/filament-ofd/docs/` (module: `filament-ofd`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/filament/ofd/docs/` (module: `filament-ofd`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 

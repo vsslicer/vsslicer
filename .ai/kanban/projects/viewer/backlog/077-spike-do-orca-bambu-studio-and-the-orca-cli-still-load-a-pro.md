@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Detection in Bambu Studio and Orca relies on `Application` starting `BambuStudio-` (`3mf.md` section 4). This spike finds out whether a VSSlicer-written file keeps its plates and settings in each tool, before the writer fixes the rule.
 
-**Code:** `vsslicer/modules/3mf/docs/application-string-spike.md` (module: `3mf`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/core/3mf/docs/application-string-spike.md` (module: `3mf`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

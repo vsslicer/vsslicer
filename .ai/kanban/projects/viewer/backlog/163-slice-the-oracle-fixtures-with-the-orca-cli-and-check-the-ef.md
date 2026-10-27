@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices each fixture through `slicer-orca` and uses the G-code parser to confirm the effect per object or layer range.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/oracle/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/oracle/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds `repairOnLoad` to the worker_threads and Web Worker adapters with progress and cancel.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/workers/` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/workers/` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

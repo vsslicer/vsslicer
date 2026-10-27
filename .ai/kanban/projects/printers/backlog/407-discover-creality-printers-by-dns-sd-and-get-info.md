@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `Discoverer` that looks for DNS-SD service names starting `Creality` and confirms each with `GET http://<ip>/info`.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/src/adapters/...` (module: `printer-unofficial-creality`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/src/adapters/...` (module: `printer-unofficial-creality`, layer: `adapters`)
 
 ## Acceptance criteria
 

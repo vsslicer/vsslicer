@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Instance lifecycle in the store with a `SecretVault` port (VS Code SecretStorage and an in-memory fake are its two sides); deleting an instance deletes its secret.
 
-**Code:** `vsslicer/modules/profiles/src/application/instances/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/instances/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

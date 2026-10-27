@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure function from the machine part of `ProfileStore.resolve(...).native("orca")` to the Orca machine preset JSON. The resolved-profile type comes from `profile-api`.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

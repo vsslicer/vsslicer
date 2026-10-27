@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The dispatch loop: choose a compatible idle printer, require confirmation for `any`, upload through the existing upload queue, start the job, link the history id.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

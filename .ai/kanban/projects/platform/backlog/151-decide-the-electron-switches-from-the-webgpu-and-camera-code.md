@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the I1 WebGPU probe and the I7 camera codec spikes and decides whether the build needs any Electron switch; the default is none.
 
-**Code:** `vsslicer/modules/vsslicer-build/docs/electron-switches.md` (module: `vsslicer-build`, layer: n/a (decision))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/docs/electron-switches.md` (module: `vsslicer-build`, layer: n/a (decision))
 
 ## Acceptance criteria
 

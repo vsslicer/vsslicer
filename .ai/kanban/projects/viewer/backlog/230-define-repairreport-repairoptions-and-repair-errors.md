@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Types for the report (vertices merged, faces removed, holes filled, normals flipped, unrepairable regions), the options (tolerance, steps, cancel token) and typed errors with messages.
 
-**Code:** `vsslicer/modules/mesh/src/domain/repair/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/repair/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

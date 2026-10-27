@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `fillBed(item, bed, options)` places copies until none fits; `multiply(item, n, ...)` places exactly n or reports how many fit.
 
-**Code:** `vsslicer/modules/arrange/src/application/fill.ts` (module: `arrange`, layer: `application`)
+**Code:** `vsslicer/modules/core/arrange/src/application/fill.ts` (module: `arrange`, layer: `application`)
 
 ## Acceptance criteria
 

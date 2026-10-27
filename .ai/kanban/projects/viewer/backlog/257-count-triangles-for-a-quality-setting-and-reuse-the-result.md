@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Tessellates at a quality once, returns the triangle count, and hands the same result to the import so the preview count equals the imported count.
 
-**Code:** `vsslicer/modules/mesh-step/src/application/preview.ts` (module: `mesh-step`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-step/src/application/preview.ts` (module: `mesh-step`, layer: `application`)
 
 ## Acceptance criteria
 

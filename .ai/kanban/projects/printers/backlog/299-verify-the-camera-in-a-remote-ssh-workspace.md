@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Manual check that the proxy on the UI machine serves a camera to a window attached to a remote workspace.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (manual verification)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (manual verification)`)
 
 ## Acceptance criteria
 

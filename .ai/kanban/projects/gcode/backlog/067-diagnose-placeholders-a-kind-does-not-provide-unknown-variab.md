@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `validateTemplate(text, slicer, kind, options)` returns diagnostics: warning for a placeholder the kind does not provide (naming the kinds that do), hint for an unknown variable, error for unbalanced `{if}`/`{endif}`.
 
-**Code:** `vsslicer/modules/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
+**Code:** `vsslicer/modules/core/gcode-templates/src/application/...` (module: `gcode-templates`, layer: `application`)
 
 ## Acceptance criteria
 

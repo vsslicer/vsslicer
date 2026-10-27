@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the golden corpus through the Web Worker in headless Chromium and compares the summary statistics with the golden JSON used on desktop.
 
-**Code:** `vsslicer/modules/gcode-parser/test/web/` (module: `gcode-parser`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/core/gcode-parser/test/web/` (module: `gcode-parser`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 For the 3.0 setting: writes the JSON config for `--load`, places preset names in the private `--datadir`, and uses the 3.0 flags of P7.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

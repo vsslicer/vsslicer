@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Multi-window safety: an advisory lock around appends and snapshot writes, stale-lock recovery and a reload when another process changed the files.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 New library module `@vsslicer/fleet-queue`: the queue item, its state machine, the compatibility check and the store, with no VS Code API.
 
-**Code:** `vsslicer/modules/fleet-queue/` (module: `fleet-queue`, layer: `n/a (scaffold)`)
+**Code:** `vsslicer/modules/printer/fleet-queue/` (module: `fleet-queue`, layer: `n/a (scaffold)`)
 
 ## Acceptance criteria
 

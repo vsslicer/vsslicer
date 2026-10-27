@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Scarf or sloped seam (Z varies along the seam segment), adaptive layer height (non-uniform layer heights on the curved fixture), bridge detection over sparse infill (bridge role), and the mapped pressure equalizer, monotonic infill and ramping travel keys.
 
-**Code:** `vsslicer/modules/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
+**Code:** `vsslicer/modules/common/slicer-api/` (module: `slicer-api`, layer: n/a (testkit))
 
 ## Acceptance criteria
 

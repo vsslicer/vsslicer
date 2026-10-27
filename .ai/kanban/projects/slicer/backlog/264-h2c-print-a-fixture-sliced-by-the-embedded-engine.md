@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sanity print on the H2C of one fixture sliced by the embedded engine, if the engine has an H2C profile (D5).
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

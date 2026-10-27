@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Orients many objects in parallel workers, reporting progress per object; cancel stops the remainder and returns what was finished.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/worker-node/orient.ts` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/worker-node/orient.ts` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

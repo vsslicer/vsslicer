@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The adapter over the chosen JS Clipper2 port or the WASM build. If WASM, it is loaded as a separate file.
 
-**Code:** `vsslicer/modules/arrange/src/adapters/clipper/` (module: `arrange`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/arrange/src/adapters/clipper/` (module: `arrange`, layer: `adapters`)
 
 ## Acceptance criteria
 

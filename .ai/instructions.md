@@ -44,11 +44,19 @@ docs/research/         tracked: distilled research reports, one per topic
 - **All code lives in `vsslicer/`.** Only files a tool requires at the repository root stay there,
   kept thin and pointing into `vsslicer/`: `.github/workflows/*.yml` and the root `LICENSE`.
   Research, plans and boards stay outside it.
-- **Every capability is its own independent module** in `vsslicer/modules/<name>/`: the G-code
+- **Every capability is its own independent module** in `vsslicer/modules/<group>/<name>/`: the G-code
   core, the toolhead simulator, each slicer engine adapter, each printer connector, the viewer,
-  profiles, filament, and so on. A module is a self-contained project:
+  profiles, filament, and so on. Groups follow the Clean layers, dependencies pointing inward:
+  - `common/`: contracts and shared domain (`gcode-api`, `printer-api`, `profile-api`, `slicer-api`, `agent-protocol`).
+  - `core/`: engines with no host (`3mf`, `mesh`, `gcode-parser`, `gcode-planner`, `gcode-bgcode`, `cura-settings`).
+  - one group per adapter family: `printer/` (connectors), `profiles/` (stores, importers, data),
+    `slicer/` (engines), `camera/`, `filament/`. A new family gets its own group; its contract goes in `common/`.
+  - `ui/`: webview plumbing (`webview-kit`). `apps/`: the VS Code extensions, the only composition
+    roots; nothing depends on an app. `tooling/`: build, lint and test harnesses.
+  A folder drops its group's prefix (`printer/moonraker`); the package keeps its full name
+  (`@vsslicer/printer-moonraker`). A module is a self-contained project:
   - its own `package.json`, lockfile, version, changelog, tests and build.
-    `cd vsslicer/modules/<name> && pnpm install && pnpm test && pnpm build` works with nothing else built.
+    `cd vsslicer/modules/<group>/<name> && pnpm install && pnpm test && pnpm build` works with nothing else built.
   - its own CI job and its own release (`<name>@x.y.z`), so it can be published alone, to npm,
     Open VSX or the VSSlicer marketplace, or moved to its own repository unchanged.
   - other modules only through declared semver ranges on their published packages, never relative
@@ -94,7 +102,7 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 - `node scripts/run.mjs ci`: every module in dependency order: install, lint, build, test, publish.
 - `node scripts/run.mjs test` (or `build`, `install`, `publish`): that step in every module.
 - `--changed <git-ref>` on any of them: only changed modules and their dependents.
-- One module standalone: `cd modules/<name> && pnpm install && pnpm test && pnpm build`.
+- One module standalone: `cd modules/<group>/<name> && pnpm install && pnpm test && pnpm build`.
 - Runner tests: `cd vsslicer/scripts && node --test test/`.
 
 ## Conventions
@@ -118,6 +126,10 @@ Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
 - DCO: every commit needs a `Signed-off-by` trailer (owner decision Q12, CONTRIBUTING.md). Until the
   first-push history rewrite (which also adds sign-offs to the existing history and removes
   profiles-data-orca's vendored data, Q21), commits need not carry one: the rewrite adds them.
+- Branches: `develop` takes the per-card commits; `main` takes only sprint merges. Closing SP<n>
+  merges `develop` into `main` with `--no-ff` ("Merge sprint SP<n> into main") and tags the merge
+  `sprint/SP<n>`; a finished milestone tags its closing merge `milestone/<id>` (annotated tags).
+  Module releases (`<name>@x.y.z`) are tagged on `main`. Nobody commits to `main` directly.
 - Push only when asked. There is no remote yet.
 - Notes and logs under `.ai/local/` (ignored) or `.reference/notes/` (ignored).
 

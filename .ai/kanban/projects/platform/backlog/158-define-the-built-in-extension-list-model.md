@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `builtInExtensions` entries (id, version, repository, `sha256`) as a typed list read from one file; every shipped extension appears exactly once.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/domain/builtins.ts` (module: `vsslicer-build`, layer: `domain`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/domain/builtins.ts` (module: `vsslicer-build`, layer: `domain`)
 
 ## Acceptance criteria
 

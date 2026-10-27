@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The face data the adaptive profile needs, sorted by z, with the normal angle per face. Ported from `SlicingAdaptive::prepare` in `OrcaSlicer@09aa0114:src/libslic3r/Slicing.cpp` (AGPL-3.0, D2; the functions behind `Slicing.hpp:166,179`; PrusaSlicer's `Slicing` as the cross-check).
 
-**Code:** `vsslicer/modules/mesh/src/application/layerheight/prepare.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/layerheight/prepare.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

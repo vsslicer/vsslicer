@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A progress notification with cancel for repair on request.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/repair/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/repair/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

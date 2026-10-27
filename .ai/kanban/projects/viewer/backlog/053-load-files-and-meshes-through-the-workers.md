@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Use case that opens a file: reads the `Project` via the 3MF worker for 3MF, parses STL and OBJ meshes via the mesh pool, and reports progress and typed errors.
 
-**Code:** `vsslicer/modules/project-extension/src/application/openFile.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/openFile.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

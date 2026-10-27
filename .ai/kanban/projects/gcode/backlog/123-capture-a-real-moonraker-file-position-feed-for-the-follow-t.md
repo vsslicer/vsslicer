@@ -12,7 +12,7 @@ created: 2026-10-26
 
 Replace GCP-53's synthetic Moonraker feed with one captured from a real Klipper printer, once one is available.
 
-**Code:** `vsslicer/modules/gcode-preview/test/fixtures/feeds/` (module: `gcode-preview`, layer: n/a (fixture))
+**Code:** `vsslicer/modules/apps/gcode-preview/test/fixtures/feeds/` (module: `gcode-preview`, layer: n/a (fixture))
 
 ## Acceptance criteria
 

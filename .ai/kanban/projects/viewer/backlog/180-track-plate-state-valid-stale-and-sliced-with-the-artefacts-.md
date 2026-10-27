@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Marks a plate stale when its content changes after slicing, lists the artefacts in `.vsslicer/sliced/` per plate, and raises state events.
 
-**Code:** `vsslicer/modules/project-extension/src/application/plateState.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/plateState.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

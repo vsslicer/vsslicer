@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `/api/v1/files` per storage.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
 
 ## Acceptance criteria
 

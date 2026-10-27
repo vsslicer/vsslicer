@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Every published version gets a signature archive; CI proves `ovsx verify` passes on it and fails on a tampered VSIX.
 
-**Code:** `vsslicer/modules/openvsx-registry/test/signature.test.ts` (module: `openvsx-registry`, layer: n/a (tests))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/test/signature.test.ts` (module: `openvsx-registry`, layer: n/a (tests))
 
 ## Acceptance criteria
 

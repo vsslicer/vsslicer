@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `defineMethod` and `defineNotification` over TypeBox giving params and result types and schemas, a namespace registry other modules extend (`printer.*`, `camera.*`, `job.*`), and the protocol version with its major-compatible rule.
 
-**Code:** `vsslicer/modules/agent-protocol/src/domain/...` (module: `agent-protocol`, layer: `domain`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/domain/...` (module: `agent-protocol`, layer: `domain`)
 
 ## Acceptance criteria
 

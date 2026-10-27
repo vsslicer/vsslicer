@@ -13,9 +13,9 @@ depends_on: [PLT-2, PLT-3, PLT-4, PLT-8]
 created: 2026-10-25
 ---
 
-Scaffold `vsslicer/modules/camera-timelapse/`: timelapse providers for the open printer families (Moonraker, OctoPrint), kept apart from the Bambu provider (FTPS) and the MJPEG cameras.
+Scaffold `vsslicer/modules/camera/timelapse/`: timelapse providers for the open printer families (Moonraker, OctoPrint), kept apart from the Bambu provider (FTPS) and the MJPEG cameras.
 
-**Code:** `vsslicer/modules/camera-timelapse/` (module: `camera-timelapse`, layer: `n/a (module scaffold)`)
+**Code:** `vsslicer/modules/camera/timelapse/` (module: `camera-timelapse`, layer: `n/a (module scaffold)`)
 
 ## Acceptance criteria
 

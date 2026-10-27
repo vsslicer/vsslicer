@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The matrix test of the epic: each generator applied to each recorded output for Klipper, Marlin, RRF and Bambu, parsed back, and compared with the sweep definition.
 
-**Code:** `vsslicer/modules/calibration/test/` (module: `calibration`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/calibration/test/` (module: `calibration`, layer: n/a (tests))
 
 ## Acceptance criteria
 

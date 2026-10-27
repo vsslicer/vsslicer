@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On the H2C, find where timelapses land on the SD card, their container (MP4 or AVI), whether they are index-less, and note other models' reports.
 
-**Code:** `vsslicer/modules/camera-bambu/` (module: `camera-bambu`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/camera/bambu/` (module: `camera-bambu`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

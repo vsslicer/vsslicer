@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Moves an instance to another plate; refuses a locked source or target.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

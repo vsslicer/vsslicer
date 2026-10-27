@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Export to drive or folder passes the selected printer's `longFilenames` capability to the sanitiser as the default; the connection setting still overrides it.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

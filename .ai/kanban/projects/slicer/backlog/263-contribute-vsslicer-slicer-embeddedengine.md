@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The setting that enables the fallback, default off until the decision says otherwise, with its description.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

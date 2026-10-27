@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure codec for the SDCP envelope (`Id`, `Data`, topics `sdcp/request|response|status|attributes|error|notice/<MainboardID>`), the command ids (0, 1, 128 to 133, 192, 255, 258, 259) and the mapping of machine and print status codes to the normalised `PrinterStatus`. Written new from `SDCP@f977215`.
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/src/domain/...` (module: `printer-unofficial-sdcp`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/src/domain/...` (module: `printer-unofficial-sdcp`, layer: `domain`)
 
 ## Acceptance criteria
 

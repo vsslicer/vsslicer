@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extension `exports` with ProjectModel and `renderThumbnail(plate)` rendering offscreen in the webview.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/exports.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/exports.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

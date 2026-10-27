@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The HTTP server on 127.0.0.1 and a random port with a per-session token in the path, serving `/camera/<id>/stream` and `/camera/<id>/snapshot`; security-sensitive.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

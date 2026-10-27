@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Takes an object and a triangle index, rotates the object so that face points down and drops it to the bed.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

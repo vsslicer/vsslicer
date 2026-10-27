@@ -15,7 +15,7 @@ created: 2026-10-25
 
 From a triangle index and a hit point, grows the region of triangles within an angle and offset tolerance of the plane and returns it as a plane feature with its boundary edges. Written new; the feature-detection approach of PrusaSlicer's `Measure.cpp` (`PrusaSlicer@30ef591`) is read for guidance and any code taken from it carries the notice.
 
-**Code:** `vsslicer/modules/mesh/src/application/measure/planes.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/measure/planes.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

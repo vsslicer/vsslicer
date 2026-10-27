@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Windows has no atomic O_APPEND guarantee. Measure lock-file behaviour (stale lock, crash while holding it, reload on change) on all three CI platforms and decide between the lock file and the single-writer fallback through the printer agent.
 
-**Code:** `vsslicer/modules/filament/test/spikes/` and `vsslicer/modules/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/filament/filament/test/spikes/` and `vsslicer/modules/filament/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 

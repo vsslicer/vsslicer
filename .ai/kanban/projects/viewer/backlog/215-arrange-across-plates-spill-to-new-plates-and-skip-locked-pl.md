@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fills plates in order, starts a new plate when allowed, never touches a plate flagged locked, and respects the 36 plate limit passed in options. Ported from `OrcaSlicer@09aa0114:src/libslic3r/Arrange.cpp` and `ModelArrange.cpp` (AGPL-3.0) on `deps_src/libnest2d` (LGPL-3.0) (D2), with the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/arrange/src/application/multiPlate.ts` (module: `arrange`, layer: `application`)
+**Code:** `vsslicer/modules/core/arrange/src/application/multiPlate.ts` (module: `arrange`, layer: `application`)
 
 ## Acceptance criteria
 

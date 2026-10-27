@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds `configurationDefaults` for `workbench.colorTheme` and `workbench.iconTheme` to the overlay.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/application/defaults.ts` (module: `vsslicer-build`, layer: `application`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/application/defaults.ts` (module: `vsslicer-build`, layer: `application`)
 
 ## Acceptance criteria
 

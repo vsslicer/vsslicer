@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Implements the `Discoverer` port with `serialport`'s port listing: path, vendor and product ids, serial number and a readable label for a small table of common boards. It never opens a port.
 
-**Code:** `vsslicer/modules/printer-serial/src/adapters/...` (module: `printer-serial`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/serial/src/adapters/...` (module: `printer-serial`, layer: `adapters`)
 
 ## Acceptance criteria
 

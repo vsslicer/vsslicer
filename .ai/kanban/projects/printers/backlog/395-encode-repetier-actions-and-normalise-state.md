@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure codec for `{action, data, printer, callback_id}` with events at `callback_id: -1`, and the mapping of `state`, `temp` and job events to `PrinterStatus`. Written new from the API documentation.
 
-**Code:** `vsslicer/modules/printer-unofficial-repetier/src/domain/...` (module: `printer-unofficial-repetier`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/unofficial-repetier/src/domain/...` (module: `printer-unofficial-repetier`, layer: `domain`)
 
 ## Acceptance criteria
 

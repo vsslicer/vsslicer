@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Resend handling is where serial streamers lose prints: after `Resend: n` the streamer must rewind to line n, discard the stale `ok`s, and resynchronise with `M110` when the printer reports a line-number error.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

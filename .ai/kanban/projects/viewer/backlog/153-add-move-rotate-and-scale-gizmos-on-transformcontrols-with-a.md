@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Gizmos for the selection: during a drag a proxy moves, and on release one command is sent. Large meshes are never re-uploaded during a drag.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/gizmo/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/gizmo/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

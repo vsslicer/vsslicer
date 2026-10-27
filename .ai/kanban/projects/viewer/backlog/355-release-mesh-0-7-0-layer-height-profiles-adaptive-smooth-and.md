@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `mesh@0.7.0`. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/mesh/` (module: `mesh`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/mesh/` (module: `mesh`, layer: n/a (release))
 
 ## Acceptance criteria
 

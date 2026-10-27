@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A test broker (Aedes, or mosquitto in CI) with a self-signed CA standing in for Bambu's, replaying fixture frames and recording commands.
 
-**Code:** `vsslicer/modules/printer-bambu/test/support/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/bambu/test/support/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

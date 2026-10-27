@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Regression for the engine path of `limit_to_extruder`.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Generates the notices with the existing tool and adds the written source offer for bundled copyleft components to the build output.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/adapters/notices.ts` (module: `vsslicer-build`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/adapters/notices.ts` (module: `vsslicer-build`, layer: `adapters`)
 
 ## Acceptance criteria
 

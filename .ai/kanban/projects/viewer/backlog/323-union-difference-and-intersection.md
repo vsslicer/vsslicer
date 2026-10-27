@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `boolean(op, a, b)` on two closed meshes with their transforms applied, returning one closed mesh or a typed error.
 
-**Code:** `vsslicer/modules/mesh-boolean/src/application/boolean.ts` (module: `mesh-boolean`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh-boolean/src/application/boolean.ts` (module: `mesh-boolean`, layer: `application`)
 
 ## Acceptance criteria
 

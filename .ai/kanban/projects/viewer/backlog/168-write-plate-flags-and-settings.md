@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes the plate fields in the Bambu/Orca plate config; defaults are omitted.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

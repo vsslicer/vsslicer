@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Shows the report per object in the tree and a detail panel, the badge from the mesh statistics, and a Repair action on problem objects.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/repair/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/repair/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

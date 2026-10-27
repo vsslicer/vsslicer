@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Size policy from the benchmark: above the triangle budget an object is a bounding box until the user chooses Draw anyway. Budget constants come from the E9 benchmark file.
 
-**Code:** `vsslicer/modules/project-extension/src/application/sizePolicy.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/sizePolicy.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

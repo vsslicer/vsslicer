@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `session.authorizedFetch()` returns a fetch that adds the API key header or an `access/oneshot_token` where a URL needs one (webcam and timelapse downloads), or sends nothing for trusted clients.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

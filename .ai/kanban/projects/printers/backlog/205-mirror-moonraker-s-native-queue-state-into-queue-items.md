@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure mapping from native queue states and events to item states, with the native queue winning on disagreement.
 
-**Code:** `vsslicer/modules/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/domain/...` (module: `fleet-queue`, layer: `domain`)
 
 ## Acceptance criteria
 

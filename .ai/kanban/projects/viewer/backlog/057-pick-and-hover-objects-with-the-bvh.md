@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Raycast picking with the transferred BVH and highlight of hovered and selected objects.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/pick/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/pick/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

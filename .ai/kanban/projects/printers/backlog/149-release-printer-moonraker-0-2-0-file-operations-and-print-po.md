@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-moonraker@0.2.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-moonraker/` (module: `printer-moonraker`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/moonraker/` (module: `printer-moonraker`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

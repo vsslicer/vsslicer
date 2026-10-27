@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Edit a fixture, reload the window, check the edits are back and the document is dirty; kill the extension host process and check the same.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/hotexit/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/hotexit/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

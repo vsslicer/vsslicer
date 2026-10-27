@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Given a measured length and a target, computes the factor and runs the existing scale command about the object's pivot, uniform or along the measured axis.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/transform/scaleToLength.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/transform/scaleToLength.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

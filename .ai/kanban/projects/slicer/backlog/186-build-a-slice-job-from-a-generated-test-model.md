@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wraps the generated mesh in a temporary project with the user's printer, process and material profile (through the 3MF writer) and returns a `SliceJob` for the normal engine path.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

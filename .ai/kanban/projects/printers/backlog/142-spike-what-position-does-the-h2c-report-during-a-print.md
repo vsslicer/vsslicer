@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Half-day H2C spike: does `mc_print_line_number` map to a byte offset of the G-code inside the `.gcode.3mf`, or is percent the only precision? Confirms the position shape with GCP-49.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

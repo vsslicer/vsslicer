@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns a `PaintLayer` and its mesh into flat arrays of leaf triangle positions and states that the webview uploads, and reports which triangles changed after a delta so only those are re-uploaded.
 
-**Code:** `vsslicer/modules/mesh/src/application/paint/leaves.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/paint/leaves.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

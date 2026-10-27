@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Dragging along the object's Z axis in range mode creates a layer-range entry with the existing add-range command, snapped to layer boundaries, and opens the override form for it.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/ranges/drag.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/ranges/drag.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

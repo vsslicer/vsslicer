@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Share of the per-tool total by progress (layer or file offset reached), flagged as an estimate.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

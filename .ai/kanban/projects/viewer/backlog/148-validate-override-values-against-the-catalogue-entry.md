@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Checks a value against the entry's type, unit, enum and bounds and returns the message to show.
 
-**Code:** `vsslicer/modules/project-extension/src/application/overrides/validate.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/overrides/validate.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

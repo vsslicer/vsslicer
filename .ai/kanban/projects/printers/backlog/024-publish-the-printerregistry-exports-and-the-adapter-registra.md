@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The public surface other extensions use: list, status events, `upload(uri, opts)`, `job`, `files`, `cameras()`, and `registerAdapter`.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

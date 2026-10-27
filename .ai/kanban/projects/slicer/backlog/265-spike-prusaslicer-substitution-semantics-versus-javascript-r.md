@@ -14,7 +14,7 @@ created: 2026-10-25
 
 Reads `prusa3d/PrusaSlicer@version_2.9.x:src/libslic3r/GCode/FindReplace.cpp` (tag to be pinned here) and the Prusa documentation to define the semantics: the four-field rule format, flags `i`, `w`, `m`, `s` (and regex mode), whole-word handling, and every Boost-versus-JavaScript difference (lookbehind, `\b`, named groups, replacement syntax).
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (spike))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (spike))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The step screens, built on E15's components, with inline offers for missing vendor data.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/wizard/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/wizard/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Shows the kit's structured failure cause as a message in the editor, including the hardware acceleration hint.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/errors/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/errors/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

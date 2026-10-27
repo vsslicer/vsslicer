@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One entry point with accessors the later epics need: embedded presets (E12), plate G-code with its MD5 and plate metadata (E21, E3), part replacement (E27).
 
-**Code:** `vsslicer/modules/3mf/src/application/api.ts` (module: `3mf`, layer: `application`)
+**Code:** `vsslicer/modules/core/3mf/src/application/api.ts` (module: `3mf`, layer: `application`)
 
 ## Acceptance criteria
 

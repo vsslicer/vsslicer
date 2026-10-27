@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Backup and restore scripts for PostgreSQL and the storage volume, rehearsed into an empty instance.
 
-**Code:** `vsslicer/modules/openvsx-registry/scripts/` (module: `openvsx-registry`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/openvsx-registry/scripts/` (module: `openvsx-registry`, layer: `adapters`)
 
 ## Acceptance criteria
 

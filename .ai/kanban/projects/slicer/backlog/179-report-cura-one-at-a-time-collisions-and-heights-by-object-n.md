@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds out what CuraEngine reports for a colliding or too-tall one-at-a-time plate and maps it to a message naming the objects; if CuraEngine reports nothing, the adapter checks bounding boxes and the gantry height before slicing.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

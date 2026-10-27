@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Commands and tree actions to set the spool in a printer tool or AMS tray (printers from `PrinterRegistry`), clear it, and resolve unassigned-bucket entries.
 
-**Code:** `vsslicer/modules/filament-extension/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/filament/src/presentation/...` (module: `filament-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Compares the two port routes on the fixtures for placement quality and speed, checks whether a maintained JS Clipper2 port exists, and whether Orca's path needs NLopt rotation optimisation. A WASM build spends an innovation token, so it must earn it.
 
-**Code:** `vsslicer/modules/arrange/docs/port-route-spike.md` (module: `arrange`, layer: n/a (spike notes))
+**Code:** `vsslicer/modules/core/arrange/docs/port-route-spike.md` (module: `arrange`, layer: n/a (spike notes))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 List, download (with progress and cancel) and render requests for a printer's timelapses over the agent.
 
-**Code:** `vsslicer/modules/camera-extension/src/application/...` (module: `camera-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/camera/src/application/...` (module: `camera-extension`, layer: `application`)
 
 ## Acceptance criteria
 

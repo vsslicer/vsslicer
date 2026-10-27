@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Owner-assisted capture on the H2C so adapter code is not written against guesses (`bambu-connectivity.md` open questions). Also the oracle for GCP-49's position-field spike.
 
-**Code:** `vsslicer/modules/printer-bambu/test/fixtures/h2c/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/bambu/test/fixtures/h2c/` (module: `printer-bambu`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

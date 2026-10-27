@@ -15,7 +15,7 @@ created: 2026-10-25
 
 three.js `WebGLRenderer` scene: materials, lighting, upload of IndexedMesh to geometry and per-object colours. WebGL2 only (D6).
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/render/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/render/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

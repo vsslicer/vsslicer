@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure state machine: vendor, model, nozzle per toolhead, surface, feeder, materials (compatible only), optional connection, summary; finishing creates the instance. Vendor data comes from whatever entities are in the store.
 
-**Code:** `vsslicer/modules/profiles/src/application/wizard/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/wizard/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

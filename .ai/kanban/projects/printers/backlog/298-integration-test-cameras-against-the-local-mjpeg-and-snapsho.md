@@ -15,7 +15,7 @@ created: 2026-10-25
 
 End-to-end in the extension test host: printer fixture, agent, camera-mjpeg, proxy and player against the local servers.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (integration tests)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (integration tests)`)
 
 ## Acceptance criteria
 

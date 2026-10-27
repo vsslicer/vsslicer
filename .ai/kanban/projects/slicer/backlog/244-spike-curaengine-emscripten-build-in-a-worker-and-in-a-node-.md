@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Builds the upstream CuraEngine Emscripten target (`CMakeLists.txt:340-361` at `47b0388`) as a single-file ES module and runs it in a `worker_threads` Worker and as a Node child process (Electron run as Node), with `--progress_cb` and `--slice_info_cb`, on the I5 fixtures with the settings resolved by `cura-settings`.
 
-**Code:** `vsslicer/modules/slicer-embedded/` (module: `slicer-embedded`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/embedded/` (module: `slicer-embedded`, layer: n/a (spike))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A CI job that starts OctoPrint's virtual printer in Docker and runs upload, start, pause and cancel with the adapter.
 
-**Code:** `vsslicer/modules/printer-octoprint/` (module: `printer-octoprint`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/octoprint/` (module: `printer-octoprint`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

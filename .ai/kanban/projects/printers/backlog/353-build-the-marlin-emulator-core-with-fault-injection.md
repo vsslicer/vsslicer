@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A test double of a Marlin printer behind the `SerialLink` port: validates `N`/checksum, answers `ok`, `Resend:`, busy periods and the `M105`, `M115`, `M27` replies from the fixtures, with injectable bit flips, dropped characters, delayed `ok`s and a configurable firmware reply.
 
-**Code:** `vsslicer/modules/printer-serial/src/adapters/testing/` (module: `printer-serial`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/serial/src/adapters/testing/` (module: `printer-serial`, layer: `adapters`)
 
 ## Acceptance criteria
 

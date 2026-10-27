@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Shows the diff of the new preset in a VS Code diff editor, asks to confirm and offers an Undo command.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

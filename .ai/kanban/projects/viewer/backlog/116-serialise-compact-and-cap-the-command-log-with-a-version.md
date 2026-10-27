@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The compact log format with a schema version, the compaction rules from the spike, a cap, and replay onto a freshly loaded model.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commandLog.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commandLog.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

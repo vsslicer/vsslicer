@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The correctness bar for the evaluator.
 
-**Code:** `vsslicer/modules/cura-settings/` (module: `cura-settings`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/core/cura-settings/` (module: `cura-settings`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Protocol exchanges for the adapter's tests, derived from `OrcaSlicer@09aa0114` `src/slic3r/Utils/CrealityPrint.cpp` (`upload` :140, `query_boxes_info` :357, `start_print` :376) and `CrealityHostDiscovery.cpp`: `get` replies, `boxsInfo`, `colorMatch`, `multiColorPrint`, `GET /info`, the upload response. The port-9999 protocol is not documented by Creality (provenance unverified); no firmware numbers are stated by any source, because no such printer is available (D5).
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/test/fixtures/` (module: `printer-unofficial-creality`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/test/fixtures/` (module: `printer-unofficial-creality`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

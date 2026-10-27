@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The registry that holds registered adapters and the user's printers and opens sessions through the hub.
 
-**Code:** `vsslicer/modules/printers-extension/src/application/...` (module: `printers-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/printers/src/application/...` (module: `printers-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Applies the policy twice: the server setting that requires a licence, and a pre-publish gate script the release job calls so refusals are named in the job log.
 
-**Code:** `vsslicer/modules/openvsx-registry/src/adapters/publish-gate.ts` (module: `openvsx-registry`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/openvsx-registry/src/adapters/publish-gate.ts` (module: `openvsx-registry`, layer: `adapters`)
 
 ## Acceptance criteria
 

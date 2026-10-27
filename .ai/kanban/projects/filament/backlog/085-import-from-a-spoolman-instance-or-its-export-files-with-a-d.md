@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One-shot import using the `filament` mapping; the first run is a dry run returning a summary the user confirms.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

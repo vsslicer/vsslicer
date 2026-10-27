@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The server core: a `Connection` port (send/receive JSON-RPC messages), handler registration per method, validation of params against the schema before the handler runs, and mapping thrown errors to the error model.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

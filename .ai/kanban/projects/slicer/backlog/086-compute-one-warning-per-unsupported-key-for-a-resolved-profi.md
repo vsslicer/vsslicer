@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure function from the keys a resolved profile sets and an engine's table to `Warning` events; renamed keys are mapped, unsupported ones warn.
 
-**Code:** `vsslicer/modules/slicer-api/src/application/...` (module: `slicer-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/slicer-api/src/application/...` (module: `slicer-api`, layer: `application`)
 
 ## Acceptance criteria
 

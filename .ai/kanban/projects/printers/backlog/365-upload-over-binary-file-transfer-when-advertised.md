@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Uses the binary protocol for SD upload when `M115` reports `BINARY_FILE_TRANSFER`, falling back to `M28` text mode otherwise, with the emulator speaking the binary protocol too.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

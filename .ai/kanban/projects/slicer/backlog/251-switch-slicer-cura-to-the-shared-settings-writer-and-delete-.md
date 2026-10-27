@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Raises the `cura-settings` range to `^0.2.0`, calls the shared writer, removes the local one.
 
-**Code:** `vsslicer/modules/slicer-cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/cura/src/domain/...` (module: `slicer-cura`, layer: `domain`)
 
 ## Acceptance criteria
 

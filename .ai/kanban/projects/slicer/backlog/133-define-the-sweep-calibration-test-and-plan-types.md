@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The vocabulary every generator shares: a `Sweep` (parameter, block values, layer rule, firmware command), a `CalibrationTest` (id, parameters, target profile key) and a `CalibrationPlan` (test model, sweep, blocks with value and layer range).
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

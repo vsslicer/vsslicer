@@ -10,7 +10,7 @@ sprint: "VSS:SP16"
 created: 2026-10-26
 ---
 
-From PRN-132's passing review (SP10): mutation survivors in `vsslicer/modules/printer-folder/src/adapters/safe-write.ts`.
+From PRN-132's passing review (SP10): mutation survivors in `vsslicer/modules/printer/folder/src/adapters/safe-write.ts`.
 
 **Code:** `src/adapters/safe-write.ts`, `test/safe-write.test.ts` (adapters)
 

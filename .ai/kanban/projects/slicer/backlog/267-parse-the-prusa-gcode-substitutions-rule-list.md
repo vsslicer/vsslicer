@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Parses the serialised rule list of an imported Prusa profile into rules (find, replace, flags, notes).
 
-**Code:** `vsslicer/modules/slicer-extension/src/domain/...` (module: `slicer-extension`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/slicer/src/domain/...` (module: `slicer-extension`, layer: `domain`)
 
 ## Acceptance criteria
 

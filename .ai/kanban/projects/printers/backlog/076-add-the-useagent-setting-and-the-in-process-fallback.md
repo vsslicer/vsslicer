@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `vsslicer.printers.useAgent` (off while the epic is in progress, on after) and a visible fallback when the agent cannot start.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

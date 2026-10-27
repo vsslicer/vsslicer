@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The first generator: tower geometry as an indexed mesh with one block per temperature, text labels omitted, plus the sweep and its write-back key `nozzle_temperature`.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

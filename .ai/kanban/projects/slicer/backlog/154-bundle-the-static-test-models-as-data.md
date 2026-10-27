@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds the approved models (cube, tolerance, bed levelling, ironing patterns) as files in the module with a manifest and provenance.
 
-**Code:** `vsslicer/modules/calibration/data/` (module: `calibration`, layer: n/a (data))
+**Code:** `vsslicer/modules/core/calibration/data/` (module: `calibration`, layer: n/a (data))
 
 ## Acceptance criteria
 

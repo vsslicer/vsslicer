@@ -15,7 +15,7 @@ created: 2026-10-25
 
 In the build with the local registry as gallery, searches and installs our extension and a public one, and checks a proxy log.
 
-**Code:** `vsslicer/modules/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

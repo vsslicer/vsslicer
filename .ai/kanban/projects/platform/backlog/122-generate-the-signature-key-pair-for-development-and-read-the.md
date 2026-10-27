@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Handles the `ovsx.integrity.key-pair` material: a script generates a development pair (gitignored), production reads a secret; security-sensitive so no key is logged or committed.
 
-**Code:** `vsslicer/modules/openvsx-registry/src/adapters/keys.ts` (module: `openvsx-registry`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/openvsx-registry/src/adapters/keys.ts` (module: `openvsx-registry`, layer: `adapters`)
 
 ## Acceptance criteria
 

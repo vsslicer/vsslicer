@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A banner on transport loss, stale version or save failure, then reload; no edit is dropped silently.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/shell/errors/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/shell/errors/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

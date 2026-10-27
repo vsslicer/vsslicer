@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `ProjectModel.addLayerGcode(plate, z, entry)` plus edit and remove, and a command to set the plate's custom G-code.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/plates/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

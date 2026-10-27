@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Multipart upload to `server/files/upload` with progress, abort, `checksum` and `print=true`.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/moonraker/src/adapters/...` (module: `printer-moonraker`, layer: `adapters`)
 
 ## Acceptance criteria
 

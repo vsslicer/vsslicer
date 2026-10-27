@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Reads the minimum, maximum and first layer height from the settings resolved for the object's plate and printer, and clamps edits and computed profiles to them.
 
-**Code:** `vsslicer/modules/project-extension/src/application/layerheight/limits.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/layerheight/limits.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

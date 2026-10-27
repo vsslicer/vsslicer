@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Mutual-TLS MQTT client on port 9883 using the `mqtt` package (MIT), subscribing to the printer's topics, decrypting and encrypting payloads, with reconnect and read-only fallback.
 
-**Code:** `vsslicer/modules/printer-unofficial-anycubic/src/adapters/...` (module: `printer-unofficial-anycubic`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-anycubic/src/adapters/...` (module: `printer-unofficial-anycubic`, layer: `adapters`)
 
 ## Acceptance criteria
 

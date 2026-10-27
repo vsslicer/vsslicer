@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `PrinterRegistry.upload` queues through the agent and returns a handle (state, progress, cancel); direct upload stays behind a setting.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds the step to the pipeline for engines whose `time_lapse_gcode` entry is `unsupported`, and never for those that pass the key through.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

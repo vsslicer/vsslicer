@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When the vendor's data is absent the model reports what is missing and the actions that could fix it (a list of data sources the composition root registers: the Orca/Bambu data package, the Prusa upstream download); a custom printer starts from `printer_model` defaults (Orca `fdm_*_common` abstract presets).
 
-**Code:** `vsslicer/modules/profiles/src/application/wizard/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/wizard/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

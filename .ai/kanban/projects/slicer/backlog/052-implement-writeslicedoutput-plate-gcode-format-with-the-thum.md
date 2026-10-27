@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The use case the pipeline calls: decide plain G-code or `.gcode.3mf`, ask the `ThumbnailRenderer` port (backed by `vsslicer.project` `renderThumbnail(plate)`, faked in tests) for images, insert or embed them, and degrade when the renderer is missing.
 
-**Code:** `vsslicer/modules/slicer-output/src/application/...` (module: `slicer-output`, layer: `application`)
+**Code:** `vsslicer/modules/slicer/output/src/application/...` (module: `slicer-output`, layer: `application`)
 
 ## Acceptance criteria
 

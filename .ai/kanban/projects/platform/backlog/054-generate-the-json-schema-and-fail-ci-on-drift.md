@@ -13,9 +13,9 @@ depends_on: [53]
 created: 2026-10-25
 ---
 
-Generates `schema/agent-protocol.schema.json` from the TypeBox definitions and checks it in; CI regenerates and fails on any difference. Path: `vsslicer/modules/agent-protocol/scripts/gen-schema.mjs`.
+Generates `schema/agent-protocol.schema.json` from the TypeBox definitions and checks it in; CI regenerates and fails on any difference. Path: `vsslicer/modules/common/agent-protocol/scripts/gen-schema.mjs`.
 
-**Code:** `vsslicer/modules/agent-protocol/` (module: `agent-protocol`, layer: n/a (ci))
+**Code:** `vsslicer/modules/common/agent-protocol/` (module: `agent-protocol`, layer: n/a (ci))
 
 ## Acceptance criteria
 

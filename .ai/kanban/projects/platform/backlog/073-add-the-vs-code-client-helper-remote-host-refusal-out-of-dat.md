@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The only VS Code API use in the module: `createAgentClient(context, options)` refuses to run in a remote extension host with a clear message and turns `AgentVersionMismatch` into "VSSlicer agent is out of date: restart it" with a Restart action that sends `shutdown` and reconnects via spawn. `vscode` is a peer dependency.
 
-**Code:** `vsslicer/modules/agent-protocol/src/presentation/...` (module: `agent-protocol`, layer: `presentation`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/presentation/...` (module: `agent-protocol`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Client core over a `Transport` port: typed `request`, per-request timeout, cancellation via `AbortSignal` sending `$/cancelRequest`, and `connected`/`disconnected` events. No reconnect yet.
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

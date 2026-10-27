@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `PrinterAdapter` for Bambu with status, HMS and the capability set chosen by the `fun` flag.
 
-**Code:** `vsslicer/modules/printer-bambu/src/application/...` (module: `printer-bambu`, layer: `application`)
+**Code:** `vsslicer/modules/printer/bambu/src/application/...` (module: `printer-bambu`, layer: `application`)
 
 ## Acceptance criteria
 

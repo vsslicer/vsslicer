@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extends the update smoke test to the signed platforms. Blocked on a signing budget (D5, D10): do not start until `PLT-128` records a yes for signing. Fallback: Linux update test (PLT-164) is the only update test.
 
-**Code:** `vsslicer/modules/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
+**Code:** `vsslicer/modules/tooling/vsslicer-build/test/smoke/` (module: `vsslicer-build`, layer: n/a (ci))
 
 ## Acceptance criteria
 

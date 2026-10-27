@@ -15,7 +15,7 @@ created: 2026-10-25
 
 MSE (go2rtc WebSocket) and WebRTC signalling (go2rtc WS, WHEP POST) reach the webview through the proxy origin; only upstreams registered by `camera.open` are forwarded to, so the proxy is not an open relay; security-sensitive.
 
-**Code:** `vsslicer/modules/printer-agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/agent/src/adapters/...` (module: `printer-agent`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers adapters, detects all of them, resolves the one named by `vsslicer.slicer.engine`, and reports installs and versions.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

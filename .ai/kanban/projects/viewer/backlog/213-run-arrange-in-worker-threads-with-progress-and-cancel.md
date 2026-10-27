@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs `arrange`, and later `fillBed` and `multiply`, in a worker with progress events and cancel; no result is returned after cancel.
 
-**Code:** `vsslicer/modules/arrange/src/adapters/worker/` (module: `arrange`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/arrange/src/adapters/worker/` (module: `arrange`, layer: `adapters`)
 
 ## Acceptance criteria
 

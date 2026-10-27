@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A virtual document listing every resolved key with its provenance.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/commands/resolved/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/commands/resolved/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

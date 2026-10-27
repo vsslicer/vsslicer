@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `project-extension@0.2.0`: the editing core. Bumps the version, writes the changelog entry, builds the VSIX and publishes to the local registry with `node scripts/run.mjs publish`, so other extensions can depend on the exported types.
 
-**Code:** `vsslicer/modules/project-extension/` (module: `project-extension`, layer: n/a (release))
+**Code:** `vsslicer/modules/apps/project/` (module: `project-extension`, layer: n/a (release))
 
 ## Acceptance criteria
 

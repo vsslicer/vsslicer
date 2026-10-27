@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Recorded engine stderr and `result.json` samples that include warnings, with engine versions.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

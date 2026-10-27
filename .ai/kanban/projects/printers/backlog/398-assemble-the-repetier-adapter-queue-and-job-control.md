@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Start copies the uploaded model to the queue with `autostart` and starts the job; stop uses `stopJob`, continue `continueJob`. The documentation lists no pause action, so `pause` is not offered.
 
-**Code:** `vsslicer/modules/printer-unofficial-repetier/src/application/...` (module: `printer-unofficial-repetier`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-repetier/src/application/...` (module: `printer-unofficial-repetier`, layer: `application`)
 
 ## Acceptance criteria
 

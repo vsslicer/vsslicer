@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On the web the custom editor reads bytes with `vscode.workspace.fs` (no Node streams) and refuses a file above the web size limit (a setting whose default comes from the spike) with a message that says the limit and what to do.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

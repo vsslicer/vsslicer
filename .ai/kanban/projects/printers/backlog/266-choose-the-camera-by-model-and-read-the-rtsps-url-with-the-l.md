@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pick `frames` for A1/P1 and `rtsp` for X1, P2S and H2 (H2C) from the printer model and the MQTT `ipcam` state; when `rtsp_url` reads `disable`, report the `liveview-disabled` state with the 'turn on LAN Mode Liveview' hint.
 
-**Code:** `vsslicer/modules/camera-bambu/src/application/...` (module: `camera-bambu`, layer: `application`)
+**Code:** `vsslicer/modules/camera/bambu/src/application/...` (module: `camera-bambu`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `filament_map` and `filament_map_mode` as a model validated against the nozzle count found in MM2.
 
-**Code:** `vsslicer/modules/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
+**Code:** `vsslicer/modules/core/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
 
 ## Acceptance criteria
 

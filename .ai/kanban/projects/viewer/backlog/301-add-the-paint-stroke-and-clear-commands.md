@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A stroke command stores only the `PaintDelta` of changed subtrees and inverts it; clear removes one kind on one volume or object. Each stroke is one undo step.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/paint/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/paint/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

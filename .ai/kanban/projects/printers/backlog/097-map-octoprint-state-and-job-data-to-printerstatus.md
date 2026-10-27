@@ -15,7 +15,7 @@ created: 2026-10-25
 
 State flags, temperatures and job progress into the normalised status.
 
-**Code:** `vsslicer/modules/printer-octoprint/src/domain/...` (module: `printer-octoprint`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/octoprint/src/domain/...` (module: `printer-octoprint`, layer: `domain`)
 
 ## Acceptance criteria
 

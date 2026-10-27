@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure parser from reply lines to typed events. Written new from the protocol; Marlin is GPL-3.0 and no Marlin code is copied.
 
-**Code:** `vsslicer/modules/printer-serial/src/domain/...` (module: `printer-serial`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/serial/src/domain/...` (module: `printer-serial`, layer: `domain`)
 
 ## Acceptance criteria
 

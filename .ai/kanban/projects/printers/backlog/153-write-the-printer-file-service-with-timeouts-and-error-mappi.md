@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Vscode-free service mapping `Session.files` to stat, readDirectory, read, write, delete, rename with read-only detection and per-call timeouts.
 
-**Code:** `vsslicer/modules/printers-extension/src/application/...` (module: `printers-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/printers/src/application/...` (module: `printers-extension`, layer: `application`)
 
 ## Acceptance criteria
 

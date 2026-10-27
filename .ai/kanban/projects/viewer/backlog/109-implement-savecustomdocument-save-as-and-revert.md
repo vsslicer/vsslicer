@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Wires `saveCustomDocument`, `saveCustomDocumentAs` and `revertCustomDocument` to the use case and the history.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

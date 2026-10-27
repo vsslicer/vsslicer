@@ -12,7 +12,7 @@ created: 2026-10-26
 
 PRF-213 writes top-level booleans as `True`/`False`; booleans inside a list or object still go through `JSON.stringify` and come out as `true` (review sp12-rev-prf-130).
 
-**Code:** `vsslicer/modules/profiles-cura/src/adapters/export/cura/write.ts` (module: `profiles-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/cura/src/adapters/export/cura/write.ts` (module: `profiles-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

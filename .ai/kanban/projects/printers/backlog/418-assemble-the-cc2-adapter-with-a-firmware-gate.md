@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes info, status, upload and start into the `elegoo-cc2` adapter. Only operations the spike verified are offered; the firmware table decides read-only mode.
 
-**Code:** `vsslicer/modules/printer-unofficial-elegoo-cc2/src/application/...` (module: `printer-unofficial-elegoo-cc2`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-elegoo-cc2/src/application/...` (module: `printer-unofficial-elegoo-cc2`, layer: `application`)
 
 ## Acceptance criteria
 

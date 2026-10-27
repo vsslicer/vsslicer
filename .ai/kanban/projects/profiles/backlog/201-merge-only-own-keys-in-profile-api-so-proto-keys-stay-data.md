@@ -10,9 +10,9 @@ sprint: "VSS:SP14"
 created: 2026-10-26
 ---
 
-From PRF-126's fix round (SP10): `vsslicer/modules/profile-api/src/domain/inheritance/merge.ts` reads `b[k]` without checking own keys, so on a plain `{}` a `__proto__` key returns `Object.prototype` and breaks a round-trip; profiles-orca worked around it with null-prototype maps.
+From PRF-126's fix round (SP10): `vsslicer/modules/common/profile-api/src/domain/inheritance/merge.ts` reads `b[k]` without checking own keys, so on a plain `{}` a `__proto__` key returns `Object.prototype` and breaks a round-trip; profiles-orca worked around it with null-prototype maps.
 
-**Code:** `vsslicer/modules/profile-api/src/domain/inheritance/merge.ts` (domain)
+**Code:** `vsslicer/modules/common/profile-api/src/domain/inheritance/merge.ts` (domain)
 
 ## Acceptance criteria
 

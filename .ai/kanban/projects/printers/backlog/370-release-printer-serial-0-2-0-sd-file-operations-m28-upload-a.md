@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `printer-serial@0.2.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/printer-serial/` (module: `printer-serial`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/printer/serial/` (module: `printer-serial`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

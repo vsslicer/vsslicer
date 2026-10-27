@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Measures the 200-object fixture in a worker and the event loop delay, and checks that cancel returns no poses.
 
-**Code:** `vsslicer/modules/arrange/test/perf/` (module: `arrange`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/arrange/test/perf/` (module: `arrange`, layer: n/a (tests))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fill `PrinterStatus.position` from `mc_print_line_number` or percent as the spike decided.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

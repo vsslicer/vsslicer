@@ -2,11 +2,13 @@
 // CI must run test:integration for modules that define it, with the shared VS Code cache, and must not cache unused fixtures.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { moduleDirs } from '../modules.mjs';
 
 const ci = readFileSync(new URL('../../../.github/workflows/ci.yml', import.meta.url), 'utf8');
 const mods = new URL('../../modules/', import.meta.url);
-const withIntegration = readdirSync(mods).filter((d) => {
+const withIntegration = moduleDirs(fileURLToPath(mods), () => {}).filter((d) => {
   try {
     return 'test:integration' in JSON.parse(readFileSync(new URL(`${d}/package.json`, mods), 'utf8')).scripts;
   } catch {

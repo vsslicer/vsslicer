@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Same effect tests as Orca, run through the Cura resolution path.
 
-**Code:** `vsslicer/modules/slicer-cura/` (module: `slicer-cura`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/cura/` (module: `slicer-cura`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

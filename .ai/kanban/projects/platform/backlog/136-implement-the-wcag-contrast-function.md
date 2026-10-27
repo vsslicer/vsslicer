@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure relative-luminance and contrast-ratio function with alpha compositing over a background.
 
-**Code:** `vsslicer/modules/themes/src/domain/contrast.ts` (module: `themes`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/themes/src/domain/contrast.ts` (module: `themes`, layer: `domain`)
 
 ## Acceptance criteria
 

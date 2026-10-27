@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Always `-o <file>` (logs share stdout), the resolved-input route from the spike, and the definition search path where needed. Runs through the shared runner.
 
-**Code:** `vsslicer/modules/slicer-cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

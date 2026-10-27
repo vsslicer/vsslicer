@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Finds boundary loops and fills small holes by triangulation, in the step order and thresholds of Orca's cross-platform pipeline. Ported from `OrcaSlicer@09aa0114:src/libslic3r/MeshRepair.cpp` (AGPL-3.0, D2); the algorithms taken from CGAL are replaced by the route in the spike. Notice and `Ported from` line required.
 
-**Code:** `vsslicer/modules/mesh/src/domain/repair/holes.ts` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/repair/holes.ts` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

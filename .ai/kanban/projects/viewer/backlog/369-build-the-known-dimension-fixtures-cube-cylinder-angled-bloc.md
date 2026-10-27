@@ -14,7 +14,7 @@ created: 2026-10-25
 
 Generated meshes whose features and measurements are known exactly, with the expected values in a JSON file next to each.
 
-**Code:** `vsslicer/modules/mesh/test/fixtures/measure/` (module: `mesh`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/mesh/test/fixtures/measure/` (module: `mesh`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

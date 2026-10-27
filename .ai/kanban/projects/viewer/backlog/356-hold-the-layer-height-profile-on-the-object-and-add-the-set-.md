@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The object's profile lives in the ProjectModel (read from `layer_heights_profile.txt` or the Prusa part, written on save). `setProfile` and `resetProfile` are commands; every profile edit builds on them.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/layerheight/profile.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/layerheight/profile.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The project tree shows plates with their objects and offers create, duplicate, rename, lock, delete and reorder.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

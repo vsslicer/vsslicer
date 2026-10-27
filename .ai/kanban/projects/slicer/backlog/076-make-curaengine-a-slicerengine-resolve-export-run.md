@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes `resolveCuraStack`, STL export, the input writer and the runner behind the common interface. The Cura stack of the resolved profile comes from `profiles`.
 
-**Code:** `vsslicer/modules/slicer-cura/src/application/...` (module: `slicer-cura`, layer: `application`)
+**Code:** `vsslicer/modules/slicer/cura/src/application/...` (module: `slicer-cura`, layer: `application`)
 
 ## Acceptance criteria
 

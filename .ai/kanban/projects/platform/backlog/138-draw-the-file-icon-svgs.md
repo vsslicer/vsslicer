@@ -15,7 +15,7 @@ created: 2026-10-25
 
 SVG icons for 3MF, STL, OBJ, STEP, G-code, binary G-code, sliced 3MF and profile files, written new (no third-party icon sets).
 
-**Code:** `vsslicer/modules/themes/icons/` (module: `themes`, layer: n/a (assets))
+**Code:** `vsslicer/modules/apps/themes/icons/` (module: `themes`, layer: n/a (assets))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Fake adapter and Moonraker replay fixtures: send one plate to both, with a mismatch refused.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

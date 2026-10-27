@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Additive domain types the writer needs: the volume kind of a part (part, negative, modifier, support enforcer, support blocker), layer-range config entries, VSSlicer namespace records, a stable UUID per object and part, and the `ConversionReport` and `SaveNotice` types. No behaviour change for readers.
 
-**Code:** `vsslicer/modules/3mf/src/domain/project/` (module: `3mf`, layer: `domain`)
+**Code:** `vsslicer/modules/core/3mf/src/domain/project/` (module: `3mf`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 FIL-74 needs a way for a connector to hand over OpenPrintTag payload bytes. Adds a capability flag and a status-stream event; connectors that read tags later set the flag.
 
-**Code:** `vsslicer/modules/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/printer-api/src/domain/...` (module: `printer-api`, layer: `domain`)
 
 ## Acceptance criteria
 

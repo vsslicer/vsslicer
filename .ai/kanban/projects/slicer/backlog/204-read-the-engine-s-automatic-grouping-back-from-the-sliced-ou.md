@@ -15,7 +15,7 @@ created: 2026-10-25
 
 After a slice in automatic mode, reads the `filament_map` the engine chose from the G-code's config block so the UI can show it.
 
-**Code:** `vsslicer/modules/multimaterial/src/application/...` (module: `multimaterial`, layer: `application`)
+**Code:** `vsslicer/modules/core/multimaterial/src/application/...` (module: `multimaterial`, layer: `application`)
 
 ## Acceptance criteria
 

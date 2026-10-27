@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A script that installs the pinned Orca for the runner's OS into a cache directory keyed by the manifest hash, and exports its path to the tests.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (ci))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (ci))
 
 ## Acceptance criteria
 

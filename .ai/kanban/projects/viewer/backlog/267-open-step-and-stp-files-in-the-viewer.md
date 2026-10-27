@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers the extensions for the viewer, imports with the default quality and shows each solid with its name.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

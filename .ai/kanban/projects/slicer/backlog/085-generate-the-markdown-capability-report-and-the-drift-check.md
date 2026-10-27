@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Deterministic Markdown from a table and the engine version, and a check that compares the committed report with a fresh one.
 
-**Code:** `vsslicer/modules/slicer-api/src/application/...` (module: `slicer-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/slicer-api/src/application/...` (module: `slicer-api`, layer: `application`)
 
 ## Acceptance criteria
 

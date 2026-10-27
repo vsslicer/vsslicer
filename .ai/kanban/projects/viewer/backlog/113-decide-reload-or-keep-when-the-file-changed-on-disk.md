@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A pure decision over the document state and the change: clean documents reload quietly; dirty documents ask, and the unsaved log is kept as a recoverable copy until dismissed.
 
-**Code:** `vsslicer/modules/project-extension/src/application/externalChange.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/externalChange.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

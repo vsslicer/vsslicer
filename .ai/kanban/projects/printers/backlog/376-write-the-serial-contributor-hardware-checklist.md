@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A checklist for contributors with a Marlin printer: what to run, what to record, and how to turn a recorded `M115` or session into a fixture.
 
-**Code:** `vsslicer/modules/printers-serial-extension/docs/hardware-checklist.md` (module: `printers-serial-extension`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/apps/printers-serial/docs/hardware-checklist.md` (module: `printers-serial-extension`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

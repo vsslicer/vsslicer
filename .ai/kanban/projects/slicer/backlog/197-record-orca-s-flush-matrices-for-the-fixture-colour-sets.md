@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Obtains the matrix the pinned Orca computes for each colour set of the multi-material fixtures (from `project_settings.config` after recalculation) and checks it in as the oracle.
 
-**Code:** `vsslicer/modules/multimaterial/test/fixtures/` (module: `multimaterial`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/core/multimaterial/test/fixtures/` (module: `multimaterial`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

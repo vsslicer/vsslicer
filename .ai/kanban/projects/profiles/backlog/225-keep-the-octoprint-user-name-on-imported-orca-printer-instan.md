@@ -13,7 +13,7 @@ created: 2026-10-26
 
 Found by sp12-rev-prf-90: `readOrcaInstances` drops Orca's `printhost_user` because the printer-instance entity has no field for it, so a user-auth OctoPrint instance gets the password without the user name (digest auth needs both).
 
-**Code:** `vsslicer/modules/profiles-orca/src/adapters/instances/read-instances.ts` and the instance entity in profile-api if it needs a field (module: `profiles-orca`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/orca/src/adapters/instances/read-instances.ts` and the instance entity in profile-api if it needs a field (module: `profiles-orca`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Types for the quality (linear and angular deflection with named presets), the result (solids with names and `IndexedMesh`) and four typed errors with user messages: unsupported schema, empty file, WASM load failure, out of memory.
 
-**Code:** `vsslicer/modules/mesh-step/src/domain/` (module: `mesh-step`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh-step/src/domain/` (module: `mesh-step`, layer: `domain`)
 
 ## Acceptance criteria
 

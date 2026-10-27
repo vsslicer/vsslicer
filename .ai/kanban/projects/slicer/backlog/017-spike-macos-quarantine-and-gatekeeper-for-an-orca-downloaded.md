@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Decides whether download is offered on macOS or only detection. No notarisation budget exists (D5), so a quarantine flag on a downloaded app may make it unlaunchable.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (spike))
 
 ## Acceptance criteria
 

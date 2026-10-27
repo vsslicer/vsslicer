@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers `slicer-embedded` and selects it only when detection finds no other engine and the setting allows it; the slice report says that the embedded engine was used.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

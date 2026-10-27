@@ -17,7 +17,7 @@ For adapters that report nothing, fetch the sliced file through the session's fi
 
 UNRESOLVED: needs gcode-parser: a release card for `readSummary`; GCP-8 is depended on directly.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

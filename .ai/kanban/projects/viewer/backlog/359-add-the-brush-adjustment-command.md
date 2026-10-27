@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One brush drag is one command holding the before and after profile of the changed samples.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/layerheight/brush.ts` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/layerheight/brush.ts` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

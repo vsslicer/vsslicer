@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A feature is a point, an edge, a circle (centre, radius, axis) or a plane (point, normal); a result is a distance, an angle, a diameter or a plane separation, each with the two features it came from.
 
-**Code:** `vsslicer/modules/mesh/src/domain/measure/types.ts` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/measure/types.ts` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

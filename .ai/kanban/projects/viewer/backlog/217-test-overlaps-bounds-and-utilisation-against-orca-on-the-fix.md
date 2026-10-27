@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs arrange on all nine fixtures and checks no polygon intersection, every instance inside the region and utilisation within 5 percent of Orca's recorded result.
 
-**Code:** `vsslicer/modules/arrange/test/metrics/` (module: `arrange`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/arrange/test/metrics/` (module: `arrange`, layer: n/a (tests))
 
 ## Acceptance criteria
 

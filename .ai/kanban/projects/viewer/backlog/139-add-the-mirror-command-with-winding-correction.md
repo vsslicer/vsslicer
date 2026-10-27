@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Mirrors an object on X, Y or Z by flipping its mesh and triangle winding so the stored transform keeps a positive determinant.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/transform/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

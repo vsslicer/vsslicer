@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The ports adapters implement: `PrinterAdapter`, `Session`, `Discoverer`, `CameraSource`, `SecretStore`, the adapter registration descriptor and the streaming upload.
 
-**Code:** `vsslicer/modules/printer-api/src/application/...` (module: `printer-api`, layer: `application`)
+**Code:** `vsslicer/modules/common/printer-api/src/application/...` (module: `printer-api`, layer: `application`)
 
 ## Acceptance criteria
 

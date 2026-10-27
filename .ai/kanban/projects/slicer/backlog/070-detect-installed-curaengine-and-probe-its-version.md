@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Looks inside installed Cura apps on each OS and at `vsslicer.slicer.cura.path`; unsupported versions warn naming the pinned one.
 
-**Code:** `vsslicer/modules/slicer-cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

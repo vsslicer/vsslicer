@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Raises the `@vsslicer/calibration` range to `^0.2.0`; the command lists PA, flow, input shaping, cornering and the static models from the registry.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

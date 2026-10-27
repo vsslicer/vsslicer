@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A script paints a plate-sized box and an overhang model through the commands (supports on one overhang, a blocker on another, a seam mark on a corner, two colours on two halves) and saves the projects.
 
-**Code:** `vsslicer/modules/project-extension/test/fixtures/paint-oracle/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/fixtures/paint-oracle/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

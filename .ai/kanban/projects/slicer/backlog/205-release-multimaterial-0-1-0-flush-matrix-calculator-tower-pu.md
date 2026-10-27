@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `multimaterial@0.1.0` so other modules can depend on the range: flush matrix calculator, tower, purge, feature assignment and nozzle map models. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/multimaterial/` (module: `multimaterial`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/multimaterial/` (module: `multimaterial`, layer: n/a (release))
 
 ## Acceptance criteria
 

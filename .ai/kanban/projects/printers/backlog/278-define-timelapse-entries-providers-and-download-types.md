@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `CameraSource.timelapses()` types: `TimelapseEntry` (name, size, date, container, optional thumbnail, render state), `TimelapseProvider` (list, request render, download with progress and `AbortSignal`) and the per-model capability record.
 
-**Code:** `vsslicer/modules/camera-api/src/domain/...` (module: `camera-api`, layer: `domain`)
+**Code:** `vsslicer/modules/common/camera-api/src/domain/...` (module: `camera-api`, layer: `domain`)
 
 ## Acceptance criteria
 

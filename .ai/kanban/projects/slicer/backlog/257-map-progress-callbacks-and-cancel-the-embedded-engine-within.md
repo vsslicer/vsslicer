@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Turns `--progress_cb` and `--slice_info_cb` into progress events and cancels by killing the child.
 
-**Code:** `vsslicer/modules/slicer-embedded/src/adapters/...` (module: `slicer-embedded`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/embedded/src/adapters/...` (module: `slicer-embedded`, layer: `adapters`)
 
 ## Acceptance criteria
 

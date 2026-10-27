@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `camera-webrtc@0.1.0`.
 
-**Code:** `vsslicer/modules/camera-webrtc/` (module: `camera-webrtc`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/camera/webrtc/` (module: `camera-webrtc`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

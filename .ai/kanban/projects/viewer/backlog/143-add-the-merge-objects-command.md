@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Merges selected objects into one object with parts, keeping each part's name and transform.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/split/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/split/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

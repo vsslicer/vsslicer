@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Many tags per spool, UID normalisation (case, separators), all-zero UID means untagged, `format` from Spoolman's known-format list, and detection of one tag on two spools.
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

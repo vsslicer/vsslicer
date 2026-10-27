@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A `Discoverer` that broadcasts `M99999` to UDP port 3000 and returns `Name`, `MachineName`, `MainboardIP`, `MainboardID`, `ProtocolVersion` and `FirmwareVersion`.
 
-**Code:** `vsslicer/modules/printer-unofficial-sdcp/src/adapters/...` (module: `printer-unofficial-sdcp`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-sdcp/src/adapters/...` (module: `printer-unofficial-sdcp`, layer: `adapters`)
 
 ## Acceptance criteria
 

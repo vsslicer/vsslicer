@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `PrinterAdapter` with capabilities, job control, `probe` (`server/info`) and `webcams()` URLs.
 
-**Code:** `vsslicer/modules/printer-moonraker/src/application/...` (module: `printer-moonraker`, layer: `application`)
+**Code:** `vsslicer/modules/printer/moonraker/src/application/...` (module: `printer-moonraker`, layer: `application`)
 
 ## Acceptance criteria
 

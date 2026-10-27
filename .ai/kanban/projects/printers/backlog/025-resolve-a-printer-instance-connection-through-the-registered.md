@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Replace the static `host_type` list of the printer_instance connection with the registry's registered adapters (E16 defines `connection {host_type, url, secret_ref}`).
 
-**Code:** `vsslicer/modules/printers-extension/src/application/...` (module: `printers-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/printers/src/application/...` (module: `printers-extension`, layer: `application`)
 
 Wiring to the profiles extension's `getConnection(instanceId)` and `printer_instance` type is UNRESOLVED (profile-api, profiles-extension).
 

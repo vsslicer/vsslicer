@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Append-only events (`sent`, `started`, `ended`, `backfilled`) and the folded record: Moonraker's job shape plus `vsslicer_job_id`, `project`, `plate_index`, `printer_id`, `profile_ref`, `thumbnail`, optional `timelapse`.
 
-**Code:** `vsslicer/modules/job-history/src/domain/...` (module: `job-history`, layer: `domain`)
+**Code:** `vsslicer/modules/printer/job-history/src/domain/...` (module: `job-history`, layer: `domain`)
 
 ## Acceptance criteria
 

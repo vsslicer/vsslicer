@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Generates or collects a 50 MB STEP file, imports it in the worker and measures event loop delay and peak memory of the worker.
 
-**Code:** `vsslicer/modules/mesh-step/test/large/` (module: `mesh-step`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh-step/test/large/` (module: `mesh-step`, layer: n/a (tests))
 
 ## Acceptance criteria
 

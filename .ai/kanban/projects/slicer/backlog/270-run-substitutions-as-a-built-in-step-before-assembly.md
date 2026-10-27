@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers the step in the pipeline before thumbnails and `.gcode.3mf` assembly, reading rules from the job's profile (Prusa key and Cura entries), so MD5 and metadata are computed afterwards.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

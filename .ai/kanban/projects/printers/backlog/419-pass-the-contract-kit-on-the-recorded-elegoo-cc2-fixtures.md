@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the `@vsslicer/printer-api` contract kit (and its HTTP/WebSocket replay harness where the protocol uses them) against the Elegoo CC2 adapter with the recorded fixtures.
 
-**Code:** `vsslicer/modules/printer-unofficial-elegoo-cc2/test/contract/` (module: `printer-unofficial-elegoo-cc2`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/unofficial-elegoo-cc2/test/contract/` (module: `printer-unofficial-elegoo-cc2`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 On the H2C and the Moonraker fixture: one action sends a plate to both and both start; history records exist.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

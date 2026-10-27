@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `orient(mesh, options)` returns the best rotation and its metrics; `orient(objects)` does it per object. This is the function the slicer UI calls for its pre-slice option.
 
-**Code:** `vsslicer/modules/mesh/src/application/orient/orient.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/orient/orient.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

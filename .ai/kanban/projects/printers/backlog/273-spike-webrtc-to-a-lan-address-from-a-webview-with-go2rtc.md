@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One day: does an `RTCPeerConnection` in a VS Code webview reach go2rtc on a LAN address, with signalling through a loopback WebSocket? If not, the fallback is MSE through the proxy.
 
-**Code:** `vsslicer/modules/camera-webrtc/` (module: `camera-webrtc`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/camera/webrtc/` (module: `camera-webrtc`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

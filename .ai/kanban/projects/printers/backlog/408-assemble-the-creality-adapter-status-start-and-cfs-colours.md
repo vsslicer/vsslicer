@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Composes the pieces: status, upload then start with `set opGcodeFile "printprt:<path>"`, and for CFS printers the colour mapping from the project's filaments to the boxes and slots, reported through the multi-material capability.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/src/application/...` (module: `printer-unofficial-creality`, layer: `application`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/src/application/...` (module: `printer-unofficial-creality`, layer: `application`)
 
 ## Acceptance criteria
 

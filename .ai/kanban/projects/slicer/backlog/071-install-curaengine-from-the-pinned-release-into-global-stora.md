@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Download with the verified downloader, extract per platform, apply the macOS decision from the Orca spike, register the install.
 
-**Code:** `vsslicer/modules/slicer-cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The unified schema may not model every Orca key. The emitter copies those from the original imported native JSON and records which, so the slice report can list them as warnings.
 
-**Code:** `vsslicer/modules/slicer-orca/src/application/...` (module: `slicer-orca`, layer: `application`)
+**Code:** `vsslicer/modules/slicer/orca/src/application/...` (module: `slicer-orca`, layer: `application`)
 
 ## Acceptance criteria
 

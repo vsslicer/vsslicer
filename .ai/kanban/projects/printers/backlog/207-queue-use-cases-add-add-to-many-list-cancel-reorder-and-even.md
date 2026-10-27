@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `Queue` service the agent hosts: `add`, `addToMany` (one item per selected printer, each checked), `list`, `cancel`, `retry`, `reorder` and an event stream.
 
-**Code:** `vsslicer/modules/fleet-queue/src/application/...` (module: `fleet-queue`, layer: `application`)
+**Code:** `vsslicer/modules/printer/fleet-queue/src/application/...` (module: `fleet-queue`, layer: `application`)
 
 ## Acceptance criteria
 

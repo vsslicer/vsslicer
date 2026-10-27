@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Uses the `mesh` module's STL writer to export each object of the plate, transformed to the plate position, since CuraEngine reads no 3MF.
 
-**Code:** `vsslicer/modules/slicer-cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
+**Code:** `vsslicer/modules/slicer/cura/src/adapters/...` (module: `slicer-cura`, layer: `adapters`)
 
 ## Acceptance criteria
 

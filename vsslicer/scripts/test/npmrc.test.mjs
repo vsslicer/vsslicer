@@ -6,10 +6,11 @@ import test from 'node:test';
 import assert from 'node:assert';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { moduleDirs } from '../modules.mjs';
 
 const root = join(import.meta.dirname, '..', '..');
 const projects = [
-  ...readdirSync(join(root, 'modules')).map((d) => join(root, 'modules', d)),
+  ...moduleDirs(join(root, 'modules'), () => {}).map((d) => join(root, 'modules', d)),
   join(root, 'fixtures', 'phantom-dep'),
 ].filter((d) => existsSync(join(d, 'package.json')));
 

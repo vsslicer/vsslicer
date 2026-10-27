@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds entries for `change_extrusion_role_gcode` and its variants, `time_lapse_gcode` and `timelapse_type`, and for SuperSlicer `feature_gcode` (renamed if the unified schema models it, else unsupported).
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

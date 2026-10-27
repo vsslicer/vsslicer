@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases the local registry stack so the build can depend on its URL settings and test fixtures.
 
-**Code:** `vsslicer/modules/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (release))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/` (module: `openvsx-registry`, layer: n/a (release))
 
 ## Acceptance criteria
 

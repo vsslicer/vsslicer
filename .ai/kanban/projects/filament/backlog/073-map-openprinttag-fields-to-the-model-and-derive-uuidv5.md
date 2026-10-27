@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Instance, material and brand UUIDs, GTIN, material, colours, weights, density, diameter, temperatures and aux `consumed_weight` into spool/filament candidates; UUIDv5 derivation when UUIDs are omitted (spec section 3.2).
 
-**Code:** `vsslicer/modules/filament/src/domain/...` (module: `filament`, layer: `domain`)
+**Code:** `vsslicer/modules/filament/filament/src/domain/...` (module: `filament`, layer: `domain`)
 
 ## Acceptance criteria
 

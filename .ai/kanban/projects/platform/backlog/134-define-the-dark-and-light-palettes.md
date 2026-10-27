@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Two colour palettes that make the generated dark and light themes.
 
-**Code:** `vsslicer/modules/themes/src/domain/palettes/` (module: `themes`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/themes/src/domain/palettes/` (module: `themes`, layer: `domain`)
 
 ## Acceptance criteria
 

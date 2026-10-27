@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The prepare and adaptive steps run off the host thread with progress and cancel; prepared data is cached per mesh so changing the quality value reruns only the profile step.
 
-**Code:** `vsslicer/modules/mesh/src/adapters/worker-node/layerHeight.ts` (module: `mesh`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/mesh/src/adapters/worker-node/layerHeight.ts` (module: `mesh`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A 'Save snapshot' command on the panel that writes the current frame as a JPEG to a chosen file.
 
-**Code:** `vsslicer/modules/camera-extension/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/camera/src/presentation/...` (module: `camera-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

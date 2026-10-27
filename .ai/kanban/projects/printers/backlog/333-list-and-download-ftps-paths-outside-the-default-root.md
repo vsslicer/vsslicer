@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Lets a caller list and download from an explicit absolute path (the SD card `/timelapse` folder) with progress and `AbortSignal`, without widening the default root of the file operations.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

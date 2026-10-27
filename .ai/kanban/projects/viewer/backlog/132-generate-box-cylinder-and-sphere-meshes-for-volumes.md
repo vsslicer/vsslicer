@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Closed, outward-facing meshes of a box, cylinder and sphere with size and segment parameters.
 
-**Code:** `vsslicer/modules/mesh/src/domain/primitives/` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/primitives/` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

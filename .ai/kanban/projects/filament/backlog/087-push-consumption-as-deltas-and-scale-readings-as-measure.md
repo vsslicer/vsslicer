@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Bookings go out as `PUT /spool/{id}/use {use_weight}` deltas with an idempotency key in `extra`; scale readings go as `PUT /spool/{id}/measure`.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

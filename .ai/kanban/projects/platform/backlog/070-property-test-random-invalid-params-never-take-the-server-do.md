@@ -13,9 +13,9 @@ depends_on: [55, 53]
 created: 2026-10-25
 ---
 
-A fast-check test generating invalid params for every registered method. Path: `vsslicer/modules/agent-protocol/test/property/invalid-params.test.ts` (layer: application, test).
+A fast-check test generating invalid params for every registered method. Path: `vsslicer/modules/common/agent-protocol/test/property/invalid-params.test.ts` (layer: application, test).
 
-**Code:** `vsslicer/modules/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
+**Code:** `vsslicer/modules/common/agent-protocol/src/application/...` (module: `agent-protocol`, layer: `application`)
 
 ## Acceptance criteria
 

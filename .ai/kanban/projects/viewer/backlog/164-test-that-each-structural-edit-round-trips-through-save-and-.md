@@ -15,7 +15,7 @@ created: 2026-10-25
 
 For move, rotate, scale, mirror, instances, units, split and merge: apply, save, reopen, slice, and compare object, part and instance counts and positions.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/structure/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/structure/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

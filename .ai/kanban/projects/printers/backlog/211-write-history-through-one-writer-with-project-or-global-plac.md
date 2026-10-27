@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The only writer: serialises appends from all windows and writes to the project's `.vsslicer/history/` or, with no project, to a global history in a configured storage directory.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The two numbers the tests and the scorer compare: the area of faces overhanging more than a threshold angle, and the area of faces lying on the bed, for a mesh under a rotation.
 
-**Code:** `vsslicer/modules/mesh/src/domain/orient/metrics.ts` (module: `mesh`, layer: `domain`)
+**Code:** `vsslicer/modules/core/mesh/src/domain/orient/metrics.ts` (module: `mesh`, layer: `domain`)
 
 ## Acceptance criteria
 

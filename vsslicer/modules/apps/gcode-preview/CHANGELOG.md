@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1
+
+- Moved to `vsslicer/modules/apps/gcode-preview`; the repository URL follows (PLT-204).
+
 ## 0.7.0
 
 - Re-range `@vsslicer/webview-kit` to ^0.8.0 and re-lock to `gcode-parser` 0.14.2 (SP12 release).

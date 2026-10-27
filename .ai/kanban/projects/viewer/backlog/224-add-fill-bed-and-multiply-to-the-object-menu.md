@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Menu entries and a count prompt for multiply.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/arrange/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/arrange/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

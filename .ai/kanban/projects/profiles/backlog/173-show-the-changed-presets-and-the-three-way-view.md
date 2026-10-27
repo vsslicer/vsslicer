@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A view of changed presets and, for each user entity with conflicts, a base/mine/vendor table built from the form's comparison components, where the user picks a side per conflicting key.
 
-**Code:** `vsslicer/modules/profiles-extension/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/src/presentation/...` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

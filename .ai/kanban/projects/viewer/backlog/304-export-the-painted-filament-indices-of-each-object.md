@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds a versioned export `paintedFilaments(objectId)` so the slicer UI can show which filaments an object's paint uses (multi-material assignment).
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/exports.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/exports.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

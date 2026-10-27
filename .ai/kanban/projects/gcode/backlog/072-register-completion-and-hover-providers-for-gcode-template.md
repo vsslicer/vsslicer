@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Thin providers over `@vsslicer/gcode-templates` that reuse the G-code command catalogue providers for plain G-code lines and add the placeholder completions and hovers; the slicer and template kind come from the document's metadata.
 
-**Code:** `vsslicer/modules/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/gcode-preview/src/presentation/...` (module: `gcode-preview`, layer: `presentation`)
 
 ## Acceptance criteria
 

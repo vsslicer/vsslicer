@@ -15,7 +15,7 @@ created: 2026-10-25
 
 HTTP actions at `/printer/api/<slug>?a=<action>&data=<json>` and the WebSocket on port 3344 for events, authenticated with the `x-api-key` header (never in the query), choosing the printer slug from `listPrinter`.
 
-**Code:** `vsslicer/modules/printer-unofficial-repetier/src/adapters/...` (module: `printer-unofficial-repetier`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-repetier/src/adapters/...` (module: `printer-unofficial-repetier`, layer: `adapters`)
 
 ## Acceptance criteria
 

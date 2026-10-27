@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Confirms on the printer and in Orca's H2C machine profile how many nozzles the H2C class has, how `filament_map` and `filament_map_mode` index them, and whether Orca's automatic grouping is right for the H2C.
 
-**Code:** `vsslicer/modules/multimaterial/` (module: `multimaterial`, layer: n/a (spike))
+**Code:** `vsslicer/modules/core/multimaterial/` (module: `multimaterial`, layer: n/a (spike))
 
 ## Acceptance criteria
 

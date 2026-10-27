@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The A1/P1-style frame source end to end against the fake port-6000 server.
 
-**Code:** `vsslicer/modules/camera-extension/` (module: `camera-extension`, layer: `n/a (integration tests)`)
+**Code:** `vsslicer/modules/apps/camera/` (module: `camera-extension`, layer: `n/a (integration tests)`)
 
 ## Acceptance criteria
 

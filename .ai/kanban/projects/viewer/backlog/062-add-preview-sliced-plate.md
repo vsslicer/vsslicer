@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Command that calls `GcodePreview.open(uri, {plate})` from `vsslicer.gcode` and explains how to install it when missing.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/commands/previewPlate.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/commands/previewPlate.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

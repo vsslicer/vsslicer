@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Takes `ProfileStore.resolve(...).native("prusa")` and the job overrides and writes the INI config for `--load`; keys the Prusa form lacks are reported, not dropped.
 
-**Code:** `vsslicer/modules/slicer-prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/prusa/src/domain/...` (module: `slicer-prusa`, layer: `domain`)
 
 ## Acceptance criteria
 

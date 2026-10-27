@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs the `@vsslicer/printer-api` contract kit (and its HTTP/WebSocket replay harness where the protocol uses them) against the Creality adapter with the recorded fixtures.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/test/contract/` (module: `printer-unofficial-creality`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/test/contract/` (module: `printer-unofficial-creality`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

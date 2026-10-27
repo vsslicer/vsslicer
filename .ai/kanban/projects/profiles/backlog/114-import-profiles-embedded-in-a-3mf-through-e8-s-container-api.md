@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The adapter implementing `ProjectConfigSource` over `@vsslicer/3mf` (`readProject` / raw config blobs). UNRESOLVED: depends on the VWR release card for `3mf@0.2.0`, to be wired by the planner.
 
-**Code:** `vsslicer/modules/profiles/src/adapters/threemf/` (module: `profiles`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/profiles/src/adapters/threemf/` (module: `profiles`, layer: `adapters`)
 
 ## Acceptance criteria
 

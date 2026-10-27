@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Optional manual check (D5): slice the two-colour painted fixture with the Orca CLI and print it on the H2C to confirm the painted regions print in the right filaments.
 
-**Code:** `vsslicer/modules/project-extension/test/manual/h2c-painted-print.md` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/manual/h2c-painted-print.md` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

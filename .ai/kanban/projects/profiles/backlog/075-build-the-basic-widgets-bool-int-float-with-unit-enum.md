@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The common widgets chosen by catalogue type, with labels, units, bounds and tooltips.
 
-**Code:** `vsslicer/modules/profiles-extension/webview/widgets/` (module: `profiles-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/profiles/webview/widgets/` (module: `profiles-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

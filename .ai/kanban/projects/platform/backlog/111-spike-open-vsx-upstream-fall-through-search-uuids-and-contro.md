@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Answers how an unmodified Open VSX behaves as an upstream-registry instance before the deployment is written (E68 risk: fall-through is documented but untested by us).
 
-**Code:** `vsslicer/modules/openvsx-registry/docs/upstream-spike.md` (module: `openvsx-registry`, layer: n/a (spike))
+**Code:** `vsslicer/modules/tooling/openvsx-registry/docs/upstream-spike.md` (module: `openvsx-registry`, layer: n/a (spike))
 
 ## Acceptance criteria
 

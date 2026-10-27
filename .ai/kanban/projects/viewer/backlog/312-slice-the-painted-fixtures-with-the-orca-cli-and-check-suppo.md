@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices the scripted projects and the upstream-painted fixtures through `slicer-orca` and uses the G-code parser per layer to confirm the paint took effect.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/paint-oracle/` (module: `project-extension`, layer: n/a (ci))
+**Code:** `vsslicer/modules/apps/project/test/integration/paint-oracle/` (module: `project-extension`, layer: n/a (ci))
 
 ## Acceptance criteria
 

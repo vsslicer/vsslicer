@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Owner-machine check (D5): one fixture plate sliced, assembled by `slicer-output` and sent to the H2C through the print task.
 
-**Code:** `vsslicer/modules/slicer-extension/` (module: `slicer-extension`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/apps/slicer/` (module: `slicer-extension`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

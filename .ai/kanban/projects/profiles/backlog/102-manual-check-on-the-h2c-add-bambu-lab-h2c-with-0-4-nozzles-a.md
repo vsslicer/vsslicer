@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Adds the owner's printer with the wizard, resolves the default process, and records the firmware; the live connection part is the M3 card `h2c_connect`.
 
-**Code:** `vsslicer/modules/profiles-extension/test/h2c/` notes (module: `profiles-extension`, layer: n/a (manual verification))
+**Code:** `vsslicer/modules/apps/profiles/test/h2c/` notes (module: `profiles-extension`, layer: n/a (manual verification))
 
 ## Acceptance criteria
 

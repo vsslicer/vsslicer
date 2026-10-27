@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Camera sources are loaded the way adapters are (PRN-64): by module path from a registered descriptor, with the printer's connection and secrets from agent memory only.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

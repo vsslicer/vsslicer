@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The I5 CI exit criterion for Orca: real engine, fixture plates, parsed by `@vsslicer/gcode`; plus cancel on a large fixture.
 
-**Code:** `vsslicer/modules/slicer-orca/` (module: `slicer-orca`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/slicer/orca/` (module: `slicer-orca`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

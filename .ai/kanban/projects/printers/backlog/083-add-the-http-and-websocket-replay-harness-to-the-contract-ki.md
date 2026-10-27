@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A shared recorded-session replay server (HTTP plus WebSocket/SockJS frames) used by the four open connectors.
 
-**Code:** `vsslicer/modules/printer-api/src/adapters/testing/` (module: `printer-api`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/printer-api/src/adapters/testing/` (module: `printer-api`, layer: `adapters`)
 
 ## Acceptance criteria
 

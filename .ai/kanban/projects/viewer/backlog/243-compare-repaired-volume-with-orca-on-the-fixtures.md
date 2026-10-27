@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Runs `repair` on every fixture and compares closedness, manifoldness and volume with the recorded Orca values.
 
-**Code:** `vsslicer/modules/mesh/test/repair/request/` (module: `mesh`, layer: n/a (tests))
+**Code:** `vsslicer/modules/core/mesh/test/repair/request/` (module: `mesh`, layer: n/a (tests))
 
 ## Acceptance criteria
 

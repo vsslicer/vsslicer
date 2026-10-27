@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Menu entries that call the slicer extension's commands for the plate or all plates.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/tree/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

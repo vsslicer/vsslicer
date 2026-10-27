@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets or clears a key on an object, part or modifier after scope and value validation.
 
-**Code:** `vsslicer/modules/project-extension/src/application/commands/overrides/` (module: `project-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/project/src/application/commands/overrides/` (module: `project-extension`, layer: `application`)
 
 ## Acceptance criteria
 

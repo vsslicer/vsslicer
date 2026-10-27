@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Decide which `notifications[]` entries are new since the last status.
 
-**Code:** `vsslicer/modules/printers-extension/src/application/...` (module: `printers-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/printers/src/application/...` (module: `printers-extension`, layer: `application`)
 
 ## Acceptance criteria
 

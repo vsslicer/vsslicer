@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Replaces the readonly provider with a `CustomEditorProvider` behind the editing setting, one document per file with `supportsMultipleEditorsPerDocument`.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/editor/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

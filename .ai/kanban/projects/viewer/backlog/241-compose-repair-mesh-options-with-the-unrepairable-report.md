@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `repair(mesh, options) -> {mesh, report}` runs the lossless steps, hole filling and self-intersection removal in Orca's order, verifies the result with the statistics, and returns the original unchanged when it cannot make a closed manifold.
 
-**Code:** `vsslicer/modules/mesh/src/application/repair.ts` (module: `mesh`, layer: `application`)
+**Code:** `vsslicer/modules/core/mesh/src/application/repair.ts` (module: `mesh`, layer: `application`)
 
 ## Acceptance criteria
 

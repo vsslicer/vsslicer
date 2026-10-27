@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Use case `attachTimelapse(record, finder)`: given the injected `listTimelapses(printerId, window)` (backed by `CameraSource.timelapses()` or the agent `timelapse.list` of PRN-289/290) it matches the entry for a finished job by time window and name and appends a `backfilled` event with `timelapse`. The module imports neither camera-api nor the agent.
 
-**Code:** `vsslicer/modules/job-history/src/application/...` (module: `job-history`, layer: `application`)
+**Code:** `vsslicer/modules/printer/job-history/src/application/...` (module: `job-history`, layer: `application`)
 
 ## Acceptance criteria
 

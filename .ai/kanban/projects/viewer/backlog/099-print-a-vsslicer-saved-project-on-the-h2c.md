@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hardware check of the whole write path: save an edited fixture, slice it with the Orca CLI, send it through the Bambu adapter and print the plate.
 
-**Code:** `vsslicer/modules/3mf/docs/h2c-verification.md` (module: `3mf`, layer: n/a (hardware verification))
+**Code:** `vsslicer/modules/core/3mf/docs/h2c-verification.md` (module: `3mf`, layer: n/a (hardware verification))
 
 ## Acceptance criteria
 

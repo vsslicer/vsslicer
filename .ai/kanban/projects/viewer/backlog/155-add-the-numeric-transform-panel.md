@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A panel with position, rotation and scale fields for the selection, in world or local space, that sends the same commands as the gizmo.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/panels/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/panels/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

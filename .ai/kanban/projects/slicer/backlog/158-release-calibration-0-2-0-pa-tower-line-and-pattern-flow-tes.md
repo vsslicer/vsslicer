@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Releases `calibration@0.2.0` so other modules can depend on the range: PA tower, line and pattern, flow tests, input shaping, cornering and static models. Bumps the version, writes the changelog entry and publishes to the local registry with `node scripts/run.mjs publish`.
 
-**Code:** `vsslicer/modules/calibration/` (module: `calibration`, layer: n/a (release))
+**Code:** `vsslicer/modules/core/calibration/` (module: `calibration`, layer: n/a (release))
 
 ## Acceptance criteria
 

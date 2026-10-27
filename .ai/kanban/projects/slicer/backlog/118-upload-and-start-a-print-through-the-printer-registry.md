@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Use cases `uploadSliced(artefact, printerId)` and `printSliced(...)` against a `PrinterGateway` port whose real side is `PrinterRegistry` (printer-api) and whose other side is a fake.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

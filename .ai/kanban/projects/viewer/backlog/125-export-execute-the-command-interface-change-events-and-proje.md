@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extends the extension exports with the editing API for other extensions.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/exports.ts` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/exports.ts` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

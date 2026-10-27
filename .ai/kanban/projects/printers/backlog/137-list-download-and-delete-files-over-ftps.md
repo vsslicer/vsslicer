@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `listFiles`, `downloadFile`, `deleteFile` and `fileMetadata` for the H2C's storage over the FTPS client.
 
-**Code:** `vsslicer/modules/printer-bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/bambu/src/adapters/...` (module: `printer-bambu`, layer: `adapters`)
 
 ## Acceptance criteria
 

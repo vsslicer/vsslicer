@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Draws the leaf triangles of each layer over the mesh in a custom shader on the `WebGLRenderer`: enforcer, blocker, seam and filament colours, with a stroke updating only the changed triangles.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/webview/render/paint/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/webview/render/paint/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

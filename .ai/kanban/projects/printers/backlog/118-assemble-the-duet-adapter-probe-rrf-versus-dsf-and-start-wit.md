@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One `PrinterAdapter` that probes the board (`rr_connect` or DSF) and picks the client.
 
-**Code:** `vsslicer/modules/printer-duet/src/application/...` (module: `printer-duet`, layer: `application`)
+**Code:** `vsslicer/modules/printer/duet/src/application/...` (module: `printer-duet`, layer: `application`)
 
 ## Acceptance criteria
 

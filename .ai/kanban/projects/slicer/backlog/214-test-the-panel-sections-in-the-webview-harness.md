@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Playwright tests of every panel section with the webview stub: render, edit, disabled states.
 
-**Code:** `vsslicer/modules/slicer-extension/test/` (module: `slicer-extension`, layer: n/a (webview tests))
+**Code:** `vsslicer/modules/apps/slicer/test/` (module: `slicer-extension`, layer: n/a (webview tests))
 
 ## Acceptance criteria
 

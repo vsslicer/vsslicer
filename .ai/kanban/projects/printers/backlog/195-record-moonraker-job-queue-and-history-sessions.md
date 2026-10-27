@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Recorded HTTP and WebSocket sessions for `server/job_queue/status`, `post_job`, `delete_job`, `start`, `pause`, `jump` and `notify_job_queue_changed`, and `server/history/list`.
 
-**Code:** fixtures path `vsslicer/modules/printer-moonraker/test/fixtures/job-queue/` (layer: n/a (fixtures))
+**Code:** fixtures path `vsslicer/modules/printer/moonraker/test/fixtures/job-queue/` (layer: n/a (fixtures))
 
 ## Acceptance criteria
 

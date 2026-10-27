@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Two flow tests: YOLO (one pass, fine steps) and two-pass (coarse then fine around the first pick); the sweep uses `M221` or the firmware's equivalent; target key `filament_flow_ratio`.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A CI check and notices so that nothing derived from RFID-Tag-Guide (no licence) enters the module, and MIT notices for OpenPrintTag and ha-bambulab facts are present.
 
-**Code:** `vsslicer/modules/filament/` (module: `filament`, layer: `n/a (ci)`)
+**Code:** `vsslicer/modules/filament/filament/` (module: `filament`, layer: `n/a (ci)`)
 
 ## Acceptance criteria
 

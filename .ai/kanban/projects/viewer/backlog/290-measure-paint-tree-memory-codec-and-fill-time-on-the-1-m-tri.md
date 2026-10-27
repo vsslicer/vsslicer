@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Paints the generated 1 M triangle mesh with scripted strokes and fills and records tree memory, decode and encode time and fill time, so the subdivision-depth risk is measured.
 
-**Code:** `vsslicer/modules/mesh/test/perf/paint/` (module: `mesh`, layer: n/a (ci))
+**Code:** `vsslicer/modules/core/mesh/test/perf/paint/` (module: `mesh`, layer: n/a (ci))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The use case behind saving: builds the plan from the change tracking, calls the part writers and returns the new package plus the `SaveNotice`. A foreign-dialect source is refused unless a conversion is requested.
 
-**Code:** `vsslicer/modules/3mf/src/application/writeProject.ts` (module: `3mf`, layer: `application`)
+**Code:** `vsslicer/modules/core/3mf/src/application/writeProject.ts` (module: `3mf`, layer: `application`)
 
 ## Acceptance criteria
 

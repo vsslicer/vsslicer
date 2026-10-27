@@ -15,11 +15,11 @@ created: 2026-10-25
 
 Creates the extension module `vsslicer.themes` from the tooling module and the sample extension; no code runs at activation (themes are declarative).
 
-**Code:** `vsslicer/modules/themes/` (module: `themes`, layer: n/a (extension))
+**Code:** `vsslicer/modules/apps/themes/` (module: `themes`, layer: n/a (extension))
 
 ## Acceptance criteria
 
-- [ ] `pnpm install && pnpm test && pnpm build` works alone inside `vsslicer/modules/themes`; `node scripts/run.mjs ci` picks it up
+- [ ] `pnpm install && pnpm test && pnpm build` works alone inside `vsslicer/modules/apps/themes`; `node scripts/run.mjs ci` picks it up
 - [ ] The VSIX packaging task builds a VSIX with the content assertion
 - [ ] Extension id `vsslicer.themes`, no activation events
 

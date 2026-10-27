@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Resolve each printer's `printer_instance` (model, toolhead nozzles) through the existing profiles link and send `fleet.facts.set`.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

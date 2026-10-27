@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Generates the icon theme definition and tests that every listed extension resolves to an icon, including the compound `.gcode.3mf`.
 
-**Code:** `vsslicer/modules/themes/src/domain/icon-theme.ts` (module: `themes`, layer: `domain`)
+**Code:** `vsslicer/modules/apps/themes/src/domain/icon-theme.ts` (module: `themes`, layer: `domain`)
 
 ## Acceptance criteria
 

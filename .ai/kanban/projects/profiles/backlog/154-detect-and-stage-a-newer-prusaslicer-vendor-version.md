@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Implements `UpdateSource` for Prusa vendors two ways: a newer commit of the upstream vendor repository (D4), or the `.idx` index versions in `vendor_indices.zip` listed by `ArchiveRepositoryManifest.json` at `preset-repo-api.prusa3d.com`. `stage` reuses the pinned-commit downloader.
 
-**Code:** `vsslicer/modules/profiles-prusa/src/adapters/...` (module: `profiles-prusa`, layer: `adapters`)
+**Code:** `vsslicer/modules/profiles/prusa/src/adapters/...` (module: `profiles-prusa`, layer: `adapters`)
 
 ## Acceptance criteria
 

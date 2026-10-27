@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Edit a sliced Bambu fixture, save, and check the output file.
 
-**Code:** `vsslicer/modules/project-extension/test/integration/stale/` (module: `project-extension`, layer: n/a (integration tests))
+**Code:** `vsslicer/modules/apps/project/test/integration/stale/` (module: `project-extension`, layer: n/a (integration tests))
 
 ## Acceptance criteria
 

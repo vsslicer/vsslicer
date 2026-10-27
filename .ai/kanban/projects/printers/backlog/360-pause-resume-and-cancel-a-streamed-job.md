@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pause stops feeding at a line boundary after the window drains and runs the optional pause script; resume runs the resume script and continues; cancel stops feeding, sends `M410`, then the cancel script (heater off, park) from connection settings.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

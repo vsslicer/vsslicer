@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A contract for timelapse providers plus a fake provider and a file server with a slow download for cancel tests.
 
-**Code:** `vsslicer/modules/camera-api/` (module: `camera-api`, layer: `n/a (test kit)`)
+**Code:** `vsslicer/modules/common/camera-api/` (module: `camera-api`, layer: `n/a (test kit)`)
 
 ## Acceptance criteria
 

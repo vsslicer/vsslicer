@@ -15,7 +15,7 @@ created: 2026-10-25
 
 `/api/version` probe; legacy `api/files` upload and status when v1 is missing.
 
-**Code:** `vsslicer/modules/printer-prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/prusalink/src/adapters/...` (module: `printer-prusalink`, layer: `adapters`)
 
 ## Acceptance criteria
 

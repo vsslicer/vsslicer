@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Extends the command generator with plate commands and checks the invariants after every step.
 
-**Code:** `vsslicer/modules/project-extension/test/property/plates/` (module: `project-extension`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/project/test/property/plates/` (module: `project-extension`, layer: n/a (tests))
 
 ## Acceptance criteria
 

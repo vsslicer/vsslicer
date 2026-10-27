@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure model and validation of `wipe_tower_type` (Type 1, Type 2), position, size and the ramming settings, mapped to and from the setting keys.
 
-**Code:** `vsslicer/modules/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
+**Code:** `vsslicer/modules/core/multimaterial/src/domain/...` (module: `multimaterial`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The Node file-system adapter of the `BackupStore` port: writes to the backup file path VS Code gives and reads it back.
 
-**Code:** `vsslicer/modules/project-extension/src/adapters/backupStore.ts` (module: `project-extension`, layer: `adapters`)
+**Code:** `vsslicer/modules/apps/project/src/adapters/backupStore.ts` (module: `project-extension`, layer: `adapters`)
 
 ## Acceptance criteria
 

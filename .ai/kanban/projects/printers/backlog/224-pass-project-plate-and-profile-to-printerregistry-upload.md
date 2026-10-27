@@ -15,7 +15,7 @@ created: 2026-10-25
 
 An optional send context `{project, plateIndex, profileRef, thumbnail}` on the upload call, forwarded to the agent so the record can link back.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

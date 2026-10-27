@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The `SerialLink` port (open, write, line events, close) has two real sides: `serialport` and the emulator. The streamer sends framed lines while the number of outstanding lines stays within the window and counts each `ok`.
 
-**Code:** `vsslicer/modules/printer-serial/src/application/...` (module: `printer-serial`, layer: `application`)
+**Code:** `vsslicer/modules/printer/serial/src/application/...` (module: `printer-serial`, layer: `application`)
 
 ## Acceptance criteria
 

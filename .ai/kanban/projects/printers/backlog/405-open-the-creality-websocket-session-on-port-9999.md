@@ -15,7 +15,7 @@ created: 2026-10-25
 
 WebSocket client that polls `get` for status (the protocol has no push we rely on), correlates `set` replies, and reconnects with backoff.
 
-**Code:** `vsslicer/modules/printer-unofficial-creality/src/adapters/...` (module: `printer-unofficial-creality`, layer: `adapters`)
+**Code:** `vsslicer/modules/printer/unofficial-creality/src/adapters/...` (module: `printer-unofficial-creality`, layer: `adapters`)
 
 ## Acceptance criteria
 

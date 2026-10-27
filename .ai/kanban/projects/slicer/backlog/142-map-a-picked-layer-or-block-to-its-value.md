@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Given a plan and the parsed layer table of the sliced file, lists blocks with the layers they actually received and maps a picked layer index or block to its value.
 
-**Code:** `vsslicer/modules/calibration/src/application/...` (module: `calibration`, layer: `application`)
+**Code:** `vsslicer/modules/core/calibration/src/application/...` (module: `calibration`, layer: `application`)
 
 ## Acceptance criteria
 

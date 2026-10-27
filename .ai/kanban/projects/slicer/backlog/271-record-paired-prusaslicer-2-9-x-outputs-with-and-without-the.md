@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Slices the fixtures twice with the pinned PrusaSlicer 2.9.x, rules off and on, and checks in both outputs as the oracle pairs; a script regenerates them.
 
-**Code:** `vsslicer/modules/slicer-extension/test/fixtures/substitutions/` (module: `slicer-extension`, layer: n/a (fixtures))
+**Code:** `vsslicer/modules/apps/slicer/test/fixtures/substitutions/` (module: `slicer-extension`, layer: n/a (fixtures))
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 When a printer reports a `[spoolman]` component, assigning a spool sets Moonraker's active spool and tells `filament` (`setExternalBooking`) to skip extrusion booking for that printer.
 
-**Code:** `vsslicer/modules/filament-spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
+**Code:** `vsslicer/modules/filament/spoolman/src/application/...` (module: `filament-spoolman`, layer: `application`)
 
 ## Acceptance criteria
 

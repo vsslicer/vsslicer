@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Checks the 3.0 CLI: `--load` JSON, preset names with `--datadir`, `--export-config-schema`, the exit-0-on-failure bug, and whether a non-GUI build or a published release exists.
 
-**Code:** `vsslicer/modules/slicer-prusa/` (module: `slicer-prusa`, layer: n/a (spike))
+**Code:** `vsslicer/modules/slicer/prusa/` (module: `slicer-prusa`, layer: n/a (spike))
 
 ## Acceptance criteria
 

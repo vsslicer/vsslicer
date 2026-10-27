@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Read Prusa firmware and PrusaLink docs for Core One and MK4 with reader: do they expose the NDEF payload through an API? If none, the parser ships behind the capability flag and the OpenPrintTag half waits on PRN.
 
-**Code:** `vsslicer/modules/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
+**Code:** `vsslicer/modules/filament/filament/docs/` (module: `filament`, layer: `n/a (spike)`)
 
 ## Acceptance criteria
 

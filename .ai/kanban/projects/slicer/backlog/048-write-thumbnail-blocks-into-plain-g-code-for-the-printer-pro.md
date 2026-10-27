@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure text transform: takes G-code and rendered images and inserts the comment blocks for each format named by `thumbnails_format`, with sizes and counts from the profile.
 
-**Code:** `vsslicer/modules/slicer-output/src/domain/...` (module: `slicer-output`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/output/src/domain/...` (module: `slicer-output`, layer: `domain`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Registers `applySweep` from `@vsslicer/calibration` as a pipeline step that runs only for calibration jobs.
 
-**Code:** `vsslicer/modules/slicer-extension/src/application/...` (module: `slicer-extension`, layer: `application`)
+**Code:** `vsslicer/modules/apps/slicer/src/application/...` (module: `slicer-extension`, layer: `application`)
 
 ## Acceptance criteria
 

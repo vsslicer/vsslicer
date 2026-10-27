@@ -15,7 +15,7 @@ created: 2026-10-25
 
 One day on the H2C, the only hardware (D5), to settle what E38 left open before sidecar code: the RTSPS URL from `ipcam.rtsp_url`, whether Developer Mode is needed, the codec, and whether go2rtc connects (one user report of refused connections on port 322).
 
-**Code:** `vsslicer/modules/camera-bambu/` (module: `camera-bambu`, layer: `n/a (docs)`)
+**Code:** `vsslicer/modules/camera/bambu/` (module: `camera-bambu`, layer: `n/a (docs)`)
 
 ## Acceptance criteria
 

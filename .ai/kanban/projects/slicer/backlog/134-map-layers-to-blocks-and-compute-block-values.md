@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Pure functions from a layer height, first layer height and block size to the block of a layer, and from a block range and step to its value, linear or stepped.
 
-**Code:** `vsslicer/modules/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
+**Code:** `vsslicer/modules/core/calibration/src/domain/...` (module: `calibration`, layer: `domain`)
 
 ## Acceptance criteria
 

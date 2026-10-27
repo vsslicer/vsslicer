@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Call `vsslicer.profiles` `getConnection` at runtime (no compile-time dependency) and export `hostTypes()` so the instance form lists registered adapters.
 
-**Code:** `vsslicer/modules/printers-extension/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/printers/src/presentation/...` (module: `printers-extension`, layer: `presentation`)
 
 UNRESOLVED: needs profiles-extension (`getConnection`) and profile-api (`printer_instance`).
 

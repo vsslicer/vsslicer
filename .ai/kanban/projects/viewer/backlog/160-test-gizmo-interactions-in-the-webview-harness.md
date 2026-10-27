@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Playwright tests on the kit's webview stub: drag, snap, numeric entry and Escape.
 
-**Code:** `vsslicer/modules/project-extension/test/webview/gizmo/` (module: `project-extension`, layer: n/a (tests))
+**Code:** `vsslicer/modules/apps/project/test/webview/gizmo/` (module: `project-extension`, layer: n/a (tests))
 
 ## Acceptance criteria
 

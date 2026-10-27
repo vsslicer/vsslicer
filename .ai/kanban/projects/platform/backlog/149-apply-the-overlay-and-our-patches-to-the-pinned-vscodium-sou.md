@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The build script writes the overlay into the VSCodium checkout and applies our patch series in order; a patch that no longer applies fails with its name.
 
-**Code:** `vsslicer/modules/vsslicer-build/src/adapters/apply.ts` (module: `vsslicer-build`, layer: `adapters`)
+**Code:** `vsslicer/modules/tooling/vsslicer-build/src/adapters/apply.ts` (module: `vsslicer-build`, layer: `adapters`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A truncated last line (crash mid-write) must not lose earlier events or be silently dropped.
 
-**Code:** `vsslicer/modules/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
+**Code:** `vsslicer/modules/filament/filament/src/adapters/...` (module: `filament`, layer: `adapters`)
 
 ## Acceptance criteria
 

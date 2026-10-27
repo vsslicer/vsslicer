@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The second half of the kit: uploads and the live-follow position rules.
 
-**Code:** `vsslicer/modules/printer-api/src/adapters/testing/` (module: `printer-api`, layer: `adapters`)
+**Code:** `vsslicer/modules/common/printer-api/src/adapters/testing/` (module: `printer-api`, layer: `adapters`)
 
 ## Acceptance criteria
 

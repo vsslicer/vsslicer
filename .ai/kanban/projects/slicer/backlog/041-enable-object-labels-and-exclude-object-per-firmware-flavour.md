@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Sets `gcode_label_objects` and `exclude_object` in the emitted process preset when the flavour supports them, and proves the labelled output with the parser's label reader.
 
-**Code:** `vsslicer/modules/slicer-orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
+**Code:** `vsslicer/modules/slicer/orca/src/domain/...` (module: `slicer-orca`, layer: `domain`)
 
 ## Acceptance criteria
 

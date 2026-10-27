@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Cached chains invalidated by the watcher so 1 000 resolutions over the full Orca tree stay fast.
 
-**Code:** `vsslicer/modules/profiles/src/application/resolve/` (module: `profiles`, layer: `application`)
+**Code:** `vsslicer/modules/profiles/profiles/src/application/resolve/` (module: `profiles`, layer: `application`)
 
 ## Acceptance criteria
 

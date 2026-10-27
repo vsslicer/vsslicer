@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Hardware verification by the owner per D5: the H2C is the only printer. Result recorded in the capability table.
 
-**Code:** `vsslicer/modules/bambu-extension/docs/h2c-checklist.md` (module: `bambu-extension`, layer: `n/a (fixtures)`)
+**Code:** `vsslicer/modules/apps/bambu/docs/h2c-checklist.md` (module: `bambu-extension`, layer: `n/a (fixtures)`)
 
 ## Acceptance criteria
 

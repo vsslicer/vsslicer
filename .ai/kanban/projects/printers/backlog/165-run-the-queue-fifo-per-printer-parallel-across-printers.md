@@ -15,7 +15,7 @@ created: 2026-10-25
 
 The runner that uploads through the session hub, emits progress and honours cancel.
 
-**Code:** `vsslicer/modules/printer-agent/src/application/...` (module: `printer-agent`, layer: `application`)
+**Code:** `vsslicer/modules/printer/agent/src/application/...` (module: `printer-agent`, layer: `application`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A recorded manual check of the generic export in PrusaSlicer and Cura, and of converted projects in Orca.
 
-**Code:** `vsslicer/modules/3mf/docs/manual-matrix.md` (module: `3mf`, layer: n/a (manual matrix))
+**Code:** `vsslicer/modules/core/3mf/docs/manual-matrix.md` (module: `3mf`, layer: n/a (manual matrix))
 
 ## Acceptance criteria
 

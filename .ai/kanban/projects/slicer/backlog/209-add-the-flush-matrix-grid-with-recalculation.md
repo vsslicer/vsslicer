@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Panel section with the colour-labelled flush grid, the multiplier and an edited-cell marker; changes of filament or colour recalculate through `multimaterial`.
 
-**Code:** `vsslicer/modules/slicer-extension/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/slicer/src/presentation/...` (module: `slicer-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 

@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A real print on the H2C with AMS spools assigned: grams booked to the right spools and `remain` stored per tray.
 
-**Code:** `vsslicer/modules/filament-extension/docs/hardware-checklist.md` (module: `filament-extension`, layer: `n/a (hardware verification)`)
+**Code:** `vsslicer/modules/apps/filament/docs/hardware-checklist.md` (module: `filament-extension`, layer: `n/a (hardware verification)`)
 
 ## Acceptance criteria
 

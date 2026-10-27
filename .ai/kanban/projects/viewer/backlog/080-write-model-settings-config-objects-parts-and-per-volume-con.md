@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Writes objects, their parts (volumes) with subtype, names, transforms and per-object, per-part and modifier config in Orca's key order. Ported from `OrcaSlicer@09aa0114:src/libslic3r/Format/bbs_3mf.cpp` (AGPL-3.0, D2), with the notice and a `Ported from` line.
 
-**Code:** `vsslicer/modules/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
+**Code:** `vsslicer/modules/core/3mf/src/adapters/bambu/` (module: `3mf`, layer: `adapters`)
 
 ## Acceptance criteria
 

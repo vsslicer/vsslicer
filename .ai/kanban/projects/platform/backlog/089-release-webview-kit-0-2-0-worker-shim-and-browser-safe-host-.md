@@ -15,7 +15,7 @@ created: 2026-10-25
 
 Publish `webview-kit@0.2.0` so dependent modules can take the range.
 
-**Code:** `vsslicer/modules/webview-kit/` (module: `webview-kit`, layer: `n/a (release)`)
+**Code:** `vsslicer/modules/ui/webview-kit/` (module: `webview-kit`, layer: `n/a (release)`)
 
 ## Acceptance criteria
 

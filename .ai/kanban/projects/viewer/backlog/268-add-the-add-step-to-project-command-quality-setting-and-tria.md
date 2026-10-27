@@ -15,7 +15,7 @@ created: 2026-10-25
 
 A command with a file picker, a quality choice with the previewed triangle count, and an objects-or-parts choice.
 
-**Code:** `vsslicer/modules/project-extension/src/presentation/step/` (module: `project-extension`, layer: `presentation`)
+**Code:** `vsslicer/modules/apps/project/src/presentation/step/` (module: `project-extension`, layer: `presentation`)
 
 ## Acceptance criteria
 
