@@ -96,7 +96,7 @@ starts the next sprint. Planners size cards with `.ai/plans/estimation.md`. Each
 
 ## Build and test
 
-Run from `vsslicer/` (Node 24, pnpm 11). Modules need the local registry (D12):
+Run from `vsslicer/` (Node 26, pnpm 11). Modules need the local registry (D12):
 
 - `scripts/registry.sh start|stop|status`: Verdaccio on `http://localhost:4873`.
 - `node scripts/run.mjs ci`: every module in dependency order: install, lint, build, test, publish.

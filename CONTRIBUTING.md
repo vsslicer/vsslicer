@@ -8,7 +8,7 @@ There is no remote yet: the public GitHub repository (and with it pull requests,
 
 ## Setup
 
-- Node 24 (`vsslicer/.nvmrc`) and pnpm 11.
+- Node 26 (`vsslicer/.nvmrc`) and pnpm 11.
 - Modules resolve each other through a local npm registry (Verdaccio, D12). From `vsslicer/`:
 
 ```sh
