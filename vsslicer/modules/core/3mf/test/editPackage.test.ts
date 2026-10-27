@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { expect, test } from 'vitest';
 import { InvalidPartEditError, openPackage, openZip } from '../src/index.ts';
 import type { EditablePackage } from '../src/index.ts';
@@ -127,7 +128,7 @@ test('start part type constant is the one the fixtures use', () => {
 });
 
 // Real files from the cloned reference repos; skipped when the clones are absent.
-const repos = new URL('../../../../.reference/repos/', import.meta.url).pathname;
+const repos = fileURLToPath(new URL('../../../../.reference/repos/', import.meta.url));
 const real = existsSync(repos)
   ? ['PrusaSlicer/tests/data/seam_test_object.3mf', 'PrusaSlicer/src/slic3r-shared/test/data/fdm_roundtrip1.3mf']
       .map((f) => join(repos, f))

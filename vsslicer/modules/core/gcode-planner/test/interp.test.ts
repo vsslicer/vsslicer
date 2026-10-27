@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { MOVE_STRIDE, MoveFlag, MoveOffset, MoveRole, readMove } from '@vsslicer/gcode-api';
 import type { ParsedFile } from '@vsslicer/gcode-api';
@@ -329,7 +329,7 @@ describe('transfer form and the planner-free entry', () => {
         walk(resolve(dirname(f), m[1]!));
     };
     walk(resolve(import.meta.dirname, '../src/window.ts'));
-    const names = [...seen].map((f) => f.split('/').pop());
+    const names = [...seen].map((f) => basename(f));
     expect(names).toContain('interp.ts');
     for (const n of ['klipper.ts', 'marlin.ts', 'rrf-planner.ts', 'planner.ts']) expect(names).not.toContain(n);
   });

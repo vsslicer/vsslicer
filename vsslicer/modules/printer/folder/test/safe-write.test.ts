@@ -29,7 +29,7 @@ test('temp name is in the target directory and a valid 8.3 name', async () => {
   const ops: FileOps = { ...nodeFileOps, create: (p) => (made.push(p), nodeFileOps.create(p)) };
   await writeFileSafely(dir, 'a.gcode', chunks(Buffer.from('x')), { ops });
   expect(made).toHaveLength(1);
-  expect(made[0]).toMatch(new RegExp(`^${dir.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/[0-9A-F]{8}\\.TMP$`));
+  expect(made[0]).toMatch(new RegExp(`^${dir.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\\\/][0-9A-F]{8}\\.TMP$`));
 });
 
 test('retries a temp name collision a bounded number of times', async () => {

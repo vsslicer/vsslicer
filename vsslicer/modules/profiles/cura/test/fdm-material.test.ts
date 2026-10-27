@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, test } from 'vitest';
 import { FDM_XML_LIMITS, readFdmMaterialFolder, readFdmMaterials } from '../src/adapters/materials/fdm-material.ts';
 
@@ -130,7 +131,7 @@ describe('readFdmMaterialFolder', () => {
   });
 });
 
-const REPO = new URL('../../../../.reference/repos/fdm_materials/', import.meta.url).pathname;
+const REPO = fileURLToPath(new URL('../../../../.reference/repos/fdm_materials/', import.meta.url));
 describe.skipIf(!existsSync(REPO))('fdm_materials@0c05969', () => {
   test('every XML file yields exactly one material', async () => {
     const { readdirSync } = await import('node:fs');
