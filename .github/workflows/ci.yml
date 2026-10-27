@@ -40,15 +40,16 @@ jobs:
         run: |
           base="${PR_BASE:-$PUSH_BEFORE}"
           # new branch or unreachable commit: compare against the empty tree, which selects every module
-          if ! git cat-file -e "${base:-x}^{commit}" 2>/dev/null; then base="$(git hash-object -t tree /dev/null)"; fi
+          if ! git cat-file -e "${base:-x}^{commit}" 2>/dev/null; then base="$(git hash-object -t tree /dev/null)"; full=1; fi
           modules="$(node scripts/run.mjs ci --changed "$base" --list)"
           echo "base: $base"
           echo "modules: $modules"
           echo "base=$base" >> "$GITHUB_OUTPUT"
           echo "modules=$modules" >> "$GITHUB_OUTPUT"
           echo "count=$(node -p "JSON.parse(process.argv[1]).length" "$modules")" >> "$GITHUB_OUTPUT"
-          # published files changed without a version bump and CHANGELOG entry
-          node scripts/run.mjs version-check --base "$base"
+          # published files changed without a version bump and CHANGELOG entry; a full run (manual, new branch) has no
+          # base to compare against, so every module would count as new
+          if [ -z "${full:-}" ]; then node scripts/run.mjs version-check --base "$base"; fi
 
   build:
     needs: select
