@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/printers-extension",
   "displayName": "VSSlicer Printers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "VSSlicer printer connectivity (VS Code extension, presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/printers-extension@0.0.1/vsslicer/modules/apps/printers",
+  "repository": "https://github.com/vsslicer/vsslicer/tree/printers-extension@0.0.2/vsslicer/modules/apps/printers",
   "vsslicer": {
     "sizeBudgetKB": 200
   },

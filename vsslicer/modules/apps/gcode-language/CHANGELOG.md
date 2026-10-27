@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- Repository URL points at github.com/vsslicer/vsslicer (PLT-214).
+
 ## 0.2.2
 
 - Moved to `vsslicer/modules/apps/gcode-language`; the repository URL follows (PLT-204).

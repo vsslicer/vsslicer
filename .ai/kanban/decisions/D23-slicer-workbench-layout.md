@@ -1,7 +1,7 @@
 ---
 id: D23
 title: "The slicer workbench: one sidebar container per area, a current project, and stock chrome hidden"
-status: proposed
+status: accepted
 date: 2026-10-27
 ---
 

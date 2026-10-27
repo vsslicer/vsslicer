@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Repository URL points at github.com/vsslicer/vsslicer (PLT-214).
+
 ## 0.1.2
 
 - Moved to `vsslicer/modules/apps/pack`; the repository URL follows (PLT-204).

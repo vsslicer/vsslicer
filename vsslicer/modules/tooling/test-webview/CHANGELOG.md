@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5
+
+- Re-range `@vsslicer/example-extension` to ^0.7.5 (PLT-214).
+
 ## 0.2.4
 
 - Re-range `@vsslicer/example-extension` to ^0.7.4 after the module regroup (PLT-204).

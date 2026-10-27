@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/pack",
   "displayName": "VSSlicer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "VSSlicer extension pack: installs the VSSlicer extensions (no code of its own).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/pack@0.1.2/vsslicer/modules/apps/pack",
+  "repository": "https://github.com/vsslicer/vsslicer/tree/pack@0.1.3/vsslicer/modules/apps/pack",
   "vsslicer": {
     "sizeBudgetKB": 50
   },

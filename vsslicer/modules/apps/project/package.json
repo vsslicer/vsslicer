@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/project-extension",
   "displayName": "VSSlicer Project",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "VSSlicer 3MF project management (VS Code extension, presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/project-extension@0.0.1/vsslicer/modules/apps/project",
+  "repository": "https://github.com/vsslicer/vsslicer/tree/project-extension@0.0.2/vsslicer/modules/apps/project",
   "vsslicer": {
     "sizeBudgetKB": 200
   },

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2
+
+- Repository URL points at github.com/vsslicer/vsslicer (PLT-214).
+
 ## 0.7.1
 
 - Moved to `vsslicer/modules/apps/gcode-preview`; the repository URL follows (PLT-204).

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.5
+
+- Repository URL points at github.com/vsslicer/vsslicer (PLT-214).
+
 ## 0.7.4
 
 - Moved to `vsslicer/modules/apps/example-extension`; the repository URL follows (PLT-204).

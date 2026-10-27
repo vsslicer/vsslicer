@@ -1,11 +1,11 @@
 {
   "name": "@vsslicer/slicer-extension",
   "displayName": "VSSlicer Slicer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "VSSlicer slicing (VS Code extension, presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
-  "repository": "https://github.com/<owner>/VSSlicer/tree/slicer-extension@0.0.1/vsslicer/modules/apps/slicer",
+  "repository": "https://github.com/vsslicer/vsslicer/tree/slicer-extension@0.0.2/vsslicer/modules/apps/slicer",
   "vsslicer": {
     "sizeBudgetKB": 200
   },
