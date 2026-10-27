@@ -7,7 +7,7 @@ effort: M
 model: sonnet
 area: [form]
 story: US32
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP22"
 depends_on: [144, 73, 74]
 created: 2026-10-25

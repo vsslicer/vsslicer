@@ -5,7 +5,7 @@ type: bug
 priority: P1
 effort: S
 model: sonnet
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP18"
 created: 2026-10-26
 ---

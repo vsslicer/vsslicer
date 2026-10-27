@@ -7,7 +7,7 @@ effort: M
 model: opus
 area: [store]
 story: US35
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP22"
 depends_on: [85, 59]
 created: 2026-10-25

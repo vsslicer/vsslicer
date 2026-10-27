@@ -7,7 +7,7 @@ effort: L
 model: opus
 area: [viewer]
 story: US16
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP21"
 depends_on: [54, PLT-37, PLT-41]
 created: 2026-10-25

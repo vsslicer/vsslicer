@@ -5,7 +5,7 @@ type: feature
 priority: P1
 effort: M
 model: opus
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP17"
 depends_on: [192, PLT-200]
 created: 2026-10-26

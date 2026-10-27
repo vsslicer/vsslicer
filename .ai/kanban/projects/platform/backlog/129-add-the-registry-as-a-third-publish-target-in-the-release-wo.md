@@ -2,12 +2,13 @@
 id: 129
 title: Attach each extension VSIX to its GitHub Release and notify the marketplace
 type: feature
-priority: P1
+priority: P0
 effort: M
 model: sonnet
 area: [registry]
 story: US72
 milestone: "VSS:M6"
+sprint: "VSS:SP18"
 depends_on: [25, 126]
 created: 2026-10-25
 ---

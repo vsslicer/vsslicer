@@ -134,7 +134,9 @@ Run from `vsslicer/` (Node 26, pnpm 11). Modules need the local registry (D12):
   merges `develop` into `main` with `--no-ff` ("Merge sprint SP<n> into main") and tags the merge
   `sprint/SP<n>`; a finished milestone tags its closing merge `milestone/<id>` (annotated tags).
   Module releases (`<name>@x.y.z`) are tagged on `main`. Nobody commits to `main` directly.
-- Push only when asked. There is no remote yet.
+- Pushing: the coordinator may push `develop` of this repository once a card is committed and verified, and
+  may push `vsslicer/vsslicer-build` and `vsslicer/vsslicer-marketplace` as their cards finish (owner,
+  2026-10-27). Pushing `main`, tags, force-pushes and anything else still need the owner's say-so.
 - Notes and logs under `.ai/local/` (ignored) or `.reference/notes/` (ignored).
 
 ## Skills, agents, plans

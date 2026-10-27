@@ -7,7 +7,7 @@ effort: L
 model: opus
 area: [wizard]
 story: US39
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP13"
 depends_on: [50, 91, 49, 135]
 created: 2026-10-25

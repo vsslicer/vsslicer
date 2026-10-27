@@ -7,7 +7,7 @@ effort: S
 model: sonnet
 area: [form]
 story: US29
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 created: 2026-10-26
 ---
 

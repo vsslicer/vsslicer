@@ -156,4 +156,3 @@
 154. [PLT-221: Drop the built-in extensions a printing editor doesn't need](221-drop-the-built-in-extensions-a-printing-editor-doesn-t-need.md)
 155. [PLT-222: Define the marketplace index.json schema and model](222-define-the-marketplace-index-json-schema-and-model.md)
 156. [PLT-223: Generate index.json from the VSSlicer GitHub Releases](223-generate-index-json-from-the-vsslicer-github-releases.md)
-157. [PLT-224: Let profiles-data-orca publish on a fresh checkout without .reference](224-let-profiles-data-orca-publish-on-a-fresh-checkout-without-r.md)

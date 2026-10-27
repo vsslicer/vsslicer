@@ -7,8 +7,9 @@ effort: L
 model: opus
 area: [publishing]
 story: US6
-milestone: "VSS:M7"
-depends_on: [20, 23, 16, 24]
+milestone: "VSS:M6"
+sprint: "VSS:SP17"
+depends_on: [20, 23]
 created: 2026-10-25
 ---
 

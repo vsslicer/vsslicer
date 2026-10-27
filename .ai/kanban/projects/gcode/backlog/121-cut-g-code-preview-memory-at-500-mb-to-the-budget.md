@@ -5,7 +5,7 @@ type: feature
 priority: P3
 effort: L
 model: opus
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 depends_on: [42]
 created: 2026-10-26
 ---

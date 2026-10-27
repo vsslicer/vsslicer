@@ -7,7 +7,7 @@ effort: S
 model: sonnet
 area: [3mf]
 story: US9
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP20"
 depends_on: [23, 26, 27, 28]
 created: 2026-10-25

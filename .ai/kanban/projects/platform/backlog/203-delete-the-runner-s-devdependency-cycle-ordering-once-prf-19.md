@@ -5,7 +5,7 @@ type: bug
 priority: P2
 effort: S
 model: sonnet
-milestone: "VSS:M2"
+milestone: "VSS:M4"
 sprint: "VSS:SP33"
 docs: [.ai/audits/SP10-audit.md]
 created: 2026-10-26

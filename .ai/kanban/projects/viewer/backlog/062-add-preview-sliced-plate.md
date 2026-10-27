@@ -7,7 +7,7 @@ effort: M
 model: opus
 area: [plates]
 story: US20
-milestone: "VSS:M2"
+milestone: "VSS:M3"
 sprint: "VSS:SP21"
 depends_on: [61, GCP-50, GCP-16]
 created: 2026-10-25
