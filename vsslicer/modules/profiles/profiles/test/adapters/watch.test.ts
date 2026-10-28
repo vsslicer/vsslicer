@@ -56,8 +56,9 @@ const counting = () => {
     },
     async read() {
       state.reads++;
+      const gate = state.gate; // taken when the read starts: clearing it later must not free a read already held
       const entries = await fsStore.read();
-      await state.gate;
+      await gate;
       return entries;
     },
   };
@@ -116,7 +117,7 @@ describe('profile file watcher (fake timers, default options)', () => {
     let events = 0;
     store.onDidChange(() => events++);
     release();
-    await vi.waitFor(() => expect(events).toBe(2), { timeout: 5000 }); // real file reads; 1 s default is short under full-CI load
+    await vi.waitFor(() => expect(events).toBe(2));
     expect(state.reads).toBe(base + 2);
     expect(await names(store)).toEqual(['v2']);
     store.dispose();
