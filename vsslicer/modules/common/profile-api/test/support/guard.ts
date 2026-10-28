@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
-
-const root = fileURLToPath(new URL('../../', import.meta.url));
-const tools = (f: string) => fileURLToPath(new URL(`../../tools/catalogue/${f}.ts`, import.meta.url));
+// file:// URLs, not paths: the child imports them, and a Windows path (D:\...) is not a valid ESM specifier
+const root = new URL('../../', import.meta.url).href;
+const tools = (f: string) => new URL(`../../tools/catalogue/${f}.ts`, import.meta.url).href;
 
 /** Vitest timeout for a test that calls `guarded` up to 3 times: above the hang guard, since `spawnSync` blocks until the child exits. */
 export const GUARDED_TIMEOUT = 300_000;
@@ -15,7 +14,7 @@ export const GUARDED_TIMEOUT = 300_000;
  */
 export const guarded = (body: string, src = '', hangMs = 60_000): string | undefined => {
   const script = `
-    const load = (rel) => import(${JSON.stringify(root)} + rel);
+    const load = (rel) => import(new URL(rel, ${JSON.stringify(root)}).href);
     const cpp = await import(${JSON.stringify(tools('cpp'))});
     const groups = await import(${JSON.stringify(tools('groups'))});
     const cura = await import(${JSON.stringify(tools('cura'))});
