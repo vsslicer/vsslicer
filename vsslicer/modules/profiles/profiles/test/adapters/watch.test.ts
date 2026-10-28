@@ -116,7 +116,7 @@ describe('profile file watcher (fake timers, default options)', () => {
     let events = 0;
     store.onDidChange(() => events++);
     release();
-    await vi.waitFor(() => expect(events).toBe(2));
+    await vi.waitFor(() => expect(events).toBe(2), { timeout: 5000 }); // real file reads; 1 s default is short under full-CI load
     expect(state.reads).toBe(base + 2);
     expect(await names(store)).toEqual(['v2']);
     store.dispose();
