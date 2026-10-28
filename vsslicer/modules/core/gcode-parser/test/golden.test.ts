@@ -17,7 +17,12 @@ describe('golden corpus', () => {
   it('manifest and fixture folders list the same files', () => {
     const onDisk = readdirSync(fixturesDir, { recursive: true, withFileTypes: true })
       .filter((e) => e.isFile() && e.name !== 'manifest.json' && e.name !== 'PROVENANCE.md')
-      .map((e) => join(e.parentPath, e.name).slice(fixturesDir.length + 1).split(sep).join('/'))
+      .map((e) =>
+        join(e.parentPath, e.name)
+          .slice(fixturesDir.length + 1)
+          .split(sep)
+          .join('/'),
+      )
       .sort();
     expect(onDisk).toEqual(manifest.files.map((f) => f.path).sort());
   });
