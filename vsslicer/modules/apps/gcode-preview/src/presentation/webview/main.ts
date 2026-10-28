@@ -47,6 +47,7 @@ import {
   createPreviewRenderer,
   frameCamera,
   visibleRange,
+  whenGpuDone,
   type PreviewRenderer,
   type Visibility,
 } from './preview-renderer.ts';
@@ -71,6 +72,10 @@ const session = crypto.randomUUID();
 let summary: PreviewSummary | undefined;
 let buffers: (ArrayBuffer | undefined)[] = [];
 let renderer: PreviewRenderer | undefined;
+let gl2: WebGL2RenderingContext | undefined;
+/** Draws issued, and whether the GPU has finished the latest (a big print takes ~30 s under software WebGL). */
+let drawSeq = 0;
+let drawn = false;
 const canvas = document.createElement('canvas');
 canvas.style.width = '100%';
 canvas.style.height = '80vh';
@@ -260,6 +265,13 @@ const redraw = () => {
     { ...s, layer: s.layer, colorMode, camera, dimAbove: isFollowed() && follow.following },
     hover === undefined ? undefined : labels[hover]?.ranges,
   );
+  const seq = ++drawSeq;
+  drawn = false;
+  whenGpuDone(gl2!, () => {
+    if (seq !== drawSeq) return;
+    drawn = true;
+    if (!clock.state.playing) report();
+  });
   placeMarker(camera);
   const l = legendFor(colorMode, renderer.ranges());
   legend.replaceChildren();
@@ -310,8 +322,8 @@ const mount = (s: PreviewSummary, moves: ArrayBuffer) => {
   if (moves.byteLength === 0) return;
   const gl = createGl2Context(canvas);
   if (!gl.ok) return void showGlFailure(canvas, gl.error);
-  renderer = createPreviewRenderer(canvas, gl.gl, moves, s.layers);
-  redraw();
+  gl2 = gl.gl;
+  renderer = createPreviewRenderer(canvas, gl.gl, moves, s.layers); // the caller's apply(false) draws the first frame
 };
 
 const time = (s: number) => `${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 60)}m ${Math.round(s % 60)}s`;
@@ -442,7 +454,7 @@ let lastTick = 0;
 let lastReport = 0;
 const report = () => {
   const c = clock.state;
-  const progress: Progress = { time: c.time, move: headMove, playing: c.playing, speed: c.speed };
+  const progress: Progress = { time: c.time, move: headMove, playing: c.playing, speed: c.speed, drawn };
   channel.post({
     tag: PROTOCOL_TAG,
     v: TRANSPORT_SCHEMA_VERSION,

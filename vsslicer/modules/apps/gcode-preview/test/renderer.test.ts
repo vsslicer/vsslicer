@@ -12,6 +12,7 @@ import {
   frameCamera,
   printBounds,
   visibleRange,
+  whenGpuDone,
 } from '../src/presentation/webview/preview-renderer.ts';
 import { ColorMode } from '@vsslicer/webview-kit/gl';
 import { spyGlUploads } from '@vsslicer/webview-kit/testing';
@@ -358,4 +359,39 @@ test('dimAbove with a highlight still draws every move once', async () => {
   assert.strictEqual(instances(f), parsed.moveCount - 1, 'every move once');
   assert.strictEqual(uniform(f, 'uMode'), ColorMode.Width, 'the last draw is the dimmed part');
   r.dispose();
+});
+
+test('whenGpuDone waits for the fence between tasks, frees it, and gives up on a lost context', () => {
+  const fence = {};
+  let status = 0;
+  let lost = false;
+  const calls: string[] = [];
+  const gl = {
+    SYNC_GPU_COMMANDS_COMPLETE: 1,
+    SYNC_STATUS: 2,
+    SIGNALED: 3,
+    fenceSync: () => fence,
+    flush: () => calls.push('flush'),
+    isContextLost: () => lost,
+    getSyncParameter: (f: unknown, p: number) => (assert.strictEqual(f, fence), assert.strictEqual(p, 2), status),
+    deleteSync: (f: unknown) => calls.push(f === fence ? 'deleteSync' : 'deleteSync?'),
+  } as unknown as WebGL2RenderingContext;
+  const queue: (() => void)[] = [];
+  const later = (f: () => void) => void queue.push(f);
+  let done = 0;
+  whenGpuDone(gl, () => done++, later);
+  assert.deepStrictEqual(calls, ['flush'], 'the fence is flushed so the GPU reaches it');
+  queue.shift()!();
+  assert.strictEqual(done, 0, 'not before the fence signals');
+  status = 3;
+  queue.shift()!();
+  assert.strictEqual(done, 1);
+  assert.deepStrictEqual(calls, ['flush', 'deleteSync']);
+  assert.strictEqual(queue.length, 0, 'polling stops');
+
+  whenGpuDone(gl, () => done++, later);
+  lost = true;
+  queue.shift()!();
+  assert.strictEqual(done, 1, 'a lost context never reports');
+  assert.strictEqual(queue.length, 0);
 });

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.4
+
+- Opening a file draws its first frame once, not twice (`mount` and `apply` both drew). (PLT-225)
+- The webview reports `Progress.drawn` once the GPU has finished its latest frame (a polled fence). The 50 MB
+  integration test waits for it, so a ~30 s software-WebGL frame no longer stalls the next suite's previews on
+  GPU-less CI. (PLT-225)
+
 ## 0.7.3
 
 - Dev: `@vsslicer/test-vscode` ^0.2.4 (software WebGL option for GPU-less CI). (PLT-225)

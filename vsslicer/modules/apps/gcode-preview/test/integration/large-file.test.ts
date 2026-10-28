@@ -96,5 +96,10 @@ describe('G-code preview: file over 50 MB', function () {
       vscode.workspace.textDocuments.map((d) => d.uri.toString()).filter((d) => d === key),
       [],
     );
+    // Under software WebGL (SwiftShader on GPU-less CI) one frame of this print takes ~30 s of the GPU process, which
+    // every webview shares; closing the preview mid-frame stalls the next suite's previews behind it (PLT-225).
+    const t = Date.now();
+    while (!probe.progress(key)?.drawn) await new Promise((r) => setTimeout(r, 100));
+    console.log(`GCP-41 first frame finished on the GPU ${Date.now() - t} ms after the checks`);
   });
 });

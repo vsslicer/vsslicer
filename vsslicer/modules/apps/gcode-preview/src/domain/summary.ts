@@ -120,6 +120,8 @@ export interface Progress {
   move: number;
   playing: boolean;
   speed: number;
+  /** The GPU has finished the latest frame. */
+  drawn: boolean;
 }
 
 export type TimelineCommand =

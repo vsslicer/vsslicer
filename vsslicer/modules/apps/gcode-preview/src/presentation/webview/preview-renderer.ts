@@ -100,6 +100,26 @@ export const printBounds = (moves: ArrayBuffer): [number[], number[]] => {
       ];
 };
 
+/**
+ * Calls `done` once the GPU has run every command issued so far: a fence polled between tasks, since WebGL
+ * cannot wait on one without blocking. Never calls it if the context is lost first.
+ */
+export const whenGpuDone = (
+  gl: WebGL2RenderingContext,
+  done: () => void,
+  later: (f: () => void) => void = (f) => setTimeout(f, 50),
+) => {
+  const fence = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+  gl.flush();
+  const check = () => {
+    if (!fence || gl.isContextLost()) return;
+    if (gl.getSyncParameter(fence, gl.SYNC_STATUS) !== gl.SIGNALED) return later(check);
+    gl.deleteSync(fence);
+    done();
+  };
+  later(check);
+};
+
 /** Column-major view and projection of a camera (the iso preset fitting the box by default). */
 export const frameCamera = (bounds: [number[], number[]], aspect: number, camera = presetCamera(bounds, aspect)) =>
   cameraMatrices(camera, aspect);
