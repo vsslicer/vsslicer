@@ -32,6 +32,9 @@ export function fetchPinned(pin, cache = defaultCache, url = URLS[pin.repo]) {
   console.error(`fetching ${pin.repo}@${pin.commit} into ${dir}`);
   git('init', '-q');
   git('config', 'core.longpaths', 'true'); // Windows: deep profile paths
+  // the tree hash is over the committed bytes: no CRLF conversion on Windows, whatever upstream's .gitattributes say
+  git('config', 'core.autocrlf', 'false');
+  git('config', 'core.eol', 'lf');
   git('remote', 'add', 'origin', url);
   git('sparse-checkout', 'set', '--no-cone', '/resources/profiles/');
   git('fetch', '-q', '--depth', '1', '--filter=blob:none', 'origin', pin.commit);
