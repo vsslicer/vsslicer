@@ -16,7 +16,7 @@ const sha = (b) => createHash('sha512').update(b).digest('base64');
 test('packing a module twice gives the same tarball hash', () => {
   const sha = () => {
     const out = mkdtempSync(join(tmpdir(), 'pack-'));
-    execFileSync('pnpm', ['pack', '--pack-destination', out], { cwd: mod, stdio: 'pipe' });
+    execFileSync('pnpm', ['pack', '--pack-destination', out], { cwd: mod, stdio: 'pipe', shell: process.platform === 'win32' });
     return createHash('sha256').update(readFileSync(join(out, readdirSync(out)[0]))).digest('hex');
   };
   assert.strictEqual(sha(), sha());

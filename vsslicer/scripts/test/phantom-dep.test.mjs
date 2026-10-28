@@ -7,7 +7,8 @@ import { join } from 'node:path';
 
 const fixture = join(import.meta.dirname, '..', '..', 'fixtures', 'phantom-dep');
 const env = { ...process.env, CI: 'true' };
-const pnpm = (...args) => spawnSync('pnpm', args, { cwd: fixture, encoding: 'utf8', env });
+// pnpm is pnpm.cmd on Windows, which only starts through a shell (run.mjs does the same)
+const pnpm = (...args) => spawnSync('pnpm', args, { cwd: fixture, encoding: 'utf8', env, shell: process.platform === 'win32' });
 
 test('building a module that imports an undeclared package fails and names the package', () => {
   const install = pnpm('install', '--frozen-lockfile');
