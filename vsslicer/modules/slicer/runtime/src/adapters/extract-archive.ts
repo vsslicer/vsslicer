@@ -60,8 +60,8 @@ const CHUNK = 16 * 1024; // inflate input per push: at most ~16 MiB of output pe
 /**
  * Extracts a zip or tar.gz (detected by magic bytes) into `dest`, which must not exist yet.
  * Writes into a sibling staging directory and renames it to `dest` only on success; any failure removes it.
- * Rejects `..`, absolute and drive paths, symlinks resolving outside `dest`, hard links, device files,
- * duplicate paths, encrypted or zip64 zips, bad tar checksums and anything past `limits`.
+ * Rejects `..`, absolute and drive paths, symlinks resolving outside `dest` (by the archive's own links, then on
+ * disk), hard links, device files, duplicate paths, encrypted or zip64 zips, bad tar checksums and anything past `limits`.
  * A tar.gz needs `opts.sha256` (its inflated size is bounded only by the ratio, so an unverified one is refused);
  * a given sha256 is verified for a zip too.
  */
@@ -144,6 +144,40 @@ export function safeParts(name: string, maxBytes: number): string[] {
   return parts;
 }
 
+/**
+ * Resolves each symlink entry (archive-relative name -> target) the way a POSIX kernel does, following the
+ * archive's other symlink entries, and refuses any resolution that steps above the root, even transiently.
+ * It reads the archive only, never the disk: Windows resolves `..` in a relative link target lexically, so
+ * there `sub/e -> c/../..` (with `sub/c -> ..`) stays inside and realpath passes it, yet it escapes on POSIX.
+ */
+export function checkSymlinkChains(links: ReadonlyMap<string, string>, maxSteps: number): void {
+  let steps = 0;
+  for (const [name, target] of links) {
+    const escapes = () =>
+      new ArchiveError(`symlink ${JSON.stringify(name)} -> ${JSON.stringify(target)} escapes target`);
+    if (target.startsWith('/')) throw escapes();
+    const cur = name.split('/').slice(0, -1);
+    const todo = target.split('/').reverse(); // a stack, next component last
+    let hops = 0;
+    while (todo.length > 0) {
+      if (++steps > maxSteps) throw new ArchiveError('symlink chains too long to check');
+      const part = todo.pop()!;
+      if (part === '' || part === '.') continue;
+      if (part === '..') {
+        if (cur.pop() === undefined) throw escapes();
+        continue;
+      }
+      cur.push(part);
+      const next = links.get(cur.join('/'));
+      if (next === undefined) continue;
+      if (++hops > 40) throw new ArchiveError(`symlink ${JSON.stringify(name)} is dangling or loops`); // Linux MAXSYMLINKS
+      if (next.startsWith('/')) throw escapes();
+      cur.pop();
+      todo.push(...next.split('/').reverse());
+    }
+  }
+}
+
 type Kind = 'file' | 'dir' | 'symlink';
 
 /** Writes entries under the staging root; symlinks are created last and then resolved, so nothing is written through one. */
@@ -153,6 +187,8 @@ class Output {
   private readonly seen = new Set<string>();
   private readonly realDirs = new Set<string>();
   private readonly links: { path: string; target: string }[] = [];
+  /** Archive-relative symlink name -> target, for checkSymlinkChains. */
+  private readonly linkTargets = new Map<string, string>();
   private readonly root: string;
   private readonly lim: ExtractLimits;
   constructor(root: string, lim: ExtractLimits) {
@@ -205,6 +241,13 @@ class Output {
     if (!lexical.startsWith(this.root + sep) && lexical !== this.root)
       throw new ArchiveError(`symlink ${JSON.stringify(name)} -> ${JSON.stringify(target)} escapes target`);
     this.links.push({ path, target });
+    this.linkTargets.set(
+      path
+        .slice(this.root.length + 1)
+        .split(sep)
+        .join('/'),
+      target,
+    );
   }
 
   /** Opens a new file; `write` counts bytes against the per-file and total limits. */
@@ -253,6 +296,7 @@ class Output {
       }
       if (all[lo]?.startsWith(under)) throw new ArchiveError(`${JSON.stringify(all[lo])} is inside a symlink entry`);
     }
+    checkSymlinkChains(this.linkTargets, this.lim.maxEntries * 64);
     const root = await realpath(this.root);
     for (const { path, target } of this.links) {
       if (dirname(path) !== this.root) await this.mkdirs(dirname(path));

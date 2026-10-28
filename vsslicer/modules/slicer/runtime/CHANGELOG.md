@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.0.1
 
+- Fixed: `extractArchive` resolves every symlink entry against the archive's other symlink entries the POSIX way before creating any, and refuses one that steps above the root (`sub/c -> ..`, `sub/e -> c/../..`). Windows resolves `..` in link targets lexically, so the on-disk realpath check alone passed it there (SLC-283).
 - Fixed: a name collision with a symlink entry is now an `ArchiveError`, not a raw `EEXIST` (SLC-281).
 - SLC-279: a name collision in `extractArchive` (Unicode or case alias) is an `ArchiveError`; the `gzip:` label is only for errors gunzip raised.
 - SLC-280: `extractArchive` takes `{ sha256 }`, verified before extracting; a tar.gz without one is refused. The archive is opened once: the hash and the extraction read the same descriptor, so the verified bytes are the extracted bytes. The tar.gz ratio uses the archive size from that descriptor (for clarity; the required sha256 is the bound).

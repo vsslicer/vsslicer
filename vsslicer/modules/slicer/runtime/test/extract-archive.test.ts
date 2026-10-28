@@ -13,11 +13,11 @@ import {
 } from 'node:fs';
 import { createHash, randomBytes } from 'node:crypto';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, win32 } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { zipSync, type Zippable } from 'fflate';
 import { afterAll, describe, expect, test, vi } from 'vitest';
-import { ArchiveError, extractArchive, safeParts } from '../src/adapters/extract-archive.ts';
+import { ArchiveError, checkSymlinkChains, extractArchive, safeParts } from '../src/adapters/extract-archive.ts';
 
 // A hook run when a sha256 digest is taken, to swap the archive between the check and the extraction.
 const digestHook: { run?: () => void } = {};
@@ -438,6 +438,36 @@ describe.skipIf(!posix || process.getuid?.() === 0)('extractArchive: the handle 
       chmodSync(parent, 0o700);
     }
     expect(fds()).toBe(before);
+  });
+});
+
+describe('checkSymlinkChains (the archive alone, on every OS)', () => {
+  const check = (links: Record<string, string>) => () => checkSymlinkChains(new Map(Object.entries(links)), 1e6);
+
+  test('the Windows gap: win32 resolves the chain lexically to the root, POSIX steps out', () => {
+    // what the lexical guard and, on Windows, the file system see: inside
+    expect(win32.resolve('C:\\d\\sub', 'c/../..')).toBe('C:\\d');
+    // what a POSIX kernel sees, following sub/c -> .. first
+    expect(check({ 'sub/c': '..', 'sub/e': 'c/../..' })).toThrow(/escapes/);
+  });
+
+  test.each([
+    [{ 'sub/c': '..', d: 'sub/c/..' }, /escapes/],
+    [{ a: 'b', b: 'c/../..', c: '.' }, /escapes/],
+    [{ l: '../x' }, /escapes/],
+    [{ l: '/etc' }, /escapes/],
+    [{ a: 'x/../../b' }, /escapes/], // transiently above the root
+    [{ a: 'b', b: 'a' }, /loops/],
+  ])('refuses %j', (links, match) => expect(check(links)).toThrow(match));
+
+  test.each([
+    [{ 'sub/c': '..', 'sub/e': 'c/x' }],
+    [{ 'F.framework/Versions/Current': 'A', 'F.framework/F': 'Versions/Current/F' }],
+    [{ 'a/b/l': '../../a/./b/../b/x' }],
+  ])('passes %j', (links) => expect(check(links)).not.toThrow());
+
+  test('bounds the work', () => {
+    expect(() => checkSymlinkChains(new Map([['l', 'a/'.repeat(100)]]), 50)).toThrow(/too long/);
   });
 });
 
