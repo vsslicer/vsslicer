@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.3
+
+- Dev: `@vsslicer/test-vscode` ^0.2.4 (software WebGL option for GPU-less CI). (PLT-225)
+
 ## 0.0.2
 
 - Repository URL points at github.com/vsslicer/vsslicer (PLT-214).

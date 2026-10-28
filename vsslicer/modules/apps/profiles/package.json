@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/profiles-extension",
   "displayName": "VSSlicer Profiles",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "VSSlicer printer, filament and print profiles (VS Code extension, presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
@@ -92,7 +92,7 @@
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
     "@vsslicer/profile-api": "^0.1.2",
-    "@vsslicer/test-vscode": "^0.2.3",
+    "@vsslicer/test-vscode": "^0.2.4",
     "@vsslicer/tooling": "^0.8.4",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",

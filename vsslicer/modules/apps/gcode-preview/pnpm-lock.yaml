@@ -18,8 +18,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0
       '@vsslicer/webview-kit':
-        specifier: ^0.8.0
-        version: 0.8.0
+        specifier: ^0.8.1
+        version: 0.8.1
     devDependencies:
       '@microsoft/api-extractor':
         specifier: 7.59.4
@@ -37,8 +37,8 @@ importers:
         specifier: 1.100.0
         version: 1.100.0
       '@vsslicer/test-vscode':
-        specifier: ^0.2.3
-        version: 0.2.3(supports-color@8.1.1)
+        specifier: ^0.2.4
+        version: 0.2.4(supports-color@8.1.1)
       '@vsslicer/tooling':
         specifier: ^0.8.3
         version: 0.8.5(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
@@ -914,8 +914,8 @@ packages:
     resolution: {integrity: sha512-MI4QJDiGlDa8TcDjEyr+ZCpwrUU3bbNpx7jEeI3qetkFVuSOno/jfB4jTEFaDKjrU9HMJ2NZnxxdno+QFv2HlQ==}
     engines: {node: '>=24'}
 
-  '@vsslicer/test-vscode@0.2.3':
-    resolution: {integrity: sha512-AG3RAB3ktxg+IeLaLOb6tPa13Yne1lQLNvYWt/0zfCB7ireO9lvCFyUetNIfvkwCnZb4OCNrGhJjRJxjiqRzxA==}
+  '@vsslicer/test-vscode@0.2.4':
+    resolution: {integrity: sha512-FswernhMg7bwrSeU4V2VV9EcnD28S++onVAFnwrJwUnKoRaGLeGXVOAaJ9L9Yp4OVVK0pV9cGG5EY+5BLAj18A==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -924,8 +924,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.8.0':
-    resolution: {integrity: sha512-LNF/ti5NPb/NiHQYFEJGtX7GZfS4XA/XmzAgQHILamv7SBSlRNU3zH/h/PCnViRcRQ6Bu5UKbedAI7LSmFU7HQ==}
+  '@vsslicer/webview-kit@0.8.1':
+    resolution: {integrity: sha512-WUJsGFa+Tba6niu8RqgtltoFMi94LDuab65oFskBB1Jqp1wF3b9Brz39ewrSVrm6dEg9Oq6T/hq/KorIHzseKA==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -3267,7 +3267,7 @@ snapshots:
     dependencies:
       '@vsslicer/gcode-api': 0.7.0
 
-  '@vsslicer/test-vscode@0.2.3(supports-color@8.1.1)':
+  '@vsslicer/test-vscode@0.2.4(supports-color@8.1.1)':
     dependencies:
       '@vscode/test-electron': 3.1.0(supports-color@8.1.1)
       mocha: 12.0.3
@@ -3295,7 +3295,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.8.0': {}
+  '@vsslicer/webview-kit@0.8.1': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:

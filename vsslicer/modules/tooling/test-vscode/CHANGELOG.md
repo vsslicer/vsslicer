@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.4
+
+- `VSSLICER_TEST_SOFTWARE_GL=1` adds the Chromium software WebGL switches (`--use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`) for GPU-less Linux CI. (PLT-225)
+
 ## 0.2.3
 
 - Build in `prepack` (PLT-180). The default mocha runner path is built with `fileURLToPath`, so folders with spaces and Windows drive letters resolve (PLT-186).

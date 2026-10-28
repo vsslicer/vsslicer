@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vsslicer/webview-kit':
-        specifier: ^0.8.0
-        version: 0.8.0
+        specifier: ^0.8.1
+        version: 0.8.1
     devDependencies:
       '@playwright/test':
         specifier: 1.64.1
@@ -22,8 +22,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
       '@vsslicer/example-extension':
-        specifier: ^0.7.5
-        version: 0.7.5
+        specifier: ^0.7.6
+        version: 0.7.6
       '@vsslicer/tooling':
         specifier: ^0.8.1
         version: 0.8.5(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@7.2.0))(supports-color@7.2.0)
@@ -983,8 +983,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/example-extension@0.7.5':
-    resolution: {integrity: sha512-nIQSI3CkNfvpISAROImU2qlBPrLgTFCGG6B4x5cN/ebDmK6NaQBTR6uIvYkkMPh8UnlrqVEWRd5vMjw/7UpM0g==}
+  '@vsslicer/example-extension@0.7.6':
+    resolution: {integrity: sha512-1MAMRWVQFqYLw48wWEperbefkEVLNoLKnVGJNFUiaczC1Xr8ca4zHjb4mDPdVNya5dUAnVkDA+4+Ho9eaITb5w==}
     engines: {node: '>=24', vscode: ^1.100.0}
 
   '@vsslicer/example@0.3.2':
@@ -996,8 +996,8 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@vsslicer/webview-kit@0.8.0':
-    resolution: {integrity: sha512-LNF/ti5NPb/NiHQYFEJGtX7GZfS4XA/XmzAgQHILamv7SBSlRNU3zH/h/PCnViRcRQ6Bu5UKbedAI7LSmFU7HQ==}
+  '@vsslicer/webview-kit@0.8.1':
+    resolution: {integrity: sha512-WUJsGFa+Tba6niu8RqgtltoFMi94LDuab65oFskBB1Jqp1wF3b9Brz39ewrSVrm6dEg9Oq6T/hq/KorIHzseKA==}
     engines: {node: '>=24'}
 
   acorn-jsx@5.3.2:
@@ -3358,7 +3358,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/example-extension@0.7.5':
+  '@vsslicer/example-extension@0.7.6':
     dependencies:
       '@vsslicer/example': 0.3.2
 
@@ -3385,7 +3385,7 @@ snapshots:
       - jiti
       - supports-color
 
-  '@vsslicer/webview-kit@0.8.0': {}
+  '@vsslicer/webview-kit@0.8.1': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:

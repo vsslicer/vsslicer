@@ -27,8 +27,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
       '@vsslicer/test-vscode':
-        specifier: ^0.2.3
-        version: 0.2.3(supports-color@8.1.1)
+        specifier: ^0.2.4
+        version: 0.2.4(supports-color@8.1.1)
       '@vsslicer/tooling':
         specifier: ^0.8.1
         version: 0.8.5(@typescript-eslint/parser@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(@typescript-eslint/utils@8.72.0(eslint@10.13.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1079,8 +1079,8 @@ packages:
     engines: {node: '>= 20'}
     hasBin: true
 
-  '@vsslicer/test-vscode@0.2.3':
-    resolution: {integrity: sha512-AG3RAB3ktxg+IeLaLOb6tPa13Yne1lQLNvYWt/0zfCB7ireO9lvCFyUetNIfvkwCnZb4OCNrGhJjRJxjiqRzxA==}
+  '@vsslicer/test-vscode@0.2.4':
+    resolution: {integrity: sha512-FswernhMg7bwrSeU4V2VV9EcnD28S++onVAFnwrJwUnKoRaGLeGXVOAaJ9L9Yp4OVVK0pV9cGG5EY+5BLAj18A==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -3764,7 +3764,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vsslicer/test-vscode@0.2.3(supports-color@8.1.1)':
+  '@vsslicer/test-vscode@0.2.4(supports-color@8.1.1)':
     dependencies:
       '@vscode/test-electron': 3.1.0(supports-color@8.1.1)
       mocha: 12.0.3

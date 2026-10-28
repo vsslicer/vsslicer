@@ -1,7 +1,7 @@
 {
   "name": "@vsslicer/printers-extension",
   "displayName": "VSSlicer Printers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "VSSlicer printer connectivity (VS Code extension, presentation layer).",
   "publisher": "vsslicer",
   "license": "AGPL-3.0-or-later",
@@ -53,7 +53,7 @@
     "@types/mocha": "10.0.10",
     "@types/node": "24.19.2",
     "@types/vscode": "1.100.0",
-    "@vsslicer/test-vscode": "^0.2.3",
+    "@vsslicer/test-vscode": "^0.2.4",
     "@vsslicer/tooling": "^0.8.1",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1
+
+- Dev: `@vsslicer/test-vscode` ^0.2.4 (software WebGL option for GPU-less CI). (PLT-225)
+
 ## 0.8.0
 
 - Added: fan and temperature colour modes (GCP-107). `ColorMode.Fan` (part-cooling fan duty, %) and `ColorMode.Temperature` (hotend target of the move's tool, °C). `createSegmentRenderer` takes the parser's state-change tables as the `stateChanges` option, folds them into step tables in the existing step texture and exposes `ranges.fan` and `ranges.temperature`. Switching modes still uploads nothing.

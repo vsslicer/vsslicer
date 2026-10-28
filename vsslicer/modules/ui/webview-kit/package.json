@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/webview-kit",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Webview plumbing shared by VSSlicer extensions: host (Node), webview and gl (browser) entry points and the transport schema version.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
@@ -52,7 +52,7 @@
     "@types/three": "0.186.0",
     "@types/vscode": "1.100.0",
     "@vitest/coverage-v8": "5.0.5",
-    "@vsslicer/test-vscode": "^0.2.3",
+    "@vsslicer/test-vscode": "^0.2.4",
     "@vsslicer/tooling": "^0.8.1",
     "esbuild": "0.28.2",
     "eslint": "10.13.0",

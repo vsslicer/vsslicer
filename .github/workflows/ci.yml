@@ -111,6 +111,7 @@ jobs:
       - if: runner.os == 'Linux'
         run: xvfb-run -a node scripts/run.mjs test:integration --changed "$BASE"
         env:
+          VSSLICER_TEST_SOFTWARE_GL: '1' # no GPU on the runner: Chromium software WebGL (PLT-225)
           VSCODE_TEST_CACHE: ${{ runner.temp }}/vscode-test
           BASE: ${{ needs.select.outputs.base }}
       - if: runner.os != 'Linux'

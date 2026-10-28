@@ -64,6 +64,7 @@ export const runIntegration = async (o: IntegrationOptions): Promise<string[]> =
           `--user-data-dir=${join(tmp, 'user-data')}`,
           `--extensions-dir=${join(tmp, 'extensions')}`,
           `--logsPath=${join(results, 'logs')}`,
+          ...softwareGlArgs(process.env),
         ],
       });
     } catch (e) {
@@ -78,3 +79,9 @@ export const runIntegration = async (o: IntegrationOptions): Promise<string[]> =
   }
   return failed;
 };
+
+/** Chromium switches (honoured by Electron straight from the command line) for WebGL without a GPU, e.g. Linux CI under xvfb. */
+export const softwareGlArgs = (env: NodeJS.ProcessEnv): string[] =>
+  env.VSSLICER_TEST_SOFTWARE_GL === '1'
+    ? ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist']
+    : [];

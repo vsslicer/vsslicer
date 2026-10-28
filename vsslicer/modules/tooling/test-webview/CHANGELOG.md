@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.6
+
+- Re-range `@vsslicer/webview-kit` to ^0.8.1 and `@vsslicer/example-extension` to ^0.7.6 (PLT-225 release).
+
 ## 0.2.5
 
 - Re-range `@vsslicer/example-extension` to ^0.7.5 (PLT-214).

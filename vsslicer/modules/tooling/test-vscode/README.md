@@ -22,6 +22,7 @@ Keep the unit script off that folder (`node --test test/*.test.ts`).
 - Each VS Code starts with `--disable-extensions`, a temporary `--user-data-dir` and `--extensions-dir` (removed afterwards) and `--logsPath` inside the results folder.
 - Exit code 1 if any version fails (a failing test, a crash or a failed download).
 - Linux without `DISPLAY`: the CLI re-runs itself under `xvfb-run -a` (install `xvfb`). macOS and Windows need no display setup.
+- `VSSLICER_TEST_SOFTWARE_GL=1` launches VS Code with Chromium's SwiftShader switches, for WebGL on machines without a GPU (Linux CI under xvfb).
 - `ELECTRON_RUN_AS_NODE` is removed from the environment (VS Code terminals set it, and the downloaded VS Code then rejects its own flags).
 
 ## Artefacts and cache (for CI)

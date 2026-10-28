@@ -1,6 +1,6 @@
 {
   "name": "@vsslicer/test-vscode",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Integration harness for VSSlicer extensions: runs mocha suites inside a real VS Code (@vscode/test-electron), on the engines minimum and stable.",
   "license": "AGPL-3.0-or-later",
   "type": "module",
